@@ -10,8 +10,7 @@ due to lack of skill and time. As a result, the game was actually created in a m
 Link to the game page - https://nytrock.itch.io/madness-cooking-english-ver
 > If you encounter any bug, please file an [issue](https://github.com/Nytrock/Madness_Cooking_EN/issues).
 
-There are also [Russian version](https://github.com/Nytrock/Madness_Cooking_RU)
-and [mobile version](https://github.com/Nytrock/Madness_Cooking_Android).
+There are also [Russian version](https://github.com/Nytrock/Madness_Cooking_RU).
 
 # Main game locations
 
