@@ -11,8 +11,6 @@ Link to the game page - https://nytrock.itch.io/madness-cooking-english-ver <br>
 You can also download the latest release on github, unzip the resulting archive and run `Madness cooking.exe` in it
 > If you encounter any bug, please file an [issue](https://github.com/Nytrock/Madness_Cooking_EN/issues).
 
-There are also [Russian version](https://github.com/Nytrock/Madness_Cooking_RU).
-
 # Main game locations
 
 ## Main menu
