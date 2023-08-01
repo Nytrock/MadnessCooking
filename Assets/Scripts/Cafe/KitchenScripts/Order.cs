@@ -7,11 +7,11 @@ using TMPro;
 public class Order : MonoBehaviour
 {
     public Image ImageFood;
-    public Text Name;
-    public Text Description;
+    public LocalizedText Name;
+    public LocalizedText Description;
     public Slider slider;
     public GameObject Final;
-    public Text ingridientText;
+    public TextMeshProUGUI ingridientText;
     public Technic NeedTechnic;
     public TechnicTemplate template;
     private int Number;
@@ -25,7 +25,7 @@ public class Order : MonoBehaviour
     public void SetOrder(ForOrders forOrders, Food food, int i, ForIngridients ingridients) {
         NeedFood = food;
         ImageFood.sprite = food.ImageFood;
-        Name.text = food.Name;
+        Name.Localize(food.Name);
         slider.maxValue = food.TimeToCooking;
         slider.value = 0;
         Number = i;
@@ -33,6 +33,7 @@ public class Order : MonoBehaviour
         Ingridients = ingridients;
         NeedTechnic = food.TypeTechnic;
         UpdateIngridients();
+        LocalizationManager.OnLanguageChange += UpdateIngridients;
     }
 
     void Update() {
@@ -42,6 +43,7 @@ public class Order : MonoBehaviour
             } else {
                 Orders.MadeOreders[Number] = true;
                 Final.SetActive(true);
+                LocalizationManager.OnLanguageChange -= UpdateIngridients;
                 Starting = false;
             }
         } else {
@@ -74,7 +76,7 @@ public class Order : MonoBehaviour
                     TextIngidient.color = new Color(211 / 255.0f, 47 / 255.0f, 47 / 255.0f);
                     BoolIngridients.Add(false);
                 }
-                TextIngidient.text = "*" + NeedFood.NeedIngridients[j].Name + " - " + NeedFood.NumberIngridients[j];
+                TextIngidient.text = "*" + LocalizationManager.GetTranslate(NeedFood.NeedIngridients[j].Name) + " - " + NeedFood.NumberIngridients[j];
             }
             var TextTechic = Instantiate(ingridientText, Description.gameObject.transform);
             TextTechic.gameObject.SetActive(true);
@@ -100,7 +102,7 @@ public class Order : MonoBehaviour
             Orders.education.AddIndex(false);
         foreach (Transform child in Description.gameObject.transform)
             Destroy(child.gameObject);
-        Description.text = NeedFood.Description;
+        Description.Localize(NeedFood.Description);
         StartButton.gameObject.SetActive(false);
         Starting = true;
         foreach (TechnicTemplate technic in Orders.AvailableTechnicTemplate) {
@@ -109,8 +111,8 @@ public class Order : MonoBehaviour
                 technic.Work.Play();
                 technic.GetComponent<Image>().sprite = technic.technic.ActiveIcon;
                 technic.DescriptionFood.ImageFood.sprite = ImageFood.sprite;
-                technic.DescriptionFood.Name.text = Name.text;
-                technic.DescriptionFood.Description.text = Description.text;
+                technic.DescriptionFood.Name.Localize(NeedFood.Name);
+                technic.DescriptionFood.Description.Localize(NeedFood.Description);
                 technic.DescriptionFood.slider.maxValue = slider.maxValue;
                 technic.DescriptionFood.slider.value = 0;
                 template = technic;

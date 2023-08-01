@@ -15,7 +15,7 @@ public class MenuButtons : MonoBehaviour
 
     public void Start()
     {
-        if (File.Exists(Application.dataPath + "/save/MadnessCookingSaveSound.txt"))
+        if (File.Exists(Application.dataPath + "/save/MadnessCookingSaveSettings.md"))
             saveSound.LoadSound();
     }
 
@@ -37,7 +37,7 @@ public class MenuButtons : MonoBehaviour
     public void StartGame(bool Confirm)
     {
         ButtonPress.Play();
-        if (!File.Exists(Application.dataPath + "/save/MadnessCookingSave.txt") || Confirm) {
+        if (!File.Exists(Application.dataPath + "/save/MadnessCookingSave.md") || Confirm) {
             NewOrContinue.Continue = false;
             CloseConfirm();
             PanelEducation.SetBool("Active", true);

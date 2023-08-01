@@ -4,6 +4,7 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using System;
+using UnityEngine.UIElements;
 
 public class Save : MonoBehaviour
 {
@@ -95,6 +96,10 @@ public class Save : MonoBehaviour
         public int IndexCafe;
         public int IndexKitchen;
         public int IndexInternet;
+    }
+
+    private void Start()
+    {
     }
 
     public void SaveAll()

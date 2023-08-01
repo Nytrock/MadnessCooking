@@ -1,14 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Chickens : MonoBehaviour
 {
     public GameObject PanelPlant;
     public Slider PlantSlider;
     public int KolIngridient;
-    public Text KolInterface;
+    public TextMeshProUGUI KolInterface;
     public float MultiplyPlantingCorn = 1;
     public float TimePouring;
     public FarmCar Car;

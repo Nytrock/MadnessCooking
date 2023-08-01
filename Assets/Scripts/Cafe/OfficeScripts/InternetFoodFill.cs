@@ -35,7 +35,7 @@ public class InternetFoodFill: MonoBehaviour
     }
 
     public void UpdateFood() {
-        int CountContainers = 0;
+        int CountContainers;
         if (AllFood.Count % 8 == 0)
             CountContainers = AllFood.Count / 8;
         else
@@ -48,13 +48,13 @@ public class InternetFoodFill: MonoBehaviour
             Containers.Add(container.gameObject);
             for (int j = 8 * i; j < 8 + 8 * i; j++) {
                 if (j < AllFood.Count) {
-                    var IngridientCell = Instantiate(product, container);
-                    IngridientCell.NameProduct.text = AllFood[j].Name;
-                    IngridientCell.ImageProduct.sprite = AllFood[j].ImageFood;
-                    IngridientCell.DescriptionProduct.text = AllFood[j].Description;
-                    IngridientCell.CostProduct.text = "Buy";
-                    IngridientCell.FoodFill = this;
-                    IngridientCell.food = AllFood[j];
+                    var foodCell = Instantiate(product, container);
+                    foodCell.NameProduct.Localize(AllFood[j].Name);
+                    foodCell.ImageProduct.sprite = AllFood[j].ImageFood;
+                    foodCell.DescriptionProduct.Localize(AllFood[j].Description);
+                    foodCell.CostProduct.Localize();
+                    foodCell.FoodFill = this;
+                    foodCell.food = AllFood[j];
                 } else {
                     break;
                 }

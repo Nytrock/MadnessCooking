@@ -1,7 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class GroundBed : MonoBehaviour
 {
@@ -13,9 +13,9 @@ public class GroundBed : MonoBehaviour
     public Ingridient ingridient;
     public GameObject PanelPlant;
     public Image ImageInterface;
-    public Text NameInterface;
-    public Text DescriptionInterface;
-    public Text KolInterface;
+    public LocalizedText NameInterface;
+    public LocalizedText DescriptionInterface;
+    public TextMeshProUGUI KolInterface;
     public Slider PlantSlider;
     public bool StartPlant;
     public int KolIngridient;
@@ -229,8 +229,8 @@ public class GroundBed : MonoBehaviour
     public void SetInterface(Ingridient ingridient)
     {
         ImageInterface.sprite = ingridient.ImageIngridient;
-        NameInterface.text = ingridient.Name;
-        DescriptionInterface.text = ingridient.Description;
+        NameInterface.Localize(ingridient.Name);
+        DescriptionInterface.Localize(ingridient.Description);
         PlantSlider.maxValue = ingridient.TimePlant;
         PlantSlider.gameObject.SetActive(true);
         StartPlant = true;

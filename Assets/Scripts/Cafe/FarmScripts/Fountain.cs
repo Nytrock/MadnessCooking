@@ -1,14 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using TMPro;
 
 public class Fountain : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     public Slider SliderFountain;
     public bool isHold;
-    public Text CountText;
+    public TextMeshProUGUI CountText;
     public int Count;
     public GameObject Icon;
     public bool isMilk;

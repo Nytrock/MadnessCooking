@@ -1,7 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class AddGardenBed : MonoBehaviour
 {
@@ -13,7 +13,7 @@ public class AddGardenBed : MonoBehaviour
     public List<int> Counts;
     public List<GameObject> Beds;
     public int Index = 0;
-    public Text TextCount;
+    public TextMeshProUGUI TextCount;
     public AudioSource AddVoice;
 
     void Update()

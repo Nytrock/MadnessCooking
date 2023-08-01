@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using TMPro;
 
 public class ManureCreate : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
@@ -12,9 +11,9 @@ public class ManureCreate : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     public float CurrentTimeShit;
     public Slider slider;
     public int CountManure;
-    public Text TextManure;
+    public TextMeshProUGUI TextManure;
     public int CountShit;
-    public Text TextShit;
+    public TextMeshProUGUI TextShit;
     public Upgrade NeedUpgrade;
     public Farm farm;
     public bool Auto = false;

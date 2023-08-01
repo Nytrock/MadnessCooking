@@ -1,14 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class InternetProduct : MonoBehaviour
 {
     public Image ImageProduct;
-    public Text NameProduct;
-    public Text DescriptionProduct;
-    public Text CostProduct;
+    public LocalizedText NameProduct;
+    public LocalizedText DescriptionProduct;
+    public LocalizedText CostProduct;
     public Ingridient ingridient;
     public Food food;
     public Upgrade upgrade;
@@ -19,23 +18,24 @@ public class InternetProduct : MonoBehaviour
     public InternetUpgradeShop UpgradeFill;
     public Button BuyButton;
 
+    private int costItem = -1;
+    private int playerCoins;
+
+    private void Start()
+    {
+        if (IngridientsFill != null || TechnicFill != null || TechnicFill != null)
+            costItem = int.Parse(CostProduct.GetComponent<TextMeshProUGUI>().text);
+    }
+
     void Update() {
-        if (IngridientsFill != null) {
-            if (IngridientsFill.Money.Coins >= int.Parse(CostProduct.text))
-                BuyButton.interactable = true;
-            else
-                BuyButton.interactable = false;
-        } else if (TechnicFill != null) {
-            if (TechnicFill.Money.Coins >= int.Parse(CostProduct.text))
-                BuyButton.interactable = true;
-            else
-                BuyButton.interactable = false;
-        } else if (UpgradeFill != null) {
-            if (UpgradeFill.Money.Coins >= int.Parse(CostProduct.text))
-                BuyButton.interactable = true;
-            else
-                BuyButton.interactable = false;
-        }
+        if (IngridientsFill != null)
+            playerCoins = IngridientsFill.Money.Coins;
+        else if (TechnicFill != null)
+            playerCoins = TechnicFill.Money.Coins;
+        else if (TechnicFill != null)
+            playerCoins = UpgradeFill.Money.Coins;
+
+        BuyButton.interactable = playerCoins >= costItem;
     }
 
 

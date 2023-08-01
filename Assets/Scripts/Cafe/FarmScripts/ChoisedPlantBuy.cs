@@ -1,14 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class ChoisedPlantBuy : MonoBehaviour
 {
     public Image Images;
-    public Text Name;
-    public Text Description;
-    public Text CostText;
+    public LocalizedText Name;
+    public LocalizedText Description;
+    public TextMeshProUGUI CostText;
     public int Cost;
     public Button BuyButton;
     public ChoiceUpgradeButton BuyingUpgrade;

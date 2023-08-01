@@ -1,53 +1,55 @@
 using System.Collections;
-using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
-using System;
 
 public class SaveSound : MonoBehaviour
 {
     public VolumeSet volumeSet;
+    public LocalizationManager localizationManager;
     public Animator animator;
     public AudioSource Press;
     [System.Serializable]
-    public class Volume {
+    public class Settings {
         public float AllSounds;
         public float MusicSounds;
         public float EffectSounds;
+        public int langId;
     }
 
     public void Start()
     {
-        if (File.Exists(Application.dataPath + "/save/MadnessCookingSaveSound.txt"))
+        if (File.Exists(Application.dataPath + "/save/MadnessCookingSaveSettings.md"))
             LoadSound();
     }
 
     public void SaveAllSound()
     {
-        Volume volume = new Volume();
-        volume.AllSounds = volumeSet.AllSounds;
-        volume.MusicSounds = volumeSet.MusicSounds;
-        volume.EffectSounds = volumeSet.EffectSounds;
+        Settings settings = new Settings();
+        settings.AllSounds = volumeSet.AllSounds;
+        settings.MusicSounds = volumeSet.MusicSounds;
+        settings.EffectSounds = volumeSet.EffectSounds;
+        settings.langId = LocalizationManager.SelectedLanguage;
 
         if (Directory.Exists(Application.dataPath + "/save")) {
-            FileStream stream = new FileStream(Application.dataPath + "/save/MadnessCookingSaveSound.txt", FileMode.Create);
+            FileStream stream = new FileStream(Application.dataPath + "/save/MadnessCookingSaveSettings.md", FileMode.Create);
             BinaryFormatter form = new BinaryFormatter();
-            form.Serialize(stream, volume);
+            form.Serialize(stream, settings);
             stream.Close();
         }
     }
 
     public void LoadSound()
     {
-        if (File.Exists(Application.dataPath + "/save/MadnessCookingSaveSound.txt")) {
-            FileStream stream = new FileStream(Application.dataPath + "/save/MadnessCookingSaveSound.txt", FileMode.Open);
+        if (File.Exists(Application.dataPath + "/save/MadnessCookingSaveSettings.md")) {
+            FileStream stream = new FileStream(Application.dataPath + "/save/MadnessCookingSaveSettings.md", FileMode.Open);
             BinaryFormatter form = new BinaryFormatter();
             try {
-                Volume volume = (Volume)form.Deserialize(stream);
-                volumeSet.AllSounds = volume.AllSounds;
-                volumeSet.MusicSounds = volume.MusicSounds;
-                volumeSet.EffectSounds = volume.EffectSounds;
+                Settings settings = (Settings)form.Deserialize(stream);
+                volumeSet.AllSounds = settings.AllSounds;
+                volumeSet.MusicSounds = settings.MusicSounds;
+                volumeSet.EffectSounds = settings.EffectSounds;
+                localizationManager.SetLanguage(settings.langId);
                 volumeSet.SetVolume();
             } finally {
                 stream.Close();

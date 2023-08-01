@@ -1,14 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Fridge : MonoBehaviour
 {
     public int CountMilk;
     public int CountFlour;
-    public Text TextMilk;
-    public Text TextFlour;
+    public TextMeshProUGUI TextMilk;
+    public TextMeshProUGUI TextFlour;
     public GameObject Panel;
     public FarmCar Car;
     public Ingridient Milk;

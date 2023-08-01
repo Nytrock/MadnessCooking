@@ -1,14 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using TMPro;
 
 public class FlourCreate : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
-    public Text TextFlour;
+    public TextMeshProUGUI TextFlour;
     public int CountCorn;
-    public Text TextCorn;
+    public TextMeshProUGUI TextCorn;
     public bool isHold;
     public GameObject Panel;
     public Slider FlourSlider;

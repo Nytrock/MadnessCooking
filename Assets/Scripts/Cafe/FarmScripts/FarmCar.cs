@@ -1,7 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class FarmCar : MonoBehaviour
 {
@@ -17,7 +17,7 @@ public class FarmCar : MonoBehaviour
     public ForOrders orders;
     public int Size;
     public int Fullness;
-    public Text TextFullness;
+    public TextMeshProUGUI TextFullness;
     public AudioSource Open;
     public AudioSource Close;
     public AudioSource Drive;
@@ -46,7 +46,7 @@ public class FarmCar : MonoBehaviour
         CountIngridientsCar.Clear();
         UpdateIngridients();
         Send.interactable = false;
-        this.GetComponent<Animator>().SetBool("ToKitchen", true);
+        GetComponent<Animator>().SetBool("ToKitchen", true);
         timer.NowTime = timer.AllTime;
         animator.SetBool("Active", false);
         Fullness = 0;
@@ -72,8 +72,8 @@ public class FarmCar : MonoBehaviour
             Count += CountIngridientsCar[i];
             cell.Count.text = CountIngridientsCar[i].ToString();
             var descr = Instantiate(ingridientText, TextContainer);
-            descr.MainText.text = IngridientsInCar[i].Name;
-            descr.DescriptionText.text = IngridientsInCar[i].Description;
+            descr.MainText.Localize(IngridientsInCar[i].Name);
+            descr.DescriptionText.Localize(IngridientsInCar[i].Description);
             cell.Description = descr;
         }
         Fullness = Count;
@@ -87,7 +87,7 @@ public class FarmCar : MonoBehaviour
 
     public void CarFrom()
     {
-        this.GetComponent<Animator>().SetBool("ToKitchen", false);
+        GetComponent<Animator>().SetBool("ToKitchen", false);
     }
 
     public void Update()

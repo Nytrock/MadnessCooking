@@ -1,7 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Shop : MonoBehaviour
 {
@@ -14,9 +14,9 @@ public class Shop : MonoBehaviour
     public int indexContainer;
     public Button Right;
     public Button Left;
-    public Text CashDescription;
-    public Text CashName;
-    public Text CashCost;
+    public TextMeshProUGUI CashDescription;
+    public TextMeshProUGUI CashName;
+    public TextMeshProUGUI CashCost;
     public Image CashImage;
     public GameObject BuyUpgrade;
     public MoneyBar money;

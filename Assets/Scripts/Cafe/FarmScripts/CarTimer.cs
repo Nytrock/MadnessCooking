@@ -1,18 +1,15 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 public class CarTimer : MonoBehaviour
 {
     public FarmCar Car;
-    public Text TextTime;
+    public TextMeshProUGUI TextTime;
     public float AllTime;
     public float NowTime;
     public GameObject Timer;
     public Farm farm;
-    private int min;
-    private int sec;
     public List<Upgrade> TimerUpgrades;
     public List<Upgrade> CarUpgrades;
 

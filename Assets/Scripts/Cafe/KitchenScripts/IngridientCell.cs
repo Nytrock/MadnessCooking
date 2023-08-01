@@ -1,22 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class IngridientCell : MonoBehaviour
 {
     public Image IngridientImage;
-    public Text Count;
+    public TextMeshProUGUI Count;
     public TextIngridient Description;
     public bool OnMouse;
 
     void Update()
     {
+        Description.gameObject.SetActive(OnMouse);
+
         if (OnMouse) {
-            Description.gameObject.SetActive(true);
-            Description.transform.position = new Vector2(Input.mousePosition.x + 150f, Input.mousePosition.y - 115f);
-        } else {
-            Description.gameObject.SetActive(false);
+            var v3 = Input.mousePosition;
+            v3.z = 10f;
+            v3 = Camera.main.ScreenToWorldPoint(v3);
+            Description.transform.position = new Vector2(v3.x + 1.5f, v3.y - 1);
         }
     } 
 

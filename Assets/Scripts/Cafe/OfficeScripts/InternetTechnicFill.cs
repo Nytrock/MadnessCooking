@@ -36,7 +36,7 @@ public class InternetTechnicFill : MonoBehaviour
 
     public void UpdateTechnic()
     {
-        int CountContainers = 0;
+        int CountContainers;
         if (AllTechicTemplate.Count % 8 == 0)
             CountContainers = AllTechicTemplate.Count / 8;
         else
@@ -49,13 +49,14 @@ public class InternetTechnicFill : MonoBehaviour
             Containers.Add(container.gameObject);
             for (int j = 8 * i; j < 8 + 8 * i; j++) {
                 if (j < AllTechicTemplate.Count) {
-                    var IngridientCell = Instantiate(product, container);
-                    IngridientCell.NameProduct.text = AllTechicTemplate[j].technic.Name;
-                    IngridientCell.ImageProduct.sprite = AllTechicTemplate[j].technic.MiniIcon;
-                    IngridientCell.DescriptionProduct.text = AllTechicTemplate[j].technic.Description;
-                    IngridientCell.CostProduct.text = AllTechicTemplate[j].technic.Cost.ToString();
-                    IngridientCell.TechnicFill = this;
-                    IngridientCell.technicTempl = AllTechicTemplate[j];
+                    var technicCell = Instantiate(product, container);
+
+                    technicCell.NameProduct.Localize(AllTechicTemplate[j].technic.Name);
+                    technicCell.ImageProduct.sprite = AllTechicTemplate[j].technic.MiniIcon;
+                    technicCell.DescriptionProduct.Localize(AllTechicTemplate[j].technic.Description);
+                    technicCell.CostProduct.Localize(AllTechicTemplate[j].technic.Cost.ToString());
+                    technicCell.TechnicFill = this;
+                    technicCell.technicTempl = AllTechicTemplate[j];
                 } else {
                     break;
                 }

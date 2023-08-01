@@ -37,7 +37,7 @@ public class InternetIngridientsFill : MonoBehaviour
 
     public void UpdateIngridients()
     {
-        int CountContainers = 0;
+        int CountContainers;
         if (AllIngridient.Count % 8 == 0)
             CountContainers = AllIngridient.Count / 8;
         else
@@ -50,13 +50,14 @@ public class InternetIngridientsFill : MonoBehaviour
             Containers.Add(container.gameObject);
             for (int j = 8 * i; j < 8 + 8 * i; j++) {
                 if (j < AllIngridient.Count) {
-                    var IngridientCell = Instantiate(product, container);
-                    IngridientCell.NameProduct.text = AllIngridient[j].Name;
-                    IngridientCell.ImageProduct.sprite = AllIngridient[j].ImageIngridient;
-                    IngridientCell.DescriptionProduct.text = AllIngridient[j].Description;
-                    IngridientCell.CostProduct.text = AllIngridient[j].Cost.ToString();
-                    IngridientCell.IngridientsFill = this;
-                    IngridientCell.ingridient = AllIngridient[j];
+                    var ingridientCell = Instantiate(product, container);
+
+                    ingridientCell.NameProduct.Localize(AllIngridient[j].Name);
+                    ingridientCell.ImageProduct.sprite = AllIngridient[j].ImageIngridient;
+                    ingridientCell.DescriptionProduct.Localize(AllIngridient[j].Description);
+                    ingridientCell.CostProduct.Localize(AllIngridient[j].Cost.ToString());
+                    ingridientCell.IngridientsFill = this;
+                    ingridientCell.ingridient = AllIngridient[j];
                 } else {
                     break;
                 }

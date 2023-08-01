@@ -1,21 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class CloseAndOpen : MonoBehaviour
 {
     public bool Close;
-    public Text TextClose;
+    public TextMeshProUGUI TextClose;
     public Cafe cafe;
     public AudioSource Change;
 
     public void Pressed(){
         Change.Play();
         if (Close) {
-            TextClose.text = "Open";
+            TextClose.text = LocalizationManager.GetTranslate("Открыто");
         } else {
-            TextClose.text = "Close";
+            TextClose.text = LocalizationManager.GetTranslate("Закрыто");
             cafe.Closed();
         }
         Close = !Close;

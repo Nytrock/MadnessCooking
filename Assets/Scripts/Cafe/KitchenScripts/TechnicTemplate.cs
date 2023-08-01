@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class TechnicTemplate : MonoBehaviour
 {
@@ -17,7 +16,7 @@ public class TechnicTemplate : MonoBehaviour
     public Slider SliderRepair;
     public bool Repairing;
     public MoneyBar money;
-    public Text CostRepairText;
+    public TextMeshProUGUI CostRepairText;
     public float FasterSpeed;
     public AudioSource Open;
     public AudioSource Work;
@@ -27,8 +26,8 @@ public class TechnicTemplate : MonoBehaviour
 
     void Start()
     {
-        DescriptionTechnic.MainText.text = technic.Name;
-        DescriptionTechnic.DescriptionText.text = technic.Description;
+        DescriptionTechnic.MainText.Localize(technic.Name);
+        DescriptionTechnic.DescriptionText.Localize(technic.Description);
         DescriptionTechnic.Description.sprite = technic.MiniIcon;
         CostRepairText.text = technic.CostRepairing.ToString();
     }
@@ -50,7 +49,7 @@ public class TechnicTemplate : MonoBehaviour
                 } else{
                     DescriptionFood.Final.SetActive(true);
                     Work.Stop();
-                    this.GetComponent<Image>().sprite = technic.Icon;
+                    GetComponent<Image>().sprite = technic.Icon;
                     if (StrenthBool) {
                         strength -= (int)(Random.Range(1f, MaxStregth * 0.08f));
                         StrenthBool = false;

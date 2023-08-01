@@ -42,8 +42,8 @@ public class ForIngridients : MonoBehaviour
             cell.IngridientImage.sprite = HaveIngridients[i].ImageIngridient;
             cell.Count.text = NumberIngridients[i].ToString();
             var descr = Instantiate(ingridientText, CellTextContainer);
-            descr.MainText.text = HaveIngridients[i].Name;
-            descr.DescriptionText.text = HaveIngridients[i].Description;
+            descr.MainText.Localize(HaveIngridients[i].Name);
+            descr.DescriptionText.Localize(HaveIngridients[i].Description);
             cell.Description = descr;
         }
         int sum = NumberIngridients.Sum(x => x);
