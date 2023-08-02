@@ -143,7 +143,7 @@ public class GroundBed : MonoBehaviour
     {
         if (KolIngridient > 0) {
             Get.Play();
-            if (ingridient.Name == "Wheat") {
+            if (ingridient.Name == "ѕшеница") {
                 flour.CountCorn += KolIngridient;
                 flour.TextCorn.text = flour.CountCorn.ToString();
                 KolIngridient = 0;
