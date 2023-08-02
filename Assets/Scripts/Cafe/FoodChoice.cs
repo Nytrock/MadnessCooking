@@ -21,7 +21,7 @@ public class FoodChoice : MonoBehaviour
         if (!OpenFood) {
             Xm.Play();
             var ChoisedFood = client.cafe.AvailableFood[Random.Range(0, client.cafe.AvailableFood.Count)];
-            this.GetComponent<Image>().sprite = ChoisedFood.ImageFood;
+            GetComponent<Image>().sprite = ChoisedFood.ImageFood;
             client.cafe.orders.AddFood(ChoisedFood, client);
             client.NeedFood = ChoisedFood;
             OpenFood = true;

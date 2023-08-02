@@ -80,7 +80,7 @@ public class Order : MonoBehaviour
             }
             var TextTechic = Instantiate(ingridientText, Description.gameObject.transform);
             TextTechic.gameObject.SetActive(true);
-            TextTechic.text = "*" + NeedFood.TypeTechnic.Name;
+            TextTechic.text = "*" + LocalizationManager.GetTranslate(NeedFood.TypeTechnic.Name);
             if (Orders.AvailableTechnic.Contains(NeedTechnic)) {
                 if (Orders.AvailableTechnicTemplate[Orders.AvailableTechnic.IndexOf(NeedTechnic)].strength > 0 && !Orders.AvailableTechnicTemplate[Orders.AvailableTechnic.IndexOf(NeedTechnic)].Repairing && !Orders.AvailableTechnicTemplate[Orders.AvailableTechnic.IndexOf(NeedTechnic)].Starting){
                     TextTechic.color = new Color(76 / 255.0f, 175 / 255.0f, 79 / 255.0f);

@@ -1,10 +1,11 @@
-using System.Collections;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
 public class SaveSound : MonoBehaviour
 {
+    public string savePath;
+
     public VolumeSet volumeSet;
     public LocalizationManager localizationManager;
     public Animator animator;
@@ -19,7 +20,7 @@ public class SaveSound : MonoBehaviour
 
     public void Start()
     {
-        if (File.Exists(Application.dataPath + "/save/MadnessCookingSaveSettings.md"))
+        if (File.Exists(Application.dataPath + savePath))
             LoadSound();
     }
 
@@ -32,7 +33,7 @@ public class SaveSound : MonoBehaviour
         settings.langId = LocalizationManager.SelectedLanguage;
 
         if (Directory.Exists(Application.dataPath + "/save")) {
-            FileStream stream = new FileStream(Application.dataPath + "/save/MadnessCookingSaveSettings.md", FileMode.Create);
+            FileStream stream = new FileStream(Application.dataPath + savePath, FileMode.Create);
             BinaryFormatter form = new BinaryFormatter();
             form.Serialize(stream, settings);
             stream.Close();
@@ -41,8 +42,8 @@ public class SaveSound : MonoBehaviour
 
     public void LoadSound()
     {
-        if (File.Exists(Application.dataPath + "/save/MadnessCookingSaveSettings.md")) {
-            FileStream stream = new FileStream(Application.dataPath + "/save/MadnessCookingSaveSettings.md", FileMode.Open);
+        if (File.Exists(Application.dataPath + savePath)) {
+            FileStream stream = new FileStream(Application.dataPath + savePath, FileMode.Open);
             BinaryFormatter form = new BinaryFormatter();
             try {
                 Settings settings = (Settings)form.Deserialize(stream);

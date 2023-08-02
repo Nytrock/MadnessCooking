@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
 
 public class MenuButtons : MonoBehaviour
 {
+    public string savePath;
+
     public Animator PanelConfirm;
     public Animator PanelEducation;
     public Animator PanelSettings;
@@ -15,7 +16,7 @@ public class MenuButtons : MonoBehaviour
 
     public void Start()
     {
-        if (File.Exists(Application.dataPath + "/save/MadnessCookingSaveSettings.md"))
+        if (File.Exists(Application.dataPath + saveSound.savePath))
             saveSound.LoadSound();
     }
 
@@ -37,7 +38,7 @@ public class MenuButtons : MonoBehaviour
     public void StartGame(bool Confirm)
     {
         ButtonPress.Play();
-        if (!File.Exists(Application.dataPath + "/save/MadnessCookingSave.md") || Confirm) {
+        if (!File.Exists(Application.dataPath + savePath) || Confirm) {
             NewOrContinue.Continue = false;
             CloseConfirm();
             PanelEducation.SetBool("Active", true);

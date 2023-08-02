@@ -1,19 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
 
 public class ContinueButton : MonoBehaviour
 {
-    public Button This;
+    [SerializeField] private string savePath;
 
-    void Update()
+    private void Start()
     {
-        if (File.Exists(Application.dataPath + "/save/MadnessCookingSave.txt"))
-            This.interactable = true;
-        else
-            This.interactable = false;
+        GetComponent<Button>().interactable = File.Exists(Application.dataPath + savePath);
     }
 }
