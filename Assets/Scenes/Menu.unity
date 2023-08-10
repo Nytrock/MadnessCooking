@@ -509,7 +509,7 @@ GameObject:
   m_Component:
   - component: {fileID: 46964090}
   m_Layer: 5
-  m_Name: Effects
+  m_Name: UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -683,7 +683,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1453817928}
         m_TargetAssemblyTypeName: VolumeSet, Assembly-CSharp
-        m_MethodName: ChangeMusic
+        m_MethodName: ChangeEffect
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1787,7 +1787,7 @@ GameObject:
   m_Component:
   - component: {fileID: 318884883}
   m_Layer: 5
-  m_Name: AllSounds
+  m_Name: Music
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3165,7 +3165,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u042D\u0444\u0444\u0435\u043A\u0442\u044B"
+  m_text: "\u0418\u043D\u0442\u0435\u0440\u0444\u0435\u0439\u0441"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3536,7 +3536,7 @@ GameObject:
   m_Component:
   - component: {fileID: 605093109}
   m_Layer: 5
-  m_Name: Music
+  m_Name: Effects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4504,7 +4504,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1453817928}
         m_TargetAssemblyTypeName: VolumeSet, Assembly-CSharp
-        m_MethodName: ChangeAllVolume
+        m_MethodName: ChangeMusic
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4915,7 +4915,7 @@ AudioSource:
   m_GameObject: {fileID: 1007505543}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: -8159400493179695479, guid: 0476a9d6ffce1ed4a95ee0785bd2f63c, type: 2}
+  OutputAudioMixerGroup: {fileID: -4815413896901550464, guid: 0476a9d6ffce1ed4a95ee0785bd2f63c, type: 2}
   m_audioClip: {fileID: 8300000, guid: 4e29719727913a446a05353ccb61ffc5, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.245
@@ -5377,7 +5377,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u041C\u0443\u0437\u044B\u043A\u0430"
+  m_text: "\u042D\u0444\u0444\u0435\u043A\u0442\u044B"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5909,7 +5909,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1453817928}
         m_TargetAssemblyTypeName: VolumeSet, Assembly-CSharp
-        m_MethodName: ChangeEffect
+        m_MethodName: ChangeUI
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7490,7 +7490,7 @@ AudioSource:
   m_GameObject: {fileID: 1453817923}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: -8159400493179695479, guid: 0476a9d6ffce1ed4a95ee0785bd2f63c, type: 2}
+  OutputAudioMixerGroup: {fileID: -4815413896901550464, guid: 0476a9d6ffce1ed4a95ee0785bd2f63c, type: 2}
   m_audioClip: {fileID: 8300000, guid: 4e29719727913a446a05353ccb61ffc5, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.245
@@ -7589,14 +7589,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27325754523a54649bac097a618fc634, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Mixer: {fileID: 24300002, guid: 0476a9d6ffce1ed4a95ee0785bd2f63c, type: 2}
+  mixer: {fileID: 24100000, guid: 0476a9d6ffce1ed4a95ee0785bd2f63c, type: 2}
   Press: {fileID: 1453817927}
-  AllSounds: 0.6
-  MusicSounds: 0.6
-  EffectSounds: 0.6
-  SliderAll: {fileID: 903099421}
-  SliderMusic: {fileID: 84701113}
-  SliderEffect: {fileID: 1192996431}
+  musicSounds: 0
+  effectSounds: 0
+  UISounds: 0
+  SliderMusic: {fileID: 903099421}
+  SliderEffect: {fileID: 84701113}
+  sliderUI: {fileID: 1192996431}
 --- !u!1 &1460743460
 GameObject:
   m_ObjectHideFlags: 0
@@ -8139,7 +8139,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u0412\u0441\u0435 \u0437\u0432\u0443\u043A\u0438"
+  m_text: "\u041C\u0443\u0437\u044B\u043A\u0430"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

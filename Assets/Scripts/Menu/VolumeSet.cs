@@ -1,47 +1,45 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 
 public class VolumeSet : MonoBehaviour
 {
-    public AudioMixerGroup Mixer;
+    public AudioMixer mixer;
     public AudioSource Press;
-    public float AllSounds;
-    public float MusicSounds;
-    public float EffectSounds;
-    public Slider SliderAll;
-    public Slider SliderMusic;
-    public Slider SliderEffect;
+    public float musicSounds;
+    public float effectSounds;
+    public float UISounds;
+    [SerializeField] private Slider SliderMusic;
+    [SerializeField] private Slider SliderEffect;
+    [SerializeField] private Slider sliderUI;
 
     public void SetVolume()
     {
-        SliderAll.value = AllSounds;
-        Mixer.audioMixer.SetFloat("Master", Mathf.Lerp(-30, 20, SliderAll.value));
-        SliderMusic.value = MusicSounds;
-        Mixer.audioMixer.SetFloat("Music", Mathf.Lerp(-30, 20, SliderMusic.value));
-        SliderEffect.value = EffectSounds;
-        Mixer.audioMixer.SetFloat("Effects", Mathf.Lerp(-30, 20, SliderEffect.value));
-    }
-
-    public void ChangeAllVolume(float volume)
-    {
-        Press.Play();
-        Mixer.audioMixer.SetFloat("Master", Mathf.Lerp(-30, 20, volume));
-        AllSounds = volume;
+        SliderMusic.value = musicSounds;
+        mixer.SetFloat("Music", Mathf.Lerp(-30, 20, SliderMusic.value));
+        SliderEffect.value = effectSounds;
+        mixer.SetFloat("Effects", Mathf.Lerp(-30, 20, SliderEffect.value));
+        sliderUI.value = UISounds;
+        mixer.SetFloat("UI", Mathf.Lerp(-30, 20, sliderUI.value));
     }
 
     public void ChangeMusic(float volume)
     {
-        Mixer.audioMixer.SetFloat("Music", Mathf.Lerp(-30, 20, volume));
-        MusicSounds = volume;
+        Press.Play();
+        mixer.SetFloat("Music", Mathf.Lerp(-30, 20, volume));
+        musicSounds = volume;
     }
 
     public void ChangeEffect(float volume)
     {
         Press.Play();
-        Mixer.audioMixer.SetFloat("Effects", Mathf.Lerp(-30, 20, volume));
-        EffectSounds = volume;
+        mixer.SetFloat("Effects", Mathf.Lerp(-30, 20, volume));
+        effectSounds = volume;
+    }
+    public void ChangeUI(float volume)
+    {
+        Press.Play();
+        mixer.SetFloat("UI", Mathf.Lerp(-30, 20, volume));
+        UISounds = volume;
     }
 }

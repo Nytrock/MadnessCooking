@@ -12,9 +12,9 @@ public class SaveSound : MonoBehaviour
     public AudioSource Press;
     [System.Serializable]
     public class Settings {
-        public float AllSounds;
-        public float MusicSounds;
-        public float EffectSounds;
+        public float UISounds;
+        public float musicSounds;
+        public float effectSounds;
         public int langId;
     }
 
@@ -27,9 +27,9 @@ public class SaveSound : MonoBehaviour
     public void SaveAllSound()
     {
         Settings settings = new Settings();
-        settings.AllSounds = volumeSet.AllSounds;
-        settings.MusicSounds = volumeSet.MusicSounds;
-        settings.EffectSounds = volumeSet.EffectSounds;
+        settings.musicSounds = volumeSet.musicSounds;
+        settings.effectSounds = volumeSet.effectSounds;
+        settings.UISounds = volumeSet.UISounds;
         settings.langId = LocalizationManager.SelectedLanguage;
 
         if (Directory.Exists(Application.dataPath + "/save")) {
@@ -47,9 +47,9 @@ public class SaveSound : MonoBehaviour
             BinaryFormatter form = new BinaryFormatter();
             try {
                 Settings settings = (Settings)form.Deserialize(stream);
-                volumeSet.AllSounds = settings.AllSounds;
-                volumeSet.MusicSounds = settings.MusicSounds;
-                volumeSet.EffectSounds = settings.EffectSounds;
+                volumeSet.UISounds = settings.UISounds;
+                volumeSet.musicSounds = settings.musicSounds;
+                volumeSet.effectSounds = settings.effectSounds;
                 localizationManager.SetLanguage(settings.langId);
                 volumeSet.SetVolume();
             } finally {
