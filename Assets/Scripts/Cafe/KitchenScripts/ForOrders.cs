@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public class ForOrders : MonoBehaviour
 {
-    public List<Food> OrdersClients;
+    public List<Food> ordersClients;
     public List<Order> Orders;
-    public List<bool> MadeOreders;
+    public List<bool> madeOrders;
     public Animator PanelOrders;
     public ButtonMenu KitchenButton;
     public Order PatternOrder;
@@ -32,14 +32,14 @@ public class ForOrders : MonoBehaviour
 
     public void AddFood(Food food, Client client)
     {
-        OrdersClients.Add(food);
-        MadeOreders.Add(false);
+        ordersClients.Add(food);
+        madeOrders.Add(false);
         var order = Instantiate(PatternOrder, Panel);
-        order.SetOrder(this, food, OrdersClients.Count - 1, client.cafe.ingridients);
+        order.SetOrder(this, food, ordersClients.Count - 1, client.cafe.ingridients);
         Orders.Add(order);
         foreach (GameObject game in VisualOrderers)
             game.SetActive(false);
-        for (int i = 0; i < MadeOreders.Count; i++)
+        for (int i = 0; i < madeOrders.Count; i++)
             VisualOrderers[Random.Range(0, VisualOrderers.Count)].SetActive(true);
     }
 

@@ -183,8 +183,8 @@ public class GroundBed : MonoBehaviour
         fountain.Count -= 1;
         fountain.CountText.text = fountain.Count.ToString();
         if (TimePouring <= 0) {
-            MultiplyPlantingWater = 1.1f;
-            TimePouring = 10;
+            MultiplyPlantingWater = 1.25f;
+            TimePouring = 90;
             Ground.sprite = GroundSprite;
         }
     }
@@ -195,8 +195,8 @@ public class GroundBed : MonoBehaviour
         manure.CountManure -= 1;
         manure.TextManure.text = manure.CountManure.ToString();
         if (TimeManuring <= 0) {
-            MultiplyPlantingManure = 1.1f;
-            TimeManuring = 10;
+            MultiplyPlantingManure = 1.35f;
+            TimeManuring = 150;
             FertilizeImage.color = new Color(1f, 1f, 1f, 1f);
         }
     }

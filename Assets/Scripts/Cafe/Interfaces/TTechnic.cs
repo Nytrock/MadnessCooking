@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public interface TTechnic
@@ -9,7 +7,6 @@ public interface TTechnic
     Sprite Icon { get; }
     Sprite ActiveIcon { get; }
     Sprite MiniIcon { get; }
-    int TimeCooking { get; }
     int Strength { get; }
     int TimeRepairing { get; }
     int CostRepairing { get; }

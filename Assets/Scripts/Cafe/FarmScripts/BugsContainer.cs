@@ -5,9 +5,9 @@ using UnityEngine;
 public class BugsContainer : MonoBehaviour
 {
     public GroundBed bed;
-    public float TimeToCreate;
-    private float MaxTimeSpawn;
-    private float MinTimeSpawn;
+    public float MaxTimeSpawn;
+    public float MinTimeSpawn;
+    private float TimeToCreate;
     public float CurrentTime = 0;
     public int IndexBug;
     public bool DestroyActive = false;
@@ -16,9 +16,7 @@ public class BugsContainer : MonoBehaviour
 
     void Start()
     {
-        Count = this.gameObject.transform.childCount;
-        MaxTimeSpawn = TimeToCreate + 45;
-        MinTimeSpawn = TimeToCreate + 5;
+        Count = gameObject.transform.childCount;
         TimeToCreate = Random.Range(MinTimeSpawn, MaxTimeSpawn);
     }
 
@@ -31,9 +29,9 @@ public class BugsContainer : MonoBehaviour
                 if (IndexBug != -1) {
                     List<GameObject> sus = new List<GameObject>();
                     List<int> Isus = new List<int>();
-                    for (int i = 0; i < this.gameObject.transform.childCount; i++){
-                        if (!this.gameObject.transform.GetChild(i).gameObject.activeSelf) {
-                            sus.Add(this.gameObject.transform.GetChild(i).gameObject);
+                    for (int i = 0; i < gameObject.transform.childCount; i++){
+                        if (!gameObject.transform.GetChild(i).gameObject.activeSelf) {
+                            sus.Add(gameObject.transform.GetChild(i).gameObject);
                             Isus.Add(i);
                         }
                     }
@@ -42,10 +40,10 @@ public class BugsContainer : MonoBehaviour
                     } else {
                         int Rand = Random.Range(0, sus.Count);
                         IndexBug = Isus[Rand];
-                        this.gameObject.transform.GetChild(IndexBug).gameObject.SetActive(true);
+                        gameObject.transform.GetChild(IndexBug).gameObject.SetActive(true);
                         CurrentTime = 0;
                         TimeToCreate = Random.Range(MinTimeSpawn, MaxTimeSpawn);
-                        bed.MultiplyPlantingBugs -= 0.025f;
+                        bed.MultiplyPlantingBugs -= 0.02f;
                     }
                 }
             }

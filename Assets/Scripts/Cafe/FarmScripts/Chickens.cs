@@ -41,7 +41,7 @@ public class Chickens : MonoBehaviour
         else if (!AutoKorm)
             MultiplyPlantingCorn = 1;
         else
-            MultiplyPlantingCorn = 1.1f;
+            MultiplyPlantingCorn = 1.25f;
     }
 
     public void ActivePanel()

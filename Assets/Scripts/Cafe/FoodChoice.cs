@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,6 +16,7 @@ public class FoodChoice : MonoBehaviour
             client.cafe.education.AddIndex(false);
             Ed = true;
         }
+
         if (!OpenFood) {
             Xm.Play();
             var ChoisedFood = client.cafe.AvailableFood[Random.Range(0, client.cafe.AvailableFood.Count)];

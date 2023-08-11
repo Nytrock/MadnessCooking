@@ -103,6 +103,7 @@ public class Save : MonoBehaviour
     private void Start()
     {
         instance = this;
+        Application.targetFrameRate = 60;
     }
 
     public void SaveAll()

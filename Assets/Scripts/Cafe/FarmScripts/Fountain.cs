@@ -85,7 +85,7 @@ public class Fountain : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         if (!isMilk) {
             if (farm.AvailibleUpgrades.Contains(NeedUpgrade)) {
                 Auto = true;
-                SliderFountain.maxValue = 4;
+                SliderFountain.maxValue = 5;
             }
         } else {
             if (farm.AvailibleUpgrades.Contains(NeedUpgrade)) {

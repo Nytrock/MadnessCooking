@@ -5,14 +5,13 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class ClockAnimator : MonoBehaviour {
-	
+
 	private const float
 		hoursToDegrees = 360f / 12f,
-		minutesToDegrees = 360f / 60f,
-		secondsToDegrees = 360f / 60f;
+		minutesToDegrees = 360f / 60f;
 	
 	public Transform hours, minutes;
-	public TimeSpan timespan = new TimeSpan(9, 0, 0);
+	public TimeSpan timespan = new TimeSpan(22, 0, 0);
 	public int MultiplyTime;
 	public SpawnClients spawnClient;
 	public bool Morning;
@@ -28,61 +27,54 @@ public class ClockAnimator : MonoBehaviour {
 	public Sprite Ground;
 	public List<Image> Skyes;
 	public List<Image> Grounds;
-	public bool TimeSlow;
 	public AudioSource SlowVolume;
 	public AudioSource FastVolume;
 
 	void Start()
     {
 		SkyChange();
-		TimeSlow = true;
 	}
 
 	private void Update()
 	{
-		if (TimeSlow) {
-			timespan = timespan.Add(new TimeSpan(0, 0, 1 * MultiplyTime));
-			hours.localRotation = Quaternion.Euler(
-					0f, 0f, (float)timespan.TotalHours * -hoursToDegrees);
-			minutes.localRotation = Quaternion.Euler(
-				0f, 0f, (float)timespan.TotalMinutes * -minutesToDegrees);
-			if ((int)timespan.TotalHours % 24 == 17 && Day){
-				for (int i = 0; i < Skyes.Count; i++)
-					Skyes[i].sprite = EveningSprite;
-				for (int i = 0; i < Grounds.Count; i++)
-					Grounds[i].sprite = Ground;
-				Day = false;
-				Evening = true;
-				spawnClient.TimeMultiply = 0.8f;
-			}else if ((int)timespan.TotalHours % 24 == 22 && Evening){
-				for (int i = 0; i < Skyes.Count; i++)
-					Skyes[i].sprite = NightSprite;
-				for (int i = 0; i < Grounds.Count; i++)
-					Grounds[i].sprite = NightGround;
-				Evening = false;
-				Night = true;
-				spawnClient.TimeMultiply = 0.1f;
-			}else if ((int)timespan.TotalHours % 24 == 4 && Night){
-				for (int i = 0; i < Skyes.Count; i++)
-					Skyes[i].sprite = MorningSprite;
-				for (int i = 0; i < Grounds.Count; i++)
-					Grounds[i].sprite = MorningGround;
-				Night = false;
-				Morning = true;
-				spawnClient.TimeMultiply = 0.8f;
-			}else if ((int)timespan.TotalHours % 24 == 10 && Morning){
-				for (int i = 0; i < Skyes.Count; i++)
-					Skyes[i].sprite = DaySprite;
-				for (int i = 0; i < Grounds.Count; i++)
-					Grounds[i].sprite = Ground;
-				Morning = false;
-				Day = true;
-				spawnClient.TimeMultiply = 1f;
-			}
-			TimeSlow = false;
-		} else {
-			TimeSlow = true;
-        }
+		timespan = timespan.Add(new TimeSpan(0, 0, 1 * MultiplyTime));
+		hours.localRotation = Quaternion.Euler(
+				0f, 0f, (float)timespan.TotalHours * -hoursToDegrees);
+		minutes.localRotation = Quaternion.Euler(
+			0f, 0f, (float)timespan.TotalMinutes * -minutesToDegrees);
+		if ((int)timespan.TotalHours % 24 == 17 && Day){
+			for (int i = 0; i < Skyes.Count; i++)
+				Skyes[i].sprite = EveningSprite;
+			for (int i = 0; i < Grounds.Count; i++)
+				Grounds[i].sprite = Ground;
+			Day = false;
+			Evening = true;
+			spawnClient.TimeMultiply = 1.2f;
+		}else if ((int)timespan.TotalHours % 24 == 22 && Evening){
+			for (int i = 0; i < Skyes.Count; i++)
+				Skyes[i].sprite = NightSprite;
+			for (int i = 0; i < Grounds.Count; i++)
+				Grounds[i].sprite = NightGround;
+			Evening = false;
+			Night = true;
+			spawnClient.TimeMultiply = 0.1f;
+		}else if ((int)timespan.TotalHours % 24 == 4 && Night){
+			for (int i = 0; i < Skyes.Count; i++)
+				Skyes[i].sprite = MorningSprite;
+			for (int i = 0; i < Grounds.Count; i++)
+				Grounds[i].sprite = MorningGround;
+			Night = false;
+			Morning = true;
+			spawnClient.TimeMultiply = 0.8f;
+		}else if ((int)timespan.TotalHours % 24 == 10 && Morning){
+			for (int i = 0; i < Skyes.Count; i++)
+				Skyes[i].sprite = DaySprite;
+			for (int i = 0; i < Grounds.Count; i++)
+				Grounds[i].sprite = Ground;
+			Morning = false;
+			Day = true;
+			spawnClient.TimeMultiply = 1f;
+		}
 	}
 
 	public void ChangeSppeed(int ThisSpeed)

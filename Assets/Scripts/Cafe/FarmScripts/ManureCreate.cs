@@ -87,7 +87,7 @@ public class ManureCreate : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     {
         if (farm.AvailibleUpgrades.Contains(NeedUpgrade)){
             Auto = true;
-            MaxTimeShit = 15;
+            MaxTimeShit = 60;
         }
     }
 }

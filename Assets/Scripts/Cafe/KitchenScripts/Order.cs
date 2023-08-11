@@ -41,7 +41,7 @@ public class Order : MonoBehaviour
             if (slider.value < slider.maxValue) {
                 slider.value += Time.deltaTime * template.FasterSpeed;
             } else {
-                Orders.MadeOreders[Number] = true;
+                Orders.madeOrders[Number] = true;
                 Final.SetActive(true);
                 LocalizationManager.OnLanguageChange -= UpdateIngridients;
                 Starting = false;

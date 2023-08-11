@@ -11,7 +11,6 @@ public class SpawnClients : MonoBehaviour
     public float NeedTime;
     public float SpeedTime = 1f;
     public float SpeedClient;
-    public bool CoroutineWork = false;
     public Transform ClientsContainer;
     public Client client;
     public CloseAndOpen Close;
@@ -45,10 +44,10 @@ public class SpawnClients : MonoBehaviour
 
     public void Spawn()
     {
-        var NewClient = Instantiate(client, ClientsContainer);
-        NewClient.ActivateClient(cafe, this);
-        NewClient.speed = SpeedClient;
-        NewClient.speedTime = SpeedTime;
+        var newClient = Instantiate(client, ClientsContainer);
+        newClient.ActivateClient(cafe, this);
+        newClient.speed = SpeedClient;
+        newClient.speedTime = SpeedTime;
         CurrentTime = NeedTime;
     }
 }
