@@ -1,4 +1,4 @@
-<p align="center"><img src="Assets/Images/Энд.png" alt="Madness Cooking Logo" width="500"></p>
+<p align="center"><img src="Assets/Images/Logo.png" alt="Madness Cooking Logo" width="500"></p>
 
 # Madness Cooking
 The first game I created on the Unity engine for the summer of 2021. The plot as such was not originally envisaged, there was only the idea of combining the two
@@ -7,9 +7,9 @@ due to lack of skill and time. As a result, the game was actually created in a m
 
 # The game
 
-Link to the game page - https://nytrock.itch.io/madness-cooking-english-ver <br>
+Link to the game page - https://nytrock.itch.io/madness-cooking <br>
 You can also download the latest release on github, unzip the resulting archive and run `Madness cooking.exe` in it
-> If you encounter any bug, please file an [issue](https://github.com/Nytrock/Madness_Cooking_EN/issues).
+> If you encounter any bug, please file an [issue](https://github.com/Nytrock/MadnessCooking/issues).
 
 # Main game locations
 
@@ -46,7 +46,7 @@ If for some reason you want to dig into the source code or even improve it, then
 - Clone repository
 
 ```shell
-git clone https://github.com/Nytrock/Madness_Cooking_EN.git
+git clone https://github.com/Nytrock/MadnessCooking.git
 ```
 - Open Unity Hub, click on the `Add project` button, select the folder where the repository was cloned
 - Click on the created project and start studying the code
