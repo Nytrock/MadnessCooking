@@ -15,7 +15,7 @@ public class ButtonsYesNo : MonoBehaviour
 
     private void Update() {
         if (client.NeedFood != null && type == "Yes" && !client.Eating)
-            button.interactable = client.cafe.orders.ordersClients.Contains(client.NeedFood);
+            button.interactable = client.cafe.orders.madeOrders[client.cafe.orders.ordersClients.IndexOf(client.NeedFood)];
     }
 
     public void Click() {

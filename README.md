@@ -1,4 +1,4 @@
-<p align="center"><img src="Assets/Images/Logo.png" alt="Madness Cooking Logo" width="500"></p>
+<p align="center"><img src="Assets/Images/Icon.png" alt="Logo" width="256"></p>
 
 # Madness Cooking
 The first game I created on the Unity engine for the summer of 2021. The plot as such was not originally envisaged, there was only the idea of combining the two
