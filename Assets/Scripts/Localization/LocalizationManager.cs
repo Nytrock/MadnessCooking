@@ -58,6 +58,8 @@ public class LocalizationManager : MonoBehaviour
         if (localization.ContainsKey(key))
             return localization[key][languageId];
 
+        Debug.Log(1);
+
         return key;
     }
 }

@@ -104,6 +104,7 @@ public class Save : MonoBehaviour
     {
         instance = this;
         Application.targetFrameRate = 60;
+        Debug.Log(1);
     }
 
     public void SaveAll()
