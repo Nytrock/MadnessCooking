@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62e259f0fb519ee4183f3e54a050614f, type: 3}
+  m_Name: FriedPotato
+  m_EditorClassIdentifier: 
+  Name: 
+  Description: 
+  Cost: 600
+  TypeTechnic: {fileID: 11400000, guid: 7a3095255cbd1074dba21111d12d19ae, type: 2}
+  FoodSprite: {fileID: 0}
+  TimeToCook: 24
+  MoneyGet: 40
+  ingridients:
+  - Ingridient: {fileID: 11400000, guid: 69a4d0ca41f89d34ebe35ac5ce8ff220, type: 2}
+    Count: 2
+  - Ingridient: {fileID: 11400000, guid: ecf0fd20f8efd89418aba1c84c5eae73, type: 2}
+    Count: 1
+  NeedIngridients:
+  - {fileID: 11400000, guid: 69a4d0ca41f89d34ebe35ac5ce8ff220, type: 2}
+  - {fileID: 11400000, guid: ecf0fd20f8efd89418aba1c84c5eae73, type: 2}
+  NumberIngridients: 0200000001000000

@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62e259f0fb519ee4183f3e54a050614f, type: 3}
+  m_Name: PineappleJuice
+  m_EditorClassIdentifier: 
+  Name: 
+  Description: 
+  Cost: 350
+  TypeTechnic: {fileID: 11400000, guid: 8fe5a1b5c2c60e04e8303266be891355, type: 2}
+  FoodSprite: {fileID: 0}
+  TimeToCook: 16
+  MoneyGet: 32
+  ingridients:
+  - Ingridient: {fileID: 11400000, guid: 97a001c1ddc2c9d449c27a2cdba8ab4b, type: 2}
+    Count: 2
+  NeedIngridients:
+  - {fileID: 11400000, guid: 97a001c1ddc2c9d449c27a2cdba8ab4b, type: 2}
+  NumberIngridients: 02000000

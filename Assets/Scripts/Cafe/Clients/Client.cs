@@ -40,7 +40,7 @@ public class Client : MonoBehaviour
 
     private void SetCloth()
     {
-
+        // Ставим скин персонажа
     }
 
     public void SetTargets(Transform enterTarget, Transform exitTarget)

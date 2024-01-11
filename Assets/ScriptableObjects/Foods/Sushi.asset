@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62e259f0fb519ee4183f3e54a050614f, type: 3}
+  m_Name: Sushi
+  m_EditorClassIdentifier: 
+  Name: 
+  Description: 
+  Cost: 1600
+  TypeTechnic: {fileID: 11400000, guid: c20c3d0744f967340882fea91042167a, type: 2}
+  FoodSprite: {fileID: 0}
+  TimeToCook: 30
+  MoneyGet: 80
+  ingridients:
+  - Ingridient: {fileID: 11400000, guid: ced1e3d4268a7b948b73cd6807c188ef, type: 2}
+    Count: 1
+  - Ingridient: {fileID: 11400000, guid: 72a975fb0e4957047b8160771602c871, type: 2}
+    Count: 1
+  - Ingridient: {fileID: 11400000, guid: 7755e9f6a50793a45afe949b36406069, type: 2}
+    Count: 1
+  NeedIngridients:
+  - {fileID: 11400000, guid: ced1e3d4268a7b948b73cd6807c188ef, type: 2}
+  - {fileID: 11400000, guid: 72a975fb0e4957047b8160771602c871, type: 2}
+  - {fileID: 11400000, guid: 7755e9f6a50793a45afe949b36406069, type: 2}
+  NumberIngridients: 010000000100000001000000

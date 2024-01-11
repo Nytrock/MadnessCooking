@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Rendering;
 
 public class ClientWalkState : ClientState
 {
@@ -16,7 +15,6 @@ public class ClientWalkState : ClientState
         } else {
             _target = client.EnterTarget;
         }
-            
     }
 
     public override void ExitState()
