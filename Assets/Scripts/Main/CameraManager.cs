@@ -27,7 +27,7 @@ public abstract class CameraManager : MonoBehaviour
     public Transform MainCameraPos => _mainCameraPos;
 
 
-    private void Start()
+    protected virtual void Start()
     {
         _locationManager.LocationChanged += ChangeWorkMode;
         _mainCameraPos = _mainCamera.transform;
