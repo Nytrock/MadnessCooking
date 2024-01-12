@@ -8,6 +8,7 @@ public class LocationAdditionUI : MonoBehaviour
     private void Start()
     {
         locationManager.LocationChanged += UpdateUI;
+        UpdateUI(locationManager.MainCamera);
     }
 
     private void UpdateUI(Transform newPosition)

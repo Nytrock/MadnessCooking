@@ -5,7 +5,9 @@ public class ClientsSpawner : MonoBehaviour
     [SerializeField] private Transform _spawnPoint;
     [SerializeField] private PopularityManager _popularityManager;
     [SerializeField] private CafeOpener _cafeOpener;
-    [SerializeField] private CafeManager _cafeManager;
+    [SerializeField] private CafeSpaceManager _spaceManager;
+    [SerializeField] private CafeSpotManager _spotManager;
+    [SerializeField] private OrdersManager _ordersManager;
     [SerializeField] private ClientsPool _pool;
 
     [Header("Время спавна")]
@@ -19,7 +21,7 @@ public class ClientsSpawner : MonoBehaviour
     private void Start()
     {
         _cafeOpener.CafeChanged += ChangeWorkMode;
-        _spawnPoint.position += new Vector3(_cafeManager.SpaceCount * _cafeManager.GetSpaceSize(), 0, 0);
+        _spawnPoint.position += new Vector3(_spaceManager.SpaceCount * _spaceManager.GetSpaceSize(), 0, 0);
         SetNewTime();
     }
 
@@ -38,25 +40,31 @@ public class ClientsSpawner : MonoBehaviour
 
     private void Spawn()
     {
-        if (!_cafeManager.CheckHavingSpots()) {
-            ChangeWorkMode();
+        var clientType = GetRandomType();
+        var spot = _spotManager.GetRandomSpot(clientType);
+        if (spot == null) {
+            Debug.Log("No spot");
             return;
         }
-
-        var clientType = GetRandomType();
-        var spot = _cafeManager.GetRandomSpot(clientType);
-        if (spot == null)
-            return;
 
         if (spot.SeatsCount > 1) {
 
         } else {
-            Debug.Log("Spawn");
             Client client = _pool.GetObject();
             client.transform.position = _spawnPoint.position;
             _cafeOpener.CafeChanged += client.Leave;
+            client.ClientLeave += ClientLeave;
+            client.SetSpot(spot);
+            client.SetWaitingtime(_popularityManager.GetSpaceMultiplier());
             client.SetType(clientType);
             client.SetTargets(spot.GetTarget(), _spawnPoint);
+            client.SetPool(_pool);
+            _ordersManager.SetNewOrder(client, spot);
+            client.StartNewCycle();
+        }
+
+        if (!_spotManager.CheckHavingSpots()) {
+            ChangeWorkMode();
         }
     }
 
@@ -91,5 +99,11 @@ public class ClientsSpawner : MonoBehaviour
             return ClientType.Triple;
         }
         return ClientType.Quarter;
+    }
+
+    private void ClientLeave(CafeSpot spot)
+    {
+        _isSpawning = true;
+        _spotManager.ReturnSpot(spot);
     }
 }

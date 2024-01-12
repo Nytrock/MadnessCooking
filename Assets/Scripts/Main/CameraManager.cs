@@ -13,6 +13,7 @@ public abstract class CameraManager : MonoBehaviour
 
     [SerializeField] protected float _cameraSpeed = 1;
     [SerializeField] protected float _keyVelocity = 1;
+    [SerializeField] protected float _mouseVelocity = 1;
     [SerializeField] protected float _speedFading = 1;
     protected Transform _mainCameraPos;
     protected float _cameraVelocity;
@@ -43,10 +44,14 @@ public abstract class CameraManager : MonoBehaviour
             return;
 
         var keyAxis = Input.GetAxis(_keyAxis);
+        var mouseAxis = Input.GetAxis("Mouse ScrollWheel");
         var cameraAxis = Input.GetAxis(_cameraAxis);
 
-        if (keyAxis != 0) {
-            _cameraVelocity = _keyVelocity * -Mathf.Sign(keyAxis);
+        if (keyAxis != 0 || mouseAxis != 0) {
+            if (keyAxis != 0)
+                _cameraVelocity = _keyVelocity * -Mathf.Sign(keyAxis);
+            else
+                _cameraVelocity = _mouseVelocity * -Mathf.Sign(mouseAxis);
             _isKeyPressed = true;
         } else if (_isKeyPressed) {
             _cameraVelocity = 0;

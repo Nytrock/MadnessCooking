@@ -2,6 +2,10 @@ using UnityEngine;
 
 public class PopularityManager : MonoBehaviour
 {
+    [SerializeField] private CafeSpaceManager _spaceManager;
+
+    private int _popularity;
+
     public float GetPopularity()
     {
         return 1;
@@ -13,5 +17,15 @@ public class PopularityManager : MonoBehaviour
         doubleChance = singleChance;
         tripleChance = doubleChance;
         quarterChance = tripleChance;
+    }
+
+    public int GetPurePopularity()
+    {
+        return _popularity;
+    }
+
+    public float GetSpaceMultiplier()
+    {
+        return Mathf.Max(1, _spaceManager.SpaceCount * 0.375f);
     }
 }

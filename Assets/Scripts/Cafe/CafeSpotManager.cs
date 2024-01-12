@@ -2,21 +2,13 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CafeManager : MonoBehaviour
+public class CafeSpotManager : MonoBehaviour
 {
-    [SerializeField] private int _spaceCount = 2;
-    [SerializeField] private CafeSpace _spacePrefab;
-    [SerializeField] private Transform _spaceContainer;
-
     [SerializeField] private List<CafeSpot> _spots;
     [SerializeField] private List<List<int>> _freeSpots = new List<List<int>>(4);
 
-    public int SpaceCount => _spaceCount;
-    public event Action SpaceAdded;
-
     private void Start()
     {
-        SetSpace();
         GenerateSpots();
     }
 
@@ -27,30 +19,6 @@ public class CafeManager : MonoBehaviour
             _freeSpots.Add(new List<int>());
         for (int i = 0; i < _spots.Count; i++)
             _freeSpots[_spots[i].SeatsCount - 1].Add(i);
-    }
-
-    private void SetSpace()
-    {
-        var size = GetSpaceSize();
-
-        for (int i = 0; i < _spaceCount; i++) {
-            var space = Instantiate(_spacePrefab);
-            space.transform.parent = _spaceContainer;
-            space.transform.position += new Vector3(size * i, 0, 0);
-        }
-    }
-
-    public float GetSpaceSize()
-    {
-        return _spacePrefab.transform.localScale.x;
-    }
-
-    private void AddSpace()
-    {
-        var space = Instantiate(_spacePrefab);
-        space.transform.parent = _spaceContainer;
-        space.transform.position += new Vector3(GetSpaceSize() * _spaceCount, 0, 0);
-        SpaceAdded?.Invoke();
     }
 
     public CafeSpot GetRandomSpot(ClientType clientType)
@@ -87,5 +55,10 @@ public class CafeManager : MonoBehaviour
         for (int i = 0; i < _freeSpots.Count; i++)
             res += _freeSpots[i].Count;
         return res != 0;
+    }
+
+    public void ReturnSpot(CafeSpot spot)
+    {
+        _freeSpots[spot.SeatsCount - 1].Add(_spots.IndexOf(spot));
     }
 }

@@ -9,6 +9,7 @@ public class Food : BaseObject
     public Sprite FoodSprite;
     public Sprite MiniSprite;
     public float TimeToCook;
+    public float TimeToEat;
     public int MoneyGet;
     public IngridientCount[] ingridients;
 }

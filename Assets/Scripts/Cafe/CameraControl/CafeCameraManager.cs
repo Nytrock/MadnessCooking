@@ -1,17 +1,15 @@
 using UnityEngine;
 
 
-[RequireComponent(typeof(CafeManager))]
 public class CafeCameraManager : CameraManager
 {
-    private CafeManager _cafeManager;
+    [SerializeField] private CafeSpaceManager _spaceManager;
     protected override string _cameraAxis => "Mouse X";
     protected override string _keyAxis => "Horizontal";
 
     protected override void Start()
     {
-        _cafeManager = GetComponent<CafeManager>();
-        _cafeManager.SpaceAdded += CalculateBorderPositions;
+        _spaceManager.SpaceAdded += CalculateBorderPositions;
         base.Start();
     }
 
@@ -19,8 +17,8 @@ public class CafeCameraManager : CameraManager
     {
         _startPosition = transform.position.x;
         var horzExtent = _mainCamera.orthographicSize * Screen.width / Screen.height;
-        var spotSize = _cafeManager.GetSpaceSize();
-        _endPosition = _startPosition + (_cafeManager.SpaceCount - 1) * spotSize + spotSize / 2 - horzExtent;
+        var spotSize = _spaceManager.GetSpaceSize();
+        _endPosition = _startPosition + (_spaceManager.SpaceCount - 1) * spotSize + spotSize / 2 - horzExtent;
     }
 
     protected override void MoveCamera()

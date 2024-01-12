@@ -2,18 +2,28 @@ using UnityEngine;
 
 public class ClientEatingState : ClientState
 {
+    private float _eatTime;
+    private float _nowTime = 0;
+
+
     public override void EnterState(Client client)
     {
-        throw new System.NotImplementedException();
+        _client = client;
+
+        _client.SetSpotTableFood();
+        _eatTime = _client.Order.Food.TimeToEat;
     }
 
     public override void ExitState()
     {
-        throw new System.NotImplementedException();
+
     }
 
     public override void UpdateState()
     {
-        throw new System.NotImplementedException();
+        if (_nowTime < _eatTime)
+            _nowTime += Time.deltaTime;
+        else
+            _client.PayAndGoAway();
     }
 }

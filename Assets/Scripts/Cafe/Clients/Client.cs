@@ -1,6 +1,9 @@
+using System;
+using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.Rendering;
 
+[RequireComponent(typeof(ClientUI))]
 public class Client : MonoBehaviour
 {
     #region States Settings
@@ -10,25 +13,38 @@ public class Client : MonoBehaviour
         get { return _nowState; }
         set { _nowState?.ExitState(); _nowState = value; _nowState.EnterState(this); }
     }
-    public ClientWalkState _walkState { get; private set; } = new();
-    public ClientWaitState _waitState { get; private set; } = new();
-    public ClientEatingState _eatState { get; private set; } = new();
+    private ClientWalkState _walkState = new();
+    private ClientWaitState _waitState = new();
+    private ClientEatingState _eatState = new();
     #endregion
 
     [SerializeField] private SortingGroup _sortingGroup;
-    
-    private Transform _enterTarget;
-    private Transform _exitTarget;
-    private ClientType _clientType;
-    private bool _isLeaving = false;
+    [SerializeField] private float _waitTime;
 
-    public Transform EnterTarget => _enterTarget;
-    public Transform ExitTarget => _exitTarget;
-    public bool IsLeaving => _isLeaving;
-    public SortingGroup SortingGroup => _sortingGroup;
+    private ClientUI _clientUI;
+    private ClientType _clientType;
+    private ClientsPool _pool;
+    private CafeSpot _spot;
+    private int _spotIndex;
+
+    public Transform EnterTarget { get; private set; }
+    public Transform ExitTarget { get; private set; }
+    public float WaitMultiplier { get; private set; }
+    public bool IsLeaving { get; private set; }
+    public Order Order { get; private set; }
+
+    public event Action<Order> OrderActivated;
+    public event Action<CafeSpot> ClientLeave;
 
     private void Start()
     {
+        _clientUI = GetComponent<ClientUI>();
+    }
+
+    public void StartNewCycle()
+    {
+        IsLeaving = false;
+        gameObject.SetActive(true);
         NowState = _walkState;
         SetCloth();
     }
@@ -45,8 +61,8 @@ public class Client : MonoBehaviour
 
     public void SetTargets(Transform enterTarget, Transform exitTarget)
     {
-        _enterTarget = enterTarget;
-        _exitTarget = exitTarget;
+        EnterTarget = enterTarget;
+        ExitTarget = exitTarget;
     }
 
     public void SetType(ClientType clientType)
@@ -54,9 +70,80 @@ public class Client : MonoBehaviour
         _clientType = clientType;
     }
 
+    public void SetOrder(Order order)
+    {
+        Order = order;
+    }
+
+    public void SetWaitingtime(float multiplier)
+    {
+        WaitMultiplier = multiplier;
+    }
+
+    public void SetPool(ClientsPool pool)
+    {
+        _pool = pool;
+    }
+
+    public void SetSpot(CafeSpot spot, int spotIndex = 0)
+    {
+        _spot = spot;
+        _spotIndex = spotIndex;
+    }
+
+    public void ActivateOrder()
+    {
+        OrderActivated?.Invoke(Order);
+        _clientUI.SetFood(Order.Food);
+    }
+
+    public void CheckOrder()
+    {
+        if (Order.IsFinished)
+            _clientUI.ActivateYesButton();
+    }
+
+    public void Wait()
+    {
+        NowState = _waitState;
+    }
+
+    public void PayAndGoAway()
+    {
+        // Заплатить
+        _spot.ResetTableFoodSprite(_spotIndex);
+        Leave();
+    }
+
     public void Leave()
     {
-        _isLeaving = true;
+        ClientLeave?.Invoke(_spot);
+        IsLeaving = true;
         NowState = _walkState;
+    }
+
+    public void Eat()
+    {
+        NowState = _eatState;
+    }
+
+    public void Destroy()
+    {
+        _pool.PutObject(this);   
+    }
+
+    public void SetSpotTableFood()
+    {
+        _spot.SetTableFoodSprite(Order.Food, _spotIndex);
+    }
+
+    public void ChangeSortingGroup(int newValue)
+    {
+        _sortingGroup.sortingOrder = newValue;
+    }
+
+    public float GetWaitTime()
+    {
+        return _waitTime * WaitMultiplier * UnityEngine.Random.Range(0.8f, 1.1f);
     }
 }
