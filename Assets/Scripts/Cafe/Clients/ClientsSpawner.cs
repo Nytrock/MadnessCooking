@@ -16,7 +16,8 @@ public class ClientsSpawner : MonoBehaviour
 
     private float _needTime;
     private float _nowTime;
-    private bool _isSpawning = true;
+    [SerializeField] private bool _isSpawning = true;
+    private bool _isOpen = true;
 
     private void Start()
     {
@@ -27,7 +28,7 @@ public class ClientsSpawner : MonoBehaviour
 
     private void Update()
     {
-        if (!_isSpawning)
+        if (!_isSpawning || !_isOpen)
             return;
 
         if (_nowTime < _needTime) {
@@ -43,7 +44,6 @@ public class ClientsSpawner : MonoBehaviour
         var clientType = GetRandomType();
         var spot = _spotManager.GetRandomSpot(clientType);
         if (spot == null) {
-            Debug.Log("No spot");
             return;
         }
 
@@ -63,9 +63,8 @@ public class ClientsSpawner : MonoBehaviour
             client.StartNewCycle();
         }
 
-        if (!_spotManager.CheckHavingSpots()) {
-            ChangeWorkMode();
-        }
+        if (!_spotManager.CheckHavingSpots())
+            ChangeSpawnMode();
     }
 
     private void SetNewTime()
@@ -75,9 +74,15 @@ public class ClientsSpawner : MonoBehaviour
         _nowTime = 0;
     }
 
-    private void ChangeWorkMode()
+    private void ChangeSpawnMode()
     {
         _isSpawning = !_isSpawning;
+        SetNewTime();
+    }
+
+    private void ChangeWorkMode()
+    {
+        _isOpen = !_isOpen;
         SetNewTime();
     }
 

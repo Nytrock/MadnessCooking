@@ -1,5 +1,4 @@
 using System;
-using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -36,17 +35,21 @@ public class Client : MonoBehaviour
     public event Action<Order> OrderActivated;
     public event Action<CafeSpot> ClientLeave;
 
-    private void Start()
+    private void Awake()
     {
         _clientUI = GetComponent<ClientUI>();
     }
 
     public void StartNewCycle()
     {
+        _waitState = new();
+        _eatState = new();
+
         IsLeaving = false;
         gameObject.SetActive(true);
         NowState = _walkState;
-        SetCloth();
+        SetCloth(); 
+        _clientUI.StartNewCycle();
     }
 
     private void Update()
@@ -110,7 +113,7 @@ public class Client : MonoBehaviour
 
     public void PayAndGoAway()
     {
-        // Заплатить
+        MoneyManager.Instance.ChangeMoney(Order.Food.MoneyGet);
         _spot.ResetTableFoodSprite(_spotIndex);
         Leave();
     }

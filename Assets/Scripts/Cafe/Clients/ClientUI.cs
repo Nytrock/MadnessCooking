@@ -17,6 +17,12 @@ public class ClientUI : MonoBehaviour
     private void Start()
     {
         _foodImage = _mainButton.GetComponent<Image>();
+        StartNewCycle();
+    }
+
+    public void StartNewCycle()
+    {
+        _waitSlider.value = 0;
         _yesButton.interactable = false;
         _buttonsBlock.SetActive(false);
         SetUIVisible(false);

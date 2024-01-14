@@ -7,6 +7,7 @@ public class CafeOpener : MonoBehaviour
     [SerializeField] private TextMeshProUGUI text;
     private bool _isOpened = true;
 
+    public bool IsOpened => _isOpened;
     public event Action CafeChanged;
 
     public void ChangeCafeState()
