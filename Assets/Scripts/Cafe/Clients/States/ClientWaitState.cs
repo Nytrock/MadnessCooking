@@ -25,7 +25,7 @@ public class ClientWaitState : ClientState
 
     public override void ExitState()
     {
-        _clientUI.SetUIVisible(false);
+
     }
 
     public override void UpdateState()

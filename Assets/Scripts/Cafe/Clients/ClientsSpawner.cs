@@ -1,3 +1,4 @@
+using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class ClientsSpawner : MonoBehaviour
@@ -43,23 +44,22 @@ public class ClientsSpawner : MonoBehaviour
     {
         var clientType = GetRandomType();
         var spot = _spotManager.GetRandomSpot(clientType);
-        if (spot == null) {
+        if (spot == null)
             return;
-        }
 
         if (spot.SeatsCount > 1) {
-
+            var table = spot.GetComponent<ClientTable>();
+            for (int i = 0; i < spot.SeatsCount; i++) {
+                Client client = _pool.GetObject();
+                table.AddClient(client);
+                SetUpClient(client, spot, clientType, i);
+            }
+            table.ClientsLeaved += ClientLeave;
+            StartCoroutine(table.SpawnGroupOfClients());
         } else {
             Client client = _pool.GetObject();
-            client.transform.position = _spawnPoint.position;
-            _cafeOpener.CafeChanged += client.Leave;
+            SetUpClient(client, spot, clientType, 0);
             client.ClientLeave += ClientLeave;
-            client.SetSpot(spot);
-            client.SetWaitingtime(_popularityManager.GetSpaceMultiplier());
-            client.SetType(clientType);
-            client.SetTargets(spot.GetTarget(), _spawnPoint);
-            client.SetPool(_pool);
-            _ordersManager.SetNewOrder(client, spot);
             client.StartNewCycle();
         }
 
@@ -110,5 +110,17 @@ public class ClientsSpawner : MonoBehaviour
     {
         _isSpawning = true;
         _spotManager.ReturnSpot(spot);
+    }
+
+    private void SetUpClient(Client client, CafeSpot spot, ClientType clientType, int spotIndex)
+    {
+        client.transform.position = _spawnPoint.position;
+        _cafeOpener.CafeChanged += client.Leave;
+        client.SetType(clientType);
+        client.SetSpot(spot, spotIndex);
+        client.SetWaitingtime(_popularityManager.GetSpaceMultiplier());
+        client.SetTargets(spot.GetTarget(spotIndex), _spawnPoint);
+        client.SetPool(_pool);
+        _ordersManager.SetNewOrder(client, spot);
     }
 }

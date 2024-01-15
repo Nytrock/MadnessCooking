@@ -15,6 +15,7 @@ public class Client : MonoBehaviour
     private ClientWalkState _walkState = new();
     private ClientWaitState _waitState = new();
     private ClientEatingState _eatState = new();
+    private ClientSitState _sitState = new();
     #endregion
 
     [SerializeField] private SortingGroup _sortingGroup;
@@ -24,6 +25,7 @@ public class Client : MonoBehaviour
     private ClientType _clientType;
     private ClientsPool _pool;
     private CafeSpot _spot;
+    private ClientTable _table;
     private int _spotIndex;
 
     public Transform EnterTarget { get; private set; }
@@ -38,10 +40,12 @@ public class Client : MonoBehaviour
     private void Awake()
     {
         _clientUI = GetComponent<ClientUI>();
+        enabled = false;
     }
 
     public void StartNewCycle()
     {
+        enabled = true;
         _waitState = new();
         _eatState = new();
 
@@ -88,9 +92,11 @@ public class Client : MonoBehaviour
         _pool = pool;
     }
 
-    public void SetSpot(CafeSpot spot, int spotIndex = 0)
+    public void SetSpot(CafeSpot spot, int spotIndex)
     {
         _spot = spot;
+        if (InGroup())
+            _table = _spot.GetComponent<ClientTable>();
         _spotIndex = spotIndex;
     }
 
@@ -111,27 +117,55 @@ public class Client : MonoBehaviour
         NowState = _waitState;
     }
 
-    public void PayAndGoAway()
+    public void Pay()
     {
-        MoneyManager.Instance.ChangeMoney(Order.Food.MoneyGet);
         _spot.ResetTableFoodSprite(_spotIndex);
-        Leave();
+        if (InGroup()) {
+            Sit();
+            _table.CheckTalk();
+        } else {
+            MoneyManager.Instance.ChangeMoney(Order.Food.MoneyGet);
+            Leave();
+        }
     }
 
     public void Leave()
     {
         ClientLeave?.Invoke(_spot);
+        ClientLeave = null;
         IsLeaving = true;
         NowState = _walkState;
     }
 
+    public void FoodRejected()
+    {
+        if (InGroup()) {
+            Sit();
+            _table.DecreaseTalk();
+            _table.CheckTalk();
+        } else {
+            Leave();
+        }
+    }
+
     public void Eat()
     {
+        if (InGroup()) {
+            _table.AddMoney(Order.Food.MoneyGet);
+            _table.CheckWait();
+        }
+        _clientUI.SetUIVisible(false);
         NowState = _eatState;
+    }
+
+    public void Sit()
+    {
+        NowState = _sitState;
     }
 
     public void Destroy()
     {
+        enabled = false;
         _pool.PutObject(this);   
     }
 
@@ -148,5 +182,19 @@ public class Client : MonoBehaviour
     public float GetWaitTime()
     {
         return _waitTime * WaitMultiplier * UnityEngine.Random.Range(0.8f, 1.1f);
+    }
+
+    public bool InGroup()
+    {
+        return _clientType == ClientType.Double || _clientType == ClientType.Triple ||
+            _clientType == ClientType.Quarter;
+    }
+
+    public void DisableWait()
+    {
+        if (_nowState != _sitState) {
+            Sit();
+            _clientUI.SetUIVisible(true);
+        }
     }
 }

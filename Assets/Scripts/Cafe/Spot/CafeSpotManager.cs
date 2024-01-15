@@ -5,6 +5,7 @@ using UnityEngine;
 public class CafeSpotManager : MonoBehaviour
 {
     [SerializeField] private CafeSpaceManager _spaceManager;
+    [SerializeField] private CafeOpener _opener;
     [SerializeField] private CafeSpot[] _spotPrefabs;
     [SerializeField] private List<CafeSpot> _spots;
     private List<List<int>> _freeSpots = new List<List<int>>(4);
@@ -33,6 +34,11 @@ public class CafeSpotManager : MonoBehaviour
 
     private void GenerateSpots()
     {
+        for (int i = 0; i < _spots.Count; i++) {
+            if (_spots[i].TryGetComponent(out ClientTable clientTable))
+                _opener.CafeChanged -= clientTable.CafeClosed;
+        }
+
         // Генерируем споты на основе списка
     }
 
@@ -51,6 +57,8 @@ public class CafeSpotManager : MonoBehaviour
         SpotsPositionChanged?.Invoke(-offset);
 
         MoveSpots(spotIndex, offset);
+        if (_spots[spotIndex].TryGetComponent(out ClientTable clientTable))
+            _opener.CafeChanged -= clientTable.CafeClosed;
         _spots[spotIndex].Destroy();
         _spots.RemoveAt(spotIndex);
         SetUpSpotsRemoveButtons();
@@ -135,6 +143,8 @@ public class CafeSpotManager : MonoBehaviour
     {
         var spot = Instantiate(_spotPrefabs[index], transform);
         spot.ChangeEditorState(true);
+        if (spot.TryGetComponent(out ClientTable clientTable))
+            _opener.CafeChanged += clientTable.CafeClosed;
 
         float offset = _spotPrefabs[0].GetSpotSize();
         switch (spot.SeatsCount) {

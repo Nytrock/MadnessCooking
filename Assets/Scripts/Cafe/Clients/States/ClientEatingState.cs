@@ -24,6 +24,6 @@ public class ClientEatingState : ClientState
         if (_nowTime < _eatTime)
             _nowTime += Time.deltaTime;
         else
-            _client.PayAndGoAway();
+            _client.Pay();
     }
 }

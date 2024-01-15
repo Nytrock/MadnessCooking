@@ -133,6 +133,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 7984458469416964061}
+        m_TargetAssemblyTypeName: ClientUI, Assembly-CSharp
+        m_MethodName: SetUIVisible
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2124394014765735467
 GameObject:
   m_ObjectHideFlags: 0
@@ -1023,8 +1035,20 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8276683760689817253}
         m_TargetAssemblyTypeName: Client, Assembly-CSharp
-        m_MethodName: Leave
+        m_MethodName: FoodRejected
         m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7984458469416964061}
+        m_TargetAssemblyTypeName: ClientUI, Assembly-CSharp
+        m_MethodName: SetUIVisible
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

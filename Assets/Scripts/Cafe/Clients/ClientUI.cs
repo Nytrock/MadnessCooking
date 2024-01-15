@@ -1,3 +1,4 @@
+using Unity.Collections.LowLevel.Unsafe;
 using UnityEditor.Events;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,7 +10,7 @@ public class ClientUI : MonoBehaviour
     [SerializeField] private Button _mainButton;
     [SerializeField] private Button _yesButton;
     [SerializeField] private Slider _waitSlider;
-
+    
     private Image _foodImage;
 
     public Slider WaitSlider => _waitSlider;
@@ -25,6 +26,7 @@ public class ClientUI : MonoBehaviour
         _waitSlider.value = 0;
         _yesButton.interactable = false;
         _buttonsBlock.SetActive(false);
+        ChangeSliderState(true);
         SetUIVisible(false);
     }
 
@@ -48,5 +50,10 @@ public class ClientUI : MonoBehaviour
     public void ActivateYesButton()
     {
         _yesButton.interactable = true;
+    }
+
+    public void ChangeSliderState(bool newValue)
+    {
+        _waitSlider.gameObject.SetActive(newValue);
     }
 }

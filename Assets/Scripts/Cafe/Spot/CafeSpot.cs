@@ -21,7 +21,7 @@ public class CafeSpot : MonoBehaviour
         _removeButton.gameObject.SetActive(_isEditor);
     }
 
-    public Transform GetTarget(int index = 0) { return _seats[index].transform; }
+    public Transform GetTarget(int index) { return _seats[index].transform; }
 
     public float GetSpotSize() { return transform.localScale.x; }
 
