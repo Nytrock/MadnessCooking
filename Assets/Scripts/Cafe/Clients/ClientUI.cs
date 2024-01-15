@@ -1,5 +1,3 @@
-using Unity.Collections.LowLevel.Unsafe;
-using UnityEditor.Events;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,12 +10,14 @@ public class ClientUI : MonoBehaviour
     [SerializeField] private Slider _waitSlider;
     
     private Image _foodImage;
+    private Client _client;
 
     public Slider WaitSlider => _waitSlider;
 
     private void Start()
     {
         _foodImage = _mainButton.GetComponent<Image>();
+        _client = GetComponent<Client>();
         StartNewCycle();
     }
 
@@ -26,6 +26,8 @@ public class ClientUI : MonoBehaviour
         _waitSlider.value = 0;
         _yesButton.interactable = false;
         _buttonsBlock.SetActive(false);
+        _mainButton.onClick.RemoveAllListeners();
+        _mainButton.onClick.AddListener(_client.ActivateOrder);
         ChangeSliderState(true);
         SetUIVisible(false);
     }
@@ -43,7 +45,7 @@ public class ClientUI : MonoBehaviour
     public void SetFood(Food food)
     {
         _foodImage.sprite = food.FoodSprite;
-        UnityEventTools.RemovePersistentListener(_mainButton.onClick, 0);
+        _mainButton.onClick.RemoveAllListeners();
         _mainButton.onClick.AddListener(ChangeButtonsBlockVisible);
     }
 

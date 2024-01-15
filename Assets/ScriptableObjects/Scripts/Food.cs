@@ -10,5 +10,5 @@ public class Food : BaseObject
     public float TimeToCook;
     public float TimeToEat;
     public int MoneyGet;
-    public IngridientCount[] ingridients;
+    public IngredientCount[] ingridients;
 }

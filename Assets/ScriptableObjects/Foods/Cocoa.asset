@@ -16,15 +16,13 @@ MonoBehaviour:
   Description: 
   Cost: 250
   TypeTechnic: {fileID: 11400000, guid: d9b4d4850f3168345b28b87a4126a631, type: 2}
-  FoodSprite: {fileID: 0}
+  FoodSprite: {fileID: 1438007305, guid: fcf5fb943f0e2034c91e28b0e7a9498a, type: 3}
+  MiniSprite: {fileID: 0}
   TimeToCook: 14
+  TimeToEat: 0
   MoneyGet: 30
   ingridients:
-  - Ingridient: {fileID: 11400000, guid: 78d7c77369aa8f64d996e81e9461096f, type: 2}
+  - Ingredient: {fileID: 11400000, guid: 78d7c77369aa8f64d996e81e9461096f, type: 2}
     Count: 2
-  - Ingridient: {fileID: 11400000, guid: 6b8daec792815f44b8b8c781a3adfdcd, type: 2}
-    Count: 1
-  NeedIngridients:
-  - {fileID: 11400000, guid: 78d7c77369aa8f64d996e81e9461096f, type: 2}
-  - {fileID: 11400000, guid: 6b8daec792815f44b8b8c781a3adfdcd, type: 2}
-  NumberIngridients: 0200000001000000
+  - Ingredient: {fileID: 11400000, guid: 6b8daec792815f44b8b8c781a3adfdcd, type: 2}
+    Count: 2
