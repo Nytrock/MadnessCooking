@@ -9,6 +9,7 @@ public class CafeSpotManager : MonoBehaviour
     [SerializeField] private CafeSpot[] _spotPrefabs;
     [SerializeField] private List<CafeSpot> _spots;
     private List<List<int>> _freeSpots = new List<List<int>>(4);
+    private float _cellSize;
 
     public event Action<float> SpotsPositionChanged;
 
@@ -17,6 +18,7 @@ public class CafeSpotManager : MonoBehaviour
         SetUpSpotsRemoveButtons();
         GenerateSpots();
         GenerateFreeSpotsList();
+        _cellSize = _spaceManager.GetSpaceSize() / 2f;
     }
 
     private void SetUpSpotsRemoveButtons()
@@ -53,7 +55,7 @@ public class CafeSpotManager : MonoBehaviour
 
     private void RemoveSpot(int spotIndex)
     {
-        var offset = _spots[spotIndex].GetSpotSize();
+        var offset = _cellSize * _spots[spotIndex].SeatsCount;
         SpotsPositionChanged?.Invoke(-offset);
 
         MoveSpots(spotIndex, offset);
@@ -127,8 +129,8 @@ public class CafeSpotManager : MonoBehaviour
     {
         float size = 0;
         foreach (var spot in _spots)
-            size += spot.GetSpotSize();
-        return size;
+            size += spot.SeatsCount;
+        return size * _cellSize;
     }
 
     public int GetFreeSpace()
@@ -146,7 +148,7 @@ public class CafeSpotManager : MonoBehaviour
         if (spot.TryGetComponent(out ClientTable clientTable))
             _opener.CafeChanged += clientTable.CafeClosed;
 
-        float offset = _spotPrefabs[0].GetSpotSize();
+        float offset = _cellSize;
         switch (spot.SeatsCount) {
             case 1: offset *= -0.5f; break;
             case 2: offset *= 0; break;
@@ -156,6 +158,6 @@ public class CafeSpotManager : MonoBehaviour
 
         _spots.Add(spot);
         SetUpSpotRemoveButton(_spots.Count - 1);
-        SpotsPositionChanged?.Invoke(spot.GetSpotSize());
+        SpotsPositionChanged?.Invoke(_cellSize * spot.SeatsCount);
     }
 }

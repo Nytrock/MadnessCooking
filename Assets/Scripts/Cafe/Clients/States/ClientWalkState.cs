@@ -9,15 +9,16 @@ public class ClientWalkState : ClientState
     {
         _client = client;
         _client.ChangeSortingGroup(10);
-        if (_client.IsLeaving) {
+        if (_client.IsLeaving)
             _target = client.ExitTarget;
-        } else {
+        else
             _target = client.EnterTarget;
-        }
+        _client.RotateSkin(_client.IsLeaving);
     }
 
     public override void ExitState()
     {
+        _client.RotateSkin();
         _client.ChangeSortingGroup(5);
     }
 

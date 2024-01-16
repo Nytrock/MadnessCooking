@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CafeSpaceManager : MonoBehaviour
@@ -20,7 +18,7 @@ public class CafeSpaceManager : MonoBehaviour
 
     private void SetSpace()
     {
-        var size = GetSpaceSize();
+        var size = _spacePrefab.GetSpaceSize();
 
         for (int i = 0; i < _spaceCount; i++) {
             var space = Instantiate(_spacePrefab);
@@ -28,16 +26,17 @@ public class CafeSpaceManager : MonoBehaviour
             space.transform.position += new Vector3(size * i, 0, 0);
         }
     }
+
     public float GetSpaceSize()
     {
-        return _spacePrefab.transform.localScale.x;
+        return _spacePrefab.GetSpaceSize();
     }
 
     private void AddSpace()
     {
         var space = Instantiate(_spacePrefab);
         space.transform.parent = _spaceContainer;
-        space.transform.position += new Vector3(GetSpaceSize() * _spaceCount, 0, 0);
+        space.transform.position += new Vector3(_spacePrefab.GetSpaceSize() * _spaceCount, 0, 0);
         SpaceAdded?.Invoke();
     }
 }

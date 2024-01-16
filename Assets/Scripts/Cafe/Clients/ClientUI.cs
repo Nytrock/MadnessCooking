@@ -8,17 +8,17 @@ public class ClientUI : MonoBehaviour
     [SerializeField] private Button _mainButton;
     [SerializeField] private Button _yesButton;
     [SerializeField] private Slider _waitSlider;
+    [SerializeField] private Sprite _defaultSprite;
     
     private Image _foodImage;
     private Client _client;
 
     public Slider WaitSlider => _waitSlider;
 
-    private void Start()
+    private void Awake()
     {
         _foodImage = _mainButton.GetComponent<Image>();
         _client = GetComponent<Client>();
-        StartNewCycle();
     }
 
     public void StartNewCycle()
@@ -28,6 +28,7 @@ public class ClientUI : MonoBehaviour
         _buttonsBlock.SetActive(false);
         _mainButton.onClick.RemoveAllListeners();
         _mainButton.onClick.AddListener(_client.ActivateOrder);
+        _foodImage.sprite = _defaultSprite;
         ChangeSliderState(true);
         SetUIVisible(false);
     }

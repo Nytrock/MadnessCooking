@@ -18,6 +18,7 @@ public class Client : MonoBehaviour
     private ClientSitState _sitState = new();
     #endregion
 
+    [SerializeField] private Transform _skin;
     [SerializeField] private SortingGroup _sortingGroup;
     [SerializeField] private float _waitTime;
 
@@ -64,6 +65,19 @@ public class Client : MonoBehaviour
     private void SetCloth()
     {
         // Ставим скин персонажа
+    }
+
+    public void RotateSkin(bool isRight)
+    {
+        if (isRight)
+            _skin.localScale = Vector2.one;
+        else
+            _skin.localScale = new Vector2(-1, 1);
+    }
+
+    public void RotateSkin()
+    {
+        _skin.localScale = new Vector2(_spot.GetTableRotation(_spotIndex), 1);
     }
 
     public void SetTargets(Transform enterTarget, Transform exitTarget)

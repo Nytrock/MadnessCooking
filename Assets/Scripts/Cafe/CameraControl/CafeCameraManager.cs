@@ -17,8 +17,8 @@ public class CafeCameraManager : CameraManager
     {
         _startPosition = transform.position.x;
         var horzExtent = _mainCamera.orthographicSize * Screen.width / Screen.height;
-        var spotSize = _spaceManager.GetSpaceSize();
-        _endPosition = _startPosition + (_spaceManager.SpaceCount - 1) * spotSize + spotSize / 2 - horzExtent;
+        var spaceSize = _spaceManager.GetSpaceSize();
+        _endPosition = _startPosition + (_spaceManager.SpaceCount - 1) * spaceSize + spaceSize / 2 - horzExtent;
     }
 
     protected override void MoveCamera()

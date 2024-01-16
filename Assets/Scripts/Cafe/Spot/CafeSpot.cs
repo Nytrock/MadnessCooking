@@ -4,8 +4,8 @@ using UnityEngine.UI;
 public class CafeSpot : MonoBehaviour
 {
     [SerializeField] private CafeSeat [] _seats;
-    [SerializeField] private SpriteRenderer [] _tableFoods;
-    [SerializeField] private SpriteRenderer _outline;
+    [SerializeField] private TableFoodView [] _tableFoods;
+    [SerializeField] private GameObject _outline;
     [SerializeField] private Button _removeButton;
     private int _index;
     private bool _isEditor;
@@ -17,28 +17,33 @@ public class CafeSpot : MonoBehaviour
 
     private void Start()
     {
-        _outline.gameObject.SetActive(_isEditor);
+        _outline.SetActive(_isEditor);
         _removeButton.gameObject.SetActive(_isEditor);
+        for (int i = 0; i < _tableFoods.Length; i++)
+            ResetTableFoodSprite(i);
     }
 
     public Transform GetTarget(int index) { return _seats[index].transform; }
 
-    public float GetSpotSize() { return transform.localScale.x; }
+    public float GetTableRotation(int index)
+    {
+        return Mathf.Sign(_seats[index].transform.localScale.x);
+    }
 
     public void SetTableFoodSprite(Food food, int index)
     {
-        _tableFoods[index].sprite = food.MiniSprite;
+        _tableFoods[index].SetSprite(food.MiniSprite);
     }
 
     public void ResetTableFoodSprite(int index)
     {
-        _tableFoods[index].sprite = null;
+        _tableFoods[index].ResetSprite();
     }
 
     public void ChangeEditorState(bool _state)
     {
         _isEditor = _state;
-        _outline.gameObject.SetActive(_isEditor);
+        _outline.SetActive(_isEditor);
         _removeButton.gameObject.SetActive(_isEditor);
     }
 
