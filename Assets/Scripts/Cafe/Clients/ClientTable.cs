@@ -60,7 +60,6 @@ public class ClientTable : MonoBehaviour
             _clients[i].StartNewCycle();
             yield return new WaitForSeconds(UnityEngine.Random.Range(0.5f, 1.2f));
         }
-        yield return null;
     }
 
     public IEnumerator ClientsLeave()
@@ -71,7 +70,6 @@ public class ClientTable : MonoBehaviour
             yield return new WaitForSeconds(UnityEngine.Random.Range(0.2f, 1f));
         }
         _clients.Clear();
-        yield return null;
     }
 
     private void RandomizeClients()
@@ -142,7 +140,7 @@ public class ClientTable : MonoBehaviour
 
     private void PayToPlayer()
     {
-        MoneyManager.Instance.ChangeMoney(_moneyCount);
+        MoneyManager.instance.ChangeMoney(_moneyCount);
         _moneyCount = 0;
     }
 

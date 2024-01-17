@@ -1,16 +1,15 @@
 using UnityEngine;
 
-[RequireComponent(typeof(FarmManager))]
 public class FarmCameraManager : CameraManager
 {
+    [SerializeField] private GroudBedsManager _bedsManager;
     protected override string _cameraAxis => "Mouse Y";
     protected override string _keyAxis => "Vertical";
 
     protected override void CalculateBorderPositions()
     {
-        FarmManager farmManager = GetComponent<FarmManager>();
         _endPosition = transform.position.y;
-        _startPosition = _endPosition - (farmManager.BedsCount - 1) * farmManager.GetBedSize();
+        _startPosition = _endPosition - (_bedsManager.GroupsCount - 1) * _bedsManager.GetBedSize();
     }
 
     protected override void MoveCamera()

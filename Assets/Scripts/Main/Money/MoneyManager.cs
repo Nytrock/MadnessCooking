@@ -3,22 +3,22 @@ using UnityEngine;
 
 public class MoneyManager : MonoBehaviour
 {
-    public static MoneyManager Instance;
+    public static MoneyManager instance;
 
     private int _moneyAmount = 0;
 
     public int MoneyAmount => _moneyAmount;
 
-    public event Action moneyChanged;
+    public event Action<int> moneyChanged;
 
     private void Start()
     {
-        Instance = this;
+        instance = this;
     }
 
     public void ChangeMoney(int changeValue)
     {
         _moneyAmount += changeValue;
-        moneyChanged?.Invoke();
+        moneyChanged?.Invoke(_moneyAmount);
     }
 }

@@ -4,6 +4,7 @@ public class LocationAdditionUI : MonoBehaviour
 {
     [SerializeField] private CameraManager manager;
     [SerializeField] private LocationManager locationManager;
+    [SerializeField] private GameObject _UI;
 
     private void Start()
     {
@@ -13,6 +14,6 @@ public class LocationAdditionUI : MonoBehaviour
 
     private void UpdateUI(Transform newPosition)
     {
-        gameObject.SetActive(manager.transform.position.x == newPosition.position.x);
+        _UI.SetActive(manager.transform.position.x == newPosition.position.x);
     }
 }

@@ -1,6 +1,9 @@
 public enum IngredientType
 {
-    Plant,
+    None,
+    Standard,
+    Desert,
+    Water,
     Meat,
     Ghost,
     Buyable,

@@ -9,13 +9,12 @@ public class MoneyView : MonoBehaviour
     private void Start()
     {
         _moneyManager.moneyChanged += UpdateText;
-        UpdateText();
+        UpdateText(_moneyManager.MoneyAmount);
     }
 
-    private void UpdateText()
+    private void UpdateText(int money)
     {
         string newText;
-        int money = _moneyManager.MoneyAmount;
         if (money / 1000000000 > 0)
             newText = $"{money / 100000000f:F2}B";
         else if (money / 1000000 > 0)

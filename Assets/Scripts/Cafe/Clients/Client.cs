@@ -138,7 +138,7 @@ public class Client : MonoBehaviour
             Sit();
             _table.CheckTalk();
         } else {
-            MoneyManager.Instance.ChangeMoney(Order.Food.MoneyGet);
+            MoneyManager.instance.ChangeMoney(Order.Food.MoneyGet);
             Leave();
         }
     }
