@@ -19,9 +19,17 @@ public class IngredientChoiceUI : ChoiceUI
     {
         _changingBed = groundBed;
         var bedType = _changingBed.BedType;
+        DestoyOldButtons();
         GenerateChoiceButtons(bedType);
         SetStyle(bedType);
         Activate();
+    }
+
+    private void DestoyOldButtons()
+    {
+        foreach (var button in _choiceButtons)
+            Destroy(button.gameObject);
+        _choiceButtons.Clear();
     }
 
     protected void GenerateChoiceButtons(BedType bedType)

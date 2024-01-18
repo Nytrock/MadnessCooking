@@ -8,12 +8,10 @@ public class BedChoiceDescrUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _name;
     [SerializeField] private TextMeshProUGUI _descr;
     [SerializeField] private TextMeshProUGUI _cost;
-    [SerializeField] private BedTypeIngredientsShower _ingredientsShower;
     private bool _isActive;
 
     public void UpdateDescription(BedType bedType)
     {
-        _ingredientsShower.ShowIngredients(bedType);
         _icon.sprite = bedType.BedSprite;
         _name.text = bedType.Name;
         _descr.text = bedType.Description;

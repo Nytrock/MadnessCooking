@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(GroundBed))]
 public class BedChoice : MonoBehaviour
@@ -8,10 +9,12 @@ public class BedChoice : MonoBehaviour
     private GroundBed _groundBed;
     private bool _isEmpty;
 
-    private void OnMouseDown()
+    public void MouseDown()
     {
         if (_isEmpty)
             _UI.Activate(this);
+        else
+            _groundBed.MouseDown();
     }
 
     private void Awake()
@@ -28,6 +31,13 @@ public class BedChoice : MonoBehaviour
         }
     }
 
+    public void ReactivateBedsChoice()
+    {
+        _groundBed.ResetBedType();
+        _isEmpty = true;
+        _UI.Activate(this);
+    }
+
     private void HideBeds() { 
         foreach (var bed in _beds)
             bed.gameObject.SetActive(false);
@@ -37,9 +47,9 @@ public class BedChoice : MonoBehaviour
     {
         foreach (var bed in _beds)
             if (bedType == bed.Type) {
-                _groundBed.enabled = true;
                 _isEmpty = false;
                 _groundBed.SetBedType(bed);
+                _groundBed.enabled = true;
                 break;
             }
     }

@@ -1,9 +1,11 @@
+using System.Data;
 using UnityEngine;
 
 public class BedChoiceUI : ChoiceUI
 {
     [SerializeField] private BedTypesManager _bedTypesManager;
     [SerializeField] private BedChoiceDescrUI _description;
+    [SerializeField] private BedTypeIngredientsShower _ingredientsShower;
     private BedChoice _changingBed;
 
     protected override void Start()
@@ -44,8 +46,8 @@ public class BedChoiceUI : ChoiceUI
         else
             _choiceButtons[_chosedIndex].ChangeSelectedState();
 
-        _submitButton.interactable = index != _chosedIndex && isBuyable;
-        if (index == _chosedIndex)  {
+        var isSame = index == _chosedIndex;
+        if (isSame)  {
             _chosedIndex = -1;
             _description.ChangeActive();
             return;
@@ -53,7 +55,12 @@ public class BedChoiceUI : ChoiceUI
 
         _chosedIndex = index;
         _choiceButtons[_chosedIndex].ChangeSelectedState();
-        _description.UpdateDescription(_bedTypesManager.HaveBeds[_chosedIndex]);
+
+        var bedType = _bedTypesManager.HaveBeds[_chosedIndex];
+        _ingredientsShower.ShowIngredients(bedType);
+        _description.UpdateDescription(bedType);
+
+        _submitButton.interactable = !isSame && isBuyable && _ingredientsShower.HaveIngredients(bedType);
     }
 
     public override void SetChoice()

@@ -45,7 +45,13 @@ public class ChoiceUI : MonoBehaviour
 
     public virtual void SetChoice()
     {
-        _choiceButtons[_chosedIndex].ChangeSelectedState();
+        Disable();
+    }
+
+    public void Disable()
+    {
+        if (_chosedIndex != -1)
+            _choiceButtons[_chosedIndex].ChangeSelectedState();
         _chosedIndex = -1;
         _submitButton.interactable = false;
         _cameraManager.ChangeWorkMode(true);

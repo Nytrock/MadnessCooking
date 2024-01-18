@@ -21,4 +21,9 @@ public class BedTypeIngredientsShower : MonoBehaviour
             _ingredientImages[i].gameObject.SetActive(i < ingredients.Count);
         }
     }
+
+    public bool HaveIngredients(BedType bedType)
+    {
+        return _ingredientsManager.GetIngredientsOfOneBedType(bedType).Count != 0;
+    }
 }
