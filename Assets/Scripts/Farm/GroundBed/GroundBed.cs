@@ -7,6 +7,7 @@ public class GroundBed : MonoBehaviour
     private IngredientType _acceptableType = IngredientType.None;
     private BedHolder _bedHolder;
     private Ingredient _plantedIngredient;
+    private Car _car;
 
     private float _growTime;
     private float _nowTime;
@@ -50,6 +51,7 @@ public class GroundBed : MonoBehaviour
     public void ResetIngredient()
     {
         _plantedIngredient = null;
+        _count = 0;
         _bedHolder.StopAnimation();
     }
 
@@ -66,9 +68,10 @@ public class GroundBed : MonoBehaviour
         _bedHolder = null;
     }
 
-    public void SetUI(IngredientChoiceUI ui)
+    public void Setup(GroundBedSettings settings)
     {
-        _ingredientChoice = ui;
+        _ingredientChoice = settings.IngredientChoiceUI;
+        _UI.Setup(settings);
     }
 
     public void SetIngredient(Ingredient ingredient)
@@ -78,5 +81,21 @@ public class GroundBed : MonoBehaviour
         _bedHolder.SetIngredient(ingredient);
         _growTime = ingredient.TimeGrow;
         _nowTime = 0;
+    }
+
+    public void SendIngredients()
+    {
+        _car.GetIngredients(_count, _plantedIngredient);
+        _count = 0;
+    }
+
+    public void Water()
+    {
+        Debug.Log("Water");
+    }
+
+    public void Fertilize()
+    {
+        Debug.Log("Fertilize");
     }
 }

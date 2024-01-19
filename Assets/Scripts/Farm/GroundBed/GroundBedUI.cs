@@ -10,7 +10,18 @@ public class GroundBedUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _name;
     [SerializeField] private TextMeshProUGUI _description;
     [SerializeField] private TextMeshProUGUI _countText;
+
+    [Header("Side buttons")]
+    [SerializeField] private GameObject _sideButtons;
+    [SerializeField] private Button _waterButton;
+    [SerializeField] private Button _fertilizeButton;
+    [SerializeField] private Button _pestsButton;
+
     private BedChoice _bedChoice;
+    private GroundBedUpgradeUI _upgrade;
+    private FarmWell _farmWell;
+    private Puncher _puncher;
+    private PestsRemoverUI _pestsRemoverUI;
     private int _count;
 
 
@@ -25,6 +36,24 @@ public class GroundBedUI : MonoBehaviour
         _UI.SetActive(!_UI.activeSelf);
     }
 
+    public void Setup(GroundBedSettings settings)
+    {
+        _upgrade = settings.UpgradeUI;
+        _farmWell = settings.FarmWell;
+        _puncher = settings.Puncher;
+        _pestsRemoverUI = settings.PestsRemoverUI;
+    }
+
+    private void CheckWater(int count)
+    {
+        _waterButton.interactable = count > 0;
+    }
+
+    private void CheckFertilize(int count)
+    {
+        _fertilizeButton.interactable = count > 0;
+    }
+
     public void UpdateIngredient(Ingredient ingredient)
     {
         _icon.sprite = ingredient.IngredientSprite;
@@ -32,6 +61,17 @@ public class GroundBedUI : MonoBehaviour
         _description.text = ingredient.Description;
         _count = 0;
         _countText.text = "0";
+
+        var sideButtonShow = !(_groundBed.BedType.AcceptableType == IngredientType.Meat ||
+            _groundBed.BedType.AcceptableType == IngredientType.Ghost);
+        _sideButtons.SetActive(sideButtonShow);
+
+        if (sideButtonShow) {
+            _farmWell.WaterAdded += CheckWater;
+            _puncher.FertilizeAdded += CheckFertilize;
+            CheckWater(_farmWell.Count);
+            CheckFertilize(_puncher.Count);
+        }
     }
 
     public void UpdateCount()
@@ -42,7 +82,10 @@ public class GroundBedUI : MonoBehaviour
 
     public void CollectIngredients()
     {
-        Debug.Log("Collected");
+        if (_count == 0)
+            return;
+
+        _groundBed.SendIngredients();
         _count = 0;
         _countText.text = "0";
     }
@@ -62,21 +105,23 @@ public class GroundBedUI : MonoBehaviour
 
     public void OpenUpgradesPanel()
     {
-        Debug.Log("Upgrades");
+        _upgrade.Activate(_groundBed);
     }
 
     public void Water()
     {
-
+        _farmWell.SubtractWater();
+        _groundBed.Water();
     }
 
     public void Fertilize()
     {
-
+        _puncher.SubtractFertilize();
+        _groundBed.Fertilize();
     }
 
     public void Pests() 
-    { 
-
+    {
+        _pestsRemoverUI.Activate(_groundBed);
     }
 }

@@ -10,11 +10,11 @@ public class GroundBedsGroup : MonoBehaviour
         return _size;
     }
 
-    public void SetBedsUI(IngredientChoiceUI ingredientChoiceUI, BedChoiceUI bedChoiceUI)
+    public void BedsSetup(GroundBedSettings settings)
     {
         foreach (var bed in _groundBeds) {
-            bed.SetUI(ingredientChoiceUI);
-            bed.GetComponent<BedChoice>().SetUI(bedChoiceUI);
+            bed.Setup(settings);
+            bed.GetComponent<BedChoice>().Setup(settings);
         }
     }
 }

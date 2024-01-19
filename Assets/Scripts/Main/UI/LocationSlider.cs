@@ -12,18 +12,25 @@ public class LocationSlider : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
     private bool _isDragging;
 
-    private void Start()
+    private void Awake()
     {
         _slider = GetComponent<Slider>();
+    }
 
+    private void Start()
+    {
         _cameraManager.CameraMoved += ChangeSliderValue;
         _cameraManager.BordersFound += SetSliderValues;
+    }
+
+    private void OnEnable()
+    {
+        SetSliderValues();
     }
 
     private void SetSliderValues() {
         _startPosition = _cameraManager.StartPosition;
         _endPosition = _cameraManager.EndPosition;
-
         _slider.minValue = _startPosition;
         _slider.maxValue = _endPosition;
     }

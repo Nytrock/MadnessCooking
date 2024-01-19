@@ -2,18 +2,23 @@ using UnityEngine;
 
 public class LocationAdditionUI : MonoBehaviour
 {
-    [SerializeField] private CameraManager manager;
-    [SerializeField] private LocationManager locationManager;
+    [SerializeField] private Transform _point;
+    [SerializeField] private LocationManager _locationManager;
     [SerializeField] private GameObject _UI;
 
     private void Start()
     {
-        locationManager.LocationChanged += UpdateUI;
-        UpdateUI(locationManager.MainCamera);
+        _locationManager.LocationChanged += UpdateUI;
+        UpdateUI(_locationManager.MainCamera);
     }
 
     private void UpdateUI(Transform newPosition)
     {
-        _UI.SetActive(manager.transform.position.x == newPosition.position.x);
+        _UI.SetActive(_point.position.x == newPosition.position.x);
+    }
+
+    public void ChangeUIState(bool newValue)
+    {
+        _UI.SetActive(newValue);
     }
 }

@@ -16,7 +16,7 @@ public class BedHolder : MonoBehaviour
     {
         _animator.Play(ingredient.name);
         _animator.SetBool("isFull", false);
-        _animator.SetFloat("growTime", 1 / (float)ingredient.TimeGrow);
+        _animator.SetFloat("growTime", 1 / (float)ingredient.TimeGrow - Time.deltaTime);
     }
 
     public void SetGrow(bool newValue)

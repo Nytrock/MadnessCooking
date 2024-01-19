@@ -54,8 +54,8 @@ public class BedChoice : MonoBehaviour
             }
     }
 
-    public void SetUI(BedChoiceUI ui)
+    public void Setup(GroundBedSettings settings)
     {
-        _UI = ui;
+        _UI = settings.BedChoiceUI;
     }
 }
