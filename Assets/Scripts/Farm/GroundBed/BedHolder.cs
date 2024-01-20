@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class BedHolder : MonoBehaviour
@@ -16,7 +17,7 @@ public class BedHolder : MonoBehaviour
     {
         _animator.Play(ingredient.name);
         _animator.SetBool("isFull", false);
-        _animator.SetFloat("growTime", 1 / (float)ingredient.TimeGrow - Time.deltaTime);
+        StartCoroutine(SetAnimationSpeed(ingredient.TimeGrow));
     }
 
     public void SetGrow(bool newValue)
@@ -27,5 +28,12 @@ public class BedHolder : MonoBehaviour
     public void StopAnimation()
     {
         _animator.SetTrigger("disabled");
+    }
+
+    private IEnumerator SetAnimationSpeed(float timeGrow)
+    {
+        yield return new WaitForEndOfFrame();
+        var animationLength = _animator.GetCurrentAnimatorStateInfo(0).length;
+        _animator.SetFloat("growTime", 1 / timeGrow * animationLength - Time.deltaTime);
     }
 }
