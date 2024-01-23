@@ -22,7 +22,6 @@ public class GroundBedUI : MonoBehaviour
     private FarmWell _farmWell;
     private Puncher _puncher;
     private PestsRemoverUI _pestsRemoverUI;
-    private int _count;
 
 
     private void Start()
@@ -59,7 +58,6 @@ public class GroundBedUI : MonoBehaviour
         _icon.sprite = ingredient.IngredientSprite;
         _name.text = ingredient.Name;
         _description.text = ingredient.Description;
-        _count = 0;
         _countText.text = "0";
 
         var sideButtonShow = !(_groundBed.BedType.AcceptableType == IngredientType.Meat ||
@@ -76,18 +74,12 @@ public class GroundBedUI : MonoBehaviour
 
     public void UpdateCount()
     {
-        _count++;
-        _countText.text = _count.ToString();
+        _countText.text = _groundBed.Count.ToString();
     }
 
     public void CollectIngredients()
     {
-        if (_count == 0)
-            return;
-
         _groundBed.SendIngredients();
-        _count = 0;
-        _countText.text = "0";
     }
 
     public void ChangeBedType()

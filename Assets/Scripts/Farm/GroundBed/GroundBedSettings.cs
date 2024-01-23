@@ -1,7 +1,7 @@
 using System;
 
 [Serializable]
-public class GroundBedSettings
+public struct GroundBedSettings
 {
     public IngredientChoiceUI IngredientChoiceUI;
     public BedChoiceUI BedChoiceUI;

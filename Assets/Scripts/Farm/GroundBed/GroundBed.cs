@@ -16,6 +16,7 @@ public class GroundBed : MonoBehaviour
 
     public IngredientType AcceptableType => _acceptableType;
     public BedType BedType => _bedHolder.Type;
+    public int Count => _count;
 
     public void MouseDown()
     {
@@ -38,7 +39,7 @@ public class GroundBed : MonoBehaviour
             _nowTime = 0;
             if (_count == _plantedIngredient.MaxCount) {
                 _isFull = true;
-                _bedHolder.SetGrow(_isFull);
+                _bedHolder.SetGrow(true);
             }
         }
     }
@@ -52,6 +53,7 @@ public class GroundBed : MonoBehaviour
     {
         _plantedIngredient = null;
         _count = 0;
+        _isFull = false;
         _bedHolder.StopAnimation();
     }
 
@@ -71,6 +73,7 @@ public class GroundBed : MonoBehaviour
     public void Setup(GroundBedSettings settings)
     {
         _ingredientChoice = settings.IngredientChoiceUI;
+        _car = settings.Car;
         _UI.Setup(settings);
     }
 
@@ -85,8 +88,25 @@ public class GroundBed : MonoBehaviour
 
     public void SendIngredients()
     {
-        _car.GetIngredients(_count, _plantedIngredient);
-        _count = 0;
+        if (_count == 0)
+            return;
+
+        var carSpace = _car.GetSpace();
+        if (carSpace == 0) {
+            return;
+        }
+
+        if (carSpace < _count) {
+            _car.GetIngredients(carSpace, _plantedIngredient);
+            _count -= carSpace;
+        } else {
+            _car.GetIngredients(_count, _plantedIngredient);
+            _count = 0;
+        }
+
+        _UI.UpdateCount();
+        _isFull = false;
+        _bedHolder.SetGrow(false);
     }
 
     public void Water()
