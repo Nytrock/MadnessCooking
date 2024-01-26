@@ -37,10 +37,8 @@ public class GroundBed : MonoBehaviour
             _count++;
             _UI.UpdateCount();
             _nowTime = 0;
-            if (_count == _plantedIngredient.MaxCount) {
+            if (_count == _plantedIngredient.MaxCount)
                 _isFull = true;
-                _bedHolder.SetGrow(true);
-            }
         }
     }
 
@@ -106,7 +104,7 @@ public class GroundBed : MonoBehaviour
 
         _UI.UpdateCount();
         _isFull = false;
-        _bedHolder.SetGrow(false);
+        _bedHolder.ResetAnimation();
     }
 
     public void Water()

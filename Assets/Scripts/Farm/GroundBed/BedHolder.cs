@@ -1,12 +1,12 @@
 using System.Collections;
-using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 
 public class BedHolder : MonoBehaviour
 {
     [SerializeField] private BedType _type;
     private Animator _animator;
-    private float _speed;
+    private string _name;
+    private int _maxCount;
 
     public BedType Type => _type;
 
@@ -17,13 +17,21 @@ public class BedHolder : MonoBehaviour
 
     public void SetIngredient(Ingredient ingredient)
     {
-        _animator.Play(ingredient.name);
+        _name = ingredient.name;
+        _maxCount = ingredient.MaxCount - 1;
+        _animator.Play(_name);
+        _animator.SetInteger("leftCount", _maxCount);
         StartCoroutine(SetAnimationSpeed(ingredient.TimeGrow));
     }
 
-    public void SetGrow(bool isActive)
+    public void ResetAnimation()
     {
-        _animator.enabled = !isActive;
+        if (_animator.GetInteger("leftCount") == 0) {
+            _animator.Play(_name, -1, 0);
+            _animator.SetInteger("leftCount", _maxCount + 1);
+        } else {
+            _animator.SetInteger("leftCount", _maxCount);
+        }
     }
 
     public void StopAnimation()
@@ -36,7 +44,6 @@ public class BedHolder : MonoBehaviour
     {
         yield return new WaitForEndOfFrame();
         var animationLength = _animator.GetCurrentAnimatorStateInfo(0).length;
-        _speed = 1 / timeGrow * animationLength;
-        _animator.SetFloat("growTime", _speed);
+        _animator.SetFloat("growTime", 1 / timeGrow * animationLength);
     }
 }
