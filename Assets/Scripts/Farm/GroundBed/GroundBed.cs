@@ -95,16 +95,16 @@ public class GroundBed : MonoBehaviour
         }
 
         if (carSpace < _count) {
-            _car.GetIngredients(carSpace, _plantedIngredient);
+            _car.PutIngredients(carSpace, _plantedIngredient);
             _count -= carSpace;
         } else {
-            _car.GetIngredients(_count, _plantedIngredient);
+            _car.PutIngredients(_count, _plantedIngredient);
             _count = 0;
         }
 
         _UI.UpdateCount();
+        _bedHolder.ResetAnimation(_isFull);
         _isFull = false;
-        _bedHolder.ResetAnimation();
     }
 
     public void Water()

@@ -10,7 +10,7 @@ public class CarUI : MonoBehaviour
     [SerializeField] private CarButtonPool _buttonPool;
     [SerializeField] private TextMeshProUGUI _sizeShower;
     [SerializeField] private Button _sendButton;
-    private readonly List<CarButton> _buttons = new List<CarButton>();
+    private readonly List<CarButton> _buttons = new();
 
     private void Start()
     {
@@ -26,9 +26,9 @@ public class CarUI : MonoBehaviour
         _panel.SetActive(!_panel.activeSelf);
     }
 
-    public void SetButton(IngredientCount count)
+    public void SetButton(int index)
     {
-        var index = _car.IngredientCounts.IndexOf(count);
+        var count = _car.GetIngredient(index);
         if (index == _buttons.Count) {
             var button = _buttonPool.GetObject();
             button.SetVisual(count);
@@ -45,6 +45,7 @@ public class CarUI : MonoBehaviour
         foreach(var button in _buttons)
             _buttonPool.PutObject(button);
         _buttons.Clear();
+        UpdateSizeShower();
         _panel.SetActive(false);
         _sendButton.interactable = false;
     }

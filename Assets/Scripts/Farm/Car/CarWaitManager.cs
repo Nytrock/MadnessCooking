@@ -1,12 +1,11 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CarWaitManager : MonoBehaviour
 {
     [SerializeField] private Car _car;
     [SerializeField] private float _waitTime;
-    private List<IngredientCount> _ingredientsSended;
+    private IngredientCountList _ingredientsSended;
     private float _nowTime;
     private bool _isWait;
     private bool _isSended;
@@ -15,7 +14,7 @@ public class CarWaitManager : MonoBehaviour
 
     public void StartWait()
     {
-        _ingredientsSended = _car.IngredientCounts;
+        _ingredientsSended = _car.GetList();
         _nowTime = 0;
         _isWait = true;
         _car.Leave();

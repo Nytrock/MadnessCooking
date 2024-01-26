@@ -12872,9 +12872,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1493344180}
-        m_TargetAssemblyTypeName: CarUI, Assembly-CSharp
-        m_MethodName: CarLeave
+      - m_Target: {fileID: 1766492819}
+        m_TargetAssemblyTypeName: CarWaitManager, Assembly-CSharp
+        m_MethodName: StartWait
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -12884,9 +12884,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1766492819}
-        m_TargetAssemblyTypeName: CarWaitManager, Assembly-CSharp
-        m_MethodName: StartWait
+      - m_Target: {fileID: 1493344180}
+        m_TargetAssemblyTypeName: CarUI, Assembly-CSharp
+        m_MethodName: CarLeave
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -14756,7 +14756,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _car: {fileID: 1317336878}
-  _waitTime: 20
+  _waitTime: 5
 --- !u!1 &1766792158
 GameObject:
   m_ObjectHideFlags: 0
@@ -16517,7 +16517,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 4
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 1024
   m_textAlignment: 65535
   m_characterSpacing: 0

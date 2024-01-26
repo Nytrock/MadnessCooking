@@ -1,19 +1,16 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class Car : MonoBehaviour
 {
     [SerializeField] private int _maxSize = 100;
     [SerializeField] private Animator _animator;
-    private List<IngredientCount> _ingredients = new List<IngredientCount>();
+    private readonly IngredientCountList _ingredients = new();
     private int _nowSize = 0;
 
-    public List<IngredientCount> IngredientCounts => _ingredients;
     public int MaxSize => _maxSize;
 
-    public event Action<IngredientCount> CountChanged;
+    public event Action<int> CountChanged;
     public event Action CarReturned;
 
     public int GetSpace()
@@ -24,6 +21,7 @@ public class Car : MonoBehaviour
     public void Leave()
     {
         _ingredients.Clear();
+        _nowSize = 0;
         _animator.SetBool("isLeave", true);
     }
 
@@ -33,27 +31,27 @@ public class Car : MonoBehaviour
         CarReturned?.Invoke();
     }
 
-    public void GetIngredients(int count, Ingredient plantedIngredient)
+    public void PutIngredients(int count, Ingredient plantedIngredient)
     {
         _nowSize += count;
+        var newElement = new IngredientCount
+        {
+            Count = count,
+            Ingredient = plantedIngredient
+        };
+        _ingredients.Add(newElement);
 
-        var index = GetIngredientIndex(plantedIngredient);
-        if (index == -1) {
-            var newElement = new IngredientCount {
-                Count = count,
-                Ingredient = plantedIngredient
-            };
-            _ingredients.Add(newElement);
-            CountChanged?.Invoke(newElement);
-        } else {
-            _ingredients[index].Count += count;
-            CountChanged?.Invoke(_ingredients[index]);
-        }
+        var index = _ingredients.IndexOf(newElement);
+        CountChanged?.Invoke(index);
     }
 
-    private int GetIngredientIndex(Ingredient ingredient)
+    public IngredientCount GetIngredient(int index)
     {
-        var haveIngredients = _ingredients.Select(x => x.Ingredient).ToList();
-        return haveIngredients.IndexOf(ingredient);
+        return _ingredients.Get(index);
+    }
+
+    public IngredientCountList GetList()
+    {
+        return _ingredients.Copy();
     }
 }

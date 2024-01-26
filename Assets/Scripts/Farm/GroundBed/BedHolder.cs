@@ -24,9 +24,9 @@ public class BedHolder : MonoBehaviour
         StartCoroutine(SetAnimationSpeed(ingredient.TimeGrow));
     }
 
-    public void ResetAnimation()
+    public void ResetAnimation(bool isFull)
     {
-        if (_animator.GetInteger("leftCount") == 0) {
+        if (_animator.GetInteger("leftCount") == 0 && isFull) {
             _animator.Play(_name, -1, 0);
             _animator.SetInteger("leftCount", _maxCount + 1);
         } else {
