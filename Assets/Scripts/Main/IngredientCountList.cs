@@ -1,10 +1,12 @@
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 
 public class IngredientCountList
 {
     private List<IngredientCount> _ingredientCounts = new();
+    private List<Ingredient> _haveIngredients = new();
+
+    public int Size => _ingredientCounts.Count;
 
     public void Add(IngredientCount ingredientCount)
     {
@@ -14,18 +16,22 @@ public class IngredientCountList
         } else {
             _ingredientCounts.Add(ingredientCount);
         }
+        UpdateHaveIngredients();
+    }
+
+    private void UpdateHaveIngredients()
+    {
+        _haveIngredients = _ingredientCounts.Select(x => x.Ingredient).ToList();
     }
 
     public bool Contains(IngredientCount ingredientCount)
     {
-        var haveIngredients = _ingredientCounts.Select(x => x.Ingredient).ToList();
-        return haveIngredients.Contains(ingredientCount.Ingredient);
+        return _haveIngredients.Contains(ingredientCount.Ingredient);
     }
 
     public int IndexOf(IngredientCount ingredientCount)
     {
-        var haveIngredients = _ingredientCounts.Select(x => x.Ingredient).ToList();
-        return haveIngredients.IndexOf(ingredientCount.Ingredient);
+        return _haveIngredients.IndexOf(ingredientCount.Ingredient);
     }
 
     public IngredientCount Get(int index)

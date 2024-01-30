@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class CarButton : MonoBehaviour
+public class IngredientStorageButton : MonoBehaviour
 {
     [SerializeField] private Image _icon;
     [SerializeField] private TextMeshProUGUI _count;

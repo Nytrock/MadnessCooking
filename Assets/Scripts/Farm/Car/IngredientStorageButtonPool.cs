@@ -1,19 +1,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CarButtonPool : MonoBehaviour
+public class IngredientStorageButtonPool : MonoBehaviour
 {
-    [SerializeField] private CarButton _prefab;
+    [SerializeField] private IngredientStorageButton _prefab;
     [SerializeField] private Transform _container;
 
-    private Queue<CarButton> _pool;
+    private Queue<IngredientStorageButton> _pool;
 
     private void Awake()
     {
-        _pool = new Queue<CarButton>();
+        _pool = new Queue<IngredientStorageButton>();
     }
 
-    public CarButton GetObject()
+    public IngredientStorageButton GetObject()
     {
         if (_pool.Count == 0) {
             var button = Instantiate(_prefab, _container);
@@ -24,7 +24,7 @@ public class CarButtonPool : MonoBehaviour
         return _pool.Dequeue();
     }
 
-    public void PutObject(CarButton button)
+    public void PutObject(IngredientStorageButton button)
     {
         _pool.Enqueue(button);
         button.gameObject.SetActive(false);
