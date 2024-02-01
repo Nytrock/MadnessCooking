@@ -47,17 +47,17 @@ public class ClientsSpawner : MonoBehaviour
             return;
 
         if (spot.SeatsCount > 1) {
-            var table = spot.GetComponent<ClientTable>();
+            var table = spot.GetComponent<ClientGroupHolder>();
             for (int i = 0; i < spot.SeatsCount; i++) {
                 Client client = _pool.GetObject();
                 table.AddClient(client);
-                SetUpClient(client, spot, clientType, i);
+                SetupClient(client, spot, clientType, i);
             }
             table.ClientsLeaved += ClientLeave;
             StartCoroutine(table.SpawnGroupOfClients());
         } else {
             Client client = _pool.GetObject();
-            SetUpClient(client, spot, clientType, 0);
+            SetupClient(client, spot, clientType, 0);
             client.ClientLeave += ClientLeave;
             client.StartNewCycle();
         }
@@ -105,13 +105,13 @@ public class ClientsSpawner : MonoBehaviour
         return ClientType.Quarter;
     }
 
-    private void ClientLeave(CafeSpot spot)
+    private void ClientLeave(Client client)
     {
         _isSpawning = true;
-        _spotManager.ReturnSpot(spot);
+        _spotManager.ReturnSpot(client.SpotIndex);
     }
 
-    private void SetUpClient(Client client, CafeSpot spot, ClientType clientType, int spotIndex)
+    private void SetupClient(Client client, CafeSpot spot, ClientType clientType, int spotIndex)
     {
         client.transform.position = _spawnPoint.position;
         _cafeOpener.CafeChanged += client.Leave;

@@ -5,24 +5,24 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(CafeSpot))]
-public class ClientTable : MonoBehaviour
+public class ClientGroupHolder : MonoBehaviour
 {
     [SerializeField] private Slider _talkSlider;
     [SerializeField] private int _minTalk;
     [SerializeField] private int _maxTalk;
     private float _talkTime;
     private float _nowTime;
-    private bool _isTalk;
     private int _talkIndex;
+    private bool _isTalk;
     private bool _isWait = true;
 
     private int _clientsLeft = 0;
     private int _moneyCount = 0;
-    private List<Client> _clients = new List<Client>();
+    private List<Client> _clients = new();
 
     private CafeSpot _spot;
 
-    public event Action<CafeSpot> ClientsLeaved;
+    public event Action<Client> ClientsLeaved;
 
     private void Start()
     {
@@ -146,7 +146,7 @@ public class ClientTable : MonoBehaviour
 
     private void EndVisit()
     {
-        ClientsLeaved?.Invoke(_spot);
+        ClientsLeaved?.Invoke(_clients[0]);
         ClientsLeaved = null;
         if (_isTalk)
             PayToPlayer();

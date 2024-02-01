@@ -5,10 +5,17 @@ using UnityEngine;
 public class OrdersManager : MonoBehaviour
 {
     [SerializeField] private CafeOpener _cafeOpener;
-    [SerializeField] private List<Order> _orders = new List<Order>();
+    [SerializeField] private KitchenBox _box;
+    [SerializeField] private TechnicManager _technicManager;
+    [SerializeField] private List<Order> _orders = new();
     private FoodManager _foodManager;
 
+    public event Action<Order> OrderAdded;
+    public event Action<Order> OrderRemoved;
     public event Action OrderFinished;
+
+    public TechnicManager TechnicManager => _technicManager;
+    public KitchenBox Box => _box;
 
     private void Start()
     {
@@ -31,17 +38,37 @@ public class OrdersManager : MonoBehaviour
 
         client.SetOrder(order);
         client.OrderActivated += AddOrder;
+        client.ClientLeave += RemoveOrder;
         OrderFinished += client.CheckOrder;
     }
 
-    private void AddOrder(Order newOrder)
+    private void AddOrder(Client client)
     {
-        _orders.Add(newOrder);
+        _orders.Add(client.Order);
+        OrderAdded?.Invoke(client.Order);
     }
 
-    [ContextMenu("FinishOrder")]
+
     public void FinishOrder()
     {
         OrderFinished?.Invoke();
+    }
+
+    private void RemoveOrder(Client client)
+    {
+        OrderFinished -= client.CheckOrder;
+        client.OrderActivated -= AddOrder;
+        client.ClientLeave -= RemoveOrder;
+
+        if (GetOrderId(client.Order) == -1)
+            return;
+
+        OrderRemoved?.Invoke(client.Order);
+        _orders.Remove(client.Order);
+    }
+
+    public int GetOrderId(Order order)
+    {
+        return _orders.IndexOf(order);
     }
 }

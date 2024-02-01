@@ -11,4 +11,9 @@ public class TechnicManager : MonoBehaviour
         foreach (var holder in _holders)
             holder.gameObject.SetActive(_availableTechnic.Contains(holder.Technic));
     }
+
+    public bool HaveTechnic(Technic technic)
+    {
+        return _availableTechnic.Contains(technic);
+    }
 }

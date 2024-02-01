@@ -26,17 +26,17 @@ public class Client : MonoBehaviour
     private ClientType _clientType;
     private ClientsPool _pool;
     private CafeSpot _spot;
-    private ClientTable _table;
-    private int _spotIndex;
+    private ClientGroupHolder _table;
 
     public Transform EnterTarget { get; private set; }
     public Transform ExitTarget { get; private set; }
     public float WaitMultiplier { get; private set; }
     public bool IsLeaving { get; private set; }
     public Order Order { get; private set; }
+    public int SpotIndex { get; private set; }
 
-    public event Action<Order> OrderActivated;
-    public event Action<CafeSpot> ClientLeave;
+    public event Action<Client> OrderActivated;
+    public event Action<Client> ClientLeave;
 
     private void Awake()
     {
@@ -77,7 +77,7 @@ public class Client : MonoBehaviour
 
     public void RotateSkin()
     {
-        _skin.localScale = new Vector2(_spot.GetTableRotation(_spotIndex), 1);
+        _skin.localScale = new Vector2(_spot.GetTableRotation(SpotIndex), 1);
     }
 
     public void SetTargets(Transform enterTarget, Transform exitTarget)
@@ -110,13 +110,13 @@ public class Client : MonoBehaviour
     {
         _spot = spot;
         if (InGroup())
-            _table = _spot.GetComponent<ClientTable>();
-        _spotIndex = spotIndex;
+            _table = _spot.GetComponent<ClientGroupHolder>();
+        SpotIndex = spotIndex;
     }
 
     public void ActivateOrder()
     {
-        OrderActivated?.Invoke(Order);
+        OrderActivated?.Invoke(this);
         _clientUI.SetFood(Order.Food);
     }
 
@@ -133,7 +133,7 @@ public class Client : MonoBehaviour
 
     public void Pay()
     {
-        _spot.ResetTableFoodSprite(_spotIndex);
+        _spot.ResetTableFoodSprite(SpotIndex);
         if (InGroup()) {
             Sit();
             _table.CheckTalk();
@@ -145,10 +145,11 @@ public class Client : MonoBehaviour
 
     public void Leave()
     {
-        ClientLeave?.Invoke(_spot);
+        ClientLeave?.Invoke(this);
         ClientLeave = null;
         IsLeaving = true;
         NowState = _walkState;
+        _clientUI.SetUIVisible(false);
     }
 
     public void FoodRejected()
@@ -185,7 +186,7 @@ public class Client : MonoBehaviour
 
     public void SetSpotTableFood()
     {
-        _spot.SetTableFoodSprite(Order.Food, _spotIndex);
+        _spot.SetTableFoodSprite(Order.Food, SpotIndex);
     }
 
     public void ChangeSortingGroup(int newValue)

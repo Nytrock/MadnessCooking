@@ -10,7 +10,7 @@ public class IngredientCountList
 
     public void Add(IngredientCount ingredientCount)
     {
-        if (Contains(ingredientCount)) {
+        if (ContainsIngredient(ingredientCount)) {
             var index = IndexOf(ingredientCount);
             _ingredientCounts[index].Count += ingredientCount.Count;
         } else {
@@ -24,9 +24,16 @@ public class IngredientCountList
         _haveIngredients = _ingredientCounts.Select(x => x.Ingredient).ToList();
     }
 
-    public bool Contains(IngredientCount ingredientCount)
+    public bool ContainsIngredient(IngredientCount ingredientCount)
     {
         return _haveIngredients.Contains(ingredientCount.Ingredient);
+    }
+
+    public bool ContainsCount(IngredientCount ingredientCount)
+    {
+        if (!ContainsIngredient(ingredientCount))
+            return false;
+        return _ingredientCounts[IndexOf(ingredientCount)].Count >= ingredientCount.Count;
     }
 
     public int IndexOf(IngredientCount ingredientCount)
@@ -42,6 +49,7 @@ public class IngredientCountList
     public void Clear()
     {
         _ingredientCounts.Clear();
+        _haveIngredients.Clear();
     }
 
     public IngredientCountList Copy()

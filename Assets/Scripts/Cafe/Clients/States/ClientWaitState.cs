@@ -38,7 +38,7 @@ public class ClientWaitState : ClientState
         }
     }
 
-    private void DecreaseWait(Order _)
+    private void DecreaseWait(Client _)
     {
         _nowTime = Mathf.Max(0, _nowTime - _waitTime * 0.1f * _waitMultiplier);
         _waitSlider.value = _nowTime;

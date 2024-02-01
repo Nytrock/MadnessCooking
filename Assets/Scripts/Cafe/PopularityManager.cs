@@ -13,10 +13,10 @@ public class PopularityManager : MonoBehaviour
 
     public void GetClientsNumberChances(out int singleChance, out int doubleChance, out int tripleChance, out int quarterChance)
     {
-        singleChance = 0;
+        singleChance = 1000;
         doubleChance = 0;
         tripleChance = 0;
-        quarterChance = 1000;
+        quarterChance = 0;
 
         doubleChance += singleChance;
         tripleChance += doubleChance;

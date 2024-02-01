@@ -7,7 +7,7 @@ public class CafeSpotManager : MonoBehaviour
     [SerializeField] private CafeSpaceManager _spaceManager;
     [SerializeField] private CafeOpener _opener;
     [SerializeField] private CafeSpot[] _spotPrefabs;
-    [SerializeField] private List<CafeSpot> _spots;
+    private List<CafeSpot> _spots;
     private List<List<int>> _freeSpots = new List<List<int>>(4);
     private float _cellSize;
 
@@ -15,13 +15,13 @@ public class CafeSpotManager : MonoBehaviour
 
     private void Start()
     {
-        SetUpSpotsRemoveButtons();
         GenerateSpots();
+        SetupSpotsRemoveButtons();
         GenerateFreeSpotsList();
         _cellSize = _spaceManager.GetSpaceSize() / 2f;
     }
 
-    private void SetUpSpotsRemoveButtons()
+    private void SetupSpotsRemoveButtons()
     {
         for (int i = 0; i < _spots.Count; i++)
             SetUpSpotRemoveButton(i);
@@ -37,7 +37,7 @@ public class CafeSpotManager : MonoBehaviour
     private void GenerateSpots()
     {
         for (int i = 0; i < _spots.Count; i++) {
-            if (_spots[i].TryGetComponent(out ClientTable clientTable))
+            if (_spots[i].TryGetComponent(out ClientGroupHolder clientTable))
                 _opener.CafeChanged -= clientTable.CafeClosed;
         }
 
@@ -59,11 +59,11 @@ public class CafeSpotManager : MonoBehaviour
         SpotsPositionChanged?.Invoke(-offset);
 
         MoveSpots(spotIndex, offset);
-        if (_spots[spotIndex].TryGetComponent(out ClientTable clientTable))
+        if (_spots[spotIndex].TryGetComponent(out ClientGroupHolder clientTable))
             _opener.CafeChanged -= clientTable.CafeClosed;
         _spots[spotIndex].Destroy();
         _spots.RemoveAt(spotIndex);
-        SetUpSpotsRemoveButtons();
+        SetupSpotsRemoveButtons();
     }
 
     private void MoveSpots(int deletedIndex, float deletedSize)
@@ -108,9 +108,9 @@ public class CafeSpotManager : MonoBehaviour
         return res != 0;
     }
 
-    public void ReturnSpot(CafeSpot spot)
+    public void ReturnSpot(int index)
     {
-        _freeSpots[spot.SeatsCount - 1].Add(_spots.IndexOf(spot));
+        _freeSpots[_spots[index].SeatsCount - 1].Add(index);
     }
 
     public void ActivateSpotsEditor()
@@ -145,7 +145,8 @@ public class CafeSpotManager : MonoBehaviour
     {
         var spot = Instantiate(_spotPrefabs[index], transform);
         spot.ChangeEditorState(true);
-        if (spot.TryGetComponent(out ClientTable clientTable))
+        spot.SetIndex(_spots.Count);
+        if (spot.TryGetComponent(out ClientGroupHolder clientTable))
             _opener.CafeChanged += clientTable.CafeClosed;
 
         float offset = _cellSize;

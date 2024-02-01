@@ -49,4 +49,9 @@ public class IngredientStorage : MonoBehaviour
     {
         return _ingredients.Copy();
     }
+
+    public bool HaveCount(IngredientCount count)
+    {
+        return _ingredients.ContainsCount(count);
+    }
 }

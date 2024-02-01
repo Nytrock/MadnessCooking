@@ -47,6 +47,11 @@ public class CafeSpot : MonoBehaviour
         _removeButton.gameObject.SetActive(_isEditor);
     }
 
+    public void SetIndex(int index)
+    {
+        _index = index + 1;
+    }
+
     public void Destroy()
     {
         Destroy(gameObject);
