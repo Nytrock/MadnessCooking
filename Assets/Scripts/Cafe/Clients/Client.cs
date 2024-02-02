@@ -37,6 +37,7 @@ public class Client : MonoBehaviour
 
     public event Action<Client> OrderActivated;
     public event Action<Client> ClientLeave;
+    public event Action<Client> ClientEat;
 
     private void Awake()
     {
@@ -171,6 +172,7 @@ public class Client : MonoBehaviour
         }
         _clientUI.SetUIVisible(false);
         NowState = _eatState;
+        ClientEat?.Invoke(this);
     }
 
     public void Sit()

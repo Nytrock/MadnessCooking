@@ -83,6 +83,7 @@ GameObject:
   - component: {fileID: 1508484192192043780}
   - component: {fileID: 4500083821768110817}
   - component: {fileID: 6541766812167510055}
+  - component: {fileID: 5284988960864983761}
   - component: {fileID: 2372775456709987122}
   m_Layer: 0
   m_Name: Order
@@ -153,6 +154,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &5284988960864983761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2467567611809568046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c752ca565ec0c274dbdd271dda2ef0f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cookingSlider: {fileID: 9041028499257844066}
 --- !u!114 &2372775456709987122
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -442,7 +456,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6668301112349034747}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2372775456709987122}
+        m_TargetAssemblyTypeName: OrderButton, Assembly-CSharp
+        m_MethodName: Cook
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &3735335458391085072
 GameObject:
   m_ObjectHideFlags: 0

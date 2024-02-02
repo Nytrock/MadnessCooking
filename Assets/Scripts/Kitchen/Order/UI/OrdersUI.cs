@@ -12,7 +12,7 @@ public class OrdersUI : MonoBehaviour
     {
         _manager.OrderAdded += AddOrder;
         _manager.OrderRemoved += RemoveOrder;
-        _pool.SetStorages(_manager.Box, _manager.TechnicManager);
+        _pool.SetStorages(_manager, this);
         _panel.SetActive(false);
     }
 
@@ -35,4 +35,21 @@ public class OrdersUI : MonoBehaviour
         _orderButtons.RemoveAt(index);
     }
 
+    public void StartCook(Order order)
+    {
+        _manager.StartCook(order);
+        UpdateRecipes();
+    }
+
+    public void FinishCook(Order order)
+    {
+        _manager.FinishCook(order);
+        UpdateRecipes();
+    }
+
+    private void UpdateRecipes()
+    {
+        foreach (OrderButton button in _orderButtons)
+            button.UpdateRecipe();
+    }
 }

@@ -39,6 +39,7 @@ public class OrdersManager : MonoBehaviour
         client.SetOrder(order);
         client.OrderActivated += AddOrder;
         client.ClientLeave += RemoveOrder;
+        client.ClientEat += RemoveOrder;
         OrderFinished += client.CheckOrder;
     }
 
@@ -48,17 +49,12 @@ public class OrdersManager : MonoBehaviour
         OrderAdded?.Invoke(client.Order);
     }
 
-
-    public void FinishOrder()
-    {
-        OrderFinished?.Invoke();
-    }
-
     private void RemoveOrder(Client client)
     {
         OrderFinished -= client.CheckOrder;
         client.OrderActivated -= AddOrder;
         client.ClientLeave -= RemoveOrder;
+        client.ClientEat -= RemoveOrder;
 
         if (GetOrderId(client.Order) == -1)
             return;
@@ -70,5 +66,17 @@ public class OrdersManager : MonoBehaviour
     public int GetOrderId(Order order)
     {
         return _orders.IndexOf(order);
+    }
+
+    public void StartCook(Order order)
+    {
+        _box.RemoveIngrediens(order.Food.Ingredients);
+        _technicManager.ActivateTechnic(order.Food);
+    }
+
+    public void FinishCook(Order order)
+    {
+        _technicManager.DisableTechnic(order.Food.TypeTechnic);
+        OrderFinished?.Invoke();
     }
 }

@@ -19,6 +19,19 @@ public class IngredientCountList
         UpdateHaveIngredients();
     }
 
+    public void Remove(IngredientCount ingredientCount)
+    {
+        if (!ContainsIngredient(ingredientCount))
+            return;
+
+        var index = IndexOf(ingredientCount);
+        _ingredientCounts[index].Count -= ingredientCount.Count;
+        if (_ingredientCounts[index].Count <= 0)
+            _ingredientCounts.RemoveAt(index);
+
+        UpdateHaveIngredients();
+    }
+
     private void UpdateHaveIngredients()
     {
         _haveIngredients = _ingredientCounts.Select(x => x.Ingredient).ToList();

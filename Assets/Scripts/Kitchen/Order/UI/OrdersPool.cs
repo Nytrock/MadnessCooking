@@ -6,8 +6,8 @@ public class OrdersPool : MonoBehaviour
     [SerializeField] private OrderButton _prefab;
     [SerializeField] private Transform _container;
 
-    private KitchenBox _box;
-    private TechnicManager _technicManager;
+    private OrdersManager _manager;
+    private OrdersUI _ordersUI;
     private Queue<OrderButton> _pool;
 
     private void Awake()
@@ -19,7 +19,7 @@ public class OrdersPool : MonoBehaviour
     {
         if (_pool.Count == 0) {
             var button = Instantiate(_prefab, _container);
-            button.SetStorages(_box, _technicManager);
+            button.SetStorages(_manager, _ordersUI);
             _pool.Enqueue(button);
         }
 
@@ -32,9 +32,9 @@ public class OrdersPool : MonoBehaviour
         button.Disable();
     }
 
-    public void SetStorages(KitchenBox box, TechnicManager technicManager)
+    public void SetStorages(OrdersManager manager, OrdersUI ordersUI)
     {
-        _box = box;
-        _technicManager = technicManager;
+        _manager = manager;
+        _ordersUI = ordersUI;
     }
 }
