@@ -108,7 +108,7 @@ public class ClientsSpawner : MonoBehaviour
     private void ClientLeave(Client client)
     {
         _isSpawning = true;
-        _spotManager.ReturnSpot(client.SpotIndex);
+        _spotManager.ReturnSpot(client.Spot.Index);
     }
 
     private void SetupClient(Client client, CafeSpot spot, ClientType clientType, int spotIndex)

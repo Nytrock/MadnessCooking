@@ -5,11 +5,11 @@ public class MoneyManager : MonoBehaviour
 {
     public static MoneyManager instance;
 
-    private int _moneyAmount = 0;
+    [SerializeField] private int _moneyAmount = 0;
 
     public int MoneyAmount => _moneyAmount;
 
-    public event Action<int> moneyChanged;
+    public event Action<int> MoneyChanged;
 
     private void Start()
     {
@@ -19,6 +19,6 @@ public class MoneyManager : MonoBehaviour
     public void ChangeMoney(int changeValue)
     {
         _moneyAmount += changeValue;
-        moneyChanged?.Invoke(_moneyAmount);
+        MoneyChanged?.Invoke(_moneyAmount);
     }
 }

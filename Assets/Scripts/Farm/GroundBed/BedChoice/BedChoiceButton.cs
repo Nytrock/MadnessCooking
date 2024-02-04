@@ -9,7 +9,7 @@ public class BedChoiceButton : ChoiceButton
     private void Start()
     {
         var moneyManager = MoneyManager.instance;
-        moneyManager.moneyChanged += CheckBuyable;
+        moneyManager.MoneyChanged += CheckBuyable;
         CheckBuyable(moneyManager.MoneyAmount);
     }
 

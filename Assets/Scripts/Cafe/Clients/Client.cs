@@ -25,7 +25,6 @@ public class Client : MonoBehaviour
     private ClientUI _clientUI;
     private ClientType _clientType;
     private ClientsPool _pool;
-    private CafeSpot _spot;
     private ClientGroupHolder _table;
 
     public Transform EnterTarget { get; private set; }
@@ -33,7 +32,8 @@ public class Client : MonoBehaviour
     public float WaitMultiplier { get; private set; }
     public bool IsLeaving { get; private set; }
     public Order Order { get; private set; }
-    public int SpotIndex { get; private set; }
+    public int TableIndex { get; private set; }
+    public CafeSpot Spot { get; private set; }
 
     public event Action<Client> OrderActivated;
     public event Action<Client> ClientLeave;
@@ -78,7 +78,7 @@ public class Client : MonoBehaviour
 
     public void RotateSkin()
     {
-        _skin.localScale = new Vector2(_spot.GetTableRotation(SpotIndex), 1);
+        _skin.localScale = new Vector2(Spot.GetTableRotation(TableIndex), 1);
     }
 
     public void SetTargets(Transform enterTarget, Transform exitTarget)
@@ -109,10 +109,10 @@ public class Client : MonoBehaviour
 
     public void SetSpot(CafeSpot spot, int spotIndex)
     {
-        _spot = spot;
+        Spot = spot;
         if (InGroup())
-            _table = _spot.GetComponent<ClientGroupHolder>();
-        SpotIndex = spotIndex;
+            _table = Spot.GetComponent<ClientGroupHolder>();
+        TableIndex = spotIndex;
     }
 
     public void ActivateOrder()
@@ -134,7 +134,7 @@ public class Client : MonoBehaviour
 
     public void Pay()
     {
-        _spot.ResetTableFoodSprite(SpotIndex);
+        Spot.ResetTableFoodSprite(TableIndex);
         if (InGroup()) {
             Sit();
             _table.CheckTalk();
@@ -188,7 +188,7 @@ public class Client : MonoBehaviour
 
     public void SetSpotTableFood()
     {
-        _spot.SetTableFoodSprite(Order.Food, SpotIndex);
+        Spot.SetTableFoodSprite(Order.Food, TableIndex);
     }
 
     public void ChangeSortingGroup(int newValue)

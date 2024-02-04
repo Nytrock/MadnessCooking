@@ -49,7 +49,7 @@ public class CafeSpot : MonoBehaviour
 
     public void SetIndex(int index)
     {
-        _index = index + 1;
+        _index = index;
     }
 
     public void Destroy()

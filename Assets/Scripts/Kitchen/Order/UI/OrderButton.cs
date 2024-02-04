@@ -19,11 +19,6 @@ public class OrderButton : MonoBehaviour
     private OrdersUI _ordersUI;
     private OrderCookingSlider _cookSlider;
 
-    private void Awake()
-    {
-        _cookSlider = GetComponent<OrderCookingSlider>();
-    }
-
     private void Start()
     {
         StartNewCycle();
@@ -68,8 +63,11 @@ public class OrderButton : MonoBehaviour
 
     public void SetStorages(OrdersManager manager, OrdersUI ordersUI)
     {
+        _cookSlider = GetComponent<OrderCookingSlider>();
+
         manager.Box.IngredientsAdded += UpdateRecipe;
         _ordersUI = ordersUI;
+        _cookSlider.SetTechnicManager(manager.TechnicManager);
         _recipe.SetStorages(manager.Box, manager.TechnicManager);
     }
 

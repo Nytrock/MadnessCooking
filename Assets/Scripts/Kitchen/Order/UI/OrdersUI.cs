@@ -43,7 +43,7 @@ public class OrdersUI : MonoBehaviour
 
     public void FinishCook(Order order)
     {
-        _manager.FinishCook(order);
+        _manager.FinishCook();
         UpdateRecipes();
     }
 

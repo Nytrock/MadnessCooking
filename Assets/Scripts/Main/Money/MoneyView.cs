@@ -8,7 +8,7 @@ public class MoneyView : MonoBehaviour
 
     private void Start()
     {
-        _moneyManager.moneyChanged += UpdateText;
+        _moneyManager.MoneyChanged += UpdateText;
         UpdateText(_moneyManager.MoneyAmount);
     }
 

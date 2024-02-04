@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class OrdersManager : MonoBehaviour
 {
-    [SerializeField] private CafeOpener _cafeOpener;
     [SerializeField] private KitchenBox _box;
     [SerializeField] private TechnicManager _technicManager;
-    [SerializeField] private List<Order> _orders = new();
+    private List<Order> _orders = new();
     private FoodManager _foodManager;
 
     public event Action<Order> OrderAdded;
@@ -19,20 +18,14 @@ public class OrdersManager : MonoBehaviour
 
     private void Start()
     {
-        _cafeOpener.CafeChanged += RemoveOrders;
         _foodManager = GetComponent<FoodManager>();
-    }
-
-    private void RemoveOrders()
-    {
-        _orders.Clear();
     }
 
     public void SetNewOrder(Client client, CafeSpot spot)
     {
         var food = _foodManager.GetRandomFood();
         var order = new Order {
-            TableNumber = spot.Index,
+            TableNumber = spot.Index + 1,
             Food = food,
         };
 
@@ -60,6 +53,7 @@ public class OrdersManager : MonoBehaviour
             return;
 
         OrderRemoved?.Invoke(client.Order);
+        _technicManager.DisableTechnic(client.Order.Food.TypeTechnic);
         _orders.Remove(client.Order);
     }
 
@@ -74,9 +68,8 @@ public class OrdersManager : MonoBehaviour
         _technicManager.ActivateTechnic(order.Food);
     }
 
-    public void FinishCook(Order order)
+    public void FinishCook()
     {
-        _technicManager.DisableTechnic(order.Food.TypeTechnic);
         OrderFinished?.Invoke();
     }
 }
