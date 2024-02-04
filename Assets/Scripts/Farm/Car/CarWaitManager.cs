@@ -4,7 +4,7 @@ using UnityEngine;
 public class CarWaitManager : MonoBehaviour
 {
     [SerializeField] private Car _car;
-    [SerializeField] private KitchenBox _kitchenBox;
+    [SerializeField] private KitchenStorage _kitchenStorage;
     [SerializeField] private float _waitTime;
     private IngredientCountList _ingredientsSended;
     private float _nowTime;
@@ -34,7 +34,7 @@ public class CarWaitManager : MonoBehaviour
                 _isWait = true;
                 _car.Return();
             } else {
-                _kitchenBox.AddIngrediens(_ingredientsSended);
+                _kitchenStorage.AddIngrediens(_ingredientsSended);
                 _nowTime = 0;
                 _isSended = true;
             }

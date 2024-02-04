@@ -3,7 +3,7 @@ using UnityEngine;
 public class OrderRecipe : MonoBehaviour
 {
     [SerializeField] private OrderRecipePart[] _recipeParts = new OrderRecipePart[8];
-    private KitchenBox _box;
+    private KitchenStorage _kitchenStorage;
     private TechnicManager _technicManager;
 
     public bool CreateRecipe(Order order)
@@ -13,7 +13,7 @@ public class OrderRecipe : MonoBehaviour
         bool canCook = true;
 
         for (int i = 0; i < ingredients.Length; i++) {
-            bool haveCount = _box.HaveCount(ingredients[i]);
+            bool haveCount = _kitchenStorage.HaveCount(ingredients[i]);
             canCook &= haveCount;
             _recipeParts[i].Setup(ingredients[i], haveCount);
         }
@@ -31,9 +31,9 @@ public class OrderRecipe : MonoBehaviour
             part.gameObject.SetActive(false);
     }
 
-    public void SetStorages(KitchenBox box, TechnicManager technic)
+    public void SetStorages(KitchenStorage ingredients, TechnicManager technic)
     {
-        _box = box;
+        _kitchenStorage = ingredients;
         _technicManager = technic;
     }
 }

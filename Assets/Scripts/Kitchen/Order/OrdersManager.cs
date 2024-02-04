@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class OrdersManager : MonoBehaviour
 {
-    [SerializeField] private KitchenBox _box;
+    [SerializeField] private KitchenStorage _kitchenStorage;
     [SerializeField] private TechnicManager _technicManager;
     private List<Order> _orders = new();
     private FoodManager _foodManager;
@@ -14,7 +14,7 @@ public class OrdersManager : MonoBehaviour
     public event Action OrderFinished;
 
     public TechnicManager TechnicManager => _technicManager;
-    public KitchenBox Box => _box;
+    public KitchenStorage KitchenStorage => _kitchenStorage;
 
     private void Start()
     {
@@ -64,7 +64,7 @@ public class OrdersManager : MonoBehaviour
 
     public void StartCook(Order order)
     {
-        _box.RemoveIngrediens(order.Food.Ingredients);
+        _kitchenStorage.RemoveIngrediens(order.Food.Ingredients);
         _technicManager.ActivateTechnic(order.Food);
     }
 

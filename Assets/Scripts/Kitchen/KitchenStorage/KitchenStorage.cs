@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class KitchenBox : IngredientStorage
+public class KitchenStorage : IngredientStorage
 {
     [SerializeField] private Ingredient _lemon;
     public event Action IngredientsAdded;
