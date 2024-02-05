@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BaseObject : ScriptableObject
+public class BuyableObject : ScriptableObject
 {
     public string Name;
     [TextArea] public string Description;

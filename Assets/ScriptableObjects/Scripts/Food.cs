@@ -2,7 +2,7 @@ using UnityEngine;
 
 [CreateAssetMenu(menuName = "Food")]
 
-public class Food : BaseObject
+public class Food : BuyableObject
 {
     public Technic TypeTechnic;
     public Sprite FoodSprite;

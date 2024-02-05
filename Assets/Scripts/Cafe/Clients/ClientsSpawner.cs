@@ -16,8 +16,15 @@ public class ClientsSpawner : MonoBehaviour
 
     private float _needTime;
     private float _nowTime;
-    [SerializeField] private bool _isSpawning = true;
+    private bool _isSpawning = true;
     private bool _isOpen = true;
+
+    private ClientTimeMultiplier _timeMultiplier;
+
+    private void Awake()
+    {
+        _timeMultiplier = GetComponent<ClientTimeMultiplier>();
+    }
 
     private void Start()
     {
@@ -69,7 +76,10 @@ public class ClientsSpawner : MonoBehaviour
     private void SetNewTime()
     {
         var popular = _popularityManager.GetPopularity();
-        _needTime = Random.Range(_minSpawnTime / popular, _maxSpawnTime / popular);
+        var minTime = _minSpawnTime / popular * _timeMultiplier.DaytimeMultiplier;
+        var maxTime = _maxSpawnTime / popular * _timeMultiplier.DaytimeMultiplier;
+
+        _needTime = Random.Range(minTime, maxTime);
         _nowTime = 0;
     }
 

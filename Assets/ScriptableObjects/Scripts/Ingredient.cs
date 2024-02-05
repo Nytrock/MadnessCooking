@@ -2,7 +2,7 @@ using UnityEngine;
 
 [CreateAssetMenu(menuName = nameof(Ingredient))]
 
-public class Ingredient : BaseObject
+public class Ingredient : BuyableObject
 {
     public IngredientType TypeIngredient;
     public Sprite IngredientSprite;

@@ -2,7 +2,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "UpgradeBundle")]
-public class UpgradesBundle : BaseObject
+public class UpgradesBundle : BuyableObject
 {
     public Upgrade[] upgradesList;
 }
