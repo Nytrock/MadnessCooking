@@ -20,19 +20,19 @@ public class TechnicManager : MonoBehaviour
         if (!_availableTechnic.Contains(technic))
             return false;
         var holder = FindHolderByTechic(technic);
-        return holder.IsFree && holder.NowStrength != 0;
+        return holder.IsFree && holder.NowStrength != 0 && !holder.IsRepairing;
     }
 
     public void ActivateTechnic(Food food)
     {
         var technic = FindHolderByTechic(food.TypeTechnic);
-        technic.StartWork(food);
+        technic.StartCook(food);
     }
 
     public void DisableTechnic(Technic typeTechnic)
     {
         var technic = FindHolderByTechic(typeTechnic);
-        technic.MakeFree();
+        technic.StopCook();
     }
 
     public TechnicHolder FindHolderByTechic(Technic technic)

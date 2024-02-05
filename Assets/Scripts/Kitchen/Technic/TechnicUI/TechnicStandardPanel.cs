@@ -1,49 +1,31 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
-public class TechnicHolderUI : MonoBehaviour
+public class TechnicStandardPanel : TechnicPanel
 {
-    [SerializeField] private GameObject _panel;
     [SerializeField] private Image _icon;
     [SerializeField] private TextMeshProUGUI _name;
     [SerializeField] private TextMeshProUGUI _repair;
     [SerializeField] private Button _repairButton;
     [SerializeField] private Slider _cookSlider;
-    private TechnicHolder _nowTechnic;
 
-    private void Start()
+    private TechnicCooker _cooker;
+
+    public override void UpdatePanel()
     {
-        _panel.SetActive(false);
-    }
-
-    private void Update()
-    {
-        if (_nowTechnic == null) return;
-
         if (_nowTechnic.IsFree && _cookSlider.gameObject.activeSelf)
-            UpdatePanelInfo();
+            UpdateInfo();
 
         if (_nowTechnic.IsFree) return;
 
-        _cookSlider.value = _nowTechnic.NowTime;
+        _cookSlider.value = _cooker.NowTime;
     }
 
-    public void OpenTechnic(TechnicHolder technic)
-    {
-        if (technic == _nowTechnic) {
-            _panel.SetActive(!_panel.activeSelf);
-        } else {
-            _panel.SetActive(true);
-            _panel.transform.position = technic.UITarget.position;
-            _nowTechnic = technic;
-        }
-        UpdatePanelInfo();
-    }
-
-    private void UpdatePanelInfo()
+    public override void UpdateInfo()
     {
         var technic = _nowTechnic.Technic;
+        _cooker = _nowTechnic.GetComponent<TechnicCooker>();
         _icon.sprite = technic.MiniSprite;
         _name.text = technic.Name;
         UpdatePanels();
@@ -53,11 +35,12 @@ public class TechnicHolderUI : MonoBehaviour
             _repairButton.interactable =
                 _nowTechnic.NowStrength != technic.Strength && MoneyManager.instance.MoneyAmount >= technic.CostRepair;
         } else {
-            _cookSlider.maxValue = _nowTechnic.CookTime;
+            _cookSlider.maxValue = _cooker.NeedTime;
         }
     }
 
-    private void UpdatePanels() {
+    private void UpdatePanels()
+    {
         _repairButton.gameObject.SetActive(_nowTechnic.IsFree);
         _cookSlider.gameObject.SetActive(!_nowTechnic.IsFree);
     }
