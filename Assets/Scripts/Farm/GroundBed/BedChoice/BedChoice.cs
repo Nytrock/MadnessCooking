@@ -33,6 +33,8 @@ public class BedChoice : MonoBehaviour
 
     public void ReactivateBedsChoice()
     {
+        if (_groundBed.BedType.Cost > 0)
+            MoneyManager.instance.ChangeMoney(_groundBed.BedType.Cost);
         _groundBed.ResetBedType();
         _isEmpty = true;
         _UI.Activate(this);
@@ -45,6 +47,7 @@ public class BedChoice : MonoBehaviour
 
     public void SetType(BedType bedType)
     {
+        MoneyManager.instance.ChangeMoney(-bedType.Cost);
         foreach (var bed in _beds)
             if (bedType == bed.Type) {
                 _isEmpty = false;

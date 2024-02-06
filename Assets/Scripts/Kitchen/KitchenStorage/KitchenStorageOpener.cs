@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Collider))]
+[RequireComponent(typeof(BoxCollider2D))]
 public class KitchenStorageOpener : MonoBehaviour
 {
     [SerializeField] private KitchenStorageUI _kitchenStorage;

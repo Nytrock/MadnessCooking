@@ -2,20 +2,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class GroundBedUI : MonoBehaviour
+public class GroundBedUIManager : MonoBehaviour
 {
     [SerializeField] private GroundBed _groundBed;
-    [SerializeField] private GameObject _UI;
-    [SerializeField] private Image _icon;
-    [SerializeField] private TextMeshProUGUI _name;
-    [SerializeField] private TextMeshProUGUI _description;
-    [SerializeField] private TextMeshProUGUI _countText;
-
-    [Header("Side buttons")]
-    [SerializeField] private GameObject _sideButtons;
-    [SerializeField] private Button _waterButton;
-    [SerializeField] private Button _fertilizeButton;
-    [SerializeField] private Button _pestsButton;
+    private BedHolderUI _nowUI;
 
     private BedChoice _bedChoice;
     private GroundBedUpgradeUI _upgrade;
@@ -27,12 +17,11 @@ public class GroundBedUI : MonoBehaviour
     private void Start()
     {
         _bedChoice = _groundBed.GetComponent<BedChoice>();
-        _UI.SetActive(false);
     }
 
     public void ChangeMode()
     {
-        _UI.SetActive(!_UI.activeSelf);
+        _nowUI.ChangeMode();
     }
 
     public void Setup(GroundBedSettings settings)
@@ -45,36 +34,33 @@ public class GroundBedUI : MonoBehaviour
 
     private void CheckWater(int count)
     {
-        _waterButton.interactable = count > 0;
+        _nowUI.CheckWater(count);
     }
 
     private void CheckFertilize(int count)
     {
-        _fertilizeButton.interactable = count > 0;
-    }
-
-    public void UpdateIngredient(Ingredient ingredient)
-    {
-        _icon.sprite = ingredient.IngredientSprite;
-        _name.text = ingredient.Name;
-        _description.text = ingredient.Description;
-        _countText.text = "0";
-
-        var sideButtonShow = !(_groundBed.BedType.AcceptableType == IngredientType.Meat ||
-            _groundBed.BedType.AcceptableType == IngredientType.Ghost);
-        _sideButtons.SetActive(sideButtonShow);
-
-        if (sideButtonShow) {
-            _farmWell.WaterAdded += CheckWater;
-            _puncher.FertilizeAdded += CheckFertilize;
-            CheckWater(_farmWell.Count);
-            CheckFertilize(_puncher.Count);
-        }
+        _nowUI.CheckFertilize(count);
     }
 
     public void UpdateCount()
     {
-        _countText.text = _groundBed.Count.ToString();
+        _nowUI.UpdateCount(_groundBed.Count);
+    }
+
+    public void UpdateIngredient(Ingredient ingredient, BedHolder _bedHolder)
+    {
+        _nowUI = _bedHolder.HolderUI;
+        _nowUI.UpdateIngredient(ingredient);
+
+        if (_nowUI.IsSideButtonsWork) {
+            _farmWell.WaterAdded += CheckWater;
+            _puncher.FertilizeAdded += CheckFertilize;
+            CheckWater(_farmWell.Count);
+            CheckFertilize(_puncher.Count);
+        } else {
+            _farmWell.WaterAdded -= CheckWater;
+            _puncher.FertilizeAdded -= CheckFertilize;
+        }
     }
 
     public void CollectIngredients()

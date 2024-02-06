@@ -4,15 +4,23 @@ using UnityEngine;
 public class BedHolder : MonoBehaviour
 {
     [SerializeField] private BedType _type;
+    [SerializeField] private GroundBed _groundBed;
+    [SerializeField] private BedHolderUI _holderUI;
     private Animator _animator;
     private string _name;
     private int _maxCount;
 
     public BedType Type => _type;
+    public BedHolderUI HolderUI => _holderUI;
 
     private void Awake()
     {
         _animator = GetComponent<Animator>();
+    }
+
+    public void ChangeMode(bool newMode)
+    {
+        gameObject.SetActive(newMode);
     }
 
     public void SetIngredient(Ingredient ingredient)

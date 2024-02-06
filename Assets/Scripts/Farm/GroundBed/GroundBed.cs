@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class GroundBed : MonoBehaviour
 {
-    [SerializeField] private GroundBedUI _UI;
+    [SerializeField] private GroundBedUIManager _UI;
     private IngredientChoiceUI _ingredientChoice;
     private IngredientType _acceptableType = IngredientType.None;
     private BedHolder _bedHolder;
@@ -58,13 +58,13 @@ public class GroundBed : MonoBehaviour
     public void SetBedType(BedHolder bedType)
     {
         _bedHolder = bedType;
-        _bedHolder.gameObject.SetActive(true);
+        _bedHolder.ChangeMode(true);
     }
 
     public void ResetBedType()
     {
         ResetIngredient();
-        _bedHolder.gameObject.SetActive(false);
+        _bedHolder.ChangeMode(false);
         _bedHolder = null;
     }
 
@@ -78,7 +78,7 @@ public class GroundBed : MonoBehaviour
     public void SetIngredient(Ingredient ingredient)
     {
         _plantedIngredient = ingredient;
-        _UI.UpdateIngredient(ingredient);
+        _UI.UpdateIngredient(ingredient, _bedHolder);
         _bedHolder.SetIngredient(ingredient);
         _growTime = ingredient.TimeGrow;
         _nowTime = 0;
