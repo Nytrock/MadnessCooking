@@ -23,8 +23,13 @@ public class HoldAddUI : MonoBehaviour
         _progressBar.value = progress;
     }
 
-    public void SetCountText(int count)
+    public virtual void SetCountText(int count)
     {
         _countText.text = count.ToString();
+    }
+
+    public virtual void SetCountText(int countRaw, int countReady)
+    {
+        _countText.text = countReady.ToString();
     }
 }

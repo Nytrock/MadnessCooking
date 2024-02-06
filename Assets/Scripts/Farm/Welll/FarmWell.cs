@@ -3,13 +3,13 @@ using UnityEngine;
 
 public class FarmWell : HoldAdd
 {
-    [SerializeField] private float _timeWait;
+    [SerializeField] private FarmCameraManager _cameraManager;
 
     public event Action<int> WaterAdded;
 
     protected override void Start()
     {
-        _progressMax = _timeWait;
+        _UI.SetCountText(_count);
         base.Start();
     }
 
@@ -17,6 +17,12 @@ public class FarmWell : HoldAdd
     {
         base.Add();
         WaterAdded?.Invoke(_count);
+    }
+
+    public override void ChangeWorkMode(bool newValue)
+    {
+        base.ChangeWorkMode(newValue);
+        _cameraManager.ChangeWorkMode(!_isWork);
     }
 
     public void SubtractWater()

@@ -3,7 +3,7 @@ using UnityEngine;
 public class HoldAdd : MonoBehaviour
 {
     [SerializeField] protected HoldAddUI _UI;
-    [SerializeField] private FarmCameraManager _cameraManager;
+    [SerializeField] private float _timeWait;
     private float _progressNow;
     protected float _progressMax;
     protected bool _isWork;
@@ -15,17 +15,17 @@ public class HoldAdd : MonoBehaviour
     {
         _isWork = false;
         _progressNow = 0;
+        _progressMax = _timeWait;
         _UI.SetSliderMax(_progressMax);
         _UI.ChangeUI(_isWork);
     }
 
-    public void ChangeWorkMode(bool newValue)
+    public virtual void ChangeWorkMode(bool newValue)
     {
         _isWork = newValue;
         _UI.ChangeUI(_isWork);
         if (!_isWork)
             _progressNow = 0;
-        _cameraManager.ChangeWorkMode(!_isWork);
     }
 
     private void Update()
