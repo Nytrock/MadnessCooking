@@ -1,9 +1,8 @@
 using TMPro;
-using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BedHolderUI : MonoBehaviour
+public class BedTypeHolderUI : MonoBehaviour
 {
     [SerializeField] private GameObject _UI;
     [SerializeField] private Image _icon;

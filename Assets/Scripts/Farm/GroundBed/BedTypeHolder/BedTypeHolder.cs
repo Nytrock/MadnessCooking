@@ -1,21 +1,29 @@
 using System.Collections;
 using UnityEngine;
 
-public class BedHolder : MonoBehaviour
+public class BedTypeHolder : MonoBehaviour
 {
     [SerializeField] private BedType _type;
     [SerializeField] private GroundBed _groundBed;
-    [SerializeField] private BedHolderUI _holderUI;
+    [SerializeField] private BedTypeHolderUI _holderUI;
+
     private Animator _animator;
     private string _name;
     private int _maxCount;
 
+    private StandardBedWater _water;
+    private StandardBedFertilize _fertilize;
+
     public BedType Type => _type;
-    public BedHolderUI HolderUI => _holderUI;
+    public BedTypeHolderUI HolderUI => _holderUI;
 
     private void Awake()
     {
         _animator = GetComponent<Animator>();
+        if (TryGetComponent(out _water))
+            _water.BoostEnded += _groundBed.StopWaterBuff;
+        if (TryGetComponent(out _fertilize))
+            _fertilize.BoostEnded += _groundBed.StopFertilizeBuff;
     }
 
     public void ChangeMode(bool newMode)
@@ -53,5 +61,23 @@ public class BedHolder : MonoBehaviour
         yield return new WaitForEndOfFrame();
         var animationLength = _animator.GetCurrentAnimatorStateInfo(0).length;
         _animator.SetFloat("growTime", 1 / timeGrow * animationLength);
+    }
+
+    public float GetWaterMultiplier()
+    {
+        if (_water == null)
+            return 1;
+
+        var multiplier = _water.StartBoost();
+        return multiplier;
+    }
+
+    public float GetFertilizeMultiptier()
+    {
+        if (_fertilize == null)
+            return 1;
+
+        var multiplier = _fertilize.StartBoost();
+        return multiplier;
     }
 }

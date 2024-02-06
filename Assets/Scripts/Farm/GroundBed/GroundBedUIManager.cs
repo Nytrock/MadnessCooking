@@ -5,7 +5,7 @@ using TMPro;
 public class GroundBedUIManager : MonoBehaviour
 {
     [SerializeField] private GroundBed _groundBed;
-    private BedHolderUI _nowUI;
+    private BedTypeHolderUI _nowUI;
 
     private BedChoice _bedChoice;
     private GroundBedUpgradeUI _upgrade;
@@ -47,7 +47,7 @@ public class GroundBedUIManager : MonoBehaviour
         _nowUI.UpdateCount(_groundBed.Count);
     }
 
-    public void UpdateIngredient(Ingredient ingredient, BedHolder _bedHolder)
+    public void UpdateIngredient(Ingredient ingredient, BedTypeHolder _bedHolder)
     {
         _nowUI = _bedHolder.HolderUI;
         _nowUI.UpdateIngredient(ingredient);

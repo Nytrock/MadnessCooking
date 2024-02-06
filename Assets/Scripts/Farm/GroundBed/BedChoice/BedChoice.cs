@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 [RequireComponent(typeof(GroundBed))]
 public class BedChoice : MonoBehaviour
 {
-    [SerializeField] private BedHolder[] _beds;
+    [SerializeField] private BedTypeHolder[] _beds;
     private BedChoiceUI _UI;
     private GroundBed _groundBed;
     private bool _isEmpty;
