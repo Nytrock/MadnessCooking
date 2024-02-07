@@ -9,5 +9,6 @@ public struct GroundBedSettings
     public FarmWell FarmWell;
     public Puncher Puncher;
     public PestsRemoverUI PestsRemoverUI;
+    public WheatManager WheatManager;
     public Car Car;
 }

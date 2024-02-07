@@ -8,14 +8,15 @@ public class GroundBed : MonoBehaviour
     private BedTypeHolder _bedHolder;
     private Ingredient _plantedIngredient;
     private Car _car;
+    private WheatManager _wheatManager;
 
     private float _growTime;
     private float _nowTime;
     private int _count;
     private bool _isFull;
 
-    [SerializeField] private float _waterBoost = 1;
-    [SerializeField] private float _fertilizeBoost = 1;
+    private float _waterBoost = 1;
+    private float _fertilizeBoost = 1;
 
     public IngredientType AcceptableType => _acceptableType;
     public BedType BedType => _bedHolder.Type;
@@ -80,6 +81,7 @@ public class GroundBed : MonoBehaviour
     {
         _ingredientChoice = settings.IngredientChoiceUI;
         _car = settings.Car;
+        _wheatManager = settings.WheatManager;
         _UI.Setup(settings);
     }
 
@@ -97,6 +99,13 @@ public class GroundBed : MonoBehaviour
         if (_count == 0)
             return;
 
+        if (_plantedIngredient.name == "Wheat") {
+            _wheatManager.AddWheat(_count);
+            _count = 0;
+            UpdateCount();
+            return;
+        }
+
         var carSpace = _car.GetSpace();
         if (carSpace == 0) {
             return;
@@ -110,6 +119,11 @@ public class GroundBed : MonoBehaviour
             _count = 0;
         }
 
+        UpdateCount();
+    }
+
+    private void UpdateCount()
+    {
         _UI.UpdateCount();
         _bedHolder.ResetAnimation(_isFull);
         _isFull = false;
@@ -128,10 +142,12 @@ public class GroundBed : MonoBehaviour
     public void StopWaterBuff(float newMultiplier)
     {
         _waterBoost = newMultiplier;
+        _bedHolder.BoostAnimationSpeed(newMultiplier);
     }
 
     public void StopFertilizeBuff(float newMultiplier)
     {
         _fertilizeBoost = newMultiplier;
+        _bedHolder.BoostAnimationSpeed(newMultiplier);
     }
 }

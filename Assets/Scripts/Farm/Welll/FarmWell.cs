@@ -5,18 +5,18 @@ public class FarmWell : HoldAdd
 {
     [SerializeField] private FarmCameraManager _cameraManager;
 
-    public event Action<int> WaterAdded;
+    public event Action<int> WaterChanged;
 
     protected override void Start()
     {
-        _UI.SetCountText(_count);
+        _UI.SetCountText(_readyCount);
         base.Start();
     }
 
     protected override void Add()
     {
         base.Add();
-        WaterAdded?.Invoke(_count);
+        WaterChanged?.Invoke(_readyCount);
     }
 
     public override void ChangeWorkMode(bool newValue)
@@ -27,7 +27,8 @@ public class FarmWell : HoldAdd
 
     public void SubtractWater()
     {
-        _count--;
-        _UI.SetCountText(_count);
+        _readyCount--;
+        _UI.SetCountText(_readyCount);
+        WaterChanged?.Invoke(_readyCount);
     }
 }

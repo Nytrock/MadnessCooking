@@ -53,13 +53,13 @@ public class GroundBedUIManager : MonoBehaviour
         _nowUI.UpdateIngredient(ingredient);
 
         if (_nowUI.IsSideButtonsWork) {
-            _farmWell.WaterAdded += CheckWater;
-            _puncher.FertilizeAdded += CheckFertilize;
+            _farmWell.WaterChanged += CheckWater;
+            _puncher.FertilizeChanged += CheckFertilize;
             CheckWater(_farmWell.Count);
             CheckFertilize(_puncher.Count);
         } else {
-            _farmWell.WaterAdded -= CheckWater;
-            _puncher.FertilizeAdded -= CheckFertilize;
+            _farmWell.WaterChanged -= CheckWater;
+            _puncher.FertilizeChanged -= CheckFertilize;
         }
     }
 

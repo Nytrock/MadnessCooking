@@ -7,9 +7,11 @@ public class HoldAdd : MonoBehaviour
     private float _progressNow;
     protected float _progressMax;
     protected bool _isWork;
-    protected int _count;
+    protected int _readyCount;
 
-    public int Count => _count;
+    protected bool _isAuto;
+
+    public int Count => _readyCount;
 
     protected virtual void Start()
     {
@@ -22,6 +24,9 @@ public class HoldAdd : MonoBehaviour
 
     public virtual void ChangeWorkMode(bool newValue)
     {
+        if (_isAuto)
+            return;
+
         _isWork = newValue;
         _UI.ChangeUI(_isWork);
         if (!_isWork)
@@ -30,9 +35,14 @@ public class HoldAdd : MonoBehaviour
 
     private void Update()
     {
-        if (!_isWork)
+        if (!_isWork && !_isAuto)
             return;
 
+        UpdateTimer();
+    }
+
+    protected virtual void UpdateTimer()
+    {
         if (_progressNow < _progressMax) {
             _progressNow += Time.deltaTime;
         } else {
@@ -45,7 +55,7 @@ public class HoldAdd : MonoBehaviour
     protected virtual void Add()
     {
         _progressNow = 0;
-        _count++;
-        _UI.SetCountText(_count);
+        _readyCount++;
+        _UI.SetCountText(_readyCount);
     }
 }

@@ -4,9 +4,9 @@ using UnityEngine.UI;
 
 public class HoldAddUI : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI _countText;
-    [SerializeField] private Slider _progressBar;
     [SerializeField] private GameObject _UI;
+    [SerializeField] private Slider _progressBar;
+    [SerializeField] private TextMeshProUGUI _countText;
 
     public void ChangeUI(bool isWork)
     {

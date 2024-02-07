@@ -1,41 +1,25 @@
 using System;
 
-public class Puncher : HoldAdd
+public class Puncher : HoldDoubleAdd
 {
-    private int _shitCount;
+    public event Action<int> FertilizeChanged;
 
-    public event Action<int> FertilizeAdded;
-
-    protected override void Start()
+    public void AddShit()
     {
-        _UI.SetCountText(_shitCount, _count);
-        base.Start();
+        _materialCount++;
+        _UI.SetCountText(_materialCount, _readyCount);
     }
 
     public void SubtractFertilize()
     {
-        _count--;
-        _UI.SetCountText(_shitCount, _count);
-    }
-
-    public override void ChangeWorkMode(bool newValue)
-    {
-        if (_shitCount == 0) {
-            _UI.ChangeUI(newValue);
-            return;
-        }
-
-        base.ChangeWorkMode(newValue);
+        _readyCount--;
+        _UI.SetCountText(_materialCount, _readyCount);
+        FertilizeChanged?.Invoke(_readyCount);
     }
 
     protected override void Add()
     {
-        _shitCount--;
-        _UI.SetCountText(_shitCount, _count);
         base.Add();
-        FertilizeAdded?.Invoke(_count);
-
-        if (_shitCount == 0)
-            _isWork = false;
+        FertilizeChanged?.Invoke(_readyCount);
     }
 }
