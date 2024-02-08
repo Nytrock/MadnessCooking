@@ -1,6 +1,4 @@
-using UnityEngine;
-
-public class CowUI :HoldDoubleAddUI
+public class CowUI : HoldDoubleAddUI
 {
 
 }

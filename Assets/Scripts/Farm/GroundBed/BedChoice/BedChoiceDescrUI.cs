@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class BedChoiceDescrUI : MonoBehaviour
 {
-    [SerializeField] private ItemInfoShowers _shower;
+    [SerializeField] private ItemInfoShower _shower;
     private bool _isActive;
 
     public void UpdateDescription(BedType bedType)

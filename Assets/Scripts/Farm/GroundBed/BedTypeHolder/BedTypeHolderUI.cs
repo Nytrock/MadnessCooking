@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class BedTypeHolderUI : MonoBehaviour
 {
     [SerializeField] private GameObject _UI;
-    [SerializeField] private ItemInfoShowers _shower;
+    [SerializeField] private ItemInfoShower _shower;
 
     [Header("Side buttons")]
     [SerializeField] private bool _isSideButtonsWork;

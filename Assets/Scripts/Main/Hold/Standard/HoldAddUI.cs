@@ -6,7 +6,7 @@ public class HoldAddUI : MonoBehaviour
 {
     [SerializeField] private GameObject _UI;
     [SerializeField] private Slider _progressBar;
-    [SerializeField] private TextMeshProUGUI _countText;
+    [SerializeField] private TextMeshProUGUI _readyCount;
 
     public void ChangeUI(bool isWork)
     {
@@ -25,11 +25,11 @@ public class HoldAddUI : MonoBehaviour
 
     public virtual void SetCountText(int count)
     {
-        _countText.text = count.ToString();
+        _readyCount.text = count.ToString();
     }
 
     public virtual void SetCountText(int countRaw, int countReady)
     {
-        _countText.text = countReady.ToString();
+        _readyCount.text = countReady.ToString();
     }
 }
