@@ -26,7 +26,7 @@ public class TechnicStandardPanel : TechnicPanel
     {
         var technic = _nowTechnic.Technic;
         _cooker = _nowTechnic.GetComponent<TechnicCooker>();
-        _icon.sprite = technic.MiniSprite;
+        _icon.sprite = technic.Icon;
         _name.text = technic.Name;
         UpdatePanels();
 

@@ -8,7 +8,7 @@ public class IngredientChoiceButton : ChoiceButton
     {
         _ingredient = newIngredient;
         gameObject.SetActive(true);
-        _icon.sprite = _ingredient.IngredientSprite;
+        _icon.sprite = _ingredient.Icon;
         GetComponent<Button>().onClick.AddListener(
             delegate { ui.Choice(ingredientIndex); }
             );

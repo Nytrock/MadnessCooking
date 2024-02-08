@@ -1,24 +1,17 @@
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
 
 public class BedChoiceDescrUI : MonoBehaviour
 {
-    [SerializeField] private Image _icon;
-    [SerializeField] private TextMeshProUGUI _name;
-    [SerializeField] private TextMeshProUGUI _descr;
-    [SerializeField] private TextMeshProUGUI _cost;
+    [SerializeField] private ItemInfoShowers _shower;
     private bool _isActive;
 
     public void UpdateDescription(BedType bedType)
     {
-        _icon.sprite = bedType.BedSprite;
-        _name.text = bedType.Name;
-        _descr.text = bedType.Description;
+        _shower.SetItemInfo(bedType);
         if (bedType.Cost > 0)
-            _cost.text = bedType.Cost.ToString();
+            _shower.SetCount(bedType.Cost.ToString());
         else
-            _cost.text = "Free";
+            _shower.SetCount("Free");
     }
 
     public void ChangeActive()

@@ -5,10 +5,7 @@ using UnityEngine.UI;
 public class BedTypeHolderUI : MonoBehaviour
 {
     [SerializeField] private GameObject _UI;
-    [SerializeField] private Image _icon;
-    [SerializeField] private TextMeshProUGUI _name;
-    [SerializeField] private TextMeshProUGUI _description;
-    [SerializeField] private TextMeshProUGUI _countText;
+    [SerializeField] private ItemInfoShowers _shower;
 
     [Header("Side buttons")]
     [SerializeField] private bool _isSideButtonsWork;
@@ -29,10 +26,8 @@ public class BedTypeHolderUI : MonoBehaviour
 
     public void UpdateIngredient(Ingredient ingredient)
     {
-        _icon.sprite = ingredient.IngredientSprite;
-        _name.text = ingredient.Name;
-        _description.text = ingredient.Description;
-        _countText.text = "0";
+        _shower.SetItemInfo(ingredient);
+        _shower.SetCount("0");
     }
 
     public void CheckWater(int count)
@@ -53,6 +48,6 @@ public class BedTypeHolderUI : MonoBehaviour
 
     public void UpdateCount(int count)
     {
-        _countText.text = count.ToString();
+        _shower.SetCount(count.ToString());
     }
 }

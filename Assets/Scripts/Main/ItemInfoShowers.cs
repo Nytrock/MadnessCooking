@@ -18,8 +18,8 @@ public class ItemInfoShowers
         _desctription.text = item.Description;
     }
 
-    public void SetCount(int count)
+    public void SetCount(string count)
     {
-        _count.text = count.ToString();
+        _count.text = count;
     }
 }

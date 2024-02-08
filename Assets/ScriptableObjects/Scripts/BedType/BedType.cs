@@ -4,5 +4,4 @@ using UnityEngine;
 public class BedType : BuyableObject
 {
     public IngredientType AcceptableType;
-    public Sprite BedSprite;
 }

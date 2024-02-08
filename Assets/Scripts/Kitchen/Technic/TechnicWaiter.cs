@@ -19,7 +19,7 @@ public class TechnicWaiter : MonoBehaviour
         _holder = GetComponent<TechnicHolder>();
     }
 
-    public void StartWork(float needTime)
+    public virtual void StartWork(float needTime)
     {
         _isWorking = true;
         _needTime = needTime;
@@ -33,10 +33,10 @@ public class TechnicWaiter : MonoBehaviour
         if (_nowTime < _needTime)
             _nowTime += Time.deltaTime * _speedMultiplier;
         else
-            EndWait();
+            EndWork();
     }
 
-    protected virtual void EndWait()
+    protected virtual void EndWork()
     {
         _isWorking = false;
         _nowTime = 0f;

@@ -10,7 +10,7 @@ public class OrderRecipePart : MonoBehaviour
     public void Setup(IngredientCount count, bool isHave)
     {
         gameObject.SetActive(true);
-        _icon.sprite = count.Ingredient.IngredientSprite;
+        _icon.sprite = count.Ingredient.Icon;
         _count.text = count.Count.ToString() + "x";
 
         if (isHave)
@@ -22,7 +22,7 @@ public class OrderRecipePart : MonoBehaviour
     public void Setup(Technic technic, bool isFree)
     {
         gameObject.SetActive(true);
-        _icon.sprite = technic.MiniSprite;
+        _icon.sprite = technic.Icon;
         _count.text = "1x";
 
         if (isFree)

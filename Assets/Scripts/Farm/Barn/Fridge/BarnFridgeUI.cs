@@ -29,11 +29,11 @@ public class BarnFridgeUI : MonoBehaviour
 
     private void UpdateMilkCount(int count)
     {
-        _milkShower.SetCount(count);
+        _milkShower.SetCount(count.ToString());
     }
 
     private void UpdateFlourCount(int count)
     {
-        _flourShower.SetCount(count);
+        _flourShower.SetCount(count.ToString());
     }
 }

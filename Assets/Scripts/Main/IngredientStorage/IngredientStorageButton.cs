@@ -9,7 +9,7 @@ public class IngredientStorageButton : MonoBehaviour
 
     public void SetVisual(IngredientCount count)
     {
-        _icon.sprite = count.Ingredient.IngredientSprite;
+        _icon.sprite = count.Ingredient.Icon;
         _count.text = count.Count.ToString();
         gameObject.SetActive(true);
     }

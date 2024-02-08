@@ -37,7 +37,7 @@ public class OrderButton : MonoBehaviour
         StartNewCycle();
         _order = order;
 
-        _icon.sprite = _order.Food.FoodSprite;
+        _icon.sprite = _order.Food.Icon;
         _title.text = _order.Food.Name;
         _tableCount.text = _order.TableNumber.ToString();
 

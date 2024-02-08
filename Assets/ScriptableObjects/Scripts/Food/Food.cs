@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Food : BuyableObject
 {
+    public FoodType Type;
     public Technic TypeTechnic;
-    public Sprite FoodSprite;
     public Sprite MiniSprite;
     public float TimeToCook;
     public float TimeToEat;

@@ -18,7 +18,7 @@ public class BedChoiceButton : ChoiceButton
         gameObject.SetActive(true);
         _type = newType;
         _cost = _type.Cost;
-        _icon.sprite = _type.BedSprite;
+        _icon.sprite = _type.Icon;
         GetComponent<Button>().onClick.AddListener(
             delegate { ui.Choice(typeIndex, _isBuyable); }
             );

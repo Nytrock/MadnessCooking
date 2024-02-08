@@ -12,7 +12,7 @@ public class BedTypeIngredientsShower : MonoBehaviour
         var ingredients = SaveManager.instance.GetIngredientsOfOneBedType(bedType);
         for (int i = 0; i < _ingredientImages.Length; i++) {
             if (i < ingredients.Count) {
-                _ingredientImages[i].sprite = ingredients[i].IngredientSprite;
+                _ingredientImages[i].sprite = ingredients[i].Icon;
                 if (_ingredientsManager.HaveIngredient(ingredients[i]))
                     _ingredientImages[i].material = null;
                 else

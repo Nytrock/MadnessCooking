@@ -4,6 +4,5 @@ using UnityEngine;
 
 public class Upgrade : BuyableObject
 {
-    public Sprite SpriteUpgrade;
     public UpgradeType TypeUpgrade;
 }

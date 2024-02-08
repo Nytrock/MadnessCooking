@@ -45,7 +45,7 @@ public class ClientUI : MonoBehaviour
 
     public void SetFood(Food food)
     {
-        _foodImage.sprite = food.FoodSprite;
+        _foodImage.sprite = food.Icon;
         _mainButton.onClick.RemoveAllListeners();
         _mainButton.onClick.AddListener(ChangeButtonsBlockVisible);
     }

@@ -1,8 +1,8 @@
 public class TechnicCooker : TechnicWaiter
 {
-    protected override void EndWait()
+    protected override void EndWork()
     {
         _holder.StopCook();
-        base.EndWait();
+        base.EndWork();
     }
 }
