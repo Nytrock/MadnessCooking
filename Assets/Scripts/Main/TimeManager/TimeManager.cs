@@ -5,6 +5,7 @@ public class TimeManager : MonoBehaviour
 {
     private TimeSpan _timespan = new(7, 0, 0);
     [SerializeField] private int _timeSpeed = 1;
+    private bool _isSkippingNight;
 
     private Daytime _daytime = Daytime.Morning;
     private Daytime _daytimeProperty
@@ -31,10 +32,28 @@ public class TimeManager : MonoBehaviour
     {
         _timespan = _timespan.Add(new TimeSpan(0, 0, 1 * _timeSpeed));
         switch (_timespan.Hours) {
-            case 4: _daytimeProperty = Daytime.Morning; break;
-            case 10: _daytimeProperty = Daytime.Day; break;
-            case 17: _daytimeProperty = Daytime.Evening; break;
-            case 22: _daytimeProperty = Daytime.Night; break;
+            case 4: 
+                _daytimeProperty = Daytime.Morning; 
+                if (_isSkippingNight) {
+                    _isSkippingNight = false;
+                    _timeSpeed = 1;
+                }
+                break;
+            case 10:
+                _daytimeProperty = Daytime.Day; 
+                break;
+            case 17: 
+                _daytimeProperty = Daytime.Evening; 
+                break;
+            case 22: 
+                _daytimeProperty = Daytime.Night; 
+                break;
         }
+    }
+
+    public void SkipNight()
+    {
+        _timeSpeed = 150;
+        _isSkippingNight = true;
     }
 }
