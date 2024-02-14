@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class LocationSlider : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     [SerializeField] protected CameraManager _cameraManager;
-    protected Slider _slider;
+    [SerializeField] protected Slider _slider;
 
     private float _startPosition;
     private float _endPosition;
@@ -14,18 +14,12 @@ public class LocationSlider : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
     private void Awake()
     {
-        _slider = GetComponent<Slider>();
+        _cameraManager.BordersFound += SetSliderValues;
     }
 
     private void Start()
     {
         _cameraManager.CameraMoved += ChangeSliderValue;
-        _cameraManager.BordersFound += SetSliderValues;
-    }
-
-    private void OnEnable()
-    {
-        SetSliderValues();
     }
 
     private void SetSliderValues() {

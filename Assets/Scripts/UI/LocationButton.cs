@@ -19,6 +19,6 @@ public class LocationButton : MonoBehaviour
 
     private void ChangeMode(Transform newPosition)
     {
-        _button.interactable = newPosition.position != _location.position;
+        _button.interactable = (Vector2)newPosition.position != (Vector2)_location.position;
     }
 }

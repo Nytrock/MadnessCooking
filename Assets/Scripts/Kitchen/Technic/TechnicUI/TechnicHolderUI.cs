@@ -5,6 +5,7 @@ public class TechnicHolderUI : MonoBehaviour
     [SerializeField] private Transform _targetPoint;
     [SerializeField] private TechnicStandardPanel _standardPanel;
     [SerializeField] private TechnicRepairPanel _repairPanel;
+    [SerializeField] private Camera _camera;
     private TechnicPanel _nowPanel;
     private TechnicHolder _nowTechnic;
 
@@ -35,7 +36,7 @@ public class TechnicHolderUI : MonoBehaviour
             else
                 _nowPanel = _standardPanel;
             _nowPanel.ChangeState(true);
-            _targetPoint.position = technic.UITarget.position;
+            _targetPoint.position = _camera.WorldToScreenPoint(technic.UITarget.position);
             _nowTechnic = technic;
         }
 

@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider2D))]
-public class KitchenStorageOpener : MonoBehaviour
+public class KitchenStorageActivator : UIActivator
 {
     [SerializeField] private KitchenStorageUI _kitchenStorage;
     private Animator _animator;
@@ -12,7 +12,7 @@ public class KitchenStorageOpener : MonoBehaviour
         _hasAnimation = TryGetComponent(out _animator);
     }
 
-    private void OnMouseDown()
+    protected override void Press()
     {
         _kitchenStorage.ChangePanelState();
         if (_hasAnimation)

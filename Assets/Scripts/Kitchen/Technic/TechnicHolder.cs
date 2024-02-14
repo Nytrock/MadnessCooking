@@ -63,7 +63,7 @@ public class TechnicHolder : MonoBehaviour
     public void StartRepair()
     {
         _isRepairing = true;
-        MoneyManager.instance.ChangeMoney(_technic.CostRepair);
+        MoneyManager.instance.ChangeMoney(-_technic.CostRepair);
         _repair.StartWork(_technic.TimeRepair);
     }
 

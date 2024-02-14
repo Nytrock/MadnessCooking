@@ -10,7 +10,7 @@ public class LocationManager : MonoBehaviour
 
     public void ChangeLocation(Transform newLocation)
     {
-        _mainCamera.position = newLocation.position;
+        _mainCamera.position = new Vector3(newLocation.position.x, newLocation.position.y, -10);
         LocationChanged?.Invoke(_mainCamera);
     }
 }

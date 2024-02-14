@@ -19,9 +19,9 @@ public class SpotEditorUI : MonoBehaviour
         _editor.SpotManager.SpotsPositionChanged += Move;
     }
 
-    public void ChangeUIState(bool _newState)
+    public void ChangeUIState(bool newState)
     {
-        _container.SetActive(_newState);
+        _container.SetActive(newState);
     }
 
     public void Move(float offset)

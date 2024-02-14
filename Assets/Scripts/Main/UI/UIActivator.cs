@@ -1,10 +1,9 @@
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider2D))]
-public class HoldActivator : MonoBehaviour
+public class UIActivator : MonoBehaviour
 {
     [SerializeField] private UIHoverListener _hoverListener;
-    [SerializeField] private HoldAdd _hold;
     private bool _isHover;
 
     private void Start()
@@ -22,16 +21,11 @@ public class HoldActivator : MonoBehaviour
         if (_isHover)
             return;
 
-        _hold.ChangeWorkMode(true);
+        Press();
     }
 
-    private void OnMouseExit()
+    protected virtual void Press()
     {
-        _hold.ChangeWorkMode(false);
-    }
 
-    private void OnMouseUp()
-    {
-        _hold.ChangeWorkMode(false);
     }
 }
