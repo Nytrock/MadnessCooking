@@ -1,20 +1,23 @@
+using System;
 using UnityEngine;
 
 public class GroundBedUIManager : MonoBehaviour
 {
-    [SerializeField] private GroundBed _groundBed;
-    private BedTypeHolderUI _nowUI;
+    [SerializeField] private BedTypeUI[] _bedsUI;
+    [SerializeField] private GroundBedUpgradeUI _upgrade;
+    [SerializeField] private FarmWell _farmWell;
+    [SerializeField] private Puncher _puncher;
+    [SerializeField] private PestsRemoverUI _pestsRemoverUI;
+    [SerializeField] private IngredientChoiceUI _ingredientChoice;
 
-    private BedChoice _bedChoice;
-    private GroundBedUpgradeUI _upgrade;
-    private FarmWell _farmWell;
-    private Puncher _puncher;
-    private PestsRemoverUI _pestsRemoverUI;
+    private GroundBed _groundBed;
+    private BedTypeUI _nowUI;
 
 
     private void Start()
     {
-        _bedChoice = _groundBed.GetComponent<BedChoice>();
+        _farmWell.WaterChanged += CheckWater;
+        _puncher.FertilizeChanged += CheckFertilize;
     }
 
     public void ChangeMode()
@@ -22,21 +25,17 @@ public class GroundBedUIManager : MonoBehaviour
         _nowUI.ChangeMode();
     }
 
-    public void Setup(GroundBedSettings settings)
-    {
-        _upgrade = settings.UpgradeUI;
-        _farmWell = settings.FarmWell;
-        _puncher = settings.Puncher;
-        _pestsRemoverUI = settings.PestsRemoverUI;
-    }
-
     private void CheckWater(int count)
     {
+        if (_nowUI == null) return;
+
         _nowUI.CheckWater(count);
     }
 
     private void CheckFertilize(int count)
     {
+        if (_nowUI == null) return;
+
         _nowUI.CheckFertilize(count);
     }
 
@@ -45,20 +44,46 @@ public class GroundBedUIManager : MonoBehaviour
         _nowUI.UpdateCount(_groundBed.Count);
     }
 
-    public void UpdateIngredient(Ingredient ingredient, BedTypeHolder _bedHolder)
+    public void ShowGroundBed(GroundBed groundBed)
     {
-        _nowUI = _bedHolder.HolderUI;
-        _nowUI.UpdateIngredient(ingredient);
+        if (_groundBed == groundBed) {
+            _nowUI.ChangeMode();
+            return;
+        }
+
+        if (_nowUI != null)
+            _nowUI.ChangeMode(false);
+
+        _nowUI = FindUI(groundBed.BedType);
+        _nowUI.UpdateInfo(groundBed);
+        _nowUI.ChangeMode(true);
+
+        if (_groundBed != null)
+            _groundBed.CountChanged -= UpdateCount;
+
+        transform.position = groundBed.transform.position;
+        _groundBed = groundBed;
+        _groundBed.CountChanged += UpdateCount;
 
         if (_nowUI.IsSideButtonsWork) {
-            _farmWell.WaterChanged += CheckWater;
-            _puncher.FertilizeChanged += CheckFertilize;
             CheckWater(_farmWell.Count);
             CheckFertilize(_puncher.Count);
-        } else {
-            _farmWell.WaterChanged -= CheckWater;
-            _puncher.FertilizeChanged -= CheckFertilize;
         }
+    }
+
+    private BedTypeUI FindUI(BedType bedType)
+    {
+        foreach (var bed in _bedsUI) {
+            if (bed.BedType == bedType)
+                return bed;
+        }
+
+        return null;
+    }
+
+    public void ActivateIngredientChoice(GroundBed groundBed)
+    {
+        _ingredientChoice.Activate(groundBed);
     }
 
     public void CollectIngredients()
@@ -69,14 +94,14 @@ public class GroundBedUIManager : MonoBehaviour
     public void ChangeBedType()
     {
         ChangeMode();
-        _bedChoice.ReactivateBedsChoice();
+        _groundBed.GetComponent<BedChoice>().ReactivateBedsChoice();
     }
 
     public void ChangeIngredient()
     {
         ChangeMode();
         _groundBed.ResetIngredient();
-        _groundBed.ActivateIngredientChoice();
+        _ingredientChoice.Activate(_groundBed);
     }
 
     public void OpenUpgradesPanel()
@@ -99,5 +124,11 @@ public class GroundBedUIManager : MonoBehaviour
     public void Pests() 
     {
         _pestsRemoverUI.Activate(_groundBed);
+    }
+
+    public void ForgiveBed(GroundBed groundBed)
+    {
+        if (_groundBed == groundBed)
+            _groundBed = null;
     }
 }

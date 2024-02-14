@@ -25,7 +25,7 @@ public class BedChoice : MonoBehaviour
 
     private void Start()
     {
-        if (_groundBed.AcceptableType == IngredientType.None) {
+        if (_groundBed.BedType == null) {
             _groundBed.enabled = false;
             _isEmpty = true;
         }

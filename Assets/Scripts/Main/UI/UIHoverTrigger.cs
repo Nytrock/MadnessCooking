@@ -14,4 +14,9 @@ public class UIHoverTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     {
         _hoverListener.HoverChange(false);
     }
+
+    public void OnDisable()
+    {
+        _hoverListener.HoverChange(false);
+    }
 }

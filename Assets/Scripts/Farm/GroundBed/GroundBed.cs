@@ -1,10 +1,10 @@
+using System;
 using UnityEngine;
 
 public class GroundBed : MonoBehaviour
 {
-    [SerializeField] private GroundBedUIManager _UI;
-    private IngredientChoiceUI _ingredientChoice;
-    private IngredientType _acceptableType = IngredientType.None;
+    private GroundBedUIManager _UI;
+    private BedType _bedType;
     private BedTypeHolder _bedHolder;
     private Ingredient _plantedIngredient;
     private Car _car;
@@ -18,16 +18,18 @@ public class GroundBed : MonoBehaviour
     private float _waterBoost = 1;
     private float _fertilizeBoost = 1;
 
-    public IngredientType AcceptableType => _acceptableType;
-    public BedType BedType => _bedHolder.Type;
+    public BedType BedType => _bedType;
+    public Ingredient Ingredient => _plantedIngredient;
     public int Count => _count;
+
+    public event Action CountChanged;
 
     public void MouseDown()
     {
         if (_plantedIngredient == null)
-            ActivateIngredientChoice();
+            _UI.ActivateIngredientChoice(this);
         else
-            _UI.ChangeMode();
+            _UI.ShowGroundBed(this);
     }
 
     private void Update()
@@ -39,16 +41,11 @@ public class GroundBed : MonoBehaviour
             _nowTime += Time.deltaTime * _waterBoost * _fertilizeBoost;
         } else {
             _count++;
-            _UI.UpdateCount();
+            CountChanged?.Invoke();
             _nowTime = 0;
             if (_count == _plantedIngredient.MaxCount)
                 _isFull = true;
         }
-    }
-
-    public void ActivateIngredientChoice()
-    {
-        _ingredientChoice.Activate(this);
     }
 
     public void ResetIngredient()
@@ -57,6 +54,7 @@ public class GroundBed : MonoBehaviour
         _count = 0;
         _isFull = false;
         _bedHolder.StopAnimation();
+        _UI.ForgiveBed(this);
     }
 
     public void SetBedType(BedTypeHolder bedType)
@@ -67,6 +65,7 @@ public class GroundBed : MonoBehaviour
             _waterBoost = 1;
 
         _bedHolder = bedType;
+        _bedType = _bedHolder.Type;
         _bedHolder.ChangeMode(true);
     }
 
@@ -75,20 +74,19 @@ public class GroundBed : MonoBehaviour
         ResetIngredient();
         _bedHolder.ChangeMode(false);
         _bedHolder = null;
+        _bedType = null;
     }
 
     public void Setup(GroundBedSettings settings)
     {
-        _ingredientChoice = settings.IngredientChoiceUI;
+        _UI = settings.UIManager;
         _car = settings.Car;
         _wheatManager = settings.WheatManager;
-        _UI.Setup(settings);
     }
 
     public void SetIngredient(Ingredient ingredient)
     {
         _plantedIngredient = ingredient;
-        _UI.UpdateIngredient(ingredient, _bedHolder);
         _bedHolder.SetIngredient(ingredient);
         _growTime = ingredient.TimeGrow;
         _nowTime = 0;
@@ -124,7 +122,7 @@ public class GroundBed : MonoBehaviour
 
     private void UpdateCount()
     {
-        _UI.UpdateCount();
+        CountChanged?.Invoke();
         _bedHolder.ResetAnimation(_isFull);
         _isFull = false;
     }

@@ -5,7 +5,6 @@ public class BedTypeHolder : MonoBehaviour
 {
     [SerializeField] private BedType _type;
     [SerializeField] private GroundBed _groundBed;
-    [SerializeField] private BedTypeHolderUI _holderUI;
 
     private Animator _animator;
     private string _name;
@@ -17,7 +16,6 @@ public class BedTypeHolder : MonoBehaviour
     private StandardBedFertilize _fertilize;
 
     public BedType Type => _type;
-    public BedTypeHolderUI HolderUI => _holderUI;
 
     private void Awake()
     {
