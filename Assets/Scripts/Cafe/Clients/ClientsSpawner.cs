@@ -19,13 +19,6 @@ public class ClientsSpawner : MonoBehaviour
     private bool _isSpawning = true;
     private bool _isOpen = true;
 
-    private ClientTimeMultiplier _timeMultiplier;
-
-    private void Awake()
-    {
-        _timeMultiplier = GetComponent<ClientTimeMultiplier>();
-    }
-
     private void Start()
     {
         _cafeOpener.CafeChanged += ChangeWorkMode;
@@ -76,8 +69,8 @@ public class ClientsSpawner : MonoBehaviour
     private void SetNewTime()
     {
         var popular = _popularityManager.GetPopularity();
-        var minTime = _minSpawnTime / popular * _timeMultiplier.DaytimeMultiplier;
-        var maxTime = _maxSpawnTime / popular * _timeMultiplier.DaytimeMultiplier;
+        var minTime = _minSpawnTime / popular;
+        var maxTime = _maxSpawnTime / popular;
 
         _needTime = Random.Range(minTime, maxTime);
         _nowTime = 0;
@@ -118,6 +111,7 @@ public class ClientsSpawner : MonoBehaviour
     private void ClientLeave(Client client)
     {
         _isSpawning = true;
+        _popularityManager.AddXp(10);
         _spotManager.ReturnSpot(client.Spot.Index);
     }
 
