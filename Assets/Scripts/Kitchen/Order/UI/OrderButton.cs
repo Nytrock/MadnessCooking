@@ -36,6 +36,7 @@ public class OrderButton : MonoBehaviour
     {
         StartNewCycle();
         _order = order;
+        _order.OrderFinished += FinishCook;
 
         _icon.sprite = _order.Food.Icon;
         _title.text = _order.Food.Name;
@@ -86,9 +87,6 @@ public class OrderButton : MonoBehaviour
     {
         _cookingSlider.SetActive(false);
         _finishText.SetActive(true);
-
-        _order.FinishCook();
-        _ordersUI.FinishCook(_order);
         _order = null;
     }
 }

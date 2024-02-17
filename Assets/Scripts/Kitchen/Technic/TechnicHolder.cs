@@ -11,6 +11,7 @@ public class TechnicHolder : MonoBehaviour
     private bool _isFree = true;
     private bool _isRepairing;
     private float _nowStrength;
+    private Order _nowOrder;
 
     private TechnicCooker _cooker;
     private TechnicRepair _repair;
@@ -35,19 +36,25 @@ public class TechnicHolder : MonoBehaviour
         _nowStrength = _technic.Strength;
     }
 
-    public void StartCook(Food food)
+    public void StartCook(Order order)
     {
         _isFree = false;
         _nowStrength = Mathf.Max(_nowStrength - Random.Range(1f, 2f), 0);
         _animator.SetBool("isCooking", true);
 
-        _cooker.StartWork(food.TimeToCook);
+        _nowOrder = order;
+        _cooker.StartWork(order.Food.TimeToCook);
     }
 
     public void StopCook()
     {
+        if (_isFree)
+            return;
+
         _isFree = true;
         _animator.SetBool("isCooking", false);
+        _nowOrder.FinishCook();
+        _nowOrder = null;
     }
 
     void OnMouseDown()

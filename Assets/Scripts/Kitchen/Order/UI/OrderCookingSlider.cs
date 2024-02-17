@@ -5,17 +5,11 @@ using UnityEngine.UI;
 public class OrderCookingSlider : MonoBehaviour
 {
     [SerializeField] private Slider _cookingSlider;
-    private OrderButton _cookButton;
     private bool _isCooking;
 
     private TechnicManager _technicManager;
     private TechnicHolder _technic;
     private TechnicCooker _cooker;
-
-    private void Awake()
-    {
-        _cookButton = GetComponent<OrderButton>();
-    }
 
     private void Update()
     {
@@ -27,7 +21,6 @@ public class OrderCookingSlider : MonoBehaviour
         } else {
             _isCooking = false;
             _technic = null;
-            _cookButton.FinishCook();
         }
     }
 

@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public class ClientUI : MonoBehaviour
 {
+    [SerializeField] private Animator _animator;
     [SerializeField] private GameObject _canvas;
     [SerializeField] private GameObject _buttonsBlock;
     [SerializeField] private Button _mainButton;
@@ -29,6 +30,7 @@ public class ClientUI : MonoBehaviour
         _mainButton.onClick.RemoveAllListeners();
         _mainButton.onClick.AddListener(_client.ActivateOrder);
         _foodImage.sprite = _defaultSprite;
+        _animator.SetBool("isFinished", false);
         ChangeSliderState(true);
         SetUIVisible(false);
     }
@@ -52,6 +54,7 @@ public class ClientUI : MonoBehaviour
 
     public void ActivateYesButton()
     {
+        _animator.SetBool("isFinished", true);
         _yesButton.interactable = true;
     }
 

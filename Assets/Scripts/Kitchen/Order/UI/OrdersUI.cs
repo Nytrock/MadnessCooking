@@ -23,6 +23,7 @@ public class OrdersUI : MonoBehaviour
 
     private void AddOrder(Order order)
     {
+        order.OrderFinished += UpdateRecipes;
         OrderButton button = _pool.GetObject();
         button.StartSetup(order);
         _orderButtons.Add(button);
@@ -38,12 +39,6 @@ public class OrdersUI : MonoBehaviour
     public void StartCook(Order order)
     {
         _manager.StartCook(order);
-        UpdateRecipes();
-    }
-
-    public void FinishCook(Order order)
-    {
-        _manager.FinishCook();
         UpdateRecipes();
     }
 

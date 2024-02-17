@@ -16,7 +16,7 @@ public class ClientEatingState : ClientState
 
     public override void ExitState()
     {
-
+        _client.ResetSpotTableFood();
     }
 
     public override void UpdateState()

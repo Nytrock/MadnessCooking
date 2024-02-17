@@ -23,10 +23,10 @@ public class TechnicManager : MonoBehaviour
         return holder.IsFree && holder.NowStrength != 0 && !holder.IsRepairing;
     }
 
-    public void ActivateTechnic(Food food)
+    public void ActivateTechnic(Order order)
     {
-        var technic = FindHolderByTechic(food.TypeTechnic);
-        technic.StartCook(food);
+        var technic = FindHolderByTechic(order.Food.TypeTechnic);
+        technic.StartCook(order);
     }
 
     public void DisableTechnic(Technic typeTechnic)

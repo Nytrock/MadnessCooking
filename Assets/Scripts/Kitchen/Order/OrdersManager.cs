@@ -11,7 +11,6 @@ public class OrdersManager : MonoBehaviour
 
     public event Action<Order> OrderAdded;
     public event Action<Order> OrderRemoved;
-    public event Action OrderFinished;
 
     public TechnicManager TechnicManager => _technicManager;
     public KitchenStorage KitchenStorage => _kitchenStorage;
@@ -24,16 +23,13 @@ public class OrdersManager : MonoBehaviour
     public void SetNewOrder(Client client, CafeSpot spot)
     {
         var food = _foodManager.GetRandomFood();
-        var order = new Order {
-            TableNumber = spot.Index + 1,
-            Food = food,
-        };
+        var order = new Order(food, spot.Index + 1);
 
         client.SetOrder(order);
         client.OrderActivated += AddOrder;
         client.ClientLeave += RemoveOrder;
         client.ClientEat += RemoveOrder;
-        OrderFinished += client.CheckOrder;
+        order.OrderFinished += client.CheckOrder;
     }
 
     private void AddOrder(Client client)
@@ -44,7 +40,6 @@ public class OrdersManager : MonoBehaviour
 
     private void RemoveOrder(Client client)
     {
-        OrderFinished -= client.CheckOrder;
         client.OrderActivated -= AddOrder;
         client.ClientLeave -= RemoveOrder;
         client.ClientEat -= RemoveOrder;
@@ -65,11 +60,6 @@ public class OrdersManager : MonoBehaviour
     public void StartCook(Order order)
     {
         _kitchenStorage.RemoveIngrediens(order.Food.Ingredients);
-        _technicManager.ActivateTechnic(order.Food);
-    }
-
-    public void FinishCook()
-    {
-        OrderFinished?.Invoke();
+        _technicManager.ActivateTechnic(order);
     }
 }

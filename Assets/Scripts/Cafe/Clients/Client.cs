@@ -134,7 +134,6 @@ public class Client : MonoBehaviour
 
     public void Pay()
     {
-        Spot.ResetTableFoodSprite(TableIndex);
         if (InGroup()) {
             Sit();
             _table.CheckTalk();
@@ -189,6 +188,11 @@ public class Client : MonoBehaviour
     public void SetSpotTableFood()
     {
         Spot.SetTableFoodSprite(Order.Food, TableIndex);
+    }
+
+    public void ResetSpotTableFood()
+    {
+        Spot.ResetTableFoodSprite(TableIndex);
     }
 
     public void ChangeSortingGroup(int newValue)
