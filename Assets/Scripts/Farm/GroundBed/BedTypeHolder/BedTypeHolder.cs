@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
 public class BedTypeHolder : MonoBehaviour
 {
     [SerializeField] private BedType _type;
+    [SerializeField] private PestsGenerator _pestsGenerator;
     [SerializeField] private GroundBed _groundBed;
 
     private Animator _animator;
@@ -24,11 +26,19 @@ public class BedTypeHolder : MonoBehaviour
             _water.BoostEnded += _groundBed.StopWaterBuff;
         if (TryGetComponent(out _fertilize))
             _fertilize.BoostEnded += _groundBed.StopFertilizeBuff;
+        _pestsGenerator.PestsChanged += _groundBed.ChangePestSlowdown;
     }
 
     public void ChangeMode(bool newMode)
     {
         gameObject.SetActive(newMode);
+        if (!newMode) {
+            if (_water != null)
+                _water.EndBoost();
+            if (_fertilize != null)
+                _fertilize.EndBoost();
+            _pestsGenerator.ChangeMode(false);
+        }
     }
 
     public void SetIngredient(Ingredient ingredient)
@@ -38,6 +48,7 @@ public class BedTypeHolder : MonoBehaviour
         _animator.Play(_name);
         _animator.SetInteger("leftCount", _maxCount);
         StartCoroutine(SetAnimationSpeed(ingredient.TimeGrow));
+        _pestsGenerator.ChangeMode(true);
     }
 
     public void ResetAnimation(bool isFull)
@@ -87,5 +98,10 @@ public class BedTypeHolder : MonoBehaviour
     public void BoostAnimationSpeed(float boost)
     {
         _animator.SetFloat("growTime", _animationSpeed * boost);
+    }
+
+    public PestsGenerator GetPests()
+    {
+        return _pestsGenerator;
     }
 }

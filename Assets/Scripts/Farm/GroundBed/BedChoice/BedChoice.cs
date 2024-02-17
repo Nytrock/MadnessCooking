@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(GroundBed))]
 public class BedChoice : MonoBehaviour
@@ -25,7 +24,7 @@ public class BedChoice : MonoBehaviour
 
     private void Start()
     {
-        if (_groundBed.BedType == null) {
+        if (!_groundBed.IsActive) {
             _groundBed.enabled = false;
             _isEmpty = true;
         }

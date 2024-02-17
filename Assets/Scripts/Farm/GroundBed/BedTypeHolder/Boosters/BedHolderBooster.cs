@@ -47,7 +47,7 @@ public class BedHolderBooster : MonoBehaviour
         return _boostMultiplier;
     }
 
-    protected virtual void EndBoost()
+    public virtual void EndBoost()
     {
         _isBoosting = false;
         ChangeSpriteAlpha(0);

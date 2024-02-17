@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class GroundBedUIManager : MonoBehaviour
@@ -123,7 +122,7 @@ public class GroundBedUIManager : MonoBehaviour
 
     public void Pests() 
     {
-        _pestsRemoverUI.Activate(_groundBed);
+        _pestsRemoverUI.Activate(_groundBed.BedType, _groundBed.GetPests());
     }
 
     public void ForgiveBed(GroundBed groundBed)

@@ -4,7 +4,6 @@ using UnityEngine;
 public class GroundBed : MonoBehaviour
 {
     private GroundBedUIManager _UI;
-    private BedType _bedType;
     private BedTypeHolder _bedHolder;
     private Ingredient _plantedIngredient;
     private Car _car;
@@ -14,13 +13,16 @@ public class GroundBed : MonoBehaviour
     private float _nowTime;
     private int _count;
     private bool _isFull;
+    private bool _isActive;
 
     private float _waterBoost = 1;
     private float _fertilizeBoost = 1;
+    private float _pestsSlowdown = 1;
 
-    public BedType BedType => _bedType;
+    public BedType BedType => _bedHolder.Type;
     public Ingredient Ingredient => _plantedIngredient;
     public int Count => _count;
+    public bool IsActive => _isActive;
 
     public event Action CountChanged;
 
@@ -38,7 +40,7 @@ public class GroundBed : MonoBehaviour
             return;
 
         if (_nowTime < _growTime) {
-            _nowTime += Time.deltaTime * _waterBoost * _fertilizeBoost;
+            _nowTime += Time.deltaTime * _waterBoost * _fertilizeBoost * _pestsSlowdown;
         } else {
             _count++;
             CountChanged?.Invoke();
@@ -65,7 +67,7 @@ public class GroundBed : MonoBehaviour
             _waterBoost = 1;
 
         _bedHolder = bedType;
-        _bedType = _bedHolder.Type;
+        _isActive = true;
         _bedHolder.ChangeMode(true);
     }
 
@@ -74,7 +76,7 @@ public class GroundBed : MonoBehaviour
         ResetIngredient();
         _bedHolder.ChangeMode(false);
         _bedHolder = null;
-        _bedType = null;
+        _isActive = false;
     }
 
     public void Setup(GroundBedSettings settings)
@@ -140,12 +142,28 @@ public class GroundBed : MonoBehaviour
     public void StopWaterBuff(float newMultiplier)
     {
         _waterBoost = newMultiplier;
-        _bedHolder.BoostAnimationSpeed(newMultiplier);
+        ChangeAnimationSpeed();
     }
 
     public void StopFertilizeBuff(float newMultiplier)
     {
         _fertilizeBoost = newMultiplier;
-        _bedHolder.BoostAnimationSpeed(newMultiplier);
+        ChangeAnimationSpeed();
+    }
+
+    public void ChangePestSlowdown(float coef)
+    {
+        _pestsSlowdown = coef;
+        ChangeAnimationSpeed();
+    }
+
+    private void ChangeAnimationSpeed()
+    {
+        _bedHolder.BoostAnimationSpeed(_fertilizeBoost * _waterBoost * _pestsSlowdown);
+    }
+
+    public PestsGenerator GetPests()
+    {
+        return _bedHolder.GetPests();
     }
 }

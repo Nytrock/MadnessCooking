@@ -50,6 +50,7 @@ public class ClientsSpawner : MonoBehaviour
             var table = spot.GetComponent<ClientGroupHolder>();
             for (int i = 0; i < spot.SeatsCount; i++) {
                 Client client = _pool.GetObject();
+                client.ClientEat += ClientEat;
                 table.AddClient(client);
                 SetupClient(client, spot, clientType, i);
             }
@@ -59,6 +60,7 @@ public class ClientsSpawner : MonoBehaviour
             Client client = _pool.GetObject();
             SetupClient(client, spot, clientType, 0);
             client.ClientLeave += ClientLeave;
+            client.ClientEat += ClientEat;
             client.StartNewCycle();
         }
 
@@ -111,8 +113,15 @@ public class ClientsSpawner : MonoBehaviour
     private void ClientLeave(Client client)
     {
         _isSpawning = true;
-        _popularityManager.AddXp(10);
         _spotManager.ReturnSpot(client.Spot.Index);
+
+        client.ClientLeave -= ClientLeave;
+        client.ClientEat -= ClientEat;
+    }
+
+    private void ClientEat(Client client)
+    {
+        _popularityManager.AddXp(10);
     }
 
     private void SetupClient(Client client, CafeSpot spot, ClientType clientType, int spotIndex)

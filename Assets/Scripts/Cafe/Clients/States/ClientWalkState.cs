@@ -25,7 +25,7 @@ public class ClientWalkState : ClientState
     public override void UpdateState()
     {
         _client.transform.position = Vector2.MoveTowards(_client.transform.position, _target.position, _speed * Time.deltaTime);
-        if (Vector3.Distance(_client.transform.position, _target.position) < 0.001f) {
+        if (Vector2.Distance(_client.transform.position, _target.position) < 0.001f) {
             if (_client.IsLeaving)
                 _client.Destroy();
             else
