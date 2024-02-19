@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class TimeShower : MonoBehaviour
+public abstract class TimeRenderer : MonoBehaviour
 {
     [SerializeField] protected TimeManager _timeManager;
 
@@ -9,8 +9,5 @@ public class TimeShower : MonoBehaviour
         UpdateVisual();
     }
 
-    protected virtual void UpdateVisual()
-    {
-
-    }
+    protected abstract void UpdateVisual();
 }

@@ -2970,7 +2970,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &136688650
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3664,6 +3664,7 @@ GameObject:
   - component: {fileID: 183653849}
   - component: {fileID: 183653848}
   - component: {fileID: 183653847}
+  - component: {fileID: 183653850}
   m_Layer: 5
   m_Name: Watch
   m_TagString: Untagged
@@ -3685,6 +3686,7 @@ RectTransform:
   m_Children:
   - {fileID: 1735995390}
   - {fileID: 220792662}
+  - {fileID: 505242684}
   m_Father: {fileID: 1646719849}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
@@ -3705,8 +3707,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _timeManager: {fileID: 1095035881}
+  _daytimeRenderer: {fileID: 183653850}
   _timeText: {fileID: 1735995391}
-  _daytimeText: {fileID: 220792663}
 --- !u!114 &183653848
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3745,6 +3747,33 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 183653845}
   m_CullTransparentMesh: 1
+--- !u!114 &183653850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 183653845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afd7bf6540554874886c0214ce83e637, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _daytimeIcon: {fileID: 505242685}
+  _daytimeText: {fileID: 220792663}
+  _daytimeInfos:
+  - _daytime: 0
+    _iconSprite: {fileID: 602249216, guid: 029d885571728bc439b5db28b4defc35, type: 3}
+    _textColor: {r: 0.21568629, g: 0.21568629, b: 0.21568629, a: 1}
+  - _daytime: 1
+    _iconSprite: {fileID: 1717604589, guid: 8072e444b91aabf4e9b5d1b7823c9183, type: 3}
+    _textColor: {r: 0.19215688, g: 0.3019608, b: 0.47450984, a: 1}
+  - _daytime: 2
+    _iconSprite: {fileID: -544774267, guid: 8072e444b91aabf4e9b5d1b7823c9183, type: 3}
+    _textColor: {r: 1, g: 1, b: 1, a: 1}
+  - _daytime: 3
+    _iconSprite: {fileID: -1783405924, guid: 8072e444b91aabf4e9b5d1b7823c9183, type: 3}
+    _textColor: {r: 0.20000002, g: 0.10588236, b: 0.08627451, a: 1}
 --- !u!1 &184710093
 GameObject:
   m_ObjectHideFlags: 0
@@ -4717,9 +4746,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 183653846}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -96.3, y: 27.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 141.7, y: 28.084}
   m_SizeDelta: {x: 170.2292, y: 42.1671}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &220792663
@@ -4776,7 +4805,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 4
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -10590,6 +10619,81 @@ MonoBehaviour:
   - {fileID: 594315333}
   _panel: {fileID: 1214176079}
   _pool: {fileID: 1355804876}
+--- !u!1 &505242683
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 505242684}
+  - component: {fileID: 505242686}
+  - component: {fileID: 505242685}
+  m_Layer: 5
+  m_Name: DaytimeImage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &505242684
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 505242683}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 183653846}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 28, y: 28}
+  m_SizeDelta: {x: 42, y: 42}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &505242685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 505242683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &505242686
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 505242683}
+  m_CullTransparentMesh: 1
 --- !u!1 &507211549
 GameObject:
   m_ObjectHideFlags: 0
@@ -22494,7 +22598,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c0e95232c04e4844b5f80f04351a6b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _timeSpeed: 1
+  _defaultTimeSpeed: 1
+  _boostedTimeSpeed: 150
+  _daytimeDescribers:
+  - _daytime: 0
+    _startHour: 6
+    _startMinute: 30
+  - _daytime: 1
+    _startHour: 10
+    _startMinute: 0
+  - _daytime: 2
+    _startHour: 17
+    _startMinute: 30
+  - _daytime: 3
+    _startHour: 22
+    _startMinute: 0
 --- !u!4 &1095035882
 Transform:
   m_ObjectHideFlags: 0

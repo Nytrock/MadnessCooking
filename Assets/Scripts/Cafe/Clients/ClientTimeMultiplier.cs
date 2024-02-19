@@ -4,7 +4,7 @@ public class ClientTimeMultiplier : MonoBehaviour
 {
     [SerializeField] private TimeManager _timeManager;
 
-    [Header("Значения множителя")]
+    [Header("Multiplier")]
     [SerializeField] private float _morning = 1;
     [SerializeField] private float _day = 1;
     [SerializeField] private float _evening = 1;
