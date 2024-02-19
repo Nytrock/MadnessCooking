@@ -43,7 +43,7 @@ public class PopularityManager : MonoBehaviour
         _nowXp = Mathf.Max(0, _nowXp - xp);
     }
 
-    private void NextLevel()
+    public void NextLevel()
     {
         _nowLevel++;
         LevelChanged?.Invoke(_levels[_nowLevel]);
@@ -51,12 +51,6 @@ public class PopularityManager : MonoBehaviour
         if (_levels.Length == _nowLevel + 1) {
             _isMaxLevel = true;
         }
-    }
-
-    public void InstantLevel()
-    {
-        _nowXp = 0;
-        NextLevel();
     }
 
     public void PreviousLevel()

@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(PopularityManager))]
-public class PopularityCalculate : MonoBehaviour
+public class PopularityCalculator : MonoBehaviour
 {
     [SerializeField] private ClientTimeMultiplier _timeMultiplier;
     [SerializeField] private CafeSpaceManager _spaceManager;

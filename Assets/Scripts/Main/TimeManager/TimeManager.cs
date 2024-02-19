@@ -6,7 +6,7 @@ public class TimeManager : MonoBehaviour
     [SerializeField] private int _defaultTimeSpeed = 1;
     [SerializeField] private int _boostedTimeSpeed = 150;
 
-    [SerializeField] private DaytimeDescriber[] _daytimeDescribers;
+    [SerializeField] private DaytimeStart[] _daytimeStarts;
 
     private TimeSpan _timespan = new(7, 0, 0);
     private int _timeSpeed;
@@ -15,6 +15,7 @@ public class TimeManager : MonoBehaviour
     private Daytime _daytime = Daytime.Morning;
 
     public TimeSpan TimeSpan => _timespan;
+    public int TimeSpeed => _timeSpeed;
 
     public event Action<Daytime> DaytimeChanged;
 
@@ -28,9 +29,9 @@ public class TimeManager : MonoBehaviour
     {
         _timespan = _timespan.Add(new TimeSpan(0, 0, 1 * _timeSpeed));
 
-        foreach (var describer in _daytimeDescribers) {
-            if (describer.TimeFits(_timespan, _daytime)) {
-                ChangeDaytime(describer.Daytime);
+        foreach (var daytimeStart in _daytimeStarts) {
+            if (daytimeStart.TimeFits(_timespan, _daytime)) {
+                ChangeDaytime(daytimeStart.Daytime);
                 return;
             }
         }
@@ -51,5 +52,13 @@ public class TimeManager : MonoBehaviour
     {
         _timeSpeed = _boostedTimeSpeed;
         _isSkippingNight = true;
+    }
+
+    public DaytimeStart GetDaytimeStartInfo(Daytime daytime)
+    {
+        foreach (var daytimeStart in _daytimeStarts)
+            if (daytimeStart.Daytime == daytime)
+                return daytimeStart;
+        return null;
     }
 }

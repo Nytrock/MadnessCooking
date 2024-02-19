@@ -4,7 +4,7 @@ using UnityEngine;
 public class ClientsSpawner : MonoBehaviour
 {
     [SerializeField] private Transform _spawnPoint;
-    [SerializeField] private PopularityCalculate _popularityCalculate;
+    [SerializeField] private PopularityCalculator _popularityCalculate;
     [SerializeField] private CafeOpener _cafeOpener;
     [SerializeField] private CafeSpaceManager _spaceManager;
     [SerializeField] private CafeSpotManager _spotManager;
@@ -19,6 +19,7 @@ public class ClientsSpawner : MonoBehaviour
     private float _nowTime;
     private bool _isSpawning = true;
     private bool _isOpen = true;
+    private bool _isWaitingCritic;
 
     private PopularityXpAdder _xpAdder;
 
@@ -100,6 +101,9 @@ public class ClientsSpawner : MonoBehaviour
 
     private ClientType GetRandomType()
     {
+        if (_isWaitingCritic)
+            return ClientType.Critic;
+
         _popularityCalculate.GetClientsNumberChances(out int singleChance, out int doubleChance, out int tripleChance, out int quarterChance);
         var number = Random.Range(1, 1001);
         if (number <= singleChance) {
@@ -143,5 +147,10 @@ public class ClientsSpawner : MonoBehaviour
         client.SetTargets(spot.GetTarget(spotIndex), _spawnPoint);
         client.SetPool(_pool);
         _ordersManager.SetNewOrder(client, spot);
+    }
+
+    public void ChangeCriticWait(bool newValue)
+    {
+        _isWaitingCritic = newValue;
     }
 }
