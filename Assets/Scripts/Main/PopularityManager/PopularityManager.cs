@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class PopularityManager : MonoBehaviour
 {
-    [SerializeField] private CafeSpaceManager _spaceManager;
-    [SerializeField] private ClientTimeMultiplier _timeMultiplier;
     [SerializeField] private PopularityLevel[] _levels;
     private int _nowLevel;
     private int _nowXp;
@@ -22,24 +20,6 @@ public class PopularityManager : MonoBehaviour
         LevelChanged?.Invoke(_levels[_nowLevel]);
     }
 
-    public float GetPopularity()
-    {
-        return _levels[_nowLevel].PopularityMultiplier * _timeMultiplier.DaytimeMultiplier;
-    }
-
-    public void GetClientsNumberChances(out int singleChance, out int doubleChance, out int tripleChance, out int quarterChance)
-    {
-        singleChance = (int)(_levels[_nowLevel].SingleChance * 10);
-        doubleChance = (int)(_levels[_nowLevel].DoubleChance * 10);
-        tripleChance = (int)(_levels[_nowLevel].TripleChance * 10);
-        quarterChance = (int)(_levels[_nowLevel].QuarterChance * 10);
-
-        doubleChance += singleChance;
-        tripleChance += doubleChance;
-        quarterChance += tripleChance;
-    }
-
-
     [ContextMenu("AddXp")]
     public void TextAddXp()
     {
@@ -50,10 +30,17 @@ public class PopularityManager : MonoBehaviour
     {
         _nowXp += xp;
         if (_nowXp >= _levels[_nowLevel].NeedXp && !_isMaxLevel) {
-            NextLevel();
-            _nowXp = 0;
+            while (_nowXp >= _levels[_nowLevel].NeedXp) {
+                _nowXp -= _levels[_nowLevel].NeedXp;
+                NextLevel();
+            }
         }
         XpChanged?.Invoke(_nowXp);
+    }
+
+    public void RemoveXp(int xp)
+    {
+        _nowXp = Mathf.Max(0, _nowXp - xp);
     }
 
     private void NextLevel()
@@ -66,8 +53,19 @@ public class PopularityManager : MonoBehaviour
         }
     }
 
-    public float GetSpaceMultiplier()
+    public void InstantLevel()
     {
-        return Mathf.Max(1, _spaceManager.SpaceCount * 0.375f);
+        _nowXp = 0;
+        NextLevel();
+    }
+
+    public void PreviousLevel()
+    {
+        _nowLevel--;
+        LevelChanged?.Invoke(_levels[_nowLevel]);
+        _isMaxLevel = false;
+
+        if (_nowXp >= _levels[_nowLevel].NeedXp)
+            _nowXp = _levels[_nowLevel].NeedXp / 2;
     }
 }

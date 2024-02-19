@@ -20,10 +20,10 @@ public class Client : MonoBehaviour
 
     [SerializeField] private Transform _skin;
     [SerializeField] private SortingGroup _sortingGroup;
-    [SerializeField] private float _waitTime;
+    [SerializeField] private float _minWaitTime;
+    [SerializeField] private float _maxWaitTime;
 
     private ClientUI _clientUI;
-    private ClientType _clientType;
     private ClientsPool _pool;
     private ClientGroupHolder _table;
 
@@ -34,6 +34,7 @@ public class Client : MonoBehaviour
     public Order Order { get; private set; }
     public int TableIndex { get; private set; }
     public CafeSpot Spot { get; private set; }
+    public ClientType ClientType { get; private set; }
 
     public event Action<Client> OrderActivated;
     public event Action<Client> ClientLeave;
@@ -89,7 +90,7 @@ public class Client : MonoBehaviour
 
     public void SetType(ClientType clientType)
     {
-        _clientType = clientType;
+        ClientType = clientType;
     }
 
     public void SetOrder(Order order)
@@ -138,7 +139,10 @@ public class Client : MonoBehaviour
             Sit();
             _table.CheckTalk();
         } else {
-            MoneyManager.instance.ChangeMoney(Order.Food.MoneyGet);
+            if (ClientType == ClientType.Rich)
+                MoneyManager.instance.ChangeMoney(Order.Food.MoneyGet * 10);
+            else
+                MoneyManager.instance.ChangeMoney(Order.Food.MoneyGet);
             Leave();
         }
     }
@@ -202,13 +206,13 @@ public class Client : MonoBehaviour
 
     public float GetWaitTime()
     {
-        return _waitTime * WaitMultiplier * UnityEngine.Random.Range(0.8f, 1.1f);
+        return WaitMultiplier * UnityEngine.Random.Range(_minWaitTime, _maxWaitTime);
     }
 
     public bool InGroup()
     {
-        return _clientType == ClientType.Double || _clientType == ClientType.Triple ||
-            _clientType == ClientType.Quarter;
+        return ClientType == ClientType.Double || ClientType == ClientType.Triple ||
+            ClientType == ClientType.Quarter;
     }
 
     public void DisableWait()

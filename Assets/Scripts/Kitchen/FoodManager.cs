@@ -3,7 +3,9 @@ using UnityEngine;
 
 public class FoodManager : MonoBehaviour
 {
-    [SerializeField] private List<Food> _availableFood;
+    [SerializeField] private List<Food> _availableFood = new List<Food>();
+
+    public int FoodCount => _availableFood.Count;
 
     public Food GetRandomFood()
     {

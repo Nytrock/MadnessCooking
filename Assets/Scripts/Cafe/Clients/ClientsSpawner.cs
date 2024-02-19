@@ -1,9 +1,10 @@
 using UnityEngine;
 
+[RequireComponent(typeof(PopularityXpAdder))]
 public class ClientsSpawner : MonoBehaviour
 {
     [SerializeField] private Transform _spawnPoint;
-    [SerializeField] private PopularityManager _popularityManager;
+    [SerializeField] private PopularityCalculate _popularityCalculate;
     [SerializeField] private CafeOpener _cafeOpener;
     [SerializeField] private CafeSpaceManager _spaceManager;
     [SerializeField] private CafeSpotManager _spotManager;
@@ -18,6 +19,13 @@ public class ClientsSpawner : MonoBehaviour
     private float _nowTime;
     private bool _isSpawning = true;
     private bool _isOpen = true;
+
+    private PopularityXpAdder _xpAdder;
+
+    private void Awake()
+    {
+        _xpAdder = GetComponent<PopularityXpAdder>();
+    }
 
     private void Start()
     {
@@ -70,7 +78,7 @@ public class ClientsSpawner : MonoBehaviour
 
     private void SetNewTime()
     {
-        var popular = _popularityManager.GetPopularity();
+        var popular = _popularityCalculate.GetPopularity();
         var minTime = _minSpawnTime / popular;
         var maxTime = _maxSpawnTime / popular;
 
@@ -92,7 +100,7 @@ public class ClientsSpawner : MonoBehaviour
 
     private ClientType GetRandomType()
     {
-        _popularityManager.GetClientsNumberChances(out int singleChance, out int doubleChance, out int tripleChance, out int quarterChance);
+        _popularityCalculate.GetClientsNumberChances(out int singleChance, out int doubleChance, out int tripleChance, out int quarterChance);
         var number = Random.Range(1, 1001);
         if (number <= singleChance) {
             number = Random.Range(1, 10001);
@@ -114,6 +122,7 @@ public class ClientsSpawner : MonoBehaviour
     {
         _isSpawning = true;
         _spotManager.ReturnSpot(client.Spot.Index);
+        _xpAdder.RemoveXp(client.ClientType);
 
         client.ClientLeave -= ClientLeave;
         client.ClientEat -= ClientEat;
@@ -121,7 +130,7 @@ public class ClientsSpawner : MonoBehaviour
 
     private void ClientEat(Client client)
     {
-        _popularityManager.AddXp(10);
+        _xpAdder.AddXp(client.ClientType);
     }
 
     private void SetupClient(Client client, CafeSpot spot, ClientType clientType, int spotIndex)
@@ -130,7 +139,7 @@ public class ClientsSpawner : MonoBehaviour
         _cafeOpener.CafeChanged += client.Leave;
         client.SetType(clientType);
         client.SetSpot(spot, spotIndex);
-        client.SetWaitingtime(_popularityManager.GetSpaceMultiplier());
+        client.SetWaitingtime(_popularityCalculate.GetSpaceMultiplier());
         client.SetTargets(spot.GetTarget(spotIndex), _spawnPoint);
         client.SetPool(_pool);
         _ordersManager.SetNewOrder(client, spot);

@@ -13,17 +13,22 @@ public class KitchenStorage : IngredientStorage
         IngredientsAdded?.Invoke();
     }
 
-    public void AddIngrediens(IngredientCountList countList)
+    public void AddIngredients(IngredientCountList countList)
     {
         for (int i = 0; i < countList.Size; i++)
             PutIngredient(countList.Get(i));
         IngredientsAdded?.Invoke();
     }
 
-    public void RemoveIngrediens(IngredientCount[] countList)
+    public void RemoveIngredients(IngredientCount[] countList)
     {
         for (int i = 0; i < countList.Length; i++)
             _ingredients.Remove(countList[i]);
         IngredientsAdded?.Invoke();
+    }
+
+    public void RemoveAll()
+    {
+        _ingredients.Clear();
     }
 }

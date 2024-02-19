@@ -34,6 +34,12 @@ public class OrdersManager : MonoBehaviour
 
     private void AddOrder(Client client)
     {
+        if (client.ClientType == ClientType.GrayMan) {
+            _kitchenStorage.RemoveAll();
+            SaveManager.instance.SaveAll();
+            Application.Quit();
+        }
+
         _orders.Add(client.Order);
         OrderAdded?.Invoke(client.Order);
     }
@@ -59,7 +65,7 @@ public class OrdersManager : MonoBehaviour
 
     public void StartCook(Order order)
     {
-        _kitchenStorage.RemoveIngrediens(order.Food.Ingredients);
+        _kitchenStorage.RemoveIngredients(order.Food.Ingredients);
         _technicManager.ActivateTechnic(order);
     }
 }

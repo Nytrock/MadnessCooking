@@ -20,6 +20,11 @@ public class SaveManager : MonoBehaviour
         Cursor.SetCursor(cursor, Vector2.zero, CursorMode.ForceSoftware);
     }
 
+    public void SaveAll()
+    {
+
+    }
+
     public List<Ingredient> GetIngredientsOfOneBedType(BedType bedType)
     {
         var result = new List<Ingredient>();
