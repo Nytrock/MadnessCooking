@@ -7,6 +7,8 @@ public class LocationButton : MonoBehaviour
     [SerializeField] private LocationManager _locationManager;
     [SerializeField] private Transform _location;
 
+    public Transform Location => _location;
+
     private Button _button;
 
     private void Start()

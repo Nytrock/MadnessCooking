@@ -11,7 +11,7 @@ public class MoneyManager : MonoBehaviour
 
     public event Action<int> MoneyChanged;
 
-    private void Start()
+    private void Awake()
     {
         instance = this;
     }

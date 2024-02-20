@@ -4,8 +4,8 @@ using UnityEngine;
 public class ClientsPool : MonoBehaviour
 {
     [SerializeField] private Client _prefab;
-    [SerializeField] private Transform _container;
 
+    private Transform _container;
     private Queue<Client> _pool;
 
     private void Awake()

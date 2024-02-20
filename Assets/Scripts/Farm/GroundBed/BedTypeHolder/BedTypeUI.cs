@@ -6,7 +6,7 @@ public class BedTypeUI : MonoBehaviour
 {
     [SerializeField] private BedType _bedType;
     [SerializeField] private GameObject _UI;
-    [SerializeField] private ItemInfoShower _shower;
+    [SerializeField] private ItemInfoRenderer _shower;
 
     [Header("Side buttons")]
     [SerializeField] private bool _isSideButtonsWork;

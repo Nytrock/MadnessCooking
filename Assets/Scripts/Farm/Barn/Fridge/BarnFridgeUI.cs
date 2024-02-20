@@ -4,8 +4,8 @@ public class BarnFridgeUI : MonoBehaviour
 {
     [SerializeField] private GameObject _panel;
     [SerializeField] private BarnFridge _barnFridge;
-    [SerializeField] private ItemInfoShower _milkShower;
-    [SerializeField] private ItemInfoShower _flourShower;
+    [SerializeField] private ItemInfoRenderer _milkShower;
+    [SerializeField] private ItemInfoRenderer _flourShower;
 
 
     [SerializeField] private Ingredient _milk;

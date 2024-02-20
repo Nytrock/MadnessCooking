@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider2D))]
-public class UIActivator : MonoBehaviour
+public abstract class UIActivator : MonoBehaviour
 {
     [SerializeField] private UIHoverListener _hoverListener;
     private bool _isHover;
@@ -24,8 +24,5 @@ public class UIActivator : MonoBehaviour
         Press();
     }
 
-    protected virtual void Press()
-    {
-
-    }
+    protected abstract void Press();
 }

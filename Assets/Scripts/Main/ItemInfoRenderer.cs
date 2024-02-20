@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using TMPro;
 
 [Serializable]
-public class ItemInfoShower
+public class ItemInfoRenderer
 {
     [SerializeField] private Image _icon;
     [SerializeField] private TextMeshProUGUI _count;

@@ -7,7 +7,7 @@ public class ChickensUI : MonoBehaviour
     [SerializeField] private GameObject _panel;
     [SerializeField] private GameObject _feedButton;
     [SerializeField] private Slider _eggSlider;
-    [SerializeField] private ItemInfoShower _eggShower;
+    [SerializeField] private ItemInfoRenderer _eggShower;
     [SerializeField] private Ingredient _egg;
 
     private void Start()

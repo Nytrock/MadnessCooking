@@ -20,4 +20,9 @@ public class IngredientsManager : MonoBehaviour
                 result.Add(ingredient);
         return result;
     }
+
+    public void AddIngredient(Ingredient ingredient)
+    {
+        _haveIngredients.Add(ingredient);
+    }
 }

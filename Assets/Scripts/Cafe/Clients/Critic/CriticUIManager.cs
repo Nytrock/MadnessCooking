@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class CriticUIManager : MonoBehaviour
 {
-    [SerializeField] private GameObject _mainUI;
-    [SerializeField] private GameObject _canvas;
+    [SerializeField] private Canvas _mainUI;
+    [SerializeField] private GameObject _criticCanvas;
     [SerializeField] private GameObject _panelStartWait;
     [SerializeField] private GameObject _panelSuccess;
     [SerializeField] private GameObject _panelFailure;
@@ -35,7 +35,7 @@ public class CriticUIManager : MonoBehaviour
 
     private void ChangeUIs(bool value)
     {
-        _mainUI.SetActive(!value);
-        _canvas.SetActive(value);
+        _mainUI.enabled = !value;
+        _criticCanvas.SetActive(value);
     }
 }
