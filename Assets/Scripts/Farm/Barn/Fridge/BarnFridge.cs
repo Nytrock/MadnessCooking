@@ -40,10 +40,10 @@ public class BarnFridge : MonoBehaviour
 
     private void MoveToCar(int carSpace, ref int count, Ingredient ingredient) {
         if (carSpace < count) {
-            _car.PutIngredient(carSpace, ingredient);
+            _car.PutIngredient(new IngredientCount(ingredient, carSpace));
             count -= carSpace;
         } else {
-            _car.PutIngredient(count, ingredient);
+            _car.PutIngredient(new IngredientCount(ingredient, count));
             count = 0;
         }
     }

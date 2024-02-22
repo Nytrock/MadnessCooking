@@ -34,7 +34,7 @@ public class CarWaitManager : MonoBehaviour
                 _isWait = true;
                 _car.Return();
             } else {
-                _kitchenStorage.AddIngredients(_ingredientsSended);
+                _kitchenStorage.PutIngredients(_ingredientsSended);
                 _nowTime = 0;
                 _isSended = true;
             }

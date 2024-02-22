@@ -112,10 +112,10 @@ public class GroundBed : MonoBehaviour
         }
 
         if (carSpace < _count) {
-            _car.PutIngredient(carSpace, _plantedIngredient);
+            _car.PutIngredient(new IngredientCount(_plantedIngredient, carSpace));
             _count -= carSpace;
         } else {
-            _car.PutIngredient(_count, _plantedIngredient);
+            _car.PutIngredient(new IngredientCount(_plantedIngredient, _count));
             _count = 0;
         }
 

@@ -13,11 +13,12 @@ public class IngredientStorageButtonPool : MonoBehaviour
         _pool = new Queue<IngredientStorageButton>();
     }
 
-    public IngredientStorageButton GetObject()
+    public IngredientStorageButton GetObject(IngredientCount count)
     {
         if (_pool.Count == 0) {
             var button = Instantiate(_prefab, _container);
             button.gameObject.SetActive(false);
+            button.SetVisual(count);
             _pool.Enqueue(button);
         }
 

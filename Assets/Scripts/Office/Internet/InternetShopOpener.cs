@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class InternetShopOpener : MonoBehaviour
 {
     [SerializeField] private InternetDownload _download;
-    [SerializeField] private BaseInternetShop _internetShop;
+    [SerializeField] private BaseShop _internetShop;
 
     private void Start()
     {

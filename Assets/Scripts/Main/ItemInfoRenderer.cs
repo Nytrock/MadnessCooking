@@ -18,7 +18,7 @@ public class ItemInfoRenderer
         _desctription.text = item.Description;
     }
 
-    public void SetCount(string count)
+    public void SetCountText(string count)
     {
         _count.text = count;
     }

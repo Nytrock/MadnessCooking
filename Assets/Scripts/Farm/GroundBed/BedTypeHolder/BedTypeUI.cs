@@ -35,7 +35,7 @@ public class BedTypeUI : MonoBehaviour
     public void UpdateInfo(GroundBed groundBed)
     {
         _shower.SetItemInfo(groundBed.Ingredient);
-        _shower.SetCount(groundBed.Count.ToString());
+        _shower.SetCountText(groundBed.Count.ToString());
     }
 
     public void CheckWater(int count)
@@ -56,6 +56,6 @@ public class BedTypeUI : MonoBehaviour
 
     public void UpdateCount(int count)
     {
-        _shower.SetCount(count.ToString());
+        _shower.SetCountText(count.ToString());
     }
 }

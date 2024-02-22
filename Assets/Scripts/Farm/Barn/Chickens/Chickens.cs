@@ -53,7 +53,7 @@ public class Chickens : MonoBehaviour
 
     public void EggsToCar(Ingredient egg)
     {
-        _car.PutIngredient(_eggCount, egg);
+        _car.PutIngredient(new IngredientCount(egg, _eggCount));
         _eggCount = 0;
         EggChanged?.Invoke(_eggCount);
     }

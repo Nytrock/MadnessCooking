@@ -4,31 +4,36 @@ using UnityEngine;
 public class KitchenStorage : IngredientStorage
 {
     [SerializeField] private Ingredient _lemon;
-    public event Action IngredientsAdded;
+    public event Action IngredientsChanged;
 
     [ContextMenu("AddLemon")]
     public void AddLemon()
     {
-        PutIngredient(new IngredientCount { Ingredient = _lemon, Count = 2});
-        IngredientsAdded?.Invoke();
+        PutIngredient(new IngredientCount(_lemon, 2));
+        IngredientsChanged?.Invoke();
     }
 
-    public void AddIngredients(IngredientCountList countList)
+    public override void PutIngredients(IngredientCountList newElementsList)
     {
-        for (int i = 0; i < countList.Size; i++)
-            PutIngredient(countList.Get(i));
-        IngredientsAdded?.Invoke();
+        base.PutIngredients(newElementsList);
+        IngredientsChanged?.Invoke();
     }
 
-    public void RemoveIngredients(IngredientCount[] countList)
+    public override void PutIngredient(IngredientCount newElement)
     {
-        for (int i = 0; i < countList.Length; i++)
-            _ingredients.Remove(countList[i]);
-        IngredientsAdded?.Invoke();
+        base.PutIngredient(newElement);
+        IngredientsChanged?.Invoke();
+    }
+
+    public override void RemoveIngredients(IngredientCount[] countList)
+    {
+        base.RemoveIngredients(countList);
+        IngredientsChanged?.Invoke();
     }
 
     public void RemoveAll()
     {
         _ingredients.Clear();
+        IngredientsChanged?.Invoke();
     }
 }

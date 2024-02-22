@@ -1,9 +1,12 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
+[Serializable]
 public class IngredientCountList
 {
-    private List<IngredientCount> _ingredientCounts = new();
+    [SerializeField] private List<IngredientCount> _ingredientCounts = new();
     private List<Ingredient> _haveIngredients = new();
 
     public int Size => _ingredientCounts.Count;

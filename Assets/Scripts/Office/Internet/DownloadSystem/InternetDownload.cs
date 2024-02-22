@@ -13,7 +13,7 @@ public class InternetDownload : MonoBehaviour
     private float _nowProgress;
     private float _needProgress;
     private bool _isDownloading;
-    private BaseInternetShop _shop;
+    private BaseShop _shop;
 
     private void Start()
     {
@@ -37,7 +37,7 @@ public class InternetDownload : MonoBehaviour
         _panel.SetActive(newValue);
     }
 
-    public void StartDownload(BaseInternetShop openingShop)
+    public void StartDownload(BaseShop openingShop)
     {
         ChangeState(true);
         _needProgress = Random.Range(_minWait, _maxWait);

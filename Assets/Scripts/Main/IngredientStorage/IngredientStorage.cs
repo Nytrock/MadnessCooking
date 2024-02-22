@@ -9,38 +9,36 @@ public class IngredientStorage : MonoBehaviour
 
     public int MaxSize => _maxSize;
 
-    public event Action<int> CountChanged;
+    public event Action<int> ElementCountChanged;
 
     public int GetSpace()
     {
         return _maxSize - _nowSize;
     }
 
-    public void PutIngredient(int count, Ingredient plantedIngredient)
+    public virtual void PutIngredients(IngredientCountList newElementsList)
     {
-        _nowSize += count;
-        var newElement = new IngredientCount
-        {
-            Count = count,
-            Ingredient = plantedIngredient
-        };
-        _ingredients.Add(newElement);
-
-        var index = _ingredients.IndexOf(newElement);
-        CountChanged?.Invoke(index);
+        for (int i = 0; i < newElementsList.Size; i++)
+            PutIngredient(newElementsList.Get(i));
     }
 
-    public void PutIngredient(IngredientCount newElement)
+    public virtual void PutIngredient(IngredientCount newElement)
     {
         if (_maxSize != -1)
             _nowSize += newElement.Count;
         _ingredients.Add(newElement);
 
         var index = _ingredients.IndexOf(newElement);
-        CountChanged?.Invoke(index);
+        ElementCountChanged?.Invoke(index);
     }
 
-    public IngredientCount GetIngredient(int index)
+    public virtual void RemoveIngredients(IngredientCount[] countList)
+    {
+        for (int i = 0; i < countList.Length; i++)
+            _ingredients.Remove(countList[i]);
+    }
+
+    public IngredientCount GetIngredientByIndex(int index)
     {
         return _ingredients.Get(index);
     }

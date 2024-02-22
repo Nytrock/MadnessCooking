@@ -9,9 +9,9 @@ public class BedChoiceDescrUI : MonoBehaviour
     {
         _shower.SetItemInfo(bedType);
         if (bedType.Cost > 0)
-            _shower.SetCount(bedType.Cost.ToString());
+            _shower.SetCountText(bedType.Cost.ToString());
         else
-            _shower.SetCount("Free");
+            _shower.SetCountText("Free");
     }
 
     public void ChangeActive()

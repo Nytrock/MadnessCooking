@@ -25,7 +25,7 @@ public class ChickensUI : MonoBehaviour
 
     private void UpdateCount(int count)
     {
-        _eggShower.SetCount(count.ToString());
+        _eggShower.SetCountText(count.ToString());
     }
 
     public void ChangeState()

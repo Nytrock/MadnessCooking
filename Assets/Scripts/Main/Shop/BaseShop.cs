@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public abstract class BaseInternetShop : MonoBehaviour
+public abstract class BaseShop : MonoBehaviour
 {
     [SerializeField] private GameObject _shop;
-    [SerializeField] private InternetCatalog _catalog;
-    [SerializeField] private InternetCatalogPage _pagePrefab;
+    [SerializeField] protected ShopCatalog _catalog;
+    [SerializeField] private ShopCatalogPage _pagePrefab;
 
     protected BuyableObject[] _itemsToBuy;
 
@@ -33,7 +33,7 @@ public abstract class BaseInternetShop : MonoBehaviour
                 if (i * pageCount + j >= _itemsToBuy.Length)
                     break;
 
-                page.GeneratePanel(_itemsToBuy[i * pageCount + j]);
+                page.GeneratePanel(_itemsToBuy[i * pageCount + j], this);
             }
             _catalog.AddPage(page);
         }
@@ -42,5 +42,5 @@ public abstract class BaseInternetShop : MonoBehaviour
     }
 
     protected abstract void SetObjectsArray();
-    protected abstract void BuyItem(int itemIndex);
+    public abstract void BuyItem(BuyableObject item);
 }
