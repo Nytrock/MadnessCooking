@@ -1,17 +1,22 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class TechnicManager : MonoBehaviour
 {
     [SerializeField] private TechnicHolder[] _holders;
-    [SerializeField] private List<Technic> _availableTechnic;
     [SerializeField] private TechnicHolderUI _UI;
+    [SerializeField] private List<Technic> _availableTechnic;
+
+    public event Action TechnicChanged;
 
     private void Start()
     {
         foreach (var holder in _holders) {
-            holder.gameObject.SetActive(_availableTechnic.Contains(holder.Technic));
-            holder.SetUI(_UI);
+            if (_availableTechnic.Contains(holder.Technic))
+                holder.Activate(_UI);
+            else
+                holder.gameObject.SetActive(false);
         }
     }
 
@@ -41,5 +46,13 @@ public class TechnicManager : MonoBehaviour
             if (_holders[i].Technic == technic)
                 return _holders[i];
         return null;
+    }
+
+    public void AddTechnic(Technic technic)
+    {
+        _availableTechnic.Add(technic);
+        var holder = FindHolderByTechic(technic);
+        holder.Activate(_UI);
+        TechnicChanged?.Invoke();
     }
 }

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.WSA;
 
 [RequireComponent(typeof(Animator))]
 public class TechnicHolder : MonoBehaviour
@@ -36,6 +37,12 @@ public class TechnicHolder : MonoBehaviour
         _nowStrength = _technic.Strength;
     }
 
+    public void Activate(TechnicHolderUI ui)
+    {
+        gameObject.SetActive(true);
+        _UI = ui;
+    }
+
     public void StartCook(Order order)
     {
         _isFree = false;
@@ -60,11 +67,6 @@ public class TechnicHolder : MonoBehaviour
     void OnMouseDown()
     {
         _UI.OpenTechnic(this);
-    }
-
-    public void SetUI(TechnicHolderUI UI)
-    {
-        _UI = UI;
     }
 
     public void StartRepair()
