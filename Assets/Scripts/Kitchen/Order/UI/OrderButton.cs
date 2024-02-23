@@ -42,8 +42,8 @@ public class OrderButton : MonoBehaviour
         _title.text = _order.Food.Name;
         _tableCount.text = _order.TableNumber.ToString();
 
-        var canCook = _recipe.CreateRecipe(_order);
-        _cookButton.interactable = canCook;
+        _recipe.SetupRecipe(_order.Food);
+        _cookButton.interactable = _recipe.CanCook;
     }
 
     public void UpdateRecipe()
@@ -51,13 +51,13 @@ public class OrderButton : MonoBehaviour
         if (_order == null) return;
         if (_order.IsCooking || _order.IsFinished) return;
 
-        var canCook = _recipe.CreateRecipe(_order);
-        _cookButton.interactable = canCook;
+        _recipe.SetupRecipe(_order.Food);
+        _cookButton.interactable = _recipe.CanCook;
     }
 
     public void Disable()
     {
-        _recipe.Disable();
+        _recipe.DisableParts();
         _order = null;
         gameObject.SetActive(false);
     }
@@ -78,7 +78,7 @@ public class OrderButton : MonoBehaviour
     {
         _cookingSlider.SetActive(true);
         _startButton.SetActive(false);
-        _recipe.Disable();
+        _recipe.DisableParts();
 
         _order.StartCook();
         _cookSlider.StartCook(_order);

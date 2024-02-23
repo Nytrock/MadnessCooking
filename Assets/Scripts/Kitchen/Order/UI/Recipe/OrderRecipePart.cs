@@ -1,33 +1,25 @@
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class OrderRecipePart : MonoBehaviour
+public class OrderRecipePart : FoodRecipePart
 {
-    [SerializeField] private Image _icon;
-    [SerializeField] private TextMeshProUGUI _count;
+    [SerializeField] Color _haveColor;
+    [SerializeField] Color _dontHaveColor;
 
-    public void Setup(IngredientCount count, bool isHave)
+    public override void Setup(IngredientCount count, bool isHave)
     {
-        gameObject.SetActive(true);
-        _icon.sprite = count.Ingredient.Icon;
-        _count.text = count.Count.ToString() + "x";
-
+        base.Setup(count, isHave);
         if (isHave)
-            _count.color = Color.white;
+            _count.color = _haveColor;
         else 
-            _count.color = Color.red;
+            _count.color = _dontHaveColor;
     }
 
-    public void Setup(Technic technic, bool isFree)
+    public override void Setup(Technic technic, bool isFree)
     {
-        gameObject.SetActive(true);
-        _icon.sprite = technic.Icon;
-        _count.text = "1x";
-
+        base.Setup(technic, isFree);
         if (isFree)
-            _count.color = Color.white;
+            _count.color = _haveColor;
         else
-            _count.color = Color.red;
+            _count.color = _dontHaveColor;
     }
 }

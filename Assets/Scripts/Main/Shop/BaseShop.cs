@@ -14,7 +14,7 @@ public abstract class BaseShop : MonoBehaviour
         ChangeShopState(false);
     }
 
-    public void ChangeShopState(bool newState)
+    public virtual void ChangeShopState(bool newState)
     {
         _shop.SetActive(newState);
     }

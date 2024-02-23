@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IngredientShop : BaseShop
+public class IngredientShop : BaseInstantShop
 {
     [SerializeField] private List<Ingredient> _ingredientsToBuy;
     [SerializeField] private IngredientsManager _ingredientsManager;

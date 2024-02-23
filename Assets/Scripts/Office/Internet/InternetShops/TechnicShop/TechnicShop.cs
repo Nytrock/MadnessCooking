@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TechnicShop : BaseShop
+public class TechnicShop : BaseInstantShop
 {
     [SerializeField] private List<Technic> _technicToBuy;
     [SerializeField] private TechnicManager _technicManager;

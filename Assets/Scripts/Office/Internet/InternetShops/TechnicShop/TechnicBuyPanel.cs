@@ -1,6 +1,6 @@
-public class TechnicBuyPanel : BaseBuyPanel
+public class TechnicBuyPanel : BaseInstantBuyPanel
 {
-    protected override void BuyItem()
+    protected override void OnBuyItem()
     {
         Destroy();
     }
