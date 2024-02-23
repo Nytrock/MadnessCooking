@@ -1,4 +1,3 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,7 +5,7 @@ public class BedTypeUI : MonoBehaviour
 {
     [SerializeField] private BedType _bedType;
     [SerializeField] private GameObject _UI;
-    [SerializeField] private ItemInfoRenderer _shower;
+    [SerializeField] private ItemInfoRendererWithNum _renderer;
 
     [Header("Side buttons")]
     [SerializeField] private bool _isSideButtonsWork;
@@ -34,8 +33,8 @@ public class BedTypeUI : MonoBehaviour
 
     public void UpdateInfo(GroundBed groundBed)
     {
-        _shower.SetItemInfo(groundBed.Ingredient);
-        _shower.SetCountText(groundBed.Count.ToString());
+        _renderer.SetItemInfo(groundBed.Ingredient);
+        _renderer.SetNumText(groundBed.Count.ToString());
     }
 
     public void CheckWater(int count)
@@ -56,6 +55,6 @@ public class BedTypeUI : MonoBehaviour
 
     public void UpdateCount(int count)
     {
-        _shower.SetCountText(count.ToString());
+        _renderer.SetNumText(count.ToString());
     }
 }

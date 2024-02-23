@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ChoiceUI : MonoBehaviour
+public abstract class ChoiceUI : MonoBehaviour
 {
     [SerializeField] protected GameObject _UI;
     [SerializeField] protected CameraManager _cameraManager;
@@ -15,11 +15,6 @@ public class ChoiceUI : MonoBehaviour
     protected virtual void Start()
     {
         _UI.SetActive(false);
-    }
-
-    protected virtual void GenerateChoiceButtons()
-    {
-
     }
 
     protected void Activate()
@@ -57,4 +52,6 @@ public class ChoiceUI : MonoBehaviour
         _cameraManager.ChangeWorkMode(true);
         _UI.SetActive(false);
     }
+
+    protected abstract void GenerateChoiceButtons();
 }

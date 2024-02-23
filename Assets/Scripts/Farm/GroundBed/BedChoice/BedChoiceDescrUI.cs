@@ -2,27 +2,24 @@ using UnityEngine;
 
 public class BedChoiceDescrUI : MonoBehaviour
 {
-    [SerializeField] private ItemInfoRenderer _shower;
-    private bool _isActive;
+    [SerializeField] private ItemInfoRendererWithNum _renderer;
 
     public void UpdateDescription(BedType bedType)
     {
-        _shower.SetItemInfo(bedType);
+        _renderer.SetItemInfo(bedType);
         if (bedType.Cost > 0)
-            _shower.SetCountText(bedType.Cost.ToString());
+            _renderer.SetNumText(bedType.Cost.ToString());
         else
-            _shower.SetCountText("Free");
+            _renderer.SetNumText("Free");
     }
 
     public void ChangeActive()
     {
-        _isActive = !_isActive;
-        gameObject.SetActive(_isActive);
+        gameObject.SetActive(!gameObject.activeSelf);
     }
 
     public void Disable()
     {
-        _isActive = false;
         gameObject.SetActive(false);
     }
 }

@@ -12,16 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62e259f0fb519ee4183f3e54a050614f, type: 3}
   m_Name: TomatoJuice
   m_EditorClassIdentifier: 
-  Icon: {fileID: 878274627, guid: fcf5fb943f0e2034c91e28b0e7a9498a, type: 3}
-  Name: 
-  Description: 
-  Cost: 450
-  Type: 3
-  TypeTechnic: {fileID: 11400000, guid: 8fe5a1b5c2c60e04e8303266be891355, type: 2}
-  MiniSprite: {fileID: 0}
-  TimeToCook: 18
-  TimeToEat: 0
-  MoneyGet: 44
-  Ingredients:
-  - Ingredient: {fileID: 11400000, guid: 7755e9f6a50793a45afe949b36406069, type: 2}
-    Count: 2
+  _icon: {fileID: 878274627, guid: fcf5fb943f0e2034c91e28b0e7a9498a, type: 3}
+  _name: 
+  _description: 
+  _cost: 450
+  _type: 3
+  _typeTechnic: {fileID: 11400000, guid: 8fe5a1b5c2c60e04e8303266be891355, type: 2}
+  _miniSprite: {fileID: 0}
+  _timeToCook: 18
+  _timeToEat: 0
+  _moneyGet: 44
+  _ingredients:
+    _ingredientCounts:
+    - _ingredient: {fileID: 11400000, guid: 7755e9f6a50793a45afe949b36406069, type: 2}
+      _count: 2

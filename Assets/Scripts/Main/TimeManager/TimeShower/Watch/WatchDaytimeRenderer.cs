@@ -2,11 +2,18 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(Watch))]
 public class WatchDaytimeRenderer : MonoBehaviour
 {
+    [SerializeField] private TimeManager _timeManager;
     [SerializeField] private Image _daytimeIcon;
     [SerializeField] private TextMeshProUGUI _daytimeText;
     [SerializeField] private DaytimeRenderInfo[] _daytimeInfos;
+
+    private void Start()
+    {
+        _timeManager.DaytimeChanged += UpdateDaytime;
+    }
 
     public void UpdateDaytime(Daytime daytime)
     {

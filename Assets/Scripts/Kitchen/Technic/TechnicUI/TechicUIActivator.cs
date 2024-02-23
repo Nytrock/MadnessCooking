@@ -7,7 +7,7 @@ public class TechicUIActivator : UIActivator
 
     private void Start()
     {
-        _holder = transform.parent.GetComponent<TechnicHolder>();
+        _holder = transform.GetComponent<TechnicHolder>();
     }
 
     protected override void Press()

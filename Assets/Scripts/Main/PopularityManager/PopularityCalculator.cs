@@ -29,8 +29,8 @@ public class PopularityCalculator : MonoBehaviour
     {
         return _nowLevel.PopularityMultiplier * 
             _timeMultiplier.DaytimeMultiplier * 
-            _spaceManager.SpaceCount * _oneCafeSpaceMultiplier * 
-            _foodManager.FoodCount * _oneFoodMultiplier;
+            (1 + _spaceManager.SpaceCount * _oneCafeSpaceMultiplier) * 
+            (1 + _foodManager.FoodCount * _oneFoodMultiplier);
     }
 
     public void GetClientsNumberChances(out int singleChance, out int doubleChance, out int tripleChance, out int quarterChance)

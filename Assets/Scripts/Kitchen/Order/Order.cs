@@ -14,7 +14,7 @@ public class Order
 
     public event Action OrderFinished;
 
-    public Order (Food food, int tableNumber)
+    public Order(Food food, int tableNumber)
     {
         _food = food;
         TableNumber = tableNumber;

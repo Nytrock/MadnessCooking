@@ -1,14 +1,22 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Food")]
+[CreateAssetMenu(menuName = nameof(BuyableObject) + "/" + nameof(Food))]
 
 public class Food : BuyableObject
 {
-    public FoodType Type;
-    public Technic TypeTechnic;
-    public Sprite MiniSprite;
-    public float TimeToCook;
-    public float TimeToEat;
-    public int MoneyGet;
-    public IngredientCount[] Ingredients;
+    [SerializeField] private FoodType _type;
+    [SerializeField] private Technic _typeTechnic;
+    [SerializeField] private Sprite _miniSprite;
+    [SerializeField] private float _timeToCook;
+    [SerializeField] private float _timeToEat;
+    [SerializeField] private int _moneyGet;
+    [SerializeField] private IngredientCountList _ingredients;
+
+    public FoodType Type => _type;
+    public Technic TypeTechnic => _typeTechnic;
+    public Sprite MiniSprite => _miniSprite;
+    public float TimeToCook => _timeToCook;
+    public float TimeToEat => _timeToEat;
+    public int MoneyGet => _moneyGet;
+    public IngredientCountList Ingredients => _ingredients;
 }

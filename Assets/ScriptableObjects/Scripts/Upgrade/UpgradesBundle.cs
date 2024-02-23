@@ -1,8 +1,10 @@
 
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "UpgradeBundle")]
+[CreateAssetMenu(menuName = nameof(BuyableObject) + "/" + nameof(UpgradesBundle))]
 public class UpgradesBundle : BuyableObject
 {
-    public Upgrade[] upgradesList;
+    [SerializeField] private Upgrade[] _upgradesList;
+
+    public Upgrade[] UpgradesList => _upgradesList;
 }

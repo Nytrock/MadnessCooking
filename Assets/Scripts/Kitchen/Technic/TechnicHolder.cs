@@ -64,11 +64,6 @@ public class TechnicHolder : MonoBehaviour
         _nowOrder = null;
     }
 
-    void OnMouseDown()
-    {
-        _UI.OpenTechnic(this);
-    }
-
     public void StartRepair()
     {
         _isRepairing = true;

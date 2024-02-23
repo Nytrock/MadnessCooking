@@ -15,7 +15,7 @@ public class IngredientCountList
     {
         if (ContainsIngredient(ingredientCount)) {
             var index = IndexOf(ingredientCount);
-            _ingredientCounts[index].Count += ingredientCount.Count;
+            _ingredientCounts[index].ChangeCount(ingredientCount.Count);
         } else {
             _ingredientCounts.Add(ingredientCount);
         }
@@ -28,8 +28,8 @@ public class IngredientCountList
             return;
 
         var index = IndexOf(ingredientCount);
-        _ingredientCounts[index].Count -= ingredientCount.Count;
-        if (_ingredientCounts[index].Count <= 0)
+        _ingredientCounts[index].ChangeCount(-ingredientCount.Count);
+        if (_ingredientCounts[index].Count == 0)
             _ingredientCounts.RemoveAt(index);
 
         UpdateHaveIngredients();

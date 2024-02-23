@@ -15,16 +15,16 @@ public class FoodRecipe : MonoBehaviour
         var ingredients = food.Ingredients;
         _canCook = true;
 
-        for (int i = 0; i < ingredients.Length; i++) {
-            bool haveCount = _kitchenStorage.HaveCount(ingredients[i]);
+        for (int i = 0; i < ingredients.Size; i++) {
+            bool haveCount = _kitchenStorage.HaveCount(ingredients.Get(i));
             _canCook &= haveCount;
-            _recipeParts[i].Setup(ingredients[i], haveCount);
+            _recipeParts[i].Setup(ingredients.Get(i), haveCount);
         }
 
         var technic = food.TypeTechnic;
         bool haveTechnic = _technicManager.HaveTechnic(technic);
         _canCook &= haveTechnic;
-        _recipeParts[ingredients.Length].Setup(technic, haveTechnic);
+        _recipeParts[ingredients.Size].Setup(technic, haveTechnic);
     }
 
     public void DisableParts()

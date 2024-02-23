@@ -1,4 +1,5 @@
 using System;
+using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -79,41 +80,28 @@ public class Client : MonoBehaviour
 
     public void RotateSkin()
     {
-        _skin.localScale = new Vector2(Spot.GetTableRotation(TableIndex), 1);
+        _skin.localScale = new Vector2(Spot.GetSeatRotation(TableIndex), 1);
     }
 
-    public void SetTargets(Transform enterTarget, Transform exitTarget)
+    public void Setup(ClientSettings settings)
     {
-        EnterTarget = enterTarget;
-        ExitTarget = exitTarget;
-    }
+        EnterTarget = settings.EnterTarget;
+        ExitTarget = settings.ExitTarget;
+        transform.position = ExitTarget.position;
 
-    public void SetType(ClientType clientType)
-    {
-        ClientType = clientType;
+        ClientType = settings.ClientType;
+        WaitMultiplier = settings.WaitMultiplier;
+        _pool = settings.Pool;
+
+        Spot = settings.Spot;
+        if (InGroup())
+            _table = Spot.GetComponent<ClientGroupHolder>();
+        TableIndex = settings.SpotIndex;
     }
 
     public void SetOrder(Order order)
     {
         Order = order;
-    }
-
-    public void SetWaitingtime(float multiplier)
-    {
-        WaitMultiplier = multiplier;
-    }
-
-    public void SetPool(ClientsPool pool)
-    {
-        _pool = pool;
-    }
-
-    public void SetSpot(CafeSpot spot, int spotIndex)
-    {
-        Spot = spot;
-        if (InGroup())
-            _table = Spot.GetComponent<ClientGroupHolder>();
-        TableIndex = spotIndex;
     }
 
     public void ActivateOrder()

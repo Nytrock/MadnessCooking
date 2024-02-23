@@ -20,7 +20,7 @@ public class IngredientChoiceUI : ChoiceUI
         _changingBed = groundBed;
         var bedType = _changingBed.BedType;
         DestoyOldButtons();
-        GenerateChoiceButtons(bedType);
+        GenerateChoiceButtons();
         SetStyle(bedType);
         Activate();
     }
@@ -32,9 +32,9 @@ public class IngredientChoiceUI : ChoiceUI
         _choiceButtons.Clear();
     }
 
-    protected void GenerateChoiceButtons(BedType bedType)
+    protected override void GenerateChoiceButtons()
     {
-        _ingredients = _ingredientsManager.GetIngredientsOfOneBedType(bedType);
+        _ingredients = _ingredientsManager.GetIngredientsOfOneBedType(_changingBed.BedType);
         for (int i = 0; i < _ingredients.Count; i++) {
             var choiceButton = Instantiate(_choiceButtonPrefab, _choiceButtonsContainer);
             choiceButton.GetComponent<IngredientChoiceButton>()

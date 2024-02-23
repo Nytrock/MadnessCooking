@@ -12,18 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62e259f0fb519ee4183f3e54a050614f, type: 3}
   m_Name: FriedPotato
   m_EditorClassIdentifier: 
-  Icon: {fileID: -527835641, guid: fcf5fb943f0e2034c91e28b0e7a9498a, type: 3}
-  Name: 
-  Description: 
-  Cost: 600
-  Type: 1
-  TypeTechnic: {fileID: 11400000, guid: 7a3095255cbd1074dba21111d12d19ae, type: 2}
-  MiniSprite: {fileID: 0}
-  TimeToCook: 24
-  TimeToEat: 0
-  MoneyGet: 40
-  Ingredients:
-  - Ingredient: {fileID: 11400000, guid: 69a4d0ca41f89d34ebe35ac5ce8ff220, type: 2}
-    Count: 2
-  - Ingredient: {fileID: 11400000, guid: ecf0fd20f8efd89418aba1c84c5eae73, type: 2}
-    Count: 1
+  _icon: {fileID: -527835641, guid: fcf5fb943f0e2034c91e28b0e7a9498a, type: 3}
+  _name: 
+  _description: 
+  _cost: 600
+  _type: 1
+  _typeTechnic: {fileID: 11400000, guid: 7a3095255cbd1074dba21111d12d19ae, type: 2}
+  _miniSprite: {fileID: 0}
+  _timeToCook: 24
+  _timeToEat: 0
+  _moneyGet: 40
+  _ingredients:
+    _ingredientCounts:
+    - _ingredient: {fileID: 11400000, guid: 69a4d0ca41f89d34ebe35ac5ce8ff220, type: 2}
+      _count: 2
+    - _ingredient: {fileID: 11400000, guid: ecf0fd20f8efd89418aba1c84c5eae73, type: 2}
+      _count: 1

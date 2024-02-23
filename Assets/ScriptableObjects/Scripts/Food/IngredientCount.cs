@@ -1,14 +1,26 @@
 using System;
+using UnityEngine;
 
 [Serializable]
 public class IngredientCount
 {
     public IngredientCount(Ingredient ingredient, int count)
     {
-        Ingredient = ingredient;
-        Count = count;
+        _ingredient = ingredient;
+        _count = count;
     }
 
-    public Ingredient Ingredient;
-    public int Count;
+    public void ChangeCount(int count)
+    {
+        if (_count + count < 0)
+            _count = 0;
+        else
+            _count += count;
+    }
+
+    [SerializeField] private Ingredient _ingredient;
+    [SerializeField] private int _count;
+
+    public Ingredient Ingredient => _ingredient;
+    public int Count => _count;
 }

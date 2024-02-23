@@ -25,9 +25,9 @@ public class CafeSpot : MonoBehaviour
 
     public Transform GetTarget(int index) { return _seats[index].transform; }
 
-    public float GetTableRotation(int index)
+    public float GetSeatRotation(int index)
     {
-        return Mathf.Sign(_seats[index].transform.localScale.x);
+        return _seats[index].GetSeatRotation();
     }
 
     public void SetTableFoodSprite(Food food, int index)

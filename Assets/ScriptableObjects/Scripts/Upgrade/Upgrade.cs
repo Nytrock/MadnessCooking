@@ -1,8 +1,10 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Upgrade")]
+[CreateAssetMenu(menuName = nameof(BuyableObject) + "/" + nameof(Upgrade))]
 
 public class Upgrade : BuyableObject
 {
-    public UpgradeType TypeUpgrade;
+    [SerializeField] private UpgradeType _typeUpgrade;
+
+    public UpgradeType TypeUpgrade => _typeUpgrade;
 }

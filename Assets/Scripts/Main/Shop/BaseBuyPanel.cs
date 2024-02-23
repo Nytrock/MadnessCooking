@@ -3,14 +3,12 @@ using UnityEngine.UI;
 
 public abstract class BaseBuyPanel : MonoBehaviour
 {
-    [SerializeField] protected ItemInfoRenderer _itemInfoRenderer;
     [SerializeField] protected Button _buyButton;
     protected BuyableObject _item;
 
     public virtual void Setup(BuyableObject item, BaseShop shop)
     {
         _item = item;
-        _itemInfoRenderer.SetItemInfo(item);
         SetButtonListener(shop);
     }
 

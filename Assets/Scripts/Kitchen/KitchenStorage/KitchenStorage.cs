@@ -25,7 +25,7 @@ public class KitchenStorage : IngredientStorage
         IngredientsChanged?.Invoke();
     }
 
-    public override void RemoveIngredients(IngredientCount[] countList)
+    public override void RemoveIngredients(IngredientCountList countList)
     {
         base.RemoveIngredients(countList);
         IngredientsChanged?.Invoke();

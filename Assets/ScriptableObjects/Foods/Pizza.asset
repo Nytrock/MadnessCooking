@@ -12,26 +12,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62e259f0fb519ee4183f3e54a050614f, type: 3}
   m_Name: Pizza
   m_EditorClassIdentifier: 
-  Icon: {fileID: -432131105, guid: fcf5fb943f0e2034c91e28b0e7a9498a, type: 3}
-  Name: 
-  Description: 
-  Cost: 500
-  Type: 1
-  TypeTechnic: {fileID: 11400000, guid: 2ab180e87c606ae48ba55132f53ee430, type: 2}
-  MiniSprite: {fileID: 0}
-  TimeToCook: 25
-  TimeToEat: 0
-  MoneyGet: 90
-  Ingredients:
-  - Ingredient: {fileID: 11400000, guid: 7755e9f6a50793a45afe949b36406069, type: 2}
-    Count: 2
-  - Ingredient: {fileID: 11400000, guid: ecf0fd20f8efd89418aba1c84c5eae73, type: 2}
-    Count: 1
-  - Ingredient: {fileID: 11400000, guid: 6b8daec792815f44b8b8c781a3adfdcd, type: 2}
-    Count: 2
-  - Ingredient: {fileID: 11400000, guid: 24d7a663aa0937f4b8ed7ab357e76093, type: 2}
-    Count: 1
-  - Ingredient: {fileID: 11400000, guid: 3278518d00037514cbdf7435e0cc9325, type: 2}
-    Count: 1
-  - Ingredient: {fileID: 11400000, guid: 1a1acf5d79493354cad0d0956b0d8689, type: 2}
-    Count: 1
+  _icon: {fileID: -432131105, guid: fcf5fb943f0e2034c91e28b0e7a9498a, type: 3}
+  _name: 
+  _description: 
+  _cost: 500
+  _type: 1
+  _typeTechnic: {fileID: 11400000, guid: 2ab180e87c606ae48ba55132f53ee430, type: 2}
+  _miniSprite: {fileID: 0}
+  _timeToCook: 25
+  _timeToEat: 0
+  _moneyGet: 90
+  _ingredients:
+    _ingredientCounts:
+    - _ingredient: {fileID: 11400000, guid: 7755e9f6a50793a45afe949b36406069, type: 2}
+      _count: 2
+    - _ingredient: {fileID: 11400000, guid: ecf0fd20f8efd89418aba1c84c5eae73, type: 2}
+      _count: 1
+    - _ingredient: {fileID: 11400000, guid: 6b8daec792815f44b8b8c781a3adfdcd, type: 2}
+      _count: 2
+    - _ingredient: {fileID: 11400000, guid: 24d7a663aa0937f4b8ed7ab357e76093, type: 2}
+      _count: 1
+    - _ingredient: {fileID: 11400000, guid: 3278518d00037514cbdf7435e0cc9325, type: 2}
+      _count: 1
+    - _ingredient: {fileID: 11400000, guid: 1a1acf5d79493354cad0d0956b0d8689, type: 2}
+      _count: 1

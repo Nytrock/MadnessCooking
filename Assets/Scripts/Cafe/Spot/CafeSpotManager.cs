@@ -7,8 +7,8 @@ public class CafeSpotManager : MonoBehaviour
     [SerializeField] private CafeSpaceManager _spaceManager;
     [SerializeField] private CafeOpener _opener;
     [SerializeField] private CafeSpot[] _spotPrefabs;
-    private readonly List<CafeSpot> _spots = new List<CafeSpot>();
-    private readonly List<List<int>> _freeSpots = new List<List<int>>(4);
+    private readonly List<CafeSpot> _spots = new();
+    private readonly List<List<int>> _freeSpots = new(4);
     private float _cellSize;
 
     public event Action<float> SpotsPositionChanged;

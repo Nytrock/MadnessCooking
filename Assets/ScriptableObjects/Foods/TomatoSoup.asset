@@ -12,18 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62e259f0fb519ee4183f3e54a050614f, type: 3}
   m_Name: TomatoSoup
   m_EditorClassIdentifier: 
-  Icon: {fileID: -1862586599, guid: fcf5fb943f0e2034c91e28b0e7a9498a, type: 3}
-  Name: 
-  Description: 
-  Cost: 500
-  Type: 4
-  TypeTechnic: {fileID: 11400000, guid: d3baf7cdadf53954d801bb39ed04c251, type: 2}
-  MiniSprite: {fileID: 0}
-  TimeToCook: 20
-  TimeToEat: 0
-  MoneyGet: 52
-  Ingredients:
-  - Ingredient: {fileID: 11400000, guid: 7755e9f6a50793a45afe949b36406069, type: 2}
-    Count: 3
-  - Ingredient: {fileID: 11400000, guid: 1a1acf5d79493354cad0d0956b0d8689, type: 2}
-    Count: 1
+  _icon: {fileID: -1862586599, guid: fcf5fb943f0e2034c91e28b0e7a9498a, type: 3}
+  _name: 
+  _description: 
+  _cost: 500
+  _type: 4
+  _typeTechnic: {fileID: 11400000, guid: d3baf7cdadf53954d801bb39ed04c251, type: 2}
+  _miniSprite: {fileID: 0}
+  _timeToCook: 20
+  _timeToEat: 0
+  _moneyGet: 52
+  _ingredients:
+    _ingredientCounts:
+    - _ingredient: {fileID: 11400000, guid: 7755e9f6a50793a45afe949b36406069, type: 2}
+      _count: 3
+    - _ingredient: {fileID: 11400000, guid: 1a1acf5d79493354cad0d0956b0d8689, type: 2}
+      _count: 1

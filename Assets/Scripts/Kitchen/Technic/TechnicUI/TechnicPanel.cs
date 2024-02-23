@@ -1,15 +1,8 @@
 using UnityEngine;
 
-public class TechnicPanel : MonoBehaviour
+public abstract class TechnicPanel : MonoBehaviour
 {
     protected TechnicHolder _nowTechnic;
-
-    public virtual void UpdatePanel()
-    {
-
-    }
-
-    public virtual void UpdateInfo() { }
 
     public void SetNewTechnic(TechnicHolder technic)
     {
@@ -28,4 +21,8 @@ public class TechnicPanel : MonoBehaviour
         enabled = newState;
         gameObject.SetActive(newState);
     }
+
+
+    public abstract void UpdateInfo();
+    public abstract void UpdatePanel();
 }

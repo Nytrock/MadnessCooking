@@ -4,9 +4,8 @@ public class BarnFridgeUI : MonoBehaviour
 {
     [SerializeField] private GameObject _panel;
     [SerializeField] private BarnFridge _barnFridge;
-    [SerializeField] private ItemInfoRenderer _milkShower;
-    [SerializeField] private ItemInfoRenderer _flourShower;
-
+    [SerializeField] private ItemInfoRendererWithNum _milkRenderer;
+    [SerializeField] private ItemInfoRendererWithNum _flourRenderer;
 
     [SerializeField] private Ingredient _milk;
     [SerializeField] private Ingredient _flour;
@@ -15,8 +14,8 @@ public class BarnFridgeUI : MonoBehaviour
     {
         _panel.SetActive(false);
 
-        _milkShower.SetItemInfo(_milk);
-        _flourShower.SetItemInfo(_flour);
+        _milkRenderer.SetItemInfo(_milk);
+        _flourRenderer.SetItemInfo(_flour);
 
         _barnFridge.MilkChanged += UpdateMilkCount;
         _barnFridge.FlourChanged += UpdateFlourCount;
@@ -29,11 +28,11 @@ public class BarnFridgeUI : MonoBehaviour
 
     private void UpdateMilkCount(int count)
     {
-        _milkShower.SetCountText(count.ToString());
+        _milkRenderer.SetNumText(count.ToString());
     }
 
     private void UpdateFlourCount(int count)
     {
-        _flourShower.SetCountText(count.ToString());
+        _flourRenderer.SetNumText(count.ToString());
     }
 }

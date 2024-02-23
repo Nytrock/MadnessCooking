@@ -32,10 +32,10 @@ public class IngredientStorage : MonoBehaviour
         ElementCountChanged?.Invoke(index);
     }
 
-    public virtual void RemoveIngredients(IngredientCount[] countList)
+    public virtual void RemoveIngredients(IngredientCountList countList)
     {
-        for (int i = 0; i < countList.Length; i++)
-            _ingredients.Remove(countList[i]);
+        for (int i = 0; i < countList.Size; i++)
+            _ingredients.Remove(countList.Get(i));
     }
 
     public IngredientCount GetIngredientByIndex(int index)

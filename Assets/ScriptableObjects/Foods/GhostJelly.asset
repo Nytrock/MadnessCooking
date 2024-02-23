@@ -12,16 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62e259f0fb519ee4183f3e54a050614f, type: 3}
   m_Name: GhostJelly
   m_EditorClassIdentifier: 
-  Icon: {fileID: 1155831041, guid: fcf5fb943f0e2034c91e28b0e7a9498a, type: 3}
-  Name: 
-  Description: 
-  Cost: 2500
-  Type: 2
-  TypeTechnic: {fileID: 11400000, guid: 1d2afa180520bd24a8befc0379d92412, type: 2}
-  MiniSprite: {fileID: 0}
-  TimeToCook: 40
-  TimeToEat: 0
-  MoneyGet: 125
-  Ingredients:
-  - Ingredient: {fileID: 11400000, guid: ea7fc1cecae589b43917f7d4735ec54a, type: 2}
-    Count: 2
+  _icon: {fileID: 1155831041, guid: fcf5fb943f0e2034c91e28b0e7a9498a, type: 3}
+  _name: 
+  _description: 
+  _cost: 2500
+  _type: 2
+  _typeTechnic: {fileID: 11400000, guid: 1d2afa180520bd24a8befc0379d92412, type: 2}
+  _miniSprite: {fileID: 0}
+  _timeToCook: 40
+  _timeToEat: 0
+  _moneyGet: 125
+  _ingredients:
+    _ingredientCounts:
+    - _ingredient: {fileID: 11400000, guid: ea7fc1cecae589b43917f7d4735ec54a, type: 2}
+      _count: 2

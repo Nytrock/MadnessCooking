@@ -1,7 +1,9 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = nameof(BedType))]
+[CreateAssetMenu(menuName = nameof(BuyableObject) + "/" + nameof(BedType))]
 public class BedType : BuyableObject
 {
-    public IngredientType AcceptableType;
+    [SerializeField] private IngredientType _acceptableType;
+
+    public IngredientType AcceptableType => _acceptableType;
 }

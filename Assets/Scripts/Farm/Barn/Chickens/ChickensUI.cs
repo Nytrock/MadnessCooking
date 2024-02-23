@@ -5,15 +5,14 @@ public class ChickensUI : MonoBehaviour
 {
     [SerializeField] private Chickens _chickens;
     [SerializeField] private GameObject _panel;
-    [SerializeField] private GameObject _feedButton;
     [SerializeField] private Slider _eggSlider;
-    [SerializeField] private ItemInfoRenderer _eggShower;
+    [SerializeField] private ItemInfoRendererWithNum _eggRenderer;
     [SerializeField] private Ingredient _egg;
 
     private void Start()
     {
         _chickens.EggChanged += UpdateCount;
-        _eggShower.SetItemInfo(_egg);
+        _eggRenderer.SetItemInfo(_egg);
         _eggSlider.maxValue = _chickens.EggTime;
         _panel.SetActive(false);
     }
@@ -25,7 +24,7 @@ public class ChickensUI : MonoBehaviour
 
     private void UpdateCount(int count)
     {
-        _eggShower.SetCountText(count.ToString());
+        _eggRenderer.SetNumText(count.ToString());
     }
 
     public void ChangeState()
