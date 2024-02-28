@@ -1,11 +1,10 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class PopularityUIMore : MonoBehaviour
 {
-    [SerializeField] private Mask _mask;
+    [SerializeField] private GameObject _panel;
     [SerializeField] private TextMeshProUGUI _description;
     [SerializeField] private TextMeshProUGUI _popularityMultiplier;
     [SerializeField] private TextMeshProUGUI _singleChance;
@@ -13,18 +12,14 @@ public class PopularityUIMore : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _tripleChance;
     [SerializeField] private TextMeshProUGUI _quarterChance;
 
-    private Image _maskImage;
-
     private void Start()
     {
-        _maskImage = _mask.GetComponent<Image>();
         ChangeMode(false);
     }
 
     public void ChangeMode(bool newMode)
     {
-        _mask.enabled = !newMode;
-        _maskImage.raycastTarget = !newMode;
+        _panel.SetActive(newMode);
     }
 
     public void UpdateInfo(PopularityLevel level)

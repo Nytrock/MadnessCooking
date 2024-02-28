@@ -15,8 +15,8 @@ public class ClientsSpawner : MonoBehaviour
     [SerializeField] private float _minSpawnTime;
     [SerializeField] private float _maxSpawnTime;
 
-    [SerializeField] private float _needTime;
-    [SerializeField] private float _nowTime;
+    private float _needTime;
+    private float _nowTime;
     private bool _isSpawning = true;
     private bool _isOpen = true;
     private bool _isWaitingCritic;
@@ -126,7 +126,8 @@ public class ClientsSpawner : MonoBehaviour
     {
         _isSpawning = true;
         _spotManager.ReturnSpot(client.Spot.Index);
-        _xpAdder.RemoveXp(client.ClientType);
+        if (!client.IsEat)
+            _xpAdder.RemoveXp(client.ClientType);
 
         client.ClientLeave -= ClientLeave;
         client.ClientEat -= ClientEat;

@@ -5,19 +5,19 @@ public class Order
     private bool _isFinished;
     private bool _isCooking;
     private Food _food;
-
-    public int TableNumber;
+    private int _tableNumber;
 
     public bool IsFinished => _isFinished;
     public bool IsCooking => _isCooking;
     public Food Food => _food;
+    public int TableNumber => _tableNumber;
 
     public event Action OrderFinished;
 
     public Order(Food food, int tableNumber)
     {
         _food = food;
-        TableNumber = tableNumber;
+        _tableNumber = tableNumber;
     }
 
     public void StartCook()

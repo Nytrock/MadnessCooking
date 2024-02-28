@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class LocationSlider : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
+public abstract class LocationSlider : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     [SerializeField] protected CameraManager _cameraManager;
     [SerializeField] protected Slider _slider;
@@ -29,8 +29,6 @@ public class LocationSlider : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         _slider.maxValue = _endPosition;
     }
 
-    protected virtual void ChangeSliderValue() { }
-
     public void ChangeCameraPosition(float newPosition)
     {
         if (_isDragging)
@@ -48,4 +46,6 @@ public class LocationSlider : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         _isDragging = false;
         _cameraManager.ChangeWorkMode(!_isDragging);
     }
+
+    protected abstract void ChangeSliderValue();
 }

@@ -6,12 +6,7 @@ public class IngredientStorageButtonPool : MonoBehaviour
     [SerializeField] private IngredientStorageButton _prefab;
     [SerializeField] private Transform _container;
 
-    private Queue<IngredientStorageButton> _pool;
-
-    private void Awake()
-    {
-        _pool = new Queue<IngredientStorageButton>();
-    }
+    private readonly Queue<IngredientStorageButton> _pool = new();
 
     public IngredientStorageButton GetObject(IngredientCount count)
     {

@@ -67,11 +67,10 @@ public abstract class CameraManager : MonoBehaviour
         }
     }
 
-    public virtual void SetCameraPosition(float newPosition) { }
-
     private void ChangeWorkMode(Transform newPosition)
     {
         _isWorking = newPosition.position.x == transform.position.x;
+        CameraMoved?.Invoke();
     }
 
     public void ChangeWorkMode(bool newState)
@@ -80,7 +79,9 @@ public abstract class CameraManager : MonoBehaviour
         _cameraVelocity = 0;
     }
 
-    protected virtual void CalculateBorderPositions() { }
+    public abstract void SetCameraPosition(float newPosition);
 
-    protected  virtual void MoveCamera() { }
+    protected abstract void CalculateBorderPositions();
+
+    protected abstract void MoveCamera();
 }

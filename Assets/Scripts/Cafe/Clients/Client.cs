@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -32,6 +33,7 @@ public class Client : MonoBehaviour
     public Transform ExitTarget { get; private set; }
     public float WaitMultiplier { get; private set; }
     public bool IsLeaving { get; private set; }
+    public bool IsEat { get; private set; }
     public Order Order { get; private set; }
     public int TableIndex { get; private set; }
     public CafeSpot Spot { get; private set; }
@@ -54,6 +56,7 @@ public class Client : MonoBehaviour
         _eatState = new();
 
         IsLeaving = false;
+        IsEat = false;
         gameObject.SetActive(true);
         NowState = _walkState;
         SetCloth(); 
@@ -161,6 +164,8 @@ public class Client : MonoBehaviour
             _table.AddMoney(Order.Food.MoneyGet);
             _table.CheckWait();
         }
+        
+        IsEat = true;
         _clientUI.SetUIVisible(false);
         NowState = _eatState;
         ClientEat?.Invoke(this);
