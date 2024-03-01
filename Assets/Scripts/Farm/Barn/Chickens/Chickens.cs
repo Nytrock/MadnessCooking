@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Chickens : MonoBehaviour
 {
-    [SerializeField] private Car _car;
+    [SerializeField] private FarmCar _car;
 
     private bool _isFeed;
     private bool _isAuto;

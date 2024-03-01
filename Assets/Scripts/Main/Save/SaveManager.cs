@@ -10,7 +10,7 @@ public class SaveManager : MonoBehaviour
     [SerializeField] private Food[] _allFood;
     [SerializeField] private Technic[] _allTechnic;
     [SerializeField] private BedType[] _allBedTypes;
-    [SerializeField] private Upgrade[] _allUpgrades;
+    [SerializeField] private BaseUpgrade[] _allUpgrades;
     [SerializeField] private Texture2D cursor;
 
     private void Awake()

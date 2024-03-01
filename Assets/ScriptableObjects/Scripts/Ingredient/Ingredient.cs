@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = nameof(BuyableObject) + "/" + nameof(Ingredient))]
+[CreateAssetMenu(menuName = AssetMenuName + nameof(Ingredient))]
 
 public class Ingredient : BuyableObject
 {

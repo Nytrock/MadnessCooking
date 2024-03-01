@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class BarnFridge : MonoBehaviour
 {
-    [SerializeField] private Car _car;
+    [SerializeField] private FarmCar _car;
 
     private int _milkCount;
     private int _flourCount;
