@@ -11,6 +11,7 @@ public class SaveManager : MonoBehaviour
     [SerializeField] private Technic[] _allTechnic;
     [SerializeField] private BedType[] _allBedTypes;
     [SerializeField] private BaseUpgrade[] _allUpgrades;
+    [SerializeField] private Decor[] _allDecor;
     [SerializeField] private Texture2D cursor;
 
     private void Awake()

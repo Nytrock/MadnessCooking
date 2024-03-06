@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(menuName = AssetMenuName + nameof(GroundBedUpgrade))]
-public class GroundBedUpgrade : BaseUpgrade
+public class GroundBedUpgrade : ProgressUpgrade
 {
     [SerializeField] private int _costAdd;
 
