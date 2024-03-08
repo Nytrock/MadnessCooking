@@ -17,7 +17,7 @@ public class TechnicShop : BaseInstantShop
 
         var index = _technicToBuy.IndexOf(technic);
         _technicToBuy.RemoveAt(index);
-        _catalog.UpdatePages(index);
+        _catalog.RemovePanel(index);
         SetObjectsArray();
     }
 

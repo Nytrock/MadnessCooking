@@ -9,6 +9,7 @@ public abstract class BaseBuyPanel : MonoBehaviour
     public virtual void Setup(BuyableObject item, BaseShop shop)
     {
         _item = item;
+        SetVisual(item);
         SetButtonListener(shop);
     }
 
@@ -18,4 +19,5 @@ public abstract class BaseBuyPanel : MonoBehaviour
     }
 
     protected abstract void SetButtonListener(BaseShop shop);
+    public abstract void SetVisual(BuyableObject item);
 }

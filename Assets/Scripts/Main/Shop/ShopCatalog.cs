@@ -47,19 +47,30 @@ public class ShopCatalog : MonoBehaviour
         _previousButton.interactable = _nowPage > 0;
     }
 
-    public void UpdatePages(int removedItemIndex)
+    public void RemovePanel(int removedItemIndex)
     {
         var startPageIndex = removedItemIndex / _pages[0].MaxItemCount;
         var panelIndex = removedItemIndex % _pages[0].MaxItemCount;
-        _pages[startPageIndex].RemovePanelByIndex(panelIndex);
+        _pages[startPageIndex].DestroyPanelByIndex(panelIndex);
+        UpdatePages(startPageIndex);
+    }
 
+    private void UpdatePages(int startPageIndex)
+    {
         for (int i = startPageIndex; i < _pages.Count - 1; i++) {
             var panel = _pages[i + 1].PopFirstPanel();
             _pages[i].AddPanel(panel);
         }
 
-        if (_pages[^1].ItemCount == 0)
+        if (_pages[^1].ItemCount == 0 && _pages.Count > 1)
             DestroyLastPage();
+    }
+
+    public void UpdatePanel(int updatedItemIndex, BuyableObject newItem)
+    {
+        var startPageIndex = updatedItemIndex / _pages[0].MaxItemCount;
+        var panelIndex = updatedItemIndex % _pages[0].MaxItemCount;
+        _pages[startPageIndex].UpdatePanelByIndex(panelIndex, newItem);
     }
 
     private void DestroyLastPage() {

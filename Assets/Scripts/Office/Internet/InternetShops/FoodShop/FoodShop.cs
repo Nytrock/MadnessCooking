@@ -19,7 +19,7 @@ public class FoodShop : BaseChooseShop
 
         var index = _foodToBuy.IndexOf(food);
         _foodToBuy.RemoveAt(index);
-        _catalog.UpdatePages(index);
+        _catalog.RemovePanel(index);
         SetObjectsArray();
     }
 

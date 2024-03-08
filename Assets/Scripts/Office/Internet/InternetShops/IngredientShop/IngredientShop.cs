@@ -23,7 +23,7 @@ public class IngredientShop : BaseInstantShop
 
         var index = _ingredientsToBuy.IndexOf(ingredient);
         _ingredientsToBuy.RemoveAt(index);
-        _catalog.UpdatePages(index);
+        _catalog.RemovePanel(index);
         SetObjectsArray();
     }
 

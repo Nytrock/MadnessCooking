@@ -29,11 +29,12 @@ public abstract class BaseShop : MonoBehaviour
 
         for (int i = 0; i < pageNum; i++) {
             var page = Instantiate(_pagePrefab, _catalog.PagesContainer);
+            page.SetShop(this);
             for (int j = 0; j < pageCount; j++) {
                 if (i * pageCount + j >= _itemsToBuy.Length)
                     break;
 
-                page.GeneratePanel(_itemsToBuy[i * pageCount + j], this);
+                page.GeneratePanel(_itemsToBuy[i * pageCount + j]);
             }
             _catalog.AddPage(page);
         }
