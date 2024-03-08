@@ -26,7 +26,7 @@ public class PestsGenerator : MonoBehaviour
             return;
 
         if (_nowTime < _needTime) {
-            _nowTime += Time.deltaTime;
+            _nowTime += Time.deltaTime * TimeManager.instance.TimeSpeed;
         } else {
             SpawnPest();
             _nowTime = 0;

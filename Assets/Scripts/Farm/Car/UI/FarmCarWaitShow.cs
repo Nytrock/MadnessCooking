@@ -33,7 +33,7 @@ public class FarmCarWaitShow : MonoBehaviour
             return;
 
         if (_nowTime > 0) {
-            _nowTime -= Time.deltaTime;
+            _nowTime -= Time.deltaTime * TimeManager.instance.TimeSpeed;
         } else {
             if (_isSended) {
                 _active = false;

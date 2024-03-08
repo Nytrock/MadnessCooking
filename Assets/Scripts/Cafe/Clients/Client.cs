@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -149,26 +147,30 @@ public class Client : MonoBehaviour
 
     public void FoodRejected()
     {
-        if (InGroup()) {
-            Sit();
+        if (InGroup())
             _table.DecreaseTalk();
-            _table.CheckTalk();
-        } else {
+        else
             Leave();
-        }
     }
 
     public void Eat()
     {
         if (InGroup()) {
             _table.AddMoney(Order.Food.MoneyGet);
-            _table.CheckWait();
+            _table.EndlessWait();
         }
         
         IsEat = true;
         _clientUI.SetUIVisible(false);
         NowState = _eatState;
         ClientEat?.Invoke(this);
+    }
+
+    public void SitWithGroup()
+    {
+        Sit();
+        _table.WaitChanged += _clientUI.SetUIVisible;
+        _table.CheckWait();
     }
 
     public void Sit()
@@ -206,13 +208,5 @@ public class Client : MonoBehaviour
     {
         return ClientType == ClientType.Double || ClientType == ClientType.Triple ||
             ClientType == ClientType.Quarter;
-    }
-
-    public void DisableWait()
-    {
-        if (_nowState != _sitState) {
-            Sit();
-            _clientUI.SetUIVisible(true);
-        }
     }
 }

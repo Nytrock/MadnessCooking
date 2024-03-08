@@ -24,12 +24,17 @@ public class ClientWalkState : ClientState
 
     public override void UpdateState()
     {
-        _client.transform.position = Vector2.MoveTowards(_client.transform.position, _target.position, _speed * Time.deltaTime);
+        _client.transform.position = Vector2.MoveTowards(_client.transform.position, 
+            _target.position, _speed * Time.deltaTime * TimeManager.instance.TimeSpeed);
         if (Vector2.Distance(_client.transform.position, _target.position) < 0.001f) {
-            if (_client.IsLeaving)
+            if (_client.IsLeaving) {
                 _client.Destroy();
-            else
-                _client.Wait();
+            } else {
+                if (_client.InGroup())
+                    _client.SitWithGroup();
+                else
+                    _client.Wait();
+            }
         }
     }
 }

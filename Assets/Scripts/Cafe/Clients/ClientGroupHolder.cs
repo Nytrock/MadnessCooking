@@ -7,41 +7,40 @@ using UnityEngine.UI;
 [RequireComponent(typeof(CafeSpot))]
 public class ClientGroupHolder : MonoBehaviour
 {
-    [SerializeField] private Slider _talkSlider;
-    [SerializeField] private int _minTalk;
-    [SerializeField] private int _maxTalk;
-    private float _talkTime;
-    private float _nowTime;
+    [SerializeField] private Slider _waitSlider;
+    [SerializeField] private float _minTalk;
+    [SerializeField] private float _maxTalk;
     private int _talkIndex;
     private bool _isTalk;
+
     private bool _isWait = true;
+    private float _waitTime;
+    private float _nowTime;
 
-    private int _clientsLeft = 0;
-    private int _moneyCount = 0;
-    private List<Client> _clients = new();
-
-    private CafeSpot _spot;
+    private int _clientsLeft;
+    private int _moneyCount;
+    private readonly List<Client> _clients = new();
 
     public event Action<Client> ClientsLeaved;
+    public event Action<bool> WaitChanged;
 
     private void Start()
     {
-        _spot = GetComponent<CafeSpot>();
-        ChangeSlider();
+        ChangeSliderState(false);
     }
 
     private void Update()
     {
-        if (!_isTalk)
+        if (!_isWait)
             return;
 
-        if (_nowTime < _talkTime) {
-            _nowTime += Time.deltaTime;
-            _talkSlider.value = _nowTime;
+        if (_nowTime < _waitTime) {
+            _nowTime += Time.deltaTime * TimeManager.instance.TimeSpeed;
+            _waitSlider.value = _nowTime;
         } else {
             _nowTime = 0;
             EndVisit();
-            ChangeSlider();
+            ChangeSliderState(false);
             StartCoroutine(ClientsLeave());
         }
     }
@@ -49,49 +48,68 @@ public class ClientGroupHolder : MonoBehaviour
     public void AddClient(Client newClient)
     {
         _clients.Add(newClient);
-        _clientsLeft++;
     }
 
     public IEnumerator SpawnGroupOfClients()
     {
         _talkIndex = _clients.Count;
+        _clientsLeft = _clients.Count;
         RandomizeClients();
+
         for (int i = 0; i < _clients.Count; i++) {
             _clients[i].StartNewCycle();
             yield return new WaitForSeconds(UnityEngine.Random.Range(0.5f, 1.2f));
         }
     }
 
+    public void CheckWait()
+    {
+        if (--_clientsLeft == 0)
+            StartWait();
+    }
+
+    private void StartWait()
+    {
+        _isWait = true;
+        _waitTime = _clients[0].GetWaitTime();
+        _nowTime = 0;
+
+        _waitSlider.maxValue = _waitTime;
+        _clientsLeft = _clients.Count;
+
+
+        ChangeSliderState(_isWait);
+        WaitChanged?.Invoke(true);
+    }
+
     public IEnumerator ClientsLeave()
     {
         RandomizeClients();
-        for (int i = 0; i < _clients.Count; i++) {
-            _clients[i].Leave();
+        WaitChanged?.Invoke(false);
+        WaitChanged = null;
+
+        Client[] leaveClients = _clients.ToArray();
+        _clients.Clear();
+
+        for (int i = 0; i < leaveClients.Length; i++) {
+            leaveClients[i].Leave();
             yield return new WaitForSeconds(UnityEngine.Random.Range(0.2f, 1f));
         }
-        _clients.Clear();
     }
 
     private void RandomizeClients()
     {
-        var count = _clientsLeft;
-        var last = count - 1;
+        var last = _clients.Count - 1;
         for (var i = 0; i < last; ++i) {
-            var r = UnityEngine.Random.Range(i, count);
-            var tmp = _clients[i];
-            _clients[i] = _clients[r];
-            _clients[r] = tmp;
+            var r = UnityEngine.Random.Range(i, _clients.Count);
+            (_clients[r], _clients[i]) = (_clients[i], _clients[r]);
         }
     }
 
-    public void CheckWait()
+    public void EndlessWait()
     {
-        if (_isWait)  {
-            for (int i = 0; i < _clients.Count; i++)
-                _clients[i].DisableWait();
-            _isWait = false;
-        }
-
+        ChangeSliderState(false);
+        _isWait = false;
     }
 
     public void AddMoney(int money)
@@ -108,6 +126,7 @@ public class ClientGroupHolder : MonoBehaviour
     public void DecreaseTalk()
     {
         _talkIndex--;
+        CheckTalk();
     }
 
     private void StartTalking()
@@ -118,15 +137,16 @@ public class ClientGroupHolder : MonoBehaviour
             return;
         }
 
-        _talkTime = _talkIndex * UnityEngine.Random.Range(_minTalk, _maxTalk);
-        _talkSlider.maxValue = _talkTime;
+        _waitTime = _talkIndex * UnityEngine.Random.Range(_minTalk, _maxTalk);
+        _waitSlider.maxValue = _waitTime;
+        _isWait = true;
         _isTalk = true;
-        ChangeSlider();
+        ChangeSliderState(true);
     }
 
-    private void ChangeSlider()
+    private void ChangeSliderState(bool newState)
     {
-        _talkSlider.gameObject.SetActive(_isTalk);
+        _waitSlider.gameObject.SetActive(newState);
     }
 
     public void CafeClosed()
@@ -134,7 +154,7 @@ public class ClientGroupHolder : MonoBehaviour
         EndVisit();
         _nowTime = 0;
         _clients.Clear();
-        ChangeSlider();
+        ChangeSliderState(false);
         StopAllCoroutines();
     }
 
@@ -148,9 +168,10 @@ public class ClientGroupHolder : MonoBehaviour
     {
         ClientsLeaved?.Invoke(_clients[0]);
         ClientsLeaved = null;
+        _waitSlider.value = 0;
         if (_isTalk)
             PayToPlayer();
         _isTalk = false;
-        _isWait = true;
+        _isWait = false;
     }
 }

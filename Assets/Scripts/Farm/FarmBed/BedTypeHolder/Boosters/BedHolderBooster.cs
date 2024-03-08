@@ -27,7 +27,7 @@ public class BedHolderBooster : MonoBehaviour
             return;
 
         if (_nowTime < _boostTime) {
-            _nowTime += Time.deltaTime;
+            _nowTime += Time.deltaTime * TimeManager.instance.TimeSpeed;
             _boostSprite.color -= new Color(0, 0, 0, _boostStep);
         } else {
             EndBoost();
@@ -42,7 +42,7 @@ public class BedHolderBooster : MonoBehaviour
         _nowTime = 0;
 
         ChangeSpriteAlpha(1);
-        _boostStep = 1 / _boostTime * Time.deltaTime;
+        _boostStep = 1 / _boostTime * Time.deltaTime * TimeManager.instance.TimeSpeed;
 
         return _boostMultiplier;
     }

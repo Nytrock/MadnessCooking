@@ -31,7 +31,7 @@ public class ClientWaitState : ClientState
     public override void UpdateState()
     {
         if (_nowTime < _waitTime) {
-            _nowTime += Time.deltaTime;
+            _nowTime += Time.deltaTime * TimeManager.instance.TimeSpeed;
             _waitSlider.value = _nowTime;
         } else {
             _client.Leave();

@@ -9,7 +9,7 @@ public class ShitGeneraor : MonoBehaviour
     private void Update()
     {
         if (_nowTime < _needTime) {
-            _nowTime += Time.deltaTime;
+            _nowTime += Time.deltaTime * TimeManager.instance.TimeSpeed;
         } else {
             _puncher.AddShit();
             _nowTime = 0;

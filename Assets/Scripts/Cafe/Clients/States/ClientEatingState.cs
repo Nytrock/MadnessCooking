@@ -5,7 +5,6 @@ public class ClientEatingState : ClientState
     private float _eatTime;
     private float _nowTime = 0;
 
-
     public override void EnterState(Client client)
     {
         _client = client;
@@ -22,7 +21,7 @@ public class ClientEatingState : ClientState
     public override void UpdateState()
     {
         if (_nowTime < _eatTime)
-            _nowTime += Time.deltaTime;
+            _nowTime += Time.deltaTime * TimeManager.instance.TimeSpeed;
         else
             _client.Pay();
     }

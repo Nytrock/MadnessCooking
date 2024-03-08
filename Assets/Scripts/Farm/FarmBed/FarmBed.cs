@@ -40,7 +40,8 @@ public class FarmBed : MonoBehaviour
             return;
 
         if (_nowTime < _growTime) {
-            _nowTime += Time.deltaTime * _waterBoost * _fertilizeBoost * _pestsSlowdown;
+            _nowTime += Time.deltaTime * _waterBoost * _fertilizeBoost 
+                * _pestsSlowdown * TimeManager.instance.TimeSpeed;
         } else {
             _count++;
             CountChanged?.Invoke();

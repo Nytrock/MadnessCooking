@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(TechnicHolder))]
-public class TechnicWaiter : MonoBehaviour
+public abstract class TechnicWaiter : MonoBehaviour
 {
     protected float _nowTime;
     protected float _needTime;
@@ -31,7 +31,7 @@ public class TechnicWaiter : MonoBehaviour
             return;
 
         if (_nowTime < _needTime)
-            _nowTime += Time.deltaTime * _speedMultiplier;
+            _nowTime += Time.deltaTime * _speedMultiplier * TimeManager.instance.TimeSpeed;
         else
             EndWork();
     }

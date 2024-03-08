@@ -28,7 +28,7 @@ public class FarmCarWaitManager : MonoBehaviour
             return;
 
         if (_nowTime < _waitTime) {
-            _nowTime += Time.deltaTime;
+            _nowTime += Time.deltaTime * TimeManager.instance.TimeSpeed;
         } else {
             if (_isSended) {
                 _isWait = true;

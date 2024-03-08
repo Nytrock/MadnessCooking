@@ -1,14 +1,19 @@
+using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class OfficeBedUI : MonoBehaviour
 {
     [SerializeField] private GameObject _panel;
-    [SerializeField] private Button _sleepButton;
+    [SerializeField] private GameObject _blockPanel;
+    [SerializeField] private TextMeshProUGUI _sleepButtonText;
+    [SerializeField] private string _isSleepText;
+    [SerializeField] private string _notSleepText;
 
     private void Start()
     {
         _panel.SetActive(false);
+        _blockPanel.SetActive(false);
+        _sleepButtonText.text = _notSleepText;
     }
 
     public void ChangeState()
@@ -16,13 +21,12 @@ public class OfficeBedUI : MonoBehaviour
         _panel.SetActive(!_panel.activeSelf);
     }
 
-    public void CheckButton(Daytime daytime)
+    public void ChangeButtonText(bool isSleep)
     {
-        _sleepButton.interactable = daytime == Daytime.Night;
-    }
-
-    public void StartSleep()
-    {
-        _panel.SetActive(false);
+        _blockPanel.SetActive(isSleep);
+        if (isSleep)
+            _sleepButtonText.text = _isSleepText;
+        else
+            _sleepButtonText.text = _notSleepText;
     }
 }

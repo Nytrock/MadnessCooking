@@ -26,14 +26,14 @@ public class Chickens : MonoBehaviour
             return;
 
         if (_nowTime < _eggTime) { 
-            _nowTime += Time.deltaTime;
+            _nowTime += Time.deltaTime * TimeManager.instance.TimeSpeed;
         } else { 
             _nowTime = 0;
             AddEgg();
         }
 
         if (_feedTime < _maxFeedTime) { 
-            _feedTime += Time.deltaTime;
+            _feedTime += Time.deltaTime * TimeManager.instance.TimeSpeed;
         } else {
             _isFeed = false;
         }

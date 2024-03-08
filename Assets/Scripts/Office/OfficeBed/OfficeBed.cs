@@ -4,15 +4,12 @@ public class OfficeBed : MonoBehaviour
 {
     [SerializeField] private TimeManager _timeManager;
     [SerializeField] private OfficeBedUI _officeBedUI;
+    private bool _isSleeping;
 
-    private void Start()
+    public void ChangeSleepState()
     {
-        _timeManager.DaytimeChanged += _officeBedUI.CheckButton;
-    }
-
-    public void StartSleep()
-    {
-        _officeBedUI.StartSleep();
-        _timeManager.SkipNight();
+        _isSleeping = !_isSleeping;
+        _officeBedUI.ChangeButtonText(_isSleeping);
+        _timeManager.ChangeSleepState(_isSleeping);
     }
 }

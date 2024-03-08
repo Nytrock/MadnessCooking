@@ -3,31 +3,36 @@ using UnityEngine;
 
 public class TimeManager : MonoBehaviour
 {
-    [SerializeField] private int _defaultTimeSpeed = 1;
-    [SerializeField] private int _boostedTimeSpeed = 150;
+    public static TimeManager instance;
+
+    [SerializeField] private int _defaultTimeSpeed;
+    [SerializeField] private int _sleepTimeSpeed;
+    private int _nowTimeSpeed;
 
     [SerializeField] private DaytimeStart[] _daytimeStarts;
 
     private TimeSpan _timespan = new(7, 0, 0);
-    private int _timeSpeed;
-    private bool _isSkippingNight;
-
     private Daytime _daytime = Daytime.Morning;
 
     public TimeSpan TimeSpan => _timespan;
-    public int TimeSpeed => _timeSpeed;
+    public int TimeSpeed => _nowTimeSpeed;
 
     public event Action<Daytime> DaytimeChanged;
 
+    private void Awake()
+    {
+        instance = this;
+    }
+
     private void Start()
     {
-        _timeSpeed = _defaultTimeSpeed;
         DaytimeChanged?.Invoke(_daytime);
+        _nowTimeSpeed = _defaultTimeSpeed;
     }
 
     private void Update()
     {
-        _timespan = _timespan.Add(new TimeSpan(0, 0, 1 * _timeSpeed));
+        _timespan = _timespan.Add(new TimeSpan(0, 0, 1 * _nowTimeSpeed));
 
         foreach (var daytimeStart in _daytimeStarts) {
             if (daytimeStart.TimeFits(_timespan, _daytime)) {
@@ -41,17 +46,11 @@ public class TimeManager : MonoBehaviour
     {
         _daytime = _newDaytime;
         DaytimeChanged?.Invoke(_daytime);
-
-        if (_daytime == Daytime.Morning && _isSkippingNight) {
-            _isSkippingNight = false;
-            _timeSpeed = _defaultTimeSpeed;
-        }
     }
 
-    public void SkipNight()
+    public void ChangeSleepState(bool isSleep)
     {
-        _timeSpeed = _boostedTimeSpeed;
-        _isSkippingNight = true;
+        _nowTimeSpeed = isSleep ? _sleepTimeSpeed : _defaultTimeSpeed;
     }
 
     public DaytimeStart GetDaytimeStartInfo(Daytime daytime)
