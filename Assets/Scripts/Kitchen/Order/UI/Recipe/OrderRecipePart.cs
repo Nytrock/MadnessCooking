@@ -1,9 +1,10 @@
 using UnityEngine;
 
-public class OrderRecipePart : FoodRecipePart
+public class OrderRecipePart : ShopFoodRecipePart
 {
-    [SerializeField] Color _haveColor;
-    [SerializeField] Color _dontHaveColor;
+    [SerializeField] private Sprite _moneySprite;
+    [SerializeField] private Color _haveColor;
+    [SerializeField] private Color _dontHaveColor;
 
     public override void Setup(IngredientCount count, bool isHave)
     {
@@ -11,6 +12,17 @@ public class OrderRecipePart : FoodRecipePart
         if (isHave)
             _count.color = _haveColor;
         else 
+            _count.color = _dontHaveColor;
+    }
+
+    public void SetupAutoSpice(Ingredient spice, int count)
+    {
+        gameObject.SetActive(true);
+        _icon.sprite = _moneySprite;
+        _count.text = (spice.Cost * count).ToString() + "x";
+        if (MoneyManager.instance.MoneyAmount >= spice.Cost * count)
+            _count.color = _haveColor;
+        else
             _count.color = _dontHaveColor;
     }
 

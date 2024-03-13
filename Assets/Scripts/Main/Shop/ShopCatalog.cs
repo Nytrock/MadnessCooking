@@ -45,6 +45,10 @@ public class ShopCatalog : MonoBehaviour
     {
         _nextButton.interactable = _nowPage < _pages.Count - 1;
         _previousButton.interactable = _nowPage > 0;
+        if (!_nextButton.interactable && !_previousButton.interactable) {
+            _nextButton.gameObject.SetActive(false);
+            _previousButton.gameObject.SetActive(false);
+        }
     }
 
     public void RemovePanel(int removedItemIndex)
@@ -79,6 +83,7 @@ public class ShopCatalog : MonoBehaviour
         if (_nowPage == _pages.Count - 1)
             PreviousPage();
         _pages.RemoveAt(_pages.Count - 1);
+
         UpdateButtons();
     }
 }

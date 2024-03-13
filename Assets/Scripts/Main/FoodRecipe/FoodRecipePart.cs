@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class FoodRecipePart : MonoBehaviour
 {
-    [SerializeField] private Image _icon;
+    [SerializeField] protected Image _icon;
     [SerializeField] protected TextMeshProUGUI _count;
 
     public virtual void Setup(IngredientCount count, bool isHave)

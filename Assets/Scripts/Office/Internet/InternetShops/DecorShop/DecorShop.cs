@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class DecorShop : BaseInstantShop
@@ -34,6 +35,7 @@ public class DecorShop : BaseInstantShop
 
     protected override void SetObjectsArray()
     {
+        _decorToBuy = _decorToBuy.OrderBy(x => x.Cost).ToList();
         _itemsToBuy = _decorToBuy.ToArray();
     }
 }

@@ -42,7 +42,7 @@ public class OrderButton : MonoBehaviour
         _title.text = _order.Food.Name;
         _tableCount.text = _order.TableNumber.ToString();
 
-        _recipe.SetupRecipe(_order.Food);
+        _recipe.SetupRecipe(_order.Food, _ordersUI.IsAutoSpice);
         _cookButton.interactable = _recipe.CanCook;
     }
 
@@ -51,7 +51,7 @@ public class OrderButton : MonoBehaviour
         if (_order == null) return;
         if (_order.IsCooking || _order.IsFinished) return;
 
-        _recipe.SetupRecipe(_order.Food);
+        _recipe.SetupRecipe(_order.Food, _ordersUI.IsAutoSpice);
         _cookButton.interactable = _recipe.CanCook;
     }
 

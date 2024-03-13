@@ -16,7 +16,7 @@ public class OrderCookingSlider : MonoBehaviour
         if (!_isCooking)
             return;
 
-        if (!_technic.IsFree) {
+        if (_technic.IsCooking) {
             _cookingSlider.value = _cooker.NowTime;
         } else {
             _isCooking = false;

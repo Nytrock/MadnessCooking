@@ -3,7 +3,6 @@ using UnityEngine.UI;
 
 public class ClientWaitState : ClientState
 {
-    private ClientUI _clientUI;
     private Slider _waitSlider;
     private float _waitTime;
     private float _waitMultiplier;
@@ -11,30 +10,31 @@ public class ClientWaitState : ClientState
 
     public override void EnterState(Client client)
     {
-        _client = client;
-        _clientUI = client.GetComponent<ClientUI>();
+        var clientUI = client.GetComponent<ClientUI>();
 
-        _clientUI.SetUIVisible(true);
-        _waitMultiplier = _client.WaitMultiplier;
-        _waitTime = _client.GetWaitTime();
-        _waitSlider = _clientUI.WaitSlider;
+        clientUI.ChangeFoodChoiceState(true);
+        clientUI.ChangeSliderState(true);
+        _waitMultiplier = client.WaitMultiplier;
+        _waitTime = client.GetWaitTime();
+        _nowTime = 0;
+        _waitSlider = clientUI.WaitSlider;
         _waitSlider.maxValue = _waitTime;
 
-        _client.OrderActivated += DecreaseWait;
+        client.OrderActivated += DecreaseWait;
     }
 
-    public override void ExitState()
+    public override void ExitState(Client client)
     {
 
     }
 
-    public override void UpdateState()
+    public override void UpdateState(Client client)
     {
         if (_nowTime < _waitTime) {
             _nowTime += Time.deltaTime * TimeManager.instance.TimeSpeed;
             _waitSlider.value = _nowTime;
         } else {
-            _client.Leave();
+            client.Leave();
         }
     }
 

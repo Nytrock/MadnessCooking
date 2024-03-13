@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class TechnicShop : BaseInstantShop
@@ -23,6 +24,7 @@ public class TechnicShop : BaseInstantShop
 
     protected override void SetObjectsArray()
     {
+        _technicToBuy = _technicToBuy.OrderBy(x => x.Cost).ToList();
         _itemsToBuy = _technicToBuy.ToArray();
     }
 }

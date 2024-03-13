@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class FoodShop : BaseChooseShop
@@ -25,6 +26,7 @@ public class FoodShop : BaseChooseShop
 
     protected override void SetObjectsArray()
     {
+        _foodToBuy = _foodToBuy.OrderBy(x => x.Cost).ToList();
         _itemsToBuy = _foodToBuy.ToArray();
     }
 }

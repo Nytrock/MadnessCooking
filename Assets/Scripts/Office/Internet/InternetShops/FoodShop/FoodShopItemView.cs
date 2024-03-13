@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class FoodShopItemView : BaseChooseShopItemView
 {
-    [SerializeField] private FoodRecipe _recipeRenderer;
+    [SerializeField] private ShopFoodRecipe _recipeRenderer;
 
     protected override void SetInfo(BuyableObject item)
     {

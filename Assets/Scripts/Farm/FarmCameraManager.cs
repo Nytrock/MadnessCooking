@@ -10,6 +10,7 @@ public class FarmCameraManager : CameraManager
     {
         _endPosition = transform.position.y;
         _startPosition = _endPosition - (_bedsManager.GroupsCount - 1) * _bedsManager.GetBedSize();
+        InvokeBordersFound();
     }
 
     protected override void MoveCamera()

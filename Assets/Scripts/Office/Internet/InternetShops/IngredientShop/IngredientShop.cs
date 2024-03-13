@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class IngredientShop : BaseInstantShop
@@ -29,6 +30,8 @@ public class IngredientShop : BaseInstantShop
 
     protected override void SetObjectsArray()
     {
+        _ingredientsToBuy = _ingredientsToBuy.OrderBy(x => 
+        (x.TypeIngredient != IngredientType.Buyable, x.Cost)).ToList();
         _itemsToBuy = _ingredientsToBuy.ToArray();
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class ClientUI : MonoBehaviour
 {
     [SerializeField] private Animator _animator;
-    [SerializeField] private GameObject _canvas;
+    [SerializeField] private GameObject _choseFoodPanel;
     [SerializeField] private GameObject _buttonsBlock;
     [SerializeField] private Button _mainButton;
     [SerializeField] private Button _yesButton;
@@ -31,13 +31,13 @@ public class ClientUI : MonoBehaviour
         _mainButton.onClick.AddListener(_client.ActivateOrder);
         _foodImage.sprite = _defaultSprite;
         _animator.SetBool("isFinished", false);
-        ChangeSliderState(true);
-        SetUIVisible(false);
+        ChangeSliderState(false);
+        ChangeFoodChoiceState(false);
     }
 
-    public void SetUIVisible(bool newValue)
+    public void ChangeFoodChoiceState(bool newValue)
     {
-        _canvas.SetActive(newValue);
+        _choseFoodPanel.SetActive(newValue);
     }
 
     private void ChangeButtonsBlockVisible()

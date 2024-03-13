@@ -7,11 +7,6 @@ public class Client : MonoBehaviour
 {
     #region States Settings
     private ClientState _nowState;
-    public ClientState NowState
-    {
-        get { return _nowState; }
-        set { _nowState?.ExitState(); _nowState = value; _nowState.EnterState(this); }
-    }
     private ClientWalkState _walkState = new();
     private ClientWaitState _waitState = new();
     private ClientEatingState _eatState = new();
@@ -32,6 +27,7 @@ public class Client : MonoBehaviour
     public float WaitMultiplier { get; private set; }
     public bool IsLeaving { get; private set; }
     public bool IsEat { get; private set; }
+    public bool IsEatTimeShow { get; private set; }
     public Order Order { get; private set; }
     public int TableIndex { get; private set; }
     public CafeSpot Spot { get; private set; }
@@ -50,20 +46,25 @@ public class Client : MonoBehaviour
     public void StartNewCycle()
     {
         enabled = true;
-        _waitState = new();
-        _eatState = new();
-
         IsLeaving = false;
         IsEat = false;
         gameObject.SetActive(true);
-        NowState = _walkState;
+        ChangeState(_walkState);
         SetCloth(); 
         _clientUI.StartNewCycle();
     }
 
+    private void ChangeState(ClientState newState)
+    {
+        if (_nowState != null)
+            _nowState.ExitState(this);
+        _nowState = newState;
+        _nowState.EnterState(this);
+    }
+
     private void Update()
     {
-        NowState.UpdateState();
+        _nowState.UpdateState(this);
     }
 
     private void SetCloth()
@@ -119,7 +120,7 @@ public class Client : MonoBehaviour
 
     public void Wait()
     {
-        NowState = _waitState;
+        ChangeState(_waitState);
     }
 
     public void Pay()
@@ -141,8 +142,9 @@ public class Client : MonoBehaviour
         ClientLeave?.Invoke(this);
         ClientLeave = null;
         IsLeaving = true;
-        NowState = _walkState;
-        _clientUI.SetUIVisible(false);
+        ChangeState(_walkState);
+        _clientUI.ChangeFoodChoiceState(false);
+        _clientUI.ChangeSliderState(false);
     }
 
     public void FoodRejected()
@@ -161,21 +163,21 @@ public class Client : MonoBehaviour
         }
         
         IsEat = true;
-        _clientUI.SetUIVisible(false);
-        NowState = _eatState;
+        ChangeState(_eatState); 
         ClientEat?.Invoke(this);
     }
 
     public void SitWithGroup()
     {
         Sit();
-        _table.WaitChanged += _clientUI.SetUIVisible;
+        _table.WaitChanged += _clientUI.ChangeFoodChoiceState;
+        _table.WaitChanged += _clientUI.ChangeSliderState;
         _table.CheckWait();
     }
 
     public void Sit()
     {
-        NowState = _sitState;
+        ChangeState(_sitState);
     }
 
     public void Destroy()
@@ -208,5 +210,10 @@ public class Client : MonoBehaviour
     {
         return ClientType == ClientType.Double || ClientType == ClientType.Triple ||
             ClientType == ClientType.Quarter;
+    }
+
+    public void ChangeShowingTimeEat(bool value)
+    {
+        IsEatTimeShow = value;
     }
 }

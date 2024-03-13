@@ -7,33 +7,32 @@ public class ClientWalkState : ClientState
 
     public override void EnterState(Client client)
     {
-        _client = client;
-        _client.ChangeSortingGroup(10);
-        if (_client.IsLeaving)
+        client.ChangeSortingGroup(10);
+        if (client.IsLeaving)
             _target = client.ExitTarget;
         else
             _target = client.EnterTarget;
-        _client.RotateSkin(_client.IsLeaving);
+        client.RotateSkin(client.IsLeaving);
     }
 
-    public override void ExitState()
+    public override void ExitState(Client client)
     {
-        _client.RotateSkin();
-        _client.ChangeSortingGroup(5);
+        client.RotateSkin();
+        client.ChangeSortingGroup(5);
     }
 
-    public override void UpdateState()
+    public override void UpdateState(Client client)
     {
-        _client.transform.position = Vector2.MoveTowards(_client.transform.position, 
+        client.transform.position = Vector2.MoveTowards(client.transform.position, 
             _target.position, _speed * Time.deltaTime * TimeManager.instance.TimeSpeed);
-        if (Vector2.Distance(_client.transform.position, _target.position) < 0.001f) {
-            if (_client.IsLeaving) {
-                _client.Destroy();
+        if (Vector2.Distance(client.transform.position, _target.position) < 0.001f) {
+            if (client.IsLeaving) {
+                client.Destroy();
             } else {
-                if (_client.InGroup())
-                    _client.SitWithGroup();
+                if (client.InGroup())
+                    client.SitWithGroup();
                 else
-                    _client.Wait();
+                    client.Wait();
             }
         }
     }

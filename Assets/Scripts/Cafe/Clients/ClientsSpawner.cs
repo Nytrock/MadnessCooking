@@ -1,7 +1,9 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(PopularityXpAdder))]
-public class ClientsSpawner : MonoBehaviour
+public class ClientsSpawner : MonoBehaviour, IUpgradeable
 {
     [SerializeField] private Transform _spawnPoint;
     [SerializeField] private PopularityCalculator _popularityCalculate;
@@ -11,10 +13,15 @@ public class ClientsSpawner : MonoBehaviour
     [SerializeField] private OrdersManager _ordersManager;
     [SerializeField] private ClientsPool _pool;
 
-    [Header("Время спавна")]
+    [Header("Spawn time")]
     [SerializeField] private float _minSpawnTime;
     [SerializeField] private float _maxSpawnTime;
 
+    [Header("Upgrades")]
+    [SerializeField] private BaseUpgrade _eatTimeShowUpgrade;
+    private bool _isEatTimeShow;
+
+    private List<Client> _clients = new();
     private float _needTime;
     private float _nowTime;
     private bool _isSpawning = true;
@@ -83,7 +90,7 @@ public class ClientsSpawner : MonoBehaviour
         var minTime = _minSpawnTime / popular;
         var maxTime = _maxSpawnTime / popular;
 
-        _needTime = Random.Range(minTime, maxTime);
+        _needTime = UnityEngine.Random.Range(minTime, maxTime);
         _nowTime = 0;
     }
 
@@ -105,9 +112,9 @@ public class ClientsSpawner : MonoBehaviour
             return ClientType.Critic;
 
         _popularityCalculate.GetClientsNumberChances(out int singleChance, out int doubleChance, out int tripleChance, out int quarterChance);
-        var number = Random.Range(1, 1001);
+        var number = UnityEngine.Random.Range(1, 1001);
         if (number <= singleChance) {
-            number = Random.Range(1, 10001);
+            number = UnityEngine.Random.Range(1, 10001);
             if (number == 1)
                 return ClientType.GrayMan;
             else if (number <= 50)
@@ -140,6 +147,8 @@ public class ClientsSpawner : MonoBehaviour
 
     private void SetupClient(Client client, CafeSpot spot, ClientType clientType, int spotIndex)
     {
+        _clients.Add(client);
+        client.ChangeShowingTimeEat(_isEatTimeShow);
         var clientSettings = new ClientSettings(_spawnPoint,
                                                 spot.GetTarget(spotIndex),
                                                 clientType,
@@ -156,5 +165,15 @@ public class ClientsSpawner : MonoBehaviour
     public void ChangeCriticWait(bool newValue)
     {
         _isWaitingCritic = newValue;
+    }
+
+    public void CheckUpgrade(BaseUpgrade upgrade)
+    {
+        if (upgrade == _eatTimeShowUpgrade) {
+            _isEatTimeShow = true;
+            foreach (var client in _clients) {
+                client.ChangeShowingTimeEat(true);
+            }
+        }
     }
 }
