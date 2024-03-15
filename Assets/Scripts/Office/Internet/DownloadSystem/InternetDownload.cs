@@ -12,7 +12,7 @@ public class InternetDownload : MonoBehaviour, IUpgradeable
     [SerializeField] private float _maxWait;
 
     [Header("Upgrades")]
-    [SerializeField] private ProgressUpgrade[] _speedUpgrades;
+    [SerializeField] private GraphUpgrade[] _speedUpgrades;
     private float _speed = 1;
     private bool _isInstant;
 

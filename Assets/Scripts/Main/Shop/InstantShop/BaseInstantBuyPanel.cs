@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BaseInstantBuyPanel : BaseBuyPanel
+public abstract class BaseInstantBuyPanel : BaseBuyPanel
 {
     [SerializeField] private ItemInfoRendererWithNum _itemInfoRenderer;
     [SerializeField] protected string _costText;

@@ -1,20 +1,39 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ShopCatalog : MonoBehaviour
 {
     [SerializeField] private Transform _pagesContainer;
+    [SerializeField] private ShopCatalogPage _pagePrefab;
     [SerializeField] private Button _nextButton;
     [SerializeField] private Button _previousButton;
+    private BaseShop _shop;
 
     private readonly List<ShopCatalogPage> _pages = new();
     private int _nowPage = 0;
 
     public Transform PagesContainer => _pagesContainer;
 
-    public void AddPage(ShopCatalogPage page)
+    public void SetShop(BaseShop shop)
     {
+        _shop = shop;
+    }
+
+    public void GeneratePanel(BuyableObject item)
+    {
+        if (_pages.Count == 0 || _pages[^1].ItemCount == _pages[^1].MaxItemCount) {
+            GeneratePage();
+            UpdateButtons();
+        }
+        _pages[^1].GeneratePanel(item);
+    }
+
+    public void GeneratePage()
+    {
+        var page = Instantiate(_pagePrefab, _pagesContainer);
+        page.SetShop(_shop);
         _pages.Add(page);
         page.ChangeState(false);
     }
@@ -45,10 +64,8 @@ public class ShopCatalog : MonoBehaviour
     {
         _nextButton.interactable = _nowPage < _pages.Count - 1;
         _previousButton.interactable = _nowPage > 0;
-        if (!_nextButton.interactable && !_previousButton.interactable) {
-            _nextButton.gameObject.SetActive(false);
-            _previousButton.gameObject.SetActive(false);
-        }
+        _nextButton.gameObject.SetActive(_pages.Count != 1);
+        _previousButton.gameObject.SetActive(_pages.Count != 1);
     }
 
     public void RemovePanel(int removedItemIndex)

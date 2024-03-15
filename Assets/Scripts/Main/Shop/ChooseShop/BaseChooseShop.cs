@@ -3,7 +3,7 @@ using UnityEngine;
 public abstract class BaseChooseShop : BaseShop
 {
     [SerializeField] private BaseChooseShopItemView _itemView;
-    protected BaseChooseBuyPanel _nowPanel;
+    public BaseChooseBuyPanel NowPanel { get; private set; }
 
     public override void ChangeShopState(bool newState)
     {
@@ -15,12 +15,12 @@ public abstract class BaseChooseShop : BaseShop
 
     public override void BuyItem(BuyableObject item)
     {
-        _nowPanel.BuyChosenItem();
+        NowPanel.BuyChosenItem();
     }
 
     public void ChooseItem(BaseChooseBuyPanel panel)
     {
-        _nowPanel = panel;
+        NowPanel = panel;
         _itemView.ShowItem(panel.Item);
     }
 }

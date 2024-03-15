@@ -1,4 +1,4 @@
-public class FoodBuyPanel : BaseChooseBuyPanel
+public class FoodShopBuyPanel : BaseChooseBuyPanel
 {
     protected override void OnChooseItem()
     {

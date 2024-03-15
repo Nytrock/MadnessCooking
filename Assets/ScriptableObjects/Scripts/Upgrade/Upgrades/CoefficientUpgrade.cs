@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(menuName = AssetMenuName + nameof(CoefficientUpgrade))]
-public class CoefficientUpgrade : ProgressUpgrade
+public class CoefficientUpgrade : GraphUpgrade
 {
     [SerializeField] private float _coefficient;
 

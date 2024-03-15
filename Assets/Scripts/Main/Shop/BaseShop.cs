@@ -4,7 +4,6 @@ public abstract class BaseShop : MonoBehaviour
 {
     [SerializeField] private GameObject _shop;
     [SerializeField] protected ShopCatalog _catalog;
-    [SerializeField] private ShopCatalogPage _pagePrefab;
 
     protected BuyableObject[] _itemsToBuy;
 
@@ -21,24 +20,9 @@ public abstract class BaseShop : MonoBehaviour
 
     protected void GenerateShop() {
         SetObjectsArray();
-
-        int pageCount = _pagePrefab.MaxItemCount;
-        int pageNum = _itemsToBuy.Length / pageCount;
-        if (_itemsToBuy.Length % pageCount != 0)
-            pageNum++;
-
-        for (int i = 0; i < pageNum; i++) {
-            var page = Instantiate(_pagePrefab, _catalog.PagesContainer);
-            page.SetShop(this);
-            for (int j = 0; j < pageCount; j++) {
-                if (i * pageCount + j >= _itemsToBuy.Length)
-                    break;
-
-                page.GeneratePanel(_itemsToBuy[i * pageCount + j]);
-            }
-            _catalog.AddPage(page);
-        }
-
+        _catalog.SetShop(this);
+        for (int i = 0; i < _itemsToBuy.Length; i++)
+            _catalog.GeneratePanel(_itemsToBuy[i]);
         _catalog.ActivateFirstPage();
     }
 

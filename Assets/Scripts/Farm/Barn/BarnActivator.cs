@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BarnOpener : UIActivator
+public class BarnActivator : UIActivator
 {
     [SerializeField] private Transform _amber;
     [SerializeField] private Transform _farm;

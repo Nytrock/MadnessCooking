@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BaseChooseShopItemView : MonoBehaviour
+public abstract class BaseChooseShopItemView : MonoBehaviour
 {
     [SerializeField] protected BaseChooseShop _shop;
     [SerializeField] private ItemInfoRendererWithNum _renderer;
@@ -43,7 +43,7 @@ public class BaseChooseShopItemView : MonoBehaviour
         _buyButton.interactable = _itemToBuy != null;
     }
 
-    public void BuyChosen()
+    public virtual void BuyChosen()
     {
         _shop.BuyItem(_itemToBuy);
         ResetInfo();

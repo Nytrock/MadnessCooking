@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(menuName = AssetMenuName + nameof(CountUpgrade))]
-public class CountUpgrade : ProgressUpgrade
+public class CountUpgrade : GraphUpgrade
 {
     [SerializeField] private int _count;
 
