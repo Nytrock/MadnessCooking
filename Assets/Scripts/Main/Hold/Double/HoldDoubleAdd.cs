@@ -1,9 +1,6 @@
-using UnityEngine;
-
 public class HoldDoubleAdd : HoldAdd
 {
     protected int _materialCount;
-    protected bool _needMaterial = true;
 
     protected override void Start()
     {
@@ -13,7 +10,7 @@ public class HoldDoubleAdd : HoldAdd
 
     protected override void UpdateTimer()
     {
-        if (_materialCount == 0 && _needMaterial)
+        if (_materialCount == 0)
             return;
 
         base.UpdateTimer();
@@ -21,7 +18,7 @@ public class HoldDoubleAdd : HoldAdd
 
     public override void ChangeWorkMode(bool newValue)
     {
-        if (_materialCount == 0 && _needMaterial) {
+        if (_materialCount == 0) {
             _UI.ChangeUI(newValue);
             return;
         }

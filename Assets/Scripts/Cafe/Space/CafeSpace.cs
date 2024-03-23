@@ -1,11 +1,4 @@
-using UnityEngine;
-
-public class CafeSpace : MonoBehaviour
+public class CafeSpace : SpacePrefab
 {
-    [SerializeField] private float _size;
 
-    public float GetSpaceSize()
-    {
-        return _size;
-    }
 }

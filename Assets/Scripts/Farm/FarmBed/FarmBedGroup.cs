@@ -1,14 +1,8 @@
 using UnityEngine;
 
-public class FarmBedGroup : MonoBehaviour
+public class FarmBedGroup : SpacePrefab
 {
-    [SerializeField] private float _size;
     [SerializeField] private FarmBed[] _groundBeds;
-
-    public float GetBedSize()
-    {
-        return _size;
-    }
 
     public void BedsSetup(FarmBedSettings settings)
     {

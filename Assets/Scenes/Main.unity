@@ -5808,13 +5808,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6942dd7f14058a34d863703dabf825d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _groupsCount: 8
-  _groundBedGroupPrefab: {fileID: 1149188167999997339, guid: d3ff9b65471ce7b46bbc97fb741ba5d5, type: 3}
+  _spacePrefab: {fileID: 1149188167999997339, guid: d3ff9b65471ce7b46bbc97fb741ba5d5, type: 3}
+  _spaceAddUpgrades:
+  - {fileID: 11400000, guid: d7ba24184fd3ada45858988ee97f9a14, type: 2}
+  - {fileID: 11400000, guid: d8dfd1006f8b948438f72116b43c0d94, type: 2}
+  - {fileID: 11400000, guid: 6c58e5477d97ae94cb12a08d1f756870, type: 2}
+  - {fileID: 11400000, guid: 30dc8c338c08a38438ec9427a0eca4b5, type: 2}
+  - {fileID: 11400000, guid: ff66ec3f81005284495882bf67e21fdd, type: 2}
+  - {fileID: 11400000, guid: 9ab756c47c2c2ab43a7320a7618b5aa1, type: 2}
+  - {fileID: 11400000, guid: 4d5f7a0b532088044b433d26ec9245a5, type: 2}
   _bedsSettings:
     _UIManager: {fileID: 1753152295}
     _bedChoiceUI: {fileID: 461820189}
     _wheatManager: {fileID: 590866774}
-    _car: {fileID: 1317336878}
+    _car: {fileID: 1090935202}
 --- !u!4 &197975457
 Transform:
   m_ObjectHideFlags: 0
@@ -10374,7 +10381,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8184c42cb16825343b7ea8e4b74ee31d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _car: {fileID: 1317336878}
+  _car: {fileID: 1090935202}
 --- !u!1 &373737564
 GameObject:
   m_ObjectHideFlags: 0
@@ -13337,7 +13344,7 @@ MonoBehaviour:
   _submitButton: {fileID: 789811624}
   _bedTypesManager: {fileID: 713062803}
   _description: {fileID: 1449719487}
-  _ingredientsShower: {fileID: 943958581}
+  _ingredientsRenderer: {fileID: 943958581}
 --- !u!222 &461820191
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -16879,7 +16886,7 @@ GameObject:
   - component: {fileID: 590866775}
   - component: {fileID: 590866774}
   m_Layer: 0
-  m_Name: WheatManger
+  m_Name: WheatManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20918,7 +20925,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 726145195}
   - {fileID: 1086958102}
   - {fileID: 1021116376}
   - {fileID: 197975457}
@@ -20938,13 +20944,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mainCamera: {fileID: 206361366}
   _locationManager: {fileID: 1560551276}
-  _startPosition: 0
-  _endPosition: 0
+  _spaceManager: {fileID: 197975456}
   _cameraSpeed: 20
   _keyVelocity: 1
   _mouseVelocity: 6
   _speedFading: 2
-  _bedsManager: {fileID: 197975456}
 --- !u!114 &713062803
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20957,12 +20961,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb7a680bc967afe458b6b548e086c541, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _haveBeds:
+  _allBeds:
   - {fileID: 11400000, guid: 80529c8439c585945b072b791ee2a6a4, type: 2}
   - {fileID: 11400000, guid: f9538ea17e1133f4090ea83b5e0827bb, type: 2}
   - {fileID: 11400000, guid: 2e37d524597e5d2499cc7a496f717a91, type: 2}
   - {fileID: 11400000, guid: 3627450b9a024af45a0e4f14c3308c09, type: 2}
   - {fileID: 11400000, guid: 7e3fc35901153c8499d08566fb3e07cf, type: 2}
+  _haveBeds:
+  - {fileID: 11400000, guid: 80529c8439c585945b072b791ee2a6a4, type: 2}
+  _bedsUpgrades:
+  - {fileID: 11400000, guid: 41c5dc56c0ea776468098bbfca8b0d8b, type: 2}
+  - {fileID: 11400000, guid: 9b73285b9270c0b4895b5e9dff90b061, type: 2}
+  - {fileID: 11400000, guid: af5109db3acb3314eab0b103a8ae3ea9, type: 2}
+  - {fileID: 11400000, guid: a1946ecabb08c9544afbe6969de562ae, type: 2}
 --- !u!114 &713062804
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21642,11 +21653,11 @@ Transform:
   m_GameObject: {fileID: 726145194}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1280.4346, y: 433.0342, z: 5.970224}
+  m_LocalPosition: {x: 980.4346, y: 433.0342, z: 5.970224}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 713062800}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &726145196
 MonoBehaviour:
@@ -21660,7 +21671,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d705ae12938ce0f4f999a7b713f85038, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _upgradeablesObjects: []
+  _upgradeablesObjects:
+  - {fileID: 197975456}
+  - {fileID: 1090935202}
+  - {fileID: 1766492819}
+  - {fileID: 852812873}
+  - {fileID: 590866774}
+  - {fileID: 1276766701}
+  - {fileID: 1231044660}
+  - {fileID: 1257875750}
+  - {fileID: 1344608377}
+  - {fileID: 1493344180}
+  - {fileID: 713062803}
 --- !u!1 &731711262
 GameObject:
   m_ObjectHideFlags: 0
@@ -24825,6 +24847,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81eb8d06c97f59848ae5c4893f2fb1d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _unlockUpgrade: {fileID: 11400000, guid: 1d29fb229f95f644aaeb340c3eff9c8a, type: 2}
+  _autoWorkUpgrade: {fileID: 11400000, guid: fc88596f2a2555e41be8b5f5113770fa, type: 2}
   _UI: {fileID: 93621978}
   _timeWait: 2
   _cameraManager: {fileID: 713062802}
@@ -32340,6 +32364,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1090935199}
   - component: {fileID: 1090935201}
+  - component: {fileID: 1090935202}
   m_Layer: 0
   m_Name: CarManager
   m_TagString: Untagged
@@ -32386,6 +32411,26 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1090935202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1090935198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e91e8b687c471184c8fed2aa750994e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxSize: 100
+  _animator: {fileID: 1090935201}
+  _sizeUpgrades:
+  - {fileID: 11400000, guid: 61fca3ae117a80d47b86a698ef863033, type: 2}
+  - {fileID: 11400000, guid: 0ce5f70df82dc1c4da7cd5fc03a2f869, type: 2}
+  - {fileID: 11400000, guid: 5d56e30d96afa5f438f34ada31d8f668, type: 2}
+  - {fileID: 11400000, guid: b708c21004b68b7499320d7d7987f4ce, type: 2}
+  - {fileID: 11400000, guid: d9436bc0ade2845429ef3fb16bc783ab, type: 2}
 --- !u!1 &1090953987
 GameObject:
   m_ObjectHideFlags: 0
@@ -33660,7 +33705,7 @@ GameObject:
   - component: {fileID: 1144551853}
   - component: {fileID: 1144551854}
   m_Layer: 0
-  m_Name: Waitrenderer
+  m_Name: WaitRenderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36323,6 +36368,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2b87d8b4a725cc4caf993be7eb75b9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _unlockUpgrade: {fileID: 11400000, guid: bebb1ae5cf63e694688e7240c564f0cf, type: 2}
+  _autoWorkUpgrade: {fileID: 11400000, guid: 981060421751812419bfa20190c9f957, type: 2}
   _UI: {fileID: 752270626}
   _timeWait: 5
   _wheatManager: {fileID: 590866774}
@@ -37642,6 +37689,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69d08c95093c5594e9f9451cdc3e7ee7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _unlockUpgrade: {fileID: 11400000, guid: bae9bd0101a850e4ca04d532187fb708, type: 2}
+  _autoWorkUpgrade: {fileID: 11400000, guid: c4baee8a713bb5349a33f46e43abe446, type: 2}
   _UI: {fileID: 211201588}
   _timeWait: 2
   _wheatManager: {fileID: 590866774}
@@ -38178,6 +38227,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77ebd59b3bab9b341b8da5eeb63297be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _unlockUpgrade: {fileID: 0}
+  _autoWorkUpgrade: {fileID: 11400000, guid: c58fc0bef6717204d9d241cdc148e118, type: 2}
   _UI: {fileID: 781806250}
   _timeWait: 4
 --- !u!1 &1277539633
@@ -38613,6 +38664,7 @@ MonoBehaviour:
   - {fileID: 1297580539}
   - {fileID: 1017138916}
   - {fileID: 1618414360}
+  - {fileID: 1989249264}
 --- !u!4 &1299343207
 Transform:
   m_ObjectHideFlags: 0
@@ -39169,7 +39221,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1317336877}
-  - component: {fileID: 1317336878}
   - component: {fileID: 1317336880}
   - component: {fileID: 1317336879}
   m_Layer: 0
@@ -39195,20 +39246,6 @@ Transform:
   - {fileID: 327426549}
   m_Father: {fileID: 1090935199}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1317336878
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1317336876}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e91e8b687c471184c8fed2aa750994e4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _maxSize: 100
-  _animator: {fileID: 1090935201}
 --- !u!114 &1317336879
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39972,7 +40009,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 485934fac3d61ca4980ff3f197226463, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _car: {fileID: 1317336878}
+  _car: {fileID: 1090935202}
   _maxFeedTime: 10
   _eggTime: 5
 --- !u!4 &1344608378
@@ -42134,7 +42171,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spacePrefab: {fileID: 8801110087086945618, guid: 5ac8a735a764ae240aba202f5ca09653, type: 3}
-  _upgrades:
+  _spaceAddUpgrades:
   - {fileID: 11400000, guid: a04fd64390135eb4cb05b6f2b74f582a, type: 2}
   - {fileID: 11400000, guid: dd73ba924328522479e5e8c1c9f04c39, type: 2}
   - {fileID: 11400000, guid: 6557113f61b27324aac62526edf94066, type: 2}
@@ -43919,7 +43956,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d9ec13b662e53b4e9d8e31111fc3041, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _storage: {fileID: 1317336878}
+  _storage: {fileID: 1090935202}
   _panel: {fileID: 1159207025}
   _buttonPool: {fileID: 1984073739}
   _sizeRenderer: {fileID: 1985458978}
@@ -52217,9 +52254,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1225a6c85d91b8a4db7eda8b0721084b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _car: {fileID: 1317336878}
-  _kitchenStorage: {fileID: 0}
-  _waitTime: 5
+  _car: {fileID: 1090935202}
+  _kitchenStorage: {fileID: 397481016}
+  _waitTime: 180
+  _speedUpgrades:
+  - {fileID: 11400000, guid: 4d98847baac23154d9da4529844c79ff, type: 2}
+  - {fileID: 11400000, guid: 18b8512479871e94b81a023e7e294027, type: 2}
+  - {fileID: 11400000, guid: 4bd1108f60b397b4da6b4be9b89f245e, type: 2}
+  - {fileID: 11400000, guid: a22541a2996533943a64e2cdb6c7e8dd, type: 2}
 --- !u!1001 &1779203913
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -53589,13 +53631,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mainCamera: {fileID: 206361366}
   _locationManager: {fileID: 1560551276}
-  _startPosition: 0
-  _endPosition: 0
+  _spaceManager: {fileID: 1436171022}
   _cameraSpeed: 20
   _keyVelocity: 1
   _mouseVelocity: 6
   _speedFading: 2
-  _spaceManager: {fileID: 1436171022}
 --- !u!1001 &1832995586
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -58154,7 +58194,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 521ee8b0837e79540b0c3208ad1528ad, type: 2}
   - {fileID: 11400000, guid: 7755e9f6a50793a45afe949b36406069, type: 2}
   _ingredientsManager: {fileID: 713062804}
+  _bedTypesManager: {fileID: 713062803}
   _ingredientStorage: {fileID: 397481016}
+  _spice: {fileID: 11400000, guid: 1a1acf5d79493354cad0d0956b0d8689, type: 2}
+  _spiceAutoBuy: {fileID: 11400000, guid: 8e6abd0bb54401244a0c7c6f4c7c8ff9, type: 2}
 --- !u!1 &1992537041
 GameObject:
   m_ObjectHideFlags: 0
@@ -63449,6 +63492,7 @@ SceneRoots:
   - {fileID: 1832416031}
   - {fileID: 800858056}
   - {fileID: 382300919}
+  - {fileID: 726145195}
   - {fileID: 713062800}
   - {fileID: 2131844622}
   - {fileID: 1671263194}

@@ -16,7 +16,7 @@ public class IngredientsManager : MonoBehaviour
     {
         var result = new List<Ingredient>();
         foreach (var ingredient in _haveIngredients)
-            if (ingredient.TypeIngredient == bedType.AcceptableType)
+            if (ingredient.Type == bedType.AcceptableType)
                 result.Add(ingredient);
         return result;
     }

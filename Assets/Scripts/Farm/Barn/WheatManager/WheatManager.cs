@@ -1,11 +1,9 @@
 using System;
 using UnityEngine;
 
-public class WheatManager : MonoBehaviour
+public class WheatManager : MonoBehaviour, IUpgradeable
 {
     private int _wheatCount = 0;
-
-    public int WheatCount => _wheatCount;
 
     public event Action<int> WheatChanged;
 
@@ -13,6 +11,11 @@ public class WheatManager : MonoBehaviour
     {
         _wheatCount += count;
         WheatChanged?.Invoke(count);
+    }
+
+    public void CheckUpgrade(BaseUpgrade upgrade)
+    {
+
     }
 
     public void SubstractWheat()

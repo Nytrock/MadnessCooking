@@ -3,13 +3,17 @@ using UnityEngine;
 
 public class IngredientStorage : MonoBehaviour
 {
-    [SerializeField] private int _maxSize = 100;
+    [SerializeField] protected int _maxSize = 100;
     protected IngredientCountList _ingredients = new();
     protected int _nowSize = 0;
 
-    public int MaxSize => _maxSize;
-
     public event Action<int> ElementCountChanged;
+    public event Action<int> MaxSizeChanged;
+
+    private void Start()
+    {
+        MaxSizeChanged?.Invoke(_maxSize);
+    }
 
     public int GetSpace()
     {
@@ -51,5 +55,10 @@ public class IngredientStorage : MonoBehaviour
     public bool HaveCount(IngredientCount count)
     {
         return _ingredients.ContainsCount(count);
+    }
+
+    protected void InvokeSizeChange()
+    {
+        MaxSizeChanged?.Invoke(_maxSize);
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class UpgradeManager : MonoBehaviour
@@ -5,6 +6,8 @@ public class UpgradeManager : MonoBehaviour
     [RequireInterface(typeof(IUpgradeable)), SerializeField]
     private MonoBehaviour[] _upgradeablesObjects;
     private IUpgradeable[] _upgradeables;
+
+    public event Action<BaseUpgrade> UpgradeAdded;
 
     private void Start()
     {
@@ -18,5 +21,6 @@ public class UpgradeManager : MonoBehaviour
         foreach(var upgradeable in _upgradeables) {
             upgradeable.CheckUpgrade(upgrade);
         }
+        UpgradeAdded?.Invoke(upgrade);
     }
 }

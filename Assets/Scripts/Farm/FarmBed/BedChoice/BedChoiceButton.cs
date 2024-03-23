@@ -1,10 +1,11 @@
-using UnityEngine.UI;
+using UnityEngine;
 
-public class BedChoiceButton : ChoiceButton
+public class BedChoiceButton : ChoiceButton<BedType, BedChoiceUI>
 {
-    private BedType _type;
+    [SerializeField] private GameObject _blockedSprite;
     private int _cost;
     private bool _isBuyable;
+    private bool _isBlocked;
 
     private void Start()
     {
@@ -13,19 +14,23 @@ public class BedChoiceButton : ChoiceButton
         CheckBuyable(moneyManager.MoneyAmount);
     }
 
-    public void Setup(BedType newType, int typeIndex, BedChoiceUI ui)
+    public override void Setup(BedType item, int index, BedChoiceUI ui)
     {
-        gameObject.SetActive(true);
-        _type = newType;
-        _cost = _type.Cost;
-        _icon.sprite = _type.Icon;
-        GetComponent<Button>().onClick.AddListener(
-            delegate { ui.Choice(typeIndex, _isBuyable); }
-            );
+        base.Setup(item, index, ui);
+        _icon.sprite = _item.Icon;
+        _button.onClick.AddListener(
+            delegate { ui.Choice(index, _isBuyable); }
+        );
+    }
+
+    public void SetBlockedState(bool isHave)
+    {
+        _isBlocked = !isHave;
+        _blockedSprite.SetActive(!isHave);
     }
 
     public void CheckBuyable(int newValue)
     {
-        _isBuyable = newValue >= _cost;
+        _isBuyable = newValue >= _cost && !_isBlocked;
     }
 }

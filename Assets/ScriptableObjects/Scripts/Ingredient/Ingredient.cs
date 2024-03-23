@@ -8,7 +8,7 @@ public class Ingredient : BuyableObject
     [SerializeField] private int _timeGrow;
     [SerializeField] private int _maxCount;
 
-    public IngredientType TypeIngredient => _typeIngredient;
+    public IngredientType Type => _typeIngredient;
     public int TimeGrow => _timeGrow;
     public int MaxCount => _maxCount;
 }

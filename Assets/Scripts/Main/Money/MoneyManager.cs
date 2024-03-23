@@ -16,6 +16,11 @@ public class MoneyManager : MonoBehaviour
         instance = this;
     }
 
+    private void Start()
+    {
+        MoneyChanged?.Invoke(_moneyAmount);
+    }
+
     public void ChangeMoney(int changeValue)
     {
         _moneyAmount += changeValue;

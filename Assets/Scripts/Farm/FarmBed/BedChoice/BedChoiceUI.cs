@@ -1,11 +1,10 @@
-using System.Data;
 using UnityEngine;
 
-public class BedChoiceUI : ChoiceUI
+public class BedChoiceUI : ChoiceUI<BedChoiceButton>
 {
     [SerializeField] private BedTypesManager _bedTypesManager;
-    [SerializeField] private BedChoiceDescrUI _description;
-    [SerializeField] private BedTypeIngredientsShower _ingredientsShower;
+    [SerializeField] private BedChoiceDescriptionUI _description;
+    [SerializeField] private BedTypeIngredientsRenderer _ingredientsRenderer;
     private BedChoice _changingBed;
 
     protected override void Start()
@@ -18,15 +17,17 @@ public class BedChoiceUI : ChoiceUI
     public void Activate(BedChoice newBed)
     {
         _changingBed = newBed;
-        _description.Disable();
+        _description.ChangeActive(false);
         Activate();
     }
 
     protected override void GenerateChoiceButtons()
     {
-        for (int i = 0; i < _bedTypesManager.HaveBeds.Count; i++) {
+        for (int i = 0; i < _bedTypesManager.BedsCount; i++) {
             var choiceButton = Instantiate(_choiceButtonPrefab, _choiceButtonsContainer);
-            choiceButton.GetComponent<BedChoiceButton>().Setup(_bedTypesManager.HaveBeds[i], i, this);
+            var bed = _bedTypesManager.GetBed(i);
+            choiceButton.Setup(bed, i, this);
+            choiceButton.SetBlockedState(_bedTypesManager.HaveBed(bed));
             _choiceButtons.Add(choiceButton);
         }
     }
@@ -34,7 +35,7 @@ public class BedChoiceUI : ChoiceUI
     private void AddType(BedType newType)
     {
         foreach (var button in _choiceButtons)
-            Destroy(button);
+            button.Destroy();
         _choiceButtons.Clear();
         GenerateChoiceButtons();
     }
@@ -56,16 +57,21 @@ public class BedChoiceUI : ChoiceUI
         _chosedIndex = index;
         _choiceButtons[_chosedIndex].ChangeSelectedState();
 
-        var bedType = _bedTypesManager.HaveBeds[_chosedIndex];
-        _ingredientsShower.ShowIngredients(bedType);
+        var bedType = _bedTypesManager.GetBed(_chosedIndex);
+        _ingredientsRenderer.ShowIngredients(bedType);
         _description.UpdateDescription(bedType);
 
-        _submitButton.interactable = !isSame && isBuyable && _ingredientsShower.HaveIngredients(bedType);
+        _submitButton.interactable = !isSame && isBuyable && _ingredientsRenderer.HaveIngredients(bedType);
     }
 
     public override void SetChoice()
     {
-        _changingBed.SetType(_bedTypesManager.HaveBeds[_chosedIndex]);
+        _changingBed.SetType(_bedTypesManager.GetBed(_chosedIndex));
         base.SetChoice();
+    }
+
+    protected override void SetSelectedState(int index)
+    {
+        _choiceButtons[index].ChangeSelectedState();
     }
 }

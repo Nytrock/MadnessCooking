@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IngredientChoiceUI : ChoiceUI
+public class IngredientChoiceUI : ChoiceUI<IngredientChoiceButton>
 {
     [SerializeField] private IngredientsManager _ingredientsManager;
     [SerializeField] private IngredientChoiceStyle[] _styles;
@@ -37,8 +37,7 @@ public class IngredientChoiceUI : ChoiceUI
         _ingredients = _ingredientsManager.GetIngredientsOfOneBedType(_changingBed.BedType);
         for (int i = 0; i < _ingredients.Count; i++) {
             var choiceButton = Instantiate(_choiceButtonPrefab, _choiceButtonsContainer);
-            choiceButton.GetComponent<IngredientChoiceButton>()
-                .Setup(_ingredients[i], i, this);
+            choiceButton.Setup(_ingredients[i], i, this);
             _choiceButtons.Add(choiceButton);
         }
     }
@@ -74,5 +73,10 @@ public class IngredientChoiceUI : ChoiceUI
     {
         _submitButton.onClick.RemoveAllListeners();
         _stylePanel.SetActive(false);
+    }
+
+    protected override void SetSelectedState(int index)
+    {
+        _choiceButtons[index].ChangeSelectedState();
     }
 }

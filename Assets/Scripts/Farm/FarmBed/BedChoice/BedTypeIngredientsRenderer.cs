@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BedTypeIngredientsShower : MonoBehaviour
+public class BedTypeIngredientsRenderer : MonoBehaviour
 {
     [SerializeField] private Image[] _ingredientImages;
     [SerializeField] private Material _grayscaleMaterial;

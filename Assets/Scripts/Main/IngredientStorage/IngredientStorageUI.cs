@@ -9,12 +9,16 @@ public class IngredientStorageUI : MonoBehaviour
     [SerializeField] protected IngredientStorageButtonPool _buttonPool;
     [SerializeField] private TextMeshProUGUI _sizeRenderer;
     protected List<IngredientStorageButton> _buttons = new();
+    private int _maxSize;
 
-    protected virtual void Start()
+    protected virtual void Awake()
     {
         _storage.ElementCountChanged += SetButton;
-        if (_storage.MaxSize != -1)
-            _sizeRenderer.text = $"0/{_storage.MaxSize}";
+        _storage.MaxSizeChanged += UpdateMaxValue;
+    }
+
+    private void Start()
+    {
         _panel.SetActive(false);
     }
 
@@ -33,16 +37,23 @@ public class IngredientStorageUI : MonoBehaviour
             _buttons[index].SetCount(count.Count);
         }
 
-        UpdateSizeShower();
+        UpdateSizeRenderer();
     }
 
-    protected void UpdateSizeShower()
+    protected void UpdateMaxValue(int newMax)
     {
-        if (_storage.MaxSize == -1)
+        _maxSize = newMax;
+        if (_sizeRenderer != null && _maxSize == -1)
+            _sizeRenderer.text = "";
+        UpdateSizeRenderer();
+    }
+
+    protected void UpdateSizeRenderer()
+    {
+        if (_maxSize == -1 || _sizeRenderer == null)
             return;
 
-        var maxSize = _storage.MaxSize;
-        var nowSize = maxSize - _storage.GetSpace();
-        _sizeRenderer.text = $"{nowSize}/{maxSize}";
+        var nowSize = _maxSize - _storage.GetSpace();
+        _sizeRenderer.text = $"{nowSize}/{_maxSize}";
     }
 }

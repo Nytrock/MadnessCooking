@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShopCatalogPage : MonoBehaviour
+public class ShopCatalogPage: MonoBehaviour
 {
     [SerializeField] private BaseBuyPanel _buyPanelPrefab;
     [SerializeField, Min(1)] private int _maxItemCount;
-    private readonly List<BaseBuyPanel> _buyPanels = new();
+    protected readonly List<BaseBuyPanel> _buyPanels = new();
     private BaseShop _shop;
 
     public int MaxItemCount => _maxItemCount;
@@ -27,6 +27,7 @@ public class ShopCatalogPage : MonoBehaviour
     {
         gameObject.SetActive(newValue);
     }
+
     public BaseBuyPanel PopFirstPanel()
     {
         var panel = _buyPanels[0];

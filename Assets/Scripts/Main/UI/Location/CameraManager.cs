@@ -5,8 +5,9 @@ public abstract class CameraManager : MonoBehaviour
 {
     [SerializeField] protected Camera _mainCamera;
     [SerializeField] protected LocationManager _locationManager;
-    [SerializeField] protected float _startPosition;
-    [SerializeField] protected float _endPosition;
+    [SerializeField] protected SpaceManager _spaceManager;
+    protected float _startPosition;
+    protected float _endPosition;
     protected abstract string _cameraAxis { get; }
     protected abstract string _keyAxis { get; }
 
@@ -30,6 +31,7 @@ public abstract class CameraManager : MonoBehaviour
     protected virtual void Start()
     {
         _locationManager.LocationChanged += ChangeWorkMode;
+        _spaceManager.SpaceAdded += CalculateBorderPositions;
         _mainCameraPos = _mainCamera.transform;
         ChangeWorkMode(_mainCameraPos);
 

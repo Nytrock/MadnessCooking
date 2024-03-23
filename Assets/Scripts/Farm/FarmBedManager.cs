@@ -1,34 +1,21 @@
+using System.Collections.Generic;
 using UnityEngine;
 
-public class FarmBedManager : MonoBehaviour
+public class FarmBedManager : SpaceManager
 {
-    [SerializeField] private int _groupsCount = 2;
-    [SerializeField] private FarmBedGroup _groundBedGroupPrefab;
     [SerializeField] private FarmBedSettings _bedsSettings;
-    private FarmBedGroup[] _beds;
-    private Transform _groupsContainer;
+    private List<FarmBedGroup> _beds = new();
 
-    public int GroupsCount => _groupsCount;
-
-    private void Start()
+    private void Awake()
     {
-        _groupsContainer = transform;
-        SetGroups();
+        _spaceCount = 1;
     }
 
-    private void SetGroups()
+    protected override void AddSpace(float size, int index)
     {
-        var size = _groundBedGroupPrefab.GetBedSize();
-
-        for (int i = 0; i < _groupsCount; i++) {
-            var groundbedGroup = Instantiate(_groundBedGroupPrefab, _groupsContainer);
-            groundbedGroup.transform.position -= new Vector3(0, size * i, 0);
-            groundbedGroup.GetComponent<FarmBedGroup>().BedsSetup(_bedsSettings);
-        }
-    }
-
-    public float GetBedSize()
-    {
-        return _groundBedGroupPrefab.GetBedSize();
+        var groundbedGroup = Instantiate(_spacePrefab, _spaceContainer) as FarmBedGroup;
+        groundbedGroup.transform.position -= new Vector3(0, size * index, 0);
+        groundbedGroup.BedsSetup(_bedsSettings);
+        _beds.Add(groundbedGroup);
     }
 }

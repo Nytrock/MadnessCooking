@@ -1,16 +1,11 @@
-using UnityEngine.UI;
-
-public class IngredientChoiceButton : ChoiceButton
+public class IngredientChoiceButton : ChoiceButton<Ingredient, IngredientChoiceUI>
 {
-    private Ingredient _ingredient;
-
-    public void Setup(Ingredient newIngredient, int ingredientIndex, ChoiceUI ui)
+    public override void Setup(Ingredient item, int index, IngredientChoiceUI ui)
     {
-        _ingredient = newIngredient;
-        gameObject.SetActive(true);
-        _icon.sprite = _ingredient.Icon;
-        GetComponent<Button>().onClick.AddListener(
-            delegate { ui.Choice(ingredientIndex); }
-            );
+        base.Setup(item, index, ui);
+        _icon.sprite = _item.Icon;
+        _button.onClick.AddListener(
+            delegate { ui.Choice(index); }
+        );
     }
 }

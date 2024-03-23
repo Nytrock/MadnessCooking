@@ -30,7 +30,7 @@ public class SaveManager : MonoBehaviour
     {
         var result = new List<Ingredient>();
         foreach (var ingredient in _allIngredients)
-            if (ingredient.TypeIngredient == bedType.AcceptableType)
+            if (ingredient.Type == bedType.AcceptableType)
                 result.Add(ingredient);
         return result;
     }

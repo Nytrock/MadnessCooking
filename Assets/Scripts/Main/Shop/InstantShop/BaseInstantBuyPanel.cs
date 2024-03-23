@@ -18,7 +18,7 @@ public abstract class BaseInstantBuyPanel : BaseBuyPanel
         UpdateButton(MoneyManager.instance.MoneyAmount);
     }
 
-    public void UpdateButton(int moneyCount)
+    protected virtual void UpdateButton(int moneyCount)
     {
         _buyButton.interactable = moneyCount >= _item.Cost;
     }
@@ -31,8 +31,7 @@ public abstract class BaseInstantBuyPanel : BaseBuyPanel
 
     protected override void SetButtonListener(BaseShop shop)
     {
-        var instantShop = shop as BaseInstantShop;
         _buyButton.onClick.RemoveAllListeners();
-        _buyButton.onClick.AddListener(delegate { instantShop.BuyItem(_item); });
+        _buyButton.onClick.AddListener(delegate { shop.BuyItem(_item); });
     }
 }

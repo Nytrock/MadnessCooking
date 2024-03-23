@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BedChoiceDescrUI : MonoBehaviour
+public class BedChoiceDescriptionUI : MonoBehaviour
 {
     [SerializeField] private ItemInfoRendererWithNum _renderer;
 
@@ -18,8 +18,8 @@ public class BedChoiceDescrUI : MonoBehaviour
         gameObject.SetActive(!gameObject.activeSelf);
     }
 
-    public void Disable()
+    public void ChangeActive(bool newvalue)
     {
-        gameObject.SetActive(false);
+        gameObject.SetActive(newvalue);
     }
 }

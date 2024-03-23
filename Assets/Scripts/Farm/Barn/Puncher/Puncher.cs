@@ -4,6 +4,12 @@ public class Puncher : HoldDoubleAdd
 {
     public event Action<int> FertilizeChanged;
 
+    protected override void Start()
+    {
+        _isUnlocked = true;
+        base.Start();
+    }
+
     public void AddShit()
     {
         _materialCount++;

@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class CafeCameraManager : CameraManager
 {
-    [SerializeField] private CafeSpaceManager _spaceManager;
     private float _horizontalExtention;
 
     protected override string _cameraAxis => "Mouse X";
@@ -11,7 +10,6 @@ public class CafeCameraManager : CameraManager
 
     protected override void Start()
     {
-        _spaceManager.SpaceAdded += CalculateBorderPositions;
         _horizontalExtention = _mainCamera.orthographicSize * Screen.width / Screen.height;
         base.Start();
     }

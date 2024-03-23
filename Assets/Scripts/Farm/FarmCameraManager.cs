@@ -2,14 +2,13 @@ using UnityEngine;
 
 public class FarmCameraManager : CameraManager
 {
-    [SerializeField] private FarmBedManager _bedsManager;
     protected override string _cameraAxis => "Mouse Y";
     protected override string _keyAxis => "Vertical";
 
     protected override void CalculateBorderPositions()
     {
         _endPosition = transform.position.y;
-        _startPosition = _endPosition - (_bedsManager.GroupsCount - 1) * _bedsManager.GetBedSize();
+        _startPosition = _endPosition - (_spaceManager.SpaceCount - 1) * _spaceManager.GetSpaceSize();
         InvokeBordersFound();
     }
 

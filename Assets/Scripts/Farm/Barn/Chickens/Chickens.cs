@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class Chickens : MonoBehaviour
+public class Chickens : MonoBehaviour, IUpgradeable
 {
     [SerializeField] private FarmCar _car;
 
@@ -56,5 +56,10 @@ public class Chickens : MonoBehaviour
         _car.PutIngredient(new IngredientCount(egg, _eggCount));
         _eggCount = 0;
         EggChanged?.Invoke(_eggCount);
+    }
+
+    public void CheckUpgrade(BaseUpgrade upgrade)
+    {
+
     }
 }
