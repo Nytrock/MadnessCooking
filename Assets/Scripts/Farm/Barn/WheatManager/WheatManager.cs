@@ -20,8 +20,8 @@ public class WheatManager : MonoBehaviour, IUpgradeable
         if (_isDistributing) {
             DistributeWheat(count);
         } else {
-            _cowWheatCount = count;
-            _flourWheatCount = count;
+            _cowWheatCount += count;
+            _flourWheatCount += count;
         }
 
         InvokeEvents();

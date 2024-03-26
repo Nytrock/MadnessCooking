@@ -1,65 +1,106 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class Chickens : MonoBehaviour, IUpgradeable
 {
     [SerializeField] private FarmCar _car;
-
-    private bool _isFeed;
-    private bool _isAuto;
+    private int _feedCount = 0;
+    private float _speed = 1; 
 
     [SerializeField] private float _maxFeedTime;
-    private float _feedTime;
-
     [SerializeField] private float _eggTime;
     private float _nowTime;
-    private int _eggCount;
-    
+
+    [Header("Upgrades")]
+    [SerializeField] private BaseUpgrade _food;
+    [SerializeField] private BaseUpgrade _infiniteFood;
+    [SerializeField, Min(1)] private float _foodSpeedCoef;
+
+    public bool IsFeed { get; private set; }
+    public bool IsInfiniteFood { get; private set; }
+    public int EggCount { get; private set; }
+    public int FoodCount { get; private set; }
+
     public float EggTime => _eggTime;
     public float NowTime => _nowTime;
 
-    public event Action<int> EggChanged;
+    public event Action EggChanged;
+    public event Action FoodCountChanged;
+
+    private void Start()
+    {
+        EggChanged?.Invoke();
+        FoodCountChanged?.Invoke();
+    }
 
     private void Update()
     {
-        if (!_isFeed && !_isAuto)
+        if (!IsFeed)
             return;
 
         if (_nowTime < _eggTime) { 
-            _nowTime += Time.deltaTime * TimeManager.instance.TimeSpeed;
+            _nowTime += Time.deltaTime * TimeManager.instance.TimeSpeed * _speed;
         } else { 
             _nowTime = 0;
             AddEgg();
-        }
-
-        if (_feedTime < _maxFeedTime) { 
-            _feedTime += Time.deltaTime * TimeManager.instance.TimeSpeed;
-        } else {
-            _isFeed = false;
         }
     }
 
     public void Feed()
     {
-        _feedTime = 0;
-        _isFeed = true;
+        _feedCount++;
+        _speed += _foodSpeedCoef / _feedCount;
+        StartCoroutine(FeedTimer());
+        IsFeed = true;
+
+        if (IsInfiniteFood)
+            return;
+
+        FoodCount--;
+        FoodCountChanged?.Invoke();
+    }
+
+    private IEnumerator FeedTimer()
+    {
+        yield return new WaitForSeconds(_maxFeedTime * _foodSpeedCoef / _feedCount);
+        _speed -= _foodSpeedCoef / _feedCount;
+        _feedCount--;
+        if (_feedCount == 0)
+            IsFeed = false;
     }
 
     public void AddEgg()
     {
-        _eggCount++;
-        EggChanged?.Invoke(_eggCount);
+        EggCount++;
+        EggChanged?.Invoke();
     }
 
     public void EggsToCar(Ingredient egg)
     {
-        _car.PutIngredient(new IngredientCount(egg, _eggCount));
-        _eggCount = 0;
-        EggChanged?.Invoke(_eggCount);
+        _car.PutIngredient(new IngredientCount(egg, EggCount));
+        EggCount = 0;
+        EggChanged?.Invoke();
     }
 
     public void CheckUpgrade(BaseUpgrade upgrade)
     {
+        if (upgrade == _food)
+            AddFood();
+        else if (upgrade == _infiniteFood)
+            SetInfiniteFood();
+    }
 
+    private void SetInfiniteFood()
+    {
+        FoodCount = -1;
+        IsInfiniteFood = true;
+        FoodCountChanged?.Invoke();
+    }
+
+    private void AddFood()
+    {
+        FoodCount++;
+        FoodCountChanged?.Invoke();
     }
 }

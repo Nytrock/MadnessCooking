@@ -195,10 +195,13 @@ public class FarmBed : MonoBehaviour
 
     public void CheckUpgrade(BaseUpgrade upgrade)
     {
-        if (upgrade == _growStatusShowUpgrade)
+        if (upgrade == _growStatusShowUpgrade) {
             _isGrowStatusShow = true;
-        else if (upgrade == _autoWheatUpgrade)
+        } else if (upgrade == _autoWheatUpgrade) {
             _isAutoWheat = true;
+            if (_plantedIngredient == _wheat)
+                SendIngredients();
+        }
 
         UpdateUpgrades();
     }
