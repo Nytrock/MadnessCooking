@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,6 +11,7 @@ public class ShopCatalogPage: MonoBehaviour
 
     public int MaxItemCount => _maxItemCount;
     public int ItemCount => _buyPanels.Count;
+    public Type ItemType => _buyPanelPrefab.Type;
 
     public void SetShop(BaseShop shop)
     {

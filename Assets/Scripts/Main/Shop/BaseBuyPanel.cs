@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -5,6 +6,7 @@ public abstract class BaseBuyPanel : MonoBehaviour
 {
     [SerializeField] protected Button _buyButton;
     protected BuyableObject _item;
+    public abstract Type Type { get; }
 
     public virtual void Setup(BuyableObject item, BaseShop shop)
     {

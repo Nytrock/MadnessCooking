@@ -1,3 +1,4 @@
+using System;
 using System.Data;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,6 +9,8 @@ public class IngredientBuyPanel : BaseInstantBuyPanel
     [SerializeField] private Image _bedTypeImage;
     [SerializeField] private Material _grayscaleMaterial;
     private bool _isHaveBed;
+
+    public override Type Type => typeof(Ingredient);
 
     public override void Setup(BuyableObject item, BaseShop shop)
     {

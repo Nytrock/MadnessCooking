@@ -1,9 +1,11 @@
+using System;
 using UnityEngine;
 
 public abstract class BaseShop : MonoBehaviour
 {
     [SerializeField] private GameObject _shop;
     [SerializeField] protected ShopCatalog _catalog;
+    public abstract Type Type { get; }
 
     protected BuyableObject[] _itemsToBuy;
 
@@ -16,6 +18,7 @@ public abstract class BaseShop : MonoBehaviour
     public virtual void ChangeShopState(bool newState)
     {
         _shop.SetActive(newState);
+        _catalog.ActivateFirstPage();
     }
 
     protected void GenerateShop() {

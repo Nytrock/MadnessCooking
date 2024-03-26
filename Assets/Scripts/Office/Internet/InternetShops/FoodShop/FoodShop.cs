@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -6,6 +7,8 @@ public class FoodShop : BaseChooseShop
 {
     [SerializeField] private List<Food> _foodToBuy;
     [SerializeField] private FoodManager _foodManager;
+
+    public override Type Type => typeof(Food);
 
     public override void BuyItem(BuyableObject item)
     {

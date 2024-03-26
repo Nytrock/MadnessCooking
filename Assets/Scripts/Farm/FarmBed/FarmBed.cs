@@ -1,8 +1,18 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FarmBed : MonoBehaviour
 {
+    [SerializeField] private Ingredient _wheat;
+
+    [Header("Upgrades")]
+    [SerializeField] private BaseUpgrade _autoWheatUpgrade;
+    [SerializeField] private BaseUpgrade _growStatusShowUpgrade;
+    [SerializeField] private FarmBedGrowSlider _growStatusSlider;
+    private bool _isAutoWheat;
+    private bool _isGrowStatusShow;
+
     private FarmBedUIManager _UI;
     private BedTypeHolder _bedHolder;
     private Ingredient _plantedIngredient;
@@ -34,6 +44,11 @@ public class FarmBed : MonoBehaviour
             _UI.ShowGroundBed(this);
     }
 
+    private void Start()
+    {
+        UpdateUpgrades();
+    }
+
     private void Update()
     {
         if (_isFull || _plantedIngredient == null)
@@ -43,12 +58,19 @@ public class FarmBed : MonoBehaviour
             _nowTime += Time.deltaTime * _waterBoost * _fertilizeBoost 
                 * _pestsSlowdown * TimeManager.instance.TimeSpeed;
         } else {
+            _nowTime = 0;
+            if (_isAutoWheat && _plantedIngredient == _wheat) {
+                _wheatManager.AddWheat(1);
+                return;
+            }
             _count++;
             CountChanged?.Invoke();
-            _nowTime = 0;
             if (_count == _plantedIngredient.MaxCount)
                 _isFull = true;
         }
+
+        if (_isGrowStatusShow)
+            _growStatusSlider.UpdateSlider(_nowTime);
     }
 
     public void ResetIngredient()
@@ -58,6 +80,7 @@ public class FarmBed : MonoBehaviour
         _isFull = false;
         _bedHolder.StopAnimation();
         _UI.ForgiveBed(this);
+        UpdateUpgrades();
     }
 
     public void SetBedType(BedTypeHolder bedType)
@@ -92,7 +115,9 @@ public class FarmBed : MonoBehaviour
         _plantedIngredient = ingredient;
         _bedHolder.SetIngredient(ingredient);
         _growTime = ingredient.TimeGrow;
+        _growStatusSlider.SetMaxTime(_growTime);
         _nowTime = 0;
+        UpdateUpgrades();
     }
 
     public void SendIngredients()
@@ -100,7 +125,7 @@ public class FarmBed : MonoBehaviour
         if (_count == 0)
             return;
 
-        if (_plantedIngredient.name == "Wheat") {
+        if (_plantedIngredient == _wheat) {
             _wheatManager.AddWheat(_count);
             _count = 0;
             UpdateCount();
@@ -166,5 +191,20 @@ public class FarmBed : MonoBehaviour
     public PestsGenerator GetPests()
     {
         return _bedHolder.GetPests();
+    }
+
+    public void CheckUpgrade(BaseUpgrade upgrade)
+    {
+        if (upgrade == _growStatusShowUpgrade)
+            _isGrowStatusShow = true;
+        else if (upgrade == _autoWheatUpgrade)
+            _isAutoWheat = true;
+
+        UpdateUpgrades();
+    }
+
+    private void UpdateUpgrades()
+    {
+        _growStatusSlider.SetActive(_isGrowStatusShow && _plantedIngredient != null);
     }
 }

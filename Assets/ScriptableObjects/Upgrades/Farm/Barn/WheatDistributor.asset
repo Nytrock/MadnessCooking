@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _icon: {fileID: 0}
   _cost: 200
-  _needUpgrades: []
+  _needUpgrades:
+  - {fileID: 11400000, guid: bebb1ae5cf63e694688e7240c564f0cf, type: 2}
+  - {fileID: 11400000, guid: bae9bd0101a850e4ca04d532187fb708, type: 2}
   _nextUpgrades:
   - {fileID: 11400000, guid: 981060421751812419bfa20190c9f957, type: 2}
   - {fileID: 11400000, guid: c4baee8a713bb5349a33f46e43abe446, type: 2}

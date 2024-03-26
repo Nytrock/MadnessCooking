@@ -130,7 +130,7 @@ public class Client : MonoBehaviour
             _table.CheckTalk();
         } else {
             if (ClientType == ClientType.Rich)
-                MoneyManager.instance.ChangeMoney(Order.Food.MoneyGet * 10);
+                MoneyManager.instance.ChangeMoney(Order.Food.MoneyGet * 100);
             else
                 MoneyManager.instance.ChangeMoney(Order.Food.MoneyGet);
             Leave();

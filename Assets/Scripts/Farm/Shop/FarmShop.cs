@@ -12,6 +12,7 @@ public class FarmShop : BaseChooseShop
     private bool _isBuyedItemReplaced;
 
     public bool IsBuyedItemReplaced => _isBuyedItemReplaced;
+    public override Type Type => typeof(BaseUpgrade);
 
     public override void BuyItem(BuyableObject item)
     {
@@ -44,7 +45,7 @@ public class FarmShop : BaseChooseShop
             _haveUpgrades.Add(upgrade);
             CheckNextUpgrades(upgrade as GraphUpgrade, index);
         } else {
-            _upgradesToBuy.RemoveAt(index);
+            _upgradesToBuy.Remove(upgrade);
             _catalog.RemovePanel(index);
             _haveUpgrades.Add(upgrade);
         }
@@ -54,14 +55,19 @@ public class FarmShop : BaseChooseShop
     private void CheckNextUpgrades(GraphUpgrade graphUpgrade, int index)
     {
         foreach (GraphUpgrade nextUpgrade in graphUpgrade.NextUpgrades) {
+            if (_upgradesToBuy.Contains(nextUpgrade))
+                continue;
+
             if (_haveUpgrades.Contains(nextUpgrade)) {
                 CheckNextUpgrades(nextUpgrade, index);
                 continue;
             }
+
             bool canAdd = true;
             foreach (GraphUpgrade needUpgrade in nextUpgrade.NeedUpgrades) {
                 canAdd &= _haveUpgrades.Contains(needUpgrade);
             }
+
             if (canAdd) {
                 if (!_isBuyedItemReplaced) {
                     if (graphUpgrade as LimitedConsumableUpgrade)

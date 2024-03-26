@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,6 +7,8 @@ public class UpgradeShop : BaseInstantShop
     [SerializeField] private UpgradeManager _upgradeManager;
     [SerializeField] private List<BaseUpgrade> _upgradesToBuy;
     private List<BaseUpgrade> _haveUpgrades = new();
+
+    public override Type Type => typeof(BaseUpgrade);
 
     public override void BuyItem(BuyableObject item)
     {
@@ -31,7 +34,7 @@ public class UpgradeShop : BaseInstantShop
     private void CheckNextUpgrades(GraphUpgrade graphUpgrade, int index, ref bool isFirst)
     {
         foreach (GraphUpgrade nextUpgrade in graphUpgrade.NextUpgrades) {
-            if (_haveUpgrades.Contains(nextUpgrade)) {
+            if (_haveUpgrades.Contains(nextUpgrade) || _upgradesToBuy.Contains(nextUpgrade)) {
                 CheckNextUpgrades(nextUpgrade, index, ref isFirst);
                 continue;
             }

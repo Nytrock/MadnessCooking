@@ -7,7 +7,7 @@ public class Cow : HoldDoubleAdd
 
     protected override void Start()
     {
-        _wheatManager.WheatChanged += SetWheatNum;
+        _wheatManager.CowWheatChanged += SetWheatNum;
         _barnFridge.MilkChanged += UpdateMilkCount;
         base.Start();
     }
@@ -30,7 +30,7 @@ public class Cow : HoldDoubleAdd
     protected override void Add()
     {
         base.Add();
-        _wheatManager.SubstractWheat();
+        _wheatManager.SubstractWheat(typeof(Cow));
         _barnFridge.AddMilk(1);
     }
 }

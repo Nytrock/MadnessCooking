@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -8,6 +9,8 @@ public class DecorShop : BaseInstantShop
     [SerializeField] private Decor _cat;
     [SerializeField] private DecorManager _kitchenManager;
     [SerializeField] private DecorManager _officeManager;
+
+    public override Type Type => typeof(Decor);
 
     public override void BuyItem(BuyableObject item)
     {

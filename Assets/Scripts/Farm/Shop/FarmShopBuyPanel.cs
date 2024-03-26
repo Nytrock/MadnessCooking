@@ -1,5 +1,9 @@
+using System;
+
 public class FarmShopBuyPanel : BaseChooseBuyPanel
 {
+    public override Type Type => typeof(BaseUpgrade);
+
     protected override void OnChooseItem()
     {
         // Change face

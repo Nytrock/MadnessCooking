@@ -19,7 +19,7 @@ public class PestsRemoverUI : MonoBehaviour
     public void Activate(BedType bedType, PestsGenerator pestsGenerator)
     {
         _generator = pestsGenerator;
-        _generator.PestsChanged += AddNewPest;
+        _generator.ChangePause(true);
         _panel.SetActive(true);
 
         _nowBed = GetBedType(bedType);
@@ -30,8 +30,8 @@ public class PestsRemoverUI : MonoBehaviour
 
     public void Close()
     {
-        _generator.PestsChanged -= AddNewPest;
         _nowBed.ChangeState(false);
+        _generator.ChangePause(false);
         _panel.SetActive(false);
         _nowBed = null;
     }
@@ -54,17 +54,6 @@ public class PestsRemoverUI : MonoBehaviour
             var pestUI = _pool.GetObject(pest);
             pestUI.ButtonRemove.onClick.AddListener(delegate { RemovePest(pestUI); });
         }
-    }
-
-    private void AddNewPest(float _)
-    {
-        var pestsList = _generator.GetList();
-        if (pestsList.Count != _pestCount + 1)
-            return;
-
-        _pestCount++;
-        var pestUI = _pool.GetObject(pestsList[^1]);
-        pestUI.ButtonRemove.onClick.AddListener(delegate { RemovePest(pestUI); });
     }
 
     private void RemovePest(PestUI pestUI)

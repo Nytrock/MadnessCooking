@@ -5,12 +5,18 @@ using UnityEngine;
 public abstract class SpaceManager : MonoBehaviour, IUpgradeable
 {
     [SerializeField] protected SpacePrefab _spacePrefab;
+    [SerializeField] protected int _defaultSpaceCount;
     [SerializeField] protected CountUpgrade[] _spaceAddUpgrades;
     protected int _spaceCount;
     protected Transform _spaceContainer;
 
     public int SpaceCount => _spaceCount;
     public event Action SpaceAdded;
+
+    private void Awake()
+    {
+        _spaceCount = _defaultSpaceCount;
+    }
 
     private void Start()
     {
@@ -30,7 +36,7 @@ public abstract class SpaceManager : MonoBehaviour, IUpgradeable
         return _spacePrefab.GetSpaceSize();
     }
 
-    public void CheckUpgrade(BaseUpgrade upgrade)
+    public virtual void CheckUpgrade(BaseUpgrade upgrade)
     {
         if (_spaceAddUpgrades.Contains(upgrade)) {
             var countUpgrade = upgrade as CountUpgrade;

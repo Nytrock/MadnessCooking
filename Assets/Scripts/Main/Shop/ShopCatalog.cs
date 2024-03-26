@@ -17,6 +17,11 @@ public class ShopCatalog : MonoBehaviour
 
     public void SetShop(BaseShop shop)
     {
+        if (_pagePrefab.ItemType != shop.Type) {
+            Debug.LogError("Buyable object type of shop and buy panel don't match");
+            return;
+        }
+
         _shop = shop;
     }
 
@@ -39,7 +44,9 @@ public class ShopCatalog : MonoBehaviour
 
     public void ActivateFirstPage()
     {
-        _pages[0].ChangeState(true);
+        _pages[_nowPage].ChangeState(false);
+        _nowPage = 0;
+        _pages[_nowPage].ChangeState(true);
         UpdateButtons();
     }
 

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -14,6 +15,7 @@ public class IngredientShop : BaseInstantShop, IUpgradeable
     [SerializeField] private BaseUpgrade _spiceAutoBuy;
 
     public BedTypesManager BedTypesManager => _bedTypesManager;
+    public override Type Type => typeof(Ingredient);
 
     public override void BuyItem(BuyableObject item)
     {

@@ -17,12 +17,13 @@ public class PestsGenerator : MonoBehaviour
 
     private readonly List<Pest> _pests = new List<Pest>();
     private bool _isActive;
+    private bool _isPause;
 
     public event Action<float> PestsChanged;
 
     private void Update()
     {
-        if (!_isActive)
+        if (!_isActive || _isPause)
             return;
 
         if (_nowTime < _needTime) {
@@ -32,6 +33,11 @@ public class PestsGenerator : MonoBehaviour
             _nowTime = 0;
             _needTime = UnityEngine.Random.Range(_minTime, _maxTime);
         }
+    }
+
+    public void ChangePause(bool newState)
+    {
+        _isPause = newState;
     }
 
     private void SpawnPest()
@@ -60,7 +66,7 @@ public class PestsGenerator : MonoBehaviour
 
     public List<Pest> GetList()
     {
-        List<Pest> result = new List<Pest>();
+        List<Pest> result = new();
         foreach (var pest in _pests)
             result.Add(pest);
         return result;

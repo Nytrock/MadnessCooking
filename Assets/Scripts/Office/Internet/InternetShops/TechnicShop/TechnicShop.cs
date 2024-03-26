@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -6,6 +7,8 @@ public class TechnicShop : BaseInstantShop
 {
     [SerializeField] private List<Technic> _technicToBuy;
     [SerializeField] private TechnicManager _technicManager;
+
+    public override Type Type => typeof(Technic);
 
     public override void BuyItem(BuyableObject item)
     {

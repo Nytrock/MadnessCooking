@@ -14,14 +14,14 @@ public class FlourMill : HoldDoubleAdd
 
     protected override void Start()
     {
-        _wheatManager.WheatChanged += SetWheatNum;
+        _wheatManager.FlourWheatChanged += SetWheatNum;
         _barnFridge.FlourChanged += UpdateFlourCount;
         base.Start();
     }
 
     public override void ChangeWorkMode(bool newValue)
     {
-        _animator.SetBool("isHold", newValue);
+        _animator.SetBool("isHold", newValue && _materialCount > 0);
         base.ChangeWorkMode(newValue);
     }
 
@@ -43,7 +43,7 @@ public class FlourMill : HoldDoubleAdd
     protected override void Add()
     {
         base.Add();
-        _wheatManager.SubstractWheat();
+        _wheatManager.SubstractWheat(typeof(FlourMill));
         _barnFridge.AddFlour(1);
     }
 }

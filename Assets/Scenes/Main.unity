@@ -4233,7 +4233,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -100, y: -249.4}
+  m_AnchoredPosition: {x: -100, y: -100}
   m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &136688651
@@ -5790,7 +5790,7 @@ GameObject:
   - component: {fileID: 197975457}
   - component: {fileID: 197975456}
   m_Layer: 0
-  m_Name: FarmBedManager
+  m_Name: FarmBedsManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5809,6 +5809,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spacePrefab: {fileID: 1149188167999997339, guid: d3ff9b65471ce7b46bbc97fb741ba5d5, type: 3}
+  _defaultSpaceCount: 1
   _spaceAddUpgrades:
   - {fileID: 11400000, guid: d7ba24184fd3ada45858988ee97f9a14, type: 2}
   - {fileID: 11400000, guid: d8dfd1006f8b948438f72116b43c0d94, type: 2}
@@ -14546,6 +14547,50 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &502661636
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 502661637}
+  - component: {fileID: 502661638}
+  m_Layer: 0
+  m_Name: FarmBedsUpgradeManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &502661637
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 502661636}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 713062800}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &502661638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 502661636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d44b9999a71134d4b860f8abdbb34d25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &503378731
 GameObject:
   m_ObjectHideFlags: 0
@@ -16904,6 +16949,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc7ba119d6f8c1d439988384e45783f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _cow: {fileID: 1231044660}
+  _flourMill: {fileID: 1257875750}
+  _wheatDistributeUpgrade: {fileID: 11400000, guid: 984bde56546b6044b81dd262405bd60f, type: 2}
 --- !u!4 &590866775
 Transform:
   m_ObjectHideFlags: 0
@@ -20927,6 +20975,7 @@ Transform:
   m_Children:
   - {fileID: 1086958102}
   - {fileID: 1021116376}
+  - {fileID: 502661637}
   - {fileID: 197975457}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -21673,6 +21722,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _upgradeablesObjects:
   - {fileID: 197975456}
+  - {fileID: 502661638}
   - {fileID: 1090935202}
   - {fileID: 1766492819}
   - {fileID: 852812873}
@@ -42171,6 +42221,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spacePrefab: {fileID: 8801110087086945618, guid: 5ac8a735a764ae240aba202f5ca09653, type: 3}
+  _defaultSpaceCount: 2
   _spaceAddUpgrades:
   - {fileID: 11400000, guid: a04fd64390135eb4cb05b6f2b74f582a, type: 2}
   - {fileID: 11400000, guid: dd73ba924328522479e5e8c1c9f04c39, type: 2}
@@ -49447,6 +49498,7 @@ MonoBehaviour:
   _upgradesToBuy:
   - {fileID: 11400000, guid: d7ba24184fd3ada45858988ee97f9a14, type: 2}
   - {fileID: 11400000, guid: a4d51e622ef1ec247afd10ec64670ee0, type: 2}
+  - {fileID: 11400000, guid: f70f6b07b4f13e241bb07edeeff27664, type: 2}
   - {fileID: 11400000, guid: 4d98847baac23154d9da4529844c79ff, type: 2}
   - {fileID: 11400000, guid: 61fca3ae117a80d47b86a698ef863033, type: 2}
   - {fileID: 11400000, guid: 9b73285b9270c0b4895b5e9dff90b061, type: 2}
