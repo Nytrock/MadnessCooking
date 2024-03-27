@@ -7,11 +7,11 @@ public class PestsRemoverUI : MonoBehaviour
     [SerializeField] private PestsUIPool _pool;
     private PestsGenerator _generator;
     private PestsBedTypeUI _nowBed;
-    private int _pestCount;
 
     private void Start()
     {
         _panel.SetActive(false);
+        _pool.SetRemover(this);
         foreach (var bedType in _bedTypes)
             bedType.ChangeState(false);
     }
@@ -49,17 +49,15 @@ public class PestsRemoverUI : MonoBehaviour
     private void GeneratePests()
     {
         var pestList = _generator.GetList();
-        _pestCount = pestList.Count;
         foreach (var pest in pestList) {
             var pestUI = _pool.GetObject(pest);
-            pestUI.ButtonRemove.onClick.AddListener(delegate { RemovePest(pestUI); });
+            pestUI.SetupRemoveButton();
         }
     }
 
-    private void RemovePest(PestUI pestUI)
+    public void RemovePest(PestUI pestUI)
     {
         _generator.RemovePest(pestUI.Pest);
-        _pestCount--;
         _pool.PutObject(pestUI);
     }
 }

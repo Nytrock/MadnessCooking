@@ -1,4 +1,5 @@
 using System;
+using Unity.Burst.Intrinsics;
 using UnityEngine;
 
 public class HoldAdd : MonoBehaviour, IUpgradeable
@@ -10,6 +11,7 @@ public class HoldAdd : MonoBehaviour, IUpgradeable
     [Header("Main")]
     [SerializeField] protected HoldAddUI _UI;
     [SerializeField] private float _timeWait;
+    [SerializeField, Min(0)] private float _fatigueCoef;
 
     private float _progressNow;
     protected float _progressMax;
@@ -66,6 +68,9 @@ public class HoldAdd : MonoBehaviour, IUpgradeable
 
     protected virtual void UpdateTimer()
     {
+        if (!_isAuto)
+            FatigueManager.instance.ChangeFatigue(_fatigueCoef);
+
         if (_progressNow < _progressMax) {
             _progressNow += Time.deltaTime * _speed;
         } else {

@@ -4,6 +4,8 @@ using UnityEngine;
 public class BarnFridge : MonoBehaviour
 {
     [SerializeField] private FarmCar _car;
+    [SerializeField] private Ingredient _milk;
+    [SerializeField] private Ingredient _flour;
 
     private int _milkCount;
     private int _flourCount;
@@ -29,16 +31,25 @@ public class BarnFridge : MonoBehaviour
         if (carSpace == 0)
             return;
 
-        if (ingredient.name == "Milk") {
-            MoveToCar(carSpace, ref _milkCount, ingredient);
+        if (ingredient == _milk) {
+            FatigueManager.instance.ChangeFatigue(_milk.FatigueCount * _milkCount);
+            MoveToCar(carSpace, ref _milkCount, _milk);
             MilkChanged?.Invoke(_milkCount);
-        } else {
-            MoveToCar(carSpace, ref _flourCount, ingredient);
+        } else if (ingredient == _flour) {
+            FatigueManager.instance.ChangeFatigue(_flour.FatigueCount * _flourCount);
+            MoveToCar(carSpace, ref _flourCount, _flour);
             FlourChanged?.Invoke(_flourCount);
+        } else {
+            Debug.LogError("Unknown ingredient");
         }
     }
 
     private void MoveToCar(int carSpace, ref int count, Ingredient ingredient) {
+        if (ingredient != _milk && ingredient != _flour) {
+            Debug.LogError("Unknown ingredient");
+            return;
+        }
+
         if (carSpace < count) {
             _car.PutIngredient(new IngredientCount(ingredient, carSpace));
             count -= carSpace;

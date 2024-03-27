@@ -7,9 +7,9 @@ public class Food : BuyableObject
     [SerializeField] private FoodType _type;
     [SerializeField] private Technic _typeTechnic;
     [SerializeField] private Sprite _miniSprite;
-    [SerializeField] private float _timeToCook;
-    [SerializeField] private float _timeToEat;
-    [SerializeField] private int _moneyGet;
+    [SerializeField, Min(0)] private float _timeToCook;
+    [SerializeField, Min(0)] private float _timeToEat;
+    [SerializeField, Min(0)] private int _moneyGet;
     [SerializeField] private IngredientCountList _ingredients;
 
     public FoodType Type => _type;

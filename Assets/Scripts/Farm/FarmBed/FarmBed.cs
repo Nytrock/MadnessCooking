@@ -125,6 +125,7 @@ public class FarmBed : MonoBehaviour
         if (_count == 0)
             return;
 
+        FatigueManager.instance.ChangeFatigue(_plantedIngredient.FatigueCount * _count);
         if (_plantedIngredient == _wheat) {
             _wheatManager.AddWheat(_count);
             _count = 0;

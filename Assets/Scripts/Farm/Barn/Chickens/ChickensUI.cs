@@ -13,6 +13,7 @@ public class ChickensUI : MonoBehaviour
 
     private void Awake()
     {
+        _countRenderer.SetChickens(_chickens);
         _chickens.EggChanged += UpdateEggCount;
         _chickens.FoodCountChanged += UpdateFoodCount;
     }
@@ -22,7 +23,6 @@ public class ChickensUI : MonoBehaviour
         _eggRenderer.SetItemInfo(_egg);
         _eggSlider.maxValue = _chickens.EggTime;
         _panel.SetActive(false);
-        _countRenderer.SetChickens(_chickens);
     }
 
     private void Update()

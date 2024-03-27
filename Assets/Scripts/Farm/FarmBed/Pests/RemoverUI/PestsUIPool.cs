@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,6 +12,7 @@ public class PestsUIPool : MonoBehaviour
     [SerializeField] private Transform _rightUp;
 
     private Queue<PestUI> _pool;
+    private PestsRemoverUI _remover;
 
     private void Awake()
     {
@@ -24,7 +26,7 @@ public class PestsUIPool : MonoBehaviour
 
         var pestUI = _pool.Dequeue();
         pestUI.ChangeState(true);
-        pestUI.Setup(originalPest, _leftDown, _rightUp);
+        pestUI.Setup(originalPest, _leftDown, _rightUp, _remover);
         return pestUI;
     }
 
@@ -32,5 +34,10 @@ public class PestsUIPool : MonoBehaviour
     {
         _pool.Enqueue(pest);
         pest.ResetPest();
+    }
+
+    public void SetRemover(PestsRemoverUI pestsRemoverUI)
+    {
+        _remover = pestsRemoverUI;
     }
 }

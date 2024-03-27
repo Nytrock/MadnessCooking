@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Technic : BuyableObject
 {
-    [SerializeField] private int _timeRepair;
-    [SerializeField] private int _strength;
-    [SerializeField] private int _costRepair;
+    [SerializeField, Min(0)] private int _timeRepair;
+    [SerializeField, Min(0)] private int _strength;
+    [SerializeField, Min(0)] private int _costRepair;
 
     public int TimeRepair => _timeRepair;
     public int Strength => _strength;

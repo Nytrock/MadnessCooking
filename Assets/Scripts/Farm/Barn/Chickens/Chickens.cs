@@ -78,6 +78,7 @@ public class Chickens : MonoBehaviour, IUpgradeable
 
     public void EggsToCar(Ingredient egg)
     {
+        FatigueManager.instance.ChangeFatigue(egg.FatigueCount * EggCount);
         _car.PutIngredient(new IngredientCount(egg, EggCount));
         EggCount = 0;
         EggChanged?.Invoke();

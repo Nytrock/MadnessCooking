@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5093379975496517487}
   - component: {fileID: 6876969059564199550}
   - component: {fileID: 9201351774352231562}
+  - component: {fileID: 3667207401879273682}
   m_Layer: 5
   m_Name: PestUI
   m_TagString: Untagged
@@ -133,3 +134,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e433d9614bc3eea439584a777046e75d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3667207401879273682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4990996418751483809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5f77a3502495de42a566d7dc7a52f5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _fatigueCoef: 0.02

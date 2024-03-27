@@ -4,6 +4,12 @@ using UnityEngine;
 [Serializable]
 public class IngredientCount
 {
+    [SerializeField] private Ingredient _ingredient;
+    [SerializeField] private int _count;
+
+    public Ingredient Ingredient => _ingredient;
+    public int Count => _count;
+
     public IngredientCount(Ingredient ingredient, int count)
     {
         _ingredient = ingredient;
@@ -17,10 +23,4 @@ public class IngredientCount
         else
             _count += count;
     }
-
-    [SerializeField] private Ingredient _ingredient;
-    [SerializeField] private int _count;
-
-    public Ingredient Ingredient => _ingredient;
-    public int Count => _count;
 }

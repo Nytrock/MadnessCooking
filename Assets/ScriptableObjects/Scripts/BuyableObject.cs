@@ -5,7 +5,7 @@ public abstract class BuyableObject : ScriptableObject
     public const string AssetMenuName = nameof(BuyableObject) + "/";
 
     [SerializeField] private Sprite _icon;
-    [SerializeField] private int _cost;
+    [SerializeField, Min(0)] private int _cost;
 
     public string Name => name + ".Name";
     public string Description => name + ".Description";

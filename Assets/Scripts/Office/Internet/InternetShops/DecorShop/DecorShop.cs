@@ -19,6 +19,7 @@ public class DecorShop : BaseInstantShop
             return;
 
         MoneyManager.instance.ChangeMoney(-decor.Cost);
+        FatigueManager.instance.AddDecorBonus(decor);
         if (decor.DecorType == DecorType.Kitchen)
             _kitchenManager.AddDecor(decor);
         else if (decor.DecorType == DecorType.Office)

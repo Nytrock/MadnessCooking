@@ -16,6 +16,7 @@ public class TimeManager : MonoBehaviour
 
     public TimeSpan TimeSpan => _timespan;
     public int TimeSpeed => _nowTimeSpeed;
+    public bool IsSleep => _sleepTimeSpeed == _nowTimeSpeed;
 
     public event Action<Daytime> DaytimeChanged;
 
@@ -32,7 +33,7 @@ public class TimeManager : MonoBehaviour
 
     private void Update()
     {
-        _timespan = _timespan.Add(new TimeSpan(0, 0, 1 * _nowTimeSpeed));
+        _timespan = _timespan.Add(new TimeSpan(0, 0, _nowTimeSpeed));
 
         foreach (var daytimeStart in _daytimeStarts) {
             if (daytimeStart.TimeFits(_timespan, _daytime)) {
@@ -59,5 +60,10 @@ public class TimeManager : MonoBehaviour
             if (daytimeStart.Daytime == daytime)
                 return daytimeStart;
         return null;
+    }
+
+    public float GetSleepBonus(float needHours, float maxFatigue)
+    {
+        return maxFatigue / (needHours * 3600 / _sleepTimeSpeed);
     }
 }

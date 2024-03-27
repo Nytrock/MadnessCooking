@@ -4,12 +4,11 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Button), typeof(Image))]
 public class PestUI : MonoBehaviour
 {
+    private PestsRemoverUI _pestsRemover;
     private Image _image;
     private Button _buttonRemove;
-    private Pest _pest;
 
-    public Button ButtonRemove => _buttonRemove;
-    public Pest Pest => _pest;
+    public Pest Pest { get; private set; }
 
     private void Awake()
     {
@@ -17,8 +16,9 @@ public class PestUI : MonoBehaviour
         _buttonRemove = GetComponent<Button>();
     }
 
-    public void Setup(Pest pest, Transform leftDown, Transform rightUp)
+    public void Setup(Pest pest, Transform leftDown, Transform rightUp, PestsRemoverUI remover)
     {
+        _pestsRemover = remover;
         _image.sprite = pest.GetSprite();
         _image.SetNativeSize();
 
@@ -28,17 +28,22 @@ public class PestUI : MonoBehaviour
         var y = Mathf.Lerp(leftDown.position.y, rightUp.position.y, yNormalized);
         
         transform.SetPositionAndRotation(new Vector2(x, y), pest.transform.rotation);
-        _pest = pest;
+        Pest = pest;
     }
 
     public void ResetPest()
     {
         ChangeState(false);
-        _buttonRemove.onClick.RemoveAllListeners();
+        _buttonRemove.onClick.RemoveListener(delegate { _pestsRemover.RemovePest(this); });
     }
 
     public void ChangeState(bool value)
     {
         gameObject.SetActive(value);
+    }
+
+    internal void SetupRemoveButton()
+    {
+        _buttonRemove.onClick.AddListener(delegate { _pestsRemover.RemovePest(this); });
     }
 }

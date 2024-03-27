@@ -71,7 +71,7 @@ public class IngredientChoiceUI : ChoiceUI<IngredientChoiceButton>
 
     private void Deactivate()
     {
-        _submitButton.onClick.RemoveAllListeners();
+        _submitButton.onClick.RemoveListener(SetChoice);
         _stylePanel.SetActive(false);
     }
 

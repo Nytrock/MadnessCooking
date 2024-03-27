@@ -6,7 +6,6 @@ public class DecorHolder : MonoBehaviour
 
     public Decor Decor => _decor;
 
-
     public void ChangeState(bool newValue)
     {
         gameObject.SetActive(newValue);
