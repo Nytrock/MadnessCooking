@@ -2,14 +2,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public abstract class ChoiceUI<T> : MonoBehaviour
+public abstract class ChoiceUI<T, K> : MonoBehaviour where K: ChoiceButton<T>
 {
     [SerializeField] protected GameObject _UI;
     [SerializeField] protected CameraManager _cameraManager;
-    [SerializeField] protected T _choiceButtonPrefab;
-    [SerializeField] protected Transform _choiceButtonsContainer;
+    [SerializeField] protected ChoicePool<T, K> _choiceButtonPool;
     [SerializeField] protected Button _submitButton;
-    protected List<T> _choiceButtons;
+    protected List<K> _choiceButtons;
     protected int _chosedIndex = -1;
 
     protected virtual void Start()
@@ -17,33 +16,13 @@ public abstract class ChoiceUI<T> : MonoBehaviour
         _UI.SetActive(false);
     }
 
-    protected void Activate()
+    protected virtual void Activate()
     {
         _cameraManager.ChangeWorkMode(false);
         _UI.SetActive(true);
     }
 
-    public void Choice(int index)
-    {
-        if (_chosedIndex != -1)
-            SetSelectedState(_chosedIndex);
-
-        _submitButton.interactable = index != _chosedIndex;
-        if (index == _chosedIndex) {
-            _chosedIndex = -1;
-            return;
-        }
-
-        _chosedIndex = index;
-        SetSelectedState(_chosedIndex);
-    }
-
-    public virtual void SetChoice()
-    {
-        Disable();
-    }
-
-    public void Disable()
+    public virtual void Disable()
     {
         if (_chosedIndex != -1)
             SetSelectedState(_chosedIndex);
@@ -55,4 +34,5 @@ public abstract class ChoiceUI<T> : MonoBehaviour
 
     protected abstract void GenerateChoiceButtons();
     protected abstract void SetSelectedState(int index);
+    public abstract void SetChoice();
 }

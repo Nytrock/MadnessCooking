@@ -1,8 +1,6 @@
 using System;
-using System.Data;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEditor.Progress;
 
 public class IngredientBuyPanel : BaseInstantBuyPanel
 {

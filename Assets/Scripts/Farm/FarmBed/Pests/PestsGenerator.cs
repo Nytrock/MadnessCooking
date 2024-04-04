@@ -58,10 +58,16 @@ public class PestsGenerator : MonoBehaviour
         }
     }
 
-    private void CleanPests()
+    public void CleanPests()
     {
         foreach (var pest in _pests)
             _pool.PutObject(pest);
+        PestsChanged?.Invoke(1);
+    }
+
+    public void StopWork()
+    {
+        _isActive = false;
     }
 
     public List<Pest> GetList()

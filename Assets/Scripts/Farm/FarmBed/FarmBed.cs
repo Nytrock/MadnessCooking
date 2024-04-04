@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
-using UnityEngine.UI;
 
+[RequireComponent(typeof(FarmBedUpgrader))]
 public class FarmBed : MonoBehaviour
 {
     [SerializeField] private Ingredient _wheat;
@@ -23,18 +23,27 @@ public class FarmBed : MonoBehaviour
     private float _nowTime;
     private int _count;
     private bool _isFull;
-    private bool _isActive;
 
     private float _waterBoost = 1;
     private float _fertilizeBoost = 1;
+    private float _independentBoost = 1;
     private float _pestsSlowdown = 1;
 
     public BedType BedType => _bedHolder.Type;
+    public PestsGenerator PestsGenerator => _bedHolder.PestsGenerator;
     public Ingredient Ingredient => _plantedIngredient;
     public int Count => _count;
-    public bool IsActive => _isActive;
+
+    public bool IsActive { get; private set; }
+    public FarmBedUpgrader Upgrader { get; private set; }
+
 
     public event Action CountChanged;
+
+    private void Awake()
+    {
+        Upgrader = GetComponent<FarmBedUpgrader>();
+    }
 
     public void MouseDown()
     {
@@ -56,7 +65,7 @@ public class FarmBed : MonoBehaviour
 
         if (_nowTime < _growTime) {
             _nowTime += Time.deltaTime * _waterBoost * _fertilizeBoost 
-                * _pestsSlowdown * TimeManager.instance.TimeSpeed;
+                * _pestsSlowdown * _independentBoost * TimeManager.instance.TimeSpeed;
         } else {
             _nowTime = 0;
             if (_isAutoWheat && _plantedIngredient == _wheat) {
@@ -91,7 +100,8 @@ public class FarmBed : MonoBehaviour
             _waterBoost = 1;
 
         _bedHolder = bedType;
-        _isActive = true;
+        Upgrader.UpdateBedHolder(_bedHolder);
+        IsActive = true;
         _bedHolder.ChangeMode(true);
     }
 
@@ -100,7 +110,8 @@ public class FarmBed : MonoBehaviour
         ResetIngredient();
         _bedHolder.ChangeMode(false);
         _bedHolder = null;
-        _isActive = false;
+        Upgrader.UpdateBedHolder(_bedHolder);
+        IsActive = false;
     }
 
     public void Setup(FarmBedSettings settings)
@@ -159,11 +170,13 @@ public class FarmBed : MonoBehaviour
     public void Water()
     {
         _waterBoost = _bedHolder.GetWaterMultiplier();
+        ChangeAnimationSpeed();
     }
 
     public void Fertilize()
     {
         _fertilizeBoost = _bedHolder.GetFertilizeMultiptier();
+        ChangeAnimationSpeed();
     }
 
     public void StopWaterBuff(float newMultiplier)
@@ -189,11 +202,6 @@ public class FarmBed : MonoBehaviour
         _bedHolder.BoostAnimationSpeed(_fertilizeBoost * _waterBoost * _pestsSlowdown);
     }
 
-    public PestsGenerator GetPests()
-    {
-        return _bedHolder.GetPests();
-    }
-
     public void CheckUpgrade(BaseUpgrade upgrade)
     {
         if (upgrade == _growStatusShowUpgrade) {
@@ -210,5 +218,10 @@ public class FarmBed : MonoBehaviour
     private void UpdateUpgrades()
     {
         _growStatusSlider.SetActive(_isGrowStatusShow && _plantedIngredient != null);
+    }
+
+    public void UpdateUpgradeBooster()
+    {
+        _independentBoost = Upgrader.UpgradesBooster;
     }
 }

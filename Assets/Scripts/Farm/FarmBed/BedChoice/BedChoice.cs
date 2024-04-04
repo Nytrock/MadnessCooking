@@ -11,7 +11,7 @@ public class BedChoice : MonoBehaviour
     public void MouseDown()
     {
         if (_isEmpty)
-            _UI.Activate(this);
+            _UI.ActivateBedChoice(this);
         else
             _groundBed.MouseDown();
     }
@@ -36,7 +36,7 @@ public class BedChoice : MonoBehaviour
             MoneyManager.instance.ChangeMoney(_groundBed.BedType.Cost);
         _groundBed.ResetBedType();
         _isEmpty = true;
-        _UI.Activate(this);
+        _UI.ActivateBedChoice(this);
     }
 
     private void HideBeds() { 

@@ -1,6 +1,6 @@
-public class IngredientChoiceButton : ChoiceButton<Ingredient, IngredientChoiceUI>
+public class IngredientChoiceButton : ChoiceSimpleButton<Ingredient>
 {
-    public override void Setup(Ingredient item, int index, IngredientChoiceUI ui)
+    public override void Setup(Ingredient item, int index, ChoiceSimpleUI<Ingredient> ui)
     {
         base.Setup(item, index, ui);
         _icon.sprite = _item.Icon;

@@ -1,15 +1,16 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Button))]
-public abstract class ChoiceButton<T, K> : MonoBehaviour
+public abstract class ChoiceButton<T> : MonoBehaviour
 {
     [SerializeField] private Sprite _deselectedSprite;
     [SerializeField] private Sprite _selectedSprite;
     [SerializeField] protected Image _icon;
+    protected T _item;
     protected Button _button;
     private Image _image;
-    [SerializeField] protected T _item;
     private bool _isSelected;
 
     private void Awake()
@@ -27,15 +28,19 @@ public abstract class ChoiceButton<T, K> : MonoBehaviour
             _image.sprite = _deselectedSprite;
     }
 
-    public virtual void Setup(T item, int index, K ui)
+    public void ChangeState(bool newState)
     {
-        _button = GetComponent<Button>();
-        gameObject.SetActive(true);
-        _item = item;
+        gameObject.SetActive(newState);
     }
 
     public void Destroy()
     {
         Destroy(gameObject);
+    }
+
+    public void Disable()
+    {
+        _button.onClick.RemoveAllListeners();
+        ChangeState(false);
     }
 }

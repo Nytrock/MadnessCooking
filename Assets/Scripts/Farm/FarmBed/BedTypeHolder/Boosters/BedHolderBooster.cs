@@ -12,6 +12,7 @@ public class BedHolderBooster : MonoBehaviour
     private float _boostStep;
 
     protected bool _isBoosting;
+    protected bool _isEternal;
     protected float _standardSpeed = 1;
 
     public event Action<float> BoostEnded;
@@ -23,7 +24,7 @@ public class BedHolderBooster : MonoBehaviour
 
     private void Update()
     {
-        if (!_isBoosting)
+        if (!_isBoosting || _isEternal)
             return;
 
         if (_nowTime < _boostTime) {
@@ -59,5 +60,10 @@ public class BedHolderBooster : MonoBehaviour
         var color = _boostSprite.color; 
         color.a = alpha;
         _boostSprite.color = color;
+    }
+
+    public void SetEternal()
+    {
+        _isEternal = true;
     }
 }

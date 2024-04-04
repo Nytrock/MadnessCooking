@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
@@ -18,6 +17,7 @@ public class BedTypeHolder : MonoBehaviour
     private StandardBedFertilize _fertilize;
 
     public BedType Type => _type;
+    public PestsGenerator PestsGenerator => _pestsGenerator;
 
     private void Awake()
     {
@@ -81,8 +81,15 @@ public class BedTypeHolder : MonoBehaviour
             return 1;
 
         var multiplier = _water.StartBoost();
-        BoostAnimationSpeed(multiplier);
         return multiplier;
+    }
+
+    public void SetEternalWater()
+    {
+        if (_water == null)
+            return;
+
+        _water.SetEternal();
     }
 
     public float GetFertilizeMultiptier()
@@ -91,17 +98,19 @@ public class BedTypeHolder : MonoBehaviour
             return 1;
 
         var multiplier = _fertilize.StartBoost();
-        BoostAnimationSpeed(multiplier);
         return multiplier;
+    }
+
+    public void SetEternalFertilize()
+    {
+        if (_fertilize == null)
+            return;
+
+        _fertilize.SetEternal();
     }
 
     public void BoostAnimationSpeed(float boost)
     {
         _animator.SetFloat("growTime", _animationSpeed * boost);
-    }
-
-    public PestsGenerator GetPests()
-    {
-        return _pestsGenerator;
     }
 }

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IngredientChoiceUI : ChoiceUI<IngredientChoiceButton>
+public class IngredientChoiceUI : ChoiceSimpleUI<Ingredient>
 {
     [SerializeField] private IngredientsManager _ingredientsManager;
     [SerializeField] private IngredientChoiceStyle[] _styles;
@@ -15,7 +15,7 @@ public class IngredientChoiceUI : ChoiceUI<IngredientChoiceButton>
         base.Start();
     }
 
-    public void Activate(FarmBed groundBed)
+    public void ActivateIngredientChoice(FarmBed groundBed)
     {
         _changingBed = groundBed;
         var bedType = _changingBed.BedType;
@@ -28,7 +28,7 @@ public class IngredientChoiceUI : ChoiceUI<IngredientChoiceButton>
     private void DestoyOldButtons()
     {
         foreach (var button in _choiceButtons)
-            Destroy(button.gameObject);
+            _choiceButtonPool.PutObject(button);
         _choiceButtons.Clear();
     }
 
@@ -36,7 +36,7 @@ public class IngredientChoiceUI : ChoiceUI<IngredientChoiceButton>
     {
         _ingredients = _ingredientsManager.GetIngredientsOfOneBedType(_changingBed.BedType);
         for (int i = 0; i < _ingredients.Count; i++) {
-            var choiceButton = Instantiate(_choiceButtonPrefab, _choiceButtonsContainer);
+            var choiceButton = _choiceButtonPool.GetObject();
             choiceButton.Setup(_ingredients[i], i, this);
             _choiceButtons.Add(choiceButton);
         }
@@ -66,7 +66,7 @@ public class IngredientChoiceUI : ChoiceUI<IngredientChoiceButton>
     {
         _changingBed.SetIngredient(_ingredients[_chosedIndex]);
         Deactivate();
-        base.SetChoice();
+        Disable();
     }
 
     private void Deactivate()
@@ -78,5 +78,11 @@ public class IngredientChoiceUI : ChoiceUI<IngredientChoiceButton>
     protected override void SetSelectedState(int index)
     {
         _choiceButtons[index].ChangeSelectedState();
+    }
+
+    public override void Disable()
+    {
+        base.Disable();
+        _changingBed = null;
     }
 }

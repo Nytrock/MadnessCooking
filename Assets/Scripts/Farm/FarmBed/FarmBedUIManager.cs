@@ -9,7 +9,7 @@ public class FarmBedUIManager : MonoBehaviour
     [SerializeField] private PestsRemoverUI _pestsRemoverUI;
     [SerializeField] private IngredientChoiceUI _ingredientChoice;
 
-    private FarmBed _groundBed;
+    private FarmBed _farmBed;
     private BedTypeUI _nowUI;
 
 
@@ -40,12 +40,12 @@ public class FarmBedUIManager : MonoBehaviour
 
     public void UpdateCount()
     {
-        _nowUI.UpdateCount(_groundBed.Count);
+        _nowUI.UpdateCount(_farmBed.Count);
     }
 
     public void ShowGroundBed(FarmBed groundBed)
     {
-        if (_groundBed == groundBed) {
+        if (_farmBed == groundBed) {
             _nowUI.ChangeMode();
             return;
         }
@@ -57,12 +57,12 @@ public class FarmBedUIManager : MonoBehaviour
         _nowUI.UpdateInfo(groundBed);
         _nowUI.ChangeMode(true);
 
-        if (_groundBed != null)
-            _groundBed.CountChanged -= UpdateCount;
+        if (_farmBed != null)
+            _farmBed.CountChanged -= UpdateCount;
 
         transform.position = groundBed.transform.position;
-        _groundBed = groundBed;
-        _groundBed.CountChanged += UpdateCount;
+        _farmBed = groundBed;
+        _farmBed.CountChanged += UpdateCount;
 
         if (_nowUI.IsSideButtonsWork) {
             CheckWater(_farmWell.Count);
@@ -82,52 +82,57 @@ public class FarmBedUIManager : MonoBehaviour
 
     public void ActivateIngredientChoice(FarmBed groundBed)
     {
-        _ingredientChoice.Activate(groundBed);
+        _ingredientChoice.ActivateIngredientChoice(groundBed);
     }
 
     public void CollectIngredients()
     {
-        _groundBed.SendIngredients();
+        _farmBed.SendIngredients();
     }
 
     public void ChangeBedType()
     {
         ChangeMode();
-        _groundBed.GetComponent<BedChoice>().ReactivateBedsChoice();
+        _farmBed.GetComponent<BedChoice>().ReactivateBedsChoice();
     }
 
     public void ChangeIngredient()
     {
         ChangeMode();
-        _groundBed.ResetIngredient();
-        _ingredientChoice.Activate(_groundBed);
+        _farmBed.ResetIngredient();
+        _ingredientChoice.ActivateIngredientChoice(_farmBed);
     }
 
     public void OpenUpgradesPanel()
     {
-        _upgrade.Activate(_groundBed);
+        _upgrade.ActivateUpgradePanel(_farmBed);
     }
 
     public void Water()
     {
         _farmWell.SubtractWater();
-        _groundBed.Water();
+        _farmBed.Water();
     }
 
     public void Fertilize()
     {
         _puncher.SubtractFertilize();
-        _groundBed.Fertilize();
+        _farmBed.Fertilize();
     }
 
     public void Pests() 
     {
-        _pestsRemoverUI.Activate(_groundBed.BedType, _groundBed.GetPests());
+        var upgrader = _farmBed.Upgrader;
+        if (upgrader.IsPestsInstant) {
+            _farmBed.PestsGenerator.CleanPests();
+        } else {
+            _pestsRemoverUI.Activate(_farmBed.BedType, _farmBed.PestsGenerator);
+        }
     }
 
     public void ForgiveBed(FarmBed groundBed)
     {
-        if (_groundBed == groundBed)
-            _groundBed = null;
+        if (_farmBed == groundBed)
+            _farmBed = null;
     }
 }

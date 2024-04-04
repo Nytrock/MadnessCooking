@@ -2557,6 +2557,7 @@ GameObject:
   - component: {fileID: 1144481904766433500}
   - component: {fileID: 5126006074908104}
   - component: {fileID: 3074750115968164318}
+  - component: {fileID: 4793016037927127210}
   m_Layer: 0
   m_Name: FarmBed
   m_TagString: Untagged
@@ -2620,6 +2621,24 @@ MonoBehaviour:
   - {fileID: 4819663339247078879}
   - {fileID: 9033362031076480432}
   - {fileID: 6410221535121138993}
+--- !u!114 &4793016037927127210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5779004356679826622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b7e4793e72ee704898737d74c2e0568, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _alwaysWater: {fileID: 11400000, guid: d1350d47e88b0904ab9c25e62685c672, type: 2}
+  _alwaysFertilize: {fileID: 11400000, guid: fefc1b67be3a6d74f8840576d177f83d, type: 2}
+  _technicSpeedUp: {fileID: 11400000, guid: 5b1327ad379db714290d5dc898998f0b, type: 2}
+  _technicSpeedBooster: 1.25
+  _instantPests: {fileID: 11400000, guid: 7e3142bdddde499469effe9504e38213, type: 2}
+  _pestsRemove: {fileID: 11400000, guid: 9d724893fc0f3074f8338d2c964755f5, type: 2}
 --- !u!1 &6095296163622046435
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,12 +4,24 @@ using UnityEngine;
 
 public class FarmBedUpgradeManager : MonoBehaviour, IUpgradeable
 {
-    [SerializeField] private GroundBedUpgrade[] _allUpgrades;
-    private List<GroundBedUpgrade> _haveUpgrades = new();
+    [SerializeField] private FarmBedUpgrade[] _allUpgrades;
+    private List<FarmBedUpgrade> _haveUpgrades = new();
+
+    public int HaveUpgradesCount => _haveUpgrades.Count;
 
     public void CheckUpgrade(BaseUpgrade upgrade)
     {
         if (_allUpgrades.Contains(upgrade))
-            _haveUpgrades.Add(upgrade as GroundBedUpgrade);
+            _haveUpgrades.Add(upgrade as FarmBedUpgrade);
+    }
+
+    public FarmBedUpgrade GetUpgradeByIndex(int index)
+    {
+        return _haveUpgrades[index];
+    }
+
+    public int GetIndexOfUpgrade(FarmBedUpgrade upgrade)
+    {
+        return _haveUpgrades.IndexOf(upgrade);
     }
 }
