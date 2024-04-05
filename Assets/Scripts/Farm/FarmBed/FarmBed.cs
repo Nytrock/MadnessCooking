@@ -109,8 +109,10 @@ public class FarmBed : MonoBehaviour
     {
         ResetIngredient();
         _bedHolder.ChangeMode(false);
-        _bedHolder = null;
         Upgrader.UpdateBedHolder(_bedHolder);
+        Upgrader.ReturnUpgrades();
+
+        _bedHolder = null;
         IsActive = false;
     }
 

@@ -5,7 +5,7 @@ public class BedTypeUI : MonoBehaviour
 {
     [SerializeField] private BedType _bedType;
     [SerializeField] private GameObject _UI;
-    [SerializeField] private ItemInfoRendererWithNum _renderer;
+    [SerializeField] private ItemInfoRendererWithCount _renderer;
 
     [Header("Side buttons")]
     [SerializeField] private bool _isSideButtonsWork;
@@ -13,7 +13,6 @@ public class BedTypeUI : MonoBehaviour
     [SerializeField] private Button _fertilizeButton;
 
     public BedType BedType => _bedType;
-
     public bool IsSideButtonsWork => _isSideButtonsWork;
 
     private void Start()
@@ -34,7 +33,7 @@ public class BedTypeUI : MonoBehaviour
     public void UpdateInfo(FarmBed groundBed)
     {
         _renderer.SetItemInfo(groundBed.Ingredient);
-        _renderer.SetNumText(groundBed.Count.ToString());
+        _renderer.SetCount(groundBed.Count);
     }
 
     public void CheckWater(int count)
@@ -55,6 +54,6 @@ public class BedTypeUI : MonoBehaviour
 
     public void UpdateCount(int count)
     {
-        _renderer.SetNumText(count.ToString());
+        _renderer.SetCount(count);
     }
 }

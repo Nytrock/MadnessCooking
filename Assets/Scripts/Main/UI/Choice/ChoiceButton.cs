@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,10 +7,12 @@ public abstract class ChoiceButton<T> : MonoBehaviour
     [SerializeField] private Sprite _deselectedSprite;
     [SerializeField] private Sprite _selectedSprite;
     [SerializeField] protected Image _icon;
-    protected T _item;
+
     protected Button _button;
     private Image _image;
     private bool _isSelected;
+
+    public T Item { get; protected set; }
 
     private void Awake()
     {
@@ -31,11 +32,6 @@ public abstract class ChoiceButton<T> : MonoBehaviour
     public void ChangeState(bool newState)
     {
         gameObject.SetActive(newState);
-    }
-
-    public void Destroy()
-    {
-        Destroy(gameObject);
     }
 
     public void Disable()

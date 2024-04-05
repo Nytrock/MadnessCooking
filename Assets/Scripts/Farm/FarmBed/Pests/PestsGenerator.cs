@@ -15,7 +15,7 @@ public class PestsGenerator : MonoBehaviour
     private float _nowTime;
     private float _needTime;
 
-    private readonly List<Pest> _pests = new List<Pest>();
+    private readonly List<Pest> _pests = new();
     private bool _isActive;
     private bool _isPause;
 

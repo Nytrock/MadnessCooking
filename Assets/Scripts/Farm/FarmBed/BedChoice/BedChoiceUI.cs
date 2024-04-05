@@ -25,24 +25,27 @@ public class BedChoiceUI : ChoiceBuyUI<BedType>
             var choiceButton = _choiceButtonPool.GetObject() as BedChoiceButton;
             var bed = _bedTypesManager.GetBed(i);
             choiceButton.Setup(bed, i, this);
-            choiceButton.SetBlockedState(_bedTypesManager.HaveBed(bed));
+            choiceButton.SetBlockedState(!_bedTypesManager.HaveBed(bed));
             _choiceButtons.Add(choiceButton);
         }
     }
 
     private void AddType(BedType newType)
     {
-        foreach (var button in _choiceButtons)
-            _choiceButtonPool.PutObject(button);
-        _choiceButtons.Clear();
-        GenerateChoiceButtons();
+        foreach (var button in _choiceButtons) {
+            if (button.Item == newType) {
+                var choiceButton = button as BedChoiceButton;
+                choiceButton.SetBlockedState(false);
+                break;
+            }
+        }
     }
 
     public override void Choice(int index, bool isBuyable)
     {
         base.Choice(index, isBuyable);
 
-        var bedType = _bedTypesManager.GetBed(_chosedIndex);
+        var bedType = _choiceButtons[_chosedIndex].Item;
         _ingredientsRenderer.ShowIngredients(bedType);
         _description.UpdateDescription(bedType);
 
@@ -51,7 +54,8 @@ public class BedChoiceUI : ChoiceBuyUI<BedType>
 
     public override void SetChoice()
     {
-        _changingBed.SetType(_bedTypesManager.GetBed(_chosedIndex));
+        base.SetChoice();
+        _changingBed.SetType(_choiceButtons[_chosedIndex].Item);
         _changingBed = null;
         Disable();
     }

@@ -1,4 +1,3 @@
-using System.Data;
 using System.Linq;
 using UnityEngine;
 
@@ -16,33 +15,36 @@ public class FarmBedUpgradeUI : ChoiceBuyUI<FarmBedUpgrade>
 
     protected override void GenerateChoiceButtons()
     {
-        for (int i = 0; i < _manager.HaveUpgradesCount; i++) {
+        int index = 0;
+        for (int i = 0; i < _manager.UpgradesCount; i++) {
             FarmBedUpgrade upgrade = _manager.GetUpgradeByIndex(i);
             bool isAccessable = CheckUpgradeAccessable(upgrade);
             if (isAccessable) {
                 var button = _choiceButtonPool.GetObject();
-                button.Setup(upgrade, i, this);
+                button.Setup(upgrade, index, this);
                 _choiceButtons.Add(button);
+                index++;
             }
         }
     }
 
     public override void SetChoice()
     {
-        var upgrade = _manager.GetUpgradeByIndex(_chosedIndex);
+        base.SetChoice();
+        var upgrade = _choiceButtons[_chosedIndex].Item;
         _changingBed.Upgrader.AddUpgrade(upgrade);
 
+        int index = 0;
         foreach (FarmBedUpgrade nextUpgrade in upgrade.NextUpgrades) {
             bool isAccessable = CheckUpgradeAccessable(nextUpgrade);
-            int i = _manager.GetIndexOfUpgrade(nextUpgrade);
-            if (isAccessable && i != -1) {
+            if (isAccessable) {
                 var button = _choiceButtonPool.GetObject();
-                button.Setup(nextUpgrade, i, this);
+                button.Setup(nextUpgrade, index, this);
                 _choiceButtons.Add(button);
             }
         }
 
-        _choiceButtons[_chosedIndex].Destroy();
+        _choiceButtonPool.PutObject(_choiceButtons[_chosedIndex]);
         Deselect();
     }
 
@@ -52,6 +54,7 @@ public class FarmBedUpgradeUI : ChoiceBuyUI<FarmBedUpgrade>
         var farmBedUpgrader = _changingBed.Upgrader;
         bool isAccessable = true;
 
+        isAccessable &= _manager.ContainsUpgrade(upgrade);
         isAccessable &= upgrade.SuitableBedTypes.Contains(bedType);
         isAccessable &= !farmBedUpgrader.HaveUpgrade(upgrade);
         foreach (FarmBedUpgrade needUpgrade in upgrade.NeedUpgrades) {
@@ -73,7 +76,7 @@ public class FarmBedUpgradeUI : ChoiceBuyUI<FarmBedUpgrade>
     {
         base.Choice(index, isBuyable);
 
-        var upgrade = _manager.GetUpgradeByIndex(_chosedIndex);
+        var upgrade = _choiceButtons[_chosedIndex].Item;
         _description.UpdateDescription(upgrade);
     }
 
@@ -87,7 +90,7 @@ public class FarmBedUpgradeUI : ChoiceBuyUI<FarmBedUpgrade>
         base.Disable();
         _changingBed = null;
         foreach (var button in _choiceButtons)
-            button.Destroy();
+            _choiceButtonPool.PutObject(button);
         _choiceButtons.Clear();
     }
 }

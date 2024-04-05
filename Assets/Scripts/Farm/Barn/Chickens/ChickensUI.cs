@@ -8,7 +8,7 @@ public class ChickensUI : MonoBehaviour
     [SerializeField] private Button _feedButton;
     [SerializeField] private ChickensFoodCountRenderer _countRenderer;
     [SerializeField] private Slider _eggSlider;
-    [SerializeField] private ItemInfoRendererWithNum _eggRenderer;
+    [SerializeField] private ItemInfoRendererWithCount _eggRenderer;
     [SerializeField] private Ingredient _egg;
 
     private void Awake()
@@ -33,7 +33,7 @@ public class ChickensUI : MonoBehaviour
 
     private void UpdateEggCount()
     {
-        _eggRenderer.SetNumText(_chickens.EggCount.ToString());
+        _eggRenderer.SetCount(_chickens.EggCount);
     }
 
     private void UpdateFoodCount()

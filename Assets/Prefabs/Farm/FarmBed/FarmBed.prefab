@@ -568,7 +568,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _type: {fileID: 11400000, guid: 80529c8439c585945b072b791ee2a6a4, type: 2}
   _pestsGenerator: {fileID: 3483287551612148431}
-  _groundBed: {fileID: 5126006074908104}
+  _farmBed: {fileID: 5126006074908104}
 --- !u!114 &572616084266854977
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1645,7 +1645,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _type: {fileID: 11400000, guid: 3627450b9a024af45a0e4f14c3308c09, type: 2}
   _pestsGenerator: {fileID: 8726292874763710025}
-  _groundBed: {fileID: 5126006074908104}
+  _farmBed: {fileID: 5126006074908104}
 --- !u!1 &2808874700637113055
 GameObject:
   m_ObjectHideFlags: 0
@@ -2545,7 +2545,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _type: {fileID: 11400000, guid: 7e3fc35901153c8499d08566fb3e07cf, type: 2}
   _pestsGenerator: {fileID: 5735628849990394074}
-  _groundBed: {fileID: 5126006074908104}
+  _farmBed: {fileID: 5126006074908104}
 --- !u!1 &5779004356679826622
 GameObject:
   m_ObjectHideFlags: 0
@@ -2556,8 +2556,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1144481904766433500}
   - component: {fileID: 5126006074908104}
-  - component: {fileID: 3074750115968164318}
   - component: {fileID: 4793016037927127210}
+  - component: {fileID: 3074750115968164318}
   m_Layer: 0
   m_Name: FarmBed
   m_TagString: Untagged
@@ -2603,24 +2603,6 @@ MonoBehaviour:
   _autoWheatUpgrade: {fileID: 11400000, guid: f70f6b07b4f13e241bb07edeeff27664, type: 2}
   _growStatusShowUpgrade: {fileID: 11400000, guid: a4d51e622ef1ec247afd10ec64670ee0, type: 2}
   _growStatusSlider: {fileID: 7841388412601854352}
---- !u!114 &3074750115968164318
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5779004356679826622}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92263927aeb4a8640adab610a57f7781, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _beds:
-  - {fileID: 3096415836260463650}
-  - {fileID: 360290496395590903}
-  - {fileID: 4819663339247078879}
-  - {fileID: 9033362031076480432}
-  - {fileID: 6410221535121138993}
 --- !u!114 &4793016037927127210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2639,6 +2621,24 @@ MonoBehaviour:
   _technicSpeedBooster: 1.25
   _instantPests: {fileID: 11400000, guid: 7e3142bdddde499469effe9504e38213, type: 2}
   _pestsRemove: {fileID: 11400000, guid: 9d724893fc0f3074f8338d2c964755f5, type: 2}
+--- !u!114 &3074750115968164318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5779004356679826622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92263927aeb4a8640adab610a57f7781, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _beds:
+  - {fileID: 3096415836260463650}
+  - {fileID: 360290496395590903}
+  - {fileID: 4819663339247078879}
+  - {fileID: 9033362031076480432}
+  - {fileID: 6410221535121138993}
 --- !u!1 &6095296163622046435
 GameObject:
   m_ObjectHideFlags: 0
@@ -3632,7 +3632,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _type: {fileID: 11400000, guid: f9538ea17e1133f4090ea83b5e0827bb, type: 2}
   _pestsGenerator: {fileID: 123950053972727860}
-  _groundBed: {fileID: 5126006074908104}
+  _farmBed: {fileID: 5126006074908104}
 --- !u!114 &8849632596100198913
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3917,7 +3917,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _type: {fileID: 11400000, guid: 2e37d524597e5d2499cc7a496f717a91, type: 2}
   _pestsGenerator: {fileID: 4956057737783124877}
-  _groundBed: {fileID: 5126006074908104}
+  _farmBed: {fileID: 5126006074908104}
 --- !u!114 &6445999316138896158
 MonoBehaviour:
   m_ObjectHideFlags: 0

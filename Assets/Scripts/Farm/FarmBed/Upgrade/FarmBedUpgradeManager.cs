@@ -7,7 +7,7 @@ public class FarmBedUpgradeManager : MonoBehaviour, IUpgradeable
     [SerializeField] private FarmBedUpgrade[] _allUpgrades;
     private List<FarmBedUpgrade> _haveUpgrades = new();
 
-    public int HaveUpgradesCount => _haveUpgrades.Count;
+    public int UpgradesCount => _allUpgrades.Length;
 
     public void CheckUpgrade(BaseUpgrade upgrade)
     {
@@ -15,13 +15,13 @@ public class FarmBedUpgradeManager : MonoBehaviour, IUpgradeable
             _haveUpgrades.Add(upgrade as FarmBedUpgrade);
     }
 
-    public FarmBedUpgrade GetUpgradeByIndex(int index)
+    public bool ContainsUpgrade(FarmBedUpgrade upgrade)
     {
-        return _haveUpgrades[index];
+        return _haveUpgrades.Contains(upgrade);
     }
 
-    public int GetIndexOfUpgrade(FarmBedUpgrade upgrade)
+    public FarmBedUpgrade GetUpgradeByIndex(int index)
     {
-        return _haveUpgrades.IndexOf(upgrade);
+        return _allUpgrades[index];
     }
 }

@@ -1,4 +1,3 @@
-using UnityEngine;
 using UnityEngine.UI;
 
 public abstract class ChoiceBuyButton<T> : ChoiceButton<T> where T: BuyableObject
@@ -18,9 +17,9 @@ public abstract class ChoiceBuyButton<T> : ChoiceButton<T> where T: BuyableObjec
         _button = GetComponent<Button>();
         gameObject.SetActive(true);
 
-        _item = item;
+        Item = item;
         _cost = item.Cost;
-        _icon.sprite = _item.Icon;
+        _icon.sprite = Item.Icon;
         _button.onClick.AddListener(
             delegate { ui.Choice(index, _isBuyable); }
         );

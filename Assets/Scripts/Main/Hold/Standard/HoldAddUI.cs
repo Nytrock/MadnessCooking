@@ -1,4 +1,3 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,7 +5,7 @@ public class HoldAddUI : MonoBehaviour
 {
     [SerializeField] private GameObject _UI;
     [SerializeField] private Slider _progressBar;
-    [SerializeField] private TextMeshProUGUI _readyCount;
+    [SerializeField] private CountRenderer _readyCount;
 
     public void ChangeUI(bool isWork)
     {
@@ -25,11 +24,11 @@ public class HoldAddUI : MonoBehaviour
 
     public virtual void SetCountText(int count)
     {
-        _readyCount.text = count.ToString();
+        _readyCount.UpdateCount(count);
     }
 
     public virtual void SetCountText(int countRaw, int countReady)
     {
-        _readyCount.text = countReady.ToString();
+        _readyCount.UpdateCount(countReady);
     }
 }

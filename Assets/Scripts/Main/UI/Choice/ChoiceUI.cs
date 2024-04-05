@@ -18,6 +18,7 @@ public abstract class ChoiceUI<T, K> : MonoBehaviour where K: ChoiceButton<T>
 
     protected virtual void Activate()
     {
+        _submitButton.interactable = false;
         _cameraManager.ChangeWorkMode(false);
         _UI.SetActive(true);
     }
@@ -27,7 +28,6 @@ public abstract class ChoiceUI<T, K> : MonoBehaviour where K: ChoiceButton<T>
         if (_chosedIndex != -1)
             SetSelectedState(_chosedIndex);
         _chosedIndex = -1;
-        _submitButton.interactable = false;
         _cameraManager.ChangeWorkMode(true);
         _UI.SetActive(false);
     }

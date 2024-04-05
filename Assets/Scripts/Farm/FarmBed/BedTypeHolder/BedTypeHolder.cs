@@ -5,7 +5,7 @@ public class BedTypeHolder : MonoBehaviour
 {
     [SerializeField] private BedType _type;
     [SerializeField] private PestsGenerator _pestsGenerator;
-    [SerializeField] private FarmBed _groundBed;
+    [SerializeField] private FarmBed _farmBed;
 
     private Animator _animator;
     private string _name;
@@ -23,10 +23,10 @@ public class BedTypeHolder : MonoBehaviour
     {
         _animator = GetComponent<Animator>();
         if (TryGetComponent(out _water))
-            _water.BoostEnded += _groundBed.StopWaterBuff;
+            _water.BoostEnded += _farmBed.StopWaterBuff;
         if (TryGetComponent(out _fertilize))
-            _fertilize.BoostEnded += _groundBed.StopFertilizeBuff;
-        _pestsGenerator.PestsChanged += _groundBed.ChangePestSlowdown;
+            _fertilize.BoostEnded += _farmBed.StopFertilizeBuff;
+        _pestsGenerator.PestsChanged += _farmBed.ChangePestSlowdown;
     }
 
     public void ChangeMode(bool newMode)
@@ -84,12 +84,12 @@ public class BedTypeHolder : MonoBehaviour
         return multiplier;
     }
 
-    public void SetEternalWater()
+    public void ChangeEternalWater()
     {
         if (_water == null)
             return;
 
-        _water.SetEternal();
+        _water.SetEternal(_farmBed.Upgrader.IsWatered);
     }
 
     public float GetFertilizeMultiptier()
@@ -101,12 +101,12 @@ public class BedTypeHolder : MonoBehaviour
         return multiplier;
     }
 
-    public void SetEternalFertilize()
+    public void ChangeEternalFertilize()
     {
         if (_fertilize == null)
             return;
 
-        _fertilize.SetEternal();
+        _fertilize.SetEternal(_farmBed.Upgrader.IsFertilized);
     }
 
     public void BoostAnimationSpeed(float boost)

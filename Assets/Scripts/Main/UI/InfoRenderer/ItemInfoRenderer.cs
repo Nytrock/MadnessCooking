@@ -10,7 +10,7 @@ public class ItemInfoRenderer
     [SerializeField] private TextMeshProUGUI _name;
     [SerializeField] private TextMeshProUGUI _description;
 
-    public void SetItemInfo(BuyableObject item)
+    public virtual void SetItemInfo(BuyableObject item)
     {
         _icon.sprite = item.Icon;
         _icon.color += new Color(0, 0, 0, 1);

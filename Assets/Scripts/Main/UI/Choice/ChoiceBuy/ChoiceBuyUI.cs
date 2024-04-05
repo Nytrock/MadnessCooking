@@ -23,6 +23,11 @@ public abstract class ChoiceBuyUI<T> : ChoiceUI<T, ChoiceBuyButton<T>> where T: 
         _submitButton.interactable = !isSame && isBuyable;
     }
 
+    public override void SetChoice()
+    {
+        MoneyManager.instance.ChangeMoney(-_choiceButtons[_chosedIndex].Item.Cost);
+    }
+
     protected override void Activate()
     {
         base.Activate();

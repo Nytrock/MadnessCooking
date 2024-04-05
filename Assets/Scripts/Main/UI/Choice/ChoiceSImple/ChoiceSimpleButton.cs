@@ -6,6 +6,6 @@ public abstract class ChoiceSimpleButton<T> : ChoiceButton<T>
     {
         _button = GetComponent<Button>();
         gameObject.SetActive(true);
-        _item = item;
+        Item = item;
     }
 }

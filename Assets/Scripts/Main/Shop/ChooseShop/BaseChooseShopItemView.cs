@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public abstract class BaseChooseShopItemView : MonoBehaviour
 {
     [SerializeField] protected BaseChooseShop _shop;
-    [SerializeField] private ItemInfoRendererWithNum _renderer;
+    [SerializeField] private ItemInfoRendererWithPrice _renderer;
     [SerializeField] private string _costText;
     [SerializeField] private Button _buyButton;
     protected BuyableObject _itemToBuy;
@@ -27,7 +27,7 @@ public abstract class BaseChooseShopItemView : MonoBehaviour
     {
         _itemToBuy = item;
         _renderer.SetItemInfo(_itemToBuy);
-        _renderer.SetNumText(_costText + _itemToBuy.Cost);
+        _renderer.SetPrice(_costText, _itemToBuy.Cost);
         UpdateButton();
     }
 

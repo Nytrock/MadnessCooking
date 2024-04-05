@@ -62,8 +62,10 @@ public class BedHolderBooster : MonoBehaviour
         _boostSprite.color = color;
     }
 
-    public void SetEternal()
+    public void SetEternal(bool newValue)
     {
-        _isEternal = true;
+        _isEternal = newValue;
+        if (!newValue)
+            EndBoost();
     }
 }

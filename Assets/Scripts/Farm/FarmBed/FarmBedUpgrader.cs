@@ -16,6 +16,8 @@ public class FarmBedUpgrader : MonoBehaviour
     private FarmBed _farmBed;
 
     public float UpgradesBooster { get; private set; }
+    public bool IsWatered { get; private set; }
+    public bool IsFertilized { get; private set; }
     public bool IsPestsInstant { get; private set; }
 
     private void Awake()
@@ -26,10 +28,12 @@ public class FarmBedUpgrader : MonoBehaviour
     public void AddUpgrade(FarmBedUpgrade upgrade)
     {
         if (upgrade == _alwaysWater) {
-            _bedHolder.SetEternalWater();
+            IsWatered = true;
+            _bedHolder.ChangeEternalWater();
             _farmBed.Water();
         } else if (upgrade == _alwaysFertilize) {
-            _bedHolder.SetEternalFertilize();
+            IsFertilized = true;
+            _bedHolder.ChangeEternalFertilize();
             _farmBed.Fertilize();
         } else if (upgrade == _technicSpeedUp) {
             UpgradesBooster = _technicSpeedBooster;
@@ -52,5 +56,18 @@ public class FarmBedUpgrader : MonoBehaviour
     public void UpdateBedHolder(BedTypeHolder holder)
     {
         _bedHolder = holder;
+    }
+    
+    public void ReturnUpgrades()
+    {
+        foreach (var upgrade in _haveUpgrades)
+            MoneyManager.instance.ChangeMoney(upgrade.Cost);
+
+        IsWatered = false;
+        IsFertilized = false;
+        IsPestsInstant = false;
+
+        _bedHolder.ChangeEternalWater();
+        _bedHolder.ChangeEternalFertilize();
     }
 }

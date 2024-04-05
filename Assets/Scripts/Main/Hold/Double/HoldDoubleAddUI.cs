@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class HoldDoubleAddUI : HoldAddUI
 {
-    [SerializeField] protected TextMeshProUGUI _materialCount;
+    [SerializeField] protected CountRenderer _materialCount;
 
     public override void SetCountText(int countRaw, int countReady)
     {
-        _materialCount.text = countRaw.ToString();
+        _materialCount.UpdateCount(countRaw);
         base.SetCountText(countRaw, countReady);
     }
 }
