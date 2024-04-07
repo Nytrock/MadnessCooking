@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,8 +10,11 @@ public class BedTypeUI : MonoBehaviour
 
     [Header("Side buttons")]
     [SerializeField] private bool _isSideButtonsWork;
+    [SerializeField] private Button _pestsButton;
     [SerializeField] private Button _waterButton;
     [SerializeField] private Button _fertilizeButton;
+    private bool _isWatered;
+    private bool _isFertilized;
 
     public BedType BedType => _bedType;
     public bool IsSideButtonsWork => _isSideButtonsWork;
@@ -41,7 +45,7 @@ public class BedTypeUI : MonoBehaviour
         if (!_isSideButtonsWork)
             return;
 
-        _waterButton.interactable = count > 0;
+        _waterButton.interactable = count > 0 && !_isWatered;
     }
 
     public void CheckFertilize(int count)
@@ -49,11 +53,21 @@ public class BedTypeUI : MonoBehaviour
         if (!_isSideButtonsWork)
             return;
 
-        _fertilizeButton.interactable = count > 0;
+        _fertilizeButton.interactable = count > 0 && !_isFertilized;
     }
 
     public void UpdateCount(int count)
     {
         _renderer.SetCount(count);
+    }
+
+    public void UpdateSideButtons(FarmBed farmBed)
+    {
+        _pestsButton.interactable = !farmBed.Upgrader.IsPestsRemoved;
+        if (!_isSideButtonsWork)
+            return;
+
+        _isWatered = farmBed.Upgrader.IsWatered;
+        _isFertilized = farmBed.Upgrader.IsFertilized;
     }
 }

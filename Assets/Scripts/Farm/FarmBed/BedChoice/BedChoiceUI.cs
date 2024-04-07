@@ -45,6 +45,9 @@ public class BedChoiceUI : ChoiceBuyUI<BedType>
     {
         base.Choice(index, isBuyable);
 
+        if (_chosedIndex == -1)
+            return;
+
         var bedType = _choiceButtons[_chosedIndex].Item;
         _ingredientsRenderer.ShowIngredients(bedType);
         _description.UpdateDescription(bedType);

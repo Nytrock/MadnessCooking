@@ -44,7 +44,7 @@ public class FarmBedUpgradeUI : ChoiceBuyUI<FarmBedUpgrade>
             }
         }
 
-        _choiceButtonPool.PutObject(_choiceButtons[_chosedIndex]);
+        _choiceButtons[_chosedIndex].Disable();
         Deselect();
     }
 
@@ -75,6 +75,9 @@ public class FarmBedUpgradeUI : ChoiceBuyUI<FarmBedUpgrade>
     public override void Choice(int index, bool isBuyable)
     {
         base.Choice(index, isBuyable);
+
+        if (_chosedIndex == -1)
+            return;
 
         var upgrade = _choiceButtons[_chosedIndex].Item;
         _description.UpdateDescription(upgrade);

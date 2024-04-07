@@ -88,7 +88,6 @@ public class FarmBed : MonoBehaviour
         _count = 0;
         _isFull = false;
         _bedHolder.StopAnimation();
-        _UI.ForgiveBed(this);
         UpdateUpgrades();
     }
 
@@ -169,11 +168,24 @@ public class FarmBed : MonoBehaviour
         _isFull = false;
     }
 
+    public void EternalWater()
+    {
+        Water();
+        _UI.UpdateSideButtons();
+    }
+
     public void Water()
     {
         _waterBoost = _bedHolder.GetWaterMultiplier();
         ChangeAnimationSpeed();
     }
+
+    public void EternalFertilize()
+    {
+        Fertilize();
+        _UI.UpdateSideButtons();
+    }
+
 
     public void Fertilize()
     {
@@ -225,5 +237,12 @@ public class FarmBed : MonoBehaviour
     public void UpdateUpgradeBooster()
     {
         _independentBoost = Upgrader.UpgradesBooster;
+    }
+
+    public void RemovePests()
+    {
+        _UI.UpdateSideButtons();
+        PestsGenerator.CleanPests();
+        PestsGenerator.SetRemoved(this);
     }
 }

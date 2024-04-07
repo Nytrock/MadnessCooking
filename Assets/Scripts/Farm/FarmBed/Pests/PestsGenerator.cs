@@ -18,12 +18,13 @@ public class PestsGenerator : MonoBehaviour
     private readonly List<Pest> _pests = new();
     private bool _isActive;
     private bool _isPause;
+    private bool _isRemoved;
 
     public event Action<float> PestsChanged;
 
     private void Update()
     {
-        if (!_isActive || _isPause)
+        if (!_isActive || _isPause || _isRemoved)
             return;
 
         if (_nowTime < _needTime) {
@@ -65,9 +66,9 @@ public class PestsGenerator : MonoBehaviour
         PestsChanged?.Invoke(1);
     }
 
-    public void StopWork()
+    public void SetRemoved(FarmBed farmBed)
     {
-        _isActive = false;
+        _isRemoved = farmBed.Upgrader.IsPestsRemoved;
     }
 
     public List<Pest> GetList()

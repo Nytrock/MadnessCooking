@@ -1,5 +1,3 @@
-using System;
-using Unity.Burst.Intrinsics;
 using UnityEngine;
 
 public class HoldAdd : MonoBehaviour, IUpgradeable

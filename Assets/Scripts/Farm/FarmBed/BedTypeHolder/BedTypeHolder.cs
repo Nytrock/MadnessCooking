@@ -12,6 +12,7 @@ public class BedTypeHolder : MonoBehaviour
     private int _maxCount;
 
     private float _animationSpeed;
+    private float _boost = 1;
 
     private StandardBedWater _water;
     private StandardBedFertilize _fertilize;
@@ -72,7 +73,7 @@ public class BedTypeHolder : MonoBehaviour
         yield return new WaitForEndOfFrame();
         var animationLength = _animator.GetCurrentAnimatorStateInfo(0).length;
         _animationSpeed = 1 / timeGrow * animationLength;
-        _animator.SetFloat("growTime", _animationSpeed);
+        _animator.SetFloat("growTime", _animationSpeed * _boost);
     }
 
     public float GetWaterMultiplier()
@@ -111,6 +112,7 @@ public class BedTypeHolder : MonoBehaviour
 
     public void BoostAnimationSpeed(float boost)
     {
-        _animator.SetFloat("growTime", _animationSpeed * boost);
+        _boost = boost;
+        _animator.SetFloat("growTime", _animationSpeed * _boost);
     }
 }

@@ -1,5 +1,4 @@
 using UnityEngine.UI;
-
 public abstract class ChoiceBuyButton<T> : ChoiceButton<T> where T: BuyableObject
 {
     private int _cost;
@@ -9,7 +8,6 @@ public abstract class ChoiceBuyButton<T> : ChoiceButton<T> where T: BuyableObjec
     {
         var moneyManager = MoneyManager.instance;
         moneyManager.MoneyChanged += CheckBuyable;
-        CheckBuyable(moneyManager.MoneyAmount);
     }
 
     public virtual void Setup(T item, int index, ChoiceBuyUI<T> ui)
@@ -20,6 +18,7 @@ public abstract class ChoiceBuyButton<T> : ChoiceButton<T> where T: BuyableObjec
         Item = item;
         _cost = item.Cost;
         _icon.sprite = Item.Icon;
+        CheckBuyable(MoneyManager.instance.MoneyAmount);
         _button.onClick.AddListener(
             delegate { ui.Choice(index, _isBuyable); }
         );

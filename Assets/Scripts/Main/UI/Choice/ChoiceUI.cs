@@ -8,7 +8,7 @@ public abstract class ChoiceUI<T, K> : MonoBehaviour where K: ChoiceButton<T>
     [SerializeField] protected CameraManager _cameraManager;
     [SerializeField] protected ChoicePool<T, K> _choiceButtonPool;
     [SerializeField] protected Button _submitButton;
-    protected List<K> _choiceButtons;
+    [SerializeField] protected List<K> _choiceButtons;
     protected int _chosedIndex = -1;
 
     protected virtual void Start()

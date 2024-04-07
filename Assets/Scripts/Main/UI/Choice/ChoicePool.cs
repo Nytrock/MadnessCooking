@@ -5,7 +5,6 @@ public class ChoicePool<T, K> : MonoBehaviour where K: ChoiceButton<T>
 {
     [SerializeField] private K _prefab;
     [SerializeField] private Transform _container;
-    private K _manager;
 
     private Queue<K> _pool = new();
 

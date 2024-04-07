@@ -15,9 +15,9 @@ public class IngredientChoiceUI : ChoiceSimpleUI<Ingredient>
         base.Start();
     }
 
-    public void ActivateIngredientChoice(FarmBed groundBed)
+    public void ActivateIngredientChoice(FarmBed farmBed)
     {
-        _changingBed = groundBed;
+        _changingBed = farmBed;
         var bedType = _changingBed.BedType;
         DestoyOldButtons();
         GenerateChoiceButtons();
@@ -65,7 +65,6 @@ public class IngredientChoiceUI : ChoiceSimpleUI<Ingredient>
     public override void SetChoice()
     {
         _changingBed.SetIngredient(_ingredients[_chosedIndex]);
-        Deactivate();
         Disable();
     }
 
@@ -83,6 +82,7 @@ public class IngredientChoiceUI : ChoiceSimpleUI<Ingredient>
     public override void Disable()
     {
         base.Disable();
+        Deactivate();
         _changingBed = null;
     }
 }

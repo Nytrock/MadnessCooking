@@ -43,26 +43,30 @@ public class FarmBedUIManager : MonoBehaviour
         _nowUI.UpdateCount(_farmBed.Count);
     }
 
-    public void ShowGroundBed(FarmBed groundBed)
+    public void ShowGroundBed(FarmBed farmBed)
     {
-        if (_farmBed == groundBed) {
+        if (_farmBed == farmBed) {
             _nowUI.ChangeMode();
             return;
         }
 
-        if (_nowUI != null)
+        if (_nowUI != null) {
             _nowUI.ChangeMode(false);
+            if (_farmBed != null)
+                UpdateSideButtons();
+        }
 
-        _nowUI = FindUI(groundBed.BedType);
-        _nowUI.UpdateInfo(groundBed);
+        _nowUI = FindUI(farmBed.BedType);
+        _nowUI.UpdateInfo(farmBed);
         _nowUI.ChangeMode(true);
 
         if (_farmBed != null)
             _farmBed.CountChanged -= UpdateCount;
 
-        transform.position = groundBed.transform.position;
-        _farmBed = groundBed;
+        transform.position = farmBed.transform.position;
+        _farmBed = farmBed;
         _farmBed.CountChanged += UpdateCount;
+        UpdateSideButtons();
 
         if (_nowUI.IsSideButtonsWork) {
             CheckWater(_farmWell.Count);
@@ -101,6 +105,8 @@ public class FarmBedUIManager : MonoBehaviour
         ChangeMode();
         _farmBed.ResetIngredient();
         _ingredientChoice.ActivateIngredientChoice(_farmBed);
+        _farmBed.CountChanged -= UpdateCount;
+        _farmBed = null;
     }
 
     public void OpenUpgradesPanel()
@@ -130,9 +136,8 @@ public class FarmBedUIManager : MonoBehaviour
         }
     }
 
-    public void ForgiveBed(FarmBed groundBed)
+    public void UpdateSideButtons()
     {
-        if (_farmBed == groundBed)
-            _farmBed = null;
+        _nowUI.UpdateSideButtons(_farmBed);
     }
 }
