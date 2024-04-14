@@ -34,7 +34,7 @@ public class IngredientChoiceUI : ChoiceSimpleUI<Ingredient>
 
     protected override void GenerateChoiceButtons()
     {
-        _ingredients = _ingredientsManager.GetIngredientsOfOneBedType(_changingBed.BedType);
+        _ingredients = _ingredientsManager.HaveIngredientsOfBedType(_changingBed.BedType);
         for (int i = 0; i < _ingredients.Count; i++) {
             var choiceButton = _choiceButtonPool.GetObject();
             choiceButton.Setup(_ingredients[i], i, this);

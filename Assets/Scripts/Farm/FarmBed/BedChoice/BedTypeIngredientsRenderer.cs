@@ -9,7 +9,7 @@ public class BedTypeIngredientsRenderer : MonoBehaviour
 
     public void ShowIngredients(BedType bedType)
     {
-        var ingredients = SaveManager.instance.GetIngredientsOfOneBedType(bedType);
+        var ingredients = _ingredientsManager.GetIngredientsOfBedType(bedType);
         for (int i = 0; i < _ingredientImages.Length; i++) {
             if (i < ingredients.Count) {
                 _ingredientImages[i].sprite = ingredients[i].Icon;
@@ -24,6 +24,6 @@ public class BedTypeIngredientsRenderer : MonoBehaviour
 
     public bool HaveIngredients(BedType bedType)
     {
-        return _ingredientsManager.GetIngredientsOfOneBedType(bedType).Count != 0;
+        return _ingredientsManager.HaveIngredientsOfBedType(bedType).Count != 0;
     }
 }

@@ -1,37 +1,48 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SaveManager : MonoBehaviour
 {
     public static SaveManager instance;
 
-    [Header("Списки всех объектов")]
-    [SerializeField] private Ingredient[] _allIngredients;
-    [SerializeField] private Food[] _allFood;
-    [SerializeField] private Technic[] _allTechnic;
-    [SerializeField] private BedType[] _allBedTypes;
-    [SerializeField] private BaseUpgrade[] _allUpgrades;
-    [SerializeField] private Decor[] _allDecor;
-    [SerializeField] private Texture2D cursor;
+    private GameData _gameData;
+    private FileDataService _dataService;
+
+    [Header("Save parts")]
+    [SerializeField] private SaveMainManager _mainPart;
+    [SerializeField] private SaveCafeManager _cafePart;
+    [SerializeField] private SaveKitchenManager _kitchenPart;
+    [SerializeField] private SaveFarmManager _farmPart;
+    [SerializeField] private SaveOfficeManager _officePart;
 
     private void Awake()
     {
-        instance = this;
+        _dataService = new FileDataService(new JsonSerializer());
         Application.targetFrameRate = 60;
-        Cursor.SetCursor(cursor, Vector2.zero, CursorMode.ForceSoftware);
+
+        instance = this;
+        LoadAll();
     }
 
-    public void SaveAll()
-    {
+    [ContextMenu("Save")]
+    public void SaveAll() => _dataService.Save(_gameData);
 
-    }
-
-    public List<Ingredient> GetIngredientsOfOneBedType(BedType bedType)
+    [ContextMenu("Load")]
+    private void LoadAll()
     {
-        var result = new List<Ingredient>();
-        foreach (var ingredient in _allIngredients)
-            if (ingredient.Type == bedType.AcceptableType)
-                result.Add(ingredient);
-        return result;
+        _gameData = _dataService.Load();
+        if (_gameData == null) {
+            _gameData = new();
+            _mainPart.SetData(_gameData.Main);
+            _cafePart.SetData(_gameData.Cafe);
+            _kitchenPart.SetData(_gameData.Kitchen);
+            _farmPart.SetData(_gameData.Farm);
+            _officePart.SetData(_gameData.Office);
+        } else {
+            _mainPart.LoadData(_gameData.Main);
+            _cafePart.LoadData(_gameData.Cafe);
+            _kitchenPart.LoadData(_gameData.Kitchen);
+            _farmPart.LoadData(_gameData.Farm);
+            _officePart.LoadData(_gameData.Office);
+        }
     }
 }

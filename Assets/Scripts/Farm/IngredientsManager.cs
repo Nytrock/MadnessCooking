@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class IngredientsManager : MonoBehaviour
 {
+    [SerializeField] private Ingredient[] _allIngredients;
     [SerializeField] private List<Ingredient> _haveIngredients;
 
     public List<Ingredient> HaveIngredients => _haveIngredients;
@@ -12,10 +13,19 @@ public class IngredientsManager : MonoBehaviour
         return _haveIngredients.Contains(ingredient);
     }
 
-    public List<Ingredient> GetIngredientsOfOneBedType(BedType bedType)
+    public List<Ingredient> HaveIngredientsOfBedType(BedType bedType)
     {
         var result = new List<Ingredient>();
         foreach (var ingredient in _haveIngredients)
+            if (ingredient.Type == bedType.AcceptableType)
+                result.Add(ingredient);
+        return result;
+    }
+
+    public List<Ingredient> GetIngredientsOfBedType(BedType bedType)
+    {
+        var result = new List<Ingredient>();
+        foreach (var ingredient in _allIngredients)
             if (ingredient.Type == bedType.AcceptableType)
                 result.Add(ingredient);
         return result;

@@ -10,7 +10,8 @@ public class RequireInterfaceDrawer : PropertyDrawer
             var requiredAttribute = attribute as RequireInterfaceAttribute;
             EditorGUI.BeginProperty(position, label, property);
             Object obj = EditorGUI.ObjectField(position, label, property.objectReferenceValue, typeof(Object), true);
-            if (obj is GameObject g) property.objectReferenceValue = g.GetComponent(requiredAttribute.RequiredType);
+            if (obj is GameObject g) 
+                property.objectReferenceValue = g.GetComponent(requiredAttribute.RequiredType);
             EditorGUI.EndProperty();
         } else {
             var previousColor = GUI.color;
