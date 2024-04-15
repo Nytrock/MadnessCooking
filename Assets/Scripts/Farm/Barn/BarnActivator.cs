@@ -19,10 +19,10 @@ public class BarnActivator : UIActivator
         _isOpen = !_isOpen;
         _mainUI.SetActive(!_isOpen);
         if (_isOpen) {
-            _locationManager.ChangeLocation(_barn);
+            _locationManager.ChangeLocation(_barn.position);
             FatigueManager.instance.ChangeFatigue(_fatigueCoef);
         } else {
-            _locationManager.ChangeLocation(_farm);
+            _locationManager.ChangeLocation(_farm.position);
         }
     }
 }

@@ -1,22 +1,43 @@
 using System;
+using UnityEditor;
 using UnityEngine;
 
-public class LocationManager : MonoBehaviour
+public class LocationManager : MonoBehaviour, IBindable<MainData>
 {
     [SerializeField] private Transform _mainCamera;
-    [SerializeField] private LocationButton _defaultPosition;
+    [SerializeField] private LocationButton[] _locations;
+    private int _startLocationIndex = 0;
+    private MainData _data;
 
-    public Transform MainCamera => _mainCamera;
-    public event Action<Transform> LocationChanged;
+    public event Action<Vector2> LocationChanged;
 
-    private void Start()
+    private void LateStart()
     {
-        ChangeLocation(_defaultPosition.Location);
+        ChangeLocation(_locations[_startLocationIndex]);
     }
 
-    public void ChangeLocation(Transform newLocation)
+    public void ChangeLocation(Vector2 newLocation)
     {
-        _mainCamera.position = new Vector3(newLocation.position.x, newLocation.position.y, -10);
-        LocationChanged?.Invoke(_mainCamera);
+        _mainCamera.position = new Vector3(newLocation.x, newLocation.y, -10);
+        LocationChanged?.Invoke(newLocation);
+    }
+
+    public void ChangeLocation(LocationButton newLocation)
+    {
+        _data.LocationId = ArrayUtility.IndexOf(_locations, newLocation);
+        ChangeLocation(newLocation.Location);
+    }
+
+    public void Bind(MainData data, bool isFileEmpty)
+    {
+        _data = data;
+        if (isFileEmpty) {
+            _data.LocationId = _startLocationIndex;
+            LateStart();
+            return;
+        }
+
+        _startLocationIndex = _data.LocationId;
+        LateStart();
     }
 }

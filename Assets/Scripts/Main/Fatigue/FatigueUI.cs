@@ -10,10 +10,6 @@ public class FatigueUI : MonoBehaviour
     private void Awake()
     {
         _manager.TiredChanged += ChangeTiredAnimation;
-    }
-
-    private void Start()
-    {
         _fatigueSlider.maxValue = _manager.FatigueMax;
     }
 

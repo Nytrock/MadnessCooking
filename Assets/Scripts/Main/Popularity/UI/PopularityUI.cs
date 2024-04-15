@@ -13,7 +13,7 @@ public class PopularityUI : MonoBehaviour
 
     private bool _isLastLevel;
 
-    private void Start()
+    private void Awake()
     {
         _popularityManager.LevelChanged += UpdateLevel;
         _popularityManager.XpChanged += UpdateProgress;

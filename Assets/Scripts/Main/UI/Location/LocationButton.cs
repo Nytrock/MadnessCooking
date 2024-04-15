@@ -8,20 +8,20 @@ public class LocationButton : MonoBehaviour
     [SerializeField] private Transform _location;
     [SerializeField] private float _fatigueCoef;
 
-    public Transform Location => _location;
+    public Vector2 Location => _location.position;
 
     private Button _button;
 
-    private void Start()
+    private void Awake()
     {
         _button = GetComponent<Button>();
-        _button.onClick.AddListener(delegate { _locationManager.ChangeLocation(_location); });
+        _button.onClick.AddListener(delegate { _locationManager.ChangeLocation(this); });
         _locationManager.LocationChanged += ChangeMode;
     }
 
-    private void ChangeMode(Transform newPosition)
+    private void ChangeMode(Vector2 newPosition)
     {
-        var isOurLocation = (Vector2)newPosition.position == (Vector2)_location.position;
+        var isOurLocation = newPosition == (Vector2)_location.position;
         if (isOurLocation)
             FatigueManager.instance.ChangeFatigue(_fatigueCoef);
         _button.interactable = !isOurLocation;

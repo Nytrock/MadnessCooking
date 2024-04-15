@@ -26990,7 +26990,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf583d77a68752b42bd1356eba1b36dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isHover: 0
 --- !u!114 &903131451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37548,7 +37547,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf583d77a68752b42bd1356eba1b36dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isHover: 0
 --- !u!114 &1234881541
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38478,13 +38476,29 @@ MonoBehaviour:
     _doubleChance: 0
     _tripleChance: 0
     _quarterChance: 0
-  - _needXp: -1
+  - _needXp: 40
     _popularityMultiplier: 1.1
     _name: "\u0420\u0430\u0431\u043E\u0442\u044F\u0433\u0430"
     _description: "\u0422\u044B \u0441\u0442\u0430\u043B \u043F\u043E\u043F\u0443\u043B\u044F\u0440\u043D\u0435\u0435"
     _singleChance: 99
     _doubleChance: 1
     _tripleChance: 0
+    _quarterChance: 0
+  - _needXp: 100
+    _popularityMultiplier: 1.15
+    _name: "\u042F\u0447\u0435\u0439\u043A\u0430 \u043E\u0431\u0449\u0435\u0441\u0442\u0432\u0430"
+    _description: "\u0422\u044B \u0441\u0442\u0430\u043B \u0435\u0449\u0451 \u043F\u043E\u043F\u0443\u043B\u044F\u0440\u043D\u0435\u0435"
+    _singleChance: 95
+    _doubleChance: 5
+    _tripleChance: 0
+    _quarterChance: 0
+  - _needXp: -1
+    _popularityMultiplier: 1.1
+    _name: "\u0424\u0438\u043B\u0430\u043D\u0442\u0440\u043E\u043F"
+    _description: "\u0422\u044B \u043E\u0447\u0435\u043D\u044C \u043F\u043E\u043F\u0443\u043B\u044F\u0440\u0435\u043D"
+    _singleChance: 90
+    _doubleChance: 9
+    _tripleChance: 1
     _quarterChance: 0
 --- !u!4 &1251689377
 Transform:
@@ -47322,6 +47336,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bindableObjects:
   - {fileID: 1412654020}
+  - {fileID: 1251689376}
+  - {fileID: 1095035881}
+  - {fileID: 1646719850}
+  - {fileID: 1154027454}
+  - {fileID: 1560551276}
 --- !u!1 &1553389292
 GameObject:
   m_ObjectHideFlags: 0
@@ -48013,7 +48032,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mainCamera: {fileID: 206361367}
-  _defaultPosition: {fileID: 2145809579}
+  _locations:
+  - {fileID: 2145809579}
+  - {fileID: 445232662}
+  - {fileID: 406078632}
+  - {fileID: 483454165}
 --- !u!1 &1569531497
 GameObject:
   m_ObjectHideFlags: 0
@@ -48209,7 +48232,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf583d77a68752b42bd1356eba1b36dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isHover: 0
 --- !u!1 &1575785821
 GameObject:
   m_ObjectHideFlags: 0
@@ -49651,7 +49673,7 @@ GameObject:
   - component: {fileID: 1646719849}
   - component: {fileID: 1646719850}
   m_Layer: 5
-  m_Name: Time
+  m_Name: TimeUIChanger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -55846,7 +55868,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf583d77a68752b42bd1356eba1b36dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isHover: 0
 --- !u!1 &1852575581
 GameObject:
   m_ObjectHideFlags: 0
@@ -58010,7 +58031,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf583d77a68752b42bd1356eba1b36dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isHover: 0
 --- !u!1 &1916427756
 GameObject:
   m_ObjectHideFlags: 0
@@ -63272,8 +63292,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 711727840}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -64684,7 +64704,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2103450609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65397,7 +65417,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 2145809577}
   m_OnClick:
     m_PersistentCalls:

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class UIHoverListener : MonoBehaviour
 {
-    [SerializeField] private bool _isHover;
+    private bool _isHover;
 
     public event Action<bool> OnHover;
 

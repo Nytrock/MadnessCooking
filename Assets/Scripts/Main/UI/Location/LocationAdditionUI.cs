@@ -6,15 +6,14 @@ public class LocationAdditionUI : MonoBehaviour
     [SerializeField] private LocationManager _locationManager;
     [SerializeField] private GameObject _UI;
 
-    private void Start()
+    private void Awake()
     {
         _locationManager.LocationChanged += UpdateUI;
-        UpdateUI(_locationManager.MainCamera);
     }
 
-    private void UpdateUI(Transform newPosition)
+    private void UpdateUI(Vector2 newPosition)
     {
-        _UI.SetActive(_point.position.x == newPosition.position.x);
+        _UI.SetActive(_point.position.x == newPosition.x);
     }
 
     public void ChangeUIState(bool newValue)

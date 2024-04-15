@@ -27,14 +27,15 @@ public abstract class CameraManager : MonoBehaviour
     public float EndPosition => _endPosition;
     public Transform MainCameraPos => _mainCameraPos;
 
-
-    protected virtual void Start()
+    private void Awake()
     {
         _locationManager.LocationChanged += ChangeWorkMode;
         _spaceManager.SpaceAdded += CalculateBorderPositions;
         _mainCameraPos = _mainCamera.transform;
-        ChangeWorkMode(_mainCameraPos);
+    }
 
+    protected virtual void Start()
+    {
         CalculateBorderPositions();
     }
 
@@ -68,9 +69,9 @@ public abstract class CameraManager : MonoBehaviour
         }
     }
 
-    private void ChangeWorkMode(Transform newPosition)
+    private void ChangeWorkMode(Vector2 newPosition)
     {
-        _isWorking = newPosition.position.x == transform.position.x;
+        _isWorking = newPosition.x == transform.position.x;
         CameraMoved?.Invoke();
     }
 

@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Slider))]
-public class FatigueSourseSlider : MonoBehaviour
+public class FatigueSourceSlider : MonoBehaviour
 {
     [SerializeField, Min(0)] private float _fatigueCoef;
     private float _lastValue;

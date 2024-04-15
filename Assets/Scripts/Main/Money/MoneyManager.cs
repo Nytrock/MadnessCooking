@@ -17,7 +17,7 @@ public class MoneyManager : MonoBehaviour, IBindable<MainData>
         instance = this;
     }
 
-    private void Start()
+    private void LateStart()
     {
         MoneyChanged?.Invoke(_moneyAmount);
     }
@@ -29,13 +29,16 @@ public class MoneyManager : MonoBehaviour, IBindable<MainData>
         MoneyChanged?.Invoke(_moneyAmount);
     }
 
-    public void Bind(MainData data)
-    {
-        _moneyAmount = data.MoneyAmount;
-    }
-
-    public void SetData(MainData data)
+    public void Bind(MainData data, bool isFileEmpty)
     {
         _data = data;
+        if (isFileEmpty) {
+            data.MoneyAmount = _moneyAmount;
+            LateStart();
+            return;
+        }
+
+        _moneyAmount = data.MoneyAmount;
+        LateStart();
     }
 }

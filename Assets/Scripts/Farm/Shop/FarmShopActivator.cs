@@ -19,8 +19,8 @@ public class FarmShopActivator : UIActivator
         _mainUI.SetActive(!_isActive);
         _shop.ChangeShopState(_isActive);
         if (_isActive)
-            _locationManager.ChangeLocation(_shop.transform);
+            _locationManager.ChangeLocation(_shop.transform.position);
         else
-            _locationManager.ChangeLocation(_farm);
+            _locationManager.ChangeLocation(_farm.position);
     }
 }

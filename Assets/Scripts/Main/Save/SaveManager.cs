@@ -20,6 +20,10 @@ public class SaveManager : MonoBehaviour
         Application.targetFrameRate = 60;
 
         instance = this;
+    }
+
+    private void Start()
+    {
         LoadAll();
     }
 
@@ -30,19 +34,15 @@ public class SaveManager : MonoBehaviour
     private void LoadAll()
     {
         _gameData = _dataService.Load();
-        if (_gameData == null) {
-            _gameData = new();
-            _mainPart.SetData(_gameData.Main);
-            _cafePart.SetData(_gameData.Cafe);
-            _kitchenPart.SetData(_gameData.Kitchen);
-            _farmPart.SetData(_gameData.Farm);
-            _officePart.SetData(_gameData.Office);
-        } else {
-            _mainPart.LoadData(_gameData.Main);
-            _cafePart.LoadData(_gameData.Cafe);
-            _kitchenPart.LoadData(_gameData.Kitchen);
-            _farmPart.LoadData(_gameData.Farm);
-            _officePart.LoadData(_gameData.Office);
+        bool isFileEmpty = _gameData == null;
+        if (isFileEmpty) {
+            _gameData = new GameData();
         }
+
+        _mainPart.LoadData(_gameData.Main, isFileEmpty);
+        _cafePart.LoadData(_gameData.Cafe, isFileEmpty);
+        _kitchenPart.LoadData(_gameData.Kitchen, isFileEmpty);
+        _farmPart.LoadData(_gameData.Farm, isFileEmpty);
+        _officePart.LoadData(_gameData.Office, isFileEmpty);
     }
 }
