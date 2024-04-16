@@ -38,7 +38,7 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable
     private void Start()
     {
         _cafeOpener.CafeChanged += ChangeWorkMode;
-        _spawnPoint.position += new Vector3(_spaceManager.SpaceCount * _spaceManager.GetSpaceSize(), 0, 0);
+        _spawnPoint.position += new Vector3(_spaceManager.SpaceCount * _spaceManager.SpaceSize, 0, 0);
         SetNewTime();
     }
 
@@ -145,15 +145,15 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable
         _xpAdder.AddXp(client.ClientType);
     }
 
-    private void SetupClient(Client client, CafeSpot spot, ClientType clientType, int spotIndex)
+    private void SetupClient(Client client, CafeSpot spot, ClientType clientType, int tableIndex)
     {
         _clients.Add(client);
         client.ChangeShowingTimeEat(_isEatTimeShow);
         var clientSettings = new ClientSettings(_spawnPoint,
-                                                spot.GetTarget(spotIndex),
+                                                spot.GetTarget(tableIndex),
                                                 clientType,
                                                 spot,
-                                                spotIndex,
+                                                tableIndex,
                                                 _popularityCalculate.GetSpaceMultiplier(),
                                                 _pool);
 

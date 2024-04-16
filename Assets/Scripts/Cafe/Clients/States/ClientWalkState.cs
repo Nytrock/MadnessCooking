@@ -9,7 +9,7 @@ public class ClientWalkState : ClientState
     {
         client.ChangeSortingGroup(10);
         if (client.IsLeaving)
-            _target = client.ExitTarget;
+            _target = client.Spot.GetTarget(client.TableIndex);
         else
             _target = client.EnterTarget;
         client.RotateSkin(client.IsLeaving);

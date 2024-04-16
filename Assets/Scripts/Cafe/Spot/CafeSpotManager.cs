@@ -18,7 +18,7 @@ public class CafeSpotManager : MonoBehaviour
         GenerateSpots();
         SetupSpotsRemoveButtons();
         GenerateFreeSpotsList();
-        _cellSize = _spaceManager.GetSpaceSize() / 2f;
+        _cellSize = _spaceManager.SpaceSize / 2f;
     }
 
     private void SetupSpotsRemoveButtons()
@@ -40,8 +40,6 @@ public class CafeSpotManager : MonoBehaviour
             if (_spots[i].TryGetComponent(out ClientGroupHolder clientTable))
                 _opener.CafeChanged -= clientTable.CafeClosed;
         }
-
-        // Генерируем споты на основе списка
     }
 
     public void GenerateFreeSpotsList()

@@ -98,7 +98,7 @@ public class Client : MonoBehaviour
         Spot = settings.Spot;
         if (InGroup())
             _table = Spot.GetComponent<ClientGroupHolder>();
-        TableIndex = settings.SpotIndex;
+        TableIndex = settings.TableIndex;
     }
 
     public void SetOrder(Order order)

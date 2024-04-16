@@ -2,10 +2,11 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(Slider))]
 public abstract class LocationSlider : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     [SerializeField] protected CameraManager _cameraManager;
-    [SerializeField] protected Slider _slider;
+    protected Slider _slider;
 
     private float _startPosition;
     private float _endPosition;
@@ -14,11 +15,8 @@ public abstract class LocationSlider : MonoBehaviour, IPointerDownHandler, IPoin
 
     private void Awake()
     {
+        _slider = GetComponent<Slider>();
         _cameraManager.BordersFound += SetSliderValues;
-    }
-
-    private void Start()
-    {
         _cameraManager.CameraMoved += ChangeSliderValue;
     }
 

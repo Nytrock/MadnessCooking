@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Xml.Linq;
 using UnityEngine;
 
 public abstract class SpaceManager : MonoBehaviour, IUpgradeable
@@ -11,40 +12,39 @@ public abstract class SpaceManager : MonoBehaviour, IUpgradeable
     protected Transform _spaceContainer;
 
     public int SpaceCount => _spaceCount;
+    public float SpaceSize => _spacePrefab.Size;
+
     public event Action SpaceAdded;
 
     private void Awake()
     {
         _spaceCount = _defaultSpaceCount;
+        _spaceContainer = transform;
     }
 
-    private void Start()
+    protected void LateStart()
     {
-        _spaceContainer = transform;
         GenerateSpaces();
     }
 
     private void GenerateSpaces()
     {
-        var size = _spacePrefab.GetSpaceSize();
+        var size = _spacePrefab.Size;
         for (int i = 0; i < _spaceCount; i++)
             AddSpace(size, i);
-    }
-
-    public float GetSpaceSize()
-    {
-        return _spacePrefab.GetSpaceSize();
     }
 
     public virtual void CheckUpgrade(BaseUpgrade upgrade)
     {
         if (_spaceAddUpgrades.Contains(upgrade)) {
             var countUpgrade = upgrade as CountUpgrade;
-            AddSpace(_spacePrefab.GetSpaceSize(), _spaceCount);
+            AddSpace(_spacePrefab.Size, _spaceCount);
             _spaceCount = countUpgrade.Count;
+            UpdateData();
             SpaceAdded?.Invoke();
         }
     }
 
     protected abstract void AddSpace(float size, int index);
+    protected abstract void UpdateData();
 }

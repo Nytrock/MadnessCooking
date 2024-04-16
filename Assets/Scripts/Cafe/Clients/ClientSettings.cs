@@ -10,7 +10,7 @@ public struct ClientSettings
         EnterTarget = enterTarget;
         ClientType = clientType;
         Spot = spot;
-        SpotIndex = spotIndex;
+        TableIndex = spotIndex;
         WaitMultiplier = waitMultiplier;
         Pool = _pool;
     }
@@ -19,7 +19,7 @@ public struct ClientSettings
     public Transform EnterTarget { get; private set; }
     public ClientType ClientType { get; private set; }
     public CafeSpot Spot { get; private set; }
-    public int SpotIndex { get; private set; }
+    public int TableIndex { get; private set; }
     public float WaitMultiplier { get; private set; }
     public ClientsPool Pool { get; private set; }
 }

@@ -20,4 +20,9 @@ public class FarmBedManager : SpaceManager
         foreach (var group in _beds)
             group.CheckUpgrade(upgrade);
     }
+
+    protected override void UpdateData()
+    {
+
+    }
 }
