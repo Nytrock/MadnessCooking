@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,19 +21,14 @@ public class ClientUI : MonoBehaviour
     {
         _foodImage = _mainButton.GetComponent<Image>();
         _client = GetComponent<Client>();
+        _mainButton.onClick.AddListener(_client.ActivateOrder);
     }
 
     public void StartNewCycle()
     {
-        _waitSlider.value = 0;
-        _yesButton.interactable = false;
-        _buttonsBlock.SetActive(false);
         _mainButton.onClick.RemoveAllListeners();
         _mainButton.onClick.AddListener(_client.ActivateOrder);
         _foodImage.sprite = _defaultSprite;
-        _animator.SetBool("isFinished", false);
-        ChangeSliderState(false);
-        ChangeFoodChoiceState(false);
     }
 
     public void ChangeFoodChoiceState(bool newValue)
@@ -61,5 +57,16 @@ public class ClientUI : MonoBehaviour
     public void ChangeSliderState(bool newValue)
     {
         _waitSlider.gameObject.SetActive(newValue);
+    }
+
+    public void Setup()
+    {
+        _waitSlider.maxValue = _client.ClientData.WaitTime;
+        _waitSlider.value = _client.ClientData.NowTime;
+        _buttonsBlock.SetActive(false);
+        _yesButton.interactable = false;
+        _animator.SetBool("isFinished", false);
+        ChangeSliderState(false);
+        ChangeFoodChoiceState(false);
     }
 }

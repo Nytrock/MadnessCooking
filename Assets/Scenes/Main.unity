@@ -1005,7 +1005,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf5fbcf20f8e68e458f51d27def1e70c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _prefab: {fileID: 8276683760689817253, guid: a67a733539390824293e08e6d333c57a, type: 3}
+  _clientPrefab: {fileID: 8276683760689817253, guid: a67a733539390824293e08e6d333c57a, type: 3}
+  _grouClientPrefab: {fileID: 5441043315051667269, guid: 201b12837891d9e40819002375cf63be, type: 3}
 --- !u!1 &25890847
 GameObject:
   m_ObjectHideFlags: 0
@@ -4977,6 +4978,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1001201130}
     m_Modifications:
+    - target: {fileID: 3228301666400061153, guid: 3f25dcb12919e004ebba914d8615c09d, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3403248874431405084, guid: 3f25dcb12919e004ebba914d8615c09d, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -5029,7 +5034,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 5935328388158999770, guid: 3f25dcb12919e004ebba914d8615c09d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: -7621174372396858964, guid: 3f25dcb12919e004ebba914d8615c09d, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -15213,7 +15223,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 6073225795250859655, guid: 0b9c7c08259366e4688ffd0395a12143, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6817118979676498753, guid: 0b9c7c08259366e4688ffd0395a12143, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: -3593941806977181301, guid: 0b9c7c08259366e4688ffd0395a12143, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -15473,6 +15492,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4385878464212479976, guid: 918a4e1a36873124e86381570b9b1ef0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8315375618084619130, guid: 918a4e1a36873124e86381570b9b1ef0, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9100331214676257604, guid: 918a4e1a36873124e86381570b9b1ef0, type: 3}
@@ -17448,7 +17471,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 1499873818}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f7f6c58f08e0b3b4d9f1b0d10c96f604, type: 3}
   m_Name: 
@@ -34641,7 +34664,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 143283980}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f7f6c58f08e0b3b4d9f1b0d10c96f604, type: 3}
   m_Name: 
@@ -38632,32 +38655,32 @@ MonoBehaviour:
     _popularityMultiplier: 1
     _name: "\u041D\u043E\u0432\u0438\u0447\u043E\u043A"
     _description: "\u0422\u044B \u043A\u0442\u043E?"
-    _singleChance: 100
-    _doubleChance: 0
+    _singleChance: 0
+    _doubleChance: 100
     _tripleChance: 0
     _quarterChance: 0
   - _needXp: 40
     _popularityMultiplier: 1.1
     _name: "\u0420\u0430\u0431\u043E\u0442\u044F\u0433\u0430"
     _description: "\u0422\u044B \u0441\u0442\u0430\u043B \u043F\u043E\u043F\u0443\u043B\u044F\u0440\u043D\u0435\u0435"
-    _singleChance: 99
-    _doubleChance: 1
+    _singleChance: 0
+    _doubleChance: 100
     _tripleChance: 0
     _quarterChance: 0
   - _needXp: 100
     _popularityMultiplier: 1.15
     _name: "\u042F\u0447\u0435\u0439\u043A\u0430 \u043E\u0431\u0449\u0435\u0441\u0442\u0432\u0430"
     _description: "\u0422\u044B \u0441\u0442\u0430\u043B \u0435\u0449\u0451 \u043F\u043E\u043F\u0443\u043B\u044F\u0440\u043D\u0435\u0435"
-    _singleChance: 95
-    _doubleChance: 5
+    _singleChance: 0
+    _doubleChance: 100
     _tripleChance: 0
     _quarterChance: 0
   - _needXp: -1
     _popularityMultiplier: 1.1
     _name: "\u0424\u0438\u043B\u0430\u043D\u0442\u0440\u043E\u043F"
     _description: "\u0422\u044B \u043E\u0447\u0435\u043D\u044C \u043F\u043E\u043F\u0443\u043B\u044F\u0440\u0435\u043D"
-    _singleChance: 90
-    _doubleChance: 9
+    _singleChance: 0
+    _doubleChance: 100
     _tripleChance: 1
     _quarterChance: 0
 --- !u!4 &1251689377
@@ -39611,7 +39634,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 503419064}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f7f6c58f08e0b3b4d9f1b0d10c96f604, type: 3}
   m_Name: 
@@ -45117,7 +45140,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 492312267}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f7f6c58f08e0b3b4d9f1b0d10c96f604, type: 3}
   m_Name: 
@@ -45424,7 +45447,16 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 5938781991105013643, guid: 925ddadf44c0daa409655d1d3c5ff111, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7781789862733694359, guid: 925ddadf44c0daa409655d1d3c5ff111, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 4807610232535231179, guid: 925ddadf44c0daa409655d1d3c5ff111, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -56474,6 +56506,8 @@ MonoBehaviour:
   _bindableObjects:
   - {fileID: 1436171022}
   - {fileID: 2131011339}
+  - {fileID: 681891816}
+  - {fileID: 2125806884}
 --- !u!1 &1857313546
 GameObject:
   m_ObjectHideFlags: 0
@@ -65179,7 +65213,7 @@ MonoBehaviour:
   _spotManager: {fileID: 681891816}
   _ordersManager: {fileID: 800858058}
   _pool: {fileID: 16532515}
-  _minSpawnTime: 0
+  _minSpawnTime: 1
   _maxSpawnTime: 7
   _eatTimeShowUpgrade: {fileID: 11400000, guid: 62639c93432a4664993c9cc144d7ac01, type: 2}
 --- !u!114 &2125806885

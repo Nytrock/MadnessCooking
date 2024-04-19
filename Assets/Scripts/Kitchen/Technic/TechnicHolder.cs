@@ -27,10 +27,6 @@ public class TechnicHolder : MonoBehaviour
         _animator = GetComponent<Animator>();
         _cooker = GetComponent<TechnicCooker>();
         _repair = GetComponent<TechnicRepair>();
-    }
-
-    private void Start()
-    {
         _nowStrength = _technic.Strength;
     }
 

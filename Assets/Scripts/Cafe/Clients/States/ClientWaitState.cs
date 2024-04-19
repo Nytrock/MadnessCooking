@@ -1,12 +1,10 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ClientWaitState : ClientState
+public class ClientWaitState : ClientBaseState
 {
     private Slider _waitSlider;
-    private float _waitTime;
-    private float _waitMultiplier;
-    private float _nowTime;
+    private SerializableClient _clientData;
 
     public override void EnterState(Client client)
     {
@@ -14,13 +12,12 @@ public class ClientWaitState : ClientState
 
         clientUI.ChangeFoodChoiceState(true);
         clientUI.ChangeSliderState(true);
-        _waitMultiplier = client.WaitMultiplier;
-        _waitTime = client.GetWaitTime();
-        _nowTime = 0;
+        _clientData = client.ClientData;
         _waitSlider = clientUI.WaitSlider;
-        _waitSlider.maxValue = _waitTime;
+        _waitSlider.maxValue = _clientData.WaitTime;
 
-        client.OrderActivated += DecreaseWait;
+        if (!_clientData.OrderActivated)
+            client.OrderActivated += DecreaseWait;
     }
 
     public override void ExitState(Client client)
@@ -30,9 +27,9 @@ public class ClientWaitState : ClientState
 
     public override void UpdateState(Client client)
     {
-        if (_nowTime < _waitTime) {
-            _nowTime += Time.deltaTime * TimeManager.instance.TimeSpeed;
-            _waitSlider.value = _nowTime;
+        if (_clientData.NowTime < _clientData.WaitTime) {
+            _clientData.NowTime += Time.deltaTime * TimeManager.instance.TimeSpeed;
+            _waitSlider.value = _clientData.NowTime;
         } else {
             client.Leave();
         }
@@ -40,7 +37,8 @@ public class ClientWaitState : ClientState
 
     private void DecreaseWait(Client _)
     {
-        _nowTime = Mathf.Max(0, _nowTime - _waitTime * 0.1f * _waitMultiplier);
-        _waitSlider.value = _nowTime;
+        _clientData.NowTime = Mathf.Max(0, 
+            _clientData.NowTime - _clientData.WaitTime * 0.1f * _clientData.WaitMultiplier);
+        _waitSlider.value = _clientData.NowTime;
     }
 }

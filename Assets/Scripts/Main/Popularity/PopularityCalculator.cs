@@ -45,8 +45,5 @@ public class PopularityCalculator : MonoBehaviour
         quarterChance += tripleChance;
     }
 
-    public float GetSpaceMultiplier()
-    {
-        return Mathf.Max(1, _spaceManager.SpaceCount * 0.375f);
-    }
+    public float GetSpaceMultiplier() => Mathf.Max(1, _spaceManager.SpaceCount * 0.375f);
 }

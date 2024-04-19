@@ -19,7 +19,7 @@ public class TechnicManager : MonoBehaviour, IUpgradeable
 
     public event Action TechnicChanged;
 
-    private void Start()
+    private void Awake()
     {
         foreach (var holder in _holders) {
             if (_availableTechnic.Contains(holder.Technic))

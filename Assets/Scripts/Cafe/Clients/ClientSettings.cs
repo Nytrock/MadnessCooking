@@ -1,25 +1,18 @@
 using System;
-using UnityEngine;
 
 [Serializable]
 public struct ClientSettings
 {
-    public ClientSettings(Transform exitTarget, Transform enterTarget, ClientType clientType, CafeSpot spot, int spotIndex, float waitMultiplier, ClientsPool _pool)
+    public ClientSettings(SerializableClient data, int spotIndex, int tableIndex, ClientsSpawner spawner)
     {
-        ExitTarget = exitTarget;
-        EnterTarget = enterTarget;
-        ClientType = clientType;
-        Spot = spot;
-        TableIndex = spotIndex;
-        WaitMultiplier = waitMultiplier;
-        Pool = _pool;
+        Data = data;
+        SpotIndex = spotIndex;
+        TableIndex = tableIndex;
+        Spawner = spawner;
     }
 
-    public Transform ExitTarget { get; private set; }
-    public Transform EnterTarget { get; private set; }
-    public ClientType ClientType { get; private set; }
-    public CafeSpot Spot { get; private set; }
+    public SerializableClient Data { get; private set; }
+    public int SpotIndex { get; private set; }
     public int TableIndex { get; private set; }
-    public float WaitMultiplier { get; private set; }
-    public ClientsPool Pool { get; private set; }
+    public ClientsSpawner Spawner { get; private set; }
 }

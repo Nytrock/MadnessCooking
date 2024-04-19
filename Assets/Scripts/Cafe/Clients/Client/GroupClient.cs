@@ -1,0 +1,44 @@
+public class GroupClient : Client
+{
+    private ClientGroupHolder _table;
+
+    public override void Setup(ClientSettings settings)
+    {
+        base.Setup(settings);
+        var spot = Spawner.GetSpot(SpotIndex);
+        _table = spot.GetComponent<ClientGroupHolder>();
+        _table.WaitStarted += Sit;
+    }
+
+    public override void Pay()
+    {
+        WaitOthers();
+        _table.CheckTalk();
+    }
+
+    public override void FoodRejected()
+    {
+        WaitOthers();
+        _table.DecreaseTalk();
+        InvokeRejected();
+    }
+
+    public override void Eat()
+    {
+        _table.AddMoney(Order.Food.MoneyGet);
+        _table.EndlessWait();
+        base.Eat();
+    }
+
+    public override void Wait()
+    {
+        WaitOthers();
+        _table.CheckWait();
+    }
+
+    private void WaitOthers()
+    {
+        ClientData.State = ClientState.WaitOthers;
+        ChangeState();
+    }
+}

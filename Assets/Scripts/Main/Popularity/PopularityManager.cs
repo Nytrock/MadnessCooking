@@ -31,7 +31,7 @@ public class PopularityManager : MonoBehaviour, IBindable<MainData>
     {
         _nowXp += xp;
         if (_nowXp >= _levels[_nowLevel].NeedXp && !_isMaxLevel) {
-            while (_nowXp >= _levels[_nowLevel].NeedXp) {
+            while (_nowXp >= _levels[_nowLevel].NeedXp && !_isMaxLevel) {
                 _nowXp -= _levels[_nowLevel].NeedXp;
                 NextLevel();
             }
@@ -44,6 +44,7 @@ public class PopularityManager : MonoBehaviour, IBindable<MainData>
     {
         _nowXp = Mathf.Max(0, _nowXp - xp);
         _data.PopularityXp = _nowXp;
+        XpChanged?.Invoke(_nowXp);
     }
 
     public void NextLevel()

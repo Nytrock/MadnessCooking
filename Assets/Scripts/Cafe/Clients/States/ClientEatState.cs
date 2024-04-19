@@ -1,11 +1,10 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ClientEatingState : ClientState
+public class ClientEatState : ClientBaseState
 {
     private Slider _eatSlider;
-    private float _eatTime;
-    private float _nowTime = 0;
+    private SerializableClient _clientData;
 
     public override void EnterState(Client client)
     {
@@ -13,12 +12,11 @@ public class ClientEatingState : ClientState
         client.SetSpotTableFood();
 
         clientUI.ChangeFoodChoiceState(false);
-        clientUI.ChangeSliderState(client.IsEatTimeShow);
+        clientUI.ChangeSliderState(true);
 
-        _eatTime = client.Order.Food.TimeToEat;
-        _nowTime = 0;
+        _clientData = client.ClientData;
         _eatSlider = clientUI.WaitSlider;
-        _eatSlider.maxValue = _eatTime;
+        _eatSlider.maxValue = _clientData.WaitTime;
     }
 
     public override void ExitState(Client client)
@@ -28,9 +26,9 @@ public class ClientEatingState : ClientState
 
     public override void UpdateState(Client client)
     {
-        if (_nowTime < _eatTime) {
-            _nowTime += Time.deltaTime * TimeManager.instance.TimeSpeed;
-            _eatSlider.value = _nowTime;
+        if (_clientData.NowTime < _clientData.WaitTime) {
+            _clientData.NowTime += Time.deltaTime * TimeManager.instance.TimeSpeed;
+            _eatSlider.value = _clientData.NowTime;
         } else {
             client.Pay();
         }

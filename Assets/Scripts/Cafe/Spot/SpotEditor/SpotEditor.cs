@@ -14,7 +14,7 @@ public class SpotEditor : MonoBehaviour
     public event Action EditorDisabled;
     public CafeSpotManager SpotManager => _spotManager;
 
-    private void Start()
+    private void Awake()
     {
         _opener.CafeChanged += CheckCafeOpener;
         _spotManager.SpotsPositionChanged += _preview.Move;

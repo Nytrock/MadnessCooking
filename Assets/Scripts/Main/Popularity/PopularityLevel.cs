@@ -10,10 +10,10 @@ public class PopularityLevel
     [TextArea, SerializeField] private string _description;
 
     [Header("ClientsChances")]
-    [SerializeField] private float _singleChance;
-    [SerializeField] private float _doubleChance;
-    [SerializeField] private float _tripleChance;
-    [SerializeField] private float _quarterChance;
+    [SerializeField, Range(0, 100)] private float _singleChance;
+    [SerializeField, Range(0, 100)] private float _doubleChance;
+    [SerializeField, Range(0, 100)] private float _tripleChance;
+    [SerializeField, Range(0, 100)] private float _quarterChance;
 
     public int NeedXp => _needXp;
     public float PopularityMultiplier => _popularityMultiplier;

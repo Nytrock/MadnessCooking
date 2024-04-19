@@ -1,39 +1,38 @@
 using UnityEngine;
 
-public class ClientWalkState : ClientState
+public class ClientWalkState : ClientBaseState
 {
     private Transform _target;
-    private float _speed = 8f;
+    private const float _speed = 8f;
 
     public override void EnterState(Client client)
     {
         client.ChangeSortingGroup(10);
-        if (client.IsLeaving)
-            _target = client.Spot.GetTarget(client.TableIndex);
+        if (client.ClientData.State == ClientState.Leave)
+            _target = client.Spawner.SpawnPoint;
         else
-            _target = client.EnterTarget;
-        client.RotateSkin(client.IsLeaving);
+            _target = client.Spawner.GetSpot(client.SpotIndex).GetTarget(client.TableIndex);
+        client.RotateSkin(client.ClientData.State == ClientState.Leave);
     }
 
     public override void ExitState(Client client)
     {
-        client.RotateSkin();
-        client.ChangeSortingGroup(5);
+        if (client.ClientData.State == ClientState.Leave)
+            return;
+
+        client.TakeSeat();
     }
 
     public override void UpdateState(Client client)
     {
         client.transform.position = Vector2.MoveTowards(client.transform.position, 
             _target.position, _speed * Time.deltaTime * TimeManager.instance.TimeSpeed);
+        client.ClientData.Position = new SerializableVector(client.transform.position);
         if (Vector2.Distance(client.transform.position, _target.position) < 0.001f) {
-            if (client.IsLeaving) {
+            if (client.ClientData.State == ClientState.Leave)
                 client.Destroy();
-            } else {
-                if (client.InGroup())
-                    client.SitWithGroup();
-                else
-                    client.Wait();
-            }
+            else
+                client.Wait();
         }
     }
 }

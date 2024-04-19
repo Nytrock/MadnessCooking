@@ -1,4 +1,4 @@
-public abstract class ClientState
+public abstract class ClientBaseState
 {
     public abstract void EnterState(Client client);
     public abstract void UpdateState(Client client);

@@ -13,7 +13,7 @@ public class OrdersUI : MonoBehaviour, IUpgradeable
     [SerializeField] private Ingredient _spice;
     public bool IsAutoSpice { get; private set; }
 
-    private void Start()
+    private void Awake()
     {
         _manager.OrderAdded += AddOrder;
         _manager.OrderRemoved += RemoveOrder;

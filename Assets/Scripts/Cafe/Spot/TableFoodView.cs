@@ -4,7 +4,7 @@ public class TableFoodView : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer _spriteRenderer;
 
-    private void Start()
+    private void Awake()
     {
         ResetSprite();
     }

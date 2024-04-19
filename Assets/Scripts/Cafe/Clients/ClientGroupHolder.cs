@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Xml.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,86 +12,83 @@ public class ClientGroupHolder : MonoBehaviour
     [SerializeField] private Slider _waitSlider;
     [SerializeField] private float _minTalk;
     [SerializeField] private float _maxTalk;
-    private int _talkIndex;
-    private bool _isTalk;
 
-    private bool _isWait = true;
-    private float _waitTime;
-    private float _nowTime;
+    private SerializableSpot _data;
+    private CafeSpot _spot;
+    private readonly List<GroupClient> _clients = new();
 
-    private int _clientsLeft;
-    private int _moneyCount;
-    private readonly List<Client> _clients = new();
+    public event Action WaitStarted;
+    public event Action<CafeSpot> ClientsLeaved;
 
-    public event Action<Client> ClientsLeaved;
-    public event Action<bool> WaitChanged;
-
-    private void Start()
+    private void Awake()
     {
+        _spot = GetComponent<CafeSpot>();
         ChangeSliderState(false);
     }
 
     private void Update()
     {
-        if (!_isWait)
+        if (_data.GroupState != GroupClientState.Wait && 
+            _data.GroupState != GroupClientState.Talk)
             return;
 
-        if (_nowTime < _waitTime) {
-            _nowTime += Time.deltaTime * TimeManager.instance.TimeSpeed;
-            _waitSlider.value = _nowTime;
+        if (_data.NowTime < _data.WaitTime) {
+            _data.NowTime += Time.deltaTime * TimeManager.instance.TimeSpeed;
+            _waitSlider.value = _data.NowTime;
         } else {
-            _nowTime = 0;
+            _data.NowTime = 0;
             EndVisit();
             ChangeSliderState(false);
             StartCoroutine(ClientsLeave());
         }
     }
 
-    public void AddClient(Client newClient)
+    public void AddClient(GroupClient newClient)
     {
         _clients.Add(newClient);
     }
 
     public IEnumerator SpawnGroupOfClients()
     {
-        _talkIndex = _clients.Count;
-        _clientsLeft = _clients.Count;
+        _data.TalkIndex = _clients.Count;
         RandomizeClients();
 
         for (int i = 0; i < _clients.Count; i++) {
             _clients[i].StartNewCycle();
+            _clients[i].enabled = true;
             yield return new WaitForSeconds(UnityEngine.Random.Range(0.5f, 1.2f));
         }
     }
 
     public void CheckWait()
     {
-        if (--_clientsLeft == 0)
+        bool allClientsHere = _data.Clients.All(x => x.State == ClientState.WaitOthers);
+        if (allClientsHere)
             StartWait();
     }
 
     private void StartWait()
     {
-        _isWait = true;
-        _waitTime = _clients[0].GetWaitTime();
-        _nowTime = 0;
+        _data.GroupState = GroupClientState.Wait;
+        if (_data.WaitTime == 0)
+            _data.WaitTime = _clients[0].ClientData.WaitTime;
+        _waitSlider.maxValue = _data.WaitTime;
 
-        _waitSlider.maxValue = _waitTime;
-        _clientsLeft = _clients.Count;
-
-
-        ChangeSliderState(_isWait);
-        WaitChanged?.Invoke(true);
+        ChangeSliderState(true);
+        WaitStarted?.Invoke();
     }
 
     public IEnumerator ClientsLeave()
     {
         RandomizeClients();
-        WaitChanged?.Invoke(false);
-        WaitChanged = null;
+        WaitStarted = null;
 
         Client[] leaveClients = _clients.ToArray();
         _clients.Clear();
+
+        for (int i = 0; i < leaveClients.Length; i++) {
+            leaveClients[i].ClientData.State = ClientState.Leave;
+        }
 
         for (int i = 0; i < leaveClients.Length; i++) {
             leaveClients[i].Leave();
@@ -109,38 +108,39 @@ public class ClientGroupHolder : MonoBehaviour
     public void EndlessWait()
     {
         ChangeSliderState(false);
-        _isWait = false;
+        _data.GroupState = GroupClientState.EndlessWait;
+        _data.NowTime = 0;
     }
 
     public void AddMoney(int money)
     {
-        _moneyCount += money;
+        _data.MoneyCount += money;
     }
 
     public void CheckTalk()
     {
-        if (--_clientsLeft == 0)
+        bool allClientsWait = _data.Clients.All(x => x.State == ClientState.WaitOthers);
+        if (allClientsWait)
             StartTalking();
     }
 
     public void DecreaseTalk()
     {
-        _talkIndex--;
+        _data.TalkIndex--;
         CheckTalk();
     }
 
     private void StartTalking()
     {
-        if (_talkIndex == 0) {
+        if (_data.TalkIndex == 0) {
             EndVisit();
             StartCoroutine(ClientsLeave());
             return;
         }
 
-        _waitTime = _talkIndex * UnityEngine.Random.Range(_minTalk, _maxTalk);
-        _waitSlider.maxValue = _waitTime;
-        _isWait = true;
-        _isTalk = true;
+        _data.WaitTime = _data.TalkIndex * UnityEngine.Random.Range(_minTalk, _maxTalk);
+        _waitSlider.maxValue = _data.WaitTime;
+        _data.GroupState = GroupClientState.Talk;
         ChangeSliderState(true);
     }
 
@@ -151,8 +151,11 @@ public class ClientGroupHolder : MonoBehaviour
 
     public void CafeClosed()
     {
+        if (_clients.Count == 0)
+            return;
+
         EndVisit();
-        _nowTime = 0;
+        _data.NowTime = 0;
         _clients.Clear();
         ChangeSliderState(false);
         StopAllCoroutines();
@@ -160,18 +163,22 @@ public class ClientGroupHolder : MonoBehaviour
 
     private void PayToPlayer()
     {
-        MoneyManager.instance.ChangeMoney(_moneyCount);
-        _moneyCount = 0;
+        MoneyManager.instance.ChangeMoney(_data.MoneyCount);
+        _data.MoneyCount = 0;
     }
 
     private void EndVisit()
     {
-        ClientsLeaved?.Invoke(_clients[0]);
+        ClientsLeaved?.Invoke(_spot);
         ClientsLeaved = null;
         _waitSlider.value = 0;
-        if (_isTalk)
+        if (_data.GroupState == GroupClientState.Talk)
             PayToPlayer();
-        _isTalk = false;
-        _isWait = false;
+        _data.GroupState = GroupClientState.None;
+    }
+
+    public void SetData(SerializableSpot spot)
+    {
+        _data = spot;
     }
 }

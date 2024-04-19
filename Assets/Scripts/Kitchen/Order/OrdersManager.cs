@@ -1,13 +1,15 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
+[RequireComponent(typeof(FoodManager))]
 public class OrdersManager : MonoBehaviour
 {
     [SerializeField] private KitchenStorage _kitchenStorage;
     [SerializeField] private TechnicManager _technicManager;
     private List<Order> _orders = new();
-    private FoodManager _foodManager;
+    private ClientState[] _suitableStates = { ClientState.Spawn, ClientState.Wait, ClientState.Sit };
 
     public event Action<Order> OrderAdded;
     public event Action<Order> OrderRemoved;
@@ -15,26 +17,25 @@ public class OrdersManager : MonoBehaviour
     public TechnicManager TechnicManager => _technicManager;
     public KitchenStorage KitchenStorage => _kitchenStorage;
 
-    private void Start()
-    {
-        _foodManager = GetComponent<FoodManager>();
-    }
-
     public void SetNewOrder(Client client, CafeSpot spot)
     {
-        var food = _foodManager.GetRandomFood();
-        var order = new Order(food, spot.Index + 1);
+        if (!_suitableStates.Contains(client.ClientData.State))
+            return;
 
+        var order = new Order(client.ClientData.OrderFood, spot.Index + 1);
         client.SetOrder(order);
         client.OrderActivated += AddOrder;
         client.ClientLeave += RemoveOrder;
         client.ClientEat += RemoveOrder;
         order.OrderFinished += client.CheckOrder;
+
+        if (client.ClientData.OrderActivated)
+            client.ActivateOrder();
     }
 
     private void AddOrder(Client client)
     {
-        if (client.ClientType == ClientType.GrayMan) {
+        if (client.ClientData.Type == ClientType.GrayMan) {
             _kitchenStorage.RemoveAll();
             SaveManager.instance.SaveAll();
             Application.Quit();

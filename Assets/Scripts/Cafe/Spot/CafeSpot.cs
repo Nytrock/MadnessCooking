@@ -15,20 +15,15 @@ public class CafeSpot : MonoBehaviour
     public int SeatsCount => _seats.Length;
     public Button RemoveButton => _removeButton;
 
-    private void Start()
+    private void Awake()
     {
         _outline.SetActive(_isEditor);
         _removeButton.gameObject.SetActive(_isEditor);
-        for (int i = 0; i < _tableFoods.Length; i++)
-            ResetTableFoodSprite(i);
     }
 
-    public Transform GetTarget(int index) { return _seats[index].transform; }
+    public Transform GetTarget(int index) => _seats[index].transform;
 
-    public float GetSeatRotation(int index)
-    {
-        return _seats[index].GetSeatRotation();
-    }
+    public float GetSeatRotation(int index) => _seats[index].GetSeatRotation();
 
     public void SetTableFoodSprite(Food food, int index)
     {
