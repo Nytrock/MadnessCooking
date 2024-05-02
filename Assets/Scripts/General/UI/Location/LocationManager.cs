@@ -2,11 +2,11 @@ using System;
 using UnityEditor;
 using UnityEngine;
 
-public class LocationManager : MonoBehaviour, IBindable<MainData>
+public class LocationManager : MonoBehaviour, IBindable<GeneralData>
 {
     [SerializeField] private Transform _mainCamera;
     [SerializeField] private LocationButton[] _locations;
-    private MainData _data;
+    private GeneralData _data;
 
     public event Action<Vector2> LocationChanged;
 
@@ -27,7 +27,7 @@ public class LocationManager : MonoBehaviour, IBindable<MainData>
         ChangeLocation(newLocation.Location);
     }
 
-    public void Bind(MainData data, bool isFileEmpty)
+    public void Bind(GeneralData data, bool isFileEmpty)
     {
         _data = data;
         LateStart();

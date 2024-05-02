@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class FatigueManager : MonoBehaviour, IBindable<MainData>
+public class FatigueManager : MonoBehaviour, IBindable<GeneralData>
 {
     public static FatigueManager instance;
 
@@ -13,7 +13,7 @@ public class FatigueManager : MonoBehaviour, IBindable<MainData>
     private float _sleepBonus;
 
     private bool _isTired;
-    private MainData _data;
+    private GeneralData _data;
 
     public float FatigueMax => _fatigueMax;
     public float FatigueNow => _data.Fatigue;
@@ -58,7 +58,7 @@ public class FatigueManager : MonoBehaviour, IBindable<MainData>
         _decorBonus += decor.FatigueCoef;
     }
 
-    public void Bind(MainData data, bool isFileEmpty)
+    public void Bind(GeneralData data, bool isFileEmpty)
     {
         _data = data;
         LateStart();

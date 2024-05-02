@@ -1,12 +1,12 @@
 using System;
 using UnityEngine;
 
-public class MoneyManager : MonoBehaviour, IBindable<MainData>
+public class MoneyManager : MonoBehaviour, IBindable<GeneralData>
 {
     public static MoneyManager instance;
 
     [SerializeField] private int _moneyDefault;
-    private MainData _data;
+    private GeneralData _data;
 
     public int MoneyCount => _data.MoneyCount;
 
@@ -31,7 +31,7 @@ public class MoneyManager : MonoBehaviour, IBindable<MainData>
         MoneyChanged?.Invoke(_data.MoneyCount);
     }
 
-    public void Bind(MainData data, bool isFileEmpty)
+    public void Bind(GeneralData data, bool isFileEmpty)
     {
         _data = data;
         if (isFileEmpty)

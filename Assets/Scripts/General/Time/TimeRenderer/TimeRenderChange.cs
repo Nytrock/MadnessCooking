@@ -1,11 +1,11 @@
 using UnityEngine;
 
-public class TimeRenderChange : MonoBehaviour, IUpgradeable, IBindable<MainData>
+public class TimeRenderChange : MonoBehaviour, IUpgradeable, IBindable<GeneralData>
 {
     [SerializeField] private BaseUpgrade _clockUpgrade;
     [SerializeField] private TimeRenderClock _clock;
     [SerializeField] private TimeRenderWatch _watch;
-    private MainData _data;
+    private GeneralData _data;
 
     private void LateStart()
     {
@@ -24,7 +24,7 @@ public class TimeRenderChange : MonoBehaviour, IUpgradeable, IBindable<MainData>
         _watch.gameObject.SetActive(_data.IsUpgradedTimeRenderer);
     }
 
-    public void Bind(MainData data, bool isFileEmpty)
+    public void Bind(GeneralData data, bool isFileEmpty)
     {
         _data = data;
         LateStart();

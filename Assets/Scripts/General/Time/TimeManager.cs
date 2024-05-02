@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class TimeManager : MonoBehaviour, IBindable<MainData>
+public class TimeManager : MonoBehaviour, IBindable<GeneralData>
 {
     public static TimeManager instance;
 
@@ -10,7 +10,7 @@ public class TimeManager : MonoBehaviour, IBindable<MainData>
     [SerializeField] private DaytimeStart[] _daytimeStarts;
 
     private int _nowTimeSpeed;
-    private MainData _data;
+    private GeneralData _data;
 
     private TimeSpan _timespan = new(7, 0, 0);
     private Daytime _daytime = Daytime.Morning;
@@ -70,7 +70,7 @@ public class TimeManager : MonoBehaviour, IBindable<MainData>
 
     public float GetSleepBonus(float needHours, float maxFatigue) => maxFatigue / (needHours * 3600 / _sleepTimeSpeed);
 
-    public void Bind(MainData data, bool isFileEmpty)
+    public void Bind(GeneralData data, bool isFileEmpty)
     {
         _data = data;
         if (isFileEmpty) {

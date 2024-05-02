@@ -2,11 +2,11 @@ using System;
 using System.Xml.Linq;
 using UnityEngine;
 
-public class PopularityManager : MonoBehaviour, IBindable<MainData>
+public class PopularityManager : MonoBehaviour, IBindable<GeneralData>
 {
     [SerializeField] private PopularityLevel[] _levels;
     private bool _isMaxLevel;
-    private MainData _data;
+    private GeneralData _data;
 
     public int NowLevel => _data.PopularityLevel;
     public bool IsMaxLevel => _isMaxLevel;
@@ -80,7 +80,7 @@ public class PopularityManager : MonoBehaviour, IBindable<MainData>
         }
     }
 
-    public void Bind(MainData data, bool isFileEmpty)
+    public void Bind(GeneralData data, bool isFileEmpty)
     {
         _data = data;
         if (isFileEmpty) {

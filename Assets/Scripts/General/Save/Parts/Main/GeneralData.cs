@@ -1,7 +1,7 @@
 using System;
 
 [Serializable]
-public class MainData : ISaveable
+public class GeneralData : ISaveable
 {
     public int MoneyCount;
     public int PopularityLevel;

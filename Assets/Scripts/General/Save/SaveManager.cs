@@ -8,7 +8,7 @@ public class SaveManager : MonoBehaviour
     private FileDataService _dataService;
 
     [Header("Save parts")]
-    [SerializeField] private SaveMainManager _mainPart;
+    [SerializeField] private SaveGeneralManager _mainPart;
     [SerializeField] private SaveCafeManager _cafePart;
     [SerializeField] private SaveKitchenManager _kitchenPart;
     [SerializeField] private SaveFarmManager _farmPart;
