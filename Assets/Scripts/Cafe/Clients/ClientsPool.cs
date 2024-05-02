@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class ClientsPool : MonoBehaviour
@@ -26,8 +27,7 @@ public class ClientsPool : MonoBehaviour
             client = _normalClients.Dequeue();
         }
 
-        client.enabled = true;
-        client.gameObject.SetActive(true);
+        ActivateClient(client);
         return client;
     }
 
@@ -40,9 +40,14 @@ public class ClientsPool : MonoBehaviour
             client = _groupClients.Dequeue();
         }
 
-        client.enabled = false;
-        client.gameObject.SetActive(true);
+        ActivateClient(client);
         return client;
+    }
+
+    private void ActivateClient(Client client)
+    {
+        client.enabled = true;
+        client.gameObject.SetActive(true);
     }
 
     public void PutClient(Client client)

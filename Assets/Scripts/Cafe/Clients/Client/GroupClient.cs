@@ -5,6 +5,9 @@ public class GroupClient : Client
     public override void Setup(ClientSettings settings)
     {
         base.Setup(settings);
+        if (ClientData.State == ClientState.Leave)
+            return;
+
         var spot = Spawner.GetSpot(SpotIndex);
         _table = spot.GetComponent<ClientGroupHolder>();
         _table.WaitStarted += Sit;

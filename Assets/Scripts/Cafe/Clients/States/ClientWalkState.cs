@@ -7,12 +7,12 @@ public class ClientWalkState : ClientBaseState
 
     public override void EnterState(Client client)
     {
-        client.ChangeSortingGroup(10);
-        if (client.ClientData.State == ClientState.Leave)
+        bool isLeaving = client.ClientData.State == ClientState.Leave;
+        if (isLeaving)
             _target = client.Spawner.SpawnPoint;
         else
             _target = client.Spawner.GetSpot(client.SpotIndex).GetTarget(client.TableIndex);
-        client.RotateSkin(client.ClientData.State == ClientState.Leave);
+        client.RotateSkin(isLeaving.ToDirection());
     }
 
     public override void ExitState(Client client)

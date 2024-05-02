@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 [RequireComponent(typeof(ClientUI))]
 public class Client : MonoBehaviour
@@ -14,8 +13,7 @@ public class Client : MonoBehaviour
     private ClientWaitOthers _waitOthersState = new();
     #endregion
 
-    [SerializeField] private Transform _skin;
-    [SerializeField] private SortingGroup _sortingGroup;
+    [SerializeField] private ClientSkin _skin;
     [SerializeField, Min(0)] private float _minWaitTime;
     [SerializeField, Min(0)] private float _maxWaitTime;
 
@@ -40,7 +38,7 @@ public class Client : MonoBehaviour
 
     public void StartNewCycle()
     {
-        SetCloth();
+        _skin.SetSkin(ClientData.Type);
         _clientUI.StartNewCycle();
     }
 
@@ -76,30 +74,23 @@ public class Client : MonoBehaviour
         _nowState.UpdateState(this);
     }
 
-    private void SetCloth()
+    public void RotateSkin(Direction direction)
     {
-        // Set charachter clothes
-    }
-
-    public void RotateSkin(bool isRight)
-    {
-        if (isRight)
-            _skin.localScale = Vector2.one;
-        else
-            _skin.localScale = new Vector2(-1, 1);
-    }
-
-    public void TakeSeat()
-    {
-        RotateSkin();
-        ChangeSortingGroup(5);
+        _skin.RotateSkin(direction);
     }
 
     private void RotateSkin()
     {
         var spot = Spawner.GetSpot(SpotIndex);
-        _skin.localScale = new Vector2(spot.GetSeatRotation(TableIndex), 1);
+        _skin.RotateSkin(spot.GetSeatRotation(TableIndex));
     }
+
+    public void TakeSeat()
+    {
+        RotateSkin();
+        _skin.ChangeSortingLayer();
+    }
+
 
     public virtual void Setup(ClientSettings settings)
     {
@@ -120,8 +111,6 @@ public class Client : MonoBehaviour
 
         if (ClientData.State != ClientState.Spawn && ClientData.State != ClientState.Leave)
             TakeSeat();
-        else
-            ChangeSortingGroup(10);
     }
 
     public void SetOrder(Order order)
@@ -164,7 +153,9 @@ public class Client : MonoBehaviour
         ClientEat = null;
         ClientRejected = null;
         ClientData.State = ClientState.Leave;
+
         ChangeState();
+        _skin.ChangeSortingLayer();
         _clientUI.ChangeFoodChoiceState(false);
         _clientUI.ChangeSliderState(false);
     }
@@ -205,11 +196,6 @@ public class Client : MonoBehaviour
     {
         var spot = Spawner.GetSpot(SpotIndex);
         spot.ResetTableFoodSprite(TableIndex);
-    }
-
-    public void ChangeSortingGroup(int newValue)
-    {
-        _sortingGroup.sortingOrder = newValue;
     }
 
     public void ChangeShowingTimeEat(bool value)

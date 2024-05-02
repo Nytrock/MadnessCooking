@@ -1360,8 +1360,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce3e6fac4ab99534c9334aee4b48ed13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _skin: {fileID: 7458045546179468267}
-  _sortingGroup: {fileID: 515094939482071146}
+  _skin: {fileID: 7846914387654242164}
   _minWaitTime: 40
   _maxWaitTime: 60
 --- !u!114 &7984458469416964061
@@ -1392,6 +1391,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7458045546179468267}
+  - component: {fileID: 7846914387654242164}
   - component: {fileID: 515094939482071146}
   m_Layer: 0
   m_Name: Skin
@@ -1417,6 +1417,20 @@ Transform:
   - {fileID: 2089575285292078579}
   m_Father: {fileID: 8389199695712350940}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7846914387654242164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7110313828980652339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c8764ac9173cb341b4631a185a8bb9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _foregroundSortingLayer: 10
+  _backgroundSortingLayer: 5
 --- !u!210 &515094939482071146
 SortingGroup:
   m_ObjectHideFlags: 0

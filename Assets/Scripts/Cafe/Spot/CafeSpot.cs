@@ -23,7 +23,7 @@ public class CafeSpot : MonoBehaviour
 
     public Transform GetTarget(int index) => _seats[index].transform;
 
-    public float GetSeatRotation(int index) => _seats[index].GetSeatRotation();
+    public Direction GetSeatRotation(int index) => _seats[index].GetSeatDirection();
 
     public void SetTableFoodSprite(Food food, int index)
     {

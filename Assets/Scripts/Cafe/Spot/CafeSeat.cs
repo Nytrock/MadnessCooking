@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class CafeSeat : MonoBehaviour
 {
-    public float GetSeatRotation()
+    public Direction GetSeatDirection()
     {
-        return Mathf.Sign(transform.localScale.x);
+        return Mathf.Sign(transform.localScale.x).ToDirection();
     }
 }

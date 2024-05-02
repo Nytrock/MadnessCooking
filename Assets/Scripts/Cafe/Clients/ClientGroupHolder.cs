@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Xml.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -51,12 +50,15 @@ public class ClientGroupHolder : MonoBehaviour
     public IEnumerator SpawnGroupOfClients()
     {
         _data.TalkIndex = _clients.Count;
+        Vector3 spawn = _clients[0].Spawner.SpawnPoint.position;
         RandomizeClients();
 
-        for (int i = 0; i < _clients.Count; i++) {
-            _clients[i].StartNewCycle();
-            _clients[i].enabled = true;
-            yield return new WaitForSeconds(UnityEngine.Random.Range(0.5f, 1.2f));
+        foreach (var client in _clients) {
+            client.enabled = true;
+            if (client.transform.position == spawn) {
+                client.StartNewCycle();
+                yield return new WaitForSeconds(UnityEngine.Random.Range(0.5f, 1.2f));
+            }
         }
     }
 

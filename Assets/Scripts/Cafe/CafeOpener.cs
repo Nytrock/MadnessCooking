@@ -7,10 +7,9 @@ public class CafeOpener : MonoBehaviour, IBindable<CafeData>
     [SerializeField] private TextMeshProUGUI _text;
     [SerializeField] private string TextOpened;
     [SerializeField] private string TextClosed;
-    private bool _isOpened = true;
     private CafeData _data;
 
-    public bool IsOpened => _isOpened;
+    public bool IsOpened => _data.IsOpened;
 
     public event Action CafeChanged;
 
@@ -22,26 +21,18 @@ public class CafeOpener : MonoBehaviour, IBindable<CafeData>
     public void Bind(CafeData data, bool isFileEmpty)
     {
         _data = data;
-        if (isFileEmpty) {
-            _data.IsOpened = _isOpened;
-            LateStart();
-            return;
-        }
-
-        _isOpened = _data.IsOpened;
         LateStart();
     }
 
     public void ChangeCafeState()
     {
-        _isOpened = !_isOpened;
-        _data.IsOpened = _isOpened;
+        _data.IsOpened = !_data.IsOpened;
         UpdateCafe();
     }
 
     private void UpdateCafe()
     {
-        if (_isOpened)
+        if (_data.IsOpened)
             _text.text = TextOpened;
         else
             _text.text = TextClosed;
