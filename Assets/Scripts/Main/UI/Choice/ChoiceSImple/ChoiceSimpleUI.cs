@@ -1,4 +1,4 @@
-public abstract class ChoiceSimpleUI<T> : ChoiceUI<T, ChoiceSimpleButton<T>>
+public abstract class ChoiceSimpleUI<T> : ChoiceUI<T, ChoiceSimpleButton<T>> where T: BuyableObject
 {
     public void Choice(int index)
     {

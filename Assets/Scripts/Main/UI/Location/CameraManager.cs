@@ -1,11 +1,12 @@
 using System;
 using UnityEngine;
 
-public abstract class CameraManager : MonoBehaviour
+public abstract class CameraManager<TData> : MonoBehaviour where TData: ISaveable
 {
     [SerializeField] protected Camera _mainCamera;
     [SerializeField] protected LocationManager _locationManager;
-    [SerializeField] protected SpaceManager _spaceManager;
+    [SerializeField] protected LocationSlider<TData> _locationSlider;
+    [SerializeField] protected SpaceManager<TData> _spaceManager;
     protected float _startPosition;
     protected float _endPosition;
     protected abstract string _cameraAxis { get; }
@@ -32,6 +33,7 @@ public abstract class CameraManager : MonoBehaviour
         _locationManager.LocationChanged += ChangeWorkMode;
         _spaceManager.SpaceAdded += CalculateBorderPositions;
         _mainCameraPos = _mainCamera.transform;
+        _locationSlider.Bootup(this);
     }
 
     protected virtual void Start()

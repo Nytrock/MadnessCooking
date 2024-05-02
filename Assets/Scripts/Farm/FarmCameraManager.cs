@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class FarmCameraManager : CameraManager
+public class FarmCameraManager : CameraManager<FarmData>
 {
     protected override string _cameraAxis => "Mouse Y";
     protected override string _keyAxis => "Vertical";

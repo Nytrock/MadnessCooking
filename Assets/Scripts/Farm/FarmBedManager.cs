@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FarmBedManager : SpaceManager
+public class FarmBedManager : SpaceManager<FarmData>
 {
     [SerializeField] private FarmBedSettings _bedsSettings;
     private List<FarmBedGroup> _beds = new();
@@ -21,8 +21,10 @@ public class FarmBedManager : SpaceManager
             group.CheckUpgrade(upgrade);
     }
 
-    protected override void UpdateData()
+    protected override void UpdateData(bool isFileEmpty)
     {
-
+        if (isFileEmpty)
+            _data.GroundbedGroupsCount = _defaultSpaceCount;
+        _spaceCount = _data.GroundbedGroupsCount;
     }
 }

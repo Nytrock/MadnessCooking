@@ -2,10 +2,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public abstract class ChoiceUI<T, K> : MonoBehaviour where K: ChoiceButton<T>
+public abstract class ChoiceUI<T, K> : MonoBehaviour where T: BuyableObject where K: ChoiceButton<T>
 {
     [SerializeField] protected GameObject _UI;
-    [SerializeField] protected CameraManager _cameraManager;
     [SerializeField] protected ChoicePool<T, K> _choiceButtonPool;
     [SerializeField] protected Button _submitButton;
     [SerializeField] protected List<K> _choiceButtons;
@@ -19,7 +18,6 @@ public abstract class ChoiceUI<T, K> : MonoBehaviour where K: ChoiceButton<T>
     protected virtual void Activate()
     {
         _submitButton.interactable = false;
-        _cameraManager.ChangeWorkMode(false);
         _UI.SetActive(true);
     }
 
@@ -28,7 +26,6 @@ public abstract class ChoiceUI<T, K> : MonoBehaviour where K: ChoiceButton<T>
         if (_chosedIndex != -1)
             SetSelectedState(_chosedIndex);
         _chosedIndex = -1;
-        _cameraManager.ChangeWorkMode(true);
         _UI.SetActive(false);
     }
 

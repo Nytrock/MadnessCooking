@@ -15,7 +15,7 @@ public abstract class BaseInstantBuyPanel : BaseBuyPanel
     {
         _itemInfoRenderer.SetItemInfo(item);
         _itemInfoRenderer.SetPrice(_costText, item.Cost);
-        UpdateButton(MoneyManager.instance.MoneyAmount);
+        UpdateButton(MoneyManager.instance.MoneyCount);
     }
 
     protected virtual void UpdateButton(int moneyCount)

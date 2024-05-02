@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChoicePool<T, K> : MonoBehaviour where K: ChoiceButton<T>
+public class ChoicePool<T, K> : MonoBehaviour where T: BuyableObject where K: ChoiceButton<T>
 {
     [SerializeField] private K _prefab;
     [SerializeField] private Transform _container;

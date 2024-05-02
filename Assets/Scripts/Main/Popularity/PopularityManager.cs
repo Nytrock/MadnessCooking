@@ -1,16 +1,14 @@
 using System;
+using System.Xml.Linq;
 using UnityEngine;
 
 public class PopularityManager : MonoBehaviour, IBindable<MainData>
 {
     [SerializeField] private PopularityLevel[] _levels;
-    private int _nowLevel = 0;
-    private int _nowXp = 0;
-
     private bool _isMaxLevel;
     private MainData _data;
 
-    public int NowLevel => _nowLevel;
+    public int NowLevel => _data.PopularityLevel;
     public bool IsMaxLevel => _isMaxLevel;
 
     public event Action<PopularityLevel> LevelChanged;
@@ -18,56 +16,67 @@ public class PopularityManager : MonoBehaviour, IBindable<MainData>
 
     private void LateStart()
     {
-        LevelChanged?.Invoke(_levels[_nowLevel]);
+        LevelChanged?.Invoke(_levels[_data.PopularityLevel]);
     }
 
     [ContextMenu("AddXp")]
     void TextAddXp()
     {
-        AddXp(10);
+        AddXp(80);
+    }
+
+    [ContextMenu("RemoveXp")]
+    void TextRemoveXp()
+    {
+        RemoveXp(70);
     }
 
     public void AddXp(int xp)
     {
-        _nowXp += xp;
-        if (_nowXp >= _levels[_nowLevel].NeedXp && !_isMaxLevel) {
-            while (_nowXp >= _levels[_nowLevel].NeedXp && !_isMaxLevel) {
-                _nowXp -= _levels[_nowLevel].NeedXp;
+        _data.PopularityXp += xp;
+        if (_data.PopularityXp >= _levels[_data.PopularityLevel].NeedXp && !_isMaxLevel) {
+            while (_data.PopularityXp >= _levels[_data.PopularityLevel].NeedXp && !_isMaxLevel) {
+                _data.PopularityXp -= _levels[_data.PopularityLevel].NeedXp;
                 NextLevel();
             }
         }
-        _data.PopularityXp = _nowXp;
-        XpChanged?.Invoke(_nowXp);
+        XpChanged?.Invoke(_data.PopularityXp);
     }
 
     public void RemoveXp(int xp)
     {
-        _nowXp = Mathf.Max(0, _nowXp - xp);
-        _data.PopularityXp = _nowXp;
-        XpChanged?.Invoke(_nowXp);
+        if (_data.PopularityLevel == 0)
+            _data.PopularityXp = Mathf.Max(0, _data.PopularityXp - xp);
+        else
+            _data.PopularityXp -= xp;
+
+        if (_data.PopularityXp < 0 && _data.PopularityLevel > 0) {
+            while (_data.PopularityXp < 0 && _data.PopularityLevel > 0) {
+                _data.PopularityXp += _levels[_data.PopularityLevel - 1].NeedXp;
+                PreviousLevel();
+            }
+        }
+        XpChanged?.Invoke(_data.PopularityXp);
     }
 
     public void NextLevel()
     {
-        _nowLevel++;
-        _data.PopularityLevel = _nowLevel;
-        LevelChanged?.Invoke(_levels[_nowLevel]);
+        _data.PopularityLevel++;
+        LevelChanged?.Invoke(_levels[_data.PopularityLevel]);
 
-        if (_levels.Length == _nowLevel + 1) {
+        if (_levels.Length == _data.PopularityLevel + 1) {
             _isMaxLevel = true;
         }
     }
 
     public void PreviousLevel()
     {
-        _nowLevel--;
-        _data.PopularityLevel = _nowLevel;
-        LevelChanged?.Invoke(_levels[_nowLevel]);
+        _data.PopularityLevel--;
+        LevelChanged?.Invoke(_levels[_data.PopularityLevel]);
         _isMaxLevel = false;
 
-        if (_nowXp >= _levels[_nowLevel].NeedXp) {
-            _nowXp = _levels[_nowLevel].NeedXp / 2;
-            _data.PopularityXp = _nowXp;
+        if (_data.PopularityXp >= _levels[_data.PopularityLevel].NeedXp) {
+            _data.PopularityXp = _levels[_data.PopularityLevel].NeedXp / 2;
         }
     }
 
@@ -75,8 +84,6 @@ public class PopularityManager : MonoBehaviour, IBindable<MainData>
     {
         _data = data;
         if (isFileEmpty) {
-            _data.PopularityXp = _nowXp;
-            _data.PopularityLevel = _nowLevel;
             LateStart();
             return;
         }

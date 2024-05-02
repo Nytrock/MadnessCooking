@@ -22,7 +22,7 @@ public class OrderRecipe : FoodRecipe<OrderRecipePart>
         for (int i = 0; i < ingredients.Size; i++) {
             var ingredientCount = ingredients.Get(i);
             if (ingredientCount.Ingredient == _spice && _isAutoSpice) {
-                _canCook &= MoneyManager.instance.MoneyAmount >= ingredientCount.Count * ingredientCount.Ingredient.Cost;
+                _canCook &= MoneyManager.instance.MoneyCount >= ingredientCount.Count * ingredientCount.Ingredient.Cost;
                 _recipeParts[i].SetupAutoSpice(ingredientCount.Ingredient, ingredientCount.Count);
             } else {
                 bool haveCount = _kitchenStorage.HaveCount(ingredientCount);

@@ -20,7 +20,7 @@ public class OrderRecipePart : ShopFoodRecipePart
         gameObject.SetActive(true);
         _icon.sprite = _moneySprite;
         _count.text = (spice.Cost * count).ToString() + "x";
-        if (MoneyManager.instance.MoneyAmount >= spice.Cost * count)
+        if (MoneyManager.instance.MoneyCount >= spice.Cost * count)
             _count.color = _haveColor;
         else
             _count.color = _dontHaveColor;

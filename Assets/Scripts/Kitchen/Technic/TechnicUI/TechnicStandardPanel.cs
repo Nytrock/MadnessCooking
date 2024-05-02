@@ -43,7 +43,7 @@ public class TechnicStandardPanel : TechnicPanel, IUpgradeable
         if (!_nowTechnic.IsCooking) {
             _repair.text = $"Repair - {technic.CostRepair}";
             _repairButton.interactable =
-                _nowTechnic.NowStrength != technic.Strength && MoneyManager.instance.MoneyAmount >= technic.CostRepair;
+                _nowTechnic.NowStrength != technic.Strength && MoneyManager.instance.MoneyCount >= technic.CostRepair;
         } else {
             _cookSlider.maxValue = _cooker.NeedTime;
         }

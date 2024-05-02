@@ -1,4 +1,4 @@
-public class FarmSlider : LocationSlider
+public class FarmSlider : LocationSlider<FarmData>
 {
     protected override void ChangeSliderValue()
     {

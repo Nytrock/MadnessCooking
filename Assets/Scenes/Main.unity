@@ -4941,10 +4941,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _UI: {fileID: 1303862258}
-  _cameraManager: {fileID: 713062802}
   _choiceButtonPool: {fileID: 1516808411}
   _submitButton: {fileID: 215982441}
   _choiceButtons: []
+  _cameraManager: {fileID: 0}
   _ingredientsManager: {fileID: 713062804}
   _styles:
   - BedType: {fileID: 11400000, guid: 80529c8439c585945b072b791ee2a6a4, type: 2}
@@ -8137,7 +8137,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7b972cbfa9050244ba3d09048b93ef9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cameraManager: {fileID: 713062802}
 --- !u!1 &271817406
 GameObject:
   m_ObjectHideFlags: 0
@@ -13946,11 +13945,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _UI: {fileID: 1745107314}
-  _cameraManager: {fileID: 713062802}
   _choiceButtonPool: {fileID: 974128615}
   _submitButton: {fileID: 789811624}
   _choiceButtons: []
   _description: {fileID: 1449719487}
+  _cameraManager: {fileID: 713062802}
   _bedTypesManager: {fileID: 713062803}
   _ingredientsRenderer: {fileID: 943958581}
 --- !u!222 &461820191
@@ -21603,6 +21602,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mainCamera: {fileID: 206361366}
   _locationManager: {fileID: 1560551276}
+  _locationSlider: {fileID: 269459661}
   _spaceManager: {fileID: 197975456}
   _cameraSpeed: 20
   _keyVelocity: 1
@@ -36083,11 +36083,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _UI: {fileID: 1481583148}
-  _cameraManager: {fileID: 713062802}
   _choiceButtonPool: {fileID: 558808508}
   _submitButton: {fileID: 1810792182}
   _choiceButtons: []
   _description: {fileID: 372516764}
+  _cameraManager: {fileID: 0}
   _manager: {fileID: 502661638}
 --- !u!222 &1183086015
 CanvasRenderer:
@@ -42717,7 +42717,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e51722e66efd73e49b3516636528d361, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moneyAmount: 1000
+  _moneyDefault: 1000
 --- !u!4 &1412654021
 Transform:
   m_ObjectHideFlags: 0
@@ -44675,7 +44675,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4aedf0822dc11b4592d3c5d83a2ff86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cameraManager: {fileID: 1832416033}
 --- !u!1 &1467619270
 GameObject:
   m_ObjectHideFlags: 0
@@ -51460,7 +51459,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2d0a0a2e6efa1240b1f1ab606cb1f37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bindableObjects: []
+  _bindableObjects:
+  - {fileID: 197975456}
 --- !u!1 &1704632488
 GameObject:
   m_ObjectHideFlags: 0
@@ -55461,6 +55461,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mainCamera: {fileID: 206361366}
   _locationManager: {fileID: 1560551276}
+  _locationSlider: {fileID: 1463500062}
   _spaceManager: {fileID: 1436171022}
   _cameraSpeed: 20
   _keyVelocity: 1

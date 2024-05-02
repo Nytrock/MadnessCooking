@@ -9,7 +9,6 @@ public class FatigueManager : MonoBehaviour, IBindable<MainData>
 
     [SerializeField] private float _fatigueMax;
     [SerializeField] private float _needHoursToRecovery;
-    private float _fatigueNow = 0;
     private float _decorBonus = 1;
     private float _sleepBonus;
 
@@ -17,7 +16,7 @@ public class FatigueManager : MonoBehaviour, IBindable<MainData>
     private MainData _data;
 
     public float FatigueMax => _fatigueMax;
-    public float FatigueNow => _fatigueNow;
+    public float FatigueNow => _data.Fatigue;
 
     public event Action<bool> TiredChanged;
 
@@ -34,17 +33,16 @@ public class FatigueManager : MonoBehaviour, IBindable<MainData>
     private void Update()
     {
         if (_timeManager.IsSleep) {
-            _fatigueNow = Mathf.Max(_fatigueNow - _sleepBonus, 0);
-            if (_fatigueNow == 0 && _isTired)
+            _data.Fatigue = Mathf.Max(_data.Fatigue - _sleepBonus, 0);
+            if (_data.Fatigue == 0 && _isTired)
                 ChangeTiredState(false);
         }
     }
 
     public void ChangeFatigue(float fatigueValue)
     {
-        _fatigueNow = Mathf.Clamp(_fatigueNow + fatigueValue / _decorBonus, 0, _fatigueMax);
-        _data.Fatigue = _fatigueNow;
-        if (_fatigueNow >= _fatigueMax)
+        _data.Fatigue = Mathf.Clamp(_data.Fatigue + fatigueValue / _decorBonus, 0, _fatigueMax);
+        if (_data.Fatigue >= _fatigueMax)
             ChangeTiredState(true);
     }
 
@@ -63,13 +61,6 @@ public class FatigueManager : MonoBehaviour, IBindable<MainData>
     public void Bind(MainData data, bool isFileEmpty)
     {
         _data = data;
-        if (isFileEmpty) {
-            _data.Fatigue = _fatigueNow;
-            LateStart();
-            return;
-        }
-
-        _fatigueNow = _data.Fatigue;
         LateStart();
     }
 }

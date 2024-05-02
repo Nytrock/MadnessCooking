@@ -18,7 +18,7 @@ public abstract class ChoiceBuyButton<T> : ChoiceButton<T> where T: BuyableObjec
         Item = item;
         _cost = item.Cost;
         _icon.sprite = Item.Icon;
-        CheckBuyable(MoneyManager.instance.MoneyAmount);
+        CheckBuyable(MoneyManager.instance.MoneyCount);
         _button.onClick.AddListener(
             delegate { ui.Choice(index, _isBuyable); }
         );

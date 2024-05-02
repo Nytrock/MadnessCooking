@@ -5,10 +5,10 @@ public class MoneyManager : MonoBehaviour, IBindable<MainData>
 {
     public static MoneyManager instance;
 
-    [SerializeField] private int _moneyAmount = 0;
+    [SerializeField] private int _moneyDefault;
     private MainData _data;
 
-    public int MoneyAmount => _moneyAmount;
+    public int MoneyCount => _data.MoneyCount;
 
     public event Action<int> MoneyChanged;
 
@@ -19,26 +19,23 @@ public class MoneyManager : MonoBehaviour, IBindable<MainData>
 
     private void LateStart()
     {
-        MoneyChanged?.Invoke(_moneyAmount);
+        MoneyChanged?.Invoke(_moneyDefault);
     }
 
     public void ChangeMoney(int changeValue)
     {
-        _moneyAmount += changeValue;
-        _data.MoneyAmount = _moneyAmount;
-        MoneyChanged?.Invoke(_moneyAmount);
+        if (_data.MoneyCount + changeValue < 0)
+            throw new ArgumentException("Incorrect value for changing money count.");
+
+        _data.MoneyCount += changeValue;
+        MoneyChanged?.Invoke(_data.MoneyCount);
     }
 
     public void Bind(MainData data, bool isFileEmpty)
     {
         _data = data;
-        if (isFileEmpty) {
-            data.MoneyAmount = _moneyAmount;
-            LateStart();
-            return;
-        }
-
-        _moneyAmount = data.MoneyAmount;
+        if (isFileEmpty)
+            data.MoneyCount = _moneyDefault;
         LateStart();
     }
 }

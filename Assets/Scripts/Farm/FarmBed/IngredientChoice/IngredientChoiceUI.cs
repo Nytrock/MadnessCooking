@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IngredientChoiceUI : ChoiceSimpleUI<Ingredient>
+public class IngredientChoiceUI : ChoiceSimpleWithCameraStopUI<Ingredient, FarmData>
 {
     [SerializeField] private IngredientsManager _ingredientsManager;
     [SerializeField] private IngredientChoiceStyle[] _styles;

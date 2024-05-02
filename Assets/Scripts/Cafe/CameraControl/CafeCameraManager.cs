@@ -1,7 +1,7 @@
 using UnityEngine;
 
 
-public class CafeCameraManager : CameraManager
+public class CafeCameraManager : CameraManager<CafeData>
 {
     private float _horizontalExtention;
 

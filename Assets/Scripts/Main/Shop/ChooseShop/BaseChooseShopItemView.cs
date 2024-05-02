@@ -41,7 +41,7 @@ public abstract class BaseChooseShopItemView : MonoBehaviour
     private void UpdateButton()
     {
         _buyButton.interactable = _itemToBuy != null 
-            && MoneyManager.instance.MoneyAmount >= _itemToBuy.Cost;
+            && MoneyManager.instance.MoneyCount >= _itemToBuy.Cost;
     }
 
     public virtual void BuyChosen()

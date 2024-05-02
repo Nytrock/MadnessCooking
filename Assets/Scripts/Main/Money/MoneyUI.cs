@@ -11,6 +11,6 @@ public class MoneyUI : CountRenderer
 
     private void Start()
     {
-        UpdateCount(_moneyManager.MoneyAmount);
+        UpdateCount(_moneyManager.MoneyCount);
     }
 }
