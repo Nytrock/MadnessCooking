@@ -27,17 +27,16 @@ public class BarnFridge : MonoBehaviour
 
     public void PutIngredient(Ingredient ingredient)
     {
-        var carSpace = _car.GetSpace();
-        if (carSpace == 0)
+        if (_car.LeftSpace == 0)
             return;
 
         if (ingredient == _milk) {
             FatigueManager.instance.ChangeFatigue(_milk.FatigueCount * _milkCount);
-            MoveToCar(carSpace, ref _milkCount, _milk);
+            MoveToCar(_car.LeftSpace, ref _milkCount, _milk);
             MilkChanged?.Invoke(_milkCount);
         } else if (ingredient == _flour) {
             FatigueManager.instance.ChangeFatigue(_flour.FatigueCount * _flourCount);
-            MoveToCar(carSpace, ref _flourCount, _flour);
+            MoveToCar(_car.LeftSpace, ref _flourCount, _flour);
             FlourChanged?.Invoke(_flourCount);
         } else {
             Debug.LogError("Unknown ingredient");

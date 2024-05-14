@@ -88,9 +88,8 @@ public class PopularityManager : MonoBehaviour, IBindable<GeneralData>
             return;
         }
 
-        int levelsCount = _data.PopularityLevel;
-        int xp  =_data.PopularityXp;
-        for (int i = 0; i < levelsCount; i++) {
+        int xp = _data.PopularityXp;
+        for (int i = 0; i < _data.PopularityLevel; i++) {
             AddXp(_levels[i].NeedXp);
         }
         AddXp(xp);

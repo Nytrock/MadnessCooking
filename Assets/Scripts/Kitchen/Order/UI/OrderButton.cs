@@ -15,14 +15,10 @@ public class OrderButton : MonoBehaviour
     [SerializeField] private OrderRecipe _recipe;
     [SerializeField] private Button _cookButton;
     
-    private Order _order;
     private OrdersUI _ordersUI;
     private OrderCookingSlider _cookSlider;
 
-    private void Start()
-    {
-        StartNewCycle();
-    }
+    public Order Order { get; private set; }
 
     public void StartNewCycle()
     {
@@ -35,30 +31,30 @@ public class OrderButton : MonoBehaviour
     public void StartSetup(Order order)
     {
         StartNewCycle();
-        _order = order;
-        _order.OrderFinished += FinishCook;
+        Order = order;
+        Order.OrderFinished += FinishCook;
 
-        _icon.sprite = _order.Food.Icon;
-        _title.text = _order.Food.Name;
-        _tableCount.text = _order.TableNumber.ToString();
+        _icon.sprite = Order.Food.Icon;
+        _title.text = Order.Food.Name;
+        _tableCount.text = Order.TableNumber.ToString();
 
-        _recipe.SetupRecipe(_order.Food, _ordersUI.IsAutoSpice);
+        _recipe.SetupRecipe(Order.Food, _ordersUI.IsAutoSpice);
         _cookButton.interactable = _recipe.CanCook;
     }
 
     public void UpdateRecipe()
     {
-        if (_order == null) return;
-        if (_order.IsCooking || _order.IsFinished) return;
+        if (Order == null) return;
+        if (Order.IsCooking || Order.IsFinished) return;
 
-        _recipe.SetupRecipe(_order.Food, _ordersUI.IsAutoSpice);
+        _recipe.SetupRecipe(Order.Food, _ordersUI.IsAutoSpice);
         _cookButton.interactable = _recipe.CanCook;
     }
 
     public void Disable()
     {
         _recipe.DisableParts();
-        _order = null;
+        Order = null;
         gameObject.SetActive(false);
     }
 
@@ -80,15 +76,18 @@ public class OrderButton : MonoBehaviour
         _startButton.SetActive(false);
         _recipe.DisableParts();
 
-        _order.StartCook();
-        _cookSlider.StartCook(_order);
-        _ordersUI.StartCook(_order);
+        Order.StartCook();
+        _cookSlider.StartCook(Order);
+        _ordersUI.StartCook(Order);
     }
 
     public void FinishCook()
     {
+        _startButton.SetActive(false);
+        _recipe.DisableParts();
+
         _cookingSlider.SetActive(false);
         _finishText.SetActive(true);
-        _order = null;
+        Order = null;
     }
 }

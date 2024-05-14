@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class KitchenStorage : IngredientStorage
+public class KitchenStorage : IngredientStorage<KitchenData>
 {
     [SerializeField] private Ingredient _lemon;
     public event Action IngredientsChanged;
@@ -35,5 +35,20 @@ public class KitchenStorage : IngredientStorage
     {
         _ingredients.Clear();
         IngredientsChanged?.Invoke();
+    }
+
+    public override void Bind(KitchenData data, bool isFileEmpty)
+    {
+        _data = data;
+        if (isFileEmpty)
+            _data.AvailableIngredients = _ingredients;
+
+        PutIngredients(_data.AvailableIngredients);
+        LateStart();
+    }
+
+    protected override void UpdateData()
+    {
+        _data.AvailableIngredients = _ingredients;
     }
 }

@@ -17,19 +17,18 @@ public class OrdersManager : MonoBehaviour
     public TechnicManager TechnicManager => _technicManager;
     public KitchenStorage KitchenStorage => _kitchenStorage;
 
-    public void SetNewOrder(Client client, CafeSpot spot)
+    public void SetNewOrder(Client client)
     {
         if (!_suitableStates.Contains(client.ClientData.State))
             return;
 
-        var order = new Order(client.ClientData.OrderFood, spot.Index + 1);
-        client.SetOrder(order);
+        var order = client.ClientData.Order;
         client.OrderActivated += AddOrder;
         client.ClientLeave += RemoveOrder;
         client.ClientEat += RemoveOrder;
         order.OrderFinished += client.CheckOrder;
 
-        if (client.ClientData.OrderActivated)
+        if (order.IsActivated)
             client.ActivateOrder();
     }
 
@@ -41,22 +40,24 @@ public class OrdersManager : MonoBehaviour
             Application.Quit();
         }
 
-        _orders.Add(client.Order);
-        OrderAdded?.Invoke(client.Order);
+        _orders.Add(client.ClientData.Order);
+        OrderAdded?.Invoke(client.ClientData.Order);
     }
 
     private void RemoveOrder(Client client)
     {
+        var order = client.ClientData.Order;
+
         client.OrderActivated -= AddOrder;
         client.ClientLeave -= RemoveOrder;
         client.ClientEat -= RemoveOrder;
 
-        if (GetOrderId(client.Order) == -1)
+        if (GetOrderId(order) == -1)
             return;
 
-        OrderRemoved?.Invoke(client.Order);
-        _technicManager.DisableTechnic(client.Order.Food.TypeTechnic);
-        _orders.Remove(client.Order);
+        OrderRemoved?.Invoke(order);
+        _technicManager.DisableTechnic(order.Food.TypeTechnic);
+        _orders.Remove(order);
     }
 
     public int GetOrderId(Order order)

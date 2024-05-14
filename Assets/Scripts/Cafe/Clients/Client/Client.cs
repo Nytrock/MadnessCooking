@@ -22,7 +22,6 @@ public class Client : MonoBehaviour
     public SerializableClient ClientData { get; private set; }
     public ClientsSpawner Spawner { get; private set; }
     public bool IsEatTimeShow { get; private set; }
-    public Order Order { get; private set; }
     public int SpotIndex { get; private set; }
     public int TableIndex { get; private set; }
 
@@ -91,7 +90,6 @@ public class Client : MonoBehaviour
         _skin.ChangeSortingLayer();
     }
 
-
     public virtual void Setup(ClientSettings settings)
     {
         Spawner = settings.Spawner;
@@ -113,21 +111,18 @@ public class Client : MonoBehaviour
             TakeSeat();
     }
 
-    public void SetOrder(Order order)
-    {
-        Order = order;
-    }
-
     public void ActivateOrder()
     {
-        ClientData.OrderActivated = true;
+        var order = ClientData.Order;
+        order.Activate();
+
         OrderActivated?.Invoke(this);
-        _clientUI.SetFood(Order.Food);
+        _clientUI.SetFood(order.Food);
     }
 
     public void CheckOrder()
     {
-        if (Order.IsFinished)
+        if (ClientData.Order.IsFinished)
             _clientUI.ActivateYesButton();
     }
 
@@ -139,10 +134,10 @@ public class Client : MonoBehaviour
 
     public virtual void Pay()
     {
+        int moneyToPay = ClientData.Order.Food.MoneyGet;
         if (ClientData.Type == ClientType.Rich)
-            MoneyManager.instance.ChangeMoney(Order.Food.MoneyGet * 100);
-        else
-            MoneyManager.instance.ChangeMoney(Order.Food.MoneyGet);
+            moneyToPay *= 100;
+        MoneyManager.instance.ChangeMoney(moneyToPay);
         Leave();
     }
 
@@ -168,7 +163,7 @@ public class Client : MonoBehaviour
 
     public virtual void Eat()
     {
-        ClientData.WaitTime = Order.Food.TimeToEat * UnityEngine.Random.Range(0.9f, 1.2f);
+        ClientData.WaitTime = ClientData.Order.Food.TimeToEat * UnityEngine.Random.Range(0.9f, 1.2f);
         ClientData.NowTime = 0;
         ClientData.State = ClientState.Eat;
         ChangeState(); 
@@ -189,7 +184,7 @@ public class Client : MonoBehaviour
     public void SetSpotTableFood()
     {
         var spot = Spawner.GetSpot(SpotIndex);
-        spot.SetTableFoodSprite(ClientData.OrderFood, TableIndex);
+        spot.SetTableFoodSprite(ClientData.Order.Food, TableIndex);
     }
 
     public void ResetSpotTableFood()

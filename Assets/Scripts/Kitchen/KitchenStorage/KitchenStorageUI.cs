@@ -1,5 +1,4 @@
-
-public class KitchenStorageUI : IngredientStorageUI
+public class KitchenStorageUI : IngredientStorageUI<KitchenData>
 {
 
 }

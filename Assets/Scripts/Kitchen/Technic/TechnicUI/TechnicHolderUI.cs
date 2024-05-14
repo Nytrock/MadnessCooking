@@ -31,7 +31,7 @@ public class TechnicHolderUI : MonoBehaviour
             _nowPanel.ChangeState();
         } else {
             _nowPanel.ChangeState(false);
-            if (technic.IsRepairing)
+            if (technic.TechnicData.IsRepairing)
                 _nowPanel = _repairPanel;
             else
                 _nowPanel = _standardPanel;
@@ -46,6 +46,7 @@ public class TechnicHolderUI : MonoBehaviour
 
     public void StartRepairTechnic()
     {
+        MoneyManager.instance.ChangeMoney(-_nowTechnic.Technic.CostRepair);
         _nowTechnic.StartRepair();
 
         _nowPanel.ChangeState(false);

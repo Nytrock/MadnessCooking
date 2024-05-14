@@ -145,14 +145,12 @@ public class FarmBed : MonoBehaviour
             return;
         }
 
-        var carSpace = _car.GetSpace();
-        if (carSpace == 0) {
+        if (_car.LeftSpace == 0)
             return;
-        }
 
-        if (carSpace < _count) {
-            _car.PutIngredient(new IngredientCount(_plantedIngredient, carSpace));
-            _count -= carSpace;
+        if (_car.LeftSpace < _count) {
+            _car.PutIngredient(new IngredientCount(_plantedIngredient, _car.LeftSpace));
+            _count -= _car.LeftSpace;
         } else {
             _car.PutIngredient(new IngredientCount(_plantedIngredient, _count));
             _count = 0;

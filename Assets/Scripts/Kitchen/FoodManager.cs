@@ -1,19 +1,27 @@
-using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
-public class FoodManager : MonoBehaviour
+public class FoodManager : MonoBehaviour, IBindable<KitchenData>
 {
-    [SerializeField] private List<Food> _availableFood = new();
+    [SerializeField] Food[] _defaultFood;
+    private KitchenData _data;
 
-    public int FoodCount => _availableFood.Count;
+    public int FoodCount => _data.AvailableFood.Count;
 
     public Food GetRandomFood()
     {
-        return _availableFood[Random.Range(0, _availableFood.Count)];
+        return _data.AvailableFood[Random.Range(0, FoodCount)];
     }
 
     public void AddFood(Food newFood)
     {
-        _availableFood.Add(newFood);
+        _data.AvailableFood.Add(newFood);
+    }
+
+    public void Bind(KitchenData data, bool isFileEmpty)
+    {
+        _data = data;
+        if (isFileEmpty)
+            _data.AvailableFood = _defaultFood.ToList();
     }
 }

@@ -1,12 +1,16 @@
 ﻿using System;
+using UnityEngine;
 
+[Serializable]
 public class Order
 {
-    private bool _isFinished;
-    private bool _isCooking;
-    private Food _food;
-    private int _tableNumber;
+    [SerializeField] private bool _isActivated;
+    [SerializeField] private bool _isFinished;
+    [SerializeField] private bool _isCooking;
+    [SerializeField] private Food _food;
+    [SerializeField] private int _tableNumber;
 
+    public bool IsActivated => _isActivated;
     public bool IsFinished => _isFinished;
     public bool IsCooking => _isCooking;
     public Food Food => _food;
@@ -30,5 +34,10 @@ public class Order
         _isCooking = false;
         _isFinished = true;
         OrderFinished?.Invoke();
+    }
+
+    public void Activate()
+    {
+        _isActivated = true;
     }
 }

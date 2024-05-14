@@ -11,15 +11,18 @@ public class IngredientCountList
 
     public int Size => _ingredientCounts.Count;
 
-    public void Add(IngredientCount ingredientCount)
+    public IngredientCount Add(IngredientCount ingredientCount)
     {
+        int index = Size;
         if (ContainsIngredient(ingredientCount)) {
-            var index = IndexOf(ingredientCount);
+            index = IndexOf(ingredientCount);
             _ingredientCounts[index].ChangeCount(ingredientCount.Count);
         } else {
             _ingredientCounts.Add(ingredientCount);
         }
+
         UpdateHaveIngredients();
+        return _ingredientCounts[index];
     }
 
     public void Remove(IngredientCount ingredientCount)

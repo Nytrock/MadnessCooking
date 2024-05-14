@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class IngredientStorageUI : MonoBehaviour
+public class IngredientStorageUI<T> : MonoBehaviour where T: ISaveable
 {
-    [SerializeField] protected IngredientStorage _storage;
+    [SerializeField] protected IngredientStorage<T> _storage;
     [SerializeField] protected GameObject _panel;
     [SerializeField] protected IngredientStorageButtonPool _buttonPool;
     [SerializeField] private TextMeshProUGUI _sizeRenderer;
@@ -13,7 +13,7 @@ public class IngredientStorageUI : MonoBehaviour
 
     protected virtual void Awake()
     {
-        _storage.ElementCountChanged += SetButton;
+        _storage.IngredientAdded += AddButton;
         _storage.MaxSizeChanged += UpdateMaxValue;
     }
 
@@ -27,16 +27,10 @@ public class IngredientStorageUI : MonoBehaviour
         _panel.SetActive(!_panel.activeSelf);
     }
 
-    public void SetButton(int index)
+    private void AddButton(IngredientCount count)
     {
-        var count = _storage.GetIngredientByIndex(index);
-        if (index == _buttons.Count) {
-            var button = _buttonPool.GetObject(count);
-            _buttons.Add(button);
-        } else {
-            _buttons[index].SetCount(count.Count);
-        }
-
+        var button = _buttonPool.GetObject(count);
+        _buttons.Add(button);
         UpdateSizeRenderer();
     }
 
@@ -53,7 +47,7 @@ public class IngredientStorageUI : MonoBehaviour
         if (_maxSize == -1 || _sizeRenderer == null)
             return;
 
-        var nowSize = _maxSize - _storage.GetSpace();
+        var nowSize = _maxSize - _storage.LeftSpace;
         _sizeRenderer.text = $"{nowSize}/{_maxSize}";
     }
 }

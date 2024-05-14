@@ -7,19 +7,15 @@ public class TechnicHolder : MonoBehaviour
     [SerializeField] private Transform _UITarget;
     private Animator _animator;
 
-    private bool _isCooking;
-    private bool _isRepairing;
-    private float _nowStrength;
+    private KitchenData _data;
     private Order _nowOrder;
 
-    private TechnicManager _manager;
     private TechnicCooker _cooker;
     private TechnicRepair _repair;
 
+    public SerializableTechnic TechnicData { get; private set; }
+
     public Technic Technic => _technic;
-    public bool IsCooking => _isCooking;
-    public bool IsRepairing => _isRepairing;
-    public float NowStrength => _nowStrength;
     public Transform UITarget => _UITarget;
 
     private void Awake()
@@ -27,31 +23,29 @@ public class TechnicHolder : MonoBehaviour
         _animator = GetComponent<Animator>();
         _cooker = GetComponent<TechnicCooker>();
         _repair = GetComponent<TechnicRepair>();
-        _nowStrength = _technic.Strength;
     }
 
-    public void Activate(TechnicManager technicManager)
+    public void ChangeState(bool newState)
     {
-        gameObject.SetActive(true);
-        _manager = technicManager;
+        gameObject.SetActive(newState);
     }
 
     public void StartCook(Order order)
     {
-        _isCooking = true;
-        _nowStrength = Mathf.Max(_nowStrength - Random.Range(1f, 2f) / _manager.TechnicStrength, 0);
+        TechnicData.IsCooking = true;
+        TechnicData.NowStrength = Mathf.Max(TechnicData.NowStrength - Random.Range(1f, 2f) / _data.TechnicStrength, 0);
         _animator.SetBool("isCooking", true);
 
         _nowOrder = order;
-        _cooker.StartWork(order.Food.TimeToCook / _manager.TechnicCookSpeed);
+        _cooker.StartWork(order.Food.TimeToCook / _data.TechnicCookSpeed);
     }
 
     public void StopCook()
     {
-        if (!_isCooking)
+        if (!TechnicData.IsCooking)
             return;
 
-        _isCooking = false;
+        TechnicData.IsCooking = false;
         _animator.SetBool("isCooking", false);
         _nowOrder.FinishCook();
         _nowOrder = null;
@@ -59,13 +53,38 @@ public class TechnicHolder : MonoBehaviour
 
     public void StartRepair()
     {
-        _isRepairing = true;
-        MoneyManager.instance.ChangeMoney(-_technic.CostRepair);
-        _repair.StartWork(_technic.TimeRepair / _manager.TechnicRepairSpeed);
+        TechnicData.IsRepairing = true;
+        _repair.StartWork(_technic.TimeRepair / _data.TechnicRepairSpeed);
     }
 
     public void StopRepair()
     {
-        _isRepairing = false;
+        TechnicData.IsRepairing = false;
+    }
+
+    public void Bind(KitchenData data, int index, bool isFileEmpty)
+    {
+        _data = data;
+
+        if (isFileEmpty) {
+            _data.AllTechnic[index] = new() {
+                NowStrength = _technic.Strength
+            };
+        }
+
+        TechnicData = _data.AllTechnic[index];
+        if (TechnicData.IsRepairing)
+            StartRepair();
+    }
+
+    public bool Accessible()
+    {
+        return !TechnicData.IsCooking && TechnicData.NowStrength != 0 && !TechnicData.IsRepairing;
+    }
+
+    public bool Repairable()
+    {
+        return TechnicData.NowStrength != _technic.Strength && 
+            MoneyManager.instance.MoneyCount >= _technic.CostRepair;
     }
 }

@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TechnicStandardPanel : TechnicPanel, IUpgradeable
+public class TechnicStandardPanel : TechnicPanel, IUpgradeable, IBindable<KitchenData>
 {
     [SerializeField] private Image _icon;
     [SerializeField] private TextMeshProUGUI _name;
@@ -10,24 +10,19 @@ public class TechnicStandardPanel : TechnicPanel, IUpgradeable
     [SerializeField] private Button _repairButton;
     [SerializeField] private Slider _cookSlider;
 
+    private KitchenData _data;
     private TechnicCooker _cooker;
 
     [Header("Upgrades")]
     [SerializeField] private BaseUpgrade _technicStrengthShow;
     [SerializeField] private Slider _strengthShower;
-    private bool _isStrengthShow;
-
-    private void Start()
-    {
-        ChangeStrengthShowState();
-    }
 
     public override void UpdatePanel()
     {
-        if (!_nowTechnic.IsCooking && _cookSlider.gameObject.activeSelf)
+        if (!_nowTechnic.TechnicData.IsCooking && _cookSlider.gameObject.activeSelf)
             UpdateInfo();
 
-        if (!_nowTechnic.IsCooking) return;
+        if (!_nowTechnic.TechnicData.IsCooking) return;
 
         _cookSlider.value = _cooker.NowTime;
     }
@@ -40,36 +35,41 @@ public class TechnicStandardPanel : TechnicPanel, IUpgradeable
         _name.text = technic.Name;
         UpdatePanels();
 
-        if (!_nowTechnic.IsCooking) {
+        if (!_nowTechnic.TechnicData.IsCooking) {
             _repair.text = $"Repair - {technic.CostRepair}";
-            _repairButton.interactable =
-                _nowTechnic.NowStrength != technic.Strength && MoneyManager.instance.MoneyCount >= technic.CostRepair;
+            _repairButton.interactable = _nowTechnic.Repairable();
         } else {
             _cookSlider.maxValue = _cooker.NeedTime;
         }
 
-        if (_isStrengthShow) {
+        if (_data.IsStrengthShow) {
             _strengthShower.maxValue = _nowTechnic.Technic.Strength;
-            _strengthShower.value = _nowTechnic.NowStrength;
+            _strengthShower.value = _nowTechnic.TechnicData.NowStrength;
         }
     }
 
     private void UpdatePanels()
     {
-        _repairButton.gameObject.SetActive(!_nowTechnic.IsCooking);
-        _cookSlider.gameObject.SetActive(_nowTechnic.IsCooking);
+        _repairButton.gameObject.SetActive(!_nowTechnic.TechnicData.IsCooking);
+        _cookSlider.gameObject.SetActive(_nowTechnic.TechnicData.IsCooking);
     }
 
     private void ChangeStrengthShowState()
     {
-        _strengthShower.gameObject.SetActive(_isStrengthShow);
+        _strengthShower.gameObject.SetActive(_data.IsStrengthShow);
     }
 
     public void CheckUpgrade(BaseUpgrade upgrade)
     {
         if (upgrade == _technicStrengthShow) {
-            _isStrengthShow = true;
+            _data.IsStrengthShow = true;
             ChangeStrengthShowState();
         }
+    }
+
+    public void Bind(KitchenData data, bool isFileEmpty)
+    {
+        _data = data;
+        ChangeStrengthShowState();
     }
 }

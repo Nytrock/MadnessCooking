@@ -4,8 +4,9 @@ public class TechnicRepair : TechnicWaiter
 {
     [SerializeField] private GameObject _repairSprite;
 
-    private void Start()
+    protected override void Awake()
     {
+        base.Awake();
         _repairSprite.SetActive(false);
     }
 

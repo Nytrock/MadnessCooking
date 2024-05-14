@@ -16,7 +16,7 @@ public class ClientWaitState : ClientBaseState
         _waitSlider = clientUI.WaitSlider;
         _waitSlider.maxValue = _clientData.WaitTime;
 
-        if (!_clientData.OrderActivated)
+        if (!_clientData.Order.IsActivated)
             client.OrderActivated += DecreaseWait;
     }
 

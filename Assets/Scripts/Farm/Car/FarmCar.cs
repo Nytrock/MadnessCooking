@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using UnityEngine;
 
-public class FarmCar : IngredientStorage, IUpgradeable
+public class FarmCar : IngredientStorage<FarmData>, IUpgradeable
 {
     [SerializeField] private Animator _animator;
 
@@ -10,6 +10,11 @@ public class FarmCar : IngredientStorage, IUpgradeable
     [SerializeField] private CountUpgrade[] _sizeUpgrades;
 
     public event Action CarReturned;
+
+    public override void Bind(FarmData data, bool isFileEmpty)
+    {
+        throw new NotImplementedException();
+    }
 
     public void CheckUpgrade(BaseUpgrade upgrade)
     {
@@ -31,5 +36,10 @@ public class FarmCar : IngredientStorage, IUpgradeable
     {
         _animator.SetBool("isLeave", false);
         CarReturned?.Invoke();
+    }
+
+    protected override void UpdateData()
+    {
+
     }
 }

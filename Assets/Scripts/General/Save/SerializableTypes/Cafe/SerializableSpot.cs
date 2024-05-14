@@ -21,6 +21,7 @@ public class SerializableSpot
 
     public void ClearClients()
     {
+        HaveClients = false;
         Clients = new SerializableClient[SeatsCount];
     }
 }

@@ -28,7 +28,7 @@ public class GroupClient : Client
 
     public override void Eat()
     {
-        _table.AddMoney(Order.Food.MoneyGet);
+        _table.AddMoney(ClientData.Order.Food.MoneyGet);
         _table.EndlessWait();
         base.Eat();
     }

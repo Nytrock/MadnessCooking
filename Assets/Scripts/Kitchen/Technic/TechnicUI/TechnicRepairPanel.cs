@@ -13,7 +13,7 @@ public class TechnicRepairPanel : TechnicPanel
 
     public override void UpdatePanel()
     {
-        if (!_nowTechnic.IsRepairing && enabled)
+        if (!_nowTechnic.TechnicData.IsRepairing && enabled)
             RepairEnded?.Invoke();
 
         _repairSlider.value = _repair.NowTime;

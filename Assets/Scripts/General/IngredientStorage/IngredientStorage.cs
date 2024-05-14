@@ -1,23 +1,22 @@
 using System;
 using UnityEngine;
 
-public class IngredientStorage : MonoBehaviour
+public abstract class IngredientStorage<T> : MonoBehaviour, IBindable<T> where T: ISaveable
 {
     [SerializeField] protected int _maxSize = 100;
-    protected IngredientCountList _ingredients = new();
+
+    protected IngredientCountList _ingredients;
+    protected T _data;
     protected int _nowSize = 0;
 
-    public event Action<int> ElementCountChanged;
+    public int LeftSpace => _maxSize - _nowSize;
+
+    public event Action<IngredientCount> IngredientAdded;
     public event Action<int> MaxSizeChanged;
 
-    private void Start()
+    protected void LateStart()
     {
         MaxSizeChanged?.Invoke(_maxSize);
-    }
-
-    public int GetSpace()
-    {
-        return _maxSize - _nowSize;
     }
 
     public virtual void PutIngredients(IngredientCountList newElementsList)
@@ -30,16 +29,19 @@ public class IngredientStorage : MonoBehaviour
     {
         if (_maxSize != -1)
             _nowSize += newElement.Count;
-        _ingredients.Add(newElement);
 
-        var index = _ingredients.IndexOf(newElement);
-        ElementCountChanged?.Invoke(index);
+        var addedElement = _ingredients.Add(newElement);
+        if (addedElement == newElement)
+            IngredientAdded?.Invoke(newElement);
+
+        UpdateData();
     }
 
     public virtual void RemoveIngredients(IngredientCountList countList)
     {
         for (int i = 0; i < countList.Size; i++)
             _ingredients.Remove(countList.Get(i));
+        UpdateData();
     }
 
     public IngredientCount GetIngredientByIndex(int index)
@@ -61,4 +63,7 @@ public class IngredientStorage : MonoBehaviour
     {
         MaxSizeChanged?.Invoke(_maxSize);
     }
+
+    public abstract void Bind(T data, bool isFileEmpty);
+    protected abstract void UpdateData();
 }

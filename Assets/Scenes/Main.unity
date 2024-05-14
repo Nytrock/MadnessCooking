@@ -18184,6 +18184,7 @@ GameObject:
   m_Component:
   - component: {fileID: 597507962}
   - component: {fileID: 597507963}
+  - component: {fileID: 597507964}
   m_Layer: 0
   m_Name: SaveManager
   m_TagString: Untagged
@@ -18228,6 +18229,19 @@ MonoBehaviour:
   _kitchenPart: {fileID: 1898106306}
   _farmPart: {fileID: 1704086921}
   _officePart: {fileID: 585237260}
+--- !u!114 &597507964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 597507961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94e1890894c1bb04cb8bf16effdf8473, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cursor: {fileID: 2800000, guid: b6f7b8cafd84953449b4e488c645b948, type: 3}
 --- !u!1 &599907145
 GameObject:
   m_ObjectHideFlags: 0
@@ -24787,7 +24801,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4412966a588bcd24bb3d62149cfa8cd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _availableFood:
+  _defaultFood:
   - {fileID: 11400000, guid: 6eeb62fd94072e542bf940359b8cbca0, type: 2}
 --- !u!114 &800858058
 MonoBehaviour:
@@ -39617,10 +39631,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1280892843}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bdb184a7fea72c541a31fd804340659a, type: 3}
+  m_Script: {fileID: 11500000, guid: 8e45915f0bb79d146a23bc09e5081851, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  decorHolders:
+  _decorHolders:
   - {fileID: 1548146671}
   - {fileID: 1736457558}
 --- !u!4 &1285210203 stripped
@@ -39820,7 +39834,7 @@ MonoBehaviour:
   - {fileID: 906710675}
   - {fileID: 1555909737}
   - {fileID: 1425203900}
-  _availableTechnic:
+  _defaultTechnic:
   - {fileID: 11400000, guid: 8fe5a1b5c2c60e04e8303266be891355, type: 2}
   _technicCookSpeedUps:
   - {fileID: 11400000, guid: 2a65908cd78c0474d8e496dc8c194e34, type: 2}
@@ -47396,12 +47410,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1543794857}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bdb184a7fea72c541a31fd804340659a, type: 3}
+  m_Script: {fileID: 11500000, guid: f0c82980fc47d7443823e692a427ed00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  decorHolders:
-  - {fileID: 1133440834}
+  _decorHolders:
   - {fileID: 10944526}
+  - {fileID: 1133440834}
 --- !u!1 &1548146669
 GameObject:
   m_ObjectHideFlags: 0
@@ -57725,7 +57739,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c439e8e39fe0144ba9cff9f969e4303, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bindableObjects: []
+  _bindableObjects:
+  - {fileID: 1297580539}
+  - {fileID: 397481016}
+  - {fileID: 1280892845}
+  - {fileID: 800858057}
+  - {fileID: 2098111177}
+  - {fileID: 1017138916}
 --- !u!1 &1899969124
 GameObject:
   m_ObjectHideFlags: 0

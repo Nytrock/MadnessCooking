@@ -1,17 +1,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OrdersUI : MonoBehaviour, IUpgradeable
+public class OrdersUI : MonoBehaviour, IUpgradeable, IBindable<KitchenData> 
 {
     [SerializeField] private OrdersManager _manager;
     [SerializeField] private OrdersPool _pool;
     [SerializeField] private GameObject _panel;
+
     private List<OrderButton> _orderButtons = new();
+    private KitchenData _data;
 
     [Header("Upgrades")]
     [SerializeField] private BaseUpgrade _autoSpice;
     [SerializeField] private Ingredient _spice;
-    public bool IsAutoSpice { get; private set; }
+
+    public bool IsAutoSpice => _data.IsAutoSpice;
 
     private void Awake()
     {
@@ -46,7 +49,7 @@ public class OrdersUI : MonoBehaviour, IUpgradeable
         _manager.StartCook(order);
         var ingredients = order.Food.Ingredients;
         for (int i = 0; i < ingredients.Size; i++) {
-            if (ingredients.Get(i).Ingredient == _spice && IsAutoSpice) {
+            if (ingredients.Get(i).Ingredient == _spice && _data.IsAutoSpice) {
                 MoneyManager.instance.ChangeMoney(-_spice.Cost * ingredients.Get(i).Count);
                 break;
             }
@@ -64,8 +67,19 @@ public class OrdersUI : MonoBehaviour, IUpgradeable
     public void CheckUpgrade(BaseUpgrade upgrade)
     {
         if (upgrade == _autoSpice) {
-            IsAutoSpice = true;
+            _data.IsAutoSpice = true;
             UpdateRecipes();
+        }
+    }
+
+    public void Bind(KitchenData data, bool isFileEmpty)
+    {
+        _data = data;
+        foreach (OrderButton button in _orderButtons) {
+            if (button.Order.IsCooking)
+                button.Cook();
+            else if (button.Order.IsFinished)
+                button.Order.FinishCook();
         }
     }
 }

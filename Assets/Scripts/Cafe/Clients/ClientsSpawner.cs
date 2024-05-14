@@ -62,15 +62,16 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable, IBindable<CafeData>
 
         var clientType = GetRandomType(clientCount);
         var spot = _spotManager.GetSpotByIndex(spotIndex);
+        Order order = new(_foodManager.GetRandomFood(), spotIndex + 1);
         if (clientCount != ClientCount.One) {
             for (int i = 0; i < spot.SeatsCount; i++) {
-                _data.Spots[spotIndex].Clients[i] = new SerializableClient(_spawnPoint.position, clientType,
-                    clientCount, waitMultiplier, _foodManager.GetRandomFood());
+                _data.Spots[spotIndex].Clients[i] = new SerializableClient(_spawnPoint.position,
+                    clientType, clientCount, waitMultiplier, order);
             }
             SpawnGroupOfClients(spot);
         } else {
-            _data.Spots[spotIndex].Clients[0] = new SerializableClient(_spawnPoint.position, clientType,
-                clientCount, waitMultiplier, _foodManager.GetRandomFood());
+            _data.Spots[spotIndex].Clients[0] = new SerializableClient(_spawnPoint.position, 
+                clientType, clientCount, waitMultiplier, order);
             Client client = SpawnOneClient(spotIndex);
             client.StartNewCycle();
         }
@@ -137,7 +138,6 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable, IBindable<CafeData>
 
 
         SerializableSpot spotData = _data.Spots[client.SpotIndex];
-        spotData.HaveClients = false;
         _data.LeavingClients.Add(spotData.Clients[0]);
         spotData.ClearClients();
         if (client.ClientData.State != ClientState.Eat)
@@ -156,7 +156,6 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable, IBindable<CafeData>
         _spotManager.ReturnSpot(spot.Index);
 
         SerializableSpot spotData = _data.Spots[spot.Index];
-        spotData.HaveClients = false;
         if (spot.SeatsCount > 1 && !_data.IsOpened) {
             if (spotData.GroupState == GroupClientState.Talk) {
                 for (int i = 0; i < spot.SeatsCount; i++) {
@@ -180,10 +179,10 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable, IBindable<CafeData>
     {
         _clients.Add(client);
         client.ChangeShowingTimeEat(_data.IsEatTimeShow);
-        var clientSettings = new ClientSettings(_data.Spots[spotIndex].Clients[tableIndex], 
-            spotIndex, tableIndex, this);
+        var clientData = _data.Spots[spotIndex].Clients[tableIndex];
+        var clientSettings = new ClientSettings(clientData, spotIndex, tableIndex, this);
         client.Setup(clientSettings);
-        _ordersManager.SetNewOrder(client, _spotManager.GetSpotByIndex(spotIndex));
+        _ordersManager.SetNewOrder(client);
         _cafeOpener.CafeChanged += client.Leave;
     }
 

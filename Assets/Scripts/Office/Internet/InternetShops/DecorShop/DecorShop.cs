@@ -7,8 +7,8 @@ public class DecorShop : BaseInstantShop
 {
     [SerializeField] private List<Decor> _decorToBuy;
     [SerializeField] private Decor _cat;
-    [SerializeField] private DecorManager _kitchenManager;
-    [SerializeField] private DecorManager _officeManager;
+    [SerializeField] private KitchenDecorManager _kitchenManager;
+    [SerializeField] private OfficeDecorManager _officeManager;
 
     public override Type Type => typeof(Decor);
 
