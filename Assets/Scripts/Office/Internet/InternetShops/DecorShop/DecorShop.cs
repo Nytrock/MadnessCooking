@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class DecorShop : BaseInstantShop
+public class DecorShop : BaseInstantShop, IBindable<OfficeData>
 {
     [SerializeField] private List<Decor> _decorToBuy;
     [SerializeField] private Decor _cat;
     [SerializeField] private KitchenDecorManager _kitchenManager;
     [SerializeField] private OfficeDecorManager _officeManager;
+    private OfficeData _data;
 
     public override Type Type => typeof(Decor);
 
@@ -40,6 +41,15 @@ public class DecorShop : BaseInstantShop
     protected override void SetObjectsArray()
     {
         _decorToBuy = _decorToBuy.OrderBy(x => x.Cost).ToList();
-        _itemsToBuy = _decorToBuy.ToArray();
+        _data.ShopDecor = _decorToBuy.ToArray();
+        _itemsToBuy = _data.ShopDecor;
+    }
+
+    public void Bind(OfficeData data, bool isFileEmpty)
+    {
+        _data = data;
+        if (!isFileEmpty)
+            _decorToBuy = _data.ShopDecor.ToList();
+        LateStart();
     }
 }

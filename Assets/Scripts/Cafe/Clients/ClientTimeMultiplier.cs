@@ -14,7 +14,7 @@ public class ClientTimeMultiplier : MonoBehaviour
 
     public float DaytimeMultiplier => _daytimeMultiplier;
 
-    private void Start()
+    private void Awake()
     {
         _timeManager.DaytimeChanged += ChangeMultiply;
     }

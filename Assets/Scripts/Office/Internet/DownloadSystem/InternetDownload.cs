@@ -2,7 +2,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InternetDownload : MonoBehaviour, IUpgradeable
+public class InternetDownload : MonoBehaviour, IUpgradeable, IBindable<OfficeData>
 {
     [SerializeField] private GameObject _panel;
     [SerializeField] private Slider _downloadBar;
@@ -13,15 +13,14 @@ public class InternetDownload : MonoBehaviour, IUpgradeable
 
     [Header("Upgrades")]
     [SerializeField] private GraphUpgrade[] _speedUpgrades;
-    private float _speed = 1;
-    private bool _isInstant;
 
     private float _nowProgress;
     private float _needProgress;
     private bool _isDownloading;
     private BaseShop _shop;
+    private OfficeData _data;
 
-    private void Start()
+    private void LateStart()
     {
         ChangeState(false);
     }
@@ -32,7 +31,7 @@ public class InternetDownload : MonoBehaviour, IUpgradeable
             return;
 
         if (_nowProgress < _needProgress)
-            _nowProgress += Time.deltaTime * _speed;
+            _nowProgress += Time.deltaTime * _data.InternetDownloadSpeed;
         else
             EndDownload();
         _downloadBar.value = _nowProgress;
@@ -45,7 +44,7 @@ public class InternetDownload : MonoBehaviour, IUpgradeable
 
     public void StartDownload(BaseShop openingShop)
     {
-        if (_isInstant) {
+        if (_data.IsInternetDownloadInstant) {
             openingShop.ChangeShopState(true);
             return;
         }
@@ -71,10 +70,16 @@ public class InternetDownload : MonoBehaviour, IUpgradeable
         if (_speedUpgrades.Contains(upgrade)) {
             var coefUpgrade = upgrade as CoefficientUpgrade;
             if (coefUpgrade != null) {
-                _speed = coefUpgrade.Coefficient;
+                _data.InternetDownloadSpeed = coefUpgrade.Coefficient;
             } else {
-                _isInstant = true;
+                _data.IsInternetDownloadInstant = true;
             }
         }
+    }
+
+    public void Bind(OfficeData data, bool isFileEmpty)
+    {
+        _data = data;
+        LateStart();
     }
 }

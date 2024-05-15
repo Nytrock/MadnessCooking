@@ -9,11 +9,9 @@ public class OfficeBedUI : MonoBehaviour
     [SerializeField] private string _isSleepText;
     [SerializeField] private string _notSleepText;
 
-    private void Start()
+    public void LateStart(bool isSleep)
     {
-        _panel.SetActive(false);
-        _blockPanel.SetActive(false);
-        _sleepButtonText.text = _notSleepText;
+        _panel.SetActive(isSleep);
     }
 
     public void ChangeState()
@@ -21,7 +19,7 @@ public class OfficeBedUI : MonoBehaviour
         _panel.SetActive(!_panel.activeSelf);
     }
 
-    public void ChangeButtonText(bool isSleep)
+    public void UpdateSleepState(bool isSleep)
     {
         _blockPanel.SetActive(isSleep);
         if (isSleep)

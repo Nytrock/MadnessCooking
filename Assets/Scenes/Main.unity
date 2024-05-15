@@ -11764,6 +11764,7 @@ GameObject:
   m_Component:
   - component: {fileID: 397481015}
   - component: {fileID: 397481016}
+  - component: {fileID: 397481017}
   m_Layer: 0
   m_Name: KitchenStorage
   m_TagString: Untagged
@@ -11802,6 +11803,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxSize: -1
   _lemon: {fileID: 11400000, guid: 897523a5d3e8cc843a91257d85a26f6b, type: 2}
+--- !u!114 &397481017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 397481014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1722a349257634429b5318bd4db4e57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _decor: {fileID: 11400000, guid: f42d7dff24558264daa25b93e840da08, type: 2}
+  _boxStorage: {fileID: 122629942}
+  _fridgeStorage: {fileID: 2055364991}
 --- !u!1 &402293157
 GameObject:
   m_ObjectHideFlags: 0
@@ -18023,7 +18039,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7549a3856f307e847b28fa9ce188bea5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bindableObjects: []
+  _bindableObjects:
+  - {fileID: 1543794859}
+  - {fileID: 442335472}
+  - {fileID: 1989249264}
+  - {fileID: 1475506784}
+  - {fileID: 1452928099}
+  - {fileID: 138484172}
+  - {fileID: 768940555}
+  - {fileID: 1618414360}
 --- !u!1 &590866773
 GameObject:
   m_ObjectHideFlags: 0
@@ -33706,7 +33730,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _defaultTimeSpeed: 1
-  _sleepTimeSpeed: 100
+  _sleepTimeSpeed: 70
   _daytimeStarts:
   - _daytime: 0
     _startHour: 7
@@ -39637,6 +39661,7 @@ MonoBehaviour:
   _decorHolders:
   - {fileID: 1548146671}
   - {fileID: 1736457558}
+  - {fileID: 397481017}
 --- !u!4 &1285210203 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4385878464212479976, guid: 918a4e1a36873124e86381570b9b1ef0, type: 3}
@@ -42731,7 +42756,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e51722e66efd73e49b3516636528d361, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moneyDefault: 1000
+  _moneyDefault: 1000000
 --- !u!4 &1412654021
 Transform:
   m_ObjectHideFlags: 0
@@ -63415,7 +63440,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hoverListener: {fileID: 1234881540}
-  _kitchenStorage: {fileID: 0}
+  _kitchenStorage: {fileID: 810907697}
 --- !u!61 &2055364995
 BoxCollider2D:
   m_ObjectHideFlags: 0

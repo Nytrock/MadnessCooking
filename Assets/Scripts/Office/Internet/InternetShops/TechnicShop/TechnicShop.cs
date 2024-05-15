@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class TechnicShop : BaseInstantShop
+public class TechnicShop : BaseInstantShop, IBindable<OfficeData>
 {
     [SerializeField] private List<Technic> _technicToBuy;
     [SerializeField] private TechnicManager _technicManager;
+    private OfficeData _data;
 
     public override Type Type => typeof(Technic);
 
@@ -28,6 +29,15 @@ public class TechnicShop : BaseInstantShop
     protected override void SetObjectsArray()
     {
         _technicToBuy = _technicToBuy.OrderBy(x => x.Cost).ToList();
-        _itemsToBuy = _technicToBuy.ToArray();
+        _data.ShopTechnic = _technicToBuy.ToArray();
+        _itemsToBuy = _data.ShopTechnic;
+    }
+
+    public void Bind(OfficeData data, bool isFileEmpty)
+    {
+        _data = data;
+        if (!isFileEmpty)
+            _technicToBuy = _data.ShopTechnic.ToList();
+        LateStart();
     }
 }

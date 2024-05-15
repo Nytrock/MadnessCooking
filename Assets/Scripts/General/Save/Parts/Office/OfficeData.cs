@@ -5,4 +5,13 @@ using System.Collections.Generic;
 public class OfficeData : ISaveable
 {
     public List<Decor> HaveDecor;
+    public bool IsSleeping;
+    public float InternetDownloadSpeed = 1;
+    public bool IsInternetDownloadInstant;
+
+    public Ingredient[] ShopIngredients;
+    public Technic[] ShopTechnic;
+    public Food[] ShopFood;
+    public Decor[] ShopDecor;
+    public BaseUpgrade[] ShopUpgrades;
 }

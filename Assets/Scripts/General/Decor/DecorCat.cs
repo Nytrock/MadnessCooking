@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 [RequireComponent(typeof(BoxCollider2D))]
 public class DecorCat : DecorHolder

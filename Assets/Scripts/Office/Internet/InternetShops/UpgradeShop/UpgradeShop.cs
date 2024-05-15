@@ -1,12 +1,14 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
-public class UpgradeShop : BaseInstantShop
+public class UpgradeShop : BaseInstantShop, IBindable<OfficeData>
 {
     [SerializeField] private UpgradeManager _upgradeManager;
     [SerializeField] private List<BaseUpgrade> _upgradesToBuy;
     private List<BaseUpgrade> _haveUpgrades = new();
+    private OfficeData _data;
 
     public override Type Type => typeof(BaseUpgrade);
 
@@ -61,6 +63,15 @@ public class UpgradeShop : BaseInstantShop
 
     protected override void SetObjectsArray()
     {
-        _itemsToBuy = _upgradesToBuy.ToArray();
+        _data.ShopUpgrades = _upgradesToBuy.ToArray();
+        _itemsToBuy = _data.ShopUpgrades;
+    }
+
+    public void Bind(OfficeData data, bool isFileEmpty)
+    {
+        _data = data;
+        if (!isFileEmpty)
+            _upgradesToBuy = _data.ShopUpgrades.ToList();
+        LateStart();
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class IngredientShop : BaseInstantShop, IUpgradeable
+public class IngredientShop : BaseInstantShop, IUpgradeable, IBindable<OfficeData>
 {
     [SerializeField] private List<Ingredient> _ingredientsToBuy;
     [SerializeField] private IngredientsManager _ingredientsManager;
@@ -13,6 +13,8 @@ public class IngredientShop : BaseInstantShop, IUpgradeable
     [Header("Upgrades")]
     [SerializeField] private Ingredient _spice;
     [SerializeField] private BaseUpgrade _spiceAutoBuy;
+
+    private OfficeData _data;
 
     public BedTypesManager BedTypesManager => _bedTypesManager;
     public override Type Type => typeof(Ingredient);
@@ -52,6 +54,15 @@ public class IngredientShop : BaseInstantShop, IUpgradeable
     {
         _ingredientsToBuy = _ingredientsToBuy.OrderBy(x => 
         (x.Type != IngredientType.Buyable, x.Cost)).ToList();
-        _itemsToBuy = _ingredientsToBuy.ToArray();
+        _data.ShopIngredients = _ingredientsToBuy.ToArray();
+        _itemsToBuy = _data.ShopIngredients;
+    }
+
+    public void Bind(OfficeData data, bool isFileEmpty)
+    {
+        _data = data;
+        if (!isFileEmpty)
+            _ingredientsToBuy = _data.ShopIngredients.ToList();
+        LateStart();
     }
 }
