@@ -11,18 +11,20 @@ public class IngredientCountList
 
     public int Size => _ingredientCounts.Count;
 
-    public IngredientCount Add(IngredientCount ingredientCount)
+    public void Add(IngredientCount ingredientCount)
     {
-        int index = Size;
-        if (ContainsIngredient(ingredientCount)) {
-            index = IndexOf(ingredientCount);
-            _ingredientCounts[index].ChangeCount(ingredientCount.Count);
-        } else {
+        if (ContainsIngredient(ingredientCount))
+            _ingredientCounts[IndexOf(ingredientCount)].ChangeCount(ingredientCount.Count);
+        else
             _ingredientCounts.Add(ingredientCount);
-        }
 
         UpdateHaveIngredients();
-        return _ingredientCounts[index];
+    }
+
+    public void Extend(IngredientCountList ingredientCount)
+    {
+        foreach (var item in ingredientCount)
+            Add(item);
     }
 
     public void Remove(IngredientCount ingredientCount)
@@ -71,11 +73,10 @@ public class IngredientCountList
         _haveIngredients.Clear();
     }
 
-    public IngredientCountList Copy()
+    public IEnumerator<IngredientCount> GetEnumerator()
     {
-        var result = new IngredientCountList();
-        foreach (var count in  _ingredientCounts)
-            result.Add(count);
-        return result;
+        foreach (var count in _ingredientCounts)
+            yield return count;
+        yield break;
     }
 }

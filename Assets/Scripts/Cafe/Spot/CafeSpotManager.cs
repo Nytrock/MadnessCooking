@@ -7,6 +7,7 @@ public class CafeSpotManager : MonoBehaviour, IBindable<CafeData>
     [SerializeField] private CafeSpaceManager _spaceManager;
     [SerializeField] private CafeOpener _opener;
     [SerializeField] private CafeSpot[] _spotPrefabs;
+
     private List<CafeSpot> _spots = new();
     private readonly List<List<int>> _freeSpots = new(4);
     private float _cellSize;
@@ -16,7 +17,7 @@ public class CafeSpotManager : MonoBehaviour, IBindable<CafeData>
 
     private void LateStart()
     {
-        _cellSize = _spaceManager.SpaceSize / 2f;
+        _cellSize = _spaceManager.SpaceData.SpaceSize / 2f;
         GenerateSpots();
         GenerateFreeSpotsList();
     }
@@ -139,7 +140,7 @@ public class CafeSpotManager : MonoBehaviour, IBindable<CafeData>
 
     public int GetFreeSpace()
     {
-        int freeSpace = _spaceManager.SpaceCount * 2;
+        int freeSpace = _spaceManager.SpaceData.Count * 2;
         foreach (var spot in _spots)
             freeSpace -= spot.SeatsCount;
         return freeSpace;

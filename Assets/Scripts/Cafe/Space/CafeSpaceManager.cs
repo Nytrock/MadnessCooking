@@ -2,16 +2,18 @@ using UnityEngine;
 
 public class CafeSpaceManager : SpaceManager<CafeData>
 {
-    protected override void AddSpace(float size, int index)
+    protected override void AddSpace(int index)
     {
         var space = Instantiate(_spacePrefab, _spaceContainer);
-        space.transform.position += new Vector3(size * index, 0, 0);
+        space.transform.position += new Vector3(SpaceData.SpaceSize * index, 0, 0);
+        InvokeSpaceAdded();
     }
 
-    protected override void UpdateData(bool isFileEmpty)
+    protected override void BindData(bool isFileEmpty)
     {
+        SpaceData = _data.Space;
         if (isFileEmpty)
-            _data.SpaceCount = _defaultSpaceCount;
-        _spaceCount = _data.SpaceCount;
+            SpaceData.Count = _defaultSpaceCount;
+        SpaceData.SpaceSize = _spacePrefab.Size;
     }
 }

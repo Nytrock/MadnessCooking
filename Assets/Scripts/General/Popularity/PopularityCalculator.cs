@@ -29,7 +29,7 @@ public class PopularityCalculator : MonoBehaviour
     {
         return _nowLevel.PopularityMultiplier * 
             _timeMultiplier.DaytimeMultiplier * 
-            (1 + _spaceManager.SpaceCount * _oneCafeSpaceMultiplier) * 
+            (1 + _spaceManager.SpaceData.Count * _oneCafeSpaceMultiplier) * 
             (1 + _foodManager.FoodCount * _oneFoodMultiplier);
     }
 
@@ -45,5 +45,5 @@ public class PopularityCalculator : MonoBehaviour
         quarterChance += tripleChance;
     }
 
-    public float GetSpaceMultiplier() => Mathf.Max(1, _spaceManager.SpaceCount * 0.375f);
+    public float GetSpaceMultiplier() => Mathf.Max(1, _spaceManager.SpaceData.Count * 0.375f);
 }

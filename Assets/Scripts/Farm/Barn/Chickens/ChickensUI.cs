@@ -14,7 +14,6 @@ public class ChickensUI : MonoBehaviour
     private void Awake()
     {
         _countRenderer.SetChickens(_chickens);
-        _chickens.EggChanged += UpdateEggCount;
         _chickens.FoodCountChanged += UpdateFoodCount;
     }
 
@@ -27,18 +26,14 @@ public class ChickensUI : MonoBehaviour
 
     private void Update()
     {
-        _eggSlider.value = _chickens.NowTime;
-        _eggSlider.gameObject.SetActive(_chickens.IsFeed);
-    }
-
-    private void UpdateEggCount()
-    {
-        _eggRenderer.SetCount(_chickens.EggCount);
+        _eggSlider.value = _chickens.Data.NowTime;
+        _eggSlider.gameObject.SetActive(_chickens.Data.IsFeed);
+        _eggRenderer.SetCount(_chickens.Data.EggCount);
     }
 
     private void UpdateFoodCount()
     {
-        _feedButton.interactable = _chickens.FoodCount > 0 || _chickens.IsInfiniteFood;
+        _feedButton.interactable = _chickens.Data.FoodCount > 0 || _chickens.Data.IsInfiniteFood;
         _countRenderer.UpdateFoodCount();
     }
 

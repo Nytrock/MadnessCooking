@@ -17,12 +17,12 @@ public class ChickensFoodCountRenderer : MonoBehaviour
 
     public void UpdateFoodCount()
     {
-        if (_chickens.IsInfiniteFood) {
+        if (_chickens.Data.IsInfiniteFood) {
             _icon.sprite = _infiniteFood.Icon;
             _count.text = "";
         } else {
             _icon.sprite = _food.Icon;
-            _count.text = "x" + _chickens.FoodCount.ToString();
+            _count.text = "x" + _chickens.Data.FoodCount.ToString();
         }
     }
 }

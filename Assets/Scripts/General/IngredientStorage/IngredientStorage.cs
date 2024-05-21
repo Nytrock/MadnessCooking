@@ -3,21 +3,11 @@ using UnityEngine;
 
 public abstract class IngredientStorage<T> : MonoBehaviour, IBindable<T> where T: ISaveable
 {
-    [SerializeField] protected int _maxSize = 100;
+    [SerializeField] protected int _defaultMaxSpace = 100;
 
-    protected IngredientCountList _ingredients;
-    protected T _data;
-    protected int _nowSize = 0;
-
-    public int LeftSpace => _maxSize - _nowSize;
+    public SerializableIngredientStorage Data { get; protected set; }
 
     public event Action<IngredientCount> IngredientAdded;
-    public event Action<int> MaxSizeChanged;
-
-    protected void LateStart()
-    {
-        MaxSizeChanged?.Invoke(_maxSize);
-    }
 
     public virtual void PutIngredients(IngredientCountList newElementsList)
     {
@@ -27,43 +17,29 @@ public abstract class IngredientStorage<T> : MonoBehaviour, IBindable<T> where T
 
     public virtual void PutIngredient(IngredientCount newElement)
     {
-        if (_maxSize != -1)
-            _nowSize += newElement.Count;
+        if (!Data.TryAddCount(newElement.Count))
+            Debug.LogError("Too big count");
 
-        var addedElement = _ingredients.Add(newElement);
-        if (addedElement == newElement)
+        var oldSize = Data.Ingredients.Size;
+        Data.Ingredients.Add(newElement);
+        if (Data.Ingredients.Size != oldSize)
             IngredientAdded?.Invoke(newElement);
-
-        UpdateData();
     }
 
     public virtual void RemoveIngredients(IngredientCountList countList)
     {
         for (int i = 0; i < countList.Size; i++)
-            _ingredients.Remove(countList.Get(i));
-        UpdateData();
-    }
-
-    public IngredientCount GetIngredientByIndex(int index)
-    {
-        return _ingredients.Get(index);
-    }
-
-    public IngredientCountList GetList()
-    {
-        return _ingredients.Copy();
+            Data.Ingredients.Remove(countList.Get(i));
     }
 
     public bool HaveCount(IngredientCount count)
     {
-        return _ingredients.ContainsCount(count);
+        return Data.Ingredients.ContainsCount(count);
     }
 
-    protected void InvokeSizeChange()
+    public virtual void Bind(T data, bool isFileEmpty)
     {
-        MaxSizeChanged?.Invoke(_maxSize);
+        foreach (var item in Data.Ingredients)
+            IngredientAdded?.Invoke(item);
     }
-
-    public abstract void Bind(T data, bool isFileEmpty);
-    protected abstract void UpdateData();
 }

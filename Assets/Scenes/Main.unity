@@ -3186,7 +3186,7 @@ GameObject:
   - component: {fileID: 93621977}
   - component: {fileID: 93621978}
   m_Layer: 0
-  m_Name: Well
+  m_Name: WellUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4944,8 +4944,8 @@ MonoBehaviour:
   _choiceButtonPool: {fileID: 1516808411}
   _submitButton: {fileID: 215982441}
   _choiceButtons: []
-  _cameraManager: {fileID: 0}
-  _ingredientsManager: {fileID: 713062804}
+  _cameraManager: {fileID: 713062802}
+  _ingredientsManager: {fileID: 917452951}
   _styles:
   - BedType: {fileID: 11400000, guid: 80529c8439c585945b072b791ee2a6a4, type: 2}
     Panel: {fileID: 119440057}
@@ -6206,6 +6206,8 @@ MonoBehaviour:
     _bedChoiceUI: {fileID: 461820189}
     _wheatManager: {fileID: 590866774}
     _car: {fileID: 1090935202}
+  _autoWheatUpgrade: {fileID: 11400000, guid: f70f6b07b4f13e241bb07edeeff27664, type: 2}
+  _growStatusShowUpgrade: {fileID: 11400000, guid: a4d51e622ef1ec247afd10ec64670ee0, type: 2}
 --- !u!4 &197975457
 Transform:
   m_ObjectHideFlags: 0
@@ -11801,7 +11803,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c16149ae9b957047a704d5adbb42fb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxSize: -1
+  _defaultMaxSpace: 100
   _lemon: {fileID: 11400000, guid: 897523a5d3e8cc843a91257d85a26f6b, type: 2}
 --- !u!114 &397481017
 MonoBehaviour:
@@ -13966,7 +13968,7 @@ MonoBehaviour:
   _choiceButtons: []
   _description: {fileID: 1449719487}
   _cameraManager: {fileID: 713062802}
-  _bedTypesManager: {fileID: 713062803}
+  _bedTypesManager: {fileID: 585307979}
   _ingredientsRenderer: {fileID: 943958581}
 --- !u!222 &461820191
 CanvasRenderer:
@@ -15374,7 +15376,7 @@ MonoBehaviour:
   _allUpgrades:
   - {fileID: 11400000, guid: d1350d47e88b0904ab9c25e62685c672, type: 2}
   - {fileID: 11400000, guid: fefc1b67be3a6d74f8840576d177f83d, type: 2}
-  - {fileID: 11400000, guid: 5b1327ad379db714290d5dc898998f0b, type: 2}
+  - {fileID: 11400000, guid: 530cee437fcaef5438c2d8bd8a8c334e, type: 2}
   - {fileID: 11400000, guid: 7e3142bdddde499469effe9504e38213, type: 2}
   - {fileID: 11400000, guid: 9d724893fc0f3074f8338d2c964755f5, type: 2}
 --- !u!1 &503378731
@@ -18048,6 +18050,63 @@ MonoBehaviour:
   - {fileID: 138484172}
   - {fileID: 768940555}
   - {fileID: 1618414360}
+--- !u!1 &585307978
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 585307980}
+  - component: {fileID: 585307979}
+  m_Layer: 0
+  m_Name: BedTypesManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &585307979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 585307978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb7a680bc967afe458b6b548e086c541, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _allBeds:
+  - {fileID: 11400000, guid: 80529c8439c585945b072b791ee2a6a4, type: 2}
+  - {fileID: 11400000, guid: f9538ea17e1133f4090ea83b5e0827bb, type: 2}
+  - {fileID: 11400000, guid: 2e37d524597e5d2499cc7a496f717a91, type: 2}
+  - {fileID: 11400000, guid: 3627450b9a024af45a0e4f14c3308c09, type: 2}
+  - {fileID: 11400000, guid: 7e3fc35901153c8499d08566fb3e07cf, type: 2}
+  _defaultBeds:
+  - {fileID: 11400000, guid: 80529c8439c585945b072b791ee2a6a4, type: 2}
+  _bedsUpgrades:
+  - {fileID: 11400000, guid: 41c5dc56c0ea776468098bbfca8b0d8b, type: 2}
+  - {fileID: 11400000, guid: 9b73285b9270c0b4895b5e9dff90b061, type: 2}
+  - {fileID: 11400000, guid: af5109db3acb3314eab0b103a8ae3ea9, type: 2}
+  - {fileID: 11400000, guid: a1946ecabb08c9544afbe6969de562ae, type: 2}
+--- !u!4 &585307980
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 585307978}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 713062800}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &590866773
 GameObject:
   m_ObjectHideFlags: 0
@@ -21597,8 +21656,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 713062800}
-  - component: {fileID: 713062803}
-  - component: {fileID: 713062804}
   - component: {fileID: 713062802}
   m_Layer: 0
   m_Name: Farm
@@ -21620,6 +21677,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 917452952}
+  - {fileID: 585307980}
   - {fileID: 1086958102}
   - {fileID: 1021116376}
   - {fileID: 502661637}
@@ -21646,64 +21705,6 @@ MonoBehaviour:
   _keyVelocity: 1
   _mouseVelocity: 6
   _speedFading: 2
---- !u!114 &713062803
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 713062799}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb7a680bc967afe458b6b548e086c541, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _allBeds:
-  - {fileID: 11400000, guid: 80529c8439c585945b072b791ee2a6a4, type: 2}
-  - {fileID: 11400000, guid: f9538ea17e1133f4090ea83b5e0827bb, type: 2}
-  - {fileID: 11400000, guid: 2e37d524597e5d2499cc7a496f717a91, type: 2}
-  - {fileID: 11400000, guid: 3627450b9a024af45a0e4f14c3308c09, type: 2}
-  - {fileID: 11400000, guid: 7e3fc35901153c8499d08566fb3e07cf, type: 2}
-  _haveBeds:
-  - {fileID: 11400000, guid: 80529c8439c585945b072b791ee2a6a4, type: 2}
-  _bedsUpgrades:
-  - {fileID: 11400000, guid: 41c5dc56c0ea776468098bbfca8b0d8b, type: 2}
-  - {fileID: 11400000, guid: 9b73285b9270c0b4895b5e9dff90b061, type: 2}
-  - {fileID: 11400000, guid: af5109db3acb3314eab0b103a8ae3ea9, type: 2}
-  - {fileID: 11400000, guid: a1946ecabb08c9544afbe6969de562ae, type: 2}
---- !u!114 &713062804
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 713062799}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6db5004f15b939048ab717a37821b90f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _allIngredients:
-  - {fileID: 11400000, guid: 552016a33cc72bb44b4eb6addf12b2f4, type: 2}
-  - {fileID: 11400000, guid: 897523a5d3e8cc843a91257d85a26f6b, type: 2}
-  - {fileID: 11400000, guid: 6f9766473f0cee440b6ecadbc52a9a0b, type: 2}
-  - {fileID: 11400000, guid: ecf0fd20f8efd89418aba1c84c5eae73, type: 2}
-  - {fileID: 11400000, guid: b6acdd96a3df47242adb35216986550f, type: 2}
-  - {fileID: 11400000, guid: 78d7c77369aa8f64d996e81e9461096f, type: 2}
-  - {fileID: 11400000, guid: 97a001c1ddc2c9d449c27a2cdba8ab4b, type: 2}
-  - {fileID: 11400000, guid: 130ec19d25206d049806ab10bdfe35c5, type: 2}
-  - {fileID: 11400000, guid: 7755e9f6a50793a45afe949b36406069, type: 2}
-  - {fileID: 11400000, guid: 69a4d0ca41f89d34ebe35ac5ce8ff220, type: 2}
-  - {fileID: 11400000, guid: 72a975fb0e4957047b8160771602c871, type: 2}
-  - {fileID: 11400000, guid: ced1e3d4268a7b948b73cd6807c188ef, type: 2}
-  - {fileID: 11400000, guid: 521ee8b0837e79540b0c3208ad1528ad, type: 2}
-  - {fileID: 11400000, guid: ea7fc1cecae589b43917f7d4735ec54a, type: 2}
-  - {fileID: 11400000, guid: 3278518d00037514cbdf7435e0cc9325, type: 2}
-  - {fileID: 11400000, guid: 24d7a663aa0937f4b8ed7ab357e76093, type: 2}
-  - {fileID: 11400000, guid: 6b8daec792815f44b8b8c781a3adfdcd, type: 2}
-  - {fileID: 11400000, guid: 1a1acf5d79493354cad0d0956b0d8689, type: 2}
-  _haveIngredients:
-  - {fileID: 11400000, guid: 552016a33cc72bb44b4eb6addf12b2f4, type: 2}
 --- !u!1 &714053293
 GameObject:
   m_ObjectHideFlags: 0
@@ -22412,7 +22413,7 @@ MonoBehaviour:
   - {fileID: 1257875750}
   - {fileID: 1344608377}
   - {fileID: 1493344180}
-  - {fileID: 713062803}
+  - {fileID: 585307979}
 --- !u!1 &726202546
 GameObject:
   m_ObjectHideFlags: 0
@@ -25866,7 +25867,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _unlockUpgrade: {fileID: 11400000, guid: 1d29fb229f95f644aaeb340c3eff9c8a, type: 2}
   _autoWorkUpgrade: {fileID: 11400000, guid: fc88596f2a2555e41be8b5f5113770fa, type: 2}
-  _UI: {fileID: 93621978}
+  _holdUI: {fileID: 93621978}
   _timeWait: 2
   _fatigueCoef: 0.01
   _cameraManager: {fileID: 713062802}
@@ -28297,6 +28298,71 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 916985078}
   m_CullTransparentMesh: 1
+--- !u!1 &917452950
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 917452952}
+  - component: {fileID: 917452951}
+  m_Layer: 0
+  m_Name: IngredientsManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &917452951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 917452950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6db5004f15b939048ab717a37821b90f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _allIngredients:
+  - {fileID: 11400000, guid: 552016a33cc72bb44b4eb6addf12b2f4, type: 2}
+  - {fileID: 11400000, guid: 897523a5d3e8cc843a91257d85a26f6b, type: 2}
+  - {fileID: 11400000, guid: 6f9766473f0cee440b6ecadbc52a9a0b, type: 2}
+  - {fileID: 11400000, guid: ecf0fd20f8efd89418aba1c84c5eae73, type: 2}
+  - {fileID: 11400000, guid: b6acdd96a3df47242adb35216986550f, type: 2}
+  - {fileID: 11400000, guid: 78d7c77369aa8f64d996e81e9461096f, type: 2}
+  - {fileID: 11400000, guid: 97a001c1ddc2c9d449c27a2cdba8ab4b, type: 2}
+  - {fileID: 11400000, guid: 130ec19d25206d049806ab10bdfe35c5, type: 2}
+  - {fileID: 11400000, guid: 7755e9f6a50793a45afe949b36406069, type: 2}
+  - {fileID: 11400000, guid: 69a4d0ca41f89d34ebe35ac5ce8ff220, type: 2}
+  - {fileID: 11400000, guid: 72a975fb0e4957047b8160771602c871, type: 2}
+  - {fileID: 11400000, guid: ced1e3d4268a7b948b73cd6807c188ef, type: 2}
+  - {fileID: 11400000, guid: 521ee8b0837e79540b0c3208ad1528ad, type: 2}
+  - {fileID: 11400000, guid: ea7fc1cecae589b43917f7d4735ec54a, type: 2}
+  - {fileID: 11400000, guid: 3278518d00037514cbdf7435e0cc9325, type: 2}
+  - {fileID: 11400000, guid: 24d7a663aa0937f4b8ed7ab357e76093, type: 2}
+  - {fileID: 11400000, guid: 6b8daec792815f44b8b8c781a3adfdcd, type: 2}
+  - {fileID: 11400000, guid: 1a1acf5d79493354cad0d0956b0d8689, type: 2}
+  _defaultIngredients:
+  - {fileID: 11400000, guid: 897523a5d3e8cc843a91257d85a26f6b, type: 2}
+--- !u!4 &917452952
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 917452950}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 713062800}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &918836921
 GameObject:
   m_ObjectHideFlags: 0
@@ -29250,7 +29316,7 @@ MonoBehaviour:
   - {fileID: 496575278}
   - {fileID: 1726139273}
   _grayscaleMaterial: {fileID: 2100000, guid: 7c2aa74e2b2bca04f9fea58636c61649, type: 2}
-  _ingredientsManager: {fileID: 713062804}
+  _ingredientsManager: {fileID: 917452951}
 --- !u!1 &949209865
 GameObject:
   m_ObjectHideFlags: 0
@@ -33557,7 +33623,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e91e8b687c471184c8fed2aa750994e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxSize: 100
+  _defaultMaxSpace: 100
   _animator: {fileID: 1090935201}
   _sizeUpgrades:
   - {fileID: 11400000, guid: 61fca3ae117a80d47b86a698ef863033, type: 2}
@@ -34510,8 +34576,6 @@ MonoBehaviour:
     _name: {fileID: 1178044772}
     _description: {fileID: 989299318}
     _count: {fileID: 168001624}
-  _milk: {fileID: 11400000, guid: 6b8daec792815f44b8b8c781a3adfdcd, type: 2}
-  _flour: {fileID: 11400000, guid: 24d7a663aa0937f4b8ed7ab357e76093, type: 2}
 --- !u!1 &1133440832
 GameObject:
   m_ObjectHideFlags: 0
@@ -34906,6 +34970,11 @@ MonoBehaviour:
   _manager: {fileID: 1766492819}
   _panel: {fileID: 1350151}
   _infoText: {fileID: 1250248978}
+  _sentText: "\u0418\u043D\u0433\u0440\u0435\u0434\u0438\u0435\u043D\u0442\u044B
+    \u043F\u0440\u0438\u0435\u0434\u0443\u0442 \u043D\u0430 \u043A\u0443\u0445\u043D\u044E
+    \u0447\u0435\u0440\u0435\u0437:"
+  _returnsText: "\u041C\u0430\u0448\u0438\u043D\u0430 \u0432\u0435\u0440\u043D\u0451\u0442\u0441\u044F
+    \u0447\u0435\u0440\u0435\u0437:"
   _timeText: {fileID: 739447885}
 --- !u!224 &1144833438 stripped
 RectTransform:
@@ -36125,7 +36194,7 @@ MonoBehaviour:
   _submitButton: {fileID: 1810792182}
   _choiceButtons: []
   _description: {fileID: 372516764}
-  _cameraManager: {fileID: 0}
+  _cameraManager: {fileID: 713062802}
   _manager: {fileID: 502661638}
 --- !u!222 &1183086015
 CanvasRenderer:
@@ -37585,11 +37654,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _unlockUpgrade: {fileID: 11400000, guid: bebb1ae5cf63e694688e7240c564f0cf, type: 2}
   _autoWorkUpgrade: {fileID: 11400000, guid: 981060421751812419bfa20190c9f957, type: 2}
-  _UI: {fileID: 752270626}
+  _holdUI: {fileID: 752270626}
   _timeWait: 5
   _fatigueCoef: 0.01
-  _wheatManager: {fileID: 590866774}
-  _barnFridge: {fileID: 372173401}
 --- !u!114 &1231044661
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38802,11 +38869,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _unlockUpgrade: {fileID: 11400000, guid: bae9bd0101a850e4ca04d532187fb708, type: 2}
   _autoWorkUpgrade: {fileID: 11400000, guid: c4baee8a713bb5349a33f46e43abe446, type: 2}
-  _UI: {fileID: 211201588}
+  _holdUI: {fileID: 211201588}
   _timeWait: 2
   _fatigueCoef: 0
-  _wheatManager: {fileID: 590866774}
-  _barnFridge: {fileID: 372173401}
 --- !u!95 &1257875751
 Animator:
   serializedVersion: 5
@@ -39475,7 +39540,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _unlockUpgrade: {fileID: 0}
   _autoWorkUpgrade: {fileID: 11400000, guid: c58fc0bef6717204d9d241cdc148e118, type: 2}
-  _UI: {fileID: 781806250}
+  _holdUI: {fileID: 781806250}
   _timeWait: 4
   _fatigueCoef: 0.01
 --- !u!1 &1277539633
@@ -41393,6 +41458,7 @@ MonoBehaviour:
   _car: {fileID: 1090935202}
   _maxFeedTime: 10
   _eggTime: 5
+  _unlockUpgrade: {fileID: 11400000, guid: c226a747773056448af69ff0162c5a28, type: 2}
   _food: {fileID: 11400000, guid: 66c5710e75d6b7b40808e1bba8713f70, type: 2}
   _infiniteFood: {fileID: 11400000, guid: 3e6aa961bc173f04ba71c4f7afc21fc6, type: 2}
   _foodSpeedCoef: 1.2
@@ -51182,6 +51248,7 @@ MonoBehaviour:
   _upgradeManager: {fileID: 726145196}
   _upgradesHolders:
   - _consumableUpgrade: {fileID: 11400000, guid: 66c5710e75d6b7b40808e1bba8713f70, type: 2}
+    _nowCount: 0
   _upgradesToBuy:
   - {fileID: 11400000, guid: d7ba24184fd3ada45858988ee97f9a14, type: 2}
   - {fileID: 11400000, guid: a4d51e622ef1ec247afd10ec64670ee0, type: 2}
@@ -51499,6 +51566,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bindableObjects:
+  - {fileID: 917452951}
+  - {fileID: 585307979}
+  - {fileID: 461820189}
+  - {fileID: 1671263195}
+  - {fileID: 852812873}
+  - {fileID: 590866774}
+  - {fileID: 1276766701}
+  - {fileID: 1231044660}
+  - {fileID: 372173401}
+  - {fileID: 1257875750}
+  - {fileID: 1344608377}
+  - {fileID: 1090935202}
+  - {fileID: 1766492819}
+  - {fileID: 1493344180}
   - {fileID: 197975456}
 --- !u!1 &1704632488
 GameObject:
@@ -54126,7 +54207,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _car: {fileID: 1090935202}
   _kitchenStorage: {fileID: 397481016}
-  _waitTime: 180
+  _defaultWaitTime: 180
   _speedUpgrades:
   - {fileID: 11400000, guid: 4d98847baac23154d9da4529844c79ff, type: 2}
   - {fileID: 11400000, guid: 18b8512479871e94b81a023e7e294027, type: 2}
@@ -60540,8 +60621,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 72a975fb0e4957047b8160771602c871, type: 2}
   - {fileID: 11400000, guid: 521ee8b0837e79540b0c3208ad1528ad, type: 2}
   - {fileID: 11400000, guid: 7755e9f6a50793a45afe949b36406069, type: 2}
-  _ingredientsManager: {fileID: 713062804}
-  _bedTypesManager: {fileID: 713062803}
+  _ingredientsManager: {fileID: 917452951}
+  _bedTypesManager: {fileID: 585307979}
   _ingredientStorage: {fileID: 397481016}
   _spice: {fileID: 11400000, guid: 1a1acf5d79493354cad0d0956b0d8689, type: 2}
   _spiceAutoBuy: {fileID: 11400000, guid: 8e6abd0bb54401244a0c7c6f4c7c8ff9, type: 2}

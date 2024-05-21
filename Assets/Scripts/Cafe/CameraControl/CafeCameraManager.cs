@@ -8,17 +8,18 @@ public class CafeCameraManager : CameraManager<CafeData>
     protected override string _cameraAxis => "Mouse X";
     protected override string _keyAxis => "Horizontal";
 
-    protected override void Start()
+    protected override void Awake()
     {
+        base.Awake();
         _horizontalExtention = _mainCamera.orthographicSize * Screen.width / Screen.height;
-        base.Start();
     }
 
     protected override void CalculateBorderPositions()
     {
+        var spaceData = _spaceManager.SpaceData;
         _startPosition = transform.position.x;
-        var spaceSize = _spaceManager.SpaceSize;
-        _endPosition = _startPosition + (_spaceManager.SpaceCount - 1) * spaceSize + spaceSize / 2 - _horizontalExtention;
+        _endPosition = _startPosition + (spaceData.Count - 1) * spaceData.SpaceSize 
+            + spaceData.SpaceSize / 2 - _horizontalExtention;
         InvokeBordersFound();
     }
 

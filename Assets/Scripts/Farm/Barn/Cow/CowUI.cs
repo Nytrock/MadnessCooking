@@ -1,4 +1,4 @@
-public class CowUI : HoldDoubleAddUI
+public class CowUI : NeedHoldAddUI
 {
 
 }

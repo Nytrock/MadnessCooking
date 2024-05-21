@@ -9,37 +9,35 @@ public class FarmCar : IngredientStorage<FarmData>, IUpgradeable
     [Header("Upgrades")]
     [SerializeField] private CountUpgrade[] _sizeUpgrades;
 
-    public event Action CarReturned;
-
-    public override void Bind(FarmData data, bool isFileEmpty)
-    {
-        throw new NotImplementedException();
-    }
-
     public void CheckUpgrade(BaseUpgrade upgrade)
     {
-        if (_sizeUpgrades.Contains(upgrade)) {
-            var countUpgrade = upgrade as CountUpgrade;
-            _maxSize = countUpgrade.Count;
-            InvokeSizeChange();
-        }
+        if (_sizeUpgrades.Contains(upgrade))
+            Data.UpdateMaxSpace(upgrade as CountUpgrade);
     }
 
     public void Leave()
     {
-        _ingredients.Clear();
-        _nowSize = 0;
+        Data.ClearList();
         _animator.SetBool("isLeave", true);
+    }
+
+    public void InstantLeave()
+    {
+        _animator.SetBool("isLeave", true);
+        _animator.Play(nameof(CarState.Sent), -1, 1);
     }
 
     public void Return()
     {
         _animator.SetBool("isLeave", false);
-        CarReturned?.Invoke();
     }
 
-    protected override void UpdateData()
-    {
 
+    public override void Bind(FarmData data, bool isFileEmpty)
+    {
+        if (isFileEmpty)
+            data.Car = new(_defaultMaxSpace);
+        Data = data.Car;
+        base.Bind(data, isFileEmpty);
     }
 }

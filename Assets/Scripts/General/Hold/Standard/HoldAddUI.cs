@@ -6,29 +6,22 @@ public class HoldAddUI : MonoBehaviour
     [SerializeField] private GameObject _UI;
     [SerializeField] private Slider _progressBar;
     [SerializeField] private CountRenderer _readyCount;
+    protected HoldAdd _holdAdd;
+
+    protected virtual void Update()
+    {
+        _progressBar.value = _holdAdd.HoldData.NowTime;
+        _readyCount.UpdateCount(_holdAdd.HoldData.ReadyCount);
+    }
 
     public void ChangeUI(bool isWork)
     {
         _UI.SetActive(isWork);
     }
 
-    public void SetSliderMax(float progressMax)
+    public void Setup(HoldAdd holdAdd)
     {
-        _progressBar.maxValue = progressMax;
-    }
-
-    public void SetSliderValue(float progress)
-    {
-        _progressBar.value = progress;
-    }
-
-    public virtual void SetCountText(int count)
-    {
-        _readyCount.UpdateCount(count);
-    }
-
-    public virtual void SetCountText(int countRaw, int countReady)
-    {
-        _readyCount.UpdateCount(countReady);
+        _holdAdd = holdAdd;
+        _progressBar.maxValue = _holdAdd.TimeWait;
     }
 }

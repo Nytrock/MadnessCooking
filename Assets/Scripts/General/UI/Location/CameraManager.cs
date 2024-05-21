@@ -28,17 +28,12 @@ public abstract class CameraManager<TData> : MonoBehaviour where TData: ISaveabl
     public float EndPosition => _endPosition;
     public Transform MainCameraPos => _mainCameraPos;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         _locationManager.LocationChanged += ChangeWorkMode;
         _spaceManager.SpaceAdded += CalculateBorderPositions;
         _mainCameraPos = _mainCamera.transform;
         _locationSlider.Bootup(this);
-    }
-
-    protected virtual void Start()
-    {
-        CalculateBorderPositions();
     }
 
     private void Update()

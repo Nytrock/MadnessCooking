@@ -7,36 +7,19 @@ public class FarmBed : MonoBehaviour
     [SerializeField] private Ingredient _wheat;
 
     [Header("Upgrades")]
-    [SerializeField] private BaseUpgrade _autoWheatUpgrade;
-    [SerializeField] private BaseUpgrade _growStatusShowUpgrade;
     [SerializeField] private FarmBedGrowSlider _growStatusSlider;
-    private bool _isAutoWheat;
-    private bool _isGrowStatusShow;
 
-    private FarmBedUIManager _UI;
-    private BedTypeHolder _bedHolder;
-    private Ingredient _plantedIngredient;
-    private FarmCar _car;
+    public SerializableFarmBed BedData { get; private set; }
+    private FarmData _data;
+
     private WheatManager _wheatManager;
-
+    private BedTypeHolder _bedHolder;
+    private FarmBedUIManager _UI;
+    private FarmCar _car;
     private float _growTime;
-    private float _nowTime;
-    private int _count;
-    private bool _isFull;
 
-    private float _waterBoost = 1;
-    private float _fertilizeBoost = 1;
-    private float _independentBoost = 1;
-    private float _pestsSlowdown = 1;
-
-    public BedType BedType => _bedHolder.Type;
     public PestsGenerator PestsGenerator => _bedHolder.PestsGenerator;
-    public Ingredient Ingredient => _plantedIngredient;
-    public int Count => _count;
-
-    public bool IsActive { get; private set; }
     public FarmBedUpgrader Upgrader { get; private set; }
-
 
     public event Action CountChanged;
 
@@ -47,72 +30,74 @@ public class FarmBed : MonoBehaviour
 
     public void MouseDown()
     {
-        if (_plantedIngredient == null)
+        if (BedData.PlantedIngredient == null)
             _UI.ActivateIngredientChoice(this);
         else
-            _UI.ShowGroundBed(this);
+            _UI.ChangeState(this);
     }
 
-    private void Start()
+    private void LateStart()
     {
         UpdateUpgrades();
     }
 
     private void Update()
     {
-        if (_isFull || _plantedIngredient == null)
+        if (BedData.IsFull || BedData.PlantedIngredient == null)
             return;
 
-        if (_nowTime < _growTime) {
-            _nowTime += Time.deltaTime * _waterBoost * _fertilizeBoost 
-                * _pestsSlowdown * _independentBoost * TimeManager.instance.TimeSpeed;
+        if (BedData.NowTime < _growTime) {
+            BedData.NowTime += Time.deltaTime * BedData.SummarizedBoost 
+                * TimeManager.instance.TimeSpeed;
         } else {
-            _nowTime = 0;
-            if (_isAutoWheat && _plantedIngredient == _wheat) {
-                _wheatManager.AddWheat(1);
+            BedData.Count++;
+            BedData.NowTime = 0;
+            if (_data.IsAutoWheat && BedData.PlantedIngredient == _wheat) {
+                _wheatManager.AddWheat(BedData.Count);
+                BedData.Count = 0;
                 return;
             }
-            _count++;
+
             CountChanged?.Invoke();
-            if (_count == _plantedIngredient.MaxCount)
-                _isFull = true;
+            if (BedData.Count == BedData.PlantedIngredient.MaxCount)
+                BedData.IsFull = true;
+            _bedHolder.UpdateAnimation();
         }
 
-        if (_isGrowStatusShow)
-            _growStatusSlider.UpdateSlider(_nowTime);
+        if (_data.IsGrowStatusShow)
+            _growStatusSlider.UpdateSlider(BedData.NowTime);
     }
 
     public void ResetIngredient()
     {
-        _plantedIngredient = null;
-        _count = 0;
-        _isFull = false;
+        BedData.PlantedIngredient = null;
+        BedData.Count = 0;
+        BedData.NowTime = 0;
+        BedData.IsFull = false;
         _bedHolder.StopAnimation();
         UpdateUpgrades();
     }
 
     public void SetBedType(BedTypeHolder bedType)
     {
-        if (bedType.Type.AcceptableType == IngredientType.Water)
-            _waterBoost = 0;
-        else
-            _waterBoost = 1;
-
         _bedHolder = bedType;
-        Upgrader.UpdateBedHolder(_bedHolder);
-        IsActive = true;
         _bedHolder.ChangeMode(true);
+
+        BedData.BedType = _bedHolder.Type;
+        if (BedData.BedType.AcceptableType == IngredientType.Water)
+            BedData.WaterBoost.Boost = 0;
+        else
+            BedData.WaterBoost.Boost = 1;
     }
 
     public void ResetBedType()
     {
         ResetIngredient();
         _bedHolder.ChangeMode(false);
-        Upgrader.UpdateBedHolder(_bedHolder);
         Upgrader.ReturnUpgrades();
 
         _bedHolder = null;
-        IsActive = false;
+        BedData.BedType = null;
     }
 
     public void Setup(FarmBedSettings settings)
@@ -124,123 +109,92 @@ public class FarmBed : MonoBehaviour
 
     public void SetIngredient(Ingredient ingredient)
     {
-        _plantedIngredient = ingredient;
-        _bedHolder.SetIngredient(ingredient);
+        BedData.PlantedIngredient = ingredient;
+        _bedHolder.SetIngredient();
         _growTime = ingredient.TimeGrow;
         _growStatusSlider.SetMaxTime(_growTime);
-        _nowTime = 0;
         UpdateUpgrades();
     }
 
     public void SendIngredients()
     {
-        if (_count == 0)
+        if (BedData.Count == 0)
             return;
 
-        FatigueManager.instance.ChangeFatigue(_plantedIngredient.FatigueCount * _count);
-        if (_plantedIngredient == _wheat) {
-            _wheatManager.AddWheat(_count);
-            _count = 0;
-            UpdateCount();
+        if (BedData.PlantedIngredient == _wheat) {
+            _wheatManager.AddWheat(BedData.Count);
+            BedData.Count = 0;
+            UnfullBed();
             return;
         }
 
-        if (_car.LeftSpace == 0)
+        if (_car.Data.LeftSpace == 0)
             return;
 
-        if (_car.LeftSpace < _count) {
-            _car.PutIngredient(new IngredientCount(_plantedIngredient, _car.LeftSpace));
-            _count -= _car.LeftSpace;
-        } else {
-            _car.PutIngredient(new IngredientCount(_plantedIngredient, _count));
-            _count = 0;
-        }
+        int sendingCount = BedData.Count;
+        if (_car.Data.LeftSpace < BedData.Count)
+            sendingCount = _car.Data.LeftSpace;
 
-        UpdateCount();
+        FatigueManager.instance.ChangeFatigue(BedData.PlantedIngredient.FatigueCount * sendingCount);
+        BedData.Count -= sendingCount;
+        _car.PutIngredient(new IngredientCount(BedData.PlantedIngredient, sendingCount));
+
+        UnfullBed();
     }
 
-    private void UpdateCount()
+    private void UnfullBed()
     {
         CountChanged?.Invoke();
-        _bedHolder.ResetAnimation(_isFull);
-        _isFull = false;
+        if (BedData.IsFull) {
+            BedData.IsFull = false;
+            _bedHolder.UpdateAnimation();
+        }
     }
 
-    public void EternalWater()
+    public void ChangeEternalWater()
     {
-        Water();
+        _bedHolder.ChangeEternalWater();
         _UI.UpdateSideButtons();
     }
 
     public void Water()
     {
-        _waterBoost = _bedHolder.GetWaterMultiplier();
-        ChangeAnimationSpeed();
+        _bedHolder.Water();
     }
 
-    public void EternalFertilize()
+    public void ChangeEternalFertilize()
     {
-        Fertilize();
+        _bedHolder.ChangeEternalFertilize();
         _UI.UpdateSideButtons();
     }
 
-
     public void Fertilize()
     {
-        _fertilizeBoost = _bedHolder.GetFertilizeMultiptier();
-        ChangeAnimationSpeed();
-    }
-
-    public void StopWaterBuff(float newMultiplier)
-    {
-        _waterBoost = newMultiplier;
-        ChangeAnimationSpeed();
-    }
-
-    public void StopFertilizeBuff(float newMultiplier)
-    {
-        _fertilizeBoost = newMultiplier;
-        ChangeAnimationSpeed();
-    }
-
-    public void ChangePestSlowdown(float coef)
-    {
-        _pestsSlowdown = coef;
-        ChangeAnimationSpeed();
-    }
-
-    private void ChangeAnimationSpeed()
-    {
-        _bedHolder.BoostAnimationSpeed(_fertilizeBoost * _waterBoost * _pestsSlowdown);
-    }
-
-    public void CheckUpgrade(BaseUpgrade upgrade)
-    {
-        if (upgrade == _growStatusShowUpgrade) {
-            _isGrowStatusShow = true;
-        } else if (upgrade == _autoWheatUpgrade) {
-            _isAutoWheat = true;
-            if (_plantedIngredient == _wheat)
-                SendIngredients();
-        }
-
-        UpdateUpgrades();
+        _bedHolder.Fertilize();
     }
 
     private void UpdateUpgrades()
     {
-        _growStatusSlider.SetActive(_isGrowStatusShow && _plantedIngredient != null);
-    }
-
-    public void UpdateUpgradeBooster()
-    {
-        _independentBoost = Upgrader.UpgradesBooster;
+        _growStatusSlider.SetActive(_data.IsGrowStatusShow && BedData.PlantedIngredient != null);
     }
 
     public void RemovePests()
     {
         _UI.UpdateSideButtons();
         PestsGenerator.CleanPests();
-        PestsGenerator.SetRemoved(this);
+    }
+
+    public void Bind(FarmData data, SerializableFarmBed bedData)
+    {
+        _data = data;
+        BedData = bedData;
+
+        if (BedData.BedType != null) {
+            GetComponent<BedChoice>().SetType(BedData.BedType);
+            if (BedData.PlantedIngredient != null)
+                SetIngredient(BedData.PlantedIngredient);
+        }
+
+        LateStart();
     }
 }

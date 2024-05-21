@@ -1,4 +1,4 @@
-public class PuncherUI : HoldDoubleAddUI
+public class PuncherUI : NeedHoldAddUI
 {
 
 }

@@ -27,10 +27,13 @@ public class DecorShop : BaseInstantShop, IBindable<OfficeData>
             _officeManager.AddDecor(decor);
 
         var index = _decorToBuy.IndexOf(decor);
-        if (_decorToBuy.Count == 1 && decor != _cat) {
+        if (_decorToBuy.Count == 1 && decor != _cat)
+        {
             _decorToBuy[index] = _cat;
             _catalog.UpdatePanel(index, _cat);
-        } else {
+        }
+        else
+        {
             _decorToBuy.RemoveAt(index);
             _catalog.RemovePanel(index);
         }

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,14 +18,14 @@ public class PestsUIPool : MonoBehaviour
         _pool = new Queue<PestUI>();
     }
 
-    public PestUI GetObject(Pest originalPest)
+    public PestUI GetObject(Pest pest)
     {
         if (_pool.Count == 0)
             _pool.Enqueue(Instantiate(_pestPrefab, _container));
 
         var pestUI = _pool.Dequeue();
         pestUI.ChangeState(true);
-        pestUI.Setup(originalPest, _leftDown, _rightUp, _remover);
+        pestUI.Setup(pest, _leftDown.position, _rightUp.position, _remover);
         return pestUI;
     }
 

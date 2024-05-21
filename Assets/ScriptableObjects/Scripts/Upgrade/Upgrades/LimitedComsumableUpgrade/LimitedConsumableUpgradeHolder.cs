@@ -5,13 +5,13 @@ using UnityEngine;
 public class LimitedConsumableUpgradeHolder
 {
     [SerializeField] private LimitedConsumableUpgrade _consumableUpgrade;
-    public int NowCount { get; private set; }
+    [SerializeField] private int _nowCount;
 
     public LimitedConsumableUpgrade ConsumableUpgrade => _consumableUpgrade;
-    public bool IsMax => _consumableUpgrade.MaxCount <= NowCount;
+    public bool IsMax => _consumableUpgrade.MaxCount <= _nowCount;
 
     public void AddCount()
     {
-        NowCount++;
+        _nowCount++;
     }
 }

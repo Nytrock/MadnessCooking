@@ -1,77 +1,50 @@
 using System;
 using UnityEngine;
 
-public class WheatManager : MonoBehaviour, IUpgradeable
+public class WheatManager : MonoBehaviour, IUpgradeable, IBindable<FarmData>
 {
     [SerializeField] private Cow _cow;
     [SerializeField] private FlourMill _flourMill;
     [SerializeField] private BaseUpgrade _wheatDistributeUpgrade;
-    private bool _isDistributing;
-
-    private int _cowWheatCount = 0;
-    private int _flourWheatCount = 0;
-    private bool _isCowNextWheat = true;
-
-    public event Action<int> CowWheatChanged;
-    public event Action<int> FlourWheatChanged;
+    private FarmData _data;
 
     public void AddWheat(int count)
     {
-        if (_isDistributing) {
+        if (_data.IsWheatDistributing) {
             DistributeWheat(count);
         } else {
-            _cowWheatCount += count;
-            _flourWheatCount += count;
+            _data.Cow.MaterialCount += count;
+            _data.FlourMill.MaterialCount += count;
         }
-
-        InvokeEvents();
     }
 
     public void CheckUpgrade(BaseUpgrade upgrade)
     {
         if (upgrade == _wheatDistributeUpgrade) {
-            _isDistributing = true;
-            var count = _cowWheatCount;
-            _cowWheatCount = 0;
-            _flourWheatCount = 0;
+            _data.IsWheatDistributing = true;
+            var count = _data.Cow.MaterialCount;
+            _data.Cow.MaterialCount = 0;
+            _data.FlourMill.MaterialCount = 0;
             DistributeWheat(count);
-            InvokeEvents();
         }
-    }
-
-    public void SubstractWheat(Type type)
-    {
-        if (_isDistributing) {
-            if (type == typeof(Cow))
-                _cowWheatCount -= 1;
-            else if (type == typeof(FlourMill))
-                _flourWheatCount -= 1;
-            else
-                Debug.LogError("Unknown type");
-        } else {
-            _cowWheatCount -= 1;
-            _flourWheatCount -= 1;
-        }
-
-        InvokeEvents();
-    }
-
-    private void InvokeEvents()
-    {
-        CowWheatChanged?.Invoke(_cowWheatCount);
-        FlourWheatChanged?.Invoke(_flourWheatCount);
     }
 
     private void DistributeWheat(int count)
     {
         var halfCount = count / 2;
-        if (count % 2 == 0) {
-            _cowWheatCount += halfCount;
-            _flourWheatCount += halfCount;
-        } else {
-            _cowWheatCount += halfCount + Convert.ToInt32(_isCowNextWheat);
-            _flourWheatCount += halfCount + Convert.ToInt32(!_isCowNextWheat);
-            _isCowNextWheat = !_isCowNextWheat;
+
+        _data.Cow.MaterialCount += halfCount;
+        _data.FlourMill.MaterialCount += halfCount;
+
+        if (count % 2 != 0) {
+            _data.Cow.MaterialCount += Convert.ToInt32(_data.IsCowNextWheat);
+            _data.FlourMill.MaterialCount += Convert.ToInt32(!_data.IsCowNextWheat);
+            _data.IsCowNextWheat = !_data.IsCowNextWheat;
         }
+    }
+
+    public void Bind(FarmData data, bool isFileEmpty)
+    {
+        _data = data;
     }
 }

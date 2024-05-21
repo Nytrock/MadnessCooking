@@ -1,60 +1,53 @@
-using System;
 using UnityEngine;
 
-public class BarnFridge : MonoBehaviour
+public class BarnFridge : MonoBehaviour, IBindable<FarmData>
 {
     [SerializeField] private FarmCar _car;
     [SerializeField] private Ingredient _milk;
     [SerializeField] private Ingredient _flour;
 
-    private int _milkCount;
-    private int _flourCount;
+    public SerializableNeedHoldAdd Cow { get; private set; }
+    public SerializableNeedHoldAdd FlourMill { get; private set; }
 
-    public event Action<int> MilkChanged;
-    public event Action<int> FlourChanged;
-
-    public void AddMilk(int count)
-    {
-        _milkCount += count;
-        MilkChanged?.Invoke(_milkCount);
-    }
-
-    public void AddFlour(int count)
-    {
-        _flourCount += count;
-        FlourChanged?.Invoke(_flourCount);
-    }
+    public Ingredient Milk => _milk;
+    public Ingredient Flour => _flour;
 
     public void PutIngredient(Ingredient ingredient)
     {
-        if (_car.LeftSpace == 0)
-            return;
-
-        if (ingredient == _milk) {
-            FatigueManager.instance.ChangeFatigue(_milk.FatigueCount * _milkCount);
-            MoveToCar(_car.LeftSpace, ref _milkCount, _milk);
-            MilkChanged?.Invoke(_milkCount);
-        } else if (ingredient == _flour) {
-            FatigueManager.instance.ChangeFatigue(_flour.FatigueCount * _flourCount);
-            MoveToCar(_car.LeftSpace, ref _flourCount, _flour);
-            FlourChanged?.Invoke(_flourCount);
-        } else {
-            Debug.LogError("Unknown ingredient");
-        }
-    }
-
-    private void MoveToCar(int carSpace, ref int count, Ingredient ingredient) {
         if (ingredient != _milk && ingredient != _flour) {
             Debug.LogError("Unknown ingredient");
             return;
         }
 
-        if (carSpace < count) {
-            _car.PutIngredient(new IngredientCount(ingredient, carSpace));
-            count -= carSpace;
+        if (_car.Data.LeftSpace == 0)
+            return;
+
+        if (ingredient == _milk)
+            FatigueManager.instance.ChangeFatigue(_milk.FatigueCount * Cow.ReadyCount);
+        else if (ingredient == _flour)
+            FatigueManager.instance.ChangeFatigue(_flour.FatigueCount * FlourMill.ReadyCount);
+        MoveToCar(ingredient);
+    }
+
+    private void MoveToCar(Ingredient ingredient) {
+        SerializableNeedHoldAdd changingHoldAdd;
+        if (ingredient == _milk)
+            changingHoldAdd = Cow;
+        else
+            changingHoldAdd = FlourMill;
+
+        if (_car.Data.LeftSpace < changingHoldAdd.ReadyCount) {
+            changingHoldAdd.ReadyCount -= _car.Data.LeftSpace;
+            _car.PutIngredient(new IngredientCount(ingredient, _car.Data.LeftSpace));
         } else {
-            _car.PutIngredient(new IngredientCount(ingredient, count));
-            count = 0;
+            _car.PutIngredient(new IngredientCount(ingredient, changingHoldAdd.ReadyCount));
+            changingHoldAdd.ReadyCount = 0;
         }
+    }
+
+    public void Bind(FarmData data, bool isFileEmpty)
+    {
+        Cow = data.Cow;
+        FlourMill = data.FlourMill;
     }
 }

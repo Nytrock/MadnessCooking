@@ -30,8 +30,13 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable, IBindable<CafeData>
     {
         _xpAdder = GetComponent<PopularityXpAdder>();
         _foodManager = _ordersManager.GetComponent<FoodManager>();
-        _cafeOpener.CafeChanged += ChangeWorkMode; 
-        _spawnPoint.position += new Vector3(_spaceManager.SpaceCount * _spaceManager.SpaceSize, 0, 0);
+        _cafeOpener.CafeChanged += ChangeWorkMode;
+        _spaceManager.SpaceAdded += MoveSpawnPoint;
+    }
+
+    private void MoveSpawnPoint()
+    {
+        _spawnPoint.position += new Vector3(_spaceManager.SpaceData.SpaceSize, 0, 0);
     }
 
     private void LateStart()

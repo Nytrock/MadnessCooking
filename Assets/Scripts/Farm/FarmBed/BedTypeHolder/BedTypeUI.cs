@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,11 +12,11 @@ public class BedTypeUI : MonoBehaviour
     [SerializeField] private Button _pestsButton;
     [SerializeField] private Button _waterButton;
     [SerializeField] private Button _fertilizeButton;
-    private bool _isWatered;
-    private bool _isFertilized;
+
+    private SerializableFarmBed _bedData;
+    private FarmData _data;
 
     public BedType BedType => _bedType;
-    public bool IsSideButtonsWork => _isSideButtonsWork;
 
     private void Start()
     {
@@ -34,40 +33,42 @@ public class BedTypeUI : MonoBehaviour
         _UI.SetActive(newValue);
     }
 
-    public void UpdateInfo(FarmBed groundBed)
+    public void UpdateInfo(FarmBed farmBed)
     {
-        _renderer.SetItemInfo(groundBed.Ingredient);
-        _renderer.SetCount(groundBed.Count);
+        _renderer.SetItemInfo(farmBed.BedData.PlantedIngredient);
+        _renderer.SetCount(farmBed.BedData.Count);
     }
 
-    public void CheckWater(int count)
+    public void CheckWater()
     {
-        if (!_isSideButtonsWork)
-            return;
-
-        _waterButton.interactable = count > 0 && !_isWatered;
+        _waterButton.interactable = _data.FarmWell.ReadyCount > 0 
+            && !_bedData.WaterBoost.IsEternal;
     }
 
-    public void CheckFertilize(int count)
+    public void CheckFertilize()
     {
-        if (!_isSideButtonsWork)
-            return;
-
-        _fertilizeButton.interactable = count > 0 && !_isFertilized;
+        _fertilizeButton.interactable = _data.Puncher.ReadyCount > 0 && 
+            !_bedData.FertilizeBoost.IsEternal;
     }
 
-    public void UpdateCount(int count)
+    public void UpdateCount()
     {
-        _renderer.SetCount(count);
+        _renderer.SetCount(_bedData.Count);
     }
 
     public void UpdateSideButtons(FarmBed farmBed)
     {
-        _pestsButton.interactable = !farmBed.Upgrader.IsPestsRemoved;
+        _bedData = farmBed.BedData;
+        _pestsButton.interactable = !_bedData.PestsGenerator.IsPestsRemoved;
         if (!_isSideButtonsWork)
             return;
 
-        _isWatered = farmBed.Upgrader.IsWatered;
-        _isFertilized = farmBed.Upgrader.IsFertilized;
+        CheckWater();
+        CheckFertilize();
+    }
+
+    public void Bind(FarmData data)
+    {
+        _data = data;
     }
 }

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 [Serializable]
 public class CafeData : ISaveable
 {
-    public int SpaceCount;
+    public SerializableSpaceManager Space = new();
     public bool IsOpened = true;
     public List<SerializableSpot> Spots = new();
     public List<SerializableClient> LeavingClients = new();

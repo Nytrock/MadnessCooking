@@ -6,13 +6,11 @@ public class BedTypeHolder : MonoBehaviour
     [SerializeField] private BedType _type;
     [SerializeField] private PestsGenerator _pestsGenerator;
     [SerializeField] private FarmBed _farmBed;
+    private SerializableFarmBed _bedData;
 
     private Animator _animator;
     private string _name;
-    private int _maxCount;
-
     private float _animationSpeed;
-    private float _boost = 1;
 
     private StandardBedWater _water;
     private StandardBedFertilize _fertilize;
@@ -24,10 +22,19 @@ public class BedTypeHolder : MonoBehaviour
     {
         _animator = GetComponent<Animator>();
         if (TryGetComponent(out _water))
-            _water.BoostEnded += _farmBed.StopWaterBuff;
+            _water.BoostEnded += ChangeAnimationSpeed;
         if (TryGetComponent(out _fertilize))
-            _fertilize.BoostEnded += _farmBed.StopFertilizeBuff;
-        _pestsGenerator.PestsChanged += _farmBed.ChangePestSlowdown;
+            _fertilize.BoostEnded += ChangeAnimationSpeed;
+        _pestsGenerator.PestsChanged += ChangeAnimationSpeed;
+        gameObject.SetActive(false);
+    }
+
+    private void Update()
+    {
+        if (_bedData.PlantedIngredient == null)
+            return;
+
+        _bedData.AnimationTime = _animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
     }
 
     public void ChangeMode(bool newMode)
@@ -39,27 +46,24 @@ public class BedTypeHolder : MonoBehaviour
             if (_fertilize != null)
                 _fertilize.EndBoost();
             _pestsGenerator.ChangeMode(false);
+        } else {
+            Bind();
         }
     }
 
-    public void SetIngredient(Ingredient ingredient)
+    public void SetIngredient()
     {
+        var ingredient = _bedData.PlantedIngredient;
         _name = ingredient.name;
-        _maxCount = ingredient.MaxCount - 1;
-        _animator.Play(_name);
-        _animator.SetInteger("leftCount", _maxCount);
+        _animator.Play(_name, -1, _bedData.AnimationTime);
         StartCoroutine(SetAnimationSpeed(ingredient.TimeGrow));
         _pestsGenerator.ChangeMode(true);
     }
 
-    public void ResetAnimation(bool isFull)
+    public void UpdateAnimation()
     {
-        if (_animator.GetInteger("leftCount") == 0 && isFull) {
+        if (!_bedData.IsFull)
             _animator.Play(_name, -1, 0);
-            _animator.SetInteger("leftCount", _maxCount + 1);
-        } else {
-            _animator.SetInteger("leftCount", _maxCount);
-        }
     }
 
     public void StopAnimation()
@@ -73,16 +77,16 @@ public class BedTypeHolder : MonoBehaviour
         yield return new WaitForEndOfFrame();
         var animationLength = _animator.GetCurrentAnimatorStateInfo(0).length;
         _animationSpeed = 1 / timeGrow * animationLength;
-        _animator.SetFloat("growTime", _animationSpeed * _boost);
+        _animator.SetFloat("growTime", _animationSpeed * _bedData.SummarizedBoost);
     }
 
-    public float GetWaterMultiplier()
+    public void Water()
     {
         if (_water == null)
-            return 1;
+            return;
 
-        var multiplier = _water.StartBoost();
-        return multiplier;
+        _water.StartBoost();
+        ChangeAnimationSpeed();
     }
 
     public void ChangeEternalWater()
@@ -90,16 +94,16 @@ public class BedTypeHolder : MonoBehaviour
         if (_water == null)
             return;
 
-        _water.SetEternal(_farmBed.Upgrader.IsWatered);
+        _water.ChangeEternal();
     }
 
-    public float GetFertilizeMultiptier()
+    public void Fertilize()
     {
         if (_fertilize == null)
-            return 1;
+            return;
 
-        var multiplier = _fertilize.StartBoost();
-        return multiplier;
+        _fertilize.StartBoost();
+        ChangeAnimationSpeed();
     }
 
     public void ChangeEternalFertilize()
@@ -107,12 +111,21 @@ public class BedTypeHolder : MonoBehaviour
         if (_fertilize == null)
             return;
 
-        _fertilize.SetEternal(_farmBed.Upgrader.IsFertilized);
+        _fertilize.ChangeEternal();
     }
 
-    public void BoostAnimationSpeed(float boost)
+    public void ChangeAnimationSpeed()
     {
-        _boost = boost;
-        _animator.SetFloat("growTime", _animationSpeed * _boost);
+        _animator.SetFloat("growTime", _animationSpeed * _bedData.SummarizedBoost);
+    }
+
+    public void Bind()
+    {
+        _bedData = _farmBed.BedData;
+        if (_water != null)
+            _water.SetData(_bedData.WaterBoost);
+        if (_fertilize != null)
+            _fertilize.SetData(_bedData.FertilizeBoost);
+        _pestsGenerator.SetData(_bedData);
     }
 }

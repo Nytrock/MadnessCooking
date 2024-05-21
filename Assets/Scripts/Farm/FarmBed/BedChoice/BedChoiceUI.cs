@@ -1,14 +1,18 @@
 using UnityEngine;
 
-public class BedChoiceUI : ChoiceBuyWithCameraStopUI<BedType, FarmData>
+public class BedChoiceUI : ChoiceBuyWithCameraStopUI<BedType, FarmData>, IBindable<FarmData>
 {
     [SerializeField] private BedTypesManager _bedTypesManager;
     [SerializeField] private BedTypeIngredientsRenderer _ingredientsRenderer;
     private BedChoice _changingBed;
 
-    protected override void Start()
+    private void Awake()
     {
         _bedTypesManager.TypeAdded += AddType;
+    }
+
+    private void LateStart()
+    {
         GenerateChoiceButtons();
         base.Start();
     }
@@ -72,5 +76,10 @@ public class BedChoiceUI : ChoiceBuyWithCameraStopUI<BedType, FarmData>
     {
         base.Disable();
         _changingBed = null;
+    }
+
+    public void Bind(FarmData data, bool isFileEmpty)
+    {
+        LateStart();
     }
 }

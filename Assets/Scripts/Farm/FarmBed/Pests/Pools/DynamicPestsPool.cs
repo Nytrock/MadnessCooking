@@ -4,14 +4,11 @@ public class DynamicPestsPool : PestsPool
 {
     [SerializeField] private Pest[] _prefabs;
 
-    [Header("Borders")]
-    [SerializeField] private Transform _leftDown;
-    [SerializeField] private Transform _rightUp;
-
-    protected override Pest SpawnPest()
+    protected override Pest SpawnPest(ref int id)
     {
-        var pest = Instantiate(_prefabs[Random.Range(0, _prefabs.Length)], _container);
-        pest.SetupBorders(_leftDown, _rightUp);
+        if (id == -1)
+            id = Random.Range(0, _prefabs.Length);
+        var pest = Instantiate(_prefabs[id], _container);
         return pest;
     }
 }

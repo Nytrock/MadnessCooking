@@ -1,22 +1,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IngredientsManager : MonoBehaviour
+public class IngredientsManager : MonoBehaviour, IBindable<FarmData>
 {
     [SerializeField] private Ingredient[] _allIngredients;
-    [SerializeField] private List<Ingredient> _haveIngredients;
-
-    public List<Ingredient> HaveIngredients => _haveIngredients;
+    [SerializeField] private List<Ingredient> _defaultIngredients;
+    private FarmData _data;
 
     public bool HaveIngredient(Ingredient ingredient)
     {
-        return _haveIngredients.Contains(ingredient);
+        return _data.AvailableIngredients.Contains(ingredient);
     }
 
     public List<Ingredient> HaveIngredientsOfBedType(BedType bedType)
     {
         var result = new List<Ingredient>();
-        foreach (var ingredient in _haveIngredients)
+        foreach (var ingredient in _data.AvailableIngredients)
             if (ingredient.Type == bedType.AcceptableType)
                 result.Add(ingredient);
         return result;
@@ -33,6 +32,13 @@ public class IngredientsManager : MonoBehaviour
 
     public void AddIngredient(Ingredient ingredient)
     {
-        _haveIngredients.Add(ingredient);
+        _data.AvailableIngredients.Add(ingredient);
+    }
+
+    public void Bind(FarmData data, bool isFileEmpty)
+    {
+        _data = data;
+        if (isFileEmpty)
+            _data.AvailableIngredients = _defaultIngredients;
     }
 }

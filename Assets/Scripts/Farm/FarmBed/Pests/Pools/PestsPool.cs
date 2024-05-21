@@ -6,19 +6,23 @@ public abstract class PestsPool : MonoBehaviour
     [SerializeField] protected Transform _container;
     private Queue<Pest> _pool;
 
+    [Header("Borders")]
+    [SerializeField] private Transform _leftDown;
+    [SerializeField] private Transform _rightUp;
+
     private void Awake()
     {
         _pool = new Queue<Pest>();
     }
 
-    public Pest GetObject()
+    public Pest GetObject(int id = -1)
     {
         if (_pool.Count == 0)
-            _pool.Enqueue(SpawnPest());
+            _pool.Enqueue(SpawnPest(ref id));
 
         var pest = _pool.Dequeue();
         pest.ChangeState(true);
-        pest.Randomize();
+        pest.Randomize(_leftDown.position, _rightUp.position, id);
         return pest;
     }
 
@@ -28,5 +32,5 @@ public abstract class PestsPool : MonoBehaviour
         pest.ChangeState(false);
     }
 
-    protected abstract Pest SpawnPest();
+    protected abstract Pest SpawnPest(ref int id);
 }

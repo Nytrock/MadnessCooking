@@ -10,13 +10,13 @@ public class DesertBedWater : StandardBedWater
         _originalBoost = _boostMultiplier;
     }
 
-    public override float StartBoost()
+    public override void StartBoost()
     {
-        if (_isBoosting)
+        if (_data.IsBoosting)
             _boostMultiplier = Mathf.Max(0, _boostMultiplier - _boostFine);
         else
             _boostMultiplier = _originalBoost;
 
-        return base.StartBoost();
+        base.StartBoost();
     }
 }

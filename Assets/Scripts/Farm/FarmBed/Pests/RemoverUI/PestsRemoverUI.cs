@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class PestsRemoverUI : MonoBehaviour
 {
-    [SerializeField] PestsBedTypeUI[] _bedTypes;
-    [SerializeField] GameObject _panel;
+    [SerializeField] private PestsBedTypeUI[] _bedTypes;
+    [SerializeField] private GameObject _panel;
     [SerializeField] private PestsUIPool _pool;
     private PestsGenerator _generator;
     private PestsBedTypeUI _nowBed;
@@ -48,8 +48,7 @@ public class PestsRemoverUI : MonoBehaviour
 
     private void GeneratePests()
     {
-        var pestList = _generator.GetList();
-        foreach (var pest in pestList) {
+        foreach (Pest pest in _generator.Pests()) {
             var pestUI = _pool.GetObject(pest);
             pestUI.SetupRemoveButton();
         }

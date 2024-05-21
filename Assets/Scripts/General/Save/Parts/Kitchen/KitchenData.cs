@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class KitchenData : ISaveable
 {
     public List<Food> AvailableFood;
-    public IngredientCountList AvailableIngredients;
+    public SerializableIngredientStorage KitchenStorage;
     public List<Decor> AvailableDecor;
 
     public List<Technic> AvailableTechnic;

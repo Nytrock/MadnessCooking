@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 using UnityEngine;
 
 public abstract class SpaceManager<T> : MonoBehaviour, IUpgradeable, IBindable<T> where T: ISaveable
@@ -7,18 +6,15 @@ public abstract class SpaceManager<T> : MonoBehaviour, IUpgradeable, IBindable<T
     [SerializeField] protected SpacePrefab _spacePrefab;
     [SerializeField] protected int _defaultSpaceCount;
     [SerializeField] protected CountUpgrade[] _spaceAddUpgrades;
-    protected int _spaceCount;
+    
     protected Transform _spaceContainer;
     protected T _data;
 
-    public int SpaceCount => _spaceCount;
-    public float SpaceSize => _spacePrefab.Size;
-
+    public SerializableSpaceManager SpaceData { get; protected set; }
     public event Action SpaceAdded;
 
     private void Awake()
     {
-        _spaceCount = _defaultSpaceCount;
         _spaceContainer = transform;
     }
 
@@ -29,29 +25,31 @@ public abstract class SpaceManager<T> : MonoBehaviour, IUpgradeable, IBindable<T
 
     private void GenerateSpaces()
     {
-        var size = _spacePrefab.Size;
-        for (int i = 0; i < _spaceCount; i++)
-            AddSpace(size, i);
+        for (int i = 0; i < SpaceData.Count; i++)
+            AddSpace(i);
     }
 
     public virtual void CheckUpgrade(BaseUpgrade upgrade)
     {
-        if (_spaceAddUpgrades.Contains(upgrade)) {
+        if (upgrade == _spaceAddUpgrades[SpaceData.Count - _defaultSpaceCount]) {
             var countUpgrade = upgrade as CountUpgrade;
-            AddSpace(_spacePrefab.Size, _spaceCount);
-            _spaceCount = countUpgrade.Count;
-            UpdateData(false);
-            SpaceAdded?.Invoke();
+            SpaceData.Count = countUpgrade.Count;
+            AddSpace(SpaceData.Count - 1);
         }
     }
 
-    public void Bind(T data, bool isFileEmpty)
+    public virtual void Bind(T data, bool isFileEmpty)
     {
         _data = data;
-        UpdateData(isFileEmpty);
+        BindData(isFileEmpty);
         LateStart();
     }
 
-    protected abstract void AddSpace(float size, int index);
-    protected abstract void UpdateData(bool isFileEmpty);
+    protected void InvokeSpaceAdded()
+    {
+        SpaceAdded?.Invoke();
+    }
+
+    protected abstract void AddSpace(int index);
+    protected abstract void BindData(bool isFileEmpty);
 }

@@ -1,29 +1,23 @@
 using UnityEngine;
 
-public class HoldAdd : MonoBehaviour, IUpgradeable
+public abstract class HoldAdd : MonoBehaviour, IUpgradeable, IBindable<FarmData>
 {
     [Header("Upgades")]
     [SerializeField] protected BaseUpgrade _unlockUpgrade;
     [SerializeField] protected CoefficientUpgrade _autoWorkUpgrade;
 
     [Header("Main")]
-    [SerializeField] protected HoldAddUI _UI;
+    [SerializeField] protected HoldAddUI _holdUI;
     [SerializeField] private float _timeWait;
     [SerializeField, Min(0)] private float _fatigueCoef;
 
-    private float _progressNow;
-    protected float _progressMax;
-    protected int _readyCount;
-    private float _speed = 1;
-
     protected bool _isWork;
-    protected bool _isUnlocked;
-    protected bool _isAuto;
 
-    public int Count => _readyCount;
+    public SerializableHoldAdd HoldData { get; protected set; }
 
+    public float TimeWait => _timeWait;
 
-    protected virtual void Start()
+    protected virtual void LateStart()
     {
         ResetAll();
         UpdateUpgrades();
@@ -32,33 +26,34 @@ public class HoldAdd : MonoBehaviour, IUpgradeable
     private void ResetAll()
     {
         _isWork = false;
-        _progressNow = 0;
-        _progressMax = _timeWait;
-        _UI.SetSliderMax(_progressMax);
-        _UI.ChangeUI(_isWork);
+        _holdUI.Setup(this);
+        _holdUI.ChangeUI(_isWork);
+
+        if (!HoldData.IsAuto)
+            HoldData.NowTime = 0;
     }
 
     private void UpdateUpgrades()
     {
-        gameObject.SetActive(_isUnlocked);
-        if (_isAuto)
-            _speed = _autoWorkUpgrade.Coefficient;
+        gameObject.SetActive(HoldData.IsUnlocked);
+        if (HoldData.IsAuto)
+            HoldData.Speed = _autoWorkUpgrade.Coefficient;
     }
 
     public virtual void ChangeWorkMode(bool newValue)
     {
-        _UI.ChangeUI(newValue);
-        if (_isAuto)
+        _holdUI.ChangeUI(newValue);
+        if (HoldData.IsAuto)
             return;
 
         _isWork = newValue;
         if (!_isWork)
-            _progressNow = 0;
+            HoldData.NowTime = 0;
     }
 
     private void Update()
     {
-        if (!_isWork && !_isAuto)
+        if (!_isWork && !HoldData.IsAuto)
             return;
 
         UpdateTimer();
@@ -66,32 +61,33 @@ public class HoldAdd : MonoBehaviour, IUpgradeable
 
     protected virtual void UpdateTimer()
     {
-        if (!_isAuto)
+        if (!HoldData.IsAuto)
             FatigueManager.instance.ChangeFatigue(_fatigueCoef);
 
-        if (_progressNow < _progressMax) {
-            _progressNow += Time.deltaTime * _speed;
-        } else {
+        if (HoldData.NowTime < _timeWait)
+            HoldData.NowTime += Time.deltaTime * HoldData.Speed;
+        else
             Add();
-        }
-
-        _UI.SetSliderValue(_progressNow);
     }
 
     protected virtual void Add()
     {
-        _progressNow = 0;
-        _readyCount++;
-        _UI.SetCountText(_readyCount);
+        HoldData.NowTime = 0;
+        HoldData.ReadyCount++;
     }
 
     public virtual void CheckUpgrade(BaseUpgrade upgrade)
     {
         if (upgrade == _unlockUpgrade)
-            _isUnlocked = true;
+            HoldData.IsUnlocked = true;
         else if (upgrade == _autoWorkUpgrade)
-            _isAuto = true;
+            HoldData.IsAuto = true;
 
         UpdateUpgrades();
+    }
+
+    public virtual void Bind(FarmData data, bool isFileEmpty)
+    {
+        LateStart();
     }
 }

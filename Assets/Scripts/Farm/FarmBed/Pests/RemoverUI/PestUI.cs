@@ -16,18 +16,16 @@ public class PestUI : MonoBehaviour
         _buttonRemove = GetComponent<Button>();
     }
 
-    public void Setup(Pest pest, Transform leftDown, Transform rightUp, PestsRemoverUI remover)
+    public void Setup(Pest pest, Vector2 leftDown, Vector2 rightUp, PestsRemoverUI remover)
     {
         _pestsRemover = remover;
         _image.sprite = pest.GetSprite();
         _image.SetNativeSize();
 
-        var xNormalized = Mathf.InverseLerp(pest.LeftDown.position.x, pest.RightUp.position.x, pest.transform.position.x);
-        var yNormalized = Mathf.InverseLerp(pest.LeftDown.position.y, pest.RightUp.position.y, pest.transform.position.y);
-        var x = Mathf.Lerp(leftDown.position.x, rightUp.position.x, xNormalized);
-        var y = Mathf.Lerp(leftDown.position.y, rightUp.position.y, yNormalized);
-        
-        transform.SetPositionAndRotation(new Vector2(x, y), pest.transform.rotation);
+        float x = Mathf.Lerp(leftDown.x, rightUp.x, pest.PestData.NormalizedPosition.x);
+        float y = Mathf.Lerp(leftDown.y, rightUp.y, pest.PestData.NormalizedPosition.y);
+        transform.SetPositionAndRotation(new Vector2(x, y), pest.PestData.RotationDegree.GetQuaternion());
+
         Pest = pest;
     }
 

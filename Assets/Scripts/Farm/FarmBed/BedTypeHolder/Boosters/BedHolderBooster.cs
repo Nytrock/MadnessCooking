@@ -6,53 +6,53 @@ public class BedHolderBooster : MonoBehaviour
     [SerializeField] private SpriteRenderer _boostSprite;
     [SerializeField] protected float _boostMultiplier;
     [SerializeField] protected float _boostLength;
+    [SerializeField] protected float _defaultSpeed;
 
-    private float _nowTime;
-    private float _boostTime;
+    protected SerializableBooster _data;
     private float _boostStep;
 
-    protected bool _isBoosting;
-    protected bool _isEternal;
-    protected float _standardSpeed = 1;
+    public event Action BoostEnded;
 
-    public event Action<float> BoostEnded;
-
-    private void Start()
+    protected virtual void Awake()
     {
         ChangeSpriteAlpha(0);
+        _boostStep = 1 / _boostLength * Time.deltaTime;
     }
 
     private void Update()
     {
-        if (!_isBoosting || _isEternal)
+        if (!_data.IsBoosting || _data.IsEternal)
             return;
 
-        if (_nowTime < _boostTime) {
-            _nowTime += Time.deltaTime * TimeManager.instance.TimeSpeed;
-            _boostSprite.color -= new Color(0, 0, 0, _boostStep);
+        if (_data.NowTime < _boostLength) {
+            _data.NowTime += Time.deltaTime * TimeManager.instance.TimeSpeed;
+            ChangeSpriteAlpha(1 - _data.NowTime / _boostLength);
         } else {
             EndBoost();
         }
     }
 
-    public virtual float StartBoost()
+    public void SetData(SerializableBooster data)
     {
-        _isBoosting = true;
+        _data = data;
+        if (_data.IsEternal)
+            ChangeSpriteAlpha(1);
+    }
 
-        _boostTime = _boostLength;
-        _nowTime = 0;
-
+    public virtual void StartBoost()
+    {
+        _data.IsBoosting = true;
+        _data.NowTime = 0;
+        _data.Boost = _boostMultiplier;
         ChangeSpriteAlpha(1);
-        _boostStep = 1 / _boostTime * Time.deltaTime * TimeManager.instance.TimeSpeed;
-
-        return _boostMultiplier;
     }
 
     public virtual void EndBoost()
     {
-        _isBoosting = false;
+        _data.IsBoosting = false;
         ChangeSpriteAlpha(0);
-        BoostEnded?.Invoke(_standardSpeed);
+        _data.Boost = _defaultSpeed;
+        BoostEnded?.Invoke();
     }
 
     private void ChangeSpriteAlpha(float alpha)
@@ -62,10 +62,11 @@ public class BedHolderBooster : MonoBehaviour
         _boostSprite.color = color;
     }
 
-    public void SetEternal(bool newValue)
+    public void ChangeEternal()
     {
-        _isEternal = newValue;
-        if (!newValue)
+        if (_data.IsEternal && !_data.IsBoosting)
+            StartBoost();
+        else if (_data.IsBoosting)
             EndBoost();
     }
 }

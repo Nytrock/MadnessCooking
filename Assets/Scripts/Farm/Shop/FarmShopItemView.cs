@@ -4,7 +4,7 @@ public class FarmShopItemView : BaseChooseShopItemView
     {
         _shop.BuyItem(_itemToBuy);
         var farmShop = _shop as FarmShop;
-        if (!farmShop.IsBuyedItemReplaced)
+        if (farmShop.IsNoNextUpgrade)
             ResetInfo();
     }
 }

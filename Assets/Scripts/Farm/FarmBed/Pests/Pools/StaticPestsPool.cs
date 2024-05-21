@@ -6,16 +6,17 @@ public class StaticPestsPool : PestsPool
     [SerializeField] private List<Pest> _pests;
     private readonly List<Pest> _freePests;
 
-    private void Start()
+    private void Awake()
     {
         foreach (var pest in _pests)
             _freePests.Add(pest);
     }
 
-    protected override Pest SpawnPest()
+    protected override Pest SpawnPest(ref int id)
     {
-        var index = Random.Range(0, _freePests.Count);
-        _freePests.RemoveAt(index);
-        return _freePests[index];
+        if (id == -1)
+            id = Random.Range(0, _freePests.Count);
+        _freePests.RemoveAt(id);
+        return _freePests[id];
     }
 }

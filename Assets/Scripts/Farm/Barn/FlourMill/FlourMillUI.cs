@@ -1,4 +1,4 @@
-public class FlourMillUI : HoldDoubleAddUI
+public class FlourMillUI : NeedHoldAddUI
 {
 
 }

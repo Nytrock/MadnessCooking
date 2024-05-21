@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class FarmShop : BaseChooseShop
+public class FarmShop : BaseChooseShop, IBindable<FarmData>
 {
     [SerializeField] private UpgradeManager _upgradeManager;
     [SerializeField] private List<LimitedConsumableUpgradeHolder> _upgradesHolders;
     [SerializeField] private List<BaseUpgrade> _upgradesToBuy;
-    private List<BaseUpgrade> _haveUpgrades = new();
-    private bool _isBuyedItemReplaced;
+    private FarmData _data;
 
-    public bool IsBuyedItemReplaced => _isBuyedItemReplaced;
+    public bool IsNoNextUpgrade { get; private set; }
+
     public override Type Type => typeof(BaseUpgrade);
 
     public override void BuyItem(BuyableObject item)
@@ -24,6 +24,7 @@ public class FarmShop : BaseChooseShop
 
         MoneyManager.instance.ChangeMoney(-upgrade.Cost);
         _upgradeManager.NewUpgrade(upgrade);
+        IsNoNextUpgrade = true;
 
         var index = Array.IndexOf(_itemsToBuy, upgrade);
         if (upgrade as LimitedConsumableUpgrade) {
@@ -31,9 +32,9 @@ public class FarmShop : BaseChooseShop
             foreach (LimitedConsumableUpgradeHolder upgradeHolder in _upgradesHolders) {
                 if (upgradeHolder.ConsumableUpgrade == consumableUpgrade) {
                     upgradeHolder.AddCount();
-                    _isBuyedItemReplaced = !upgradeHolder.IsMax;
+                    IsNoNextUpgrade = upgradeHolder.IsMax;
                     if (upgradeHolder.IsMax) {
-                        _haveUpgrades.Add(consumableUpgrade);
+                        _data.HaveUpgrades.Add(consumableUpgrade);
                         _upgradesHolders.Remove(upgradeHolder);
                         CheckNextUpgrades(consumableUpgrade, index);
                     }
@@ -41,14 +42,14 @@ public class FarmShop : BaseChooseShop
                 }
             }
         } else if (upgrade as GraphUpgrade) {
-            _isBuyedItemReplaced = false;
-            _haveUpgrades.Add(upgrade);
+            _data.HaveUpgrades.Add(upgrade);
             CheckNextUpgrades(upgrade as GraphUpgrade, index);
         } else {
             _upgradesToBuy.Remove(upgrade);
             _catalog.RemovePanel(index);
-            _haveUpgrades.Add(upgrade);
+            _data.HaveUpgrades.Add(upgrade);
         }
+
         SetObjectsArray();
     }
 
@@ -58,31 +59,32 @@ public class FarmShop : BaseChooseShop
             if (_upgradesToBuy.Contains(nextUpgrade))
                 continue;
 
-            if (_haveUpgrades.Contains(nextUpgrade)) {
+            if (_data.HaveUpgrades.Contains(nextUpgrade)) {
                 CheckNextUpgrades(nextUpgrade, index);
                 continue;
             }
 
             bool canAdd = true;
             foreach (GraphUpgrade needUpgrade in nextUpgrade.NeedUpgrades) {
-                canAdd &= _haveUpgrades.Contains(needUpgrade);
+                canAdd &= _data.HaveUpgrades.Contains(needUpgrade);
             }
 
             if (canAdd) {
-                if (!_isBuyedItemReplaced) {
+                if (IsNoNextUpgrade) {
                     if (graphUpgrade as LimitedConsumableUpgrade)
                         _upgradesToBuy.Insert(index, nextUpgrade);
                     else
-                        _upgradesToBuy[index - _upgradesHolders.Count] = nextUpgrade;
+                        _upgradesToBuy[index] = nextUpgrade;
                     _catalog.UpdatePanel(index, nextUpgrade);
-                    _isBuyedItemReplaced = true;
+                    IsNoNextUpgrade = false;
                 } else {
                     _upgradesToBuy.Add(nextUpgrade);
                     _catalog.GeneratePanel(nextUpgrade);
                 }
             }
         }
-        if (!_isBuyedItemReplaced) {
+
+        if (IsNoNextUpgrade) {
             _upgradesToBuy.Remove(graphUpgrade);
             _catalog.RemovePanel(index);
         }
@@ -90,14 +92,18 @@ public class FarmShop : BaseChooseShop
 
     protected override void SetObjectsArray()
     {
-        var upgradesConsumable = _upgradesHolders.Select(x => x.ConsumableUpgrade).ToList();
-        _itemsToBuy = new BuyableObject[_upgradesToBuy.Count + upgradesConsumable.Count];
-        int i;
-        for (i = 0; i < upgradesConsumable.Count; i++) {
-            _itemsToBuy[i] = upgradesConsumable[i];
+        _data.UpgradesHolders = _upgradesHolders.ToArray();
+        _data.UpgradesToBuy = _upgradesToBuy.ToArray();
+        _itemsToBuy = _data.UpgradesToBuy;
+    }
+
+    public void Bind(FarmData data, bool isFileEmpty)
+    {
+        _data = data;
+        if (!isFileEmpty) {
+            _upgradesHolders = _data.UpgradesHolders.ToList();
+            _upgradesToBuy = _data.UpgradesToBuy.ToList();
         }
-        for (int j = i; j < i + _upgradesToBuy.Count; j++) {
-            _itemsToBuy[j] = _upgradesToBuy[j - i];
-        }
+        LateStart();
     }
 }

@@ -2,19 +2,18 @@ using UnityEngine;
 
 public class FarmBedGroup : SpacePrefab
 {
-    [SerializeField] private FarmBed[] _groundBeds;
+    [SerializeField] private BedChoice[] _farmBeds = new BedChoice[_farmBedsCount];
+    private const int _farmBedsCount = 3;
 
     public void BedsSetup(FarmBedSettings settings)
     {
-        foreach (var bed in _groundBeds) {
+        foreach (var bed in _farmBeds)
             bed.Setup(settings);
-            bed.GetComponent<BedChoice>().Setup(settings);
-        }
     }
 
-    public void CheckUpgrade(BaseUpgrade upgrade)
+    public void Bind(FarmData data, int groupIndex)
     {
-        foreach (var bed in _groundBeds)
-            bed.CheckUpgrade(upgrade);
+        for (int i = 0; i < _farmBedsCount; i++)
+            _farmBeds[i].Bind(data, groupIndex * 3 + i);
     }
 }

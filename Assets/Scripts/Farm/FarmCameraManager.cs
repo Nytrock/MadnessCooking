@@ -7,8 +7,9 @@ public class FarmCameraManager : CameraManager<FarmData>
 
     protected override void CalculateBorderPositions()
     {
+        var spaceData = _spaceManager.SpaceData;
         _endPosition = transform.position.y;
-        _startPosition = _endPosition - (_spaceManager.SpaceCount - 1) * _spaceManager.SpaceSize;
+        _startPosition = _endPosition - (spaceData.Count - 1) * spaceData.SpaceSize;
         InvokeBordersFound();
     }
 

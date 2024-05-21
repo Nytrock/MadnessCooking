@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class BedTypesManager : MonoBehaviour, IUpgradeable
+public class BedTypesManager : MonoBehaviour, IUpgradeable, IBindable<FarmData>
 {
     [SerializeField] private List<BedType> _allBeds;
-    [SerializeField] private List<BedType> _haveBeds;
+    [SerializeField] private List<BedType> _defaultBeds;
+    private FarmData _data;
 
     [Header("Upgrades")]
     [SerializeField] private BedTypeUpgrade[] _bedsUpgrades;
@@ -30,7 +31,7 @@ public class BedTypesManager : MonoBehaviour, IUpgradeable
 
     public bool HaveBed(BedType bedType)
     {
-        foreach (var bed in _haveBeds)
+        foreach (var bed in _data.AvailableBedTypes)
             if (bed == bedType)
                 return true;
         return false;
@@ -46,7 +47,14 @@ public class BedTypesManager : MonoBehaviour, IUpgradeable
 
     private void AddBedType(BedType newBedType)
     {
-        _haveBeds.Add(newBedType);
+        _data.AvailableBedTypes.Add(newBedType);
         TypeAdded?.Invoke(newBedType);
+    }
+
+    public void Bind(FarmData data, bool isFileEmpty)
+    {
+        _data = data;
+        if (isFileEmpty)
+            _data.AvailableBedTypes = _defaultBeds;
     }
 }

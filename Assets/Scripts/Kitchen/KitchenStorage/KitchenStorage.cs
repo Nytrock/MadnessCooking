@@ -13,12 +13,6 @@ public class KitchenStorage : IngredientStorage<KitchenData>
         IngredientsChanged?.Invoke();
     }
 
-    public override void PutIngredients(IngredientCountList newElementsList)
-    {
-        base.PutIngredients(newElementsList);
-        IngredientsChanged?.Invoke();
-    }
-
     public override void PutIngredient(IngredientCount newElement)
     {
         base.PutIngredient(newElement);
@@ -33,22 +27,15 @@ public class KitchenStorage : IngredientStorage<KitchenData>
 
     public void RemoveAll()
     {
-        _ingredients.Clear();
+        Data.ClearList();
         IngredientsChanged?.Invoke();
     }
 
     public override void Bind(KitchenData data, bool isFileEmpty)
     {
-        _data = data;
         if (isFileEmpty)
-            _data.AvailableIngredients = _ingredients;
-
-        PutIngredients(_data.AvailableIngredients);
-        LateStart();
-    }
-
-    protected override void UpdateData()
-    {
-        _data.AvailableIngredients = _ingredients;
+            data.KitchenStorage = new(_defaultMaxSpace);
+        Data = data.KitchenStorage;
+        base.Bind(data, isFileEmpty);
     }
 }

@@ -1,10 +1,11 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
-public class FlourMill : HoldDoubleAdd
+public class FlourMill : NeedHoldAdd
 {
-    [SerializeField] private WheatManager _wheatManager;
-    [SerializeField] private BarnFridge _barnFridge;
+    private SerializableNeedHoldAdd _cowData;
+    private FarmData _data;
+
     private Animator _animator;
 
     private void Awake()
@@ -12,38 +13,24 @@ public class FlourMill : HoldDoubleAdd
         _animator = GetComponent<Animator>();
     }
 
-    protected override void Start()
+    protected override void Add()
     {
-        _wheatManager.FlourWheatChanged += SetWheatNum;
-        _barnFridge.FlourChanged += UpdateFlourCount;
-        base.Start();
+        if (!_data.IsWheatDistributing)
+            _cowData.MaterialCount--;
+        base.Add();
     }
 
     public override void ChangeWorkMode(bool newValue)
     {
-        _animator.SetBool("isHold", newValue && _materialCount > 0);
+        _animator.SetBool("isHold", newValue && NeedHoldData.MaterialCount > 0);
         base.ChangeWorkMode(newValue);
     }
 
-    private void SetWheatNum(int num)
+    public override void Bind(FarmData data, bool isFileEmpty)
     {
-        _materialCount = num;
-        _UI.SetCountText(_materialCount, _readyCount);
-    }
-
-    private void UpdateFlourCount(int count)
-    {
-        if (count > 0)
-            return;
-
-        _readyCount = count;
-        _UI.SetCountText(_materialCount, count);
-    }
-
-    protected override void Add()
-    {
-        base.Add();
-        _wheatManager.SubstractWheat(typeof(FlourMill));
-        _barnFridge.AddFlour(1);
+        HoldData = data.FlourMill;
+        _cowData = data.Cow;
+        _data = data;
+        base.Bind(data, isFileEmpty);
     }
 }

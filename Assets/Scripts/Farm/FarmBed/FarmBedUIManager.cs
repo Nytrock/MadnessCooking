@@ -12,8 +12,7 @@ public class FarmBedUIManager : MonoBehaviour
     private FarmBed _farmBed;
     private BedTypeUI _nowUI;
 
-
-    private void Start()
+    private void Awake()
     {
         _farmWell.WaterChanged += CheckWater;
         _puncher.FertilizeChanged += CheckFertilize;
@@ -24,26 +23,21 @@ public class FarmBedUIManager : MonoBehaviour
         _nowUI.ChangeMode();
     }
 
-    private void CheckWater(int count)
+    private void CheckWater()
     {
         if (_nowUI == null) return;
 
-        _nowUI.CheckWater(count);
+        _nowUI.CheckWater();
     }
 
-    private void CheckFertilize(int count)
+    private void CheckFertilize()
     {
         if (_nowUI == null) return;
 
-        _nowUI.CheckFertilize(count);
+        _nowUI.CheckFertilize();
     }
 
-    public void UpdateCount()
-    {
-        _nowUI.UpdateCount(_farmBed.Count);
-    }
-
-    public void ShowGroundBed(FarmBed farmBed)
+    public void ChangeState(FarmBed farmBed)
     {
         if (_farmBed == farmBed) {
             _nowUI.ChangeMode();
@@ -52,26 +46,20 @@ public class FarmBedUIManager : MonoBehaviour
 
         if (_nowUI != null) {
             _nowUI.ChangeMode(false);
-            if (_farmBed != null)
+            if (_farmBed != null) {
+                _farmBed.CountChanged -= _nowUI.UpdateCount;
                 UpdateSideButtons();
+            }
         }
 
-        _nowUI = FindUI(farmBed.BedType);
+        _nowUI = FindUI(farmBed.BedData.BedType);
         _nowUI.UpdateInfo(farmBed);
         _nowUI.ChangeMode(true);
 
-        if (_farmBed != null)
-            _farmBed.CountChanged -= UpdateCount;
-
         transform.position = farmBed.transform.position;
         _farmBed = farmBed;
-        _farmBed.CountChanged += UpdateCount;
+        _farmBed.CountChanged += _nowUI.UpdateCount;
         UpdateSideButtons();
-
-        if (_nowUI.IsSideButtonsWork) {
-            CheckWater(_farmWell.Count);
-            CheckFertilize(_puncher.Count);
-        }
     }
 
     private BedTypeUI FindUI(BedType bedType)
@@ -105,7 +93,7 @@ public class FarmBedUIManager : MonoBehaviour
         ChangeMode();
         _farmBed.ResetIngredient();
         _ingredientChoice.ActivateIngredientChoice(_farmBed);
-        _farmBed.CountChanged -= UpdateCount;
+        _farmBed.CountChanged -= _nowUI.UpdateCount;
         _farmBed = null;
     }
 
@@ -128,16 +116,20 @@ public class FarmBedUIManager : MonoBehaviour
 
     public void Pests() 
     {
-        var upgrader = _farmBed.Upgrader;
-        if (upgrader.IsPestsInstant) {
+        if (_farmBed.BedData.PestsGenerator.IsPestsInstant)
             _farmBed.PestsGenerator.CleanPests();
-        } else {
-            _pestsRemoverUI.Activate(_farmBed.BedType, _farmBed.PestsGenerator);
-        }
+        else
+            _pestsRemoverUI.Activate(_farmBed.BedData.BedType, _farmBed.PestsGenerator);
     }
 
     public void UpdateSideButtons()
     {
         _nowUI.UpdateSideButtons(_farmBed);
+    }
+
+    public void Bind(FarmData data)
+    {
+        foreach (var bedType in _bedsUI)
+            bedType.Bind(data);
     }
 }
