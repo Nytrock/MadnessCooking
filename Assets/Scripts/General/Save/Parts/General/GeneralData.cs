@@ -10,4 +10,5 @@ public class GeneralData : ISaveable
     public bool IsUpgradedTimeRenderer;
     public float Fatigue = 0;
     public int StartLocationId = 0;
+    public float AutoSaveNowTime;
 }

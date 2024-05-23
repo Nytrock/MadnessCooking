@@ -36,7 +36,7 @@ public class OrdersManager : MonoBehaviour
     {
         if (client.ClientData.Type == ClientType.GrayMan) {
             _kitchenStorage.RemoveAll();
-            SaveManager.instance.SaveAll();
+            SaveManager.instance.Save();
             Application.Quit();
         }
 

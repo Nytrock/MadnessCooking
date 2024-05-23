@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class SaveManager : MonoBehaviour
@@ -14,6 +15,8 @@ public class SaveManager : MonoBehaviour
     [SerializeField] private SaveFarmManager _farmPart;
     [SerializeField] private SaveOfficeManager _officePart;
 
+    public event Action SaveEnded;
+
     private void Awake()
     {
         _dataService = new FileDataService(new JsonSerializer());
@@ -24,14 +27,18 @@ public class SaveManager : MonoBehaviour
 
     private void Start()
     {
-        LoadAll();
+        Load();
     }
 
     [ContextMenu("Save")]
-    public void SaveAll() => _dataService.Save(_gameData);
+    public void Save()
+    {
+        _dataService.Save(_gameData);
+        SaveEnded?.Invoke();
+    }
 
     [ContextMenu("Load")]
-    private void LoadAll()
+    private void Load()
     {
         _gameData = _dataService.Load();
         bool isFileEmpty = _gameData == null;
