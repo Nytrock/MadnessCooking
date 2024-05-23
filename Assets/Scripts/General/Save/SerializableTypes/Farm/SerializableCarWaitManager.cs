@@ -5,6 +5,6 @@ public class SerializableCarWaitManager
 {
     public IngredientCountList IngredientsSended = new();
     public CarState CarState = CarState.Calm;
-    public float NowTime;
-    public float WaitTime;
+    public float NowWaitTime;
+    public float NeedWaitTime;
 }

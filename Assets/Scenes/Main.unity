@@ -22412,7 +22412,6 @@ MonoBehaviour:
   - {fileID: 1231044660}
   - {fileID: 1257875750}
   - {fileID: 1344608377}
-  - {fileID: 1493344180}
   - {fileID: 585307979}
 --- !u!1 &726202546
 GameObject:
@@ -25024,6 +25023,52 @@ MonoBehaviour:
   _panel: {fileID: 1694403031}
   _buttonPool: {fileID: 443366266}
   _sizeRenderer: {fileID: 0}
+--- !u!1 &816031579
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 816031580}
+  - component: {fileID: 816031581}
+  m_Layer: 0
+  m_Name: ShitGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &816031580
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 816031579}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1231044659}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &816031581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 816031579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df2f5286b1967b746bb22aae107a523b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _puncher: {fileID: 1276766701}
+  _needTime: 10
 --- !u!1 &819326168
 GameObject:
   m_ObjectHideFlags: 0
@@ -37615,7 +37660,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1231044659}
   - component: {fileID: 1231044660}
-  - component: {fileID: 1231044661}
   m_Layer: 0
   m_Name: Cow
   m_TagString: Untagged
@@ -37638,6 +37682,7 @@ Transform:
   m_Children:
   - {fileID: 614414817}
   - {fileID: 1164681599}
+  - {fileID: 816031580}
   m_Father: {fileID: 2131844622}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1231044660
@@ -37657,20 +37702,6 @@ MonoBehaviour:
   _holdUI: {fileID: 752270626}
   _timeWait: 5
   _fatigueCoef: 0.01
---- !u!114 &1231044661
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1231044658}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df2f5286b1967b746bb22aae107a523b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _puncher: {fileID: 1276766701}
-  _needTime: 10
 --- !u!1 &1232672322
 GameObject:
   m_ObjectHideFlags: 0
@@ -45429,6 +45460,7 @@ MonoBehaviour:
   _panel: {fileID: 1159207025}
   _buttonPool: {fileID: 1984073739}
   _sizeRenderer: {fileID: 1985458978}
+  _waitManager: {fileID: 1766492819}
   _sendButton: {fileID: 1506650406}
 --- !u!1 &1497202355
 GameObject:
@@ -45858,31 +45890,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1506650407}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1766492819}
-        m_TargetAssemblyTypeName: CarWaitManager, Assembly-CSharp
-        m_MethodName: StartWait
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1493344180}
-        m_TargetAssemblyTypeName: CarUI, Assembly-CSharp
-        m_MethodName: CarLeave
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1506650407
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -51574,12 +51582,12 @@ MonoBehaviour:
   - {fileID: 590866774}
   - {fileID: 1276766701}
   - {fileID: 1231044660}
+  - {fileID: 816031581}
   - {fileID: 372173401}
   - {fileID: 1257875750}
   - {fileID: 1344608377}
   - {fileID: 1090935202}
   - {fileID: 1766492819}
-  - {fileID: 1493344180}
   - {fileID: 197975456}
 --- !u!1 &1704632488
 GameObject:

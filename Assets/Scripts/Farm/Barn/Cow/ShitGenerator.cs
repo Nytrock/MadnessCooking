@@ -1,18 +1,23 @@
 using UnityEngine;
 
-public class ShitGeneraor : MonoBehaviour
+public class ShitGeneraor : MonoBehaviour, IBindable<FarmData>
 {
     [SerializeField] private Puncher _puncher;
     [SerializeField] private float _needTime;
-    private float _nowTime = 0;
+    private SerializableShitGenerator _data;
 
     private void Update()
     {
-        if (_nowTime < _needTime) {
-            _nowTime += Time.deltaTime * TimeManager.instance.TimeSpeed;
+        if (_data.NowTime < _needTime) {
+            _data.NowTime += Time.deltaTime * TimeManager.instance.TimeSpeed;
         } else {
             _puncher.AddShit();
-            _nowTime = 0;
+            _data.NowTime = 0;
         }
+    }
+
+    public void Bind(FarmData data, bool isFileEmpty)
+    {
+        _data = data.ShitGenerator;
     }
 }

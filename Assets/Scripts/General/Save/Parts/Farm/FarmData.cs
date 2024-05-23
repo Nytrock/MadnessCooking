@@ -19,6 +19,8 @@ public class FarmData : ISaveable
 
     public SerializableHoldAdd FarmWell = new();
     public SerializableNeedHoldAdd Cow = new();
+    public SerializableShitGenerator ShitGenerator = new();
+
     public SerializableNeedHoldAdd Puncher = new();
     public SerializableNeedHoldAdd FlourMill = new();
     public SerializableChickens Chickens = new();

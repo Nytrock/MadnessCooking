@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-public class FarmCarWaitRenderer : MonoBehaviour
+public class FarmCarWaitUI : MonoBehaviour
 {
     [SerializeField] private FarmCarWaitManager _manager;
     [SerializeField] private GameObject _panel;
@@ -34,7 +34,7 @@ public class FarmCarWaitRenderer : MonoBehaviour
 
     private void UpdateText()
     {
-        int nowTime = (int)_manager.Data.NowTime;
+        int nowTime = (int)_manager.Data.NowWaitTime;
         var seconds = nowTime % 60;
         _timeText.text = $"{nowTime / 60}:{seconds:00}";
     }
