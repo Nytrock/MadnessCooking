@@ -5,22 +5,21 @@ using UnityEngine;
 public class CountRenderer : MonoBehaviour
 {
     private readonly string[] _prefixes = { "K", "M", "B" };
-    private const string _overflowMessage = "WAIT, WHAT?!";
-
-    private TextMeshProUGUI _count;
+    private readonly string _overflowMessage = "WHAT";
+    private TextMeshProUGUI _countText;
 
     private void GetCountText()
     {
-        _count = GetComponent<TextMeshProUGUI>();
+        _countText = GetComponent<TextMeshProUGUI>();
     }
 
     public void UpdateCount(int count)
     {
-        if (_count == null)
+        if (_countText == null)
             GetCountText();
 
         if (count == int.MaxValue) {
-            _count.text = _overflowMessage;
+            _countText.text = _overflowMessage;
             return;
         }
 
@@ -33,15 +32,15 @@ public class CountRenderer : MonoBehaviour
             index++;
         }
         if (index == -1)
-            _count.text = count.ToString();
+            _countText.text = count.ToString();
         else if (index == _prefixes.Length)
-            _count.text = _overflowMessage;
+            _countText.text = _overflowMessage;
         else
-            _count.text = $"{resCount:F2}{_prefixes[index]}";
+            _countText.text = $"{resCount:F2}{_prefixes[index]}";
     }
     
     public void ResetText()
     {
-        _count.text = "";
+        _countText.text = "";
     }
 }

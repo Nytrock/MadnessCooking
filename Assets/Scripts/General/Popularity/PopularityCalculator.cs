@@ -8,8 +8,8 @@ public class PopularityCalculator : MonoBehaviour
     [SerializeField] private FoodManager _foodManager;
 
     [Header("Multipliers")]
-    [SerializeField] private float _oneCafeSpaceMultiplier;
-    [SerializeField] private float _oneFoodMultiplier;
+    [SerializeField, Min(0)] private float _oneCafeSpaceMultiplier;
+    [SerializeField, Min(0)] private float _oneFoodMultiplier;
 
     private PopularityLevel _nowLevel;
     private PopularityManager _popularityManager;

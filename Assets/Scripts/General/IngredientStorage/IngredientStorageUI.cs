@@ -2,12 +2,12 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class IngredientStorageUI<T> : MonoBehaviour where T: ISaveable
+public class IngredientStorageUI<TData> : MonoBehaviour where TData: ISaveable
 {
-    [SerializeField] protected IngredientStorage<T> _storage;
+    [SerializeField] protected IngredientStorage<TData> _storage;
     [SerializeField] protected GameObject _panel;
     [SerializeField] protected IngredientStorageButtonPool _buttonPool;
-    [SerializeField] private TextMeshProUGUI _sizeRenderer;
+    [SerializeField] private TextMeshProUGUI _sizeText;
     protected List<IngredientStorageButton> _buttons = new();
 
     protected virtual void Awake()
@@ -32,20 +32,20 @@ public class IngredientStorageUI<T> : MonoBehaviour where T: ISaveable
 
     private void AddButton(IngredientCount count)
     {
-        var button = _buttonPool.GetObject(count);
+        IngredientStorageButton button = _buttonPool.GetObject(count);
         _buttons.Add(button);
     }
 
     protected void UpdateSizeRenderer()
     {
-        if (_sizeRenderer == null)
+        if (_sizeText == null)
             return;
 
         if (_storage.Data.MaxSpace == -1) {
-            _sizeRenderer.text = "";
+            _sizeText.text = "";
             return;
         }
 
-        _sizeRenderer.text = $"{_storage.Data.NowSpace}/{_storage.Data.MaxSpace}";
+        _sizeText.text = $"{_storage.Data.NowSpace}/{_storage.Data.MaxSpace}";
     }
 }

@@ -8,8 +8,8 @@ public class InternetDownload : MonoBehaviour, IUpgradeable, IBindable<OfficeDat
     [SerializeField] private Slider _downloadBar;
 
     [Header("Wait borders")]
-    [SerializeField] private float _minWait;
-    [SerializeField] private float _maxWait;
+    [SerializeField, Min(0)] private float _minWait;
+    [SerializeField, Min(0)] private float _maxWait;
 
     [Header("Upgrades")]
     [SerializeField] private GraphUpgrade[] _speedUpgrades;

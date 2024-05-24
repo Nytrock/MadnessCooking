@@ -3,7 +3,7 @@ using UnityEngine;
 public class FarmBedUIManager : MonoBehaviour
 {
     [SerializeField] private BedTypeUI[] _bedsUI;
-    [SerializeField] private FarmBedUpgradeUI _upgrade;
+    [SerializeField] private FarmBedUpgraderUI _upgrade;
     [SerializeField] private FarmWell _farmWell;
     [SerializeField] private Puncher _puncher;
     [SerializeField] private PestsRemoverUI _pestsRemoverUI;
@@ -85,7 +85,7 @@ public class FarmBedUIManager : MonoBehaviour
     public void ChangeBedType()
     {
         ChangeMode();
-        _farmBed.GetComponent<BedChoice>().ReactivateBedsChoice();
+        _farmBed.ResetBedType();
     }
 
     public void ChangeIngredient()

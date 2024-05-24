@@ -7,8 +7,8 @@ public class PopularityUI : MonoBehaviour
     [SerializeField] private PopularityManager _popularityManager;
     [SerializeField] private PopularityUIMore _additionalUI;
 
-    [SerializeField] private TextMeshProUGUI _name;
-    [SerializeField] private TextMeshProUGUI _level;
+    [SerializeField] private TextMeshProUGUI _nameText;
+    [SerializeField] private TextMeshProUGUI _levelText;
     [SerializeField] private Slider _progress;
 
     private bool _isLastLevel;
@@ -21,8 +21,8 @@ public class PopularityUI : MonoBehaviour
 
     private void UpdateLevel(PopularityLevel level)
     {
-        _name.text = level.Name;
-        _level.text = (_popularityManager.NowLevel + 1).ToString();
+        _nameText.text = level.Name;
+        _levelText.text = (_popularityManager.NowLevel + 1).ToString();
         _additionalUI.UpdateInfo(level);
 
         if (_popularityManager.IsMaxLevel) {

@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Button))]
-public abstract class ChoiceButton<T> : MonoBehaviour where T: BuyableObject
+public abstract class ChoiceButton<TItem> : MonoBehaviour where TItem: BuyableObject
 {
     [SerializeField] private Sprite _deselectedSprite;
     [SerializeField] private Sprite _selectedSprite;
@@ -12,7 +12,7 @@ public abstract class ChoiceButton<T> : MonoBehaviour where T: BuyableObject
     private Image _image;
     private bool _isSelected;
 
-    public T Item { get; protected set; }
+    public TItem Item { get; protected set; }
 
     private void Awake()
     {

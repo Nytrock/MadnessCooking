@@ -8,7 +8,7 @@ public abstract class HoldAdd : MonoBehaviour, IUpgradeable, IBindable<FarmData>
 
     [Header("Main")]
     [SerializeField] protected HoldAddUI _holdUI;
-    [SerializeField] private float _timeWait;
+    [SerializeField, Min(0)] private float _timeWait;
     [SerializeField, Min(0)] private float _fatigueCoef;
 
     protected bool _isWork;

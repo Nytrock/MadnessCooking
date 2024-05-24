@@ -3,7 +3,7 @@ using System;
 [Serializable]
 public class SerializableSpot
 {
-    public bool HaveClients;
+    public bool AvailableClients;
     public GroupClientState GroupState;
     public float WaitTime;
     public float NowTime;
@@ -21,7 +21,7 @@ public class SerializableSpot
 
     public void ClearClients()
     {
-        HaveClients = false;
+        AvailableClients = false;
         Clients = new SerializableClient[SeatsCount];
     }
 }

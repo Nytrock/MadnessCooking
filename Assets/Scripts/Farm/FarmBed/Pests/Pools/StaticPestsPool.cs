@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class StaticPestsPool : PestsPool
 {
-    [SerializeField] private List<Pest> _pests;
-    private readonly List<Pest> _freePests;
+    [SerializeField] private Pest[] _pests;
+    private readonly List<Pest> _freePests = new();
 
     private void Awake()
     {

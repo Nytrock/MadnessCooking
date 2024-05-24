@@ -6,7 +6,7 @@ public class LocationButton : MonoBehaviour
 {
     [SerializeField] private LocationManager _locationManager;
     [SerializeField] private Transform _location;
-    [SerializeField] private float _fatigueCoef;
+    [SerializeField, Min(0)] private float _fatigueCoef;
 
     public Vector2 Location => _location.position;
 
@@ -21,7 +21,7 @@ public class LocationButton : MonoBehaviour
 
     private void ChangeMode(Vector2 newPosition)
     {
-        var isOurLocation = newPosition == (Vector2)_location.position;
+        bool isOurLocation = newPosition == (Vector2)_location.position;
         if (isOurLocation)
             FatigueManager.instance.ChangeFatigue(_fatigueCoef);
         _button.interactable = !isOurLocation;

@@ -11,9 +11,8 @@ public class SaveFarmManager : SavePartManager<FarmData>
         _bindables = new IBindable<FarmData>[_bindableObjects.Length];
         for (int i = 0; i < _bindableObjects.Length; i++) {
             _bindables[i] = _bindableObjects[i].GetComponent<IBindable<FarmData>>();
-            if (_bindables[i] == null) {
+            if (_bindables[i] == null)
                 throw new NullReferenceException($"Object {i} don't have type {typeof(FarmData)}");
-            }
         }
     }
 }

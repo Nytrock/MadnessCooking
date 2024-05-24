@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class BarnFridge : MonoBehaviour, IBindable<FarmData>
@@ -14,10 +15,8 @@ public class BarnFridge : MonoBehaviour, IBindable<FarmData>
 
     public void PutIngredient(Ingredient ingredient)
     {
-        if (ingredient != _milk && ingredient != _flour) {
-            Debug.LogError("Unknown ingredient");
-            return;
-        }
+        if (ingredient != _milk && ingredient != _flour)
+            throw new ArgumentException("Unknown ingredient");
 
         if (_car.Data.LeftSpace == 0)
             return;

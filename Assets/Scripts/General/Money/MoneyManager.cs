@@ -5,7 +5,7 @@ public class MoneyManager : MonoBehaviour, IBindable<GeneralData>
 {
     public static MoneyManager instance;
 
-    [SerializeField] private int _moneyDefault;
+    [SerializeField, Min(0)] private int _moneyDefault;
     private GeneralData _data;
 
     public int MoneyCount => _data.MoneyCount;

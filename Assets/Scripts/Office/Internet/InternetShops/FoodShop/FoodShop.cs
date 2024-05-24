@@ -17,12 +17,12 @@ public class FoodShop : BaseChooseShop, IBindable<OfficeData>
 
         var food = item as Food;
         if (food == null)
-            return;
+            throw new NullReferenceException($"Buying item is not {Type}");
 
         MoneyManager.instance.ChangeMoney(-food.Cost);
         _foodManager.AddFood(food);
 
-        var index = _foodToBuy.IndexOf(food);
+        int index = _foodToBuy.IndexOf(food);
         _foodToBuy.RemoveAt(index);
         _catalog.RemovePanel(index);
         SetObjectsArray();

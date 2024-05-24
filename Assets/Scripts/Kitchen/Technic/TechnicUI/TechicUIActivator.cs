@@ -1,13 +1,14 @@
 using UnityEngine;
 
+[RequireComponent(typeof(TechnicHolder))]
 public class TechicUIActivator : UIActivator
 {
     [SerializeField] private TechnicHolderUI _technicUI;
     private TechnicHolder _holder;
 
-    private void Start()
+    private void Awake()
     {
-        _holder = transform.GetComponent<TechnicHolder>();
+        _holder = GetComponent<TechnicHolder>();
     }
 
     protected override void Press()

@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public abstract class IngredientStorage<T> : MonoBehaviour, IBindable<T> where T: ISaveable
+public abstract class IngredientStorage<TData> : MonoBehaviour, IBindable<TData> where TData: ISaveable
 {
     [SerializeField] protected int _defaultMaxSpace = 100;
 
@@ -9,21 +9,21 @@ public abstract class IngredientStorage<T> : MonoBehaviour, IBindable<T> where T
 
     public event Action<IngredientCount> IngredientAdded;
 
-    public virtual void PutIngredients(IngredientCountList newElementsList)
+    public virtual void PutIngredients(IngredientCountList puttingCountList)
     {
-        for (int i = 0; i < newElementsList.Size; i++)
-            PutIngredient(newElementsList.Get(i));
+        for (int i = 0; i < puttingCountList.Size; i++)
+            PutIngredient(puttingCountList.Get(i));
     }
 
-    public virtual void PutIngredient(IngredientCount newElement)
+    public virtual void PutIngredient(IngredientCount puttingCount)
     {
-        if (!Data.TryAddCount(newElement.Count))
-            Debug.LogError("Too big count");
+        if (!Data.TryAddCount(puttingCount.Count))
+            throw new OverflowException("Too big count");
 
-        var oldSize = Data.Ingredients.Size;
-        Data.Ingredients.Add(newElement);
+        int oldSize = Data.Ingredients.Size;
+        Data.Ingredients.Add(puttingCount);
         if (Data.Ingredients.Size != oldSize)
-            IngredientAdded?.Invoke(newElement);
+            IngredientAdded?.Invoke(puttingCount);
     }
 
     public virtual void RemoveIngredients(IngredientCountList countList)
@@ -37,9 +37,9 @@ public abstract class IngredientStorage<T> : MonoBehaviour, IBindable<T> where T
         return Data.Ingredients.ContainsCount(count);
     }
 
-    public virtual void Bind(T data, bool isFileEmpty)
+    public virtual void Bind(TData data, bool isFileEmpty)
     {
-        foreach (var item in Data.Ingredients)
-            IngredientAdded?.Invoke(item);
+        foreach (var ingredientCount in Data.Ingredients)
+            IngredientAdded?.Invoke(ingredientCount);
     }
 }

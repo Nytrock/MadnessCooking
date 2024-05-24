@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(OrderButton))]
 public class OrderCookingSlider : MonoBehaviour
 {
     [SerializeField] private Slider _cookingSlider;

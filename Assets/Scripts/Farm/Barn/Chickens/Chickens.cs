@@ -5,8 +5,8 @@ using UnityEngine;
 public class Chickens : MonoBehaviour, IUpgradeable, IBindable<FarmData>
 {
     [SerializeField] private FarmCar _car;
-    [SerializeField] private float _maxFeedTime;
-    [SerializeField] private float _eggTime;
+    [SerializeField, Min(0)] private float _maxFoodWorkTime;
+    [SerializeField, Min(0)] private float _eggTime;
 
     [Header("Upgrades")]
     [SerializeField] private BaseUpgrade _unlockUpgrade;
@@ -43,10 +43,10 @@ public class Chickens : MonoBehaviour, IUpgradeable, IBindable<FarmData>
     private void UpdateFoods()
     {
         List<SerializableChickenFood> foodToRemove = new();
-        foreach (var item in Data.FoodList) {
-            item.AddTime();
-            if (item.IsEnded)
-                foodToRemove.Add(item);
+        foreach (var food in Data.FoodList) {
+            food.AddTime();
+            if (food.IsEnded)
+                foodToRemove.Add(food);
         }
 
         foreach (var item in foodToRemove)
@@ -65,7 +65,7 @@ public class Chickens : MonoBehaviour, IUpgradeable, IBindable<FarmData>
     public void Feed()
     {
         float foodCoef = _foodSpeedCoef / (Data.FoodList.Count + 1);
-        Data.FoodList.Add(new SerializableChickenFood(_maxFeedTime, foodCoef));
+        Data.FoodList.Add(new SerializableChickenFood(_maxFoodWorkTime, foodCoef));
 
         Data.Speed += foodCoef;
         Data.IsFeed = true;

@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(PopularityXpAdder))]
 public class ClientsSpawner : MonoBehaviour, IUpgradeable, IBindable<CafeData>
@@ -14,8 +16,8 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable, IBindable<CafeData>
     private FoodManager _foodManager;
 
     [Header("Spawn time")]
-    [SerializeField] private float _minSpawnTime;
-    [SerializeField] private float _maxSpawnTime;
+    [SerializeField, Min(0)] private float _minSpawnTime;
+    [SerializeField, Min(0)] private float _maxSpawnTime;
 
     [Header("Upgrades")]
     [SerializeField] private BaseUpgrade _eatTimeShowUpgrade;
@@ -59,14 +61,14 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable, IBindable<CafeData>
 
     private void Spawn()
     {
-        var clientCount = GetRandomCount();
-        var spotIndex = _spotManager.TakeRandomSpot(clientCount);
-        var waitMultiplier = _popularityCalculate.GetSpaceMultiplier();
+        ClientCount clientCount = GetRandomCount();
+        int spotIndex = _spotManager.TakeRandomSpot(clientCount);
         if (spotIndex == -1)
             return;
 
-        var clientType = GetRandomType(clientCount);
-        var spot = _spotManager.GetSpotByIndex(spotIndex);
+        float waitMultiplier = _popularityCalculate.GetSpaceMultiplier();
+        ClientType clientType = GetRandomType(clientCount);
+        CafeSpot spot = _spotManager.GetSpotByIndex(spotIndex);
         Order order = new(_foodManager.GetRandomFood(), spotIndex + 1);
         if (clientCount != ClientCount.One) {
             for (int i = 0; i < spot.SeatsCount; i++) {
@@ -80,7 +82,7 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable, IBindable<CafeData>
             Client client = SpawnOneClient(spotIndex);
             client.StartNewCycle();
         }
-        _data.Spots[spotIndex].HaveClients = true;
+        _data.Spots[spotIndex].AvailableClients = true;
 
         if (!_spotManager.CheckHavingSpots())
             ChangeSpawnMode();
@@ -88,9 +90,9 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable, IBindable<CafeData>
 
     private void SetNewTime()
     {
-        var popular = _popularityCalculate.GetPopularity();
-        var minTime = _minSpawnTime / popular;
-        var maxTime = _maxSpawnTime / popular;
+        float popular = _popularityCalculate.GetPopularity();
+        float minTime = _minSpawnTime / popular;
+        float maxTime = _maxSpawnTime / popular;
 
         _data.NeedSpawnTime = Random.Range(minTime, maxTime);
         _data.NowSpawnTime = 0;
@@ -113,7 +115,7 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable, IBindable<CafeData>
             return ClientCount.One;
 
         _popularityCalculate.GetClientsNumberChances(out int singleChance, out int doubleChance, out int tripleChance, out int quarterChance);
-        var number = UnityEngine.Random.Range(1, 1001);
+        int number = Random.Range(1, 1001);
         if (number <= singleChance)
             return ClientCount.One;
         else if (number <= doubleChance)
@@ -128,7 +130,7 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable, IBindable<CafeData>
         if (_data.IsWaitingCritic)
             return ClientType.Critic;
 
-        var number = UnityEngine.Random.Range(1, 1001);
+        int number = Random.Range(1, 1001);
         if (number == 1 && clientCount == ClientCount.One)
             return ClientType.GrayMan;
         else if (number <= 50)
@@ -184,8 +186,8 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable, IBindable<CafeData>
     {
         _clients.Add(client);
         client.ChangeShowingTimeEat(_data.IsEatTimeShow);
-        var clientData = _data.Spots[spotIndex].Clients[tableIndex];
-        var clientSettings = new ClientSettings(clientData, spotIndex, tableIndex, this);
+        SerializableClient clientData = _data.Spots[spotIndex].Clients[tableIndex];
+        ClientSettings clientSettings = new(clientData, spotIndex, tableIndex, this);
         client.Setup(clientSettings);
         _ordersManager.SetNewOrder(client);
         _cafeOpener.CafeChanged += client.Leave;
@@ -200,9 +202,8 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable, IBindable<CafeData>
     {
         if (upgrade == _eatTimeShowUpgrade) {
             _data.IsEatTimeShow = true;
-            foreach (var client in _clients) {
+            foreach (var client in _clients)
                 client.ChangeShowingTimeEat(true);
-            }
         }
     }
 
@@ -215,14 +216,14 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable, IBindable<CafeData>
         }
 
         for (int spotIndex = 0; spotIndex < _data.Spots.Count; spotIndex++) {
-            var spotData = _data.Spots[spotIndex];
-            if (!spotData.HaveClients)
+            SerializableSpot spotData = _data.Spots[spotIndex];
+            if (!spotData.AvailableClients)
                 continue;
 
             _spotManager.TakeSpot(spotIndex);
             CafeSpot spot = _spotManager.GetSpotByIndex(spotIndex);
             if (spotData.SeatsCount != 1) {
-                var table = SpawnGroupOfClients(spot);
+                ClientGroupHolder table = SpawnGroupOfClients(spot);
                 if (spotData.GroupState == GroupClientState.Wait ||
                     spotData.GroupState == GroupClientState.EndlessWait)
                     table.CheckWait();
@@ -239,7 +240,7 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable, IBindable<CafeData>
                 client = _pool.GetClient();
             else
                 client = _pool.GetGroupClient();
-            var clientData = _data.LeavingClients[i];
+            SerializableClient clientData = _data.LeavingClients[i];
             client.transform.position = clientData.Position.GetVector();
             client.Setup(new ClientSettings(clientData, -1, -1, this));
         }
@@ -263,7 +264,9 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable, IBindable<CafeData>
 
     private ClientGroupHolder SpawnGroupOfClients(CafeSpot spot)
     {
-        var table = spot.GetComponent<ClientGroupHolder>();
+        if (!spot.TryGetComponent(out ClientGroupHolder table))
+            throw new ArgumentNullException("Spot doesn't have the required class ClientGroupHolder");
+
         for (int i = 0; i < spot.SeatsCount; i++) {
             GroupClient client = _pool.GetGroupClient();
             client.ClientEat += ClientEat;

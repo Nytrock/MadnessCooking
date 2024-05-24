@@ -1,7 +1,7 @@
-using UnityEngine;
-using UnityEditor;
 using System;
 using System.Reflection;
+using UnityEditor;
+using UnityEngine;
 using Object = UnityEngine.Object;
 
 #if UNITY_EDITOR
@@ -32,14 +32,13 @@ public class BuyableObjectEditor : Editor
 
     private static Type GetType(string TypeName)
     {
-        var type = Type.GetType(TypeName);
+        Type type = Type.GetType(TypeName);
         if (type != null)
             return type;
 
-        if (TypeName.Contains("."))
-        {
-            var assemblyName = TypeName.Substring(0, TypeName.IndexOf('.'));
-            var assembly = Assembly.Load(assemblyName);
+        if (TypeName.Contains(".")) {
+            string assemblyName = TypeName.Substring(0, TypeName.IndexOf('.'));
+            Assembly assembly = Assembly.Load(assemblyName);
             if (assembly == null)
                 return null;
             type = assembly.GetType(TypeName);
@@ -47,13 +46,11 @@ public class BuyableObjectEditor : Editor
                 return type;
         }
 
-        var currentAssembly = Assembly.GetExecutingAssembly();
-        var referencedAssemblies = currentAssembly.GetReferencedAssemblies();
-        foreach (var assemblyName in referencedAssemblies)
-        {
-            var assembly = Assembly.Load(assemblyName);
-            if (assembly != null)
-            {
+        Assembly currentAssembly = Assembly.GetExecutingAssembly();
+        AssemblyName[] referencedAssemblies = currentAssembly.GetReferencedAssemblies();
+        foreach (var assemblyName in referencedAssemblies) {
+            Assembly assembly = Assembly.Load(assemblyName);
+            if (assembly != null) {
                 type = assembly.GetType(TypeName);
                 if (type != null)
                     return type;

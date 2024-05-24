@@ -5,7 +5,7 @@ using UnityEngine;
 public class IngredientCount
 {
     [SerializeField] private Ingredient _ingredient;
-    [SerializeField] private int _count;
+    [SerializeField, Min(1)] private int _count;
 
     public Ingredient Ingredient => _ingredient;
     public int Count => _count;

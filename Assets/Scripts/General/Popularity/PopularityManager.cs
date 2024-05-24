@@ -1,5 +1,4 @@
 using System;
-using System.Xml.Linq;
 using UnityEngine;
 
 public class PopularityManager : MonoBehaviour, IBindable<GeneralData>
@@ -20,13 +19,13 @@ public class PopularityManager : MonoBehaviour, IBindable<GeneralData>
     }
 
     [ContextMenu("AddXp")]
-    void TextAddXp()
+    void TestAddXp()
     {
         AddXp(80);
     }
 
     [ContextMenu("RemoveXp")]
-    void TextRemoveXp()
+    void TestRemoveXp()
     {
         RemoveXp(70);
     }

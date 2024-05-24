@@ -20,7 +20,7 @@ public class OrderRecipe : FoodRecipe<OrderRecipePart>
     protected override void SetupIngredients(IngredientCountList ingredients, ref bool canCook)
     {
         for (int i = 0; i < ingredients.Size; i++) {
-            var ingredientCount = ingredients.Get(i);
+            IngredientCount ingredientCount = ingredients.Get(i);
             if (ingredientCount.Ingredient == _spice && _isAutoSpice) {
                 _canCook &= MoneyManager.instance.MoneyCount >= ingredientCount.Count * ingredientCount.Ingredient.Cost;
                 _recipeParts[i].SetupAutoSpice(ingredientCount.Ingredient, ingredientCount.Count);

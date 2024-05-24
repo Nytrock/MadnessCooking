@@ -5,19 +5,19 @@ using UnityEngine;
 [Serializable]
 public class ItemInfoRendererWithPrice : ItemInfoRenderer
 {
-    [SerializeField] private TextMeshProUGUI _price;
+    [SerializeField] private TextMeshProUGUI _priceText;
 
     public void SetPrice(string buyText, int count = -1)
     {
         if (count == -1)
-            _price.text = buyText;
+            _priceText.text = buyText;
         else
-            _price.text = buyText + " " + count.ToString();
+            _priceText.text = buyText + " " + count.ToString();
     }
 
     public override void ResetInfo()
     {
         base.ResetInfo();
-        _price.text = "";
+        _priceText.text = "";
     }
 }

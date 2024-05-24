@@ -1,4 +1,4 @@
-public class ClientWaitOthers : ClientBaseState
+public class ClientWaitOthersState : ClientBaseState
 {
     public override void EnterState(Client client)
     {

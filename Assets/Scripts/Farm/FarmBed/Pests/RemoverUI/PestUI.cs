@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(Button), typeof(Image))]
+[RequireComponent(typeof(Button))]
 public class PestUI : MonoBehaviour
 {
     private PestsRemoverUI _pestsRemover;

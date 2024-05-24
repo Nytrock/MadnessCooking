@@ -5,7 +5,7 @@ public abstract class BaseChooseShopItemView : MonoBehaviour
 {
     [SerializeField] protected BaseChooseShop _shop;
     [SerializeField] private ItemInfoRendererWithPrice _renderer;
-    [SerializeField] private string _costText;
+    [SerializeField] private string _costDescription;
     [SerializeField] private Button _buyButton;
     protected BuyableObject _itemToBuy;
 
@@ -27,7 +27,7 @@ public abstract class BaseChooseShopItemView : MonoBehaviour
     {
         _itemToBuy = item;
         _renderer.SetItemInfo(_itemToBuy);
-        _renderer.SetPrice(_costText, _itemToBuy.Cost);
+        _renderer.SetPrice(_costDescription, _itemToBuy.Cost);
         UpdateButton();
     }
 

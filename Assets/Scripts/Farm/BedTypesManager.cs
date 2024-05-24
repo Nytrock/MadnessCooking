@@ -5,14 +5,14 @@ using UnityEngine;
 
 public class BedTypesManager : MonoBehaviour, IUpgradeable, IBindable<FarmData>
 {
-    [SerializeField] private List<BedType> _allBeds;
+    [SerializeField] private BedType[] _allBeds;
     [SerializeField] private List<BedType> _defaultBeds;
     private FarmData _data;
 
     [Header("Upgrades")]
     [SerializeField] private BedTypeUpgrade[] _bedsUpgrades;
 
-    public int BedsCount => _allBeds.Count;
+    public int BedsCount => _allBeds.Length;
 
     public event Action<BedType> TypeAdded;
 

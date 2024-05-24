@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class DesertBedWater : StandardBedWater
 {
-    [SerializeField] private float _boostFine;
+    [SerializeField, Min(0)] private float _boostFine;
     private float _originalBoost;
 
     private void Start()

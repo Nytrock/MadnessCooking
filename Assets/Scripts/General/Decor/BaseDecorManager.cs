@@ -1,9 +1,10 @@
+using System;
 using UnityEngine;
 
-public abstract class BaseDecorManager<T> : MonoBehaviour, IBindable<T> where T: ISaveable
+public abstract class BaseDecorManager<TData> : MonoBehaviour, IBindable<TData> where TData: ISaveable
 {
     [SerializeField] private DecorHolder[] _decorHolders;
-    protected T _data;
+    protected TData _data;
 
     private void Awake()
     {
@@ -25,8 +26,8 @@ public abstract class BaseDecorManager<T> : MonoBehaviour, IBindable<T> where T:
             }
         }
 
-        Debug.LogError("No such decor holder");
+        throw new ArgumentNullException("No such decor holder");
     }
 
-    public abstract void Bind(T data, bool isFileEmpty);
+    public abstract void Bind(TData data, bool isFileEmpty);
 }

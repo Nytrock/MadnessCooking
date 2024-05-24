@@ -20,7 +20,7 @@ public class ShopCatalogPage: MonoBehaviour
 
     public void GeneratePanel(BuyableObject item)
     {
-        var buyPanel = Instantiate(_buyPanelPrefab, transform);
+        BaseBuyPanel buyPanel = Instantiate(_buyPanelPrefab, transform);
         buyPanel.Setup(item, _shop);
         _buyPanels.Add(buyPanel);
     }
@@ -32,7 +32,7 @@ public class ShopCatalogPage: MonoBehaviour
 
     public BaseBuyPanel PopFirstPanel()
     {
-        var panel = _buyPanels[0];
+        BaseBuyPanel panel = _buyPanels[0];
         _buyPanels.RemoveAt(0);
         return panel;
     }

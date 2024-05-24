@@ -1,5 +1,5 @@
-using UnityEngine;
 using UnityEditor;
+using UnityEngine;
 
 [CustomPropertyDrawer(typeof(RequireInterfaceAttribute))]
 public class RequireInterfaceDrawer : PropertyDrawer
@@ -14,7 +14,7 @@ public class RequireInterfaceDrawer : PropertyDrawer
                 property.objectReferenceValue = g.GetComponent(requiredAttribute.RequiredType);
             EditorGUI.EndProperty();
         } else {
-            var previousColor = GUI.color;
+            Color previousColor = GUI.color;
             GUI.color = Color.red;
             EditorGUI.LabelField(position, label, new GUIContent("Property is not a reference type"));
             GUI.color = previousColor;

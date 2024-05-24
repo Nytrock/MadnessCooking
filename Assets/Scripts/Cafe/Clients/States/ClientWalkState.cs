@@ -3,7 +3,7 @@ using UnityEngine;
 public class ClientWalkState : ClientBaseState
 {
     private Transform _target;
-    private const float _speed = 8f;
+    private readonly float _speed = 8f;
 
     public override void EnterState(Client client)
     {
@@ -28,6 +28,7 @@ public class ClientWalkState : ClientBaseState
         client.transform.position = Vector2.MoveTowards(client.transform.position, 
             _target.position, _speed * Time.deltaTime * TimeManager.instance.TimeSpeed);
         client.ClientData.Position = new SerializableVector(client.transform.position);
+
         if (Vector2.Distance(client.transform.position, _target.position) < 0.001f) {
             if (client.ClientData.State == ClientState.Leave)
                 client.Destroy();

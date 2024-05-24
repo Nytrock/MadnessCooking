@@ -22,7 +22,7 @@ public class WheatManager : MonoBehaviour, IUpgradeable, IBindable<FarmData>
     {
         if (upgrade == _wheatDistributeUpgrade) {
             _data.IsWheatDistributing = true;
-            var count = _data.Cow.MaterialCount;
+            int count = _data.Cow.MaterialCount;
             _data.Cow.MaterialCount = 0;
             _data.FlourMill.MaterialCount = 0;
             DistributeWheat(count);
@@ -31,7 +31,7 @@ public class WheatManager : MonoBehaviour, IUpgradeable, IBindable<FarmData>
 
     private void DistributeWheat(int count)
     {
-        var halfCount = count / 2;
+        int halfCount = count / 2;
 
         _data.Cow.MaterialCount += halfCount;
         _data.FlourMill.MaterialCount += halfCount;

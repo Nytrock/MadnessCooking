@@ -3,16 +3,16 @@ using UnityEngine;
 public class ChoiceBuyDescriptionUI : MonoBehaviour
 {
     [SerializeField] private ItemInfoRendererWithPrice _renderer;
-    [SerializeField] private string _buyText;
-    [SerializeField] private string _freeText;
+    [SerializeField] private string _buyDescription;
+    [SerializeField] private string _freeDescription;
 
     public void UpdateDescription(BuyableObject item)
     {
         _renderer.SetItemInfo(item);
         if (item.Cost > 0)
-            _renderer.SetPrice(_buyText, item.Cost);
+            _renderer.SetPrice(_buyDescription, item.Cost);
         else
-            _renderer.SetPrice(_freeText);
+            _renderer.SetPrice(_freeDescription);
     }
 
     public void ChangeActive()

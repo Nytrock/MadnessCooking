@@ -2,11 +2,12 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(OrderCookingSlider))]
 public class OrderButton : MonoBehaviour
 {
     [SerializeField] private Image _icon;
-    [SerializeField] private TextMeshProUGUI _title;
-    [SerializeField] private TextMeshProUGUI _tableCount;
+    [SerializeField] private TextMeshProUGUI _titleText;
+    [SerializeField] private TextMeshProUGUI _tableIndexText;
 
     [SerializeField] private GameObject _startButton;
     [SerializeField] private GameObject _cookingSlider;
@@ -35,8 +36,8 @@ public class OrderButton : MonoBehaviour
         Order.OrderFinished += FinishCook;
 
         _icon.sprite = Order.Food.Icon;
-        _title.text = Order.Food.Name;
-        _tableCount.text = Order.TableNumber.ToString();
+        _titleText.text = Order.Food.Name;
+        _tableIndexText.text = Order.TableNumber.ToString();
 
         _recipe.SetupRecipe(Order.Food, _ordersUI.IsAutoSpice);
         _cookButton.interactable = _recipe.CanCook;

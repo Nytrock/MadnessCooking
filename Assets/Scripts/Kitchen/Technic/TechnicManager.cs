@@ -1,15 +1,12 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 public class TechnicManager : MonoBehaviour, IUpgradeable, IBindable<KitchenData>
 {
-    public const int HoldersCount = 9;
-
     [SerializeField] private TechnicHolderUI _UI;
-    [SerializeField] private TechnicHolder[] _holders = new TechnicHolder[HoldersCount];
-    [SerializeField] private List<Technic> _defaultTechnic;
+    [SerializeField] private TechnicHolder[] _holders;
+    [SerializeField] private Technic[] _defaultTechnic;
     private KitchenData _data;
 
     [Header("Upgrades")]
@@ -30,19 +27,19 @@ public class TechnicManager : MonoBehaviour, IUpgradeable, IBindable<KitchenData
     {
         if (!_data.AvailableTechnic.Contains(technic))
             return false;
-        var holder = FindHolderByTechic(technic);
+        TechnicHolder holder = FindHolderByTechic(technic);
         return holder.Accessible();
     }
 
     public void ActivateTechnic(Order order)
     {
-        var technic = FindHolderByTechic(order.Food.TypeTechnic);
+        TechnicHolder technic = FindHolderByTechic(order.Food.TypeTechnic);
         technic.StartCook(order);
     }
 
     public void DisableTechnic(Technic typeTechnic)
     {
-        var technic = FindHolderByTechic(typeTechnic);
+        TechnicHolder technic = FindHolderByTechic(typeTechnic);
         technic.StopCook();
     }
 
@@ -57,7 +54,7 @@ public class TechnicManager : MonoBehaviour, IUpgradeable, IBindable<KitchenData
     public void AddTechnic(Technic technic)
     {
         _data.AvailableTechnic.Add(technic);
-        var holder = FindHolderByTechic(technic);
+        TechnicHolder holder = FindHolderByTechic(technic);
         holder.ChangeState(true);
         TechnicChanged?.Invoke();
     }
@@ -80,7 +77,8 @@ public class TechnicManager : MonoBehaviour, IUpgradeable, IBindable<KitchenData
     {
         _data = data;
         if (isFileEmpty) {
-            _data.AvailableTechnic = _defaultTechnic;
+            _data.AllTechnic = new SerializableTechnic[_holders.Length];
+            _data.AvailableTechnic = _defaultTechnic.ToList();
         }
 
         ActivateHolders();

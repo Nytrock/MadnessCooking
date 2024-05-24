@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class TimeRenderClock : TimeRenderer
@@ -10,7 +11,7 @@ public class TimeRenderClock : TimeRenderer
 
     protected override void UpdateVisual()
     {
-        var timespan = _timeManager.TimeSpan;
+        TimeSpan timespan = _timeManager.TimeSpan;
         hoursPoint.localRotation = Quaternion.Euler(
                 0f, 0f, (float)timespan.TotalHours * -hoursToDegrees);
         minutesPoint.localRotation = Quaternion.Euler(

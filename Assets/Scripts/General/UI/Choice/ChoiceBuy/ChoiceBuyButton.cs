@@ -1,16 +1,15 @@
 using UnityEngine.UI;
-public abstract class ChoiceBuyButton<T> : ChoiceButton<T> where T: BuyableObject
+public abstract class ChoiceBuyButton<TItem> : ChoiceButton<TItem> where TItem: BuyableObject
 {
     private int _cost;
     protected bool _isBuyable;
 
-    private void Start()
+    private void Awake()
     {
-        var moneyManager = MoneyManager.instance;
-        moneyManager.MoneyChanged += CheckBuyable;
+        MoneyManager.instance.MoneyChanged += CheckBuyable;
     }
 
-    public virtual void Setup(T item, int index, ChoiceBuyUI<T> ui)
+    public virtual void Setup(TItem item, int index, ChoiceBuyUI<TItem> ui)
     {
         _button = GetComponent<Button>();
         gameObject.SetActive(true);

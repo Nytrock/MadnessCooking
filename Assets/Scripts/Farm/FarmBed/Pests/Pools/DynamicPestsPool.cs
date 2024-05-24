@@ -8,7 +8,7 @@ public class DynamicPestsPool : PestsPool
     {
         if (id == -1)
             id = Random.Range(0, _prefabs.Length);
-        var pest = Instantiate(_prefabs[id], _container);
+        Pest pest = Instantiate(_prefabs[id], _container);
         return pest;
     }
 }

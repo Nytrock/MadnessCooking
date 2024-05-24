@@ -13,8 +13,8 @@ public class SpotEditorUI : MonoBehaviour
         _buttonAdd.SetActive(true);
         _buttonsContainer.gameObject.SetActive(false);
 
-        _editor.EditorActivated += delegate { ChangeUIState(true); Move(_editor.SpotManager.GetLengthAllSpots()); };
-        _editor.EditorDisabled += delegate { ChangeUIState(false); Move(-_editor.SpotManager.GetLengthAllSpots()); };
+        _editor.EditorActivated += delegate { ChangeUIState(true); Move(_editor.SpotManager.GetLengthOfAllSpots()); };
+        _editor.EditorDisabled += delegate { ChangeUIState(false); Move(-_editor.SpotManager.GetLengthOfAllSpots()); };
 
         _editor.SpotManager.SpotsPositionChanged += Move;
     }

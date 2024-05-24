@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public abstract class ChoiceBuyUI<T> : ChoiceUI<T, ChoiceBuyButton<T>> where T: BuyableObject
+public abstract class ChoiceBuyUI<TItem> : ChoiceUI<TItem, ChoiceBuyButton<TItem>> where TItem: BuyableObject
 {
     [SerializeField] protected ChoiceBuyDescriptionUI _description;
 
@@ -11,7 +11,7 @@ public abstract class ChoiceBuyUI<T> : ChoiceUI<T, ChoiceBuyButton<T>> where T: 
         else
             _choiceButtons[_chosedIndex].ChangeSelectedState();
 
-        var isSame = index == _chosedIndex;
+        bool isSame = index == _chosedIndex;
         if (isSame) {
             _chosedIndex = -1;
             _description.ChangeActive();

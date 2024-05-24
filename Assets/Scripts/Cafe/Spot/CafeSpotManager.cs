@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class CafeSpotManager : MonoBehaviour, IBindable<CafeData>
 {
@@ -8,12 +10,17 @@ public class CafeSpotManager : MonoBehaviour, IBindable<CafeData>
     [SerializeField] private CafeOpener _opener;
     [SerializeField] private CafeSpot[] _spotPrefabs;
 
-    private List<CafeSpot> _spots = new();
-    private readonly List<List<int>> _freeSpots = new(4);
+    private readonly List<CafeSpot> _spots = new();
+    private List<List<int>> _freeSpots;
     private float _cellSize;
     private CafeData _data;
 
     public event Action<float> SpotsPositionChanged;
+
+    private void Awake()
+    {
+        _freeSpots = new(_spotPrefabs.Length);
+    }
 
     private void LateStart()
     {
@@ -30,7 +37,7 @@ public class CafeSpotManager : MonoBehaviour, IBindable<CafeData>
 
     private void SetupSpotRemoveButton(int i)
     {
-        var eventHandler = _spots[i].RemoveButton.onClick;
+        Button.ButtonClickedEvent eventHandler = _spots[i].RemoveButton.onClick;
         eventHandler.RemoveAllListeners();
         eventHandler.AddListener(delegate { RemoveSpot(i); });
     }
@@ -44,15 +51,15 @@ public class CafeSpotManager : MonoBehaviour, IBindable<CafeData>
     public void GenerateFreeSpotsList()
     {
         _freeSpots.Clear();
-        for (int i = 0; i < 4; i++)
-            _freeSpots.Add(new List<int>());
+        for (int i = 0; i < _spotPrefabs.Length; i++)
+            _freeSpots.Add(new());
         for (int i = 0; i < _spots.Count; i++)
             _freeSpots[_spots[i].SeatsCount - 1].Add(i);
     }
 
     private void RemoveSpot(int spotIndex)
     {
-        var offset = _cellSize * _spots[spotIndex].SeatsCount;
+        float offset = _cellSize * _spots[spotIndex].SeatsCount;
         SpotsPositionChanged?.Invoke(-offset);
 
         MoveSpots(spotIndex, offset);
@@ -72,30 +79,18 @@ public class CafeSpotManager : MonoBehaviour, IBindable<CafeData>
 
     public int TakeRandomSpot(ClientCount clientType)
     {
-        int needSeat;
-        switch (clientType) {
-            case ClientCount.One:
-                needSeat = 1;
-                break;
-            case ClientCount.Two:
-                needSeat = 2;
-                break;
-            case ClientCount.Three:
-                needSeat = 3;
-                break;
-            case ClientCount.Four:
-                needSeat = 4;
-                break;
-            default:
-                needSeat = 1;
-                break;
-        }
-        needSeat -= 1;
+        int needSeat = clientType switch {
+            ClientCount.One => 0,
+            ClientCount.Two => 1,
+            ClientCount.Three => 2,
+            ClientCount.Four => 3,
+            _ => 0,
+        };
 
         if (_freeSpots[needSeat].Count == 0)
             return -1;
 
-        var randomSpotNum = _freeSpots[needSeat][UnityEngine.Random.Range(0, _freeSpots[needSeat].Count)];
+        int randomSpotNum = _freeSpots[needSeat][Random.Range(0, _freeSpots[needSeat].Count)];
         _freeSpots[needSeat].Remove(randomSpotNum);
         return randomSpotNum;
     }
@@ -130,7 +125,7 @@ public class CafeSpotManager : MonoBehaviour, IBindable<CafeData>
             spot.ChangeEditorState(false);
     }
 
-    public float GetLengthAllSpots()
+    public float GetLengthOfAllSpots()
     {
         float size = 0;
         foreach (var spot in _spots)
@@ -148,7 +143,7 @@ public class CafeSpotManager : MonoBehaviour, IBindable<CafeData>
 
     public void AddNewSpot(int index, bool isAddedByEditor = true)
     {
-        var spot = Instantiate(_spotPrefabs[index], transform);
+        CafeSpot spot = Instantiate(_spotPrefabs[index], transform);
         spot.ChangeEditorState(isAddedByEditor);
         spot.SetIndex(_spots.Count);
         if (isAddedByEditor)
@@ -164,7 +159,7 @@ public class CafeSpotManager : MonoBehaviour, IBindable<CafeData>
             case 2: offset *= 0; break;
             case 3: offset *= 0.5f; break;
         }
-        spot.transform.position += new Vector3(GetLengthAllSpots() + offset, 0, 0);
+        spot.transform.position += new Vector3(GetLengthOfAllSpots() + offset, 0, 0);
 
         _spots.Add(spot);
         SetupSpotRemoveButton(_spots.Count - 1);

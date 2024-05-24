@@ -1,16 +1,17 @@
 using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(ClientUI))]
 public class Client : MonoBehaviour
 {
     #region States Settings
     protected ClientBaseState _nowState;
-    private ClientWalkState _walkState = new();
-    private ClientWaitState _waitState = new();
-    private ClientEatState _eatState = new();
-    private ClientSitState _sitState = new();
-    private ClientWaitOthers _waitOthersState = new();
+    private readonly ClientWalkState _walkState = new();
+    private readonly ClientWaitState _waitState = new();
+    private readonly ClientEatState _eatState = new();
+    private readonly ClientSitState _sitState = new();
+    private readonly ClientWaitOthersState _waitOthersState = new();
     #endregion
 
     [SerializeField] private ClientSkin _skin;
@@ -80,7 +81,7 @@ public class Client : MonoBehaviour
 
     private void RotateSkin()
     {
-        var spot = Spawner.GetSpot(SpotIndex);
+        CafeSpot spot = Spawner.GetSpot(SpotIndex);
         _skin.RotateSkin(spot.GetSeatRotation(TableIndex));
     }
 
@@ -99,8 +100,7 @@ public class Client : MonoBehaviour
 
         ClientData = settings.Data;
         if (ClientData.WaitTime == 0) {
-            ClientData.WaitTime = ClientData.WaitMultiplier *
-                UnityEngine.Random.Range(_minWaitTime, _maxWaitTime);
+            ClientData.WaitTime = ClientData.WaitMultiplier * Random.Range(_minWaitTime, _maxWaitTime);
         }
 
         transform.position = ClientData.Position.GetVector();
@@ -113,11 +113,9 @@ public class Client : MonoBehaviour
 
     public void ActivateOrder()
     {
-        var order = ClientData.Order;
-        order.Activate();
-
         OrderActivated?.Invoke(this);
-        _clientUI.SetFood(order.Food);
+        _clientUI.SetFood(ClientData.Order.Food);
+        ClientData.Order.Activate();
     }
 
     public void CheckOrder()
@@ -163,7 +161,7 @@ public class Client : MonoBehaviour
 
     public virtual void Eat()
     {
-        ClientData.WaitTime = ClientData.Order.Food.TimeToEat * UnityEngine.Random.Range(0.9f, 1.2f);
+        ClientData.WaitTime = ClientData.Order.Food.TimeToEat * Random.Range(0.9f, 1.2f);
         ClientData.NowTime = 0;
         ClientData.State = ClientState.Eat;
         ChangeState(); 
@@ -183,13 +181,13 @@ public class Client : MonoBehaviour
 
     public void SetSpotTableFood()
     {
-        var spot = Spawner.GetSpot(SpotIndex);
+        CafeSpot spot = Spawner.GetSpot(SpotIndex);
         spot.SetTableFoodSprite(ClientData.Order.Food, TableIndex);
     }
 
     public void ResetSpotTableFood()
     {
-        var spot = Spawner.GetSpot(SpotIndex);
+        CafeSpot spot = Spawner.GetSpot(SpotIndex);
         spot.ResetTableFoodSprite(TableIndex);
     }
 

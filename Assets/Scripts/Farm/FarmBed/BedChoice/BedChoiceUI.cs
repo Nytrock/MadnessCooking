@@ -27,7 +27,7 @@ public class BedChoiceUI : ChoiceBuyWithCameraStopUI<BedType, FarmData>, IBindab
     {
         for (int i = 0; i < _bedTypesManager.BedsCount; i++) {
             var choiceButton = _choiceButtonPool.GetObject() as BedChoiceButton;
-            var bed = _bedTypesManager.GetBed(i);
+            BedType bed = _bedTypesManager.GetBed(i);
             choiceButton.Setup(bed, i, this);
             choiceButton.SetBlockedState(!_bedTypesManager.HaveBed(bed));
             _choiceButtons.Add(choiceButton);
@@ -52,7 +52,7 @@ public class BedChoiceUI : ChoiceBuyWithCameraStopUI<BedType, FarmData>, IBindab
         if (_chosedIndex == -1)
             return;
 
-        var bedType = _choiceButtons[_chosedIndex].Item;
+        BedType bedType = _choiceButtons[_chosedIndex].Item;
         _ingredientsRenderer.ShowIngredients(bedType);
         _description.UpdateDescription(bedType);
 

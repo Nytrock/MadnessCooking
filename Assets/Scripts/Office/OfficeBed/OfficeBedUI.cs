@@ -6,8 +6,8 @@ public class OfficeBedUI : MonoBehaviour
     [SerializeField] private GameObject _panel;
     [SerializeField] private GameObject _blockPanel;
     [SerializeField] private TextMeshProUGUI _sleepButtonText;
-    [SerializeField] private string _isSleepText;
-    [SerializeField] private string _notSleepText;
+    [SerializeField] private string _sleepingNote;
+    [SerializeField] private string _notSleepingNote;
 
     public void LateStart(bool isSleep)
     {
@@ -23,8 +23,8 @@ public class OfficeBedUI : MonoBehaviour
     {
         _blockPanel.SetActive(isSleep);
         if (isSleep)
-            _sleepButtonText.text = _isSleepText;
+            _sleepButtonText.text = _sleepingNote;
         else
-            _sleepButtonText.text = _notSleepText;
+            _sleepButtonText.text = _notSleepingNote;
     }
 }

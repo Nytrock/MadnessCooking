@@ -23,17 +23,15 @@ public class IngredientShop : BaseInstantShop, IUpgradeable, IBindable<OfficeDat
     {
         var ingredient = item as Ingredient;
         if (ingredient == null)
-            return;
+            throw new NullReferenceException($"Buying item is not {Type}");
 
         MoneyManager.instance.ChangeMoney(-ingredient.Cost);
         if (ingredient.Type == IngredientType.Buyable) {
             _ingredientStorage.PutIngredient(new IngredientCount(ingredient, 1));
-            return;
         } else {
             _ingredientsManager.AddIngredient(ingredient);
+            RemoveIngredient(ingredient);
         }
-
-        RemoveIngredient(ingredient);
     }
 
     public void CheckUpgrade(BaseUpgrade upgrade)
@@ -44,7 +42,7 @@ public class IngredientShop : BaseInstantShop, IUpgradeable, IBindable<OfficeDat
 
     private void RemoveIngredient(Ingredient ingredient)
     {
-        var index = _ingredientsToBuy.IndexOf(ingredient);
+        int index = _ingredientsToBuy.IndexOf(ingredient);
         _ingredientsToBuy.RemoveAt(index);
         _catalog.RemovePanel(index);
         SetObjectsArray();

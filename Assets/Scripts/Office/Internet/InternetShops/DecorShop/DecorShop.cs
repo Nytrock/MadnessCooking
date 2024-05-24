@@ -17,7 +17,7 @@ public class DecorShop : BaseInstantShop, IBindable<OfficeData>
     {
         var decor = item as Decor;
         if (decor == null)
-            return;
+            throw new NullReferenceException($"Buying item is not {Type}");
 
         MoneyManager.instance.ChangeMoney(-decor.Cost);
         FatigueManager.instance.AddDecorBonus(decor);
@@ -26,14 +26,11 @@ public class DecorShop : BaseInstantShop, IBindable<OfficeData>
         else if (decor.DecorType == DecorType.Office)
             _officeManager.AddDecor(decor);
 
-        var index = _decorToBuy.IndexOf(decor);
-        if (_decorToBuy.Count == 1 && decor != _cat)
-        {
+        int index = _decorToBuy.IndexOf(decor);
+        if (_decorToBuy.Count == 1 && decor != _cat) {
             _decorToBuy[index] = _cat;
             _catalog.UpdatePanel(index, _cat);
-        }
-        else
-        {
+        } else {
             _decorToBuy.RemoveAt(index);
             _catalog.RemovePanel(index);
         }

@@ -41,9 +41,9 @@ public abstract class CameraManager<TData> : MonoBehaviour where TData: ISaveabl
         if (!_isWorking)
             return;
 
-        var keyAxis = Input.GetAxis(_keyAxis);
-        var mouseAxis = Input.GetAxis("Mouse ScrollWheel");
-        var cameraAxis = Input.GetAxis(_cameraAxis);
+        float keyAxis = Input.GetAxis(_keyAxis);
+        float mouseAxis = Input.GetAxis("Mouse ScrollWheel");
+        float cameraAxis = Input.GetAxis(_cameraAxis);
 
         if (keyAxis != 0 || mouseAxis != 0) {
             if (keyAxis != 0)

@@ -13,9 +13,9 @@ public class KitchenStorage : IngredientStorage<KitchenData>
         IngredientsChanged?.Invoke();
     }
 
-    public override void PutIngredient(IngredientCount newElement)
+    public override void PutIngredient(IngredientCount puttingCount)
     {
-        base.PutIngredient(newElement);
+        base.PutIngredient(puttingCount);
         IngredientsChanged?.Invoke();
     }
 

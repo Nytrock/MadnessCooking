@@ -5,10 +5,10 @@ public class ClientTimeMultiplier : MonoBehaviour
     [SerializeField] private TimeManager _timeManager;
 
     [Header("Multiplier")]
-    [SerializeField] private float _morning = 1;
-    [SerializeField] private float _day = 1;
-    [SerializeField] private float _evening = 1;
-    [SerializeField] private float _night = 1;
+    [SerializeField, Min(0)] private float _morning = 1;
+    [SerializeField, Min(0)] private float _day = 1;
+    [SerializeField, Min(0)] private float _evening = 1;
+    [SerializeField, Min(0)] private float _night = 1;
 
     private float _daytimeMultiplier = 1;
 

@@ -5,8 +5,8 @@ using UnityEngine;
 public class CafeOpener : MonoBehaviour, IBindable<CafeData>
 {
     [SerializeField] private TextMeshProUGUI _text;
-    [SerializeField] private string TextOpened;
-    [SerializeField] private string TextClosed;
+    [SerializeField] private string _descriptionOpened;
+    [SerializeField] private string _descriptionClosed;
     private CafeData _data;
 
     public bool IsOpened => _data.IsOpened;
@@ -33,9 +33,9 @@ public class CafeOpener : MonoBehaviour, IBindable<CafeData>
     private void UpdateCafe()
     {
         if (_data.IsOpened)
-            _text.text = TextOpened;
+            _text.text = _descriptionOpened;
         else
-            _text.text = TextClosed;
+            _text.text = _descriptionClosed;
         CafeChanged?.Invoke();
     }
 }

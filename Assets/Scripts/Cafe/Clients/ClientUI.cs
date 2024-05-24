@@ -20,7 +20,9 @@ public class ClientUI : MonoBehaviour
     private void Awake()
     {
         _foodImage = _mainButton.GetComponent<Image>();
-        _client = GetComponent<Client>();
+
+        if (!TryGetComponent(out _client))
+            throw new ArgumentNullException("ClientUI is not connected to client");
         _mainButton.onClick.AddListener(_client.ActivateOrder);
     }
 

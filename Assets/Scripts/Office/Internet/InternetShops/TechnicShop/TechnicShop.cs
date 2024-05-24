@@ -15,12 +15,12 @@ public class TechnicShop : BaseInstantShop, IBindable<OfficeData>
     {
         var technic = item as Technic;
         if (technic == null)
-            return;
+            throw new NullReferenceException($"Buying item is not {Type}");
 
         MoneyManager.instance.ChangeMoney(-technic.Cost);
         _technicManager.AddTechnic(technic);
 
-        var index = _technicToBuy.IndexOf(technic);
+        int index = _technicToBuy.IndexOf(technic);
         _technicToBuy.RemoveAt(index);
         _catalog.RemovePanel(index);
         SetObjectsArray();

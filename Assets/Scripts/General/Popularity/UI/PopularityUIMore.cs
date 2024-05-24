@@ -1,16 +1,15 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PopularityUIMore : MonoBehaviour
 {
     [SerializeField] private GameObject _panel;
-    [SerializeField] private TextMeshProUGUI _description;
-    [SerializeField] private TextMeshProUGUI _popularityMultiplier;
-    [SerializeField] private TextMeshProUGUI _singleChance;
-    [SerializeField] private TextMeshProUGUI _doubleChance;
-    [SerializeField] private TextMeshProUGUI _tripleChance;
-    [SerializeField] private TextMeshProUGUI _quarterChance;
+    [SerializeField] private TextMeshProUGUI _descriptionText;
+    [SerializeField] private TextMeshProUGUI _popularityMultiplierText;
+    [SerializeField] private TextMeshProUGUI _singleChanceText;
+    [SerializeField] private TextMeshProUGUI _doubleChanceText;
+    [SerializeField] private TextMeshProUGUI _tripleChanceText;
+    [SerializeField] private TextMeshProUGUI _quarterChanceText;
 
     private void Start()
     {
@@ -24,11 +23,11 @@ public class PopularityUIMore : MonoBehaviour
 
     public void UpdateInfo(PopularityLevel level)
     {
-        _description.text = level.Description;
-        _popularityMultiplier.text = level.PopularityMultiplier.ToString();
-        _singleChance.text = level.SingleChance.ToString() + "%";
-        _doubleChance.text = level.DoubleChance.ToString() + "%";
-        _tripleChance.text = level.TripleChance.ToString() + "%";
-        _quarterChance.text = level.QuarterChance.ToString() + "%";
+        _descriptionText.text = level.Description;
+        _popularityMultiplierText.text = level.PopularityMultiplier.ToString();
+        _singleChanceText.text = level.SingleChance.ToString() + "%";
+        _doubleChanceText.text = level.DoubleChance.ToString() + "%";
+        _tripleChanceText.text = level.TripleChance.ToString() + "%";
+        _quarterChanceText.text = level.QuarterChance.ToString() + "%";
     }
 }

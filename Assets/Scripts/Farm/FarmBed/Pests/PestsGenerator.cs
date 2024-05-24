@@ -1,16 +1,17 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class PestsGenerator : MonoBehaviour
 {
-    [SerializeField] private int _maxPests;
+    [SerializeField, Min(1)] private int _maxPests;
     [SerializeField] private PestsPool _pool;
-    [SerializeField] private float _onePestSlowdown;
+    [SerializeField, Min(0)] private float _onePestSlowdown;
 
     [Header("Time settings")]
-    [SerializeField] private float _minTime;
-    [SerializeField] private float _maxTime;
+    [SerializeField, Min(0)] private float _minTime;
+    [SerializeField, Min(0)] private float _maxTime;
 
     private SerializableFarmBed _bedData;
     private SerializablePestsGenerator _generatorData => _bedData.PestsGenerator;
@@ -30,7 +31,7 @@ public class PestsGenerator : MonoBehaviour
         } else {
             SpawnPest();
             _generatorData.NowTime = 0;
-            _generatorData.NeedTime = UnityEngine.Random.Range(_minTime, _maxTime);
+            _generatorData.NeedTime = Random.Range(_minTime, _maxTime);
         }
     }
 
@@ -41,7 +42,7 @@ public class PestsGenerator : MonoBehaviour
 
     private void SpawnPest()
     {
-        var pest = _pool.GetObject();
+        Pest pest = _pool.GetObject();
         _pests.Add(pest);
         _generatorData.Pests.Add(pest.PestData);
         CheckWork();
@@ -53,7 +54,7 @@ public class PestsGenerator : MonoBehaviour
         if (!newMode) {
             CleanPests();
         } else {
-            _generatorData.NeedTime = UnityEngine.Random.Range(_minTime, _maxTime);
+            _generatorData.NeedTime = Random.Range(_minTime, _maxTime);
             _generatorData.NowTime = 0;
         }
     }
@@ -100,7 +101,7 @@ public class PestsGenerator : MonoBehaviour
     {
         _bedData = bedData;
         foreach (var pestData in _generatorData.Pests) {
-            var pest = _pool.GetObject(pestData.PrefabId);
+            Pest pest = _pool.GetObject(pestData.PrefabId);
             _pests.Add(pest);
             pest.Bind(pestData);
         }

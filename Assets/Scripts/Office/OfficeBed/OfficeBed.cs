@@ -9,7 +9,9 @@ public class OfficeBed : MonoBehaviour, IBindable<OfficeData>
     public void Bind(OfficeData data, bool isFileEmpty)
     {
         _data = data;
-        _officeBedUI.LateStart(_data.IsSleeping);
+
+        if (_officeBedUI != null)
+            _officeBedUI.LateStart(_data.IsSleeping);
         UpdateSleepState();
     }
 
@@ -21,7 +23,9 @@ public class OfficeBed : MonoBehaviour, IBindable<OfficeData>
 
     private void UpdateSleepState()
     {
-        _officeBedUI.UpdateSleepState(_data.IsSleeping);
         _timeManager.ChangeSleepState(_data.IsSleeping);
+
+        if (_officeBedUI != null)
+            _officeBedUI.UpdateSleepState(_data.IsSleeping);
     }
 }

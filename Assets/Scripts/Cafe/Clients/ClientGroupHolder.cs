@@ -4,13 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(CafeSpot))]
 public class ClientGroupHolder : MonoBehaviour
 {
     [SerializeField] private Slider _waitSlider;
-    [SerializeField] private float _minTalk;
-    [SerializeField] private float _maxTalk;
+    [SerializeField, Min(0)] private float _minTalk;
+    [SerializeField, Min(0)] private float _maxTalk;
 
     private SerializableSpot _data;
     private CafeSpot _spot;
@@ -57,7 +58,7 @@ public class ClientGroupHolder : MonoBehaviour
             client.enabled = true;
             if (client.transform.position == spawn) {
                 client.StartNewCycle();
-                yield return new WaitForSeconds(UnityEngine.Random.Range(0.5f, 1.2f));
+                yield return new WaitForSeconds(Random.Range(0.5f, 1.2f));
             }
         }
     }
@@ -94,15 +95,14 @@ public class ClientGroupHolder : MonoBehaviour
 
         for (int i = 0; i < leaveClients.Length; i++) {
             leaveClients[i].Leave();
-            yield return new WaitForSeconds(UnityEngine.Random.Range(0.2f, 1f));
+            yield return new WaitForSeconds(Random.Range(0.2f, 1f));
         }
     }
 
     private void RandomizeClients()
     {
-        var last = _clients.Count - 1;
-        for (var i = 0; i < last; ++i) {
-            var r = UnityEngine.Random.Range(i, _clients.Count);
+        for (int i = 0; i < _clients.Count - 1; i++) {
+            int r = Random.Range(0, _clients.Count);
             (_clients[r], _clients[i]) = (_clients[i], _clients[r]);
         }
     }
@@ -140,7 +140,7 @@ public class ClientGroupHolder : MonoBehaviour
             return;
         }
 
-        _data.WaitTime = _data.TalkIndex * UnityEngine.Random.Range(_minTalk, _maxTalk);
+        _data.WaitTime = _data.TalkIndex * Random.Range(_minTalk, _maxTalk);
         _waitSlider.maxValue = _data.WaitTime;
         _data.GroupState = GroupClientState.Talk;
         ChangeSliderState(true);

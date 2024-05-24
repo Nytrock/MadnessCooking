@@ -19,7 +19,7 @@ public class SaveManager : MonoBehaviour
 
     private void Awake()
     {
-        _dataService = new FileDataService(new JsonSerializer());
+        _dataService = new FileDataService();
         Application.targetFrameRate = 60;
 
         instance = this;

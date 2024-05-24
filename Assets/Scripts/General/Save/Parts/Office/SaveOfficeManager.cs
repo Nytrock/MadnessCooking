@@ -13,9 +13,7 @@ public class SaveOfficeManager : SavePartManager<OfficeData>
         {
             _bindables[i] = _bindableObjects[i].GetComponent<IBindable<OfficeData>>();
             if (_bindables[i] == null)
-            {
                 throw new NullReferenceException($"Object {i} don't have type {typeof(OfficeData)}");
-            }
         }
     }
 }

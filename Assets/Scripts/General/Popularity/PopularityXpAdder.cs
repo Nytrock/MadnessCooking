@@ -4,8 +4,8 @@ public class PopularityXpAdder : MonoBehaviour
 {
     [SerializeField] private PopularityManager _popularityManager;
     [SerializeField] private CriticSpawner _criticSpawner;
-    [SerializeField] private int _minXp;
-    [SerializeField] private int _maxXp;
+    [SerializeField, Min(0)] private int _minXp;
+    [SerializeField, Min(0)] private int _maxXp;
 
     public void AddXp(ClientType clientType)
     {

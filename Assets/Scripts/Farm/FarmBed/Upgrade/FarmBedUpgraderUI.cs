@@ -1,7 +1,7 @@
 using System.Linq;
 using UnityEngine;
 
-public class FarmBedUpgradeUI : ChoiceBuyWithCameraStopUI<FarmBedUpgrade, FarmData>
+public class FarmBedUpgraderUI : ChoiceBuyWithCameraStopUI<FarmBedUpgrade, FarmData>
 {
     [SerializeField] private FarmBedUpgradeManager _manager;
     private FarmBed _changingBed;
@@ -20,7 +20,7 @@ public class FarmBedUpgradeUI : ChoiceBuyWithCameraStopUI<FarmBedUpgrade, FarmDa
             FarmBedUpgrade upgrade = _manager.GetUpgradeByIndex(i);
             bool isAccessable = CheckUpgradeAccessable(upgrade);
             if (isAccessable) {
-                var button = _choiceButtonPool.GetObject();
+                ChoiceBuyButton<FarmBedUpgrade> button = _choiceButtonPool.GetObject();
                 button.Setup(upgrade, index, this);
                 _choiceButtons.Add(button);
                 index++;
@@ -31,15 +31,16 @@ public class FarmBedUpgradeUI : ChoiceBuyWithCameraStopUI<FarmBedUpgrade, FarmDa
     public override void SetChoice()
     {
         base.SetChoice();
-        var upgrade = _choiceButtons[_chosedIndex].Item;
-        _changingBed.Upgrader.AddUpgrade(upgrade);
+        FarmBedUpgrade upgrade = _choiceButtons[_chosedIndex].Item;
+        _changingBed.AddUpgrade(upgrade);
 
         int index = 0;
-        foreach (FarmBedUpgrade nextUpgrade in upgrade.NextUpgrades) {
-            bool isAccessable = CheckUpgradeAccessable(nextUpgrade);
+        foreach (var nextUpgrade in upgrade.NextUpgrades) {
+            var farmBedNextUpgrade = nextUpgrade as FarmBedUpgrade;
+            bool isAccessable = CheckUpgradeAccessable(farmBedNextUpgrade);
             if (isAccessable) {
                 var button = _choiceButtonPool.GetObject();
-                button.Setup(nextUpgrade, index, this);
+                button.Setup(farmBedNextUpgrade, index, this);
                 _choiceButtons.Add(button);
             }
         }
@@ -50,15 +51,15 @@ public class FarmBedUpgradeUI : ChoiceBuyWithCameraStopUI<FarmBedUpgrade, FarmDa
 
     private bool CheckUpgradeAccessable(FarmBedUpgrade upgrade)
     {
-        var bedType = _changingBed.BedData.BedType;
-        var farmBedUpgrader = _changingBed.Upgrader;
+        BedType bedType = _changingBed.BedData.BedType;
         bool isAccessable = true;
 
         isAccessable &= _manager.ContainsUpgrade(upgrade);
         isAccessable &= upgrade.SuitableBedTypes.Contains(bedType);
-        isAccessable &= !farmBedUpgrader.HaveUpgrade(upgrade);
-        foreach (FarmBedUpgrade needUpgrade in upgrade.NeedUpgrades) {
-            isAccessable &= farmBedUpgrader.HaveUpgrade(needUpgrade);
+        isAccessable &= !_changingBed.HaveUpgrade(upgrade);
+        foreach (var needUpgrade in upgrade.NeedUpgrades) {
+            var needFarmBedUpgrade = needUpgrade as FarmBedUpgrade;
+            isAccessable &= _changingBed.HaveUpgrade(needFarmBedUpgrade);
         }
 
         return isAccessable;
@@ -79,7 +80,7 @@ public class FarmBedUpgradeUI : ChoiceBuyWithCameraStopUI<FarmBedUpgrade, FarmDa
         if (_chosedIndex == -1)
             return;
 
-        var upgrade = _choiceButtons[_chosedIndex].Item;
+        FarmBedUpgrade upgrade = _choiceButtons[_chosedIndex].Item;
         _description.UpdateDescription(upgrade);
     }
 

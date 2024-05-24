@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,10 +18,8 @@ public class ShopCatalog : MonoBehaviour
 
     public void SetShop(BaseShop shop)
     {
-        if (_pagePrefab.ItemType != shop.Type) {
-            Debug.LogError("Buyable object type of shop and buy panel don't match");
-            return;
-        }
+        if (_pagePrefab.ItemType != shop.Type)
+            throw new ArgumentException("Buyable object type of shop and buy panel don't match");
 
         _shop = shop;
     }
@@ -36,7 +35,7 @@ public class ShopCatalog : MonoBehaviour
 
     public void GeneratePage()
     {
-        var page = Instantiate(_pagePrefab, _pagesContainer);
+        ShopCatalogPage page = Instantiate(_pagePrefab, _pagesContainer);
         page.SetShop(_shop);
         _pages.Add(page);
         page.ChangeState(false);
@@ -76,8 +75,8 @@ public class ShopCatalog : MonoBehaviour
 
     public void RemovePanel(int removedItemIndex)
     {
-        var startPageIndex = removedItemIndex / _pages[0].MaxItemCount;
-        var panelIndex = removedItemIndex % _pages[0].MaxItemCount;
+        int startPageIndex = removedItemIndex / _pages[0].MaxItemCount;
+        int panelIndex = removedItemIndex % _pages[0].MaxItemCount;
         _pages[startPageIndex].DestroyPanelByIndex(panelIndex);
         UpdatePages(startPageIndex);
     }
@@ -85,7 +84,7 @@ public class ShopCatalog : MonoBehaviour
     private void UpdatePages(int startPageIndex)
     {
         for (int i = startPageIndex; i < _pages.Count - 1; i++) {
-            var panel = _pages[i + 1].PopFirstPanel();
+            BaseBuyPanel panel = _pages[i + 1].PopFirstPanel();
             _pages[i].AddPanel(panel);
         }
 
@@ -95,8 +94,8 @@ public class ShopCatalog : MonoBehaviour
 
     public void UpdatePanel(int updatedItemIndex, BuyableObject newItem)
     {
-        var startPageIndex = updatedItemIndex / _pages[0].MaxItemCount;
-        var panelIndex = updatedItemIndex % _pages[0].MaxItemCount;
+        int startPageIndex = updatedItemIndex / _pages[0].MaxItemCount;
+        int panelIndex = updatedItemIndex % _pages[0].MaxItemCount;
         _pages[startPageIndex].UpdatePanelByIndex(panelIndex, newItem);
     }
 

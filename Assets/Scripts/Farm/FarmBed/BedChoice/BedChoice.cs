@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(FarmBed))]
@@ -31,27 +32,14 @@ public class BedChoice : MonoBehaviour
         }
     }
 
-    public void ReactivateBedsChoice()
-    {
-        if (_bedData.BedType.Cost > 0)
-            MoneyManager.instance.ChangeMoney(_bedData.BedType.Cost);
-        _farmBed.ResetBedType();
-        _bedData.IsActive = false;
-        _UI.ActivateBedChoice(this);
-    }
-
     public void SetType(BedType bedType)
     {
         MoneyManager.instance.ChangeMoney(-bedType.Cost);
-        foreach (var bed in _beds) {
-            if (bedType == bed.Type) {
-                _bedData.IsActive = true;
-                _farmBed.SetBedType(bed);
-                _farmBed.enabled = true;
-                break;
-            }
-        }
-            
+        BedTypeHolder bed = FindBedHolder(bedType);
+
+        _bedData.IsActive = true;
+        _farmBed.SetBedType(bed);
+        _farmBed.enabled = true;
     }
 
     public void Bind(FarmData data, int bedIndex)
@@ -59,7 +47,7 @@ public class BedChoice : MonoBehaviour
         _data = data;
         _bedData = _data.FarmBeds[bedIndex];
 
-        _farmBed.Bind(data, _bedData);
+        _farmBed.Bind(data, _bedData, FindBedHolder(_bedData.BedType));
         LateStart();
     }
 
@@ -67,5 +55,17 @@ public class BedChoice : MonoBehaviour
     {
         _UI = settings.BedChoiceUI;
         _farmBed.Setup(settings);
+    }
+
+    private BedTypeHolder FindBedHolder(BedType bedType)
+    {
+        if (bedType == null)
+            return null;
+
+        foreach (var bed in _beds)
+            if (bedType == bed.Type)
+                return bed;
+
+        throw new ArgumentNullException("There's no bed holder with succh bed Type");
     }
 }

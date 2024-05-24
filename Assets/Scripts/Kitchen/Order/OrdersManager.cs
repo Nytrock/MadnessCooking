@@ -8,8 +8,8 @@ public class OrdersManager : MonoBehaviour
 {
     [SerializeField] private KitchenStorage _kitchenStorage;
     [SerializeField] private TechnicManager _technicManager;
-    private List<Order> _orders = new();
-    private ClientState[] _suitableStates = { ClientState.Spawn, ClientState.Wait, ClientState.Sit };
+    private readonly List<Order> _orders = new();
+    private readonly ClientState[] _suitableStates = { ClientState.Spawn, ClientState.Wait, ClientState.Sit };
 
     public event Action<Order> OrderAdded;
     public event Action<Order> OrderRemoved;
@@ -22,7 +22,7 @@ public class OrdersManager : MonoBehaviour
         if (!_suitableStates.Contains(client.ClientData.State))
             return;
 
-        var order = client.ClientData.Order;
+        Order order = client.ClientData.Order;
         client.OrderActivated += AddOrder;
         client.ClientLeave += RemoveOrder;
         client.ClientEat += RemoveOrder;
@@ -46,7 +46,7 @@ public class OrdersManager : MonoBehaviour
 
     private void RemoveOrder(Client client)
     {
-        var order = client.ClientData.Order;
+        Order order = client.ClientData.Order;
 
         client.OrderActivated -= AddOrder;
         client.ClientLeave -= RemoveOrder;

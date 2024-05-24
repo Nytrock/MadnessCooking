@@ -2,12 +2,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public abstract class ChoiceUI<T, K> : MonoBehaviour where T: BuyableObject where K: ChoiceButton<T>
+public abstract class ChoiceUI<TItem, TButton> : MonoBehaviour where TItem: BuyableObject where TButton: ChoiceButton<TItem>
 {
     [SerializeField] protected GameObject _UI;
-    [SerializeField] protected ChoicePool<T, K> _choiceButtonPool;
+    [SerializeField] protected ChoicePool<TItem, TButton> _choiceButtonPool;
     [SerializeField] protected Button _submitButton;
-    [SerializeField] protected List<K> _choiceButtons;
+    protected readonly List<TButton> _choiceButtons = new();
     protected int _chosedIndex = -1;
 
     protected virtual void Start()

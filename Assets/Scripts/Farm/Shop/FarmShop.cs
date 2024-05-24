@@ -20,21 +20,21 @@ public class FarmShop : BaseChooseShop, IBindable<FarmData>
 
         var upgrade = item as BaseUpgrade;
         if (upgrade == null)
-            return;
+            throw new NullReferenceException($"Buying item is not {Type}");
 
         MoneyManager.instance.ChangeMoney(-upgrade.Cost);
         _upgradeManager.NewUpgrade(upgrade);
         IsNoNextUpgrade = true;
 
-        var index = Array.IndexOf(_itemsToBuy, upgrade);
+        int index = Array.IndexOf(_itemsToBuy, upgrade);
         if (upgrade as LimitedConsumableUpgrade) {
             var consumableUpgrade = upgrade as LimitedConsumableUpgrade;
-            foreach (LimitedConsumableUpgradeHolder upgradeHolder in _upgradesHolders) {
+            foreach (var upgradeHolder in _upgradesHolders) {
                 if (upgradeHolder.ConsumableUpgrade == consumableUpgrade) {
                     upgradeHolder.AddCount();
                     IsNoNextUpgrade = upgradeHolder.IsMax;
                     if (upgradeHolder.IsMax) {
-                        _data.HaveUpgrades.Add(consumableUpgrade);
+                        _data.AvailableUpgrades.Add(consumableUpgrade);
                         _upgradesHolders.Remove(upgradeHolder);
                         CheckNextUpgrades(consumableUpgrade, index);
                     }
@@ -42,12 +42,12 @@ public class FarmShop : BaseChooseShop, IBindable<FarmData>
                 }
             }
         } else if (upgrade as GraphUpgrade) {
-            _data.HaveUpgrades.Add(upgrade);
+            _data.AvailableUpgrades.Add(upgrade);
             CheckNextUpgrades(upgrade as GraphUpgrade, index);
         } else {
             _upgradesToBuy.Remove(upgrade);
             _catalog.RemovePanel(index);
-            _data.HaveUpgrades.Add(upgrade);
+            _data.AvailableUpgrades.Add(upgrade);
         }
 
         SetObjectsArray();
@@ -55,19 +55,18 @@ public class FarmShop : BaseChooseShop, IBindable<FarmData>
 
     private void CheckNextUpgrades(GraphUpgrade graphUpgrade, int index)
     {
-        foreach (GraphUpgrade nextUpgrade in graphUpgrade.NextUpgrades) {
+        foreach (var nextUpgrade in graphUpgrade.NextUpgrades) {
             if (_upgradesToBuy.Contains(nextUpgrade))
                 continue;
 
-            if (_data.HaveUpgrades.Contains(nextUpgrade)) {
+            if (_data.AvailableUpgrades.Contains(nextUpgrade)) {
                 CheckNextUpgrades(nextUpgrade, index);
                 continue;
             }
 
             bool canAdd = true;
-            foreach (GraphUpgrade needUpgrade in nextUpgrade.NeedUpgrades) {
-                canAdd &= _data.HaveUpgrades.Contains(needUpgrade);
-            }
+            foreach (var needUpgrade in nextUpgrade.NeedUpgrades)
+                canAdd &= _data.AvailableUpgrades.Contains(needUpgrade);
 
             if (canAdd) {
                 if (IsNoNextUpgrade) {

@@ -10,7 +10,6 @@ public class ClientEatState : ClientBaseState
     {
         var clientUI = client.GetComponent<ClientUI>();
         client.SetSpotTableFood();
-
         clientUI.ChangeFoodChoiceState(false);
         clientUI.ChangeSliderState(true);
 

@@ -5,7 +5,7 @@ public class IngredientChoiceUI : ChoiceSimpleWithCameraStopUI<Ingredient, FarmD
 {
     [SerializeField] private IngredientsManager _ingredientsManager;
     [SerializeField] private IngredientChoiceStyle[] _styles;
-    private List<Ingredient> _ingredients;
+    private readonly List<Ingredient> _ingredients;
     protected GameObject _stylePanel;
     private FarmBed _changingBed;
 
@@ -18,7 +18,7 @@ public class IngredientChoiceUI : ChoiceSimpleWithCameraStopUI<Ingredient, FarmD
     public void ActivateIngredientChoice(FarmBed farmBed)
     {
         _changingBed = farmBed;
-        var bedType = _changingBed.BedData.BedType;
+        BedType bedType = _changingBed.BedData.BedType;
         DestoyOldButtons();
         GenerateChoiceButtons();
         SetStyle(bedType);
@@ -34,11 +34,12 @@ public class IngredientChoiceUI : ChoiceSimpleWithCameraStopUI<Ingredient, FarmD
 
     protected override void GenerateChoiceButtons()
     {
-        _ingredients = _ingredientsManager.HaveIngredientsOfBedType(_changingBed.BedData.BedType);
-        for (int i = 0; i < _ingredients.Count; i++) {
-            var choiceButton = _choiceButtonPool.GetObject();
-            choiceButton.Setup(_ingredients[i], i, this);
+        _ingredients.Clear();
+        foreach (var ingredient in _ingredientsManager.GetAvailableIngredientsOfBedType(_changingBed.BedData.BedType)) {
+            ChoiceSimpleButton<Ingredient> choiceButton = _choiceButtonPool.GetObject();
+            choiceButton.Setup(ingredient, _ingredients.Count, this);
             _choiceButtons.Add(choiceButton);
+            _ingredients.Add(ingredient);
         }
     }
 

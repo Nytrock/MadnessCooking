@@ -1,14 +1,14 @@
 using System;
 using UnityEngine;
 
-public abstract class SpaceManager<T> : MonoBehaviour, IUpgradeable, IBindable<T> where T: ISaveable
+public abstract class SpaceManager<TData> : MonoBehaviour, IUpgradeable, IBindable<TData> where TData: ISaveable
 {
     [SerializeField] protected SpacePrefab _spacePrefab;
     [SerializeField] protected int _defaultSpaceCount;
     [SerializeField] protected CountUpgrade[] _spaceAddUpgrades;
     
     protected Transform _spaceContainer;
-    protected T _data;
+    protected TData _data;
 
     public SerializableSpaceManager SpaceData { get; protected set; }
     public event Action SpaceAdded;
@@ -38,7 +38,7 @@ public abstract class SpaceManager<T> : MonoBehaviour, IUpgradeable, IBindable<T
         }
     }
 
-    public virtual void Bind(T data, bool isFileEmpty)
+    public virtual void Bind(TData data, bool isFileEmpty)
     {
         _data = data;
         BindData(isFileEmpty);

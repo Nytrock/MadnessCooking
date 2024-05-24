@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public abstract class ChoiceBuyWithCameraStopUI<T, K> : ChoiceBuyUI<T> where T : BuyableObject where K: ISaveable
+public abstract class ChoiceBuyWithCameraStopUI<TItem, TData> : ChoiceBuyUI<TItem> where TItem : BuyableObject where TData: ISaveable
 {
-    [SerializeField] protected CameraManager<K> _cameraManager;
+    [SerializeField] protected CameraManager<TData> _cameraManager;
 
     protected override void Activate()
     {

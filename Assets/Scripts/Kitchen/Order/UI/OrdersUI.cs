@@ -7,7 +7,7 @@ public class OrdersUI : MonoBehaviour, IUpgradeable, IBindable<KitchenData>
     [SerializeField] private OrdersPool _pool;
     [SerializeField] private GameObject _panel;
 
-    private List<OrderButton> _orderButtons = new();
+    private readonly List<OrderButton> _orderButtons = new();
     private KitchenData _data;
 
     [Header("Upgrades")]
@@ -47,7 +47,7 @@ public class OrdersUI : MonoBehaviour, IUpgradeable, IBindable<KitchenData>
     public void StartCook(Order order)
     {
         _manager.StartCook(order);
-        var ingredients = order.Food.Ingredients;
+        IngredientCountList ingredients = order.Food.Ingredients;
         for (int i = 0; i < ingredients.Size; i++) {
             if (ingredients.Get(i).Ingredient == _spice && _data.IsAutoSpice) {
                 MoneyManager.instance.ChangeMoney(-_spice.Cost * ingredients.Get(i).Count);
@@ -60,7 +60,7 @@ public class OrdersUI : MonoBehaviour, IUpgradeable, IBindable<KitchenData>
 
     private void UpdateRecipes()
     {
-        foreach (OrderButton button in _orderButtons)
+        foreach (var button in _orderButtons)
             button.UpdateRecipe();
     }
 
@@ -75,7 +75,7 @@ public class OrdersUI : MonoBehaviour, IUpgradeable, IBindable<KitchenData>
     public void Bind(KitchenData data, bool isFileEmpty)
     {
         _data = data;
-        foreach (OrderButton button in _orderButtons) {
+        foreach (var button in _orderButtons) {
             if (button.Order.IsCooking)
                 button.Cook();
             else if (button.Order.IsFinished)

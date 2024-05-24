@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class CriticSpawner : MonoBehaviour
 {
@@ -39,12 +40,12 @@ public class CriticSpawner : MonoBehaviour
     {
         _isWaitingCritic = true;
 
-        var morging = _timeManager.GetDaytimeStartInfo(Daytime.Morning);
-        var night = _timeManager.GetDaytimeStartInfo(Daytime.Night);
+        DaytimeStart morging = _timeManager.GetDaytimeStartInfo(Daytime.Morning);
+        DaytimeStart night = _timeManager.GetDaytimeStartInfo(Daytime.Night);
 
-        var hour = UnityEngine.Random.Range(morging.Hour, night.Hour);
-        var minute = UnityEngine.Random.Range(morging.Minute, night.Minute);
-        var timeCritic = new TimeSpan(hour, minute, 0);
+        int hour = Random.Range(morging.Hour, night.Hour);
+        int minute = Random.Range(morging.Minute, night.Minute);
+        TimeSpan timeCritic = new(hour, minute, 0);
         StartCoroutine(WaitCriticTime(timeCritic));
 
         _criticUI.ChangeCriticWaitStartUI(true);

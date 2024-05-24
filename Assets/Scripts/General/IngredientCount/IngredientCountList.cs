@@ -7,7 +7,7 @@ using UnityEngine;
 public class IngredientCountList
 {
     [SerializeField] private List<IngredientCount> _ingredientCounts = new();
-    private List<Ingredient> _haveIngredients = new();
+    private List<Ingredient> _availableIngredients = new();
 
     public int Size => _ingredientCounts.Count;
 
@@ -18,13 +18,13 @@ public class IngredientCountList
         else
             _ingredientCounts.Add(ingredientCount);
 
-        UpdateHaveIngredients();
+        UpdateAvailableIngredients();
     }
 
-    public void Extend(IngredientCountList ingredientCount)
+    public void Extend(IngredientCountList ingredientCountList)
     {
-        foreach (var item in ingredientCount)
-            Add(item);
+        foreach (var ingredientCount in ingredientCountList)
+            Add(ingredientCount);
     }
 
     public void Remove(IngredientCount ingredientCount)
@@ -32,22 +32,22 @@ public class IngredientCountList
         if (!ContainsIngredient(ingredientCount))
             return;
 
-        var index = IndexOf(ingredientCount);
+        int index = IndexOf(ingredientCount);
         _ingredientCounts[index].ChangeCount(-ingredientCount.Count);
         if (_ingredientCounts[index].Count == 0)
             _ingredientCounts.RemoveAt(index);
 
-        UpdateHaveIngredients();
+        UpdateAvailableIngredients();
     }
 
-    private void UpdateHaveIngredients()
+    private void UpdateAvailableIngredients()
     {
-        _haveIngredients = _ingredientCounts.Select(x => x.Ingredient).ToList();
+        _availableIngredients = _ingredientCounts.Select(x => x.Ingredient).ToList();
     }
 
     public bool ContainsIngredient(IngredientCount ingredientCount)
     {
-        return _haveIngredients.Contains(ingredientCount.Ingredient);
+        return _availableIngredients.Contains(ingredientCount.Ingredient);
     }
 
     public bool ContainsCount(IngredientCount ingredientCount)
@@ -59,7 +59,7 @@ public class IngredientCountList
 
     public int IndexOf(IngredientCount ingredientCount)
     {
-        return _haveIngredients.IndexOf(ingredientCount.Ingredient);
+        return _availableIngredients.IndexOf(ingredientCount.Ingredient);
     }
 
     public IngredientCount Get(int index)
@@ -70,7 +70,7 @@ public class IngredientCountList
     public void Clear()
     {
         _ingredientCounts.Clear();
-        _haveIngredients.Clear();
+        _availableIngredients.Clear();
     }
 
     public IEnumerator<IngredientCount> GetEnumerator()

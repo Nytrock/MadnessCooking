@@ -6,7 +6,7 @@ public class ChickensFoodCountRenderer : MonoBehaviour
 {
     [SerializeField] private BaseUpgrade _food;
     [SerializeField] private BaseUpgrade _infiniteFood;
-    [SerializeField] private TextMeshProUGUI _count;
+    [SerializeField] private TextMeshProUGUI _countText;
     [SerializeField] private Image _icon;
     private Chickens _chickens;
 
@@ -19,10 +19,10 @@ public class ChickensFoodCountRenderer : MonoBehaviour
     {
         if (_chickens.Data.IsInfiniteFood) {
             _icon.sprite = _infiniteFood.Icon;
-            _count.text = "";
+            _countText.text = "";
         } else {
             _icon.sprite = _food.Icon;
-            _count.text = "x" + _chickens.Data.FoodCount.ToString();
+            _countText.text = "x" + _chickens.Data.FoodCount.ToString();
         }
     }
 }

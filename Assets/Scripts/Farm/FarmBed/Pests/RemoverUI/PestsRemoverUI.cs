@@ -48,8 +48,8 @@ public class PestsRemoverUI : MonoBehaviour
 
     private void GeneratePests()
     {
-        foreach (Pest pest in _generator.Pests()) {
-            var pestUI = _pool.GetObject(pest);
+        foreach (var pest in _generator.Pests()) {
+            PestUI pestUI = _pool.GetObject(pest);
             pestUI.SetupRemoveButton();
         }
     }

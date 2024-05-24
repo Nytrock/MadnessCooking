@@ -6,10 +6,10 @@ public class KitchenData : ISaveable
 {
     public List<Food> AvailableFood;
     public SerializableIngredientStorage KitchenStorage;
-    public List<Decor> AvailableDecor;
+    public List<Decor> AvailableDecor = new();
 
     public List<Technic> AvailableTechnic;
-    public SerializableTechnic[] AllTechnic = new SerializableTechnic[TechnicManager.HoldersCount];
+    public SerializableTechnic[] AllTechnic;
 
     public bool IsAutoSpice;
     public bool IsStrengthShow;

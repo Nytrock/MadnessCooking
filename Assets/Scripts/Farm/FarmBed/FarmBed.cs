@@ -14,18 +14,18 @@ public class FarmBed : MonoBehaviour
 
     private WheatManager _wheatManager;
     private BedTypeHolder _bedHolder;
+    private FarmBedUpgrader _upgrader;
     private FarmBedUIManager _UI;
     private FarmCar _car;
     private float _growTime;
 
     public PestsGenerator PestsGenerator => _bedHolder.PestsGenerator;
-    public FarmBedUpgrader Upgrader { get; private set; }
 
     public event Action CountChanged;
 
     private void Awake()
     {
-        Upgrader = GetComponent<FarmBedUpgrader>();
+        _upgrader = GetComponent<FarmBedUpgrader>();
     }
 
     public void MouseDown()
@@ -92,9 +92,13 @@ public class FarmBed : MonoBehaviour
 
     public void ResetBedType()
     {
+        if (BedData.BedType.Cost > 0)
+            MoneyManager.instance.ChangeMoney(BedData.BedType.Cost);
+        BedData.IsActive = false;
+
         ResetIngredient();
         _bedHolder.ChangeMode(false);
-        Upgrader.ReturnUpgrades();
+        DisableUpgrades();
 
         _bedHolder = null;
         BedData.BedType = null;
@@ -178,23 +182,43 @@ public class FarmBed : MonoBehaviour
         _growStatusSlider.SetActive(_data.IsGrowStatusShow && BedData.PlantedIngredient != null);
     }
 
-    public void RemovePests()
+    public bool HaveUpgrade(FarmBedUpgrade upgrade) => _upgrader.HaveUpgrade(upgrade);
+
+    private void DisableUpgrades()
+    {
+        _upgrader.DisableUpgrades();
+        ChangeEternalWater();
+        ChangeEternalFertilize();
+    }
+
+    public void AddUpgrade(FarmBedUpgrade upgrade)
+    {
+        _upgrader.AddUpgrade(upgrade);
+        ChangeEternalWater();
+        ChangeEternalFertilize();
+
+        if (BedData.PestsGenerator.IsPestsRemoved)
+            RemovePests();
+    }
+
+    private void RemovePests()
     {
         _UI.UpdateSideButtons();
         PestsGenerator.CleanPests();
     }
 
-    public void Bind(FarmData data, SerializableFarmBed bedData)
+    public void Bind(FarmData data, SerializableFarmBed bedData, BedTypeHolder holder)
     {
         _data = data;
         BedData = bedData;
 
         if (BedData.BedType != null) {
-            GetComponent<BedChoice>().SetType(BedData.BedType);
+            SetBedType(holder);
             if (BedData.PlantedIngredient != null)
                 SetIngredient(BedData.PlantedIngredient);
         }
 
+        _upgrader.Bind(BedData);
         LateStart();
     }
 }

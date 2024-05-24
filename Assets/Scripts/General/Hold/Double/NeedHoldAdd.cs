@@ -1,4 +1,4 @@
-using UnityEngine;
+using System;
 
 public abstract class NeedHoldAdd : HoldAdd
 {
@@ -9,7 +9,7 @@ public abstract class NeedHoldAdd : HoldAdd
     protected override void LateStart()
     {
         if (NeedHoldData == null || _needHoldUI == null)
-            Debug.LogError("Class mismatch");
+            throw new ArgumentNullException("Argument for data or for UI are null");
         base.LateStart();
     }
 

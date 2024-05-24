@@ -1,17 +1,11 @@
 using System.IO;
 using UnityEngine;
 
-public class FileDataService { 
-    private JsonSerializer _serializer;
-    private readonly string _dataPath; 
-    private const string _fileName = "save";
-    private const string _fileExtension = "nyt";
-
-    public FileDataService(JsonSerializer serializer)
-    {
-        _dataPath = Application.persistentDataPath;
-        _serializer = serializer;
-    }
+public class FileDataService {
+    private readonly JsonSerializer _serializer = new();
+    private readonly string _dataPath = Application.persistentDataPath; 
+    private readonly string _fileName = "save";
+    private readonly string _fileExtension = "nyt";
 
     string GetPathToFile()
     {

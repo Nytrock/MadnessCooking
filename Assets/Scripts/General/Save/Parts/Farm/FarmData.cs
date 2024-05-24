@@ -12,7 +12,7 @@ public class FarmData : ISaveable
 
     public LimitedConsumableUpgradeHolder[] UpgradesHolders;
     public BaseUpgrade[] UpgradesToBuy;
-    public List<BaseUpgrade> HaveUpgrades = new();
+    public List<BaseUpgrade> AvailableUpgrades = new();
 
     public bool IsCowNextWheat = true;
     public bool IsWheatDistributing;

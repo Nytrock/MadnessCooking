@@ -5,8 +5,8 @@ using UnityEngine.UI;
 public class TechnicStandardPanel : TechnicPanel, IUpgradeable, IBindable<KitchenData>
 {
     [SerializeField] private Image _icon;
-    [SerializeField] private TextMeshProUGUI _name;
-    [SerializeField] private TextMeshProUGUI _repair;
+    [SerializeField] private TextMeshProUGUI _nameText;
+    [SerializeField] private TextMeshProUGUI _repairText;
     [SerializeField] private Button _repairButton;
     [SerializeField] private Slider _cookSlider;
 
@@ -29,14 +29,14 @@ public class TechnicStandardPanel : TechnicPanel, IUpgradeable, IBindable<Kitche
 
     public override void UpdateInfo()
     {
-        var technic = _nowTechnic.Technic;
+        Technic technic = _nowTechnic.Technic;
         _cooker = _nowTechnic.GetComponent<TechnicCooker>();
         _icon.sprite = technic.Icon;
-        _name.text = technic.Name;
+        _nameText.text = technic.Name;
         UpdatePanels();
 
         if (!_nowTechnic.TechnicData.IsCooking) {
-            _repair.text = $"Repair - {technic.CostRepair}";
+            _repairText.text = $"Repair - {technic.CostRepair}";
             _repairButton.interactable = _nowTechnic.Repairable();
         } else {
             _cookSlider.maxValue = _cooker.NeedTime;

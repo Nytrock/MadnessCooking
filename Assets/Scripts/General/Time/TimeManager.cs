@@ -5,8 +5,8 @@ public class TimeManager : MonoBehaviour, IBindable<GeneralData>
 {
     public static TimeManager instance;
 
-    [SerializeField] private int _defaultTimeSpeed;
-    [SerializeField] private int _sleepTimeSpeed;
+    [SerializeField, Min(0)] private int _defaultTimeSpeed;
+    [SerializeField, Min(0)] private int _sleepTimeSpeed;
     [SerializeField] private DaytimeStart[] _daytimeStarts;
 
     private int _nowTimeSpeed;

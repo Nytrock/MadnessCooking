@@ -1,10 +1,11 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class IngredientsManager : MonoBehaviour, IBindable<FarmData>
 {
     [SerializeField] private Ingredient[] _allIngredients;
-    [SerializeField] private List<Ingredient> _defaultIngredients;
+    [SerializeField] private Ingredient[] _defaultIngredients;
     private FarmData _data;
 
     public bool HaveIngredient(Ingredient ingredient)
@@ -12,22 +13,28 @@ public class IngredientsManager : MonoBehaviour, IBindable<FarmData>
         return _data.AvailableIngredients.Contains(ingredient);
     }
 
-    public List<Ingredient> HaveIngredientsOfBedType(BedType bedType)
+    public bool HaveIngredientsOfBedType(BedType bedType)
     {
-        var result = new List<Ingredient>();
         foreach (var ingredient in _data.AvailableIngredients)
             if (ingredient.Type == bedType.AcceptableType)
-                result.Add(ingredient);
-        return result;
+                return true;
+        return false;
     }
 
-    public List<Ingredient> GetIngredientsOfBedType(BedType bedType)
+    public IEnumerable<Ingredient> GetAvailableIngredientsOfBedType(BedType bedType)
     {
-        var result = new List<Ingredient>();
+        foreach (var ingredient in _data.AvailableIngredients)
+            if (ingredient.Type == bedType.AcceptableType)
+                yield return ingredient;
+        yield break;
+    }
+
+    public IEnumerable<Ingredient> GetAllIngredientsOfBedType(BedType bedType)
+    {
         foreach (var ingredient in _allIngredients)
             if (ingredient.Type == bedType.AcceptableType)
-                result.Add(ingredient);
-        return result;
+                yield return ingredient;
+        yield break;
     }
 
     public void AddIngredient(Ingredient ingredient)
@@ -39,6 +46,6 @@ public class IngredientsManager : MonoBehaviour, IBindable<FarmData>
     {
         _data = data;
         if (isFileEmpty)
-            _data.AvailableIngredients = _defaultIngredients;
+            _data.AvailableIngredients = _defaultIngredients.ToList();
     }
 }

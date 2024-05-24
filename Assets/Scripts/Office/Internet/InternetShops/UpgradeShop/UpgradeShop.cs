@@ -7,7 +7,7 @@ public class UpgradeShop : BaseInstantShop, IBindable<OfficeData>
 {
     [SerializeField] private UpgradeManager _upgradeManager;
     [SerializeField] private List<BaseUpgrade> _upgradesToBuy;
-    private List<BaseUpgrade> _haveUpgrades = new();
+    private List<BaseUpgrade> _availableUpgrades = new();
     private OfficeData _data;
 
     public override Type Type => typeof(BaseUpgrade);
@@ -16,13 +16,13 @@ public class UpgradeShop : BaseInstantShop, IBindable<OfficeData>
     {
         var upgrade = item as BaseUpgrade;
         if (upgrade == null)
-            return;
+            throw new NullReferenceException($"Buying item is not {Type}");
 
         MoneyManager.instance.ChangeMoney(-upgrade.Cost);
         _upgradeManager.NewUpgrade(upgrade);
-        _haveUpgrades.Add(upgrade);
+        _availableUpgrades.Add(upgrade);
 
-        var index = _upgradesToBuy.IndexOf(upgrade);
+        int index = _upgradesToBuy.IndexOf(upgrade);
         if (upgrade as GraphUpgrade) {
             bool isFirst = true;
             CheckNextUpgrades(upgrade as GraphUpgrade, index, ref isFirst);
@@ -35,15 +35,14 @@ public class UpgradeShop : BaseInstantShop, IBindable<OfficeData>
 
     private void CheckNextUpgrades(GraphUpgrade graphUpgrade, int index, ref bool isFirst)
     {
-        foreach (GraphUpgrade nextUpgrade in graphUpgrade.NextUpgrades) {
-            if (_haveUpgrades.Contains(nextUpgrade) || _upgradesToBuy.Contains(nextUpgrade)) {
+        foreach (var nextUpgrade in graphUpgrade.NextUpgrades) {
+            if (_availableUpgrades.Contains(nextUpgrade) || _upgradesToBuy.Contains(nextUpgrade)) {
                 CheckNextUpgrades(nextUpgrade, index, ref isFirst);
                 continue;
             }
             bool canAdd = true;
-            foreach (GraphUpgrade needUpgrade in nextUpgrade.NeedUpgrades) {
-                canAdd &= _haveUpgrades.Contains(needUpgrade);
-            }
+            foreach (var needUpgrade in nextUpgrade.NeedUpgrades)
+                canAdd &= _availableUpgrades.Contains(needUpgrade);
             if (canAdd) {
                 if (isFirst) {
                     _upgradesToBuy[index] = nextUpgrade;

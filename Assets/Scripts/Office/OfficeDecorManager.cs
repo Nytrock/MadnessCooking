@@ -2,7 +2,7 @@ public class OfficeDecorManager : BaseDecorManager<OfficeData>
 {
     public override void AddDecor(Decor decor)
     {
-        _data.HaveDecor.Add(decor);
+        _data.AvailableDecor.Add(decor);
         base.AddDecor(decor);
     }
 
@@ -10,9 +10,9 @@ public class OfficeDecorManager : BaseDecorManager<OfficeData>
     {
         _data = data;
         if (isFileEmpty)
-            _data.HaveDecor = new();
+            _data.AvailableDecor = new();
 
-        foreach (var decor in _data.HaveDecor)
+        foreach (var decor in _data.AvailableDecor)
             FindAndActivateHolder(decor);
     }
 }

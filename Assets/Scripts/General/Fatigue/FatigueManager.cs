@@ -7,8 +7,8 @@ public class FatigueManager : MonoBehaviour, IBindable<GeneralData>
 
     [SerializeField] private TimeManager _timeManager;
 
-    [SerializeField] private float _fatigueMax;
-    [SerializeField] private float _needHoursToRecovery;
+    [SerializeField, Min(0)] private float _fatigueMax;
+    [SerializeField, Min(1)] private float _needHoursToRecovery;
     private float _decorBonus = 1;
     private float _sleepBonus;
 

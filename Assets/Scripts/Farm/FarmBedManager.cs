@@ -4,7 +4,7 @@ using UnityEngine;
 public class FarmBedManager : SpaceManager<FarmData>
 {
     [SerializeField] private FarmBedSettings _bedsSettings;
-    private List<FarmBedGroup> _beds = new();
+    private readonly List<FarmBedGroup> _beds = new();
 
     [Header("Upgrades")]
     [SerializeField] private BaseUpgrade _autoWheatUpgrade;

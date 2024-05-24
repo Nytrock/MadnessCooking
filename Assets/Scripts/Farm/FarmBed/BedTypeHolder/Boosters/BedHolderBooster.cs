@@ -57,7 +57,7 @@ public class BedHolderBooster : MonoBehaviour
 
     private void ChangeSpriteAlpha(float alpha)
     {
-        var color = _boostSprite.color; 
+        Color color = _boostSprite.color; 
         color.a = alpha;
         _boostSprite.color = color;
     }

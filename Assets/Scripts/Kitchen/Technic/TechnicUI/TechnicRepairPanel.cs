@@ -7,7 +7,7 @@ public class TechnicRepairPanel : TechnicPanel
     [SerializeField] private Slider _repairSlider;
     [SerializeField] private Image _icon;
 
-    private TechnicRepair _repair;
+    private TechnicRepairer _repair;
 
     public event Action RepairEnded;
 
@@ -21,7 +21,7 @@ public class TechnicRepairPanel : TechnicPanel
 
     public override void UpdateInfo()
     {
-        _repair = _nowTechnic.GetComponent<TechnicRepair>();
+        _repair = _nowTechnic.GetComponent<TechnicRepairer>();
         _repairSlider.maxValue = _repair.NeedTime;
     }
 }

@@ -7,8 +7,8 @@ public class FarmCarWaitUI : MonoBehaviour
     [SerializeField] private GameObject _panel;
 
     [SerializeField] private TextMeshProUGUI _infoText;
-    [SerializeField] private string _sentText;
-    [SerializeField] private string _returnsText;
+    [SerializeField] private string _sentMessage;
+    [SerializeField] private string _returnsMessage;
 
     [SerializeField] private TextMeshProUGUI _timeText;
 
@@ -25,9 +25,9 @@ public class FarmCarWaitUI : MonoBehaviour
             return;
 
         if (_manager.Data.CarState == CarState.Sent)
-            _infoText.text = _sentText;
+            _infoText.text = _sentMessage;
         else if (_manager.Data.CarState == CarState.Returns)
-            _infoText.text = _returnsText;
+            _infoText.text = _returnsMessage;
 
         UpdateText();
     }
@@ -35,7 +35,7 @@ public class FarmCarWaitUI : MonoBehaviour
     private void UpdateText()
     {
         int nowTime = (int)_manager.Data.NowWaitTime;
-        var seconds = nowTime % 60;
+        int seconds = nowTime % 60;
         _timeText.text = $"{nowTime / 60}:{seconds:00}";
     }
 }

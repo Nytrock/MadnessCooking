@@ -18,7 +18,7 @@ public class OrdersPool : MonoBehaviour
     public OrderButton GetObject()
     {
         if (_pool.Count == 0) {
-            var button = Instantiate(_prefab, _container);
+            OrderButton button = Instantiate(_prefab, _container);
             button.SetStorages(_manager, _ordersUI);
             _pool.Enqueue(button);
         }

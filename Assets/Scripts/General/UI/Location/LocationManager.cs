@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LocationManager : MonoBehaviour, IBindable<GeneralData>
 {
-    [SerializeField] private Transform _mainCamera;
+    [SerializeField] private Camera _mainCamera;
     [SerializeField] private LocationButton[] _locations;
     private GeneralData _data;
 
@@ -17,7 +17,7 @@ public class LocationManager : MonoBehaviour, IBindable<GeneralData>
 
     public void ChangeLocation(Vector2 newLocation)
     {
-        _mainCamera.position = new Vector3(newLocation.x, newLocation.y, -10);
+        _mainCamera.transform.position = new Vector3(newLocation.x, newLocation.y, -10);
         LocationChanged?.Invoke(newLocation);
     }
 

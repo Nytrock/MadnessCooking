@@ -3,7 +3,7 @@ using UnityEngine;
 public class ShitGeneraor : MonoBehaviour, IBindable<FarmData>
 {
     [SerializeField] private Puncher _puncher;
-    [SerializeField] private float _needTime;
+    [SerializeField, Min(0)] private float _needTime;
     private SerializableShitGenerator _data;
 
     private void Update()

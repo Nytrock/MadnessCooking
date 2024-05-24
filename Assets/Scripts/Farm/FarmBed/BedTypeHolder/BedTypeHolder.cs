@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
+[RequireComponent(typeof(Animator))]
 public class BedTypeHolder : MonoBehaviour
 {
     [SerializeField] private BedType _type;
@@ -53,7 +54,7 @@ public class BedTypeHolder : MonoBehaviour
 
     public void SetIngredient()
     {
-        var ingredient = _bedData.PlantedIngredient;
+        Ingredient ingredient = _bedData.PlantedIngredient;
         _name = ingredient.name;
         _animator.Play(_name, -1, _bedData.AnimationTime);
         StartCoroutine(SetAnimationSpeed(ingredient.TimeGrow));
@@ -75,7 +76,7 @@ public class BedTypeHolder : MonoBehaviour
     private IEnumerator SetAnimationSpeed(float timeGrow)
     {
         yield return new WaitForEndOfFrame();
-        var animationLength = _animator.GetCurrentAnimatorStateInfo(0).length;
+        float animationLength = _animator.GetCurrentAnimatorStateInfo(0).length;
         _animationSpeed = 1 / timeGrow * animationLength;
         _animator.SetFloat("growTime", _animationSpeed * _bedData.SummarizedBoost);
     }

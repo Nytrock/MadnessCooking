@@ -20,7 +20,7 @@ public abstract class PestsPool : MonoBehaviour
         if (_pool.Count == 0)
             _pool.Enqueue(SpawnPest(ref id));
 
-        var pest = _pool.Dequeue();
+        Pest pest = _pool.Dequeue();
         pest.ChangeState(true);
         pest.Randomize(_leftDown.position, _rightUp.position, id);
         return pest;

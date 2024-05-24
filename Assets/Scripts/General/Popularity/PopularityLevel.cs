@@ -4,8 +4,8 @@ using UnityEngine;
 [Serializable]
 public class PopularityLevel
 {
-    [SerializeField] private int _needXp;
-    [SerializeField] private float _popularityMultiplier = 1;
+    [SerializeField, Min(1)] private int _needXp;
+    [SerializeField, Min(1)] private float _popularityMultiplier = 1;
     [SerializeField] private string _name;
     [TextArea, SerializeField] private string _description;
 

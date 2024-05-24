@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class TechnicRepair : TechnicWaiter
+public class TechnicRepairer : TechnicWaiter
 {
     [SerializeField] private GameObject _repairSprite;
 

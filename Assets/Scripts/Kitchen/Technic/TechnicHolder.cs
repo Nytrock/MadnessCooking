@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(Animator), typeof(TechnicCooker), typeof(TechnicRepairer))]
 public class TechnicHolder : MonoBehaviour
 {
     [SerializeField] private Technic _technic;
@@ -11,7 +11,7 @@ public class TechnicHolder : MonoBehaviour
     private Order _nowOrder;
 
     private TechnicCooker _cooker;
-    private TechnicRepair _repair;
+    private TechnicRepairer _repair;
 
     public SerializableTechnic TechnicData { get; private set; }
 
@@ -22,7 +22,7 @@ public class TechnicHolder : MonoBehaviour
     {
         _animator = GetComponent<Animator>();
         _cooker = GetComponent<TechnicCooker>();
-        _repair = GetComponent<TechnicRepair>();
+        _repair = GetComponent<TechnicRepairer>();
     }
 
     public void ChangeState(bool newState)

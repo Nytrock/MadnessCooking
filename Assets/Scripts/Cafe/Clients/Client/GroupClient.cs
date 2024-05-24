@@ -1,3 +1,5 @@
+using System;
+
 public class GroupClient : Client
 {
     private ClientGroupHolder _table;
@@ -8,8 +10,10 @@ public class GroupClient : Client
         if (ClientData.State == ClientState.Leave)
             return;
 
-        var spot = Spawner.GetSpot(SpotIndex);
-        _table = spot.GetComponent<ClientGroupHolder>();
+        CafeSpot spot = Spawner.GetSpot(SpotIndex);
+        if (!spot.TryGetComponent(out _table))
+            throw new ArgumentNullException("Spot doesn't have the required class ClientGroupHolder");
+
         _table.WaitStarted += Sit;
     }
 

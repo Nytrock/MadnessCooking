@@ -1,5 +1,6 @@
-using UnityEngine;
+using System;
 using TMPro;
+using UnityEngine;
 
 public class TimeRenderWatch : TimeRenderer
 {
@@ -7,7 +8,7 @@ public class TimeRenderWatch : TimeRenderer
 
     protected override void UpdateVisual()
     {
-        var timespan = _timeManager.TimeSpan;
+        TimeSpan timespan = _timeManager.TimeSpan;
         _timeText.text = $"{timespan:hh\\:mm}";
     }
 }
