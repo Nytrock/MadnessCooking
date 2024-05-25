@@ -19,8 +19,8 @@ public class DecorShop : BaseInstantShop, IBindable<OfficeData>
         if (decor == null)
             throw new NullReferenceException($"Buying item is not {Type}");
 
-        MoneyManager.instance.ChangeMoney(-decor.Cost);
-        FatigueManager.instance.AddDecorBonus(decor);
+        MoneyManager.Instance.ChangeMoney(-decor.Cost);
+        FatigueManager.Instance.AddDecorBonus(decor);
         if (decor.DecorType == DecorType.Kitchen)
             _kitchenManager.AddDecor(decor);
         else if (decor.DecorType == DecorType.Office)

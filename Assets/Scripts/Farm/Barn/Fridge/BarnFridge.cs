@@ -4,14 +4,16 @@ using UnityEngine;
 public class BarnFridge : MonoBehaviour, IBindable<FarmData>
 {
     [SerializeField] private FarmCar _car;
-    [SerializeField] private Ingredient _milk;
-    [SerializeField] private Ingredient _flour;
+    private Ingredient _milk;
+    private Ingredient _flour;
 
     public SerializableNeedHoldAdd Cow { get; private set; }
     public SerializableNeedHoldAdd FlourMill { get; private set; }
 
-    public Ingredient Milk => _milk;
-    public Ingredient Flour => _flour;
+    private void Start() {
+        _milk = IngredientsManager.Instance.Milk;
+        _flour = IngredientsManager.Instance.Flour;
+    }
 
     public void PutIngredient(Ingredient ingredient)
     {
@@ -22,9 +24,9 @@ public class BarnFridge : MonoBehaviour, IBindable<FarmData>
             return;
 
         if (ingredient == _milk)
-            FatigueManager.instance.ChangeFatigue(_milk.FatigueCount * Cow.ReadyCount);
+            FatigueManager.Instance.ChangeFatigue(_milk.FatigueCount * Cow.ReadyCount);
         else if (ingredient == _flour)
-            FatigueManager.instance.ChangeFatigue(_flour.FatigueCount * FlourMill.ReadyCount);
+            FatigueManager.Instance.ChangeFatigue(_flour.FatigueCount * FlourMill.ReadyCount);
         MoveToCar(ingredient);
     }
 

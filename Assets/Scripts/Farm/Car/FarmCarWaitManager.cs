@@ -40,7 +40,7 @@ public class FarmCarWaitManager : MonoBehaviour, IUpgradeable, IBindable<FarmDat
             return;
 
         if (Data.NowWaitTime > 0) {
-            Data.NowWaitTime -= Time.deltaTime * TimeManager.instance.TimeSpeed;
+            Data.NowWaitTime -= TimeManager.Instance.InGameTimeSpeed;
         } else {
             if (Data.CarState == CarState.Returns) {
                 Data.CarState = CarState.Calm;

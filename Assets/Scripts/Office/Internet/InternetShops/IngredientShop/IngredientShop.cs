@@ -11,7 +11,6 @@ public class IngredientShop : BaseInstantShop, IUpgradeable, IBindable<OfficeDat
     [SerializeField] private KitchenStorage _ingredientStorage;
 
     [Header("Upgrades")]
-    [SerializeField] private Ingredient _spice;
     [SerializeField] private BaseUpgrade _spiceAutoBuy;
 
     private OfficeData _data;
@@ -25,7 +24,7 @@ public class IngredientShop : BaseInstantShop, IUpgradeable, IBindable<OfficeDat
         if (ingredient == null)
             throw new NullReferenceException($"Buying item is not {Type}");
 
-        MoneyManager.instance.ChangeMoney(-ingredient.Cost);
+        MoneyManager.Instance.ChangeMoney(-ingredient.Cost);
         if (ingredient.Type == IngredientType.Buyable) {
             _ingredientStorage.PutIngredient(new IngredientCount(ingredient, 1));
         } else {
@@ -37,7 +36,7 @@ public class IngredientShop : BaseInstantShop, IUpgradeable, IBindable<OfficeDat
     public void CheckUpgrade(BaseUpgrade upgrade)
     {
         if (upgrade == _spiceAutoBuy)
-            RemoveIngredient(_spice);
+            RemoveIngredient(IngredientsManager.Instance.Spice);
     }
 
     private void RemoveIngredient(Ingredient ingredient)

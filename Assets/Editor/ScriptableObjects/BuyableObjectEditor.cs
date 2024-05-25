@@ -9,7 +9,7 @@ using Object = UnityEngine.Object;
 [CanEditMultipleObjects]
 public class BuyableObjectEditor : Editor
 {
-    private BuyableObject Item { get { return (target as BuyableObject); } }
+    private BuyableObject Item { get { return target as BuyableObject; } }
 
     public override Texture2D RenderStaticPreview(string assetPath, Object[] subAssets, int width, int height)
     {

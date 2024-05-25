@@ -1,13 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OrdersPool : MonoBehaviour
+public class OrderButtonsPool : MonoBehaviour
 {
     [SerializeField] private OrderButton _prefab;
     [SerializeField] private Transform _container;
-
-    private OrdersManager _manager;
-    private OrdersUI _ordersUI;
+    [SerializeField] private TechnicManager _technicManager;
+    [SerializeField] private KitchenStorage _kitchenStorage;
     private Queue<OrderButton> _pool;
 
     private void Awake()
@@ -19,7 +18,7 @@ public class OrdersPool : MonoBehaviour
     {
         if (_pool.Count == 0) {
             OrderButton button = Instantiate(_prefab, _container);
-            button.SetStorages(_manager, _ordersUI);
+            button.Setup(_technicManager, _kitchenStorage);
             _pool.Enqueue(button);
         }
 
@@ -30,11 +29,5 @@ public class OrdersPool : MonoBehaviour
     {
         _pool.Enqueue(button);
         button.Disable();
-    }
-
-    public void SetStorages(OrdersManager manager, OrdersUI ordersUI)
-    {
-        _manager = manager;
-        _ordersUI = ordersUI;
     }
 }

@@ -12,8 +12,8 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable, IBindable<CafeData>
     [SerializeField] private CafeSpaceManager _spaceManager;
     [SerializeField] private CafeSpotManager _spotManager;
     [SerializeField] private OrdersManager _ordersManager;
+    [SerializeField] private FoodManager _foodManager;
     [SerializeField] private ClientsPool _pool;
-    private FoodManager _foodManager;
 
     [Header("Spawn time")]
     [SerializeField, Min(0)] private float _minSpawnTime;
@@ -31,7 +31,6 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable, IBindable<CafeData>
     private void Awake()
     {
         _xpAdder = GetComponent<PopularityXpAdder>();
-        _foodManager = _ordersManager.GetComponent<FoodManager>();
         _cafeOpener.CafeChanged += ChangeWorkMode;
         _spaceManager.SpaceAdded += MoveSpawnPoint;
     }
@@ -52,7 +51,7 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable, IBindable<CafeData>
             return;
 
         if (_data.NowSpawnTime < _data.NeedSpawnTime) {
-            _data.NowSpawnTime += Time.deltaTime * TimeManager.instance.TimeSpeed;
+            _data.NowSpawnTime += TimeManager.Instance.InGameTimeSpeed;
         } else {
             Spawn();
             SetNewTime();

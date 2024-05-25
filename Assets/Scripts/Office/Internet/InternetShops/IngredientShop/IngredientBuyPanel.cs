@@ -39,7 +39,7 @@ public class IngredientBuyPanel : BaseInstantBuyPanel
 
         var ingredient = _item as Ingredient;
         _isBedAvailable = newBed.AcceptableType == ingredient.Type;
-        UpdateButton(MoneyManager.instance.MoneyCount);
+        UpdateButton(MoneyManager.Instance.MoneyCount);
     }
 
     protected override void UpdateButton(int moneyCount)

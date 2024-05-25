@@ -15,12 +15,14 @@ public class OrderRecipePart : ShopFoodRecipePart
             _countText.color = _notAvailableColor;
     }
 
-    public void SetupAutoSpice(Ingredient spice, int count)
+    public void SetupAutoSpice(IngredientCount ingredientCount)
     {
         gameObject.SetActive(true);
         _icon.sprite = _moneySprite;
-        _countText.text = (spice.Cost * count).ToString() + "x";
-        if (MoneyManager.instance.MoneyCount >= spice.Cost * count)
+        int cost = ingredientCount.Count * IngredientsManager.Instance.Spice.Cost;
+
+        _countText.text = cost.ToString() + "x";
+        if (MoneyManager.Instance.MoneyCount >= cost)
             _countText.color = _availableColor;
         else
             _countText.color = _notAvailableColor;

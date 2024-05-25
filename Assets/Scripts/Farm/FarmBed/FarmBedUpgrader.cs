@@ -35,7 +35,7 @@ public class FarmBedUpgrader : MonoBehaviour
     public void DisableUpgrades()
     {
         foreach (var upgrade in _availableUpgrades)
-            MoneyManager.instance.ChangeMoney(upgrade.Cost);
+            MoneyManager.Instance.ChangeMoney(upgrade.Cost);
 
         _bedData.WaterBoost.IsEternal = false;
         _bedData.FertilizeBoost.IsEternal = false;

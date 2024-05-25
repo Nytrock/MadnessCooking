@@ -13,6 +13,6 @@ public class FatigueSourceButton : MonoBehaviour
 
     private void IncreaseFatigue()
     {
-        FatigueManager.instance.ChangeFatigue(_fatigueCoef);
+        FatigueManager.Instance.ChangeFatigue(_fatigueCoef);
     }
 }

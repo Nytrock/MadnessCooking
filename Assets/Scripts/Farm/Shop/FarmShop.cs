@@ -22,7 +22,7 @@ public class FarmShop : BaseChooseShop, IBindable<FarmData>
         if (upgrade == null)
             throw new NullReferenceException($"Buying item is not {Type}");
 
-        MoneyManager.instance.ChangeMoney(-upgrade.Cost);
+        MoneyManager.Instance.ChangeMoney(-upgrade.Cost);
         _upgradeManager.NewUpgrade(upgrade);
         IsNoNextUpgrade = true;
 

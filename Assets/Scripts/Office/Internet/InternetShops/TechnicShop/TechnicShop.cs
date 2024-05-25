@@ -17,7 +17,7 @@ public class TechnicShop : BaseInstantShop, IBindable<OfficeData>
         if (technic == null)
             throw new NullReferenceException($"Buying item is not {Type}");
 
-        MoneyManager.instance.ChangeMoney(-technic.Cost);
+        MoneyManager.Instance.ChangeMoney(-technic.Cost);
         _technicManager.AddTechnic(technic);
 
         int index = _technicToBuy.IndexOf(technic);

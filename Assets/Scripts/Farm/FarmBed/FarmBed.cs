@@ -4,8 +4,6 @@ using UnityEngine;
 [RequireComponent(typeof(FarmBedUpgrader))]
 public class FarmBed : MonoBehaviour
 {
-    [SerializeField] private Ingredient _wheat;
-
     [Header("Upgrades")]
     [SerializeField] private FarmBedGrowSlider _growStatusSlider;
 
@@ -13,6 +11,8 @@ public class FarmBed : MonoBehaviour
     private FarmData _data;
 
     private WheatManager _wheatManager;
+    private Ingredient _wheat;
+
     private BedTypeHolder _bedHolder;
     private FarmBedUpgrader _upgrader;
     private FarmBedUIManager _UI;
@@ -47,8 +47,7 @@ public class FarmBed : MonoBehaviour
             return;
 
         if (BedData.NowTime < _growTime) {
-            BedData.NowTime += Time.deltaTime * BedData.SummarizedBoost 
-                * TimeManager.instance.TimeSpeed;
+            BedData.NowTime += BedData.SummarizedBoost * TimeManager.Instance.InGameTimeSpeed;
         } else {
             BedData.Count++;
             BedData.NowTime = 0;
@@ -93,7 +92,7 @@ public class FarmBed : MonoBehaviour
     public void ResetBedType()
     {
         if (BedData.BedType.Cost > 0)
-            MoneyManager.instance.ChangeMoney(BedData.BedType.Cost);
+            MoneyManager.Instance.ChangeMoney(BedData.BedType.Cost);
         BedData.IsActive = false;
 
         ResetIngredient();
@@ -109,6 +108,7 @@ public class FarmBed : MonoBehaviour
         _UI = settings.UIManager;
         _car = settings.Car;
         _wheatManager = settings.WheatManager;
+        _wheat = IngredientsManager.Instance.Wheat;
     }
 
     public void SetIngredient(Ingredient ingredient)
@@ -139,7 +139,7 @@ public class FarmBed : MonoBehaviour
         if (_car.Data.LeftSpace < BedData.Count)
             sendingCount = _car.Data.LeftSpace;
 
-        FatigueManager.instance.ChangeFatigue(BedData.PlantedIngredient.FatigueCount * sendingCount);
+        FatigueManager.Instance.ChangeFatigue(BedData.PlantedIngredient.FatigueCount * sendingCount);
         BedData.Count -= sendingCount;
         _car.PutIngredient(new IngredientCount(BedData.PlantedIngredient, sendingCount));
 

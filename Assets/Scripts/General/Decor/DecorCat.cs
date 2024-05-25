@@ -7,6 +7,6 @@ public class DecorCat : DecorHolder
 
     private void OnMouseDown()
     {
-        FatigueManager.instance.ChangeFatigue(-_fatigueDecreaseCoef);
+        FatigueManager.Instance.ChangeFatigue(-_fatigueDecreaseCoef);
     }
 }

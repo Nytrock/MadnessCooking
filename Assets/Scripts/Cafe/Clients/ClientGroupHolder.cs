@@ -33,7 +33,7 @@ public class ClientGroupHolder : MonoBehaviour
             return;
 
         if (_data.NowTime < _data.WaitTime) {
-            _data.NowTime += Time.deltaTime * TimeManager.instance.TimeSpeed;
+            _data.NowTime += TimeManager.Instance.InGameTimeSpeed;
             _waitSlider.value = _data.NowTime;
         } else {
             _data.NowTime = 0;
@@ -165,7 +165,7 @@ public class ClientGroupHolder : MonoBehaviour
 
     private void PayToPlayer()
     {
-        MoneyManager.instance.ChangeMoney(_data.MoneyCount);
+        MoneyManager.Instance.ChangeMoney(_data.MoneyCount);
         _data.MoneyCount = 0;
     }
 

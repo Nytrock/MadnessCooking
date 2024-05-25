@@ -7,7 +7,6 @@ public class OrderCookingSlider : MonoBehaviour
     private bool _isCooking;
 
     private TechnicManager _technicManager;
-    private TechnicHolder _technic;
     private TechnicCooker _cooker;
 
     private void Update()
@@ -15,23 +14,23 @@ public class OrderCookingSlider : MonoBehaviour
         if (!_isCooking)
             return;
 
-        if (_technic.TechnicData.IsCooking) {
-            _cookingSlider.value = _cooker.NowTime;
-        } else {
-            _isCooking = false;
-            _technic = null;
-        }
+        _cookingSlider.value = _cooker.NowTime;
     }
 
     public void StartCook(Order order) {
-        _technic = _technicManager.FindHolderByTechic(order.Food.TypeTechnic);
-        _cooker = _technic.GetComponent<TechnicCooker>();
-        _cookingSlider.maxValue = order.Food.TimeToCook;
+        order.OrderFinished += EndCook;
         _isCooking = true;
+
+        _cookingSlider.maxValue = order.Food.TimeToCook;
+        _cooker = _technicManager.FindHolderByTechic(order.Food.TypeTechnic).GetComponent<TechnicCooker>();
     }
 
     public void SetTechnicManager(TechnicManager technicManager)
     {
         _technicManager = technicManager;
+    }
+
+    private void EndCook() {
+        _isCooking = false;
     }
 }

@@ -11063,8 +11063,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _car: {fileID: 1090935202}
-  _milk: {fileID: 11400000, guid: 6b8daec792815f44b8b8c781a3adfdcd, type: 2}
-  _flour: {fileID: 11400000, guid: 24d7a663aa0937f4b8ed7ab357e76093, type: 2}
 --- !u!1 &372516763
 GameObject:
   m_ObjectHideFlags: 0
@@ -24868,8 +24866,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 800858056}
-  - component: {fileID: 800858058}
-  - component: {fileID: 800858057}
   m_Layer: 0
   m_Name: Kitchen
   m_TagString: Untagged
@@ -24891,40 +24887,14 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1301953829}
+  - {fileID: 1103085984}
+  - {fileID: 1692783795}
   - {fileID: 1537848106}
   - {fileID: 1297580538}
   - {fileID: 397481015}
   - {fileID: 1280892844}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &800858057
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 800858055}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4412966a588bcd24bb3d62149cfa8cd0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _defaultFood:
-  - {fileID: 11400000, guid: 6eeb62fd94072e542bf940359b8cbca0, type: 2}
---- !u!114 &800858058
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 800858055}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09e9d7cde212b8c40af63b27864698b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _kitchenStorage: {fileID: 397481016}
-  _technicManager: {fileID: 1297580539}
 --- !u!1 &809682216
 GameObject:
   m_ObjectHideFlags: 0
@@ -27184,6 +27154,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _prefab: {fileID: 2372775456709987122, guid: 60087e4c175681842925be6686c83a02, type: 3}
   _container: {fileID: 1527982002}
+  _technicManager: {fileID: 1297580539}
+  _kitchenStorage: {fileID: 397481016}
 --- !u!224 &902209910
 RectTransform:
   m_ObjectHideFlags: 0
@@ -28477,6 +28449,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1a1acf5d79493354cad0d0956b0d8689, type: 2}
   _defaultIngredients:
   - {fileID: 11400000, guid: 897523a5d3e8cc843a91257d85a26f6b, type: 2}
+  _spice: {fileID: 11400000, guid: 1a1acf5d79493354cad0d0956b0d8689, type: 2}
+  _milk: {fileID: 11400000, guid: 6b8daec792815f44b8b8c781a3adfdcd, type: 2}
+  _flour: {fileID: 11400000, guid: 24d7a663aa0937f4b8ed7ab357e76093, type: 2}
+  _egg: {fileID: 11400000, guid: 3278518d00037514cbdf7435e0cc9325, type: 2}
+  _wheat: {fileID: 11400000, guid: 552016a33cc72bb44b4eb6addf12b2f4, type: 2}
 --- !u!4 &917452952
 Transform:
   m_ObjectHideFlags: 0
@@ -34046,6 +34023,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1102800010}
   m_CullTransparentMesh: 1
+--- !u!1 &1103085982
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1103085984}
+  - component: {fileID: 1103085983}
+  m_Layer: 0
+  m_Name: FoodManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1103085983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1103085982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4412966a588bcd24bb3d62149cfa8cd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _defaultFood:
+  - {fileID: 11400000, guid: 6eeb62fd94072e542bf940359b8cbca0, type: 2}
+--- !u!4 &1103085984
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1103085982}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 800858056}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1103815202
 GameObject:
   m_ObjectHideFlags: 0
@@ -38928,7 +38951,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _timeMultiplier: {fileID: 1095035883}
   _spaceManager: {fileID: 1436171022}
-  _foodManager: {fileID: 800858057}
+  _foodManager: {fileID: 0}
   _oneCafeSpaceMultiplier: 0.12
   _oneFoodMultiplier: 0.05
 --- !u!1 &1257875748
@@ -44424,7 +44447,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c00caadbdf55c9142affdf6fefb42640, type: 2}
   - {fileID: 11400000, guid: d962533a8198db345b4b5944ebc95faf, type: 2}
   - {fileID: 11400000, guid: 87f6dce480009e647827c7826e4351c7, type: 2}
-  _foodManager: {fileID: 800858057}
+  _foodManager: {fileID: 0}
 --- !u!222 &1452928100
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -51520,6 +51543,53 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1425203894}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1692783793
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1692783795}
+  - component: {fileID: 1692783794}
+  m_Layer: 0
+  m_Name: OrdersManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1692783794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1692783793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09e9d7cde212b8c40af63b27864698b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _kitchenStorage: {fileID: 397481016}
+  _technicManager: {fileID: 1297580539}
+  _saveManager: {fileID: 597507963}
+--- !u!4 &1692783795
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1692783793}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 800858056}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1694403031
 GameObject:
   m_ObjectHideFlags: 0
@@ -53982,7 +54052,6 @@ MonoBehaviour:
     _nameText: {fileID: 80050150}
     _descriptionText: {fileID: 915874127}
     _count: {fileID: 2086361568}
-  _egg: {fileID: 11400000, guid: 3278518d00037514cbdf7435e0cc9325, type: 2}
 --- !u!1 &1759948584
 GameObject:
   m_ObjectHideFlags: 0
@@ -57938,7 +58007,7 @@ MonoBehaviour:
   - {fileID: 1297580539}
   - {fileID: 397481016}
   - {fileID: 1280892845}
-  - {fileID: 800858057}
+  - {fileID: 1103085983}
   - {fileID: 2098111177}
   - {fileID: 1017138916}
 --- !u!1 &1899969124
@@ -60713,7 +60782,6 @@ MonoBehaviour:
   _ingredientsManager: {fileID: 917452951}
   _bedTypesManager: {fileID: 585307979}
   _ingredientStorage: {fileID: 397481016}
-  _spice: {fileID: 11400000, guid: 1a1acf5d79493354cad0d0956b0d8689, type: 2}
   _spiceAutoBuy: {fileID: 11400000, guid: 8e6abd0bb54401244a0c7c6f4c7c8ff9, type: 2}
 --- !u!1 &1992537041
 GameObject:
@@ -65002,11 +65070,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25026d6059525a84e909c1652d19c5be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _manager: {fileID: 800858058}
+  _ordersManager: {fileID: 1692783794}
   _pool: {fileID: 902209909}
   _panel: {fileID: 780988748}
   _autoSpice: {fileID: 11400000, guid: 8e6abd0bb54401244a0c7c6f4c7c8ff9, type: 2}
-  _spice: {fileID: 11400000, guid: 1a1acf5d79493354cad0d0956b0d8689, type: 2}
 --- !u!1 &2101075559
 GameObject:
   m_ObjectHideFlags: 0
@@ -65502,7 +65569,8 @@ MonoBehaviour:
   _cafeOpener: {fileID: 2131011339}
   _spaceManager: {fileID: 1436171022}
   _spotManager: {fileID: 681891816}
-  _ordersManager: {fileID: 800858058}
+  _ordersManager: {fileID: 1692783794}
+  _foodManager: {fileID: 1103085983}
   _pool: {fileID: 16532515}
   _minSpawnTime: 1
   _maxSpawnTime: 7

@@ -8,7 +8,6 @@ public class ChoicePool<TItem, TButton> : MonoBehaviour where TItem: BuyableObje
 
     private Queue<TButton> _pool = new();
 
-
     public TButton GetObject()
     {
         if (_pool.Count == 0) {

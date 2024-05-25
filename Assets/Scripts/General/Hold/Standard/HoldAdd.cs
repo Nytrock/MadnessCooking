@@ -62,7 +62,7 @@ public abstract class HoldAdd : MonoBehaviour, IUpgradeable, IBindable<FarmData>
     protected virtual void UpdateTimer()
     {
         if (!HoldData.IsAuto)
-            FatigueManager.instance.ChangeFatigue(_fatigueCoef);
+            FatigueManager.Instance.ChangeFatigue(_fatigueCoef);
 
         if (HoldData.NowTime < _timeWait)
             HoldData.NowTime += Time.deltaTime * HoldData.Speed;

@@ -9,7 +9,6 @@ public class ChickensUI : MonoBehaviour
     [SerializeField] private ChickensFoodCountRenderer _countRenderer;
     [SerializeField] private Slider _eggSlider;
     [SerializeField] private ItemInfoRendererWithCount _eggRenderer;
-    [SerializeField] private Ingredient _egg;
 
     private void Awake()
     {
@@ -19,7 +18,7 @@ public class ChickensUI : MonoBehaviour
 
     private void Start()
     {
-        _eggRenderer.SetItemInfo(_egg);
+        _eggRenderer.SetItemInfo(IngredientsManager.Instance.Egg);
         _eggSlider.maxValue = _chickens.EggTime;
         _panel.SetActive(false);
     }
@@ -42,8 +41,5 @@ public class ChickensUI : MonoBehaviour
         _panel.SetActive(!_panel.activeSelf);
     }
 
-    public void EggsToCar()
-    {
-        _chickens.EggsToCar(_egg);
-    }
+    public void EggsToCar() => _chickens.EggsToCar();
 }

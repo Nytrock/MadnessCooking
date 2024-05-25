@@ -8,14 +8,14 @@ public abstract class BaseInstantBuyPanel : BaseBuyPanel
     public override void Setup(BuyableObject item, BaseShop shop)
     {
         base.Setup(item, shop);
-        MoneyManager.instance.MoneyChanged += UpdateButton;
+        MoneyManager.Instance.MoneyChanged += UpdateButton;
     }
 
     public override void SetVisual(BuyableObject item)
     {
         _itemInfoRenderer.SetItemInfo(item);
         _itemInfoRenderer.SetCost(_costDescription, item.Cost);
-        UpdateButton(MoneyManager.instance.MoneyCount);
+        UpdateButton(MoneyManager.Instance.MoneyCount);
     }
 
     protected virtual void UpdateButton(int moneyCount)
@@ -25,7 +25,7 @@ public abstract class BaseInstantBuyPanel : BaseBuyPanel
 
     public override void Destroy()
     {
-        MoneyManager.instance.MoneyChanged -= UpdateButton;
+        MoneyManager.Instance.MoneyChanged -= UpdateButton;
         base.Destroy();
     }
 

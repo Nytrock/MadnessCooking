@@ -33,7 +33,7 @@ public class Chickens : MonoBehaviour, IUpgradeable, IBindable<FarmData>
 
         UpdateFoods();
         if (Data.NowTime < _eggTime) {
-            Data.NowTime += Time.deltaTime * TimeManager.instance.TimeSpeed * Data.Speed;
+            Data.NowTime += TimeManager.Instance.InGameTimeSpeed * Data.Speed;
         } else {
             Data.NowTime = 0;
             Data.EggCount++;
@@ -77,9 +77,10 @@ public class Chickens : MonoBehaviour, IUpgradeable, IBindable<FarmData>
         FoodCountChanged?.Invoke();
     }
 
-    public void EggsToCar(Ingredient egg)
+    public void EggsToCar()
     {
-        FatigueManager.instance.ChangeFatigue(egg.FatigueCount * Data.EggCount);
+        Ingredient egg = IngredientsManager.Instance.Egg;
+        FatigueManager.Instance.ChangeFatigue(egg.FatigueCount * Data.EggCount);
         _car.PutIngredient(new IngredientCount(egg, Data.EggCount));
         Data.EggCount = 0;
     }

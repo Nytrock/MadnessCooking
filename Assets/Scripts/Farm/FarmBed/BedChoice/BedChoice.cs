@@ -34,7 +34,7 @@ public class BedChoice : MonoBehaviour
 
     public void SetType(BedType bedType)
     {
-        MoneyManager.instance.ChangeMoney(-bedType.Cost);
+        MoneyManager.Instance.ChangeMoney(-bedType.Cost);
         BedTypeHolder bed = FindBedHolder(bedType);
 
         _bedData.IsActive = true;

@@ -33,7 +33,7 @@ public class TechnicHolder : MonoBehaviour
     public void StartCook(Order order)
     {
         TechnicData.IsCooking = true;
-        TechnicData.NowStrength = Mathf.Max(TechnicData.NowStrength - Random.Range(1f, 2f) / _data.TechnicStrength, 0);
+        TechnicData.NowStrength = Mathf.Max(TechnicData.NowStrength - (Random.Range(1f, 2f) / _data.TechnicStrength), 0);
         _animator.SetBool("isCooking", true);
 
         _nowOrder = order;
@@ -85,6 +85,6 @@ public class TechnicHolder : MonoBehaviour
     public bool Repairable()
     {
         return TechnicData.NowStrength != _technic.Strength && 
-            MoneyManager.instance.MoneyCount >= _technic.CostRepair;
+            MoneyManager.Instance.MoneyCount >= _technic.CostRepair;
     }
 }

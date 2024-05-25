@@ -3,19 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-[RequireComponent(typeof(FoodManager))]
 public class OrdersManager : MonoBehaviour
 {
     [SerializeField] private KitchenStorage _kitchenStorage;
     [SerializeField] private TechnicManager _technicManager;
+    [SerializeField] private SaveManager _saveManager;
     private readonly List<Order> _orders = new();
     private readonly ClientState[] _suitableStates = { ClientState.Spawn, ClientState.Wait, ClientState.Sit };
 
     public event Action<Order> OrderAdded;
     public event Action<Order> OrderRemoved;
-
-    public TechnicManager TechnicManager => _technicManager;
-    public KitchenStorage KitchenStorage => _kitchenStorage;
 
     public void SetNewOrder(Client client)
     {
@@ -36,7 +33,7 @@ public class OrdersManager : MonoBehaviour
     {
         if (client.ClientData.Type == ClientType.GrayMan) {
             _kitchenStorage.RemoveAll();
-            SaveManager.instance.Save();
+            _saveManager.Save();
             Application.Quit();
         }
 

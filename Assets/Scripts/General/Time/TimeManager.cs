@@ -1,10 +1,8 @@
 using System;
 using UnityEngine;
 
-public class TimeManager : MonoBehaviour, IBindable<GeneralData>
+public class TimeManager : Singleton<TimeManager>, IBindable<GeneralData>
 {
-    public static TimeManager instance;
-
     [SerializeField, Min(0)] private int _defaultTimeSpeed;
     [SerializeField, Min(0)] private int _sleepTimeSpeed;
     [SerializeField] private DaytimeStart[] _daytimeStarts;
@@ -16,15 +14,10 @@ public class TimeManager : MonoBehaviour, IBindable<GeneralData>
     private Daytime _daytime = Daytime.Morning;
 
     public TimeSpan TimeSpan => _timespan;
-    public int TimeSpeed => _nowTimeSpeed;
     public bool IsSleep => _sleepTimeSpeed == _nowTimeSpeed;
+    public float InGameTimeSpeed => _nowTimeSpeed * Time.deltaTime;
 
     public event Action<Daytime> DaytimeChanged;
-
-    private void Awake()
-    {
-        instance = this;
-    }
 
     private void LateStart()
     {

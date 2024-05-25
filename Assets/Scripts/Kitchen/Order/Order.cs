@@ -16,6 +16,8 @@ public class Order
     public Food Food => _food;
     public int TableIndex => _tableIndex;
 
+    public event Action OrderStarted;
+
     public event Action OrderFinished;
 
     public Order(Food food, int tableIndex)
@@ -27,6 +29,7 @@ public class Order
     public void StartCook()
     {
         _isCooking = true;
+        OrderStarted?.Invoke();
     }
 
     public void FinishCook()

@@ -2,10 +2,24 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class IngredientsManager : MonoBehaviour, IBindable<FarmData>
+public class IngredientsManager : Singleton<IngredientsManager>, IBindable<FarmData>
 {
     [SerializeField] private Ingredient[] _allIngredients;
     [SerializeField] private Ingredient[] _defaultIngredients;
+
+    [Header("Static ingredients")]
+    [SerializeField] private Ingredient _spice;
+    [SerializeField] private Ingredient _milk;
+    [SerializeField] private Ingredient _flour;
+    [SerializeField] private Ingredient _egg;
+    [SerializeField] private Ingredient _wheat;
+
+    public Ingredient Spice => _spice;
+    public Ingredient Milk => _milk;
+    public Ingredient Flour => _flour;
+    public Ingredient Egg => _egg;
+    public Ingredient Wheat => _wheat;
+
     private FarmData _data;
 
     public bool HaveIngredient(Ingredient ingredient)

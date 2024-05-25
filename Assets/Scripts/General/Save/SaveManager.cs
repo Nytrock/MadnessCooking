@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class SaveManager : MonoBehaviour
 {
-    public static SaveManager instance;
-
     private GameData _gameData;
     private FileDataService _dataService;
 
@@ -21,8 +19,6 @@ public class SaveManager : MonoBehaviour
     {
         _dataService = new FileDataService();
         Application.targetFrameRate = 60;
-
-        instance = this;
     }
 
     private void Start()

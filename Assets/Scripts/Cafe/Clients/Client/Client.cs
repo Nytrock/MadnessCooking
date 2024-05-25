@@ -135,7 +135,7 @@ public class Client : MonoBehaviour
         int moneyToPay = ClientData.Order.Food.MoneyGet;
         if (ClientData.Type == ClientType.Rich)
             moneyToPay *= 100;
-        MoneyManager.instance.ChangeMoney(moneyToPay);
+        MoneyManager.Instance.ChangeMoney(moneyToPay);
         Leave();
     }
 

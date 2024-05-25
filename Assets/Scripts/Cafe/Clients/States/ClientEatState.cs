@@ -1,4 +1,3 @@
-using UnityEngine;
 using UnityEngine.UI;
 
 public class ClientEatState : ClientBaseState
@@ -26,7 +25,7 @@ public class ClientEatState : ClientBaseState
     public override void UpdateState(Client client)
     {
         if (_clientData.NowTime < _clientData.WaitTime) {
-            _clientData.NowTime += Time.deltaTime * TimeManager.instance.TimeSpeed;
+            _clientData.NowTime += TimeManager.Instance.InGameTimeSpeed;
             _eatSlider.value = _clientData.NowTime;
         } else {
             client.Pay();

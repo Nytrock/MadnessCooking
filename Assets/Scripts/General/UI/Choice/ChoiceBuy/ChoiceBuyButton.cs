@@ -7,7 +7,7 @@ public abstract class ChoiceBuyButton<TItem> : ChoiceButton<TItem> where TItem: 
     protected override void Awake()
     {
         base.Awake();
-        MoneyManager.instance.MoneyChanged += CheckBuyable;
+        MoneyManager.Instance.MoneyChanged += CheckBuyable;
     }
 
     public virtual void Setup(TItem item, int index, ChoiceBuyUI<TItem> ui)
@@ -18,7 +18,7 @@ public abstract class ChoiceBuyButton<TItem> : ChoiceButton<TItem> where TItem: 
         Item = item;
         _cost = item.Cost;
         _icon.sprite = Item.Icon;
-        CheckBuyable(MoneyManager.instance.MoneyCount);
+        CheckBuyable(MoneyManager.Instance.MoneyCount);
         _button.onClick.AddListener(
             delegate { ui.Choice(index, _isBuyable); }
         );

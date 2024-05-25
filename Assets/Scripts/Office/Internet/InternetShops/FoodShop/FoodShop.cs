@@ -19,7 +19,7 @@ public class FoodShop : BaseChooseShop, IBindable<OfficeData>
         if (food == null)
             throw new NullReferenceException($"Buying item is not {Type}");
 
-        MoneyManager.instance.ChangeMoney(-food.Cost);
+        MoneyManager.Instance.ChangeMoney(-food.Cost);
         _foodManager.AddFood(food);
 
         int index = _foodToBuy.IndexOf(food);

@@ -16,6 +16,6 @@ public class FatigueSourceSlider : MonoBehaviour
 
     private void IncreaseFatigue(float value)
     {
-        FatigueManager.instance.ChangeFatigue(Mathf.Abs(_lastValue - value) * _fatigueCoef);
+        FatigueManager.Instance.ChangeFatigue(Mathf.Abs(_lastValue - value) * _fatigueCoef);
     }
 }

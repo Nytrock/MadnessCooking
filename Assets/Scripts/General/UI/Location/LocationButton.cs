@@ -23,7 +23,7 @@ public class LocationButton : MonoBehaviour
     {
         bool isOurLocation = newPosition == (Vector2)_location.position;
         if (isOurLocation)
-            FatigueManager.instance.ChangeFatigue(_fatigueCoef);
+            FatigueManager.Instance.ChangeFatigue(_fatigueCoef);
         _button.interactable = !isOurLocation;
     }
 }

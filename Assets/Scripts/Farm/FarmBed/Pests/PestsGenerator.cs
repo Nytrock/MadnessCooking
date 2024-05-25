@@ -27,7 +27,7 @@ public class PestsGenerator : MonoBehaviour
             return;
 
         if (_generatorData.NowTime < _generatorData.NeedTime) {
-            _generatorData.NowTime += Time.deltaTime * TimeManager.instance.TimeSpeed;
+            _generatorData.NowTime += TimeManager.Instance.InGameTimeSpeed;
         } else {
             SpawnPest();
             _generatorData.NowTime = 0;
@@ -92,7 +92,7 @@ public class PestsGenerator : MonoBehaviour
             _generatorData.IsActive = false;
         } else {
             _generatorData.IsActive = true;
-            _bedData.PestsSlowdown = 1 - _pests.Count * _onePestSlowdown;
+            _bedData.PestsSlowdown = 1 - (_pests.Count * _onePestSlowdown);
         }
         PestsChanged?.Invoke();
     }

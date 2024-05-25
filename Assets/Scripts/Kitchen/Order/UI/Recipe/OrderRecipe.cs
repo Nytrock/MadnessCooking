@@ -1,29 +1,25 @@
-using UnityEngine;
-
 public class OrderRecipe : FoodRecipe<OrderRecipePart>
 {
-    [SerializeField] private Ingredient _spice;
-    private bool _isAutoSpice;
+    private KitchenData _data;
 
-    public void SetupRecipe(Food food, bool isAutoSpice)
+    public void Setup(KitchenStorage kitchenStorage, TechnicManager technicManager)
     {
-        _isAutoSpice = isAutoSpice;
-        SetupRecipe(food);
+        _kitchenStorage = kitchenStorage;
+        _technicManager = technicManager;
     }
 
-    public void SetStorages(KitchenStorage ingredients, TechnicManager technic)
-    {
-        _kitchenStorage = ingredients;
-        _technicManager = technic;
+    public void SetupRecipe(Food food, KitchenData data) {
+        _data = data;
+        SetupRecipe(food);
     }
 
     protected override void SetupIngredients(IngredientCountList ingredients, ref bool canCook)
     {
         for (int i = 0; i < ingredients.Size; i++) {
             IngredientCount ingredientCount = ingredients.Get(i);
-            if (ingredientCount.Ingredient == _spice && _isAutoSpice) {
-                _canCook &= MoneyManager.instance.MoneyCount >= ingredientCount.Count * ingredientCount.Ingredient.Cost;
-                _recipeParts[i].SetupAutoSpice(ingredientCount.Ingredient, ingredientCount.Count);
+            if (ingredientCount.Ingredient == IngredientsManager.Instance.Spice && _data.IsAutoSpice) {
+                _canCook &= MoneyManager.Instance.MoneyCount >= ingredientCount.Count * ingredientCount.Ingredient.Cost;
+                _recipeParts[i].SetupAutoSpice(ingredientCount);
             } else {
                 bool haveCount = _kitchenStorage.HaveCount(ingredientCount);
                 _canCook &= haveCount;

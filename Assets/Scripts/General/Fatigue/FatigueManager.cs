@@ -1,10 +1,8 @@
 using System;
 using UnityEngine;
 
-public class FatigueManager : MonoBehaviour, IBindable<GeneralData>
+public class FatigueManager : Singleton<FatigueManager>, IBindable<GeneralData>
 {
-    public static FatigueManager instance;
-
     [SerializeField] private TimeManager _timeManager;
 
     [SerializeField, Min(0)] private float _fatigueMax;
@@ -19,11 +17,6 @@ public class FatigueManager : MonoBehaviour, IBindable<GeneralData>
     public float FatigueNow => _data.Fatigue;
 
     public event Action<bool> TiredChanged;
-
-    private void Awake()
-    {
-        instance = this;
-    }
 
     private void LateStart()
     {
@@ -41,7 +34,7 @@ public class FatigueManager : MonoBehaviour, IBindable<GeneralData>
 
     public void ChangeFatigue(float fatigueValue)
     {
-        _data.Fatigue = Mathf.Clamp(_data.Fatigue + fatigueValue / _decorBonus, 0, _fatigueMax);
+        _data.Fatigue = Mathf.Clamp(_data.Fatigue + (fatigueValue / _decorBonus), 0, _fatigueMax);
         if (_data.Fatigue >= _fatigueMax)
             ChangeTiredState(true);
     }

@@ -16,7 +16,6 @@ public class OrderButton : MonoBehaviour
     [SerializeField] private OrderRecipe _recipe;
     [SerializeField] private Button _cookButton;
     
-    private OrdersUI _ordersUI;
     private OrderCookingSlider _cookSlider;
 
     public Order Order { get; private set; }
@@ -29,7 +28,7 @@ public class OrderButton : MonoBehaviour
         gameObject.SetActive(true);
     }
 
-    public void StartSetup(Order order)
+    public void SetOrder(Order order, KitchenData data)
     {
         StartNewCycle();
         Order = order;
@@ -39,7 +38,7 @@ public class OrderButton : MonoBehaviour
         _titleText.text = Order.Food.Name;
         _tableIndexText.text = Order.TableIndex.ToString();
 
-        _recipe.SetupRecipe(Order.Food, _ordersUI.IsAutoSpice);
+        _recipe.SetupRecipe(Order.Food, data);
         _cookButton.interactable = _recipe.CanCook;
     }
 
@@ -48,7 +47,7 @@ public class OrderButton : MonoBehaviour
         if (Order == null) return;
         if (Order.IsCooking || Order.IsFinished) return;
 
-        _recipe.SetupRecipe(Order.Food, _ordersUI.IsAutoSpice);
+        _recipe.SetupRecipe(Order.Food);
         _cookButton.interactable = _recipe.CanCook;
     }
 
@@ -59,16 +58,15 @@ public class OrderButton : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public void SetStorages(OrdersManager manager, OrdersUI ordersUI)
+    public void Setup(TechnicManager technicManager, KitchenStorage kitchenStorage)
     {
         _cookSlider = GetComponent<OrderCookingSlider>();
 
-        manager.KitchenStorage.IngredientsChanged += UpdateRecipe;
-        manager.TechnicManager.TechnicChanged += UpdateRecipe;
+        kitchenStorage.IngredientsChanged += UpdateRecipe;
+        technicManager.TechnicChanged += UpdateRecipe;
 
-        _ordersUI = ordersUI;
-        _cookSlider.SetTechnicManager(manager.TechnicManager);
-        _recipe.SetStorages(manager.KitchenStorage, manager.TechnicManager);
+        _cookSlider.SetTechnicManager(technicManager);
+        _recipe.Setup(kitchenStorage, technicManager);
     }
 
     public void Cook()
@@ -76,10 +74,8 @@ public class OrderButton : MonoBehaviour
         _cookingSlider.SetActive(true);
         _startButton.SetActive(false);
         _recipe.DisableParts();
-
-        Order.StartCook();
         _cookSlider.StartCook(Order);
-        _ordersUI.StartCook(Order);
+        Order.StartCook();
     }
 
     public void FinishCook()
