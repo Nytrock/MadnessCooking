@@ -9,14 +9,15 @@ public class KitchenStorage : IngredientStorage<KitchenData>
     [ContextMenu("AddLemon")]
     public void AddLemon()
     {
-        PutIngredient(new IngredientCount(_lemon, 2));
+        PutIngredientWithRemain(new IngredientCount(_lemon, 2));
         IngredientsChanged?.Invoke();
     }
 
-    public override void PutIngredient(IngredientCount puttingCount)
+    public override int PutIngredientWithRemain(IngredientCount puttingCount)
     {
-        base.PutIngredient(puttingCount);
+        int remain = base.PutIngredientWithRemain(puttingCount);
         IngredientsChanged?.Invoke();
+        return remain;
     }
 
     public override void RemoveIngredients(IngredientCountList countList)

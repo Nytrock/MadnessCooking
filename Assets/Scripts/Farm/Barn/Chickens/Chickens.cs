@@ -14,6 +14,8 @@ public class Chickens : MonoBehaviour, IUpgradeable, IBindable<FarmData>
     [SerializeField] private BaseUpgrade _infiniteFood;
     [SerializeField, Min(1)] private float _foodSpeedCoef;
 
+    private Ingredient _egg;
+
     public float EggTime => _eggTime;
 
     public SerializableChickens Data { get; private set; }
@@ -22,6 +24,7 @@ public class Chickens : MonoBehaviour, IUpgradeable, IBindable<FarmData>
 
     private void LateStart()
     {
+        _egg = IngredientsManager.Instance.Egg;
         FoodCountChanged?.Invoke();
         ChangeState();
     }
@@ -79,10 +82,9 @@ public class Chickens : MonoBehaviour, IUpgradeable, IBindable<FarmData>
 
     public void EggsToCar()
     {
-        Ingredient egg = IngredientsManager.Instance.Egg;
-        FatigueManager.Instance.ChangeFatigue(egg.FatigueCount * Data.EggCount);
-        _car.PutIngredient(new IngredientCount(egg, Data.EggCount));
-        Data.EggCount = 0;
+        int remainCount = _car.PutIngredientWithRemain(new IngredientCount(_egg, Data.EggCount));
+        FatigueManager.Instance.ChangeFatigue(_egg.FatigueCount * (Data.EggCount - remainCount));
+        Data.EggCount = remainCount;
     }
 
     public void CheckUpgrade(BaseUpgrade upgrade)

@@ -26,7 +26,7 @@ public class IngredientShop : BaseInstantShop, IUpgradeable, IBindable<OfficeDat
 
         MoneyManager.Instance.ChangeMoney(-ingredient.Cost);
         if (ingredient.Type == IngredientType.Buyable) {
-            _ingredientStorage.PutIngredient(new IngredientCount(ingredient, 1));
+            _ingredientStorage.PutIngredientWithRemain(new IngredientCount(ingredient, 1));
         } else {
             _ingredientsManager.AddIngredient(ingredient);
             RemoveIngredient(ingredient);

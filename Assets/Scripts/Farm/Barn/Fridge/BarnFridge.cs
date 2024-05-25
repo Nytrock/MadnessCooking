@@ -37,13 +37,9 @@ public class BarnFridge : MonoBehaviour, IBindable<FarmData>
         else
             changingHoldAdd = FlourMill;
 
-        if (_car.Data.LeftSpace < changingHoldAdd.ReadyCount) {
-            changingHoldAdd.ReadyCount -= _car.Data.LeftSpace;
-            _car.PutIngredient(new IngredientCount(ingredient, _car.Data.LeftSpace));
-        } else {
-            _car.PutIngredient(new IngredientCount(ingredient, changingHoldAdd.ReadyCount));
-            changingHoldAdd.ReadyCount = 0;
-        }
+        int remainCount = _car.PutIngredientWithRemain(new IngredientCount(ingredient, changingHoldAdd.ReadyCount));
+        FatigueManager.Instance.ChangeFatigue(ingredient.FatigueCount * (changingHoldAdd.ReadyCount - remainCount));
+        changingHoldAdd.ReadyCount = remainCount;
     }
 
     public void Bind(FarmData data, bool isFileEmpty)

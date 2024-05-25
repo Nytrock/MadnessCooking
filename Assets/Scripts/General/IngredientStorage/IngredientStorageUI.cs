@@ -20,7 +20,7 @@ public class IngredientStorageUI<TData> : MonoBehaviour where TData: ISaveable
         _panel.SetActive(false);
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         UpdateSizeRenderer();
     }

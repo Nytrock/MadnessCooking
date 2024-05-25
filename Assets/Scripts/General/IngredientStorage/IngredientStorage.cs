@@ -12,18 +12,23 @@ public abstract class IngredientStorage<TData> : MonoBehaviour, IBindable<TData>
     public virtual void PutIngredients(IngredientCountList puttingCountList)
     {
         for (int i = 0; i < puttingCountList.Size; i++)
-            PutIngredient(puttingCountList.Get(i));
+            PutIngredientWithRemain(puttingCountList.Get(i));
     }
 
-    public virtual void PutIngredient(IngredientCount puttingCount)
+    public virtual int PutIngredientWithRemain(IngredientCount puttingCount)
     {
-        if (!Data.TryAddCount(puttingCount.Count))
-            throw new OverflowException("Too big count");
+        int remainCount = 0;
+        if (!Data.CanAddCount(puttingCount.Count)) {
+            remainCount = Data.NowSpace + puttingCount.Count - Data.MaxSpace;
+            puttingCount = new(puttingCount.Ingredient, Data.LeftSpace);
+        }
 
         int oldSize = Data.Ingredients.Size;
         Data.Ingredients.Add(puttingCount);
+        Data.AddCount(puttingCount.Count);
         if (Data.Ingredients.Size != oldSize)
             IngredientAdded?.Invoke(puttingCount);
+        return remainCount;
     }
 
     public virtual void RemoveIngredients(IngredientCountList countList)

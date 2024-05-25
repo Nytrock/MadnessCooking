@@ -13,8 +13,9 @@ public class FarmCarUI : IngredientStorageUI<FarmData>
         base.Awake();
     }
 
-    private void Update()
+    protected override void Update()
     {
+        base.Update();
         _sendButton.interactable = _waitManager.Data.CarState == CarState.Calm;
     }
 

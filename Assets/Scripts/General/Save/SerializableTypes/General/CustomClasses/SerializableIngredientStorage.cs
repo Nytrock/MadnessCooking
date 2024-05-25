@@ -19,13 +19,18 @@ public class SerializableIngredientStorage
         _maxSpace = maxSize;
     }
 
-    public bool TryAddCount(int count)
+    public bool CanAddCount(int count)
     {
-        if (_nowSpace + count > _maxSpace && _maxSpace != -1)
-            return false;
+        return _nowSpace + count <= _maxSpace || _maxSpace == -1;
+    }
+
+    public void AddCount(int count) {
+        if (!CanAddCount(count)) {
+            _nowSpace = _maxSpace;
+            return;
+        }
 
         _nowSpace += count;
-        return true;
     }
 
     public void ClearList()

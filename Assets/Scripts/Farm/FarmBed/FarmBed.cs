@@ -135,13 +135,10 @@ public class FarmBed : MonoBehaviour
         if (_car.Data.LeftSpace == 0)
             return;
 
-        int sendingCount = BedData.Count;
-        if (_car.Data.LeftSpace < BedData.Count)
-            sendingCount = _car.Data.LeftSpace;
-
-        FatigueManager.Instance.ChangeFatigue(BedData.PlantedIngredient.FatigueCount * sendingCount);
-        BedData.Count -= sendingCount;
-        _car.PutIngredient(new IngredientCount(BedData.PlantedIngredient, sendingCount));
+        int remainCount = _car.PutIngredientWithRemain(new IngredientCount(BedData.PlantedIngredient, BedData.Count));
+        FatigueManager.Instance.ChangeFatigue(BedData.PlantedIngredient.FatigueCount 
+            * (BedData.Count - remainCount));
+        BedData.Count = remainCount; 
 
         UnfullBed();
     }
