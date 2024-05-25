@@ -7,8 +7,8 @@ public class BarnFridge : MonoBehaviour, IBindable<FarmData>
     private Ingredient _milk;
     private Ingredient _flour;
 
-    public SerializableNeedHoldAdd Cow { get; private set; }
-    public SerializableNeedHoldAdd FlourMill { get; private set; }
+    public NeedHoldAddData Cow { get; private set; }
+    public NeedHoldAddData FlourMill { get; private set; }
 
     private void Start() {
         _milk = IngredientsManager.Instance.Milk;
@@ -31,7 +31,7 @@ public class BarnFridge : MonoBehaviour, IBindable<FarmData>
     }
 
     private void MoveToCar(Ingredient ingredient) {
-        SerializableNeedHoldAdd changingHoldAdd;
+        NeedHoldAddData changingHoldAdd;
         if (ingredient == _milk)
             changingHoldAdd = Cow;
         else

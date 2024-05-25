@@ -16,7 +16,7 @@ public class CafeCameraManager : CameraManager<CafeData>
 
     protected override void CalculateBorderPositions()
     {
-        SerializableSpaceManager spaceData = _spaceManager.SpaceData;
+        SpaceManagerData spaceData = _spaceManager.SpaceData;
         _startPosition = transform.position.x;
         _endPosition = _startPosition + (spaceData.Count - 1) * spaceData.SpaceSize 
             + spaceData.SpaceSize / 2 - _horizontalExtention;

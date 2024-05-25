@@ -7,7 +7,7 @@ public class BedTypeHolder : MonoBehaviour
     [SerializeField] private BedType _type;
     [SerializeField] private PestsGenerator _pestsGenerator;
     [SerializeField] private FarmBed _farmBed;
-    private SerializableFarmBed _bedData;
+    private FarmBedData _bedData;
 
     private Animator _animator;
     private string _name;

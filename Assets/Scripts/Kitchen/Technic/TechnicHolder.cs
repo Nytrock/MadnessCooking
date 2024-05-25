@@ -13,7 +13,7 @@ public class TechnicHolder : MonoBehaviour
     private TechnicCooker _cooker;
     private TechnicRepairer _repair;
 
-    public SerializableTechnic TechnicData { get; private set; }
+    public TechnicData TechnicData { get; private set; }
 
     public Technic Technic => _technic;
     public Transform UITarget => _UITarget;

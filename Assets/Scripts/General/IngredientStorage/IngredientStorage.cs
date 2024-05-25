@@ -5,7 +5,7 @@ public abstract class IngredientStorage<TData> : MonoBehaviour, IBindable<TData>
 {
     [SerializeField] protected int _defaultMaxSpace = 100;
 
-    public SerializableIngredientStorage Data { get; protected set; }
+    public IngredientStorageData Data { get; protected set; }
 
     public event Action<IngredientCount> IngredientAdded;
 

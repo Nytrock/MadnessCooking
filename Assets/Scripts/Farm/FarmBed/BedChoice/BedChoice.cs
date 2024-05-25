@@ -6,7 +6,7 @@ public class BedChoice : MonoBehaviour
 {
     [SerializeField] private BedTypeHolder[] _beds;
     private FarmData _data;
-    private SerializableFarmBed _bedData;
+    private FarmBedData _bedData;
 
     private BedChoiceUI _UI;
     private FarmBed _farmBed;

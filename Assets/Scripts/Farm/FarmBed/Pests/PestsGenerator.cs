@@ -13,8 +13,8 @@ public class PestsGenerator : MonoBehaviour
     [SerializeField, Min(0)] private float _minTime;
     [SerializeField, Min(0)] private float _maxTime;
 
-    private SerializableFarmBed _bedData;
-    private SerializablePestsGenerator _generatorData => _bedData.PestsGenerator;
+    private FarmBedData _bedData;
+    private PestsGeneratorData _generatorData => _bedData.PestsGenerator;
 
     private readonly List<Pest> _pests = new();
     private bool _isPause;
@@ -97,7 +97,7 @@ public class PestsGenerator : MonoBehaviour
         PestsChanged?.Invoke();
     }
 
-    public void SetData(SerializableFarmBed bedData)
+    public void SetData(FarmBedData bedData)
     {
         _bedData = bedData;
         foreach (var pestData in _generatorData.Pests) {

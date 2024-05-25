@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class ClientWaitState : ClientBaseState
 {
     private Slider _waitSlider;
-    private SerializableClient _clientData;
+    private ClientData _clientData;
 
     public override void EnterState(Client client)
     {

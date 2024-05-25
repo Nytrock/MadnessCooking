@@ -3,7 +3,7 @@ using UnityEngine.UI;
 public class ClientEatState : ClientBaseState
 {
     private Slider _eatSlider;
-    private SerializableClient _clientData;
+    private ClientData _clientData;
 
     public override void EnterState(Client client)
     {

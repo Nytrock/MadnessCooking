@@ -147,7 +147,7 @@ public class CafeSpotManager : MonoBehaviour, IBindable<CafeData>
         spot.ChangeEditorState(isAddedByEditor);
         spot.SetIndex(_spots.Count);
         if (isAddedByEditor)
-            _data.Spots.Add(new SerializableSpot(spot.SeatsCount));
+            _data.Spots.Add(new SpotData(spot.SeatsCount));
         if (spot.TryGetComponent(out ClientGroupHolder clientTable)) {
             _opener.CafeChanged += clientTable.CafeClosed;
             clientTable.SetData(_data.Spots[spot.Index]);
@@ -171,7 +171,7 @@ public class CafeSpotManager : MonoBehaviour, IBindable<CafeData>
         _data = data;
         if (isFileEmpty) {
             foreach (var spot in _spots) {
-                _data.Spots.Add(new SerializableSpot(spot.SeatsCount));
+                _data.Spots.Add(new SpotData(spot.SeatsCount));
             }
         }
 

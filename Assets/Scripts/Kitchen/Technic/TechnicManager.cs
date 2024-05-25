@@ -77,7 +77,7 @@ public class TechnicManager : MonoBehaviour, IUpgradeable, IBindable<KitchenData
     {
         _data = data;
         if (isFileEmpty) {
-            _data.AllTechnic = new SerializableTechnic[_holders.Length];
+            _data.AllTechnic = new TechnicData[_holders.Length];
             _data.AvailableTechnic = _defaultTechnic.ToList();
         }
 

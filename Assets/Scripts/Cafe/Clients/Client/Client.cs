@@ -20,7 +20,7 @@ public class Client : MonoBehaviour
 
     protected ClientUI _clientUI;
 
-    public SerializableClient ClientData { get; private set; }
+    public ClientData ClientData { get; private set; }
     public ClientsSpawner Spawner { get; private set; }
     public bool IsEatTimeShow { get; private set; }
     public int SpotIndex { get; private set; }

@@ -10,7 +10,7 @@ public abstract class SpaceManager<TData> : MonoBehaviour, IUpgradeable, IBindab
     protected Transform _spaceContainer;
     protected TData _data;
 
-    public SerializableSpaceManager SpaceData { get; protected set; }
+    public SpaceManagerData SpaceData { get; protected set; }
     public event Action SpaceAdded;
 
     private void Awake()

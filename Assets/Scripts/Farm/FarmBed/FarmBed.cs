@@ -7,7 +7,7 @@ public class FarmBed : MonoBehaviour
     [Header("Upgrades")]
     [SerializeField] private FarmBedGrowSlider _growStatusSlider;
 
-    public SerializableFarmBed BedData { get; private set; }
+    public FarmBedData BedData { get; private set; }
     private FarmData _data;
 
     private WheatManager _wheatManager;
@@ -204,7 +204,7 @@ public class FarmBed : MonoBehaviour
         PestsGenerator.CleanPests();
     }
 
-    public void Bind(FarmData data, SerializableFarmBed bedData, BedTypeHolder holder)
+    public void Bind(FarmData data, FarmBedData bedData, BedTypeHolder holder)
     {
         _data = data;
         BedData = bedData;

@@ -7,8 +7,8 @@ public class FarmData : ISaveable
     public List<Ingredient> AvailableIngredients;
     public List<BedType> AvailableBedTypes;
 
-    public SerializableSpaceManager FarmBedGroups = new();
-    public SerializableFarmBed[] FarmBeds;
+    public SpaceManagerData FarmBedGroups = new();
+    public FarmBedData[] FarmBeds;
 
     public LimitedConsumableUpgradeHolder[] UpgradesHolders;
     public BaseUpgrade[] UpgradesToBuy;
@@ -17,23 +17,23 @@ public class FarmData : ISaveable
     public bool IsCowNextWheat = true;
     public bool IsWheatDistributing;
 
-    public SerializableHoldAdd FarmWell = new();
-    public SerializableNeedHoldAdd Cow = new();
-    public SerializableShitGenerator ShitGenerator = new();
+    public HoldAddData FarmWell = new();
+    public NeedHoldAddData Cow = new();
+    public ShitGeneratorData ShitGenerator = new();
 
-    public SerializableNeedHoldAdd Puncher = new();
-    public SerializableNeedHoldAdd FlourMill = new();
-    public SerializableChickens Chickens = new();
+    public NeedHoldAddData Puncher = new();
+    public NeedHoldAddData FlourMill = new();
+    public ChickensData Chickens = new();
 
-    public SerializableIngredientStorage Car;
-    public SerializableCarWaitManager CarWaitManager;
+    public IngredientStorageData Car;
+    public CarWaitManagerData CarWaitManager;
 
     public bool IsAutoWheat;
     public bool IsGrowStatusShow;
 
     public void GenerateFarmBeds(int lenght)
     {
-        FarmBeds = new SerializableFarmBed[lenght];
+        FarmBeds = new FarmBedData[lenght];
         for (int i = 0; i < FarmBeds.Length; i++)
             FarmBeds[i] = new();
     }

@@ -13,7 +13,7 @@ public class BedTypeUI : MonoBehaviour
     [SerializeField] private Button _waterButton;
     [SerializeField] private Button _fertilizeButton;
 
-    private SerializableFarmBed _bedData;
+    private FarmBedData _bedData;
     private FarmData _data;
 
     public BedType BedType => _bedType;

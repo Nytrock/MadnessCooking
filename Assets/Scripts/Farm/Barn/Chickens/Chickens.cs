@@ -18,7 +18,7 @@ public class Chickens : MonoBehaviour, IUpgradeable, IBindable<FarmData>
 
     public float EggTime => _eggTime;
 
-    public SerializableChickens Data { get; private set; }
+    public ChickensData Data { get; private set; }
 
     public event Action FoodCountChanged;
 
@@ -45,7 +45,7 @@ public class Chickens : MonoBehaviour, IUpgradeable, IBindable<FarmData>
 
     private void UpdateFoods()
     {
-        List<SerializableChickenFood> foodToRemove = new();
+        List<ChickenFoodData> foodToRemove = new();
         foreach (var food in Data.FoodList) {
             food.AddTime();
             if (food.IsEnded)
@@ -57,7 +57,7 @@ public class Chickens : MonoBehaviour, IUpgradeable, IBindable<FarmData>
         foodToRemove.Clear();
     }
 
-    private void RemoveFood(SerializableChickenFood food)
+    private void RemoveFood(ChickenFoodData food)
     {
         Data.FoodList.Remove(food);
         Data.Speed -= food.FoodCoef;
@@ -68,7 +68,7 @@ public class Chickens : MonoBehaviour, IUpgradeable, IBindable<FarmData>
     public void Feed()
     {
         float foodCoef = _foodSpeedCoef / (Data.FoodList.Count + 1);
-        Data.FoodList.Add(new SerializableChickenFood(_maxFoodWorkTime, foodCoef));
+        Data.FoodList.Add(new ChickenFoodData(_maxFoodWorkTime, foodCoef));
 
         Data.Speed += foodCoef;
         Data.IsFeed = true;

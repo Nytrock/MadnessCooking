@@ -9,7 +9,7 @@ public class Pest : MonoBehaviour
     [SerializeField] private bool _isMovable;
     private SpriteRenderer _renderer;
 
-    public SerializablePest PestData { get; private set; }
+    public PestData PestData { get; private set; }
 
     private void Awake()
     {
@@ -48,7 +48,7 @@ public class Pest : MonoBehaviour
         PestData.RotationDegree = new(transform.rotation);
     }
 
-    public void Bind(SerializablePest pestData)
+    public void Bind(PestData pestData)
     {
         PestData = pestData;
         transform.SetPositionAndRotation(PestData.Position.GetVector(), 

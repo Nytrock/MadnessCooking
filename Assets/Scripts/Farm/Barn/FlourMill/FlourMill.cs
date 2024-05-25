@@ -3,7 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class FlourMill : NeedHoldAdd
 {
-    private SerializableNeedHoldAdd _cowData;
+    private NeedHoldAddData _cowData;
     private FarmData _data;
 
     private Animator _animator;

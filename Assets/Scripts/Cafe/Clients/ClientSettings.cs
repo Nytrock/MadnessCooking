@@ -3,12 +3,12 @@ using System;
 [Serializable]
 public struct ClientSettings
 {
-    public SerializableClient Data { get; private set; }
+    public ClientData Data { get; private set; }
     public int SpotIndex { get; private set; }
     public int TableIndex { get; private set; }
     public ClientsSpawner Spawner { get; private set; }
 
-    public ClientSettings(SerializableClient data, int spotIndex, int tableIndex, ClientsSpawner spawner)
+    public ClientSettings(ClientData data, int spotIndex, int tableIndex, ClientsSpawner spawner)
     {
         Data = data;
         SpotIndex = spotIndex;

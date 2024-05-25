@@ -13,7 +13,7 @@ public class ClientGroupHolder : MonoBehaviour
     [SerializeField, Min(0)] private float _minTalk;
     [SerializeField, Min(0)] private float _maxTalk;
 
-    private SerializableSpot _data;
+    private SpotData _data;
     private CafeSpot _spot;
     private readonly List<GroupClient> _clients = new();
 
@@ -179,7 +179,7 @@ public class ClientGroupHolder : MonoBehaviour
         _data.GroupState = GroupClientState.None;
     }
 
-    public void SetData(SerializableSpot spot)
+    public void SetData(SpotData spot)
     {
         _data = spot;
     }

@@ -8,7 +8,7 @@ public class BedHolderBooster : MonoBehaviour
     [SerializeField] protected float _boostLength;
     [SerializeField] protected float _defaultSpeed;
 
-    protected SerializableBooster _data;
+    protected BedHolderBoosterData _data;
     private float _boostStep;
 
     public event Action BoostEnded;
@@ -32,7 +32,7 @@ public class BedHolderBooster : MonoBehaviour
         }
     }
 
-    public void SetData(SerializableBooster data)
+    public void SetData(BedHolderBoosterData data)
     {
         _data = data;
         if (_data.IsEternal)

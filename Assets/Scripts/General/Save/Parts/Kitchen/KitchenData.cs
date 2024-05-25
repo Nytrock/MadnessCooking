@@ -5,11 +5,11 @@ using System.Collections.Generic;
 public class KitchenData : ISaveable
 {
     public List<Food> AvailableFood;
-    public SerializableIngredientStorage KitchenStorage;
+    public IngredientStorageData KitchenStorage;
     public List<Decor> AvailableDecor = new();
 
     public List<Technic> AvailableTechnic;
-    public SerializableTechnic[] AllTechnic;
+    public TechnicData[] AllTechnic;
 
     public bool IsAutoSpice;
     public bool IsStrengthShow;

@@ -1,6 +1,6 @@
 public class Cow : NeedHoldAdd
 {
-    private SerializableNeedHoldAdd _flourMillData;
+    private NeedHoldAddData _flourMillData;
     private FarmData _data;
 
     protected override void Add()
