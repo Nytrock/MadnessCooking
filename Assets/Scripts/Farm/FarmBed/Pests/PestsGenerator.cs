@@ -101,7 +101,7 @@ public class PestsGenerator : MonoBehaviour
     {
         _bedData = bedData;
         foreach (var pestData in _generatorData.Pests) {
-            Pest pest = _pool.GetObject(pestData.PrefabId);
+            Pest pest = _pool.GetObject(pestData.PrefabIndex);
             _pests.Add(pest);
             pest.Bind(pestData);
         }

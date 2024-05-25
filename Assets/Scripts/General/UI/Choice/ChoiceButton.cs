@@ -14,7 +14,7 @@ public abstract class ChoiceButton<TItem> : MonoBehaviour where TItem: BuyableOb
 
     public TItem Item { get; protected set; }
 
-    private void Awake()
+    protected virtual void Awake()
     {
         _image = GetComponent<Image>();
         _image.sprite = _deselectedSprite;

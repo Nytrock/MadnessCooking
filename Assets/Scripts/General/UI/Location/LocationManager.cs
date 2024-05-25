@@ -12,7 +12,7 @@ public class LocationManager : MonoBehaviour, IBindable<GeneralData>
 
     private void LateStart()
     {
-        ChangeLocation(_locations[_data.StartLocationId]);
+        ChangeLocation(_locations[_data.StartLocationIndex]);
     }
 
     public void ChangeLocation(Vector2 newLocation)
@@ -23,7 +23,7 @@ public class LocationManager : MonoBehaviour, IBindable<GeneralData>
 
     public void ChangeLocation(LocationButton newLocation)
     {
-        _data.StartLocationId = ArrayUtility.IndexOf(_locations, newLocation);
+        _data.StartLocationIndex = ArrayUtility.IndexOf(_locations, newLocation);
         ChangeLocation(newLocation.Location);
     }
 

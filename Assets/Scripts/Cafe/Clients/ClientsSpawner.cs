@@ -114,13 +114,13 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable, IBindable<CafeData>
         if (_data.IsWaitingCritic)
             return ClientCount.One;
 
-        _popularityCalculate.GetClientsNumberChances(out int singleChance, out int doubleChance, out int tripleChance, out int quarterChance);
-        int number = Random.Range(1, 1001);
-        if (number <= singleChance)
+        _popularityCalculate.GetClientChances(out int singleChance, out int doubleChance, out int tripleChance, out int quarterChance);
+        int chance = Random.Range(1, 1001);
+        if (chance <= singleChance)
             return ClientCount.One;
-        else if (number <= doubleChance)
+        else if (chance <= doubleChance)
             return ClientCount.Two;
-        else if (number <= tripleChance)
+        else if (chance <= tripleChance)
             return ClientCount.Three;
         return ClientCount.Four;
     }
@@ -279,5 +279,5 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable, IBindable<CafeData>
         return table;
     }
 
-    public CafeSpot GetSpot(int SpotId) => _spotManager.GetSpotByIndex(SpotId);
+    public CafeSpot GetSpot(int SpotIndex) => _spotManager.GetSpotByIndex(SpotIndex);
 }

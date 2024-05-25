@@ -37,7 +37,7 @@ public class OrderButton : MonoBehaviour
 
         _icon.sprite = Order.Food.Icon;
         _titleText.text = Order.Food.Name;
-        _tableIndexText.text = Order.TableNumber.ToString();
+        _tableIndexText.text = Order.TableIndex.ToString();
 
         _recipe.SetupRecipe(Order.Food, _ordersUI.IsAutoSpice);
         _cookButton.interactable = _recipe.CanCook;

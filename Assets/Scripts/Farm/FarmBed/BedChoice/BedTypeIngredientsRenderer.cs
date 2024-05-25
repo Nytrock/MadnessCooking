@@ -20,7 +20,7 @@ public class BedTypeIngredientsRenderer : MonoBehaviour
             index++;
         }
 
-        for (int i = 0; i < _ingredientImages.Length; i++)
+        for (int i = index; i < _ingredientImages.Length; i++)
             _ingredientImages[i].gameObject.SetActive(false);
     }
 

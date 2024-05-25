@@ -9,12 +9,15 @@ public class TechnicHolderUI : MonoBehaviour
     private TechnicPanel _nowPanel;
     private TechnicHolder _nowTechnic;
 
+    private void Awake()
+    {
+        _repairPanel.RepairEnded += EndRepairTechnic;
+    }
+
     private void Start()
     {
         _standardPanel.ChangeState(false);
         _repairPanel.ChangeState(false);
-
-        _repairPanel.RepairEnded += EndRepairTechnic;
         _nowPanel = _standardPanel;
     }
 

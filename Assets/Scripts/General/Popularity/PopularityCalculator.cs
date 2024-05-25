@@ -33,7 +33,7 @@ public class PopularityCalculator : MonoBehaviour
             (1 + _foodManager.FoodCount * _oneFoodMultiplier);
     }
 
-    public void GetClientsNumberChances(out int singleChance, out int doubleChance, out int tripleChance, out int quarterChance)
+    public void GetClientChances(out int singleChance, out int doubleChance, out int tripleChance, out int quarterChance)
     {
         singleChance = (int)(_nowLevel.SingleChance * 10);
         doubleChance = (int)(_nowLevel.DoubleChance * 10);

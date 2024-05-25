@@ -6,7 +6,7 @@ public abstract class UIActivator : MonoBehaviour
     [SerializeField] private UIHoverListener _hoverListener;
     private bool _isHover;
 
-    private void Start()
+    private void Awake()
     {
         _hoverListener.OnHover += ChangeMode;
     }

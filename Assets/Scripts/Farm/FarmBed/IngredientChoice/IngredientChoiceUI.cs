@@ -5,7 +5,7 @@ public class IngredientChoiceUI : ChoiceSimpleWithCameraStopUI<Ingredient, FarmD
 {
     [SerializeField] private IngredientsManager _ingredientsManager;
     [SerializeField] private IngredientChoiceStyle[] _styles;
-    private readonly List<Ingredient> _ingredients;
+    private readonly List<Ingredient> _ingredients = new();
     protected GameObject _stylePanel;
     private FarmBed _changingBed;
 

@@ -10,7 +10,7 @@ public class WatchDaytimeRenderer : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _daytimeText;
     [SerializeField] private DaytimeRenderInfo[] _daytimeInfos;
 
-    private void Start()
+    private void Awake()
     {
         _timeManager.DaytimeChanged += UpdateDaytime;
     }

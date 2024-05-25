@@ -3,11 +3,11 @@ using UnityEngine.UI;
 
 public class SpotEditorChooseButtons : MonoBehaviour
 {
-    [SerializeField] private Button[] chooseButtons;
+    [SerializeField] private Button[] _chooseButtons;
 
-    public void ChangeButtonNumber(int freeSpace)
+    public void SetButtonsNumber(int freeSpace)
     {
-        for (int i = 0; i < chooseButtons.Length; i++)
-            chooseButtons[i].interactable = i < freeSpace;
+        for (int i = 0; i < _chooseButtons.Length; i++)
+            _chooseButtons[i].interactable = i < freeSpace;
     }
 }

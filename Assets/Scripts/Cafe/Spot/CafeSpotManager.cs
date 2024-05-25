@@ -90,9 +90,9 @@ public class CafeSpotManager : MonoBehaviour, IBindable<CafeData>
         if (_freeSpots[needSeat].Count == 0)
             return -1;
 
-        int randomSpotNum = _freeSpots[needSeat][Random.Range(0, _freeSpots[needSeat].Count)];
-        _freeSpots[needSeat].Remove(randomSpotNum);
-        return randomSpotNum;
+        int randomSpotIndex = _freeSpots[needSeat][Random.Range(0, _freeSpots[needSeat].Count)];
+        _freeSpots[needSeat].Remove(randomSpotIndex);
+        return randomSpotIndex;
     }
 
     public void TakeSpot(int index)

@@ -2902,8 +2902,8 @@ MonoBehaviour:
   _UI: {fileID: 927083203}
   _renderer:
     _icon: {fileID: 1609104032}
-    _name: {fileID: 712134653}
-    _description: {fileID: 1735845695}
+    _nameText: {fileID: 712134653}
+    _descriptionText: {fileID: 1735845695}
     _count: {fileID: 11958078}
   _isSideButtonsWork: 1
   _pestsButton: {fileID: 1347486680}
@@ -3280,8 +3280,8 @@ MonoBehaviour:
   _UI: {fileID: 60991275}
   _renderer:
     _icon: {fileID: 1522341045}
-    _name: {fileID: 941507073}
-    _description: {fileID: 396402426}
+    _nameText: {fileID: 941507073}
+    _descriptionText: {fileID: 396402426}
     _count: {fileID: 510856826}
   _isSideButtonsWork: 1
   _pestsButton: {fileID: 1923875773}
@@ -4943,7 +4943,6 @@ MonoBehaviour:
   _UI: {fileID: 1303862258}
   _choiceButtonPool: {fileID: 1516808411}
   _submitButton: {fileID: 215982441}
-  _choiceButtons: []
   _cameraManager: {fileID: 713062802}
   _ingredientsManager: {fileID: 917452951}
   _styles:
@@ -5308,8 +5307,8 @@ MonoBehaviour:
   _UI: {fileID: 455760216}
   _renderer:
     _icon: {fileID: 40873877}
-    _name: {fileID: 2085866515}
-    _description: {fileID: 1663244687}
+    _nameText: {fileID: 2085866515}
+    _descriptionText: {fileID: 1663244687}
     _count: {fileID: 1132073197}
   _isSideButtonsWork: 0
   _pestsButton: {fileID: 1344378153}
@@ -11097,9 +11096,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _renderer:
     _icon: {fileID: 505970058}
-    _name: {fileID: 1569531499}
-    _description: {fileID: 582900834}
-    _price: {fileID: 1263605496}
+    _nameText: {fileID: 1569531499}
+    _descriptionText: {fileID: 582900834}
+    _costText: {fileID: 1263605496}
   _buyDescription: FarmBedUpgrade.Buy
   _freeDescription: FarmBedUpgrade.Free
 --- !u!224 &372516765
@@ -14036,7 +14035,6 @@ MonoBehaviour:
   _UI: {fileID: 1745107314}
   _choiceButtonPool: {fileID: 974128615}
   _submitButton: {fileID: 789811624}
-  _choiceButtons: []
   _description: {fileID: 1449719487}
   _cameraManager: {fileID: 713062802}
   _bedTypesManager: {fileID: 585307979}
@@ -17508,8 +17506,8 @@ MonoBehaviour:
   _panel: {fileID: 1475402429}
   _blockPanel: {fileID: 1045531717}
   _sleepButtonText: {fileID: 58073605}
-  _isSleepText: OfficeBed.WakeUp
-  _notSleepText: OfficeBed.Sleep
+  _sleepingNote: OfficeBed.WakeUp
+  _notSleepingNote: OfficeBed.Sleep
 --- !u!114 &568093280
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17622,10 +17620,10 @@ MonoBehaviour:
   _shop: {fileID: 1452928099}
   _renderer:
     _icon: {fileID: 1603776846}
-    _name: {fileID: 463537531}
-    _description: {fileID: 445941976}
-    _price: {fileID: 360027830}
-  _costDescription: 
+    _nameText: {fileID: 463537531}
+    _descriptionText: {fileID: 445941976}
+    _costText: {fileID: 360027830}
+  _costDescription: ItemView.Buy
   _buyButton: {fileID: 880767362}
   _recipeRenderer: {fileID: 1384931311}
 --- !u!114 &580367323
@@ -20299,8 +20297,8 @@ MonoBehaviour:
   _UI: {fileID: 1238875408}
   _renderer:
     _icon: {fileID: 1669209994}
-    _name: {fileID: 383551108}
-    _description: {fileID: 680397992}
+    _nameText: {fileID: 383551108}
+    _descriptionText: {fileID: 680397992}
     _count: {fileID: 914025697}
   _isSideButtonsWork: 0
   _pestsButton: {fileID: 2030520322}
@@ -21494,11 +21492,11 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 4
+  m_fontSize: 8.95
   m_fontSizeBase: 4
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 0.03
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 2
@@ -23943,7 +23941,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3be85cfda87d4764789d228b9357763f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chooseButtons:
+  _chooseButtons:
   - {fileID: 1136361992}
   - {fileID: 246686178}
   - {fileID: 599907147}
@@ -31762,8 +31760,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _icon: {fileID: 533427099}
-  _name: {fileID: 1718339440}
-  _repair: {fileID: 2101075562}
+  _nameText: {fileID: 1718339440}
+  _repairText: {fileID: 2101075562}
   _repairButton: {fileID: 445049855}
   _cookSlider: {fileID: 1405496148}
   _technicStrengthShow: {fileID: 11400000, guid: 5c5e9bb4f8ad81e4285b8b96d8ea731b, type: 2}
@@ -32018,8 +32016,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _popularityManager: {fileID: 1251689376}
   _additionalUI: {fileID: 1103815207}
-  _nameText: {fileID: 0}
-  _levelText: {fileID: 0}
+  _nameText: {fileID: 1614828907}
+  _levelText: {fileID: 324148881}
   _progress: {fileID: 1006096970}
 --- !u!1 &1029949020
 GameObject:
@@ -34138,12 +34136,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _panel: {fileID: 692613754}
-  _descriptionText: {fileID: 0}
-  _popularityMultiplierText: {fileID: 0}
-  _singleChanceText: {fileID: 0}
-  _doubleChanceText: {fileID: 0}
-  _tripleChanceText: {fileID: 0}
-  _quarterChanceText: {fileID: 0}
+  _descriptionText: {fileID: 1852575583}
+  _popularityMultiplierText: {fileID: 1805324108}
+  _singleChanceText: {fileID: 1532211912}
+  _doubleChanceText: {fileID: 302011083}
+  _tripleChanceText: {fileID: 358973555}
+  _quarterChanceText: {fileID: 1029949022}
 --- !u!1 &1113975929
 GameObject:
   m_ObjectHideFlags: 0
@@ -34699,13 +34697,13 @@ MonoBehaviour:
   _barnFridge: {fileID: 372173401}
   _milkRenderer:
     _icon: {fileID: 1317896659}
-    _name: {fileID: 1641676352}
-    _description: {fileID: 1736484045}
+    _nameText: {fileID: 1641676352}
+    _descriptionText: {fileID: 1736484045}
     _count: {fileID: 720973435}
   _flourRenderer:
     _icon: {fileID: 468827318}
-    _name: {fileID: 1178044772}
-    _description: {fileID: 989299318}
+    _nameText: {fileID: 1178044772}
+    _descriptionText: {fileID: 989299318}
     _count: {fileID: 168001624}
 --- !u!1 &1133440832
 GameObject:
@@ -36320,7 +36318,6 @@ MonoBehaviour:
   _UI: {fileID: 1481583148}
   _choiceButtonPool: {fileID: 558808508}
   _submitButton: {fileID: 1810792182}
-  _choiceButtons: []
   _description: {fileID: 372516764}
   _cameraManager: {fileID: 713062802}
   _manager: {fileID: 502661638}
@@ -39019,7 +39016,7 @@ GameObject:
   - component: {fileID: 1263605497}
   - component: {fileID: 1263605496}
   m_Layer: 5
-  m_Name: Num
+  m_Name: Cost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44190,9 +44187,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _renderer:
     _icon: {fileID: 1707463942}
-    _name: {fileID: 731711264}
-    _description: {fileID: 582574735}
-    _price: {fileID: 1187572287}
+    _nameText: {fileID: 731711264}
+    _descriptionText: {fileID: 582574735}
+    _costText: {fileID: 1187572287}
   _buyDescription: BedChoice.Buy
   _freeDescription: BedChoice.Free
 --- !u!1 &1451246556
@@ -45543,7 +45540,7 @@ MonoBehaviour:
   _storage: {fileID: 1090935202}
   _panel: {fileID: 1159207025}
   _buttonPool: {fileID: 1984073739}
-  _sizeText: {fileID: 0}
+  _sizeText: {fileID: 1985458978}
   _waitManager: {fileID: 1766492819}
   _sendButton: {fileID: 1506650406}
 --- !u!1 &1497202355
@@ -50569,10 +50566,10 @@ MonoBehaviour:
   _shop: {fileID: 1671263195}
   _renderer:
     _icon: {fileID: 908150623}
-    _name: {fileID: 1458276953}
-    _description: {fileID: 470972339}
-    _price: {fileID: 1272642099}
-  _costDescription: 
+    _nameText: {fileID: 1458276953}
+    _descriptionText: {fileID: 470972339}
+    _costText: {fileID: 1272642099}
+  _costDescription: ItemView.Buy
   _buyButton: {fileID: 1118122550}
 --- !u!114 &1656205583
 MonoBehaviour:
@@ -53982,8 +53979,8 @@ MonoBehaviour:
   _eggSlider: {fileID: 1158028931}
   _eggRenderer:
     _icon: {fileID: 907679983}
-    _name: {fileID: 80050150}
-    _description: {fileID: 915874127}
+    _nameText: {fileID: 80050150}
+    _descriptionText: {fileID: 915874127}
     _count: {fileID: 2086361568}
   _egg: {fileID: 11400000, guid: 3278518d00037514cbdf7435e0cc9325, type: 2}
 --- !u!1 &1759948584
@@ -59708,7 +59705,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _food: {fileID: 11400000, guid: 66c5710e75d6b7b40808e1bba8713f70, type: 2}
   _infiniteFood: {fileID: 11400000, guid: 3e6aa961bc173f04ba71c4f7afc21fc6, type: 2}
-  _countText: {fileID: 0}
+  _countText: {fileID: 328711405}
   _icon: {fileID: 824657881}
 --- !u!1 &1945257954
 GameObject:
@@ -61233,8 +61230,8 @@ MonoBehaviour:
   _UI: {fileID: 1974314491}
   _renderer:
     _icon: {fileID: 819326170}
-    _name: {fileID: 1975834169}
-    _description: {fileID: 1556693051}
+    _nameText: {fileID: 1975834169}
+    _descriptionText: {fileID: 1556693051}
     _count: {fileID: 2036298829}
   _isSideButtonsWork: 1
   _pestsButton: {fileID: 2134825558}

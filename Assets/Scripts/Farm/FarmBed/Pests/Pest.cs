@@ -21,15 +21,15 @@ public class Pest : MonoBehaviour
         gameObject.SetActive(value);
     }
 
-    public void Randomize(Vector2 leftDown, Vector2 rightUp, int prefabId)
+    public void Randomize(Vector2 leftDown, Vector2 rightUp, int prefabIndex)
     {
         PestData = new() {
-            PrefabId = prefabId
+            PrefabIndex = prefabIndex
         };
 
         if (_isSpriteChanging) {
-            PestData.SpriteId = Random.Range(0, _sprites.Length);
-            _renderer.sprite = _sprites[PestData.SpriteId];
+            PestData.SpriteIndex = Random.Range(0, _sprites.Length);
+            _renderer.sprite = _sprites[PestData.SpriteIndex];
         }
 
         if (_isMovable) {
@@ -55,7 +55,7 @@ public class Pest : MonoBehaviour
             PestData.RotationDegree.GetQuaternion());
 
         if (_isSpriteChanging)
-            _renderer.sprite = _sprites[PestData.SpriteId];
+            _renderer.sprite = _sprites[PestData.SpriteIndex];
     }
 
     public Sprite GetSprite() => _renderer.sprite;

@@ -8,20 +8,20 @@ public class Order
     [SerializeField] private bool _isFinished;
     [SerializeField] private bool _isCooking;
     [SerializeField] private Food _food;
-    [SerializeField] private int _tableNumber;
+    [SerializeField] private int _tableIndex;
 
     public bool IsActivated => _isActivated;
     public bool IsFinished => _isFinished;
     public bool IsCooking => _isCooking;
     public Food Food => _food;
-    public int TableNumber => _tableNumber;
+    public int TableIndex => _tableIndex;
 
     public event Action OrderFinished;
 
-    public Order(Food food, int tableNumber)
+    public Order(Food food, int tableIndex)
     {
         _food = food;
-        _tableNumber = tableNumber;
+        _tableIndex = tableIndex;
     }
 
     public void StartCook()

@@ -26,9 +26,8 @@ using UnityEngine.AddressableAssets;
 #endif
 using Object = UnityEngine.Object;
 
-namespace AssetUsageDetectorNamespace
-{
-	public partial class AssetUsageDetector
+namespace AssetUsageDetectorNamespace {
+    public partial class AssetUsageDetector
 	{
 		#region Helper Classes
 #if UNITY_2017_3_OR_NEWER
@@ -1593,7 +1592,7 @@ namespace AssetUsageDetectorNamespace
 					// Unknown exceptions usually occur when variableValue is an IEnumerable and its enumerator throws an unhandled exception in MoveNext or Current
 					StringBuilder sb = Utilities.stringBuilder;
 					sb.Length = 0;
-					sb.EnsureCapacity( callStack.Count * 50 + 1000 );
+					sb.EnsureCapacity( (callStack.Count * 50) + 1000 );
 
 					sb.Append( "Skipped searching " ).Append( referenceNode.nodeObject.GetType().FullName ).Append( "." ).Append( variables[i].Name ).AppendLine( " because it threw exception:" ).Append( e ).AppendLine();
 

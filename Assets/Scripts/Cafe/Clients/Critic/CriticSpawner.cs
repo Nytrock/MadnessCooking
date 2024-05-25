@@ -19,10 +19,6 @@ public class CriticSpawner : MonoBehaviour
     private void Awake()
     {
         _popularityManager = _popularityCalculator.GetComponent<PopularityManager>();
-    }
-
-    private void Start()
-    {
         _timeManager.DaytimeChanged += CheckDaytime;
     }
 

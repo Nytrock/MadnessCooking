@@ -1,23 +1,22 @@
 // Asset Usage Detector - by Suleyman Yasir KULA (yasirkula@gmail.com)
 
-using UnityEngine;
-using UnityEditor;
-using UnityEngine.SceneManagement;
-using UnityEditor.SceneManagement;
-using System.Collections.Generic;
-using System.Reflection;
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 using System.Text;
+using UnityEditor;
+using UnityEditor.SceneManagement;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 using Object = UnityEngine.Object;
 #if UNITY_2018_3_OR_NEWER && !UNITY_2021_2_OR_NEWER
 using PrefabStage = UnityEditor.Experimental.SceneManagement.PrefabStage;
 using PrefabStageUtility = UnityEditor.Experimental.SceneManagement.PrefabStageUtility;
 #endif
 
-namespace AssetUsageDetectorNamespace
-{
-	[Flags]
+namespace AssetUsageDetectorNamespace {
+    [Flags]
 	public enum SceneSearchMode { None = 0, OpenScenes = 1, ScenesInBuildSettingsAll = 2, ScenesInBuildSettingsTickedOnly = 4, AllScenes = 8 };
 
 	public partial class AssetUsageDetector
@@ -304,7 +303,7 @@ namespace AssetUsageDetectorNamespace
 						EditorBuildSettingsScene[] scenesTemp = EditorBuildSettings.scenes;
 						for( int i = 0; i < scenesTemp.Length; i++ )
 						{
-							if( ( searchInScenesInBuildTickedAll || scenesTemp[i].enabled ) )
+							if(  searchInScenesInBuildTickedAll || scenesTemp[i].enabled  )
 								scenesToSearch.Add( scenesTemp[i].path );
 						}
 					}
@@ -575,7 +574,7 @@ namespace AssetUsageDetectorNamespace
 			{
 				StringBuilder sb = Utilities.stringBuilder;
 				sb.Length = 0;
-				sb.EnsureCapacity( objectsToSearchSet.Count * 50 + callStack.Count * 50 + 500 );
+				sb.EnsureCapacity( (objectsToSearchSet.Count * 50) + (callStack.Count * 50) + 500 );
 
 				sb.AppendLine( "<b>AssetUsageDetector Error:</b> The following Exception is thrown during the search. Details:" );
 

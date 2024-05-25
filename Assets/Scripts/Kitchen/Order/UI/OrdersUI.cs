@@ -39,7 +39,7 @@ public class OrdersUI : MonoBehaviour, IUpgradeable, IBindable<KitchenData>
 
     private void RemoveOrder(Order order)
     {
-        int index = _manager.GetOrderId(order);
+        int index = _manager.GetOrderIndex(order);
         _pool.PutObject(_orderButtons[index]);
         _orderButtons.RemoveAt(index);
     }

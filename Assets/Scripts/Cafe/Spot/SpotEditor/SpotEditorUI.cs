@@ -7,16 +7,18 @@ public class SpotEditorUI : MonoBehaviour
     [SerializeField] private SpotEditorChooseButtons _buttonsContainer;
     [SerializeField] private SpotEditor _editor;
 
+    private void Awake()
+    {
+        _editor.EditorActivated += delegate { ChangeUIState(true); Move(_editor.SpotManager.GetLengthOfAllSpots()); };
+        _editor.EditorDisabled += delegate { ChangeUIState(false); Move(-_editor.SpotManager.GetLengthOfAllSpots()); };
+        _editor.SpotManager.SpotsPositionChanged += Move;
+    }
+
     private void Start()
     {
         ChangeUIState(false);
         _buttonAdd.SetActive(true);
         _buttonsContainer.gameObject.SetActive(false);
-
-        _editor.EditorActivated += delegate { ChangeUIState(true); Move(_editor.SpotManager.GetLengthOfAllSpots()); };
-        _editor.EditorDisabled += delegate { ChangeUIState(false); Move(-_editor.SpotManager.GetLengthOfAllSpots()); };
-
-        _editor.SpotManager.SpotsPositionChanged += Move;
     }
 
     public void ChangeUIState(bool newState)
@@ -36,7 +38,7 @@ public class SpotEditorUI : MonoBehaviour
         _buttonAdd.SetActive(!value);
 
         if (value)
-            _buttonsContainer.ChangeButtonNumber(_editor.SpotManager.GetFreeSpace());
+            _buttonsContainer.SetButtonsNumber(_editor.SpotManager.GetFreeSpace());
     }
 
     public void SetPreview(int previewIndex) {

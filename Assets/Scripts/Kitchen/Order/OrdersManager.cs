@@ -52,7 +52,7 @@ public class OrdersManager : MonoBehaviour
         client.ClientLeave -= RemoveOrder;
         client.ClientEat -= RemoveOrder;
 
-        if (GetOrderId(order) == -1)
+        if (GetOrderIndex(order) == -1)
             return;
 
         OrderRemoved?.Invoke(order);
@@ -60,7 +60,7 @@ public class OrdersManager : MonoBehaviour
         _orders.Remove(order);
     }
 
-    public int GetOrderId(Order order)
+    public int GetOrderIndex(Order order)
     {
         return _orders.IndexOf(order);
     }

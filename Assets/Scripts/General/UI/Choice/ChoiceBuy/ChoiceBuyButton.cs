@@ -4,8 +4,9 @@ public abstract class ChoiceBuyButton<TItem> : ChoiceButton<TItem> where TItem: 
     private int _cost;
     protected bool _isBuyable;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         MoneyManager.instance.MoneyChanged += CheckBuyable;
     }
 

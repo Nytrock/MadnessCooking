@@ -10,6 +10,7 @@ public class FarmCarUI : IngredientStorageUI<FarmData>
     {
         _sendButton.onClick.AddListener(_waitManager.StartWait);
         _sendButton.onClick.AddListener(CarLeave);
+        base.Awake();
     }
 
     private void Update()
