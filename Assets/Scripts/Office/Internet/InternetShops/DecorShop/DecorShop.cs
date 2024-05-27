@@ -19,7 +19,7 @@ public class DecorShop : BaseInstantShop, IBindable<OfficeData>
         if (decor == null)
             throw new NullReferenceException($"Buying item is not {Type}");
 
-        MoneyManager.Instance.ChangeMoney(-decor.Cost);
+        MoneyManager.Instance.ChangeMoney(-decor.Price);
         FatigueManager.Instance.AddDecorBonus(decor);
         if (decor.DecorType == DecorType.Kitchen)
             _kitchenManager.AddDecor(decor);
@@ -40,7 +40,7 @@ public class DecorShop : BaseInstantShop, IBindable<OfficeData>
 
     protected override void SetObjectsArray()
     {
-        _decorToBuy = _decorToBuy.OrderBy(x => x.Cost).ToList();
+        _decorToBuy = _decorToBuy.OrderBy(x => x.Price).ToList();
         _data.ShopDecor = _decorToBuy.ToArray();
         _itemsToBuy = _data.ShopDecor;
     }

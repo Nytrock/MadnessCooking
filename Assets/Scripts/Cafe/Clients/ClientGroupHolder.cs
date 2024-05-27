@@ -33,7 +33,7 @@ public class ClientGroupHolder : MonoBehaviour
             return;
 
         if (_data.NowTime < _data.WaitTime) {
-            _data.NowTime += TimeManager.Instance.InGameTimeSpeed;
+            _data.NowTime += InGameTime.Instance.DeltaTime;
             _waitSlider.value = _data.NowTime;
         } else {
             _data.NowTime = 0;

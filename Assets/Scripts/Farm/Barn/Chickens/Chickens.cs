@@ -24,7 +24,7 @@ public class Chickens : MonoBehaviour, IUpgradeable, IBindable<FarmData>
 
     private void LateStart()
     {
-        _egg = IngredientsManager.Instance.Egg;
+        _egg = ConstIngredients.Instance.Egg;
         FoodCountChanged?.Invoke();
         ChangeState();
     }
@@ -36,7 +36,7 @@ public class Chickens : MonoBehaviour, IUpgradeable, IBindable<FarmData>
 
         UpdateFoods();
         if (Data.NowTime < _eggTime) {
-            Data.NowTime += TimeManager.Instance.InGameTimeSpeed * Data.Speed;
+            Data.NowTime += InGameTime.Instance.DeltaTime * Data.Speed;
         } else {
             Data.NowTime = 0;
             Data.EggCount++;

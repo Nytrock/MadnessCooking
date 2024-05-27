@@ -44,6 +44,6 @@ public class IngredientBuyPanel : BaseInstantBuyPanel
 
     protected override void UpdateButton(int moneyCount)
     {
-        _buyButton.interactable = moneyCount >= _item.Cost && _isBedAvailable;
+        _buyButton.interactable = moneyCount >= _item.Price && _isBedAvailable;
     }
 }

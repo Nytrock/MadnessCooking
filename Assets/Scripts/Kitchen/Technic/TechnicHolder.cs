@@ -85,6 +85,6 @@ public class TechnicHolder : MonoBehaviour
     public bool Repairable()
     {
         return TechnicData.NowStrength != _technic.Strength && 
-            MoneyManager.Instance.MoneyCount >= _technic.CostRepair;
+            MoneyManager.Instance.MoneyCount >= _technic.PriceRepair;
     }
 }

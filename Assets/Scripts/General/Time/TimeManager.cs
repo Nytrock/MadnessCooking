@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class TimeManager : Singleton<TimeManager>, IBindable<GeneralData>
+public class TimeManager : MonoBehaviour, IBindable<GeneralData>
 {
     [SerializeField, Min(0)] private int _defaultTimeSpeed;
     [SerializeField, Min(0)] private int _sleepTimeSpeed;
@@ -15,7 +15,7 @@ public class TimeManager : Singleton<TimeManager>, IBindable<GeneralData>
 
     public TimeSpan TimeSpan => _timespan;
     public bool IsSleep => _sleepTimeSpeed == _nowTimeSpeed;
-    public float InGameTimeSpeed => _nowTimeSpeed * Time.deltaTime;
+    public int NowTimeSpeed => _nowTimeSpeed;
 
     public event Action<Daytime> DaytimeChanged;
 
@@ -58,7 +58,7 @@ public class TimeManager : Singleton<TimeManager>, IBindable<GeneralData>
         foreach (var daytimeStart in _daytimeStarts)
             if (daytimeStart.Daytime == daytime)
                 return daytimeStart;
-        return null;
+        throw new NullReferenceException($"No info about {daytime}");
     }
 
     public float GetSleepBonus(float needHours, float maxFatigue) => maxFatigue / (needHours * 3600 / _sleepTimeSpeed);

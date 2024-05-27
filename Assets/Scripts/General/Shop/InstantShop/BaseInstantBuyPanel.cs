@@ -2,8 +2,8 @@ using UnityEngine;
 
 public abstract class BaseInstantBuyPanel : BaseBuyPanel
 {
-    [SerializeField] private ItemInfoRendererWithCost _itemInfoRenderer;
-    [SerializeField] protected string _costDescription;
+    [SerializeField] private ItemInfoRendererWithPrice _itemInfoRenderer;
+    [SerializeField] protected string _priceDescription;
 
     public override void Setup(BuyableObject item, BaseShop shop)
     {
@@ -14,13 +14,13 @@ public abstract class BaseInstantBuyPanel : BaseBuyPanel
     public override void SetVisual(BuyableObject item)
     {
         _itemInfoRenderer.SetItemInfo(item);
-        _itemInfoRenderer.SetCost(_costDescription, item.Cost);
+        _itemInfoRenderer.SetPrice(_priceDescription, item.Price);
         UpdateButton(MoneyManager.Instance.MoneyCount);
     }
 
     protected virtual void UpdateButton(int moneyCount)
     {
-        _buyButton.interactable = moneyCount >= _item.Cost;
+        _buyButton.interactable = moneyCount >= _item.Price;
     }
 
     public override void Destroy()

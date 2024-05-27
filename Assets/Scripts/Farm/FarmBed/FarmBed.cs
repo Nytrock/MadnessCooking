@@ -47,7 +47,7 @@ public class FarmBed : MonoBehaviour
             return;
 
         if (BedData.NowTime < _growTime) {
-            BedData.NowTime += BedData.SummarizedBoost * TimeManager.Instance.InGameTimeSpeed;
+            BedData.NowTime += BedData.SummarizedBoost * InGameTime.Instance.DeltaTime;
         } else {
             BedData.Count++;
             BedData.NowTime = 0;
@@ -91,8 +91,8 @@ public class FarmBed : MonoBehaviour
 
     public void ResetBedType()
     {
-        if (BedData.BedType.Cost > 0)
-            MoneyManager.Instance.ChangeMoney(BedData.BedType.Cost);
+        if (BedData.BedType.Price > 0)
+            MoneyManager.Instance.ChangeMoney(BedData.BedType.Price);
         BedData.IsActive = false;
 
         ResetIngredient();
@@ -108,7 +108,7 @@ public class FarmBed : MonoBehaviour
         _UI = settings.UIManager;
         _car = settings.Car;
         _wheatManager = settings.WheatManager;
-        _wheat = IngredientsManager.Instance.Wheat;
+        _wheat = ConstIngredients.Instance.Wheat;
     }
 
     public void SetIngredient(Ingredient ingredient)

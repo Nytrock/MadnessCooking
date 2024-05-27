@@ -10,8 +10,8 @@ public class BarnFridgeUI : MonoBehaviour
     private void Start()
     {
         _panel.SetActive(false);
-        _milkRenderer.SetItemInfo(IngredientsManager.Instance.Milk);
-        _flourRenderer.SetItemInfo(IngredientsManager.Instance.Flour);
+        _milkRenderer.SetItemInfo(ConstIngredients.Instance.Milk);
+        _flourRenderer.SetItemInfo(ConstIngredients.Instance.Flour);
     }
 
     private void Update()

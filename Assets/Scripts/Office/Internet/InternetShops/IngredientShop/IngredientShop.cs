@@ -24,7 +24,7 @@ public class IngredientShop : BaseInstantShop, IUpgradeable, IBindable<OfficeDat
         if (ingredient == null)
             throw new NullReferenceException($"Buying item is not {Type}");
 
-        MoneyManager.Instance.ChangeMoney(-ingredient.Cost);
+        MoneyManager.Instance.ChangeMoney(-ingredient.Price);
         if (ingredient.Type == IngredientType.Buyable) {
             _ingredientStorage.PutIngredientWithRemain(new IngredientCount(ingredient, 1));
         } else {
@@ -36,7 +36,7 @@ public class IngredientShop : BaseInstantShop, IUpgradeable, IBindable<OfficeDat
     public void CheckUpgrade(BaseUpgrade upgrade)
     {
         if (upgrade == _spiceAutoBuy)
-            RemoveIngredient(IngredientsManager.Instance.Spice);
+            RemoveIngredient(ConstIngredients.Instance.Spice);
     }
 
     private void RemoveIngredient(Ingredient ingredient)
@@ -50,7 +50,7 @@ public class IngredientShop : BaseInstantShop, IUpgradeable, IBindable<OfficeDat
     protected override void SetObjectsArray()
     {
         _ingredientsToBuy = _ingredientsToBuy.OrderBy(x => 
-        (x.Type != IngredientType.Buyable, x.Cost)).ToList();
+        (x.Type != IngredientType.Buyable, x.Price)).ToList();
         _data.ShopIngredients = _ingredientsToBuy.ToArray();
         _itemsToBuy = _data.ShopIngredients;
     }

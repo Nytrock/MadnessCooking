@@ -10,10 +10,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Object = UnityEngine.Object;
 
-namespace AssetUsageDetectorNamespace
-{
-	// Custom class to hold search results
-	[Serializable]
+namespace AssetUsageDetectorNamespace {
+    // Custom class to hold search results
+    [Serializable]
 	public class SearchResult : IEnumerable<SearchResultGroup>, ISerializationCallbackReceiver
 	{
 		[Serializable]
@@ -863,13 +862,13 @@ namespace AssetUsageDetectorNamespace
 
 					if( treeView == null )
 					{
-						bool isFirstInitialization = ( treeViewState == null );
+						bool isFirstInitialization =  treeViewState == null ;
 						if( isFirstInitialization )
 							treeViewState = new SearchResultTreeViewState();
 
 						// This isn't inside isFirstInitialization because SearchResultTreeViewState might have been initialized by
 						// Unity's serialization system after a domain reload
-						bool shouldUpdateInitialTreeViewNodeId = ( treeViewState.initialNodeId == 0 && searchResult != null );
+						bool shouldUpdateInitialTreeViewNodeId =  treeViewState.initialNodeId == 0 && searchResult != null ;
 						if( shouldUpdateInitialTreeViewNodeId )
 							treeViewState.initialNodeId = searchResult.nextTreeViewId;
 

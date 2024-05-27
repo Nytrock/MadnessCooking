@@ -51,7 +51,7 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable, IBindable<CafeData>
             return;
 
         if (_data.NowSpawnTime < _data.NeedSpawnTime) {
-            _data.NowSpawnTime += TimeManager.Instance.InGameTimeSpeed;
+            _data.NowSpawnTime += InGameTime.Instance.DeltaTime;
         } else {
             Spawn();
             SetNewTime();

@@ -18,14 +18,14 @@ public class CafeCameraManager : CameraManager<CafeData>
     {
         SpaceManagerData spaceData = _spaceManager.SpaceData;
         _startPosition = transform.position.x;
-        _endPosition = _startPosition + (spaceData.Count - 1) * spaceData.SpaceSize 
-            + spaceData.SpaceSize / 2 - _horizontalExtention;
+        _endPosition = _startPosition + ((spaceData.Count - 1) * spaceData.SpaceSize) 
+            + (spaceData.SpaceSize / 2) - _horizontalExtention;
         InvokeBordersFound();
     }
 
     protected override void MoveCamera()
     {
-        float newPosition = _mainCameraPos.position.x - _cameraVelocity * Time.deltaTime * _cameraSpeed;
+        float newPosition = _mainCameraPos.position.x - (_cameraVelocity * Time.deltaTime * _cameraSpeed);
         newPosition = Mathf.Clamp(newPosition, _startPosition, _endPosition);
         SetCameraPosition(newPosition);
     }

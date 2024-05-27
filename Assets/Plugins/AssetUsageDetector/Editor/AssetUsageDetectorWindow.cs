@@ -13,9 +13,8 @@ using PrefabStage = UnityEditor.Experimental.SceneManagement.PrefabStage;
 using PrefabStageUtility = UnityEditor.Experimental.SceneManagement.PrefabStageUtility;
 #endif
 
-namespace AssetUsageDetectorNamespace
-{
-	public enum Phase { Setup, Processing, Complete };
+namespace AssetUsageDetectorNamespace {
+    public enum Phase { Setup, Processing, Complete };
 
 	public class AssetUsageDetectorWindow : EditorWindow, IHasCustomMenu
 	{

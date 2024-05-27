@@ -15,9 +15,8 @@ using PrefabStage = UnityEditor.Experimental.SceneManagement.PrefabStage;
 using PrefabStageUtility = UnityEditor.Experimental.SceneManagement.PrefabStageUtility;
 #endif
 
-namespace AssetUsageDetectorNamespace
-{
-	public static class Utilities
+namespace AssetUsageDetectorNamespace {
+    public static class Utilities
 	{
 		// A set of commonly used Unity types
 		private static readonly HashSet<Type> primitiveUnityTypes = new HashSet<Type>()

@@ -9,7 +9,7 @@ public class ShitGeneraor : MonoBehaviour, IBindable<FarmData>
     private void Update()
     {
         if (_data.NowTime < _needTime) {
-            _data.NowTime += TimeManager.Instance.InGameTimeSpeed;
+            _data.NowTime += InGameTime.Instance.DeltaTime;
         } else {
             _puncher.AddShit();
             _data.NowTime = 0;

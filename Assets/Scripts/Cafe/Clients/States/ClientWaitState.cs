@@ -28,7 +28,7 @@ public class ClientWaitState : ClientBaseState
     public override void UpdateState(Client client)
     {
         if (_clientData.NowTime < _clientData.WaitTime) {
-            _clientData.NowTime += TimeManager.Instance.InGameTimeSpeed;
+            _clientData.NowTime += InGameTime.Instance.DeltaTime;
             _waitSlider.value = _clientData.NowTime;
         } else {
             client.Leave();

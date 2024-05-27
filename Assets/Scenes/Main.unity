@@ -10676,7 +10676,7 @@ GameObject:
   - component: {fileID: 360027831}
   - component: {fileID: 360027830}
   m_Layer: 0
-  m_Name: Cost
+  m_Name: Price
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11096,7 +11096,7 @@ MonoBehaviour:
     _icon: {fileID: 505970058}
     _nameText: {fileID: 1569531499}
     _descriptionText: {fileID: 582900834}
-    _costText: {fileID: 1263605496}
+    _priceText: {fileID: 1263605496}
   _buyDescription: FarmBedUpgrade.Buy
   _freeDescription: FarmBedUpgrade.Free
 --- !u!224 &372516765
@@ -11872,7 +11872,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _defaultMaxSpace: -1
-  _lemon: {fileID: 11400000, guid: 897523a5d3e8cc843a91257d85a26f6b, type: 2}
 --- !u!114 &397481017
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17620,8 +17619,8 @@ MonoBehaviour:
     _icon: {fileID: 1603776846}
     _nameText: {fileID: 463537531}
     _descriptionText: {fileID: 445941976}
-    _costText: {fileID: 360027830}
-  _costDescription: ItemView.Buy
+    _priceText: {fileID: 360027830}
+  _priceDescription: ItemView.Buy
   _buyButton: {fileID: 880767362}
   _recipeRenderer: {fileID: 1384931311}
 --- !u!114 &580367323
@@ -28409,6 +28408,7 @@ GameObject:
   m_Component:
   - component: {fileID: 917452952}
   - component: {fileID: 917452951}
+  - component: {fileID: 917452953}
   m_Layer: 0
   m_Name: IngredientsManager
   m_TagString: Untagged
@@ -28449,11 +28449,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1a1acf5d79493354cad0d0956b0d8689, type: 2}
   _defaultIngredients:
   - {fileID: 11400000, guid: 897523a5d3e8cc843a91257d85a26f6b, type: 2}
-  _spice: {fileID: 11400000, guid: 1a1acf5d79493354cad0d0956b0d8689, type: 2}
-  _milk: {fileID: 11400000, guid: 6b8daec792815f44b8b8c781a3adfdcd, type: 2}
-  _flour: {fileID: 11400000, guid: 24d7a663aa0937f4b8ed7ab357e76093, type: 2}
-  _egg: {fileID: 11400000, guid: 3278518d00037514cbdf7435e0cc9325, type: 2}
-  _wheat: {fileID: 11400000, guid: 552016a33cc72bb44b4eb6addf12b2f4, type: 2}
 --- !u!4 &917452952
 Transform:
   m_ObjectHideFlags: 0
@@ -28469,6 +28464,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 713062800}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &917452953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 917452950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e639eff284ba334f9de6099179da7f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _lemon: {fileID: 11400000, guid: 897523a5d3e8cc843a91257d85a26f6b, type: 2}
+  _spice: {fileID: 11400000, guid: 1a1acf5d79493354cad0d0956b0d8689, type: 2}
+  _milk: {fileID: 11400000, guid: 6b8daec792815f44b8b8c781a3adfdcd, type: 2}
+  _flour: {fileID: 11400000, guid: 24d7a663aa0937f4b8ed7ab357e76093, type: 2}
+  _egg: {fileID: 11400000, guid: 3278518d00037514cbdf7435e0cc9325, type: 2}
+  _wheat: {fileID: 11400000, guid: 552016a33cc72bb44b4eb6addf12b2f4, type: 2}
 --- !u!1 &918836921
 GameObject:
   m_ObjectHideFlags: 0
@@ -36631,7 +36644,7 @@ GameObject:
   - component: {fileID: 1187572288}
   - component: {fileID: 1187572287}
   m_Layer: 5
-  m_Name: Cost
+  m_Name: Price
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -39039,7 +39052,7 @@ GameObject:
   - component: {fileID: 1263605497}
   - component: {fileID: 1263605496}
   m_Layer: 5
-  m_Name: Cost
+  m_Name: Price
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -39493,7 +39506,7 @@ GameObject:
   - component: {fileID: 1272642100}
   - component: {fileID: 1272642099}
   m_Layer: 0
-  m_Name: Cost
+  m_Name: Price
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44212,7 +44225,7 @@ MonoBehaviour:
     _icon: {fileID: 1707463942}
     _nameText: {fileID: 731711264}
     _descriptionText: {fileID: 582574735}
-    _costText: {fileID: 1187572287}
+    _priceText: {fileID: 1187572287}
   _buyDescription: BedChoice.Buy
   _freeDescription: BedChoice.Free
 --- !u!1 &1451246556
@@ -50591,8 +50604,8 @@ MonoBehaviour:
     _icon: {fileID: 908150623}
     _nameText: {fileID: 1458276953}
     _descriptionText: {fileID: 470972339}
-    _costText: {fileID: 1272642099}
-  _costDescription: ItemView.Buy
+    _priceText: {fileID: 1272642099}
+  _priceDescription: ItemView.Buy
   _buyButton: {fileID: 1118122550}
 --- !u!114 &1656205583
 MonoBehaviour:

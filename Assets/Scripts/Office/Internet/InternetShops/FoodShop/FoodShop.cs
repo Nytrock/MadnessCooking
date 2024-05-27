@@ -19,7 +19,7 @@ public class FoodShop : BaseChooseShop, IBindable<OfficeData>
         if (food == null)
             throw new NullReferenceException($"Buying item is not {Type}");
 
-        MoneyManager.Instance.ChangeMoney(-food.Cost);
+        MoneyManager.Instance.ChangeMoney(-food.Price);
         _foodManager.AddFood(food);
 
         int index = _foodToBuy.IndexOf(food);
@@ -30,7 +30,7 @@ public class FoodShop : BaseChooseShop, IBindable<OfficeData>
 
     protected override void SetObjectsArray()
     {
-        _foodToBuy = _foodToBuy.OrderBy(x => x.Cost).ToList();
+        _foodToBuy = _foodToBuy.OrderBy(x => x.Price).ToList();
         _data.ShopFood = _foodToBuy.ToArray();
         _itemsToBuy = _data.ShopFood;
     }

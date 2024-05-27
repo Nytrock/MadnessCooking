@@ -11,8 +11,8 @@ public class BarnFridge : MonoBehaviour, IBindable<FarmData>
     public NeedHoldAddData FlourMill { get; private set; }
 
     private void Start() {
-        _milk = IngredientsManager.Instance.Milk;
-        _flour = IngredientsManager.Instance.Flour;
+        _milk = ConstIngredients.Instance.Milk;
+        _flour = ConstIngredients.Instance.Flour;
     }
 
     public void PutIngredient(Ingredient ingredient)

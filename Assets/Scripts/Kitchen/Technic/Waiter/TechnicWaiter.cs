@@ -30,7 +30,7 @@ public abstract class TechnicWaiter : MonoBehaviour
             return;
 
         if (_holder.TechnicData.NowWaitTime < _needTime)
-            _holder.TechnicData.NowWaitTime += _speedMultiplier * TimeManager.Instance.InGameTimeSpeed;
+            _holder.TechnicData.NowWaitTime += _speedMultiplier * InGameTime.Instance.DeltaTime;
         else
             EndWork();
     }

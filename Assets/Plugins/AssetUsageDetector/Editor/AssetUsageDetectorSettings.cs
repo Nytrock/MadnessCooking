@@ -1,9 +1,8 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-namespace AssetUsageDetectorNamespace
-{
-	public static class AssetUsageDetectorSettings
+namespace AssetUsageDetectorNamespace {
+    public static class AssetUsageDetectorSettings
 	{
 		private static readonly GUILayoutOption GL_WIDTH_60 = GUILayout.Width( 60f );
 

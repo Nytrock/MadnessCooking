@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
-namespace AssetUsageDetectorNamespace
-{
-	public partial class AssetUsageDetector
+namespace AssetUsageDetectorNamespace {
+    public partial class AssetUsageDetector
 	{
 		#region Helper Classes
 		private class CacheEntry

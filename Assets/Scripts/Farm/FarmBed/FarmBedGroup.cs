@@ -14,6 +14,6 @@ public class FarmBedGroup : SpacePrefab
     public void Bind(FarmData data, int groupIndex)
     {
         for (int i = 0; i < FARM_BEDS_COUNT; i++)
-            _farmBeds[i].Bind(data, groupIndex * 3 + i);
+            _farmBeds[i].Bind(data, (groupIndex * 3) + i);
     }
 }

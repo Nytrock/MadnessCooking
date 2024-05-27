@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Globalization;
-using System.Reflection;
 using System.Text;
 using UnityEditor;
 using UnityEditor.IMGUI.Controls;
@@ -13,9 +12,8 @@ using PrefabStage = UnityEditor.Experimental.SceneManagement.PrefabStage;
 using PrefabStageUtility = UnityEditor.Experimental.SceneManagement.PrefabStageUtility;
 #endif
 
-namespace AssetUsageDetectorNamespace
-{
-	[System.Serializable]
+namespace AssetUsageDetectorNamespace {
+    [System.Serializable]
 	public class SearchResultTreeViewState : TreeViewState
 	{
 		// - initialNodeId is serialized because we want to preserve the expanded states of the TreeViewItems after domain reload and
@@ -316,7 +314,7 @@ namespace AssetUsageDetectorNamespace
 			{
 				if( !isSearching )
 					shouldShowItem = true;
-				else if( state.searchMode == SearchMode.All || ( ( depth == 0 ) == ( state.searchMode == SearchMode.SearchedObjectsOnly ) ) )
+				else if( state.searchMode == SearchMode.All || (  depth == 0  == ( state.searchMode == SearchMode.SearchedObjectsOnly ) ) )
 				{
 					shouldShowItem = textComparer.IndexOf( referenceNode.Label, state.searchTerm, textCompareOptions ) >= 0;
 					if( !shouldShowItem && depth > 0 )
@@ -559,8 +557,8 @@ namespace AssetUsageDetectorNamespace
 							if( data.isLastLink || ( args.item.hasChildren && IsExpanded( args.item.id ) ) )
 							{
 								GUI.DrawTexture( new Rect( rect.x, rect.yMax - SEARCHED_OBJECTS_BORDER_THICKNESS, rect.width, SEARCHED_OBJECTS_BORDER_THICKNESS ), EditorGUIUtility.whiteTexture, ScaleMode.StretchToFill, true, 0f );
-								GUI.DrawTexture( new Rect( rect.x, rect.y + 1, SEARCHED_OBJECTS_BORDER_THICKNESS, rect.height - 2f * SEARCHED_OBJECTS_BORDER_THICKNESS ), EditorGUIUtility.whiteTexture, ScaleMode.StretchToFill, true, 0f );
-								GUI.DrawTexture( new Rect( rect.xMax - SEARCHED_OBJECTS_BORDER_THICKNESS, rect.y + 1, SEARCHED_OBJECTS_BORDER_THICKNESS, rect.height - 2f * SEARCHED_OBJECTS_BORDER_THICKNESS ), EditorGUIUtility.whiteTexture, ScaleMode.StretchToFill, true, 0f );
+								GUI.DrawTexture( new Rect( rect.x, rect.y + 1, SEARCHED_OBJECTS_BORDER_THICKNESS, rect.height - (2f * SEARCHED_OBJECTS_BORDER_THICKNESS) ), EditorGUIUtility.whiteTexture, ScaleMode.StretchToFill, true, 0f );
+								GUI.DrawTexture( new Rect( rect.xMax - SEARCHED_OBJECTS_BORDER_THICKNESS, rect.y + 1, SEARCHED_OBJECTS_BORDER_THICKNESS, rect.height - (2f * SEARCHED_OBJECTS_BORDER_THICKNESS) ), EditorGUIUtility.whiteTexture, ScaleMode.StretchToFill, true, 0f );
 							}
 							else
 							{
@@ -620,15 +618,15 @@ namespace AssetUsageDetectorNamespace
 					Color guiColor = GUI.color;
 					bool shouldHighlightTreeLine;
 
-					Rect verticalLineRect = new Rect( rect.x + GetContentIndent( args.item.parent ) - ( foldoutWidth + TREE_VIEW_LINES_THICKNESS ) * 0.5f - 2f, rect.y, TREE_VIEW_LINES_THICKNESS, rect.height );
-					Rect horizontalLineRect = new Rect( verticalLineRect.x, verticalLineRect.y + ( verticalLineRect.height - TREE_VIEW_LINES_THICKNESS ) * 0.5f, foldoutWidth + TREE_VIEW_LINES_THICKNESS - 4f, TREE_VIEW_LINES_THICKNESS );
+					Rect verticalLineRect = new Rect( rect.x + GetContentIndent( args.item.parent ) - (( foldoutWidth + TREE_VIEW_LINES_THICKNESS ) * 0.5f) - 2f, rect.y, TREE_VIEW_LINES_THICKNESS, rect.height );
+					Rect horizontalLineRect = new Rect( verticalLineRect.x, verticalLineRect.y + (( verticalLineRect.height - TREE_VIEW_LINES_THICKNESS ) * 0.5f), foldoutWidth + TREE_VIEW_LINES_THICKNESS - 4f, TREE_VIEW_LINES_THICKNESS );
 
 					for( ReferenceNodeData parentData = data.parent; parentData.parent != null; parentData = parentData.parent )
 					{
 						if( !parentData.isLastLink )
 						{
 							shouldHighlightTreeLine = selectedReferenceNodesHierarchyIndirectIds.Contains( parentData.item.id );
-							Rect _verticalLineRect = new Rect( verticalLineRect.x - depthIndentWidth * ( args.item.depth - parentData.item.depth ), verticalLineRect.y, verticalLineRect.width, verticalLineRect.height );
+							Rect _verticalLineRect = new Rect( verticalLineRect.x - (depthIndentWidth * ( args.item.depth - parentData.item.depth )), verticalLineRect.y, verticalLineRect.width, verticalLineRect.height );
 							if( shouldHighlightTreeLine )
 							{
 								_verticalLineRect.x -= ( HIGHLIGHTED_TREE_VIEW_LINES_THICKNESS - TREE_VIEW_LINES_THICKNESS ) * 0.5f;
@@ -1243,8 +1241,8 @@ namespace AssetUsageDetectorNamespace
 			{
 				if( rows[i].id == id )
 				{
-					isFirstRow = ( i <= 0 );
-					isLastRow = ( i >= rows.Count - 1 );
+					isFirstRow =  i <= 0 ;
+					isLastRow =  i >= rows.Count - 1 ;
 					isExpanded = rows[i].hasChildren && IsExpanded( id );
 					canExpand = rows[i].hasChildren && !IsExpanded( id );
 

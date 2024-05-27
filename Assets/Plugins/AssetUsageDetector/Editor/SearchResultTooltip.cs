@@ -2,9 +2,8 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace AssetUsageDetectorNamespace
-{
-	public class SearchResultTooltip : EditorWindow
+namespace AssetUsageDetectorNamespace {
+    public class SearchResultTooltip : EditorWindow
 	{
 		private static SearchResultTooltip mainWindow;
 		private static string tooltip;

@@ -49,7 +49,7 @@ public class TechnicHolderUI : MonoBehaviour
 
     public void StartRepairTechnic()
     {
-        MoneyManager.Instance.ChangeMoney(-_nowTechnic.Technic.CostRepair);
+        MoneyManager.Instance.ChangeMoney(-_nowTechnic.Technic.PriceRepair);
         _nowTechnic.StartRepair();
 
         _nowPanel.ChangeState(false);

@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 [Serializable]
-public class DaytimeStart
+public struct DaytimeStart
 {
     [SerializeField] private Daytime _daytime;
     [SerializeField, Range(0, 23)] private int _startHour;

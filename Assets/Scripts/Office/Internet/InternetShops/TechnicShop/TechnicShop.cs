@@ -17,7 +17,7 @@ public class TechnicShop : BaseInstantShop, IBindable<OfficeData>
         if (technic == null)
             throw new NullReferenceException($"Buying item is not {Type}");
 
-        MoneyManager.Instance.ChangeMoney(-technic.Cost);
+        MoneyManager.Instance.ChangeMoney(-technic.Price);
         _technicManager.AddTechnic(technic);
 
         int index = _technicToBuy.IndexOf(technic);
@@ -28,7 +28,7 @@ public class TechnicShop : BaseInstantShop, IBindable<OfficeData>
 
     protected override void SetObjectsArray()
     {
-        _technicToBuy = _technicToBuy.OrderBy(x => x.Cost).ToList();
+        _technicToBuy = _technicToBuy.OrderBy(x => x.Price).ToList();
         _data.ShopTechnic = _technicToBuy.ToArray();
         _itemsToBuy = _data.ShopTechnic;
     }

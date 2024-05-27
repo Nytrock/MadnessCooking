@@ -3,13 +3,12 @@ using UnityEngine;
 
 public class KitchenStorage : IngredientStorage<KitchenData>
 {
-    [SerializeField] private Ingredient _lemon;
     public event Action IngredientsChanged;
 
     [ContextMenu("AddLemon")]
     public void AddLemon()
     {
-        PutIngredientWithRemain(new IngredientCount(_lemon, 2));
+        PutIngredientWithRemain(new IngredientCount(ConstIngredients.Instance.Lemon, 2));
         IngredientsChanged?.Invoke();
     }
 

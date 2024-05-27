@@ -18,7 +18,7 @@ public class UpgradeShop : BaseInstantShop, IBindable<OfficeData>
         if (upgrade == null)
             throw new NullReferenceException($"Buying item is not {Type}");
 
-        MoneyManager.Instance.ChangeMoney(-upgrade.Cost);
+        MoneyManager.Instance.ChangeMoney(-upgrade.Price);
         _upgradeManager.NewUpgrade(upgrade);
         _availableUpgrades.Add(upgrade);
 

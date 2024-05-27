@@ -26,7 +26,7 @@ public class ClientWalkState : ClientBaseState
     public override void UpdateState(Client client)
     {
         client.transform.position = Vector2.MoveTowards(client.transform.position, 
-            _target.position, _speed * TimeManager.Instance.InGameTimeSpeed);
+            _target.position, _speed * InGameTime.Instance.DeltaTime);
         client.ClientData.Position = new SerializableVector(client.transform.position);
 
         if (Vector2.Distance(client.transform.position, _target.position) < 0.001f) {

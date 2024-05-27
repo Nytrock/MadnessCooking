@@ -1,7 +1,7 @@
 using UnityEngine.UI;
 public abstract class ChoiceBuyButton<TItem> : ChoiceButton<TItem> where TItem: BuyableObject
 {
-    private int _cost;
+    private int _price;
     protected bool _isBuyable;
 
     protected override void Awake()
@@ -16,7 +16,7 @@ public abstract class ChoiceBuyButton<TItem> : ChoiceButton<TItem> where TItem: 
         gameObject.SetActive(true);
 
         Item = item;
-        _cost = item.Cost;
+        _price = item.Price;
         _icon.sprite = Item.Icon;
         CheckBuyable(MoneyManager.Instance.MoneyCount);
         _button.onClick.AddListener(
@@ -26,6 +26,6 @@ public abstract class ChoiceBuyButton<TItem> : ChoiceButton<TItem> where TItem: 
 
     public virtual void CheckBuyable(int newValue)
     {
-        _isBuyable = newValue >= _cost;
+        _isBuyable = newValue >= _price;
     }
 }

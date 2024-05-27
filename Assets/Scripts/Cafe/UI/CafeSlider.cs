@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class CafeSlider : LocationSlider<CafeData>
 {
     protected override void ChangeSliderValue() {

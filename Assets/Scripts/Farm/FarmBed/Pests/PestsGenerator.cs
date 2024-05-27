@@ -27,7 +27,7 @@ public class PestsGenerator : MonoBehaviour
             return;
 
         if (_generatorData.NowTime < _generatorData.NeedTime) {
-            _generatorData.NowTime += TimeManager.Instance.InGameTimeSpeed;
+            _generatorData.NowTime += InGameTime.Instance.DeltaTime;
         } else {
             SpawnPest();
             _generatorData.NowTime = 0;

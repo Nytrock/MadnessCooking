@@ -9,13 +9,13 @@ public class FarmCameraManager : CameraManager<FarmData>
     {
         SpaceManagerData spaceData = _spaceManager.SpaceData;
         _endPosition = transform.position.y;
-        _startPosition = _endPosition - (spaceData.Count - 1) * spaceData.SpaceSize;
+        _startPosition = _endPosition - ((spaceData.Count - 1) * spaceData.SpaceSize);
         InvokeBordersFound();
     }
 
     protected override void MoveCamera()
     {
-        float newPosition = _mainCameraPos.position.y - _cameraVelocity * Time.deltaTime * _cameraSpeed;
+        float newPosition = _mainCameraPos.position.y - (_cameraVelocity * Time.deltaTime * _cameraSpeed);
         newPosition = Mathf.Clamp(newPosition, _startPosition, _endPosition);
         SetCameraPosition(newPosition);
     }

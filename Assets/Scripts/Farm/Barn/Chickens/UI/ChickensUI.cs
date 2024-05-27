@@ -18,7 +18,7 @@ public class ChickensUI : MonoBehaviour
 
     private void Start()
     {
-        _eggRenderer.SetItemInfo(IngredientsManager.Instance.Egg);
+        _eggRenderer.SetItemInfo(ConstIngredients.Instance.Egg);
         _eggSlider.maxValue = _chickens.EggTime;
         _panel.SetActive(false);
     }

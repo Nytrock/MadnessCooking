@@ -2,9 +2,8 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace AssetUsageDetectorNamespace
-{
-	public abstract class ListDrawer<T>
+namespace AssetUsageDetectorNamespace {
+    public abstract class ListDrawer<T>
 	{
 		private readonly string label;
 		private readonly bool acceptSceneObjects;

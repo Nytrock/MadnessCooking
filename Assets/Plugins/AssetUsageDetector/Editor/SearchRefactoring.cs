@@ -7,9 +7,8 @@ using UnityEditor.SceneManagement;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace AssetUsageDetectorNamespace
-{
-	public delegate void SearchRefactoring( SearchMatch match );
+namespace AssetUsageDetectorNamespace {
+    public delegate void SearchRefactoring( SearchMatch match );
 
 	public abstract class SearchMatch
 	{

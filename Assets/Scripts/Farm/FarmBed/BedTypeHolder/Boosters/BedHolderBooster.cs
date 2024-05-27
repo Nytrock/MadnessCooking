@@ -25,7 +25,7 @@ public class BedHolderBooster : MonoBehaviour
             return;
 
         if (_data.NowTime < _boostLength) {
-            _data.NowTime += TimeManager.Instance.InGameTimeSpeed;
+            _data.NowTime += InGameTime.Instance.DeltaTime;
             ChangeSpriteAlpha(1 - (_data.NowTime / _boostLength));
         } else {
             EndBoost();

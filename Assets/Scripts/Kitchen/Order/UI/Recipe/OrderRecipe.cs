@@ -17,8 +17,8 @@ public class OrderRecipe : FoodRecipe<OrderRecipePart>
     {
         for (int i = 0; i < ingredients.Size; i++) {
             IngredientCount ingredientCount = ingredients.Get(i);
-            if (ingredientCount.Ingredient == IngredientsManager.Instance.Spice && _data.IsAutoSpice) {
-                _canCook &= MoneyManager.Instance.MoneyCount >= ingredientCount.Count * ingredientCount.Ingredient.Cost;
+            if (ingredientCount.Ingredient == ConstIngredients.Instance.Spice && _data.IsAutoSpice) {
+                _canCook &= MoneyManager.Instance.MoneyCount >= ingredientCount.Count * ingredientCount.Ingredient.Price;
                 _recipeParts[i].SetupAutoSpice(ingredientCount);
             } else {
                 bool haveCount = _kitchenStorage.HaveCount(ingredientCount);

@@ -34,7 +34,7 @@ public class BedChoice : MonoBehaviour
 
     public void SetType(BedType bedType)
     {
-        MoneyManager.Instance.ChangeMoney(-bedType.Cost);
+        MoneyManager.Instance.ChangeMoney(-bedType.Price);
         BedTypeHolder bed = FindBedHolder(bedType);
 
         _bedData.IsActive = true;
@@ -66,6 +66,6 @@ public class BedChoice : MonoBehaviour
             if (bedType == bed.Type)
                 return bed;
 
-        throw new ArgumentNullException("There's no bed holder with succh bed Type");
+        throw new ArgumentNullException("There's no bed holder with such bed Type");
     }
 }

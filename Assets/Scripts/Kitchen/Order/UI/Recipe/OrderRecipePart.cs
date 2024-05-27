@@ -19,10 +19,10 @@ public class OrderRecipePart : ShopFoodRecipePart
     {
         gameObject.SetActive(true);
         _icon.sprite = _moneySprite;
-        int cost = ingredientCount.Count * IngredientsManager.Instance.Spice.Cost;
+        int price = ingredientCount.Count * ConstIngredients.Instance.Spice.Price;
 
-        _countText.text = cost.ToString() + "x";
-        if (MoneyManager.Instance.MoneyCount >= cost)
+        _countText.text = price.ToString() + "x";
+        if (MoneyManager.Instance.MoneyCount >= price)
             _countText.color = _availableColor;
         else
             _countText.color = _notAvailableColor;

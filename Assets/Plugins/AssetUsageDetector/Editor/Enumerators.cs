@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace AssetUsageDetectorNamespace
-{
-	public class EmptyEnumerator<T> : IEnumerable<T>, IEnumerator<T>
+namespace AssetUsageDetectorNamespace {
+    public class EmptyEnumerator<T> : IEnumerable<T>, IEnumerator<T>
 	{
 		public T Current { get { return default( T ); } }
 		object IEnumerator.Current { get { return Current; } }

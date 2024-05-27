@@ -2,10 +2,9 @@
 using System.Reflection;
 using UnityEngine;
 
-namespace AssetUsageDetectorNamespace
-{
-	// Delegate to get the value of a variable (either field or property)
-	public delegate object VariableGetVal( object obj );
+namespace AssetUsageDetectorNamespace {
+    // Delegate to get the value of a variable (either field or property)
+    public delegate object VariableGetVal( object obj );
 
 	// Custom struct to hold a variable, its important properties and its getter function
 	public struct VariableGetterHolder

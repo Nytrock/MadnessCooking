@@ -36,7 +36,7 @@ public class TechnicStandardPanel : TechnicPanel, IUpgradeable, IBindable<Kitche
         UpdatePanels();
 
         if (!_nowTechnic.TechnicData.IsCooking) {
-            _repairText.text = $"Repair - {technic.CostRepair}";
+            _repairText.text = $"Repair - {technic.PriceRepair}";
             _repairButton.interactable = _nowTechnic.Repairable();
         } else {
             _cookSlider.maxValue = _cooker.NeedTime;

@@ -24,7 +24,7 @@ public class OrdersUI : MonoBehaviour, IUpgradeable, IBindable<KitchenData>
     }
 
     private void Start() {
-        _spice = IngredientsManager.Instance.Spice;
+        _spice = ConstIngredients.Instance.Spice;
     }
 
     public void ChangeState()
@@ -54,7 +54,7 @@ public class OrdersUI : MonoBehaviour, IUpgradeable, IBindable<KitchenData>
         IngredientCountList ingredients = order.Food.Ingredients;
         for (int i = 0; i < ingredients.Size; i++) {
             if (ingredients.Get(i).Ingredient == _spice && _data.IsAutoSpice) {
-                MoneyManager.Instance.ChangeMoney(-_spice.Cost * ingredients.Get(i).Count);
+                MoneyManager.Instance.ChangeMoney(-_spice.Price * ingredients.Get(i).Count);
                 break;
             }
         }
