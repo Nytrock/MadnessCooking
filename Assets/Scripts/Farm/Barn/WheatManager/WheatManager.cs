@@ -1,15 +1,13 @@
 using System;
 using UnityEngine;
 
-public class WheatManager : MonoBehaviour, IUpgradeable, IBindable<FarmData>
-{
+public class WheatManager : MonoBehaviour, IUpgradeable, IBindable<FarmData> {
     [SerializeField] private Cow _cow;
     [SerializeField] private FlourMill _flourMill;
     [SerializeField] private BaseUpgrade _wheatDistributeUpgrade;
     private FarmData _data;
 
-    public void AddWheat(int count)
-    {
+    public void AddWheat(int count) {
         if (_data.IsWheatDistributing) {
             DistributeWheat(count);
         } else {
@@ -18,8 +16,7 @@ public class WheatManager : MonoBehaviour, IUpgradeable, IBindable<FarmData>
         }
     }
 
-    public void CheckUpgrade(BaseUpgrade upgrade)
-    {
+    public void CheckUpgrade(BaseUpgrade upgrade) {
         if (upgrade == _wheatDistributeUpgrade) {
             _data.IsWheatDistributing = true;
             int count = _data.Cow.MaterialCount;
@@ -29,8 +26,7 @@ public class WheatManager : MonoBehaviour, IUpgradeable, IBindable<FarmData>
         }
     }
 
-    private void DistributeWheat(int count)
-    {
+    private void DistributeWheat(int count) {
         int halfCount = count / 2;
 
         _data.Cow.MaterialCount += halfCount;
@@ -43,8 +39,7 @@ public class WheatManager : MonoBehaviour, IUpgradeable, IBindable<FarmData>
         }
     }
 
-    public void Bind(FarmData data, bool isFileEmpty)
-    {
+    public void Bind(FarmData data, bool isFileEmpty) {
         _data = data;
     }
 }

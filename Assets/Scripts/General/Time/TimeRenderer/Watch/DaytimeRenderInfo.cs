@@ -2,8 +2,7 @@ using System;
 using UnityEngine;
 
 [Serializable]
-public class DaytimeRenderInfo
-{
+public class DaytimeRenderInfo {
     [SerializeField] private Daytime _daytime;
     [SerializeField] private Sprite _iconSprite;
     [SerializeField] private Color _textColor;

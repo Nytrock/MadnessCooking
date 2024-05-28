@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ShopCatalog : MonoBehaviour
-{
+public class ShopCatalog : MonoBehaviour {
     [SerializeField] private Transform _pagesContainer;
     [SerializeField] private ShopCatalogPage _pagePrefab;
     [SerializeField] private Button _nextButton;
@@ -16,16 +15,14 @@ public class ShopCatalog : MonoBehaviour
 
     public Transform PagesContainer => _pagesContainer;
 
-    public void SetShop(BaseShop shop)
-    {
+    public void SetShop(BaseShop shop) {
         if (_pagePrefab.ItemType != shop.Type)
             throw new ArgumentException("Buyable object type of shop and buy panel don't match");
 
         _shop = shop;
     }
 
-    public void GeneratePanel(BuyableObject item)
-    {
+    public void GeneratePanel(BuyableObject item) {
         if (_pages.Count == 0 || _pages[^1].ItemCount == _pages[^1].MaxItemCount) {
             GeneratePage();
             UpdateButtons();
@@ -33,56 +30,49 @@ public class ShopCatalog : MonoBehaviour
         _pages[^1].GeneratePanel(item);
     }
 
-    public void GeneratePage()
-    {
+    public void GeneratePage() {
         ShopCatalogPage page = Instantiate(_pagePrefab, _pagesContainer);
         page.SetShop(_shop);
         _pages.Add(page);
         page.ChangeState(false);
     }
 
-    public void ActivateFirstPage()
-    {
+    public void ActivateFirstPage() {
         _pages[_nowPage].ChangeState(false);
         _nowPage = 0;
         _pages[_nowPage].ChangeState(true);
         UpdateButtons();
     }
 
-    public void NextPage()
-    {
+    public void NextPage() {
         _pages[_nowPage].ChangeState(false);
         _nowPage++;
         _pages[_nowPage].ChangeState(true);
         UpdateButtons();
     }
-    
-    public void PreviousPage()
-    {
+
+    public void PreviousPage() {
         _pages[_nowPage].ChangeState(false);
         _nowPage--;
         _pages[_nowPage].ChangeState(true);
         UpdateButtons();
     }
 
-    private void UpdateButtons()
-    {
+    private void UpdateButtons() {
         _nextButton.interactable = _nowPage < _pages.Count - 1;
         _previousButton.interactable = _nowPage > 0;
         _nextButton.gameObject.SetActive(_pages.Count != 1);
         _previousButton.gameObject.SetActive(_pages.Count != 1);
     }
 
-    public void RemovePanel(int removedItemIndex)
-    {
+    public void RemovePanel(int removedItemIndex) {
         int startPageIndex = removedItemIndex / _pages[0].MaxItemCount;
         int panelIndex = removedItemIndex % _pages[0].MaxItemCount;
         _pages[startPageIndex].DestroyPanelByIndex(panelIndex);
         UpdatePages(startPageIndex);
     }
 
-    private void UpdatePages(int startPageIndex)
-    {
+    private void UpdatePages(int startPageIndex) {
         for (int i = startPageIndex; i < _pages.Count - 1; i++) {
             BaseBuyPanel panel = _pages[i + 1].PopFirstPanel();
             _pages[i].AddPanel(panel);
@@ -92,8 +82,7 @@ public class ShopCatalog : MonoBehaviour
             DestroyLastPage();
     }
 
-    public void UpdatePanel(int updatedItemIndex, BuyableObject newItem)
-    {
+    public void UpdatePanel(int updatedItemIndex, BuyableObject newItem) {
         int startPageIndex = updatedItemIndex / _pages[0].MaxItemCount;
         int panelIndex = updatedItemIndex % _pages[0].MaxItemCount;
         _pages[startPageIndex].UpdatePanelByIndex(panelIndex, newItem);

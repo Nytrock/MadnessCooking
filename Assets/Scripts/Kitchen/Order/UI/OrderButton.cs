@@ -3,8 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(OrderCookingSlider))]
-public class OrderButton : MonoBehaviour
-{
+public class OrderButton : MonoBehaviour {
     [SerializeField] private Image _icon;
     [SerializeField] private TextMeshProUGUI _titleText;
     [SerializeField] private TextMeshProUGUI _tableIndexText;
@@ -15,21 +14,19 @@ public class OrderButton : MonoBehaviour
 
     [SerializeField] private OrderRecipe _recipe;
     [SerializeField] private Button _cookButton;
-    
+
     private OrderCookingSlider _cookSlider;
 
     public Order Order { get; private set; }
 
-    public void StartNewCycle()
-    {
+    public void StartNewCycle() {
         _cookingSlider.SetActive(false);
         _startButton.SetActive(true);
         _finishText.SetActive(false);
         gameObject.SetActive(true);
     }
 
-    public void SetOrder(Order order, KitchenData data)
-    {
+    public void SetOrder(Order order, KitchenData data) {
         StartNewCycle();
         Order = order;
         Order.OrderFinished += FinishCook;
@@ -42,8 +39,7 @@ public class OrderButton : MonoBehaviour
         _cookButton.interactable = _recipe.CanCook;
     }
 
-    public void UpdateRecipe()
-    {
+    public void UpdateRecipe() {
         if (Order == null) return;
         if (Order.IsCooking || Order.IsFinished) return;
 
@@ -51,15 +47,13 @@ public class OrderButton : MonoBehaviour
         _cookButton.interactable = _recipe.CanCook;
     }
 
-    public void Disable()
-    {
+    public void Disable() {
         _recipe.DisableParts();
         Order = null;
         gameObject.SetActive(false);
     }
 
-    public void Setup(TechnicManager technicManager, KitchenStorage kitchenStorage)
-    {
+    public void Setup(TechnicManager technicManager, KitchenStorage kitchenStorage) {
         _cookSlider = GetComponent<OrderCookingSlider>();
 
         kitchenStorage.IngredientsChanged += UpdateRecipe;
@@ -69,8 +63,7 @@ public class OrderButton : MonoBehaviour
         _recipe.Setup(kitchenStorage, technicManager);
     }
 
-    public void Cook()
-    {
+    public void Cook() {
         _cookingSlider.SetActive(true);
         _startButton.SetActive(false);
         _recipe.DisableParts();
@@ -78,8 +71,7 @@ public class OrderButton : MonoBehaviour
         Order.StartCook();
     }
 
-    public void FinishCook()
-    {
+    public void FinishCook() {
         _startButton.SetActive(false);
         _recipe.DisableParts();
 

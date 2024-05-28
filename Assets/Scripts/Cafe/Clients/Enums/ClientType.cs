@@ -1,5 +1,4 @@
-public enum ClientType
-{
+public enum ClientType {
     Standard,
     Critic,
     Rich,

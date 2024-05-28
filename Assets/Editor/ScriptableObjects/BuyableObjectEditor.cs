@@ -7,20 +7,15 @@ using Object = UnityEngine.Object;
 #if UNITY_EDITOR
 [CustomEditor(typeof(BuyableObject), true)]
 [CanEditMultipleObjects]
-public class BuyableObjectEditor : Editor
-{
+public class BuyableObjectEditor : Editor {
     private BuyableObject Item { get { return target as BuyableObject; } }
 
-    public override Texture2D RenderStaticPreview(string assetPath, Object[] subAssets, int width, int height)
-    {
-        if (Item.Icon != null)
-        {
+    public override Texture2D RenderStaticPreview(string assetPath, Object[] subAssets, int width, int height) {
+        if (Item.Icon != null) {
             Type t = GetType("UnityEditor.SpriteUtility");
-            if (t != null)
-            {
+            if (t != null) {
                 MethodInfo method = t.GetMethod("RenderStaticPreview", new Type[] { typeof(Sprite), typeof(Color), typeof(int), typeof(int) });
-                if (method != null)
-                {
+                if (method != null) {
                     object ret = method.Invoke("RenderStaticPreview", new object[] { Item.Icon, Color.white, width, height });
                     if (ret is Texture2D)
                         return ret as Texture2D;
@@ -30,8 +25,7 @@ public class BuyableObjectEditor : Editor
         return base.RenderStaticPreview(assetPath, subAssets, width, height);
     }
 
-    private static Type GetType(string TypeName)
-    {
+    private static Type GetType(string TypeName) {
         Type type = Type.GetType(TypeName);
         if (type != null)
             return type;

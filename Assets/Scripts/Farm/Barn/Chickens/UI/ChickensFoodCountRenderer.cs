@@ -2,21 +2,18 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ChickensFoodCountRenderer : MonoBehaviour
-{
+public class ChickensFoodCountRenderer : MonoBehaviour {
     [SerializeField] private BaseUpgrade _food;
     [SerializeField] private BaseUpgrade _infiniteFood;
     [SerializeField] private TextMeshProUGUI _countText;
     [SerializeField] private Image _icon;
     private Chickens _chickens;
 
-    public void SetChickens(Chickens chickens)
-    {
+    public void SetChickens(Chickens chickens) {
         _chickens = chickens;
     }
 
-    public void UpdateFoodCount()
-    {
+    public void UpdateFoodCount() {
         if (_chickens.Data.IsInfiniteFood) {
             _icon.sprite = _infiniteFood.Icon;
             _countText.text = "";

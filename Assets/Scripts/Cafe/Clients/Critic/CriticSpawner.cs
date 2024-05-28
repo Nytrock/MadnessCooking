@@ -3,8 +3,7 @@ using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class CriticSpawner : MonoBehaviour
-{
+public class CriticSpawner : MonoBehaviour {
     [SerializeField] private TimeManager _timeManager;
     [SerializeField] private PopularityCalculator _popularityCalculator;
     [SerializeField] private ClientsSpawner _clientSpawner;
@@ -16,24 +15,21 @@ public class CriticSpawner : MonoBehaviour
 
     private bool _isWaitingCritic;
 
-    private void Awake()
-    {
+    private void Awake() {
         _popularityManager = _popularityCalculator.GetComponent<PopularityManager>();
         _timeManager.DaytimeChanged += CheckDaytime;
     }
 
-    private void CheckDaytime(Daytime daytime)
-    {
+    private void CheckDaytime(Daytime daytime) {
         if (daytime == Daytime.Night && _isWaitingCritic)
             WaitFailure();
 
         if (daytime == Daytime.Morning)
-           if (_needPopularity[_nextPopularityIndex] <= _popularityCalculator.GetPopularity())
-               ActivateCriticWait();
+            if (_needPopularity[_nextPopularityIndex] <= _popularityCalculator.GetPopularity())
+                ActivateCriticWait();
     }
 
-    private void ActivateCriticWait()
-    {
+    private void ActivateCriticWait() {
         _isWaitingCritic = true;
 
         DaytimeStart morging = _timeManager.GetDaytimeStartInfo(Daytime.Morning);
@@ -47,29 +43,25 @@ public class CriticSpawner : MonoBehaviour
         _criticUI.ChangeCriticWaitStartUI(true);
     }
 
-    private IEnumerator WaitCriticTime(TimeSpan timeCritic)
-    {
+    private IEnumerator WaitCriticTime(TimeSpan timeCritic) {
         yield return new WaitUntil(() => timeCritic >= _timeManager.TimeSpan);
         _clientSpawner.ChangeCriticWait(true);
     }
 
-    private void DisableCriticWait()
-    {
+    private void DisableCriticWait() {
         _isWaitingCritic = false;
         _clientSpawner.ChangeCriticWait(false);
     }
 
 
-    public void WaitSuccess()
-    {
+    public void WaitSuccess() {
         DisableCriticWait();
         _nextPopularityIndex++;
         _popularityManager.NextLevel();
         _criticUI.ChangeCriticWaitSuccessUI(true);
     }
-    
-    public void WaitFailure()
-    {
+
+    public void WaitFailure() {
         DisableCriticWait();
         _popularityManager.PreviousLevel();
         _criticUI.ChangeCriticWaitFailureUI(true);

@@ -1,8 +1,7 @@
 using System;
 using UnityEngine;
 
-public class SaveManager : MonoBehaviour
-{
+public class SaveManager : MonoBehaviour {
     private GameData _gameData;
     private FileDataService _dataService;
 
@@ -15,27 +14,23 @@ public class SaveManager : MonoBehaviour
 
     public event Action SaveEnded;
 
-    private void Awake()
-    {
+    private void Awake() {
         _dataService = new FileDataService();
         Application.targetFrameRate = 60;
     }
 
-    private void Start()
-    {
+    private void Start() {
         Load();
     }
 
     [ContextMenu("Save")]
-    public void Save()
-    {
+    public void Save() {
         _dataService.Save(_gameData);
         SaveEnded?.Invoke();
     }
 
     [ContextMenu("Load")]
-    private void Load()
-    {
+    private void Load() {
         _gameData = _dataService.Load();
         bool isFileEmpty = _gameData == null;
         if (isFileEmpty) {

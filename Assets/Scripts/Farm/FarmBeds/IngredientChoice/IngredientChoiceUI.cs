@@ -1,0 +1,78 @@
+using System.Collections.Generic;
+using UnityEngine;
+
+public class IngredientChoiceUI : ChoiceSimpleWithCameraStopUI<Ingredient, FarmData> {
+    [SerializeField] private IngredientsManager _ingredientsManager;
+    [SerializeField] private IngredientChoiceStyle[] _styles;
+    private readonly List<Ingredient> _ingredients = new();
+    protected GameObject _stylePanel;
+    private FarmBed _changingBed;
+
+    protected override void Start() {
+        DisableAllStyles();
+        base.Start();
+    }
+
+    public void ActivateIngredientChoice(FarmBed farmBed) {
+        _changingBed = farmBed;
+        BedType bedType = _changingBed.BedData.BedType;
+        DestoyOldButtons();
+        GenerateChoiceButtons();
+        SetStyle(bedType);
+        Activate();
+    }
+
+    private void DestoyOldButtons() {
+        foreach (var button in _choiceButtons)
+            _choiceButtonPool.PutObject(button);
+        _choiceButtons.Clear();
+    }
+
+    protected override void GenerateChoiceButtons() {
+        _ingredients.Clear();
+        foreach (var ingredient in _ingredientsManager.GetAvailableIngredientsOfBedType(_changingBed.BedData.BedType)) {
+            ChoiceSimpleButton<Ingredient> choiceButton = _choiceButtonPool.GetObject();
+            choiceButton.Setup(ingredient, _ingredients.Count, this);
+            _choiceButtons.Add(choiceButton);
+            _ingredients.Add(ingredient);
+        }
+    }
+
+    private void SetStyle(BedType bedType) {
+        foreach (var style in _styles) {
+            if (style.BedType == bedType) {
+                style.Panel.SetActive(true);
+                _stylePanel = style.Panel;
+                _submitButton = style.MainButton;
+                _submitButton.onClick.AddListener(SetChoice);
+            }
+        }
+    }
+
+    private void DisableAllStyles() {
+        foreach (var style in _styles) {
+            style.Panel.SetActive(false);
+            style.MainButton.interactable = false;
+        }
+    }
+
+    public override void SetChoice() {
+        _changingBed.SetIngredient(_ingredients[_chosedIndex]);
+        Disable();
+    }
+
+    private void Deactivate() {
+        _submitButton.onClick.RemoveListener(SetChoice);
+        _stylePanel.SetActive(false);
+    }
+
+    protected override void SetSelectedState(int index) {
+        _choiceButtons[index].ChangeSelectedState();
+    }
+
+    public override void Disable() {
+        base.Disable();
+        Deactivate();
+        _changingBed = null;
+    }
+}

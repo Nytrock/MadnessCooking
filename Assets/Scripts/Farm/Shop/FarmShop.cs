@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class FarmShop : BaseChooseShop, IBindable<FarmData>
-{
+public class FarmShop : BaseChooseShop, IBindable<FarmData> {
     [SerializeField] private UpgradeManager _upgradeManager;
     [SerializeField] private List<LimitedConsumableUpgradeHolder> _upgradesHolders;
     [SerializeField] private List<BaseUpgrade> _upgradesToBuy;
@@ -14,8 +13,7 @@ public class FarmShop : BaseChooseShop, IBindable<FarmData>
 
     public override Type Type => typeof(BaseUpgrade);
 
-    public override void BuyItem(BuyableObject item)
-    {
+    public override void BuyItem(BuyableObject item) {
         base.BuyItem(item);
 
         var upgrade = item as BaseUpgrade;
@@ -53,8 +51,7 @@ public class FarmShop : BaseChooseShop, IBindable<FarmData>
         SetObjectsArray();
     }
 
-    private void CheckNextUpgrades(GraphUpgrade graphUpgrade, int index)
-    {
+    private void CheckNextUpgrades(GraphUpgrade graphUpgrade, int index) {
         foreach (var nextUpgrade in graphUpgrade.NextUpgrades) {
             if (_upgradesToBuy.Contains(nextUpgrade))
                 continue;
@@ -89,15 +86,13 @@ public class FarmShop : BaseChooseShop, IBindable<FarmData>
         }
     }
 
-    protected override void SetObjectsArray()
-    {
+    protected override void SetObjectsArray() {
         _data.UpgradesHolders = _upgradesHolders.ToArray();
         _data.UpgradesToBuy = _upgradesToBuy.ToArray();
         _itemsToBuy = _data.UpgradesToBuy;
     }
 
-    public void Bind(FarmData data, bool isFileEmpty)
-    {
+    public void Bind(FarmData data, bool isFileEmpty) {
         _data = data;
         if (!isFileEmpty) {
             _upgradesHolders = _data.UpgradesHolders.ToList();

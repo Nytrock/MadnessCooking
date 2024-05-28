@@ -1,5 +1,4 @@
-public enum Daytime
-{
+public enum Daytime {
     Morning,
     Day,
     Evening,

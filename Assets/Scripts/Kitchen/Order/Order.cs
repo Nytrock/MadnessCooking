@@ -2,8 +2,7 @@
 using UnityEngine;
 
 [Serializable]
-public class Order
-{
+public class Order {
     [SerializeField] private bool _isActivated;
     [SerializeField] private bool _isFinished;
     [SerializeField] private bool _isCooking;
@@ -20,27 +19,23 @@ public class Order
 
     public event Action OrderFinished;
 
-    public Order(Food food, int tableIndex)
-    {
+    public Order(Food food, int tableIndex) {
         _food = food;
         _tableIndex = tableIndex;
     }
 
-    public void StartCook()
-    {
+    public void StartCook() {
         _isCooking = true;
         OrderStarted?.Invoke();
     }
 
-    public void FinishCook()
-    {
+    public void FinishCook() {
         _isCooking = false;
         _isFinished = true;
         OrderFinished?.Invoke();
     }
 
-    public void Activate()
-    {
+    public void Activate() {
         _isActivated = true;
     }
 }

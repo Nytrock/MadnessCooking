@@ -2,8 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShopCatalogPage: MonoBehaviour
-{
+public class ShopCatalogPage : MonoBehaviour {
     [SerializeField] private BaseBuyPanel _buyPanelPrefab;
     [SerializeField, Min(1)] private int _maxItemCount;
     protected readonly List<BaseBuyPanel> _buyPanels = new();
@@ -13,49 +12,41 @@ public class ShopCatalogPage: MonoBehaviour
     public int ItemCount => _buyPanels.Count;
     public Type ItemType => _buyPanelPrefab.Type;
 
-    public void SetShop(BaseShop shop)
-    {
+    public void SetShop(BaseShop shop) {
         _shop = shop;
     }
 
-    public void GeneratePanel(BuyableObject item)
-    {
+    public void GeneratePanel(BuyableObject item) {
         BaseBuyPanel buyPanel = Instantiate(_buyPanelPrefab, transform);
         buyPanel.Setup(item, _shop);
         _buyPanels.Add(buyPanel);
     }
 
-    public void ChangeState(bool newValue)
-    {
+    public void ChangeState(bool newValue) {
         gameObject.SetActive(newValue);
     }
 
-    public BaseBuyPanel PopFirstPanel()
-    {
+    public BaseBuyPanel PopFirstPanel() {
         BaseBuyPanel panel = _buyPanels[0];
         _buyPanels.RemoveAt(0);
         return panel;
     }
 
-    public void AddPanel(BaseBuyPanel panel)
-    {
+    public void AddPanel(BaseBuyPanel panel) {
         panel.transform.SetParent(transform);
         _buyPanels.Add(panel);
     }
 
-    public void DestroyPanelByIndex(int index)
-    {
+    public void DestroyPanelByIndex(int index) {
         _buyPanels[index].Destroy();
         _buyPanels.RemoveAt(index);
     }
 
-    public void UpdatePanelByIndex(int index, BuyableObject item)
-    {
+    public void UpdatePanelByIndex(int index, BuyableObject item) {
         _buyPanels[index].Setup(item, _shop);
     }
 
-    public void Destroy()
-    {
+    public void Destroy() {
         foreach (var panel in _buyPanels)
             panel.Destroy();
 

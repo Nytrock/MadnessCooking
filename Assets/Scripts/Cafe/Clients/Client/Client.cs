@@ -3,8 +3,7 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(ClientUI))]
-public class Client : MonoBehaviour
-{
+public class Client : MonoBehaviour {
     #region States Settings
     protected ClientBaseState _nowState;
     private readonly ClientWalkState _walkState = new();
@@ -31,32 +30,29 @@ public class Client : MonoBehaviour
     public event Action<Client> ClientRejected;
     public event Action<Client> ClientEat;
 
-    private void Awake()
-    {
+    private void Awake() {
         _clientUI = GetComponent<ClientUI>();
     }
 
-    public void StartNewCycle()
-    {
+    public void StartNewCycle() {
         _skin.SetSkin(ClientData.Type);
         _clientUI.StartNewCycle();
     }
 
-    protected void ChangeState()
-    {
+    protected void ChangeState() {
         ClientBaseState clientState = null;
         switch (ClientData.State) {
             case ClientState.Spawn:
             case ClientState.Leave:
                 clientState = _walkState;
                 break;
-            case ClientState.Wait: 
+            case ClientState.Wait:
                 clientState = _waitState;
                 break;
-            case ClientState.Eat: 
+            case ClientState.Eat:
                 clientState = _eatState;
                 break;
-            case ClientState.Sit: 
+            case ClientState.Sit:
                 clientState = _sitState;
                 break;
             case ClientState.WaitOthers:
@@ -69,30 +65,25 @@ public class Client : MonoBehaviour
         _nowState.EnterState(this);
     }
 
-    private void Update()
-    {
+    private void Update() {
         _nowState.UpdateState(this);
     }
 
-    public void RotateSkin(Direction direction)
-    {
+    public void RotateSkin(Direction direction) {
         _skin.RotateSkin(direction);
     }
 
-    private void RotateSkin()
-    {
+    private void RotateSkin() {
         CafeSpot spot = Spawner.GetSpot(SpotIndex);
         _skin.RotateSkin(spot.GetSeatRotation(TableIndex));
     }
 
-    public void TakeSeat()
-    {
+    public void TakeSeat() {
         RotateSkin();
         _skin.ChangeSortingLayer();
     }
 
-    public virtual void Setup(ClientSettings settings)
-    {
+    public virtual void Setup(ClientSettings settings) {
         Spawner = settings.Spawner;
 
         TableIndex = settings.TableIndex;
@@ -111,27 +102,23 @@ public class Client : MonoBehaviour
             TakeSeat();
     }
 
-    public void ActivateOrder()
-    {
+    public void ActivateOrder() {
         OrderActivated?.Invoke(this);
         _clientUI.SetFood(ClientData.Order.Food);
         ClientData.Order.Activate();
     }
 
-    public void CheckOrder()
-    {
+    public void CheckOrder() {
         if (ClientData.Order.IsFinished)
             _clientUI.ActivateYesButton();
     }
 
-    public virtual void Wait()
-    {
+    public virtual void Wait() {
         ClientData.State = ClientState.Wait;
         ChangeState();
     }
 
-    public virtual void Pay()
-    {
+    public virtual void Pay() {
         int moneyToPay = ClientData.Order.Food.MoneyGet;
         if (ClientData.Type == ClientType.Rich)
             moneyToPay *= 100;
@@ -139,8 +126,7 @@ public class Client : MonoBehaviour
         Leave();
     }
 
-    public void Leave()
-    {
+    public void Leave() {
         ClientLeave?.Invoke(this);
         ClientLeave = null;
         ClientEat = null;
@@ -153,51 +139,43 @@ public class Client : MonoBehaviour
         _clientUI.ChangeSliderState(false);
     }
 
-    public virtual void FoodRejected()
-    {
+    public virtual void FoodRejected() {
         InvokeRejected();
         Leave();
     }
 
-    public virtual void Eat()
-    {
+    public virtual void Eat() {
         ClientData.WaitTime = ClientData.Order.Food.TimeToEat * Random.Range(0.9f, 1.2f);
         ClientData.NowTime = 0;
         ClientData.State = ClientState.Eat;
-        ChangeState(); 
+        ChangeState();
         ClientEat?.Invoke(this);
     }
 
-    public void Sit()
-    {
+    public void Sit() {
         ClientData.State = ClientState.Sit;
         ChangeState();
     }
 
-    public void Destroy()
-    {
-        Spawner.PutClient(this);   
+    public void Destroy() {
+        Spawner.PutClient(this);
     }
 
-    public void SetSpotTableFood()
-    {
+    public void SetSpotTableFood() {
         CafeSpot spot = Spawner.GetSpot(SpotIndex);
         spot.SetTableFoodSprite(ClientData.Order.Food, TableIndex);
     }
 
-    public void ResetSpotTableFood()
-    {
+    public void ResetSpotTableFood() {
         CafeSpot spot = Spawner.GetSpot(SpotIndex);
         spot.ResetTableFoodSprite(TableIndex);
     }
 
-    public void ChangeShowingTimeEat(bool value)
-    {
+    public void ChangeShowingTimeEat(bool value) {
         IsEatTimeShow = value;
     }
 
-    protected void InvokeRejected()
-    {
+    protected void InvokeRejected() {
         ClientRejected?.Invoke(this);
     }
 }

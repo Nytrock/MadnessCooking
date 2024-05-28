@@ -1,8 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OrdersUI : MonoBehaviour, IUpgradeable, IBindable<KitchenData> 
-{
+public class OrdersUI : MonoBehaviour, IUpgradeable, IBindable<KitchenData> {
     [SerializeField] private OrdersManager _ordersManager;
     [SerializeField] private OrderButtonsPool _pool;
     [SerializeField] private GameObject _panel;
@@ -16,8 +15,7 @@ public class OrdersUI : MonoBehaviour, IUpgradeable, IBindable<KitchenData>
 
     public bool IsAutoSpice => _data.IsAutoSpice;
 
-    private void Awake()
-    {
+    private void Awake() {
         _ordersManager.OrderAdded += AddOrder;
         _ordersManager.OrderRemoved += RemoveOrder;
         _panel.SetActive(false);
@@ -27,13 +25,11 @@ public class OrdersUI : MonoBehaviour, IUpgradeable, IBindable<KitchenData>
         _spice = ConstIngredients.Instance.Spice;
     }
 
-    public void ChangeState()
-    {
+    public void ChangeState() {
         _panel.SetActive(!_panel.activeSelf);
     }
 
-    private void AddOrder(Order order)
-    {
+    private void AddOrder(Order order) {
         order.OrderStarted += delegate { StartCook(order); };
         order.OrderFinished += UpdateRecipes;
         OrderButton button = _pool.GetObject();
@@ -41,15 +37,13 @@ public class OrdersUI : MonoBehaviour, IUpgradeable, IBindable<KitchenData>
         _orderButtons.Add(button);
     }
 
-    private void RemoveOrder(Order order)
-    {
+    private void RemoveOrder(Order order) {
         int index = _ordersManager.GetOrderIndex(order);
         _pool.PutObject(_orderButtons[index]);
         _orderButtons.RemoveAt(index);
     }
 
-    public void StartCook(Order order)
-    {
+    public void StartCook(Order order) {
         _ordersManager.StartCook(order);
         IngredientCountList ingredients = order.Food.Ingredients;
         for (int i = 0; i < ingredients.Size; i++) {
@@ -62,22 +56,19 @@ public class OrdersUI : MonoBehaviour, IUpgradeable, IBindable<KitchenData>
         UpdateRecipes();
     }
 
-    private void UpdateRecipes()
-    {
+    private void UpdateRecipes() {
         foreach (var button in _orderButtons)
             button.UpdateRecipe();
     }
 
-    public void CheckUpgrade(BaseUpgrade upgrade)
-    {
+    public void CheckUpgrade(BaseUpgrade upgrade) {
         if (upgrade == _autoSpice) {
             _data.IsAutoSpice = true;
             UpdateRecipes();
         }
     }
 
-    public void Bind(KitchenData data, bool isFileEmpty)
-    {
+    public void Bind(KitchenData data, bool isFileEmpty) {
         _data = data;
         foreach (var button in _orderButtons) {
             if (button.Order.IsCooking)

@@ -1,16 +1,13 @@
 using UnityEngine;
 
-public class MoneyUI : CountRenderer
-{
+public class MoneyUI : CountRenderer {
     [SerializeField] private MoneyManager _moneyManager;
 
-    private void Awake()
-    {
+    private void Awake() {
         _moneyManager.MoneyChanged += UpdateCount;
     }
 
-    private void Start()
-    {
+    private void Start() {
         UpdateCount(_moneyManager.MoneyCount);
     }
 }

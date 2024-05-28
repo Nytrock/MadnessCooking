@@ -2,8 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Button))]
-public class LocationButton : MonoBehaviour
-{
+public class LocationButton : MonoBehaviour {
     [SerializeField] private LocationManager _locationManager;
     [SerializeField] private Transform _location;
     [SerializeField, Min(0)] private float _fatigueCoef;
@@ -12,15 +11,13 @@ public class LocationButton : MonoBehaviour
 
     private Button _button;
 
-    private void Awake()
-    {
+    private void Awake() {
         _button = GetComponent<Button>();
         _button.onClick.AddListener(delegate { _locationManager.ChangeLocation(this); });
         _locationManager.LocationChanged += ChangeMode;
     }
 
-    private void ChangeMode(Vector2 newPosition)
-    {
+    private void ChangeMode(Vector2 newPosition) {
         bool isOurLocation = newPosition == (Vector2)_location.position;
         if (isOurLocation)
             FatigueManager.Instance.ChangeFatigue(_fatigueCoef);

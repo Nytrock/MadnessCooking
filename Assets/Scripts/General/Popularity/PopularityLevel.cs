@@ -2,8 +2,7 @@ using System;
 using UnityEngine;
 
 [Serializable]
-public class PopularityLevel
-{
+public class PopularityLevel {
     [SerializeField, Min(1)] private int _needXp;
     [SerializeField, Min(1)] private float _popularityMultiplier = 1;
     [SerializeField] private string _name;

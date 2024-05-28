@@ -3,8 +3,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Slider))]
-public abstract class LocationSlider<TData> : MonoBehaviour, IPointerDownHandler, IPointerUpHandler where TData : ISaveable
-{
+public abstract class LocationSlider<TData> : MonoBehaviour, IPointerDownHandler, IPointerUpHandler where TData : ISaveable {
     protected CameraManager<TData> _cameraManager;
     protected Slider _slider;
 
@@ -13,8 +12,7 @@ public abstract class LocationSlider<TData> : MonoBehaviour, IPointerDownHandler
 
     private bool _isDragging;
 
-    public void Bootup(CameraManager<TData> cameraManager)
-    {
+    public void Bootup(CameraManager<TData> cameraManager) {
         _cameraManager = cameraManager;
         _slider = GetComponent<Slider>();
         _cameraManager.BordersFound += SetSliderValues;
@@ -28,20 +26,17 @@ public abstract class LocationSlider<TData> : MonoBehaviour, IPointerDownHandler
         _slider.maxValue = _endPosition;
     }
 
-    public void ChangeCameraPosition(float newPosition)
-    {
+    public void ChangeCameraPosition(float newPosition) {
         if (_isDragging)
             _cameraManager.SetCameraPosition(newPosition);
     }
 
-    public void OnPointerDown(PointerEventData eventData)
-    {
+    public void OnPointerDown(PointerEventData eventData) {
         _isDragging = true;
         _cameraManager.ChangeWorkMode(!_isDragging);
     }
 
-    public void OnPointerUp(PointerEventData eventData)
-    {
+    public void OnPointerUp(PointerEventData eventData) {
         _isDragging = false;
         _cameraManager.ChangeWorkMode(!_isDragging);
     }

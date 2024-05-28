@@ -2,39 +2,33 @@ using System;
 using System.Linq;
 using UnityEngine;
 
-public class FarmCar : IngredientStorage<FarmData>, IUpgradeable
-{
+public class FarmCar : IngredientStorage<FarmData>, IUpgradeable {
     [SerializeField] private Animator _animator;
 
     [Header("Upgrades")]
     [SerializeField] private CountUpgrade[] _sizeUpgrades;
 
-    public void CheckUpgrade(BaseUpgrade upgrade)
-    {
+    public void CheckUpgrade(BaseUpgrade upgrade) {
         if (_sizeUpgrades.Contains(upgrade))
             Data.UpdateMaxSpace(upgrade as CountUpgrade);
     }
 
-    public void Leave()
-    {
+    public void Leave() {
         Data.ClearList();
         _animator.SetBool("isLeave", true);
     }
 
-    public void InstantLeave()
-    {
+    public void InstantLeave() {
         _animator.SetBool("isLeave", true);
         _animator.Play(nameof(CarState.Sent), -1, 1);
     }
 
-    public void Return()
-    {
+    public void Return() {
         _animator.SetBool("isLeave", false);
     }
 
 
-    public override void Bind(FarmData data, bool isFileEmpty)
-    {
+    public override void Bind(FarmData data, bool isFileEmpty) {
         if (isFileEmpty)
             data.Car = new(_defaultMaxSpace);
         Data = data.Car;

@@ -1,13 +1,11 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ClientWaitState : ClientBaseState
-{
+public class ClientWaitState : ClientBaseState {
     private Slider _waitSlider;
     private ClientData _clientData;
 
-    public override void EnterState(Client client)
-    {
+    public override void EnterState(Client client) {
         var clientUI = client.GetComponent<ClientUI>();
 
         clientUI.ChangeFoodChoiceState(true);
@@ -20,13 +18,11 @@ public class ClientWaitState : ClientBaseState
             client.OrderActivated += DecreaseWait;
     }
 
-    public override void ExitState(Client client)
-    {
+    public override void ExitState(Client client) {
 
     }
 
-    public override void UpdateState(Client client)
-    {
+    public override void UpdateState(Client client) {
         if (_clientData.NowTime < _clientData.WaitTime) {
             _clientData.NowTime += InGameTime.Instance.DeltaTime;
             _waitSlider.value = _clientData.NowTime;
@@ -35,9 +31,8 @@ public class ClientWaitState : ClientBaseState
         }
     }
 
-    private void DecreaseWait(Client _)
-    {
-        _clientData.NowTime = Mathf.Max(0, 
+    private void DecreaseWait(Client _) {
+        _clientData.NowTime = Mathf.Max(0,
             _clientData.NowTime - (_clientData.WaitTime * 0.1f * _clientData.WaitMultiplier));
         _waitSlider.value = _clientData.NowTime;
     }

@@ -1,7 +1,6 @@
 using UnityEngine;
 
-public class ConstIngredients : Singleton<ConstIngredients>
-{
+public class ConstIngredients : Singleton<ConstIngredients> {
     [SerializeField] private Ingredient _lemon;
     [SerializeField] private Ingredient _spice;
     [SerializeField] private Ingredient _milk;

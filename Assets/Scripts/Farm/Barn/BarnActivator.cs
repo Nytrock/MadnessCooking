@@ -1,7 +1,6 @@
 using UnityEngine;
 
-public class BarnActivator : UIActivator
-{
+public class BarnActivator : UIActivator {
     [SerializeField] private Transform _barn;
     [SerializeField] private Transform _farm;
     [SerializeField] private LocationManager _locationManager;
@@ -9,13 +8,11 @@ public class BarnActivator : UIActivator
     [SerializeField, Min(0)] private float _fatigueCoef;
     private bool _isOpen;
 
-    protected override void Press()
-    {
+    protected override void Press() {
         ChangeBarnState();
     }
 
-    private void ChangeBarnState()
-    {
+    private void ChangeBarnState() {
         _isOpen = !_isOpen;
         _mainUI.SetActive(!_isOpen);
         if (_isOpen) {

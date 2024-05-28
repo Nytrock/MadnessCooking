@@ -1,17 +1,14 @@
 using UnityEngine.UI;
-public abstract class ChoiceBuyButton<TItem> : ChoiceButton<TItem> where TItem: BuyableObject
-{
+public abstract class ChoiceBuyButton<TItem> : ChoiceButton<TItem> where TItem : BuyableObject {
     private int _price;
     protected bool _isBuyable;
 
-    protected override void Awake()
-    {
+    protected override void Awake() {
         base.Awake();
         MoneyManager.Instance.MoneyChanged += CheckBuyable;
     }
 
-    public virtual void Setup(TItem item, int index, ChoiceBuyUI<TItem> ui)
-    {
+    public virtual void Setup(TItem item, int index, ChoiceBuyUI<TItem> ui) {
         _button = GetComponent<Button>();
         gameObject.SetActive(true);
 
@@ -24,8 +21,7 @@ public abstract class ChoiceBuyButton<TItem> : ChoiceButton<TItem> where TItem: 
         );
     }
 
-    public virtual void CheckBuyable(int newValue)
-    {
+    public virtual void CheckBuyable(int newValue) {
         _isBuyable = newValue >= _price;
     }
 }

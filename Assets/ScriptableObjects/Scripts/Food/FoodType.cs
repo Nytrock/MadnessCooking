@@ -1,5 +1,4 @@
-public enum FoodType
-{
+public enum FoodType {
     None,
     Crisp,
     Soft,

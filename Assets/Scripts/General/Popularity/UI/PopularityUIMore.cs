@@ -1,8 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-public class PopularityUIMore : MonoBehaviour
-{
+public class PopularityUIMore : MonoBehaviour {
     [SerializeField] private GameObject _panel;
     [SerializeField] private TextMeshProUGUI _descriptionText;
     [SerializeField] private TextMeshProUGUI _popularityMultiplierText;
@@ -11,18 +10,15 @@ public class PopularityUIMore : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _tripleChanceText;
     [SerializeField] private TextMeshProUGUI _quarterChanceText;
 
-    private void Start()
-    {
+    private void Start() {
         ChangeMode(false);
     }
 
-    public void ChangeMode(bool newMode)
-    {
+    public void ChangeMode(bool newMode) {
         _panel.SetActive(newMode);
     }
 
-    public void UpdateInfo(PopularityLevel level)
-    {
+    public void UpdateInfo(PopularityLevel level) {
         _descriptionText.text = level.Description;
         _popularityMultiplierText.text = level.PopularityMultiplier.ToString();
         _singleChanceText.text = level.SingleChance.ToString() + "%";

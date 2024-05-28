@@ -1,7 +1,6 @@
 using UnityEngine;
 
-public abstract class FoodRecipe<T> : MonoBehaviour
-{
+public abstract class FoodRecipe<T> : MonoBehaviour {
     [SerializeField] protected T[] _recipeParts = new T[8];
     [SerializeField] protected KitchenStorage _kitchenStorage;
     [SerializeField] protected TechnicManager _technicManager;
@@ -9,8 +8,7 @@ public abstract class FoodRecipe<T> : MonoBehaviour
 
     public bool CanCook => _canCook;
 
-    public void SetupRecipe(Food food) 
-    {
+    public void SetupRecipe(Food food) {
         DisableParts();
         _canCook = true;
 

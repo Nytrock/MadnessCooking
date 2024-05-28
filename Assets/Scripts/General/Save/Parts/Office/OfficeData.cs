@@ -2,8 +2,7 @@ using System;
 using System.Collections.Generic;
 
 [Serializable]
-public class OfficeData : ISaveable
-{
+public class OfficeData : ISaveable {
     public List<Decor> AvailableDecor = new();
     public bool IsSleeping;
     public float InternetDownloadSpeed = 1;

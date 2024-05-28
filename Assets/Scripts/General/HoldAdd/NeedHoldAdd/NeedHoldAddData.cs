@@ -1,7 +1,6 @@
 using System;
 
 [Serializable]
-public class NeedHoldAddData : HoldAddData
-{
+public class NeedHoldAddData : HoldAddData {
     public int MaterialCount;
 }

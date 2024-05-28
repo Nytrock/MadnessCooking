@@ -2,15 +2,13 @@ using UnityEditor;
 using UnityEngine;
 
 [CustomPropertyDrawer(typeof(RequireInterfaceAttribute))]
-public class RequireInterfaceDrawer : PropertyDrawer
-{
-    public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
-    {
+public class RequireInterfaceDrawer : PropertyDrawer {
+    public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {
         if (property.propertyType == SerializedPropertyType.ObjectReference) {
             var requiredAttribute = attribute as RequireInterfaceAttribute;
             EditorGUI.BeginProperty(position, label, property);
             Object obj = EditorGUI.ObjectField(position, label, property.objectReferenceValue, typeof(Object), true);
-            if (obj is GameObject g) 
+            if (obj is GameObject g)
                 property.objectReferenceValue = g.GetComponent(requiredAttribute.RequiredType);
             EditorGUI.EndProperty();
         } else {

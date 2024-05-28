@@ -1,9 +1,7 @@
-public class OrderRecipe : FoodRecipe<OrderRecipePart>
-{
+public class OrderRecipe : FoodRecipe<OrderRecipePart> {
     private KitchenData _data;
 
-    public void Setup(KitchenStorage kitchenStorage, TechnicManager technicManager)
-    {
+    public void Setup(KitchenStorage kitchenStorage, TechnicManager technicManager) {
         _kitchenStorage = kitchenStorage;
         _technicManager = technicManager;
     }
@@ -13,8 +11,7 @@ public class OrderRecipe : FoodRecipe<OrderRecipePart>
         SetupRecipe(food);
     }
 
-    protected override void SetupIngredients(IngredientCountList ingredients, ref bool canCook)
-    {
+    protected override void SetupIngredients(IngredientCountList ingredients, ref bool canCook) {
         for (int i = 0; i < ingredients.Size; i++) {
             IngredientCount ingredientCount = ingredients.Get(i);
             if (ingredientCount.Ingredient == ConstIngredients.Instance.Spice && _data.IsAutoSpice) {
@@ -28,15 +25,13 @@ public class OrderRecipe : FoodRecipe<OrderRecipePart>
         }
     }
 
-    protected override void SetupTechnic(Technic technic, int index, ref bool canCook)
-    {
+    protected override void SetupTechnic(Technic technic, int index, ref bool canCook) {
         bool haveTechnic = _technicManager.HaveTechnic(technic);
         _canCook &= haveTechnic;
         _recipeParts[index].Setup(technic, haveTechnic);
     }
 
-    public override void DisableParts()
-    {
+    public override void DisableParts() {
         foreach (var part in _recipeParts)
             part.gameObject.SetActive(false);
     }

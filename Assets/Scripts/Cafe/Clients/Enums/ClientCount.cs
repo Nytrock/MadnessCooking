@@ -1,5 +1,4 @@
-public enum ClientCount
-{
+public enum ClientCount {
     One,
     Two,
     Three,

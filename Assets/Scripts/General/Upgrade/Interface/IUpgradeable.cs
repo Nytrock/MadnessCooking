@@ -1,4 +1,3 @@
-public interface IUpgradeable
-{
+public interface IUpgradeable {
     void CheckUpgrade(BaseUpgrade upgrade);
 }

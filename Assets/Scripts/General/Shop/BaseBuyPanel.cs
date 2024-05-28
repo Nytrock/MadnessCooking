@@ -2,21 +2,18 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-public abstract class BaseBuyPanel : MonoBehaviour
-{
+public abstract class BaseBuyPanel : MonoBehaviour {
     [SerializeField] protected Button _buyButton;
     protected BuyableObject _item;
     public abstract Type Type { get; }
 
-    public virtual void Setup(BuyableObject item, BaseShop shop)
-    {
+    public virtual void Setup(BuyableObject item, BaseShop shop) {
         _item = item;
         SetVisual(item);
         SetButtonListener(shop);
     }
 
-    public virtual void Destroy()
-    {
+    public virtual void Destroy() {
         Destroy(gameObject);
     }
 

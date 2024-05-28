@@ -1,8 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-public class FarmCarWaitUI : MonoBehaviour
-{
+public class FarmCarWaitUI : MonoBehaviour {
     [SerializeField] private FarmCarWaitManager _manager;
     [SerializeField] private GameObject _panel;
 
@@ -12,13 +11,11 @@ public class FarmCarWaitUI : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI _timeText;
 
-    private void Start()
-    {
+    private void Start() {
         _panel.SetActive(false);
     }
 
-    private void Update()
-    {
+    private void Update() {
         bool isCarCalm = _manager.Data.CarState == CarState.Calm;
         _panel.SetActive(!isCarCalm);
         if (isCarCalm)
@@ -32,8 +29,7 @@ public class FarmCarWaitUI : MonoBehaviour
         UpdateText();
     }
 
-    private void UpdateText()
-    {
+    private void UpdateText() {
         int nowTime = (int)_manager.Data.NowWaitTime;
         int seconds = nowTime % 60;
         _timeText.text = $"{nowTime / 60}:{seconds:00}";

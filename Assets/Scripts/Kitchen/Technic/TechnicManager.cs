@@ -2,8 +2,7 @@ using System;
 using System.Linq;
 using UnityEngine;
 
-public class TechnicManager : MonoBehaviour, IUpgradeable, IBindable<KitchenData>
-{
+public class TechnicManager : MonoBehaviour, IUpgradeable, IBindable<KitchenData> {
     [SerializeField] private TechnicHolderUI _UI;
     [SerializeField] private TechnicHolder[] _holders;
     [SerializeField] private Technic[] _defaultTechnic;
@@ -16,51 +15,44 @@ public class TechnicManager : MonoBehaviour, IUpgradeable, IBindable<KitchenData
 
     public event Action TechnicChanged;
 
-    private void ActivateHolders()
-    {
+    private void ActivateHolders() {
         foreach (var holder in _holders)
             holder.ChangeState(_data.AvailableTechnic.Contains(holder.Technic));
         TechnicChanged?.Invoke();
     }
 
-    public bool HaveTechnic(Technic technic)
-    {
+    public bool HaveTechnic(Technic technic) {
         if (!_data.AvailableTechnic.Contains(technic))
             return false;
         TechnicHolder holder = FindHolderByTechic(technic);
         return holder.Accessible();
     }
 
-    public void ActivateTechnic(Order order)
-    {
+    public void ActivateTechnic(Order order) {
         TechnicHolder technic = FindHolderByTechic(order.Food.TypeTechnic);
         technic.StartCook(order);
     }
 
-    public void DisableTechnic(Technic typeTechnic)
-    {
+    public void DisableTechnic(Technic typeTechnic) {
         TechnicHolder technic = FindHolderByTechic(typeTechnic);
         technic.StopCook();
     }
 
-    public TechnicHolder FindHolderByTechic(Technic technic)
-    {
+    public TechnicHolder FindHolderByTechic(Technic technic) {
         for (int i = 0; i < _holders.Length; i++)
             if (_holders[i].Technic == technic)
                 return _holders[i];
         return null;
     }
 
-    public void AddTechnic(Technic technic)
-    {
+    public void AddTechnic(Technic technic) {
         _data.AvailableTechnic.Add(technic);
         TechnicHolder holder = FindHolderByTechic(technic);
         holder.ChangeState(true);
         TechnicChanged?.Invoke();
     }
 
-    public void CheckUpgrade(BaseUpgrade upgrade)
-    {
+    public void CheckUpgrade(BaseUpgrade upgrade) {
         if (_technicCookSpeedUps.Contains(upgrade)) {
             var coefUpgrade = upgrade as CoefficientUpgrade;
             _data.TechnicCookSpeed = coefUpgrade.Coefficient;
@@ -73,8 +65,7 @@ public class TechnicManager : MonoBehaviour, IUpgradeable, IBindable<KitchenData
         }
     }
 
-    public void Bind(KitchenData data, bool isFileEmpty)
-    {
+    public void Bind(KitchenData data, bool isFileEmpty) {
         _data = data;
         if (isFileEmpty) {
             _data.AllTechnic = new TechnicData[_holders.Length];
@@ -85,8 +76,7 @@ public class TechnicManager : MonoBehaviour, IUpgradeable, IBindable<KitchenData
         BindHolders(isFileEmpty);
     }
 
-    private void BindHolders(bool isFileEmpty)
-    {
+    private void BindHolders(bool isFileEmpty) {
         for (int i = 0; i < _data.AllTechnic.Length; i++) {
             _holders[i].Bind(_data, i, isFileEmpty);
         }

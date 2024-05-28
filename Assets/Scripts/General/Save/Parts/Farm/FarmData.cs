@@ -2,8 +2,7 @@ using System;
 using System.Collections.Generic;
 
 [Serializable]
-public class FarmData : ISaveable 
-{
+public class FarmData : ISaveable {
     public List<Ingredient> AvailableIngredients;
     public List<BedType> AvailableBedTypes;
 
@@ -31,8 +30,7 @@ public class FarmData : ISaveable
     public bool IsAutoWheat;
     public bool IsGrowStatusShow;
 
-    public void GenerateFarmBeds(int lenght)
-    {
+    public void GenerateFarmBeds(int lenght) {
         FarmBeds = new FarmBedData[lenght];
         for (int i = 0; i < FarmBeds.Length; i++)
             FarmBeds[i] = new();

@@ -1,5 +1,4 @@
-public enum GroupClientState
-{
+public enum GroupClientState {
     None,
     Wait,
     EndlessWait,

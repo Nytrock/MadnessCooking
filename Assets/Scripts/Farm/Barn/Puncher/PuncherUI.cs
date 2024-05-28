@@ -1,4 +1,3 @@
-public class PuncherUI : NeedHoldAddUI
-{
+public class PuncherUI : NeedHoldAddUI {
 
 }

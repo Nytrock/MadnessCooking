@@ -1,7 +1,6 @@
 using UnityEngine;
 
-public class TechnicHolderUI : MonoBehaviour
-{
+public class TechnicHolderUI : MonoBehaviour {
     [SerializeField] private Transform _targetPoint;
     [SerializeField] private TechnicStandardPanel _standardPanel;
     [SerializeField] private TechnicRepairPanel _repairPanel;
@@ -9,27 +8,23 @@ public class TechnicHolderUI : MonoBehaviour
     private TechnicPanel _nowPanel;
     private TechnicHolder _nowTechnic;
 
-    private void Awake()
-    {
+    private void Awake() {
         _repairPanel.RepairEnded += EndRepairTechnic;
     }
 
-    private void Start()
-    {
+    private void Start() {
         _standardPanel.ChangeState(false);
         _repairPanel.ChangeState(false);
         _nowPanel = _standardPanel;
     }
 
-    private void Update()
-    {
+    private void Update() {
         if (_nowTechnic == null) return;
 
         _nowPanel.UpdatePanel();
     }
 
-    public void OpenTechnic(TechnicHolder technic)
-    {
+    public void OpenTechnic(TechnicHolder technic) {
         if (technic == _nowTechnic) {
             _nowPanel.ChangeState();
         } else {
@@ -47,8 +42,7 @@ public class TechnicHolderUI : MonoBehaviour
         _nowPanel.UpdateInfo();
     }
 
-    public void StartRepairTechnic()
-    {
+    public void StartRepairTechnic() {
         MoneyManager.Instance.ChangeMoney(-_nowTechnic.Technic.PriceRepair);
         _nowTechnic.StartRepair();
 
@@ -60,8 +54,7 @@ public class TechnicHolderUI : MonoBehaviour
         _nowPanel.UpdateInfo();
     }
 
-    public void EndRepairTechnic()
-    {
+    public void EndRepairTechnic() {
         _nowPanel.ChangeState(false);
         _nowPanel = _standardPanel;
         _nowPanel.ChangeState(true);

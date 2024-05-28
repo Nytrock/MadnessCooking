@@ -1,4 +1,3 @@
-public abstract class ChoiceSimplePool<TItem> : ChoicePool<TItem, ChoiceSimpleButton<TItem>> where TItem: BuyableObject
-{
+public abstract class ChoiceSimplePool<TItem> : ChoicePool<TItem, ChoiceSimpleButton<TItem>> where TItem : BuyableObject {
 
 }

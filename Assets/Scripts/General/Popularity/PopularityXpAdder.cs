@@ -1,14 +1,12 @@
 using UnityEngine;
 
-public class PopularityXpAdder : MonoBehaviour
-{
+public class PopularityXpAdder : MonoBehaviour {
     [SerializeField] private PopularityManager _popularityManager;
     [SerializeField] private CriticSpawner _criticSpawner;
     [SerializeField, Min(0)] private int _minXp;
     [SerializeField, Min(0)] private int _maxXp;
 
-    public void AddXp(ClientType clientType)
-    {
+    public void AddXp(ClientType clientType) {
         if (clientType == ClientType.Rich) {
             _popularityManager.AddXp(Random.Range(_minXp, _maxXp) * 20);
         } else if (clientType == ClientType.Critic) {
@@ -18,8 +16,7 @@ public class PopularityXpAdder : MonoBehaviour
         }
     }
 
-    public void RemoveXp(ClientType clientType)
-    {
+    public void RemoveXp(ClientType clientType) {
         if (clientType == ClientType.Rich) {
             _popularityManager.RemoveXp(Random.Range(_minXp, _maxXp) * 20);
         } else if (clientType == ClientType.Critic) {

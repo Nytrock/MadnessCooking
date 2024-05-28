@@ -1,5 +1,4 @@
-public enum ClientState
-{
+public enum ClientState {
     Spawn,
     Leave,
     Wait,

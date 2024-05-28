@@ -1,5 +1,4 @@
-public enum IngredientType
-{
+public enum IngredientType {
     None,
     Standard,
     Desert,

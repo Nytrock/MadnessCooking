@@ -2,8 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PopularityUI : MonoBehaviour
-{
+public class PopularityUI : MonoBehaviour {
     [SerializeField] private PopularityManager _popularityManager;
     [SerializeField] private PopularityUIMore _additionalUI;
 
@@ -13,14 +12,12 @@ public class PopularityUI : MonoBehaviour
 
     private bool _isLastLevel;
 
-    private void Awake()
-    {
+    private void Awake() {
         _popularityManager.LevelChanged += UpdateLevel;
         _popularityManager.XpChanged += UpdateProgress;
     }
 
-    private void UpdateLevel(PopularityLevel level)
-    {
+    private void UpdateLevel(PopularityLevel level) {
         _nameText.text = level.Name;
         _levelText.text = (_popularityManager.NowLevel + 1).ToString();
         _additionalUI.UpdateInfo(level);
@@ -33,8 +30,7 @@ public class PopularityUI : MonoBehaviour
         }
     }
 
-    private void UpdateProgress(int xp)
-    {
+    private void UpdateProgress(int xp) {
         if (_isLastLevel)
             return;
 

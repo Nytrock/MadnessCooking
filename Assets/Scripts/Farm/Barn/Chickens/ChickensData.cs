@@ -2,8 +2,7 @@ using System;
 using System.Collections.Generic;
 
 [Serializable]
-public class ChickensData
-{
+public class ChickensData {
     public List<ChickenFoodData> FoodList = new();
     public bool IsUnlocked;
     public float NowTime;

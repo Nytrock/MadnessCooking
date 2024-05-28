@@ -1,8 +1,7 @@
 using System;
 using UnityEngine;
 
-public class PopularityManager : MonoBehaviour, IBindable<GeneralData>
-{
+public class PopularityManager : MonoBehaviour, IBindable<GeneralData> {
     [SerializeField] private PopularityLevel[] _levels;
     private bool _isMaxLevel;
     private GeneralData _data;
@@ -13,25 +12,21 @@ public class PopularityManager : MonoBehaviour, IBindable<GeneralData>
     public event Action<PopularityLevel> LevelChanged;
     public event Action<int> XpChanged;
 
-    private void LateStart()
-    {
+    private void LateStart() {
         LevelChanged?.Invoke(_levels[_data.PopularityLevel]);
     }
 
     [ContextMenu("AddXp")]
-    void TestAddXp()
-    {
+    void TestAddXp() {
         AddXp(80);
     }
 
     [ContextMenu("RemoveXp")]
-    void TestRemoveXp()
-    {
+    void TestRemoveXp() {
         RemoveXp(70);
     }
 
-    public void AddXp(int xp)
-    {
+    public void AddXp(int xp) {
         _data.PopularityXp += xp;
         if (_data.PopularityXp >= _levels[_data.PopularityLevel].NeedXp && !_isMaxLevel) {
             while (_data.PopularityXp >= _levels[_data.PopularityLevel].NeedXp && !_isMaxLevel) {
@@ -42,8 +37,7 @@ public class PopularityManager : MonoBehaviour, IBindable<GeneralData>
         XpChanged?.Invoke(_data.PopularityXp);
     }
 
-    public void RemoveXp(int xp)
-    {
+    public void RemoveXp(int xp) {
         if (_data.PopularityLevel == 0)
             _data.PopularityXp = Mathf.Max(0, _data.PopularityXp - xp);
         else
@@ -58,8 +52,7 @@ public class PopularityManager : MonoBehaviour, IBindable<GeneralData>
         XpChanged?.Invoke(_data.PopularityXp);
     }
 
-    public void NextLevel()
-    {
+    public void NextLevel() {
         _data.PopularityLevel++;
         LevelChanged?.Invoke(_levels[_data.PopularityLevel]);
 
@@ -68,8 +61,7 @@ public class PopularityManager : MonoBehaviour, IBindable<GeneralData>
         }
     }
 
-    public void PreviousLevel()
-    {
+    public void PreviousLevel() {
         _data.PopularityLevel--;
         LevelChanged?.Invoke(_levels[_data.PopularityLevel]);
         _isMaxLevel = false;
@@ -79,8 +71,7 @@ public class PopularityManager : MonoBehaviour, IBindable<GeneralData>
         }
     }
 
-    public void Bind(GeneralData data, bool isFileEmpty)
-    {
+    public void Bind(GeneralData data, bool isFileEmpty) {
         _data = data;
         if (isFileEmpty) {
             LateStart();

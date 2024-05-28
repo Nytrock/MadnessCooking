@@ -1,14 +1,14 @@
 using System;
 
-[Serializable] public class GameData
-{
+[Serializable]
+public class GameData {
     public GeneralData Main;
     public CafeData Cafe;
     public KitchenData Kitchen;
     public FarmData Farm;
     public OfficeData Office;
 
-    public GameData() { 
+    public GameData() {
         Main = new GeneralData();
         Cafe = new CafeData();
         Kitchen = new KitchenData();

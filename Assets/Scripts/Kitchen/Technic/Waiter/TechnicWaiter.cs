@@ -1,8 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(TechnicHolder))]
-public abstract class TechnicWaiter : MonoBehaviour
-{
+public abstract class TechnicWaiter : MonoBehaviour {
     protected float _needTime;
 
     protected float _speedMultiplier = 1f;
@@ -13,19 +12,16 @@ public abstract class TechnicWaiter : MonoBehaviour
     public float NowTime => _holder.TechnicData.NowWaitTime;
     public float NeedTime => _needTime;
 
-    protected virtual void Awake()
-    {
+    protected virtual void Awake() {
         _holder = GetComponent<TechnicHolder>();
     }
 
-    public virtual void StartWork(float needTime)
-    {
+    public virtual void StartWork(float needTime) {
         _isWorking = true;
         _needTime = needTime;
     }
 
-    private void Update()
-    {
+    private void Update() {
         if (!_isWorking)
             return;
 
@@ -35,8 +31,7 @@ public abstract class TechnicWaiter : MonoBehaviour
             EndWork();
     }
 
-    protected virtual void EndWork()
-    {
+    protected virtual void EndWork() {
         _isWorking = false;
         _holder.TechnicData.NowWaitTime = 0f;
     }

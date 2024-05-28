@@ -4,14 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [Serializable]
-public class ItemInfoRenderer
-{
+public class ItemInfoRenderer {
     [SerializeField] private Image _icon;
     [SerializeField] private TextMeshProUGUI _nameText;
     [SerializeField] private TextMeshProUGUI _descriptionText;
 
-    public virtual void SetItemInfo(BuyableObject item)
-    {
+    public virtual void SetItemInfo(BuyableObject item) {
         _icon.sprite = item.Icon;
         _icon.color += new Color(0, 0, 0, 1);
 
@@ -19,8 +17,7 @@ public class ItemInfoRenderer
         _descriptionText.text = item.Description;
     }
 
-    public virtual void ResetInfo()
-    {
+    public virtual void ResetInfo() {
         _icon.sprite = null;
         _icon.color *= new Color(1, 1, 1, 0);
 

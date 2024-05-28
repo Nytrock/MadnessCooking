@@ -1,11 +1,9 @@
 using UnityEngine;
 
-public class CursorManager : MonoBehaviour
-{
+public class CursorManager : MonoBehaviour {
     [SerializeField] private Texture2D cursor;
 
-    private void Awake()
-    {
+    private void Awake() {
         Cursor.SetCursor(cursor, Vector2.zero, CursorMode.ForceSoftware);
     }
 }

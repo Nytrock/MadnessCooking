@@ -2,8 +2,7 @@ using System;
 using System.Collections.Generic;
 
 [Serializable]
-public class KitchenData : ISaveable
-{
+public class KitchenData : ISaveable {
     public List<Food> AvailableFood;
     public IngredientStorageData KitchenStorage;
     public List<Decor> AvailableDecor = new();

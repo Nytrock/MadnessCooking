@@ -1,4 +1,3 @@
-public class FlourMillUI : NeedHoldAddUI
-{
+public class FlourMillUI : NeedHoldAddUI {
 
 }

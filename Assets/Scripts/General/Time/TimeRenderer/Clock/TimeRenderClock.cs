@@ -1,16 +1,14 @@
 using System;
 using UnityEngine;
 
-public class TimeRenderClock : TimeRenderer
-{
+public class TimeRenderClock : TimeRenderer {
     private const float
         hoursToDegrees = 360f / 12f,
         minutesToDegrees = 360f / 60f;
 
     public Transform hoursPoint, minutesPoint;
 
-    protected override void UpdateVisual()
-    {
+    protected override void UpdateVisual() {
         TimeSpan timespan = _timeManager.TimeSpan;
         hoursPoint.localRotation = Quaternion.Euler(
                 0f, 0f, (float)timespan.TotalHours * -hoursToDegrees);

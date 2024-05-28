@@ -2,8 +2,7 @@ using System;
 using System.Linq;
 using UnityEngine;
 
-public class FarmCarWaitManager : MonoBehaviour, IUpgradeable, IBindable<FarmData>
-{
+public class FarmCarWaitManager : MonoBehaviour, IUpgradeable, IBindable<FarmData> {
     [SerializeField] private FarmCar _car;
     [SerializeField] private KitchenStorage _kitchenStorage;
     [SerializeField, Min(0)] private float _defaultWaitTime;
@@ -13,8 +12,7 @@ public class FarmCarWaitManager : MonoBehaviour, IUpgradeable, IBindable<FarmDat
 
     public CarWaitManagerData Data { get; private set; }
 
-    public void CheckUpgrade(BaseUpgrade upgrade)
-    {
+    public void CheckUpgrade(BaseUpgrade upgrade) {
         if (_speedUpgrades.Contains(upgrade)) {
             var countUpgrade = upgrade as CountUpgrade;
             Data.NeedWaitTime = countUpgrade.Count;
@@ -24,8 +22,7 @@ public class FarmCarWaitManager : MonoBehaviour, IUpgradeable, IBindable<FarmDat
         }
     }
 
-    public void StartWait()
-    {
+    public void StartWait() {
         Data.IngredientsSended.Clear();
         Data.IngredientsSended.Extend(_car.Data.Ingredients);
 
@@ -34,8 +31,7 @@ public class FarmCarWaitManager : MonoBehaviour, IUpgradeable, IBindable<FarmDat
         _car.Leave();
     }
 
-    private void Update()
-    {
+    private void Update() {
         if (Data.CarState == CarState.Calm)
             return;
 
@@ -54,15 +50,14 @@ public class FarmCarWaitManager : MonoBehaviour, IUpgradeable, IBindable<FarmDat
         }
     }
 
-    public void Bind(FarmData data, bool isFileEmpty)
-    {
+    public void Bind(FarmData data, bool isFileEmpty) {
         if (isFileEmpty) {
             data.CarWaitManager = new() {
                 NeedWaitTime = _defaultWaitTime
             };
         }
         Data = data.CarWaitManager;
-        
+
         if (Data.CarState != CarState.Calm)
             _car.InstantLeave();
     }

@@ -1,26 +1,22 @@
 using TMPro;
 using UnityEngine;
 
-public class OfficeBedUI : MonoBehaviour
-{
+public class OfficeBedUI : MonoBehaviour {
     [SerializeField] private GameObject _panel;
     [SerializeField] private GameObject _blockPanel;
     [SerializeField] private TextMeshProUGUI _sleepButtonText;
     [SerializeField] private string _sleepingNote;
     [SerializeField] private string _notSleepingNote;
 
-    public void LateStart(bool isSleep)
-    {
+    public void LateStart(bool isSleep) {
         _panel.SetActive(isSleep);
     }
 
-    public void ChangeState()
-    {
+    public void ChangeState() {
         _panel.SetActive(!_panel.activeSelf);
     }
 
-    public void UpdateSleepState(bool isSleep)
-    {
+    public void UpdateSleepState(bool isSleep) {
         _blockPanel.SetActive(isSleep);
         if (isSleep)
             _sleepButtonText.text = _sleepingNote;

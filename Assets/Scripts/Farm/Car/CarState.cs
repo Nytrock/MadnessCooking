@@ -1,5 +1,4 @@
-public enum CarState
-{
+public enum CarState {
     Calm,
     Sent,
     Returns

@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class OrdersManager : MonoBehaviour
-{
+public class OrdersManager : MonoBehaviour {
     [SerializeField] private KitchenStorage _kitchenStorage;
     [SerializeField] private TechnicManager _technicManager;
     [SerializeField] private SaveManager _saveManager;
@@ -14,8 +13,7 @@ public class OrdersManager : MonoBehaviour
     public event Action<Order> OrderAdded;
     public event Action<Order> OrderRemoved;
 
-    public void SetNewOrder(Client client)
-    {
+    public void SetNewOrder(Client client) {
         if (!_suitableStates.Contains(client.ClientData.State))
             return;
 
@@ -29,8 +27,7 @@ public class OrdersManager : MonoBehaviour
             client.ActivateOrder();
     }
 
-    private void AddOrder(Client client)
-    {
+    private void AddOrder(Client client) {
         if (client.ClientData.Type == ClientType.GrayMan) {
             _kitchenStorage.RemoveAll();
             _saveManager.Save();
@@ -41,8 +38,7 @@ public class OrdersManager : MonoBehaviour
         OrderAdded?.Invoke(client.ClientData.Order);
     }
 
-    private void RemoveOrder(Client client)
-    {
+    private void RemoveOrder(Client client) {
         Order order = client.ClientData.Order;
 
         client.OrderActivated -= AddOrder;
@@ -57,13 +53,11 @@ public class OrdersManager : MonoBehaviour
         _orders.Remove(order);
     }
 
-    public int GetOrderIndex(Order order)
-    {
+    public int GetOrderIndex(Order order) {
         return _orders.IndexOf(order);
     }
 
-    public void StartCook(Order order)
-    {
+    public void StartCook(Order order) {
         _kitchenStorage.RemoveIngredients(order.Food.Ingredients);
         _technicManager.ActivateTechnic(order);
     }

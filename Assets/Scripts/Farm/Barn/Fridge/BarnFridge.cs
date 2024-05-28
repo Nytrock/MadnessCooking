@@ -1,8 +1,7 @@
 using System;
 using UnityEngine;
 
-public class BarnFridge : MonoBehaviour, IBindable<FarmData>
-{
+public class BarnFridge : MonoBehaviour, IBindable<FarmData> {
     [SerializeField] private FarmCar _car;
     private Ingredient _milk;
     private Ingredient _flour;
@@ -15,8 +14,7 @@ public class BarnFridge : MonoBehaviour, IBindable<FarmData>
         _flour = ConstIngredients.Instance.Flour;
     }
 
-    public void PutIngredient(Ingredient ingredient)
-    {
+    public void PutIngredient(Ingredient ingredient) {
         if (ingredient != _milk && ingredient != _flour)
             throw new ArgumentException("Unknown ingredient");
 
@@ -42,8 +40,7 @@ public class BarnFridge : MonoBehaviour, IBindable<FarmData>
         changingHoldAdd.ReadyCount = remainCount;
     }
 
-    public void Bind(FarmData data, bool isFileEmpty)
-    {
+    public void Bind(FarmData data, bool isFileEmpty) {
         Cow = data.Cow;
         FlourMill = data.FlourMill;
     }

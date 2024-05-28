@@ -1,8 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(SaveManager))]
-public class AutoSaveManager : MonoBehaviour, IBindable<GeneralData>
-{
+public class AutoSaveManager : MonoBehaviour, IBindable<GeneralData> {
     [SerializeField, Min(1)] private int _needAutoSaveMinutes;
     [SerializeField] private AutoSaveUI _UI;
     private SaveManager _saveManager;
@@ -11,19 +10,16 @@ public class AutoSaveManager : MonoBehaviour, IBindable<GeneralData>
     private float _needAutoSaveTime;
     private bool _isSaving;
 
-    private void Awake()
-    {
+    private void Awake() {
         _saveManager = GetComponent<SaveManager>();
         _saveManager.SaveEnded += EndAutoSave;
     }
 
-    private void Start()
-    {
+    private void Start() {
         _needAutoSaveTime = 60 * _needAutoSaveMinutes;
     }
 
-    private void Update()
-    {
+    private void Update() {
         if (_isSaving)
             return;
 
@@ -33,8 +29,7 @@ public class AutoSaveManager : MonoBehaviour, IBindable<GeneralData>
             StartAutoSave();
     }
 
-    private void StartAutoSave()
-    {
+    private void StartAutoSave() {
         _saveManager.Save();
         _isSaving = true;
 
@@ -42,8 +37,7 @@ public class AutoSaveManager : MonoBehaviour, IBindable<GeneralData>
             _UI.PlaySaveAnimation();
     }
 
-    private void EndAutoSave()
-    {
+    private void EndAutoSave() {
         _data.AutoSaveNowTime = 0;
         _isSaving = false;
 
@@ -51,8 +45,7 @@ public class AutoSaveManager : MonoBehaviour, IBindable<GeneralData>
             _UI.StopSaveAnimation();
     }
 
-    public void Bind(GeneralData data, bool isFileEmpty)
-    {
+    public void Bind(GeneralData data, bool isFileEmpty) {
         _data = data;
     }
 }

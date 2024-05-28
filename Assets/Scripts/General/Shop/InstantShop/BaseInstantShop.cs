@@ -1,4 +1,3 @@
-public abstract class BaseInstantShop : BaseShop
-{
+public abstract class BaseInstantShop : BaseShop {
 
 }

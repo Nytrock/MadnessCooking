@@ -1,4 +1,3 @@
-public class CafeSpace : SpacePrefab
-{
+public class CafeSpace : SpacePrefab {
 
 }

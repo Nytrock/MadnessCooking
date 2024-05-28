@@ -1,8 +1,7 @@
 using System;
 using UnityEngine;
 
-public abstract class CameraManager<TData> : MonoBehaviour where TData: ISaveable
-{
+public abstract class CameraManager<TData> : MonoBehaviour where TData : ISaveable {
     [SerializeField] protected Camera _mainCamera;
     [SerializeField] protected LocationManager _locationManager;
     [SerializeField] protected LocationSlider<TData> _locationSlider;
@@ -28,16 +27,14 @@ public abstract class CameraManager<TData> : MonoBehaviour where TData: ISaveabl
     public float EndPosition => _endPosition;
     public Transform MainCameraPos => _mainCameraPos;
 
-    protected virtual void Awake()
-    {
+    protected virtual void Awake() {
         _locationManager.LocationChanged += ChangeWorkMode;
         _spaceManager.SpaceAdded += CalculateBorderPositions;
         _mainCameraPos = _mainCamera.transform;
         _locationSlider.Bootup(this);
     }
 
-    private void Update()
-    {
+    private void Update() {
         if (!_isWorking)
             return;
 
@@ -66,20 +63,17 @@ public abstract class CameraManager<TData> : MonoBehaviour where TData: ISaveabl
         }
     }
 
-    private void ChangeWorkMode(Vector2 newPosition)
-    {
+    private void ChangeWorkMode(Vector2 newPosition) {
         _isWorking = newPosition.x == transform.position.x;
         CameraMoved?.Invoke();
     }
 
-    public void ChangeWorkMode(bool newState)
-    {
+    public void ChangeWorkMode(bool newState) {
         _isWorking = newState;
         _cameraVelocity = 0;
     }
 
-    protected void InvokeBordersFound()
-    {
+    protected void InvokeBordersFound() {
         BordersFound?.Invoke();
     }
 

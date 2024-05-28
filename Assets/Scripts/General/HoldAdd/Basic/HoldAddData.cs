@@ -1,8 +1,7 @@
 using System;
 
 [Serializable]
-public class HoldAddData
-{
+public class HoldAddData {
     public float NowTime;
     public bool IsUnlocked;
     public bool IsAuto;
