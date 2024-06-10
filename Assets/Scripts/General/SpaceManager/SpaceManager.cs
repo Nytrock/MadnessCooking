@@ -12,6 +12,8 @@ public abstract class SpaceManager<TData> : MonoBehaviour, IUpgradeable, IBindab
     public SpaceManagerData SpaceData { get; protected set; }
     public event Action SpaceAdded;
 
+    public float SpaceSize => _spacePrefab.Size;
+
     private void Awake() {
         _spaceContainer = transform;
     }

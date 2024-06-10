@@ -14,14 +14,16 @@ public class CafeSpotManager : MonoBehaviour, IBindable<CafeData> {
     private float _cellSize;
     private CafeData _data;
 
+    public float CellSize => _cellSize;
+
     public event Action<float> SpotsPositionChanged;
 
     private void Awake() {
         _freeSpots = new(_spotPrefabs.Length);
+        _cellSize = _spaceManager.SpaceSize / 2f;
     }
 
     private void LateStart() {
-        _cellSize = _spaceManager.SpaceData.SpaceSize / 2f;
         GenerateSpots();
         GenerateFreeSpotsList();
     }

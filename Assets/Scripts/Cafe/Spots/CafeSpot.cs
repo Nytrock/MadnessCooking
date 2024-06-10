@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class CafeSpot : MonoBehaviour {
     [SerializeField] private CafeSeat[] _seats;
     [SerializeField] private TableFoodView[] _tableFoods;
-    [SerializeField] private GameObject _outline;
+    [SerializeField] private GameObject _border;
     [SerializeField] private Button _removeButton;
     private int _index;
     private bool _isEditor;
@@ -14,14 +14,14 @@ public class CafeSpot : MonoBehaviour {
     public int SeatsCount => _seats.Length;
     public Button RemoveButton => _removeButton;
 
-    private void Awake() {
-        _outline.SetActive(_isEditor);
+    private void Start() {
+        _border.SetActive(_isEditor);
         _removeButton.gameObject.SetActive(_isEditor);
     }
 
     public Transform GetTarget(int index) => _seats[index].transform;
 
-    public Direction GetSeatRotation(int index) => _seats[index].GetSeatDirection();
+    public Direction GetSeatRotation(int index) => _seats[index].SeatDirection;
 
     public void SetTableFoodSprite(Food food, int index) {
         _tableFoods[index].SetSprite(food.MiniSprite);
@@ -31,9 +31,9 @@ public class CafeSpot : MonoBehaviour {
         _tableFoods[index].ResetSprite();
     }
 
-    public void ChangeEditorState(bool _state) {
-        _isEditor = _state;
-        _outline.SetActive(_isEditor);
+    public void ChangeEditorState(bool state) {
+        _isEditor = state;
+        _border.SetActive(_isEditor);
         _removeButton.gameObject.SetActive(_isEditor);
     }
 

@@ -9,7 +9,6 @@ public class ClientUI : MonoBehaviour {
     [SerializeField] private Button _mainButton;
     [SerializeField] private Button _yesButton;
     [SerializeField] private Slider _waitSlider;
-    [SerializeField] private Sprite _defaultSprite;
 
     private Image _foodImage;
     private Client _client;
@@ -27,7 +26,7 @@ public class ClientUI : MonoBehaviour {
     public void StartNewCycle() {
         _mainButton.onClick.RemoveAllListeners();
         _mainButton.onClick.AddListener(_client.ActivateOrder);
-        _foodImage.sprite = _defaultSprite;
+        _foodImage.color -= new Color(0, 0, 0, 1);
     }
 
     public void ChangeFoodChoiceState(bool newValue) {
@@ -39,6 +38,7 @@ public class ClientUI : MonoBehaviour {
     }
 
     public void SetFood(Food food) {
+        _foodImage.color += new Color(0, 0, 0, 1);
         _foodImage.sprite = food.Icon;
         _mainButton.onClick.RemoveAllListeners();
         _mainButton.onClick.AddListener(ChangeButtonsBlockVisible);

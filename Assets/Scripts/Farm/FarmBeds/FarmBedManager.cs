@@ -11,7 +11,7 @@ public class FarmBedManager : SpaceManager<FarmData> {
 
     protected override void AddSpace(int index) {
         var farmBedsGroup = Instantiate(_spacePrefab, _spaceContainer) as FarmBedGroup;
-        farmBedsGroup.transform.position -= new Vector3(0, SpaceData.SpaceSize * index, 0);
+        farmBedsGroup.transform.position -= new Vector3(0, _spacePrefab.Size * index, 0);
         farmBedsGroup.BedsSetup(_bedsSettings);
         farmBedsGroup.Bind(_data, _beds.Count);
 
@@ -33,7 +33,6 @@ public class FarmBedManager : SpaceManager<FarmData> {
             _data.GenerateFarmBeds(_spaceAddUpgrades[^1].Count * 3);
             SpaceData.Count = _defaultSpaceCount;
         }
-        SpaceData.SpaceSize = _spacePrefab.Size;
         _bedsSettings.UIManager.Bind(_data);
     }
 }

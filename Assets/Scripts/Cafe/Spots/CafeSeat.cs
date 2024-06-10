@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public class CafeSeat : MonoBehaviour {
-    public Direction GetSeatDirection() {
-        return Mathf.Sign(transform.localScale.x).ToDirection();
-    }
+    [SerializeField] private Direction _seatDirection;
+
+    public Direction SeatDirection => _seatDirection;
 }

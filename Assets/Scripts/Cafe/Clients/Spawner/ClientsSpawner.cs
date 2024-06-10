@@ -34,7 +34,7 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable, IBindable<CafeData> {
     }
 
     private void MoveSpawnPoint() {
-        _spawnPoint.position += new Vector3(_spaceManager.SpaceData.SpaceSize, 0, 0);
+        _spawnPoint.position += new Vector3(_spaceManager.SpaceSize, 0, 0);
     }
 
     private void LateStart() {
