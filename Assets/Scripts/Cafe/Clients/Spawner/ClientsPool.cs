@@ -1,55 +1,35 @@
-using System.Collections.Generic;
 using UnityEngine;
 
-public class ClientsPool : MonoBehaviour {
+public class ClientsPool : Pool<Client> {
     [SerializeField] private Client _clientPrefab;
-    [SerializeField] private GroupClient _grouClientPrefab;
 
-    private Transform _container;
-    private Queue<Client> _normalClients;
-    private Queue<GroupClient> _groupClients;
+    public override Client GetObject() {
+        if (_pool.Count == 0)
+            return Instantiate(_clientPrefab, _container);
+        else
+            return _pool.Dequeue();
+    }
 
-    private void Awake() {
-        _normalClients = new();
-        _groupClients = new();
-        _container = transform;
+    public override void PutObject(Client client) {
+        _pool.Enqueue(client);
+        ChangeClientState(client, false);
     }
 
     public Client GetClient() {
-        Client client;
-        if (_normalClients.Count == 0) {
-            client = Instantiate(_clientPrefab, _container);
-        } else {
-            client = _normalClients.Dequeue();
-        }
-
-        ActivateClient(client);
+        Client client = GetObject();
+        ChangeClientState(client, transform);
         return client;
     }
 
     public GroupClient GetGroupClient() {
-        GroupClient client;
-        if (_groupClients.Count == 0) {
-            client = Instantiate(_grouClientPrefab, _container);
-        } else {
-            client = _groupClients.Dequeue();
-        }
-
-        ActivateClient(client);
+        GroupClient client = GetObject().GetComponent<GroupClient>();
+        ChangeClientState(client, true);
         return client;
     }
 
-    private void ActivateClient(Client client) {
-        client.enabled = true;
-        client.gameObject.SetActive(true);
-    }
-
-    public void PutClient(Client client) {
-        if (client.ClientData.Count == ClientCount.One)
-            _normalClients.Enqueue(client);
-        else
-            _groupClients.Enqueue(client as GroupClient);
-        client.enabled = false;
-        client.gameObject.SetActive(false);
+    private void ChangeClientState(Client client, bool newState) {
+        // client.GetComponent<Client>().enabled = false;
+        // client.GetComponent<GroupClient>().enabled = false;
+        client.gameObject.SetActive(newState);
     }
 }

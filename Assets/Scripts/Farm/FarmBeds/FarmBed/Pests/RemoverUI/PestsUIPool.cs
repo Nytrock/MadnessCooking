@@ -1,32 +1,27 @@
-using System.Collections.Generic;
 using UnityEngine;
 
-public class PestsUIPool : MonoBehaviour {
+public class PestsUIPool : Pool<PestUI> {
     [SerializeField] private PestUI _pestPrefab;
-    [SerializeField] private Transform _container;
 
     [Header("Borders")]
     [SerializeField] private Transform _leftDown;
     [SerializeField] private Transform _rightUp;
-
-    private Queue<PestUI> _pool;
     private PestsRemoverUI _remover;
 
-    private void Awake() {
-        _pool = new Queue<PestUI>();
-    }
-
     public PestUI GetObject(Pest pest) {
-        if (_pool.Count == 0)
-            _pool.Enqueue(Instantiate(_pestPrefab, _container));
-
-        PestUI pestUI = _pool.Dequeue();
+        PestUI pestUI = GetObject();
         pestUI.ChangeState(true);
         pestUI.Setup(pest, _leftDown.position, _rightUp.position, _remover);
         return pestUI;
     }
 
-    public void PutObject(PestUI pest) {
+    public override PestUI GetObject() {
+        if (_pool.Count == 0)
+            return Instantiate(_pestPrefab, _container);
+        return _pool.Dequeue();
+    }
+
+    public override void PutObject(PestUI pest) {
         _pool.Enqueue(pest);
         pest.ResetPest();
     }

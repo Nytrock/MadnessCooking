@@ -257,8 +257,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8276683760689817253}
-        m_TargetAssemblyTypeName: Client, Assembly-CSharp
+      - m_Target: {fileID: 479690599442864797}
+        m_TargetAssemblyTypeName: GroupClient, Assembly-CSharp
         m_MethodName: Eat
         m_Mode: 1
         m_Arguments:
@@ -2635,8 +2635,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8276683760689817253}
-        m_TargetAssemblyTypeName: Client, Assembly-CSharp
+      - m_Target: {fileID: 479690599442864797}
+        m_TargetAssemblyTypeName: GroupClient, Assembly-CSharp
         m_MethodName: FoodRejected
         m_Mode: 1
         m_Arguments:
@@ -2960,7 +2960,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8389199695712350940}
-  - component: {fileID: 8276683760689817253}
+  - component: {fileID: 479690599442864797}
   - component: {fileID: 7984458469416964061}
   m_Layer: 0
   m_Name: Client
@@ -2986,7 +2986,7 @@ Transform:
   - {fileID: 6905283630923008905}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8276683760689817253
+--- !u!114 &479690599442864797
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2995,7 +2995,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6711993078686137172}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3617a2d3bdd683a4386f2b6663fe0dc1, type: 3}
+  m_Script: {fileID: 11500000, guid: ce3e6fac4ab99534c9334aee4b48ed13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _skin: {fileID: 3703463240899266760}

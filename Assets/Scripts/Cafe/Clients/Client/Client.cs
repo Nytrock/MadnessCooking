@@ -36,7 +36,7 @@ public class Client : MonoBehaviour {
 
     public void StartNewCycle() {
         _skin.StartNewCycle(ClientData);
-        _clientUI.StartNewCycle();
+        _clientUI.StartNewCycle(ActivateOrder);
     }
 
     protected void ChangeState() {
@@ -111,7 +111,7 @@ public class Client : MonoBehaviour {
         }
 
         transform.position = ClientData.Position.GetVector();
-        _clientUI.Setup();
+        _clientUI.Setup(ClientData);
         ChangeState();
 
         if (ClientData.State != ClientState.Spawn && ClientData.State != ClientState.Leave)

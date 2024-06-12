@@ -1,5 +1,5 @@
-using System;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class ClientUI : MonoBehaviour {
@@ -9,24 +9,18 @@ public class ClientUI : MonoBehaviour {
     [SerializeField] private Button _mainButton;
     [SerializeField] private Button _yesButton;
     [SerializeField] private Slider _waitSlider;
-
     private Image _foodImage;
-    private Client _client;
 
     public Slider WaitSlider => _waitSlider;
 
     private void Awake() {
         _foodImage = _mainButton.GetComponent<Image>();
-
-        if (!TryGetComponent(out _client))
-            throw new ArgumentNullException("ClientUI is not connected to client");
-        _mainButton.onClick.AddListener(_client.ActivateOrder);
     }
 
-    public void StartNewCycle() {
+    public void StartNewCycle(UnityAction action) {
         _mainButton.onClick.RemoveAllListeners();
-        _mainButton.onClick.AddListener(_client.ActivateOrder);
-        _foodImage.color -= new Color(0, 0, 0, 1);
+        _mainButton.onClick.AddListener(action);
+        _foodImage.color = new Color(1, 1, 1, 0);
     }
 
     public void ChangeFoodChoiceState(bool newValue) {
@@ -38,7 +32,7 @@ public class ClientUI : MonoBehaviour {
     }
 
     public void SetFood(Food food) {
-        _foodImage.color += new Color(0, 0, 0, 1);
+        _foodImage.color = new Color(1, 1, 1, 1);
         _foodImage.sprite = food.Icon;
         _mainButton.onClick.RemoveAllListeners();
         _mainButton.onClick.AddListener(ChangeButtonsBlockVisible);
@@ -53,9 +47,9 @@ public class ClientUI : MonoBehaviour {
         _waitSlider.gameObject.SetActive(newValue);
     }
 
-    public void Setup() {
-        _waitSlider.maxValue = _client.ClientData.WaitTime;
-        _waitSlider.value = _client.ClientData.NowTime;
+    public void Setup(ClientData clientData) {
+        _waitSlider.maxValue = clientData.WaitTime;
+        _waitSlider.value = clientData.NowTime;
         _buttonsBlock.SetActive(false);
         _yesButton.interactable = false;
         _animator.SetBool("isFinished", false);

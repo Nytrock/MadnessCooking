@@ -229,7 +229,7 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable, IBindable<CafeData> {
     public void PutClient(Client client) {
         if (_data.LeavingClients.Contains(client.ClientData))
             _data.LeavingClients.Remove(client.ClientData);
-        _pool.PutClient(client);
+        _pool.PutObject(client);
     }
 
     private Client SpawnOneClient(int spotIndex) {
