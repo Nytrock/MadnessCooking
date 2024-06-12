@@ -19,7 +19,7 @@ public class CafeSpot : MonoBehaviour {
         _removeButton.gameObject.SetActive(_isEditor);
     }
 
-    public Transform GetTarget(int index) => _seats[index].transform;
+    public Vector2 GetTarget(int index) => _seats[index].transform.position;
 
     public Direction GetSeatRotation(int index) => _seats[index].SeatDirection;
 

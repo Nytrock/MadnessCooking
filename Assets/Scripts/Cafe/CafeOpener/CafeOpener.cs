@@ -1,11 +1,7 @@
 using System;
-using TMPro;
 using UnityEngine;
 
 public class CafeOpener : MonoBehaviour, IBindable<CafeData> {
-    [SerializeField] private TextMeshProUGUI _text;
-    [SerializeField] private string _descriptionOpened;
-    [SerializeField] private string _descriptionClosed;
     private CafeData _data;
 
     public bool IsOpened => _data.IsOpened;
@@ -13,7 +9,7 @@ public class CafeOpener : MonoBehaviour, IBindable<CafeData> {
     public event Action CafeChanged;
 
     private void LateStart() {
-        UpdateCafe();
+        CafeChanged?.Invoke();
     }
 
     public void Bind(CafeData data, bool isFileEmpty) {
@@ -23,14 +19,6 @@ public class CafeOpener : MonoBehaviour, IBindable<CafeData> {
 
     public void ChangeCafeState() {
         _data.IsOpened = !_data.IsOpened;
-        UpdateCafe();
-    }
-
-    private void UpdateCafe() {
-        if (_data.IsOpened)
-            _text.text = _descriptionOpened;
-        else
-            _text.text = _descriptionClosed;
         CafeChanged?.Invoke();
     }
 }

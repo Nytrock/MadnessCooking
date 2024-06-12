@@ -1,16 +1,19 @@
 using UnityEngine;
 
 public class ClientWalkState : ClientBaseState {
-    private Transform _target;
-    private readonly float _speed = 8f;
+    private float _target;
+    private const float _speed = 3f;
+    private float _directionMultiplier;
 
     public override void EnterState(Client client) {
         bool isLeaving = client.ClientData.State == ClientState.Leave;
         if (isLeaving)
-            _target = client.Spawner.SpawnPoint;
+            _target = client.Spawner.SpawnPoint.x;
         else
-            _target = client.Spawner.GetSpot(client.SpotIndex).GetTarget(client.TableIndex);
-        client.RotateSkin(isLeaving.ToDirection());
+            _target = client.Spawner.GetSpot(client.SpotIndex).GetTarget(client.TableIndex).x;
+
+        _directionMultiplier = isLeaving ? 1 : -1;
+        client.StartWalk(isLeaving);
     }
 
     public override void ExitState(Client client) {
@@ -21,11 +24,10 @@ public class ClientWalkState : ClientBaseState {
     }
 
     public override void UpdateState(Client client) {
-        client.transform.position = Vector2.MoveTowards(client.transform.position,
-            _target.position, _speed * InGameTime.Instance.DeltaTime);
+        client.transform.position += new Vector3(_speed * InGameTime.Instance.DeltaTime * _directionMultiplier, 0, 0);
         client.ClientData.Position = new SerializableVector(client.transform.position);
 
-        if (Vector2.Distance(client.transform.position, _target.position) < 0.001f) {
+        if (Mathf.Abs(client.transform.position.x - _target) < 0.1f) {
             if (client.ClientData.State == ClientState.Leave)
                 client.Destroy();
             else

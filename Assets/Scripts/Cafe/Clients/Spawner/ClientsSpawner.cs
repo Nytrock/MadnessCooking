@@ -25,7 +25,7 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable, IBindable<CafeData> {
     private CafeData _data;
     private PopularityXpAdder _xpAdder;
 
-    public Transform SpawnPoint => _spawnPoint;
+    public Vector2 SpawnPoint => _spawnPoint.position;
 
     private void Awake() {
         _xpAdder = GetComponent<PopularityXpAdder>();

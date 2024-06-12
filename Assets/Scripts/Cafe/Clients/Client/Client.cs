@@ -35,7 +35,7 @@ public class Client : MonoBehaviour {
     }
 
     public void StartNewCycle() {
-        _skin.SetSkin(ClientData.Type);
+        _skin.StartNewCycle(ClientData.Type);
         _clientUI.StartNewCycle();
     }
 
@@ -69,8 +69,13 @@ public class Client : MonoBehaviour {
         _nowState.UpdateState(this);
     }
 
-    public void RotateSkin(Direction direction) {
-        _skin.RotateSkin(direction);
+    public void StartWalk(bool isLeaving) {
+        if (isLeaving)
+            _skin.ChangeSortingLayer();
+        _skin.RotateSkin(isLeaving.ToDirection());
+
+        _skin.ChangeWalkState(true);
+        MoveClient(true);
     }
 
     private void RotateSkin() {
@@ -81,6 +86,17 @@ public class Client : MonoBehaviour {
     public void TakeSeat() {
         RotateSkin();
         _skin.ChangeSortingLayer();
+        _skin.ChangeWalkState(false);
+        MoveClient(false);
+    }
+
+    private void MoveClient(bool isWalk) {
+        float posY;
+        if (isWalk)
+            posY = Spawner.SpawnPoint.y;
+        else
+            posY = Spawner.GetSpot(SpotIndex).GetTarget(TableIndex).y;
+        transform.position = new Vector2(transform.position.x, posY);
     }
 
     public virtual void Setup(ClientSettings settings) {
@@ -134,7 +150,6 @@ public class Client : MonoBehaviour {
         ClientData.State = ClientState.Leave;
 
         ChangeState();
-        _skin.ChangeSortingLayer();
         _clientUI.ChangeFoodChoiceState(false);
         _clientUI.ChangeSliderState(false);
     }

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0e2f54feeeaecdb4b97e981df70c5f02
+guid: 90a680f8d9687144dbe6713e32adb83e
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -149,85 +149,127 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: TableOne
+      name: OpenerRod
       rect:
         serializedVersion: 2
-        x: 0
-        y: 56
-        width: 22
-        height: 23
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 76aa1a0da56dd5149987a18677cb184c
-      internalID: -1642030445
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TableTwo
-      rect:
-        serializedVersion: 2
-        x: 23
-        y: 56
-        width: 26
-        height: 23
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f9fd91771fc654c488d12e28ce6ba63a
-      internalID: 606594854
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TableThree
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 28
-        width: 44
-        height: 27
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 877db0525b5f40145b75b05d134150b0
-      internalID: 572932605
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TableFour
-      rect:
-        serializedVersion: 2
-        x: 0
+        x: 20
         y: 0
-        width: 58
-        height: 27
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        width: 3
+        height: 16
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 26e65e342780c9f4cb7ed959b3d009e1
-      internalID: -937145473
+      spriteID: 31c30a1040474134ba4bdc0a2f75a82f
+      internalID: -1869181378
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OpenerSign
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1
+        width: 19
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8811b53160d97cc439b03bfb47551974
+      internalID: -889836747
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BarCandies
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 10
+        width: 12
+        height: 7
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1cb6bf09bd445cd429b2d61673bf89cd
+      internalID: 107653291
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpotEditor
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 18
+        width: 17
+        height: 13
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 12adc59db20a17c44a1b66a9e25ab1c1
+      internalID: 1361734860
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OpenerSide
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 1
+        width: 1
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 043fd25fa2f53d4479f9c854562c57fd
+      internalID: 430198676
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpotEditorOpened
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 17
+        width: 17
+        height: 14
+      alignment: 9
+      pivot: {x: -0.05882353, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e49293a8d3cecda49b2ea795f46a076b
+      internalID: 916951473
       vertices: []
       indices: 
       edges: []
@@ -244,12 +286,14 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       Background: 1901407923
+      BarCandies: 107653291
       Lamp: 1955946697
+      OpenerRod: -1869181378
+      OpenerSide: 430198676
+      OpenerSign: -889836747
       Pot: 470648381
-      TableFour: -937145473
-      TableOne: -1642030445
-      TableThree: 572932605
-      TableTwo: 606594854
+      SpotEditor: 1361734860
+      SpotEditorOpened: 916951473
       Window: -805373322
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0

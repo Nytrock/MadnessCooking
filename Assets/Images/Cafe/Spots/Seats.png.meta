@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 90a680f8d9687144dbe6713e32adb83e
+guid: 8ffae2e5fe3e4b040a81a8e2d469eed3
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -149,85 +149,106 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: OpenerRod
+      name: RightSeat
       rect:
         serializedVersion: 2
-        x: 18
-        y: 14
-        width: 3
-        height: 16
-      alignment: 4
-      pivot: {x: 0, y: 0.5}
+        x: 0
+        y: 31
+        width: 21
+        height: 28
+      alignment: 9
+      pivot: {x: 0.64285713, y: -0.071428575}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 31c30a1040474134ba4bdc0a2f75a82f
-      internalID: -1869181378
+      spriteID: f73328f5024f2a344bd3c1425ac456ee
+      internalID: 989870722
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Opener
+      name: RightArmset
       rect:
         serializedVersion: 2
         x: 0
+        y: 14
+        width: 17
+        height: 16
+      alignment: 9
+      pivot: {x: 0.7941176, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 633a23313cef0ad469d32c2c5e20ef1b
+      internalID: -632635290
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CenterSeat
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 32
+        width: 18
+        height: 27
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 991d34b712ce0be4f9965742c1568a8a
+      internalID: 1370362515
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LeftSeat
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 31
+        width: 17
+        height: 28
+      alignment: 9
+      pivot: {x: 0.29411766, y: -0.071428575}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff1a6e6342140f049bb2683080775afb
+      internalID: -406976478
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LeftArmset
+      rect:
+        serializedVersion: 2
+        x: 42
         y: 0
         width: 19
-        height: 8
-      alignment: 4
-      pivot: {x: 0, y: 0.5}
+        height: 30
+      alignment: 9
+      pivot: {x: 0.36842105, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8811b53160d97cc439b03bfb47551974
-      internalID: -889836747
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: BarCandies
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 9
-        width: 12
-        height: 7
-      alignment: 6
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1cb6bf09bd445cd429b2d61673bf89cd
-      internalID: 107653291
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SpotEditor
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 17
-        width: 17
-        height: 13
-      alignment: 6
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 12adc59db20a17c44a1b66a9e25ab1c1
-      internalID: 1361734860
+      spriteID: e722549b2b928a1468f7db386c0f3047
+      internalID: 455003548
       vertices: []
       indices: 
       edges: []
@@ -244,12 +265,13 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       Background: 1901407923
-      BarCandies: 107653291
+      CenterSeat: 1370362515
       Lamp: 1955946697
-      Opener: -889836747
-      OpenerRod: -1869181378
+      LeftArmset: 455003548
+      LeftSeat: -406976478
       Pot: 470648381
-      SpotEditor: 1361734860
+      RightArmset: -632635290
+      RightSeat: 989870722
       Window: -805373322
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0

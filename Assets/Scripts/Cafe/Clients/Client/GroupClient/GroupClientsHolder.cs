@@ -46,12 +46,12 @@ public class GroupClientsHolder : MonoBehaviour {
 
     public IEnumerator SpawnGroupOfClients() {
         _data.TalkIndex = _clients.Count;
-        Vector3 spawn = _clients[0].Spawner.SpawnPoint.position;
+        float spawn = _clients[0].Spawner.SpawnPoint.x;
         RandomizeClients();
 
         foreach (var client in _clients) {
             client.enabled = true;
-            if (client.transform.position == spawn) {
+            if (client.transform.position.x == spawn) {
                 client.StartNewCycle();
                 yield return new WaitForSeconds(Random.Range(0.5f, 1.2f));
             }
