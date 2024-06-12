@@ -1,17 +1,11 @@
 ﻿#if UNITY_EDITOR
 using System;
 using System.IO;
-using System.Collections;
-using System.Collections.Generic;
-using System.Xml;
 using System.Xml.Serialization;
-using UnityEngine;
 
-namespace ERP
-{
+namespace ERP {
     [Serializable]
-    public class ERPSettings
-    {
+    public class ERPSettings {
         private static string path = Directory.GetCurrentDirectory() + "/.erp";
         public bool showSceneName;
         public bool showProjectName;
@@ -24,8 +18,7 @@ namespace ERP
 
         public ERPSettings() { }
 
-        public ERPSettings(bool showSceneName, bool showProjectName, bool resetOnSceneChange, bool debugMode, bool editorClosed, long lastTimestamp, long lastSessionID, bool errored)
-        {
+        public ERPSettings(bool showSceneName, bool showProjectName, bool resetOnSceneChange, bool debugMode, bool editorClosed, long lastTimestamp, long lastSessionID, bool errored) {
             this.showSceneName = showSceneName;
             this.showProjectName = showProjectName;
             this.resetOnSceneChange = resetOnSceneChange;
@@ -36,10 +29,8 @@ namespace ERP
             Errored = errored;
         }
 
-        public static void GetSettings()
-        {
-            if (File.Exists(path))
-            {
+        public static void GetSettings() {
+            if (File.Exists(path)) {
                 XmlSerializer serializer = new XmlSerializer(typeof(ERPSettings));
                 FileStream stream = new FileStream(path, FileMode.Open);
                 ERPSettings settings = serializer.Deserialize(stream) as ERPSettings;
@@ -48,8 +39,7 @@ namespace ERP
             }
         }
 
-        private static void ApplySettings(ERPSettings settings)
-        {
+        private static void ApplySettings(ERPSettings settings) {
             ERP.showSceneName = settings.showSceneName;
             ERP.showProjectName = settings.showProjectName;
             ERP.resetOnSceneChange = settings.resetOnSceneChange;
@@ -61,8 +51,7 @@ namespace ERP
             ERP.Log("Applied Settings from file");
         }
 
-        public static void SaveSettings()
-        {
+        public static void SaveSettings() {
             ERPSettings settings = new ERPSettings(ERP.showSceneName, ERP.showProjectName, ERP.resetOnSceneChange, ERP.debugMode, ERP.EditorClosed, ERP.lastTimestamp, ERP.lastSessionID, ERP.Errored);
 
             XmlSerializer serializer = new XmlSerializer(typeof(ERPSettings));

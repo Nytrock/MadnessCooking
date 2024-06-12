@@ -4,6 +4,7 @@ using UnityEngine;
 [Serializable]
 public class ClientData {
     public ClientType Type;
+    public ClientSkinType SkinType;
     public ClientCount Count;
     public ClientState State;
     public SerializableVector Position;

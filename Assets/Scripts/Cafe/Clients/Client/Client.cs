@@ -35,7 +35,7 @@ public class Client : MonoBehaviour {
     }
 
     public void StartNewCycle() {
-        _skin.StartNewCycle(ClientData.Type);
+        _skin.StartNewCycle(ClientData);
         _clientUI.StartNewCycle();
     }
 
