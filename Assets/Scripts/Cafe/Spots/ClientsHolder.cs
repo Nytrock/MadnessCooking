@@ -7,14 +7,14 @@ using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(CafeSpot))]
-public class GroupClientsHolder : MonoBehaviour {
+public class ClientsHolder : MonoBehaviour {
     [SerializeField] private Slider _waitSlider;
     [SerializeField, Min(0)] private float _minTalk;
     [SerializeField, Min(0)] private float _maxTalk;
 
     private SpotData _data;
     private CafeSpot _spot;
-    private readonly List<GroupClient> _clients = new();
+    private readonly List<Client> _clients = new();
 
     public event Action WaitStarted;
     public event Action<CafeSpot> ClientsLeaved;
@@ -35,12 +35,11 @@ public class GroupClientsHolder : MonoBehaviour {
         } else {
             _data.NowTime = 0;
             EndVisit();
-            ChangeSliderState(false);
             StartCoroutine(ClientsLeave());
         }
     }
 
-    public void AddClient(GroupClient newClient) {
+    public void AddClient(Client newClient) {
         _clients.Add(newClient);
     }
 
@@ -59,7 +58,7 @@ public class GroupClientsHolder : MonoBehaviour {
     }
 
     public void CheckWait() {
-        bool allClientsHere = _data.Clients.All(x => x.State == ClientState.WaitOthers);
+        bool allClientsHere = _data.Clients.All(x => x.State == ClientState.Wait);
         if (allClientsHere)
             StartWait();
     }
@@ -109,7 +108,7 @@ public class GroupClientsHolder : MonoBehaviour {
     }
 
     public void CheckTalk() {
-        bool allClientsWait = _data.Clients.All(x => x.State == ClientState.WaitOthers);
+        bool allClientsWait = _data.Clients.All(x => x.State == ClientState.Wait);
         if (allClientsWait)
             StartTalking();
     }
@@ -120,7 +119,7 @@ public class GroupClientsHolder : MonoBehaviour {
     }
 
     private void StartTalking() {
-        if (_data.TalkIndex == 0) {
+        if (_data.TalkIndex == 0 || _clients.Count == 1) {
             EndVisit();
             StartCoroutine(ClientsLeave());
             return;
@@ -143,7 +142,6 @@ public class GroupClientsHolder : MonoBehaviour {
         EndVisit();
         _data.NowTime = 0;
         _clients.Clear();
-        ChangeSliderState(false);
         StopAllCoroutines();
     }
 
@@ -153,6 +151,7 @@ public class GroupClientsHolder : MonoBehaviour {
     }
 
     private void EndVisit() {
+        ChangeSliderState(false);
         ClientsLeaved?.Invoke(_spot);
         ClientsLeaved = null;
         _waitSlider.value = 0;

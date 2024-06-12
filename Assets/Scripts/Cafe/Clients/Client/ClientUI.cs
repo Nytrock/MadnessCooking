@@ -4,17 +4,22 @@ using UnityEngine.UI;
 
 public class ClientUI : MonoBehaviour {
     [SerializeField] private Animator _animator;
-    [SerializeField] private GameObject _choseFoodPanel;
+    [SerializeField] private GameObject _chooseFoodPanel;
     [SerializeField] private GameObject _buttonsBlock;
     [SerializeField] private Button _mainButton;
     [SerializeField] private Button _yesButton;
-    [SerializeField] private Slider _waitSlider;
+    [SerializeField] private Slider _eatSlider;
     private Image _foodImage;
 
-    public Slider WaitSlider => _waitSlider;
+    private CafeData _data;
+    private ClientData _clientData;
 
     private void Awake() {
         _foodImage = _mainButton.GetComponent<Image>();
+    }
+
+    public void SetData(CafeData data) {
+        _data = data;
     }
 
     public void StartNewCycle(UnityAction action) {
@@ -23,8 +28,14 @@ public class ClientUI : MonoBehaviour {
         _foodImage.color = new Color(1, 1, 1, 0);
     }
 
+    public void StartEat() {
+        _eatSlider.maxValue = _clientData.WaitTime;
+        ChangeFoodChoiceState(false);
+        ChangeSliderState(true);
+    }
+
     public void ChangeFoodChoiceState(bool newValue) {
-        _choseFoodPanel.SetActive(newValue);
+        _chooseFoodPanel.SetActive(newValue);
     }
 
     private void ChangeButtonsBlockVisible() {
@@ -44,16 +55,22 @@ public class ClientUI : MonoBehaviour {
     }
 
     public void ChangeSliderState(bool newValue) {
-        _waitSlider.gameObject.SetActive(newValue);
+        _eatSlider.gameObject.SetActive(newValue && _data.IsEatTimeShow);
     }
 
     public void Setup(ClientData clientData) {
-        _waitSlider.maxValue = clientData.WaitTime;
-        _waitSlider.value = clientData.NowTime;
+        _clientData = clientData;
+        _eatSlider.maxValue = _clientData.WaitTime;
+        _eatSlider.value = _clientData.NowTime;
+
         _buttonsBlock.SetActive(false);
         _yesButton.interactable = false;
         _animator.SetBool("isFinished", false);
         ChangeSliderState(false);
         ChangeFoodChoiceState(false);
+    }
+
+    public void UpdateSlider() {
+        _eatSlider.value = _clientData.NowTime;
     }
 }

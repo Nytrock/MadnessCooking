@@ -8,7 +8,7 @@ public class OrdersManager : MonoBehaviour {
     [SerializeField] private TechnicManager _technicManager;
     [SerializeField] private SaveManager _saveManager;
     private readonly List<Order> _orders = new();
-    private readonly ClientState[] _suitableStates = { ClientState.Spawn, ClientState.Wait, ClientState.Sit };
+    private readonly ClientState[] _suitableStates = { ClientState.Spawn, ClientState.Sit };
 
     public event Action<Order> OrderAdded;
     public event Action<Order> OrderRemoved;

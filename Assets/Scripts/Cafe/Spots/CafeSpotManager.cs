@@ -57,7 +57,7 @@ public class CafeSpotManager : MonoBehaviour, IBindable<CafeData> {
         SpotsPositionChanged?.Invoke(-offset);
 
         MoveSpots(spotIndex, offset);
-        if (_spots[spotIndex].TryGetComponent(out GroupClientsHolder clientTable))
+        if (_spots[spotIndex].TryGetComponent(out ClientsHolder clientTable))
             _opener.CafeChanged -= clientTable.CafeClosed;
         _spots[spotIndex].Destroy();
         _spots.RemoveAt(spotIndex);
@@ -132,7 +132,7 @@ public class CafeSpotManager : MonoBehaviour, IBindable<CafeData> {
         spot.SetIndex(_spots.Count);
         if (isAddedByEditor)
             _data.Spots.Add(new SpotData(spot.SeatsCount));
-        if (spot.TryGetComponent(out GroupClientsHolder clientTable)) {
+        if (spot.TryGetComponent(out ClientsHolder clientTable)) {
             _opener.CafeChanged += clientTable.CafeClosed;
             clientTable.SetData(_data.Spots[spot.Index]);
         }

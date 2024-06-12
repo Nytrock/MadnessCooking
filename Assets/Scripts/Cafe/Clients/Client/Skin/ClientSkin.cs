@@ -49,6 +49,7 @@ public class ClientSkin : MonoBehaviour {
 
         foreach (var skinPart in _skinParts)
             skinPart.SetSprite(data.SkinType);
+        _sortingGroup.sortingOrder = _foregroundSortingLayer;
     }
 
     private ClientSkinType GetRandomSkinType(ClientType type) {
@@ -72,12 +73,11 @@ public class ClientSkin : MonoBehaviour {
             _skin.localScale = Vector2.one;
     }
 
-    public void ChangeSortingLayer() {
-        if (_sortingGroup.sortingOrder == _foregroundSortingLayer) {
-            _sortingGroup.sortingOrder = _backgroundSortingLayer;
-        } else {
+    public void ChangeSortingLayer(bool isWalk) {
+        if (isWalk)
             _sortingGroup.sortingOrder = _foregroundSortingLayer;
-        }
+        else
+            _sortingGroup.sortingOrder = _backgroundSortingLayer;
     }
 
     public void ChangeWalkState(bool isWalk) {

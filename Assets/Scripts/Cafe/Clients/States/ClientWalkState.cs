@@ -13,7 +13,7 @@ public class ClientWalkState : ClientBaseState {
             _target = client.Spawner.GetSpot(client.SpotIndex).GetTarget(client.TableIndex).x;
 
         _directionMultiplier = isLeaving ? 1 : -1;
-        client.StartWalk(isLeaving);
+        client.StartWalk(isLeaving.ToDirection());
     }
 
     public override void ExitState(Client client) {

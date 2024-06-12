@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -21,7 +20,6 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable, IBindable<CafeData> {
     [Header("Upgrades")]
     [SerializeField] private BaseUpgrade _eatTimeShowUpgrade;
 
-    private readonly List<Client> _clients = new();
     private CafeData _data;
     private PopularityXpAdder _xpAdder;
 
@@ -62,19 +60,13 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable, IBindable<CafeData> {
         float waitMultiplier = _popularityCalculate.GetSpaceMultiplier();
         ClientType clientType = GetRandomType(clientCount);
         CafeSpot spot = _spotManager.GetSpotByIndex(spotIndex);
-        Order order = new(_foodManager.GetRandomFood(), spotIndex + 1);
-        if (clientCount != ClientCount.One) {
-            for (int i = 0; i < spot.SeatsCount; i++) {
-                _data.Spots[spotIndex].Clients[i] = new ClientData(_spawnPoint.position,
-                    clientType, clientCount, waitMultiplier, order);
-            }
-            SpawnGroupOfClients(spot);
-        } else {
-            _data.Spots[spotIndex].Clients[0] = new ClientData(_spawnPoint.position,
+        Order order;
+        for (int i = 0; i < spot.SeatsCount; i++) {
+            order = new(_foodManager.GetRandomFood(), spotIndex + 1);
+            _data.Spots[spotIndex].Clients[i] = new ClientData(_spawnPoint.position,
                 clientType, clientCount, waitMultiplier, order);
-            Client client = SpawnOneClient(spotIndex);
-            client.StartNewCycle();
         }
+        SpawnGroupOfClients(spot);
         _data.Spots[spotIndex].AvailableClients = true;
 
         if (!_spotManager.CheckHavingSpots())
@@ -126,20 +118,13 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable, IBindable<CafeData> {
         return ClientType.Standard;
     }
 
-    private void ClientLeave(Client client) {
-        _data.IsSpawning = true;
-        _spotManager.ReturnSpot(client.SpotIndex);
-
-
-        SpotData spotData = _data.Spots[client.SpotIndex];
-        _data.LeavingClients.Add(spotData.Clients[0]);
-        spotData.ClearClients();
-        if (client.ClientData.State != ClientState.Eat)
-            _xpAdder.RemoveXp(client.ClientData.Type);
+    private void ClientEat(Client client) {
+        client.ClientEat -= ClientEat;
+        _xpAdder.AddXp(client.ClientData.Type);
     }
 
-    private void GroupClientRejected(Client client) {
-        client.ClientLeave -= GroupClientRejected;
+    private void ClientRejected(Client client) {
+        client.ClientRejected -= ClientRejected;
         _xpAdder.RemoveXp(client.ClientData.Type);
     }
 
@@ -162,13 +147,8 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable, IBindable<CafeData> {
         spotData.ClearClients();
     }
 
-    private void ClientEat(Client client) {
-        _xpAdder.AddXp(client.ClientData.Type);
-    }
-
     private void SetupClient(Client client, int spotIndex, int tableIndex) {
-        _clients.Add(client);
-        client.ChangeShowingTimeEat(_data.IsEatTimeShow);
+        client.ClientUI.SetData(_data);
         ClientData clientData = _data.Spots[spotIndex].Clients[tableIndex];
         ClientSettings clientSettings = new(clientData, spotIndex, tableIndex, this);
         client.Setup(clientSettings);
@@ -181,11 +161,8 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable, IBindable<CafeData> {
     }
 
     public void CheckUpgrade(BaseUpgrade upgrade) {
-        if (upgrade == _eatTimeShowUpgrade) {
+        if (upgrade == _eatTimeShowUpgrade)
             _data.IsEatTimeShow = true;
-            foreach (var client in _clients)
-                client.ChangeShowingTimeEat(true);
-        }
     }
 
     public void Bind(CafeData data, bool isFileEmpty) {
@@ -202,24 +179,16 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable, IBindable<CafeData> {
 
             _spotManager.TakeSpot(spotIndex);
             CafeSpot spot = _spotManager.GetSpotByIndex(spotIndex);
-            if (spotData.SeatsCount != 1) {
-                GroupClientsHolder table = SpawnGroupOfClients(spot);
-                if (spotData.GroupState == GroupClientState.Wait ||
-                    spotData.GroupState == GroupClientState.EndlessWait)
-                    table.CheckWait();
-                else if (spotData.GroupState == GroupClientState.Talk)
-                    table.CheckTalk();
-            } else {
-                SpawnOneClient(spotIndex);
-            }
+            ClientsHolder table = SpawnGroupOfClients(spot);
+            if (spotData.GroupState == GroupClientState.Wait ||
+                spotData.GroupState == GroupClientState.EndlessWait)
+                table.CheckWait();
+            else if (spotData.GroupState == GroupClientState.Talk)
+                table.CheckTalk();
         }
 
         for (int i = 0; i < _data.LeavingClients.Count; i++) {
-            Client client;
-            if (_data.LeavingClients[i].Count == ClientCount.One)
-                client = _pool.GetClient();
-            else
-                client = _pool.GetGroupClient();
+            Client client = _pool.GetObject();
             ClientData clientData = _data.LeavingClients[i];
             client.transform.position = clientData.Position.GetVector();
             client.Setup(new ClientSettings(clientData, -1, -1, this));
@@ -232,22 +201,14 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable, IBindable<CafeData> {
         _pool.PutObject(client);
     }
 
-    private Client SpawnOneClient(int spotIndex) {
-        Client client = _pool.GetClient();
-        SetupClient(client, spotIndex, 0);
-        client.ClientLeave += ClientLeave;
-        client.ClientEat += ClientEat;
-        return client;
-    }
-
-    private GroupClientsHolder SpawnGroupOfClients(CafeSpot spot) {
-        if (!spot.TryGetComponent(out GroupClientsHolder table))
+    private ClientsHolder SpawnGroupOfClients(CafeSpot spot) {
+        if (!spot.TryGetComponent(out ClientsHolder table))
             throw new ArgumentNullException("Spot doesn't have the required class ClientGroupHolder");
 
         for (int i = 0; i < spot.SeatsCount; i++) {
-            GroupClient client = _pool.GetGroupClient();
+            Client client = _pool.GetObject();
             client.ClientEat += ClientEat;
-            client.ClientRejected += GroupClientRejected;
+            client.ClientRejected += ClientRejected;
             table.AddClient(client);
             SetupClient(client, spot.Index, i);
         }

@@ -4,24 +4,19 @@ using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(ClientUI))]
 public class Client : MonoBehaviour {
-    #region States Settings
-    protected ClientBaseState _nowState;
+    private ClientBaseState _nowState;
     private readonly ClientWalkState _walkState = new();
-    private readonly ClientWaitState _waitState = new();
     private readonly ClientEatState _eatState = new();
     private readonly ClientSitState _sitState = new();
-    private readonly ClientWaitOthersState _waitOthersState = new();
-    #endregion
 
     [SerializeField] private ClientSkin _skin;
     [SerializeField, Min(0)] private float _minWaitTime;
     [SerializeField, Min(0)] private float _maxWaitTime;
-
-    protected ClientUI _clientUI;
+    private ClientsHolder _table;
 
     public ClientData ClientData { get; private set; }
     public ClientsSpawner Spawner { get; private set; }
-    public bool IsEatTimeShow { get; private set; }
+    public ClientUI ClientUI { get; private set; }
     public int SpotIndex { get; private set; }
     public int TableIndex { get; private set; }
 
@@ -31,32 +26,27 @@ public class Client : MonoBehaviour {
     public event Action<Client> ClientEat;
 
     private void Awake() {
-        _clientUI = GetComponent<ClientUI>();
+        ClientUI = GetComponent<ClientUI>();
     }
 
     public void StartNewCycle() {
         _skin.StartNewCycle(ClientData);
-        _clientUI.StartNewCycle(ActivateOrder);
+        ClientUI.StartNewCycle(ActivateOrder);
     }
 
-    protected void ChangeState() {
+    private void ChangeState() {
         ClientBaseState clientState = null;
         switch (ClientData.State) {
             case ClientState.Spawn:
             case ClientState.Leave:
                 clientState = _walkState;
                 break;
-            case ClientState.Wait:
-                clientState = _waitState;
-                break;
             case ClientState.Eat:
                 clientState = _eatState;
                 break;
+            case ClientState.Wait:
             case ClientState.Sit:
                 clientState = _sitState;
-                break;
-            case ClientState.WaitOthers:
-                clientState = _waitOthersState;
                 break;
         }
 
@@ -69,10 +59,9 @@ public class Client : MonoBehaviour {
         _nowState.UpdateState(this);
     }
 
-    public void StartWalk(bool isLeaving) {
-        if (isLeaving)
-            _skin.ChangeSortingLayer();
-        _skin.RotateSkin(isLeaving.ToDirection());
+    public void StartWalk(Direction direction) {
+        _skin.ChangeSortingLayer(true);
+        _skin.RotateSkin(direction);
 
         _skin.ChangeWalkState(true);
         MoveClient(true);
@@ -85,7 +74,7 @@ public class Client : MonoBehaviour {
 
     public void TakeSeat() {
         RotateSkin();
-        _skin.ChangeSortingLayer();
+        _skin.ChangeSortingLayer(false);
         _skin.ChangeWalkState(false);
         MoveClient(false);
     }
@@ -99,7 +88,7 @@ public class Client : MonoBehaviour {
         transform.position = new Vector2(transform.position.x, posY);
     }
 
-    public virtual void Setup(ClientSettings settings) {
+    public void Setup(ClientSettings settings) {
         Spawner = settings.Spawner;
 
         TableIndex = settings.TableIndex;
@@ -111,55 +100,64 @@ public class Client : MonoBehaviour {
         }
 
         transform.position = ClientData.Position.GetVector();
-        _clientUI.Setup(ClientData);
+        ClientUI.Setup(ClientData);
         ChangeState();
 
         if (ClientData.State != ClientState.Spawn && ClientData.State != ClientState.Leave)
             TakeSeat();
+
+        if (ClientData.State == ClientState.Leave)
+            return;
+
+        CafeSpot spot = Spawner.GetSpot(SpotIndex);
+        if (!spot.TryGetComponent(out _table))
+            throw new ArgumentNullException("Spot doesn't have the required class ClientGroupHolder");
+        _table.WaitStarted += Sit;
     }
 
     public void ActivateOrder() {
         OrderActivated?.Invoke(this);
-        _clientUI.SetFood(ClientData.Order.Food);
+        ClientUI.SetFood(ClientData.Order.Food);
         ClientData.Order.Activate();
     }
 
     public void CheckOrder() {
         if (ClientData.Order.IsFinished)
-            _clientUI.ActivateYesButton();
+            ClientUI.ActivateYesButton();
     }
 
-    public virtual void Wait() {
-        ClientData.State = ClientState.Wait;
-        ChangeState();
+    public void Wait() {
+        WaitOthers();
+        _table.CheckWait();
     }
 
-    public virtual void Pay() {
-        int moneyToPay = ClientData.Order.Food.MoneyGet;
-        if (ClientData.Type == ClientType.Rich)
-            moneyToPay *= 100;
-        MoneyManager.Instance.ChangeMoney(moneyToPay);
-        Leave();
+    public void Pay() {
+        WaitOthers();
+        _table.CheckTalk();
     }
 
     public void Leave() {
         ClientLeave?.Invoke(this);
-        ClientLeave = null;
-        ClientEat = null;
-        ClientRejected = null;
         ClientData.State = ClientState.Leave;
 
         ChangeState();
-        _clientUI.ChangeFoodChoiceState(false);
-        _clientUI.ChangeSliderState(false);
+        ClientUI.ChangeSliderState(false);
+        ClientUI.ChangeFoodChoiceState(false);
     }
 
-    public virtual void FoodRejected() {
-        InvokeRejected();
-        Leave();
+    public void FoodRejected() {
+        WaitOthers();
+        _table.DecreaseTalk();
+        ClientRejected?.Invoke(this);
     }
 
     public virtual void Eat() {
+        int payingMoney = ClientData.Order.Food.MoneyGet;
+        if (ClientData.Type == ClientType.Rich)
+            payingMoney *= 100;
+        _table.AddMoney(payingMoney);
+
+        _table.EndlessWait();
         ClientData.WaitTime = ClientData.Order.Food.TimeToEat * Random.Range(0.9f, 1.2f);
         ClientData.NowTime = 0;
         ClientData.State = ClientState.Eat;
@@ -186,11 +184,12 @@ public class Client : MonoBehaviour {
         spot.ResetTableFoodSprite(TableIndex);
     }
 
-    public void ChangeShowingTimeEat(bool value) {
-        IsEatTimeShow = value;
+    private void InvokeRejected() {
+
     }
 
-    protected void InvokeRejected() {
-        ClientRejected?.Invoke(this);
+    private void WaitOthers() {
+        ClientData.State = ClientState.Wait;
+        ChangeState();
     }
 }

@@ -1,8 +1,6 @@
 public class ClientSitState : ClientBaseState {
     public override void EnterState(Client client) {
-        var clientUI = client.GetComponent<ClientUI>();
-        clientUI.ChangeFoodChoiceState(true);
-        clientUI.ChangeSliderState(false);
+        client.ClientUI.ChangeFoodChoiceState(client.ClientData.State == ClientState.Sit);
     }
 
     public override void ExitState(Client client) {
