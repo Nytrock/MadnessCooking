@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class ClientSkinColorfulGroupPart : ClientSkinGroupPart {
     [SerializeField] private Color[] _randomColors;
-    [SerializeField] private SpecialClientColor[] _specialColors;
+
+    public int RandomColorsCount => _randomColors.Length;
 
     public override void SetRandomSprite(int spriteIndex) {
         base.SetRandomSprite(spriteIndex);
@@ -13,5 +14,10 @@ public class ClientSkinColorfulGroupPart : ClientSkinGroupPart {
             else
                 part.SetRandomSprite(spriteIndex);
         }
+    }
+
+    public override void SetSpecialSprite(ClientSkinType skinType) {
+        base.SetSpecialSprite(skinType);
+        _renderer.color = new(1, 1, 1, 1);
     }
 }

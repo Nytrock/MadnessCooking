@@ -1,15 +1,14 @@
-using System;
-using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class ClientSkinColorfulPart : ClientSkinPart {
     [SerializeField] private Color[] _randomColors;
-    [SerializeField] private SpecialClientColor[] _specialColors;
+
+    public int RandomColorsCount => _randomColors.Length;
 
     public override void SetRandomSprite(int spriteIndex) {
         base.SetRandomSprite(spriteIndex);
-        int colorIndex = Random.Range(0, _randomColors.Length);
+        int colorIndex = Random.Range(0, RandomColorsCount);
         _renderer.color = _randomColors[colorIndex];
     }
 
@@ -20,24 +19,18 @@ public class ClientSkinColorfulPart : ClientSkinPart {
 
     public override void SetSpecialSprite(ClientSkinType skinType) {
         base.SetSpecialSprite(skinType);
-        foreach (var specialColor in _specialColors) {
-            if (specialColor.SkinType == skinType) {
-                _renderer.color = specialColor.Color;
-                return;
-            }
-        }
-        throw new ArgumentNullException($"No color for client {skinType}");
+        _renderer.color = new(1, 1, 1, 1);
     }
 
     public override bool CheckRelationToGroup(ClientSkinGroupPart groupPart) {
         if (!base.CheckRelationToGroup(groupPart))
             return false;
 
-        foreach (var groupSpecialSprite in groupPart.GetSpecialSprites()) {
-            if (!_specialColors.Select(color => color.SkinType).Contains(groupSpecialSprite.SkinType)) {
-                return false;
-            }
-        }
+        ClientSkinColorfulGroupPart colorfulGroupPart = groupPart as ClientSkinColorfulGroupPart;
+        if (colorfulGroupPart == null)
+            return false;
+        if (RandomColorsCount != colorfulGroupPart.RandomColorsCount)
+            return false;
 
         return true;
     }

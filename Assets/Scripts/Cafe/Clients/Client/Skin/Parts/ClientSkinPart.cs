@@ -1,13 +1,11 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(SpriteRenderer))]
 public class ClientSkinPart : MonoBehaviour {
     [SerializeField] private Sprite[] _randomSprites;
-    [SerializeField] private SpecialClientSprite[] _specialSprites;
+    [SerializeField] protected SpecialClientSprite[] _specialSprites;
     protected SpriteRenderer _renderer;
 
     public int RandomSpritesCount => _randomSprites.Length;
@@ -22,11 +20,16 @@ public class ClientSkinPart : MonoBehaviour {
             return;
         }
 
-        int spriteIndex = Random.Range(0, _randomSprites.Length);
+        int spriteIndex = Random.Range(0, RandomSpritesCount);
         SetRandomSprite(spriteIndex);
     }
 
     public virtual void SetRandomSprite(int spriteIndex) {
+        if (RandomSpritesCount == 0) {
+            _renderer.sprite = null;
+            return;
+        }
+
         _renderer.sprite = _randomSprites[spriteIndex];
     }
 
@@ -37,19 +40,13 @@ public class ClientSkinPart : MonoBehaviour {
                 return;
             }
         }
-        throw new ArgumentNullException($"No sprite for client {skinType}");
+
+        _renderer.sprite = null;
     }
 
     public virtual bool CheckRelationToGroup(ClientSkinGroupPart groupPart) {
-        if (groupPart.RandomSpritesCount != RandomSpritesCount)
+        if (groupPart.RandomSpritesCount != RandomSpritesCount && RandomSpritesCount != 0)
             return false;
-
-        foreach (var groupSpecialSprite in groupPart.GetSpecialSprites()) {
-            if (!_specialSprites.Contains(groupSpecialSprite)) {
-                return false;
-            }
-        }
-
         return true;
     }
 
