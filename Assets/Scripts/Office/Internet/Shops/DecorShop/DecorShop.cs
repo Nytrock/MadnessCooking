@@ -5,9 +5,7 @@ using UnityEngine;
 
 public class DecorShop : BaseInstantShop, IBindable<OfficeData> {
     [SerializeField] private List<Decor> _decorToBuy;
-    [SerializeField] private Decor _cat;
-    [SerializeField] private KitchenDecorManager _kitchenManager;
-    [SerializeField] private OfficeDecorManager _officeManager;
+    [SerializeField] private BaseDecorManager[] _decorManagers;
     private OfficeData _data;
 
     public override Type Type => typeof(Decor);
@@ -19,21 +17,42 @@ public class DecorShop : BaseInstantShop, IBindable<OfficeData> {
 
         MoneyManager.Instance.ChangeMoney(-decor.Price);
         FatigueManager.Instance.AddDecorBonus(decor);
-        if (decor.DecorType == DecorType.Kitchen)
-            _kitchenManager.AddDecor(decor);
-        else if (decor.DecorType == DecorType.Office)
-            _officeManager.AddDecor(decor);
+        _data.AvailableDecor.Add(decor);
+        foreach (var decorManager in _decorManagers)
+            decorManager.AddDecor(decor);
 
         int index = _decorToBuy.IndexOf(decor);
-        if (_decorToBuy.Count == 1 && decor != _cat) {
-            _decorToBuy[index] = _cat;
-            _catalog.UpdatePanel(index, _cat);
-        } else {
+        bool isFirst = true;
+        CheckNextDecor(decor, index, ref isFirst);
+
+        SetObjectsArray();
+    }
+
+    private void CheckNextDecor(Decor decor, int index, ref bool isFirst) {
+        foreach (var nextDecor in decor.NextItems) {
+            if (_data.AvailableDecor.Contains(nextDecor) || _decorToBuy.Contains(nextDecor)) {
+                CheckNextDecor(nextDecor, index, ref isFirst);
+                continue;
+            }
+            bool canAdd = true;
+            foreach (var needUpgrade in nextDecor.NeedItems)
+                canAdd &= _data.AvailableDecor.Contains(needUpgrade);
+            if (canAdd) {
+                if (isFirst) {
+                    _decorToBuy[index] = nextDecor;
+                    _catalog.UpdatePanel(index, nextDecor);
+                    isFirst = false;
+                } else {
+                    _decorToBuy.Add(nextDecor);
+                    _catalog.GeneratePanel(nextDecor);
+                }
+            }
+        }
+
+        if (isFirst) {
             _decorToBuy.RemoveAt(index);
             _catalog.RemovePanel(index);
         }
-
-        SetObjectsArray();
     }
 
     protected override void SetObjectsArray() {

@@ -12,11 +12,11 @@ public abstract class FoodRecipe<T> : MonoBehaviour {
         DisableParts();
         _canCook = true;
 
-        SetupIngredients(food.Ingredients, ref _canCook);
-        SetupTechnic(food.TypeTechnic, food.Ingredients.Size, ref _canCook);
+        SetupIngredients(food, ref _canCook);
+        SetupTechnic(food.TypeTechnic, food.IngredientsCount, ref _canCook);
     }
 
     public abstract void DisableParts();
-    protected abstract void SetupIngredients(IngredientCountList ingredients, ref bool canCook);
+    protected abstract void SetupIngredients(Food food, ref bool canCook);
     protected abstract void SetupTechnic(Technic technic, int index, ref bool canCook);
 }

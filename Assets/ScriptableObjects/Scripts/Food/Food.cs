@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = AssetMenuName + nameof(Food))]
@@ -17,5 +18,7 @@ public class Food : BuyableObject {
     public float TimeToCook => _timeToCook;
     public float TimeToEat => _timeToEat;
     public int MoneyGet => _moneyGet;
-    public IngredientCountList Ingredients => _ingredients;
+
+    public IEnumerable<IngredientCount> Ingredients => _ingredients.GetIngredients();
+    public int IngredientsCount => _ingredients.Size;
 }

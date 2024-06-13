@@ -1,5 +1,6 @@
 public enum DecorType {
     None,
     Kitchen,
-    Office
+    Office,
+    Cafe
 }

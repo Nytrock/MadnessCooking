@@ -52,7 +52,7 @@ public class FarmShop : BaseChooseShop, IBindable<FarmData> {
     }
 
     private void CheckNextUpgrades(GraphUpgrade graphUpgrade, int index) {
-        foreach (var nextUpgrade in graphUpgrade.NextUpgrades) {
+        foreach (var nextUpgrade in graphUpgrade.NextItems) {
             if (_upgradesToBuy.Contains(nextUpgrade))
                 continue;
 
@@ -62,7 +62,7 @@ public class FarmShop : BaseChooseShop, IBindable<FarmData> {
             }
 
             bool canAdd = true;
-            foreach (var needUpgrade in nextUpgrade.NeedUpgrades)
+            foreach (var needUpgrade in nextUpgrade.NeedItems)
                 canAdd &= _data.AvailableUpgrades.Contains(needUpgrade);
 
             if (canAdd) {

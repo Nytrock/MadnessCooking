@@ -56,6 +56,5 @@ public class ClientSkinPart : MonoBehaviour {
     public IEnumerable<SpecialClientSprite> GetSpecialSprites() {
         foreach (var specialSprite in _specialSprites)
             yield return specialSprite;
-        yield break;
     }
 }

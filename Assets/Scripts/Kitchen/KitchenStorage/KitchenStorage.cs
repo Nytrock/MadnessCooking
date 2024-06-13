@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class KitchenStorage : IngredientStorage<KitchenData> {
@@ -16,7 +17,7 @@ public class KitchenStorage : IngredientStorage<KitchenData> {
         return remain;
     }
 
-    public override void RemoveIngredients(IngredientCountList countList) {
+    public override void RemoveIngredients(IEnumerable<IngredientCount> countList) {
         base.RemoveIngredients(countList);
         IngredientsChanged?.Invoke();
     }

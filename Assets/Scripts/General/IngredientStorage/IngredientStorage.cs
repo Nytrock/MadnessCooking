@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class IngredientStorage<TData> : MonoBehaviour, IBindable<TData> where TData : ISaveable {
@@ -28,9 +29,9 @@ public abstract class IngredientStorage<TData> : MonoBehaviour, IBindable<TData>
         return remainCount;
     }
 
-    public virtual void RemoveIngredients(IngredientCountList countList) {
-        for (int i = 0; i < countList.Size; i++)
-            Data.Ingredients.Remove(countList.Get(i));
+    public virtual void RemoveIngredients(IEnumerable<IngredientCount> ingredients) {
+        foreach (var count in ingredients)
+            Data.Ingredients.Remove(count);
     }
 
     public bool HaveCount(IngredientCount count) {

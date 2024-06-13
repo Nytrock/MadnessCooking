@@ -22,14 +22,12 @@ public class IngredientsManager : MonoBehaviour, IBindable<FarmData> {
         foreach (var ingredient in _data.AvailableIngredients)
             if (ingredient.Type == bedType.AcceptableType)
                 yield return ingredient;
-        yield break;
     }
 
     public IEnumerable<Ingredient> GetAllIngredientsOfBedType(BedType bedType) {
         foreach (var ingredient in _allIngredients)
             if (ingredient.Type == bedType.AcceptableType)
                 yield return ingredient;
-        yield break;
     }
 
     public void AddIngredient(Ingredient ingredient) {

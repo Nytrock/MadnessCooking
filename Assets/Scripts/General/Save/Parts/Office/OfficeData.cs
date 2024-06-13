@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 [Serializable]
 public class OfficeData : ISaveable {
-    public List<Decor> AvailableDecor = new();
+    public DecorManagerData DecorData = new();
     public bool IsSleeping;
     public float InternetDownloadSpeed = 1;
     public bool IsInternetDownloadInstant;
@@ -12,5 +12,7 @@ public class OfficeData : ISaveable {
     public Technic[] ShopTechnic;
     public Food[] ShopFood;
     public Decor[] ShopDecor;
+    public List<Decor> AvailableDecor = new();
     public BaseUpgrade[] ShopUpgrades;
+    public List<BaseUpgrade> AvailableUpgrades = new();
 }

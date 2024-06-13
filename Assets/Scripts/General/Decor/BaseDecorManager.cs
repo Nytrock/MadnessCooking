@@ -1,9 +1,7 @@
-using System;
 using UnityEngine;
 
-public abstract class BaseDecorManager<TData> : MonoBehaviour, IBindable<TData> where TData : ISaveable {
-    [SerializeField] private DecorHolder[] _decorHolders;
-    protected TData _data;
+public class BaseDecorManager : MonoBehaviour {
+    [SerializeField] protected DecorHolder[] _decorHolders;
 
     private void Awake() {
         foreach (var holder in _decorHolders)
@@ -11,19 +9,16 @@ public abstract class BaseDecorManager<TData> : MonoBehaviour, IBindable<TData> 
     }
 
     public virtual void AddDecor(Decor decor) {
-        FindAndActivateHolder(decor);
+        DecorHolder holder = TryFindHolder(decor);
+        if (holder != null)
+            holder.ChangeState(true);
     }
 
-    protected void FindAndActivateHolder(Decor decor) {
-        foreach (var holder in _decorHolders) {
-            if (holder.Decor == decor) {
-                holder.ChangeState(true);
-                return;
-            }
-        }
+    protected DecorHolder TryFindHolder(Decor decor) {
+        foreach (var holder in _decorHolders)
+            if (holder.Decor == decor)
+                return holder;
 
-        throw new ArgumentNullException("No such decor holder");
+        return null;
     }
-
-    public abstract void Bind(TData data, bool isFileEmpty);
 }

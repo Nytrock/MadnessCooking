@@ -6,7 +6,6 @@ using UnityEngine;
 public class UpgradeShop : BaseInstantShop, IBindable<OfficeData> {
     [SerializeField] private UpgradeManager _upgradeManager;
     [SerializeField] private List<BaseUpgrade> _upgradesToBuy;
-    private List<BaseUpgrade> _availableUpgrades = new();
     private OfficeData _data;
 
     public override Type Type => typeof(BaseUpgrade);
@@ -18,7 +17,7 @@ public class UpgradeShop : BaseInstantShop, IBindable<OfficeData> {
 
         MoneyManager.Instance.ChangeMoney(-upgrade.Price);
         _upgradeManager.NewUpgrade(upgrade);
-        _availableUpgrades.Add(upgrade);
+        _data.AvailableUpgrades.Add(upgrade);
 
         int index = _upgradesToBuy.IndexOf(upgrade);
         if (upgrade as GraphUpgrade) {
@@ -32,14 +31,14 @@ public class UpgradeShop : BaseInstantShop, IBindable<OfficeData> {
     }
 
     private void CheckNextUpgrades(GraphUpgrade graphUpgrade, int index, ref bool isFirst) {
-        foreach (var nextUpgrade in graphUpgrade.NextUpgrades) {
-            if (_availableUpgrades.Contains(nextUpgrade) || _upgradesToBuy.Contains(nextUpgrade)) {
+        foreach (var nextUpgrade in graphUpgrade.NextItems) {
+            if (_data.AvailableUpgrades.Contains(nextUpgrade) || _upgradesToBuy.Contains(nextUpgrade)) {
                 CheckNextUpgrades(nextUpgrade, index, ref isFirst);
                 continue;
             }
             bool canAdd = true;
-            foreach (var needUpgrade in nextUpgrade.NeedUpgrades)
-                canAdd &= _availableUpgrades.Contains(needUpgrade);
+            foreach (var needUpgrade in nextUpgrade.NeedItems)
+                canAdd &= _data.AvailableUpgrades.Contains(needUpgrade);
             if (canAdd) {
                 if (isFirst) {
                     _upgradesToBuy[index] = nextUpgrade;

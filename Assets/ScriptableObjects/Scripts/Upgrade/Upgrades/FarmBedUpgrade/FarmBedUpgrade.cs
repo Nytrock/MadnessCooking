@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = AssetMenuName + nameof(FarmBedUpgrade))]
@@ -10,5 +11,5 @@ public class FarmBedUpgrade : GraphUpgrade {
 
     public int PriceAdd => _priceAdd;
     public float FatigueCoef => _fatigueCoef;
-    public BedType[] SuitableBedTypes => _suitableBedTypes;
+    public IEnumerable<BedType> SuitableBedTypes => _suitableBedTypes;
 }

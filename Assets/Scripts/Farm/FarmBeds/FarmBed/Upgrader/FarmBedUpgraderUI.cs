@@ -31,7 +31,7 @@ public class FarmBedUpgraderUI : ChoiceBuyWithCameraStopUI<FarmBedUpgrade, FarmD
         _changingBed.AddUpgrade(upgrade);
 
         int index = 0;
-        foreach (var nextUpgrade in upgrade.NextUpgrades) {
+        foreach (var nextUpgrade in upgrade.NextItems) {
             var farmBedNextUpgrade = nextUpgrade as FarmBedUpgrade;
             bool isAccessable = CheckUpgradeAccessable(farmBedNextUpgrade);
             if (isAccessable) {
@@ -52,7 +52,7 @@ public class FarmBedUpgraderUI : ChoiceBuyWithCameraStopUI<FarmBedUpgrade, FarmD
         isAccessable &= _manager.ContainsUpgrade(upgrade);
         isAccessable &= upgrade.SuitableBedTypes.Contains(bedType);
         isAccessable &= !_changingBed.HaveUpgrade(upgrade);
-        foreach (var needUpgrade in upgrade.NeedUpgrades) {
+        foreach (var needUpgrade in upgrade.NeedItems) {
             var needFarmBedUpgrade = needUpgrade as FarmBedUpgrade;
             isAccessable &= _changingBed.HaveUpgrade(needFarmBedUpgrade);
         }

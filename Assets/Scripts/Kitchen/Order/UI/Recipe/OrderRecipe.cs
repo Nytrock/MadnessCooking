@@ -11,17 +11,18 @@ public class OrderRecipe : FoodRecipe<OrderRecipePart> {
         SetupRecipe(food);
     }
 
-    protected override void SetupIngredients(IngredientCountList ingredients, ref bool canCook) {
-        for (int i = 0; i < ingredients.Size; i++) {
-            IngredientCount ingredientCount = ingredients.Get(i);
-            if (ingredientCount.Ingredient == ConstIngredients.Instance.Spice && _data.IsAutoSpice) {
-                _canCook &= MoneyManager.Instance.MoneyCount >= ingredientCount.Count * ingredientCount.Ingredient.Price;
-                _recipeParts[i].SetupAutoSpice(ingredientCount);
+    protected override void SetupIngredients(Food food, ref bool canCook) {
+        int index = 0;
+        foreach (var count in food.Ingredients) {
+            if (count.Ingredient == ConstIngredients.Instance.Spice && _data.IsAutoSpice) {
+                _canCook &= MoneyManager.Instance.MoneyCount >= count.Count * count.Ingredient.Price;
+                _recipeParts[index].SetupAutoSpice(count);
             } else {
-                bool haveCount = _kitchenStorage.HaveCount(ingredientCount);
+                bool haveCount = _kitchenStorage.HaveCount(count);
                 _canCook &= haveCount;
-                _recipeParts[i].Setup(ingredientCount, haveCount);
+                _recipeParts[index].Setup(count, haveCount);
             }
+            index++;
         }
     }
 

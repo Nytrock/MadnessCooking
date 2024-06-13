@@ -45,10 +45,9 @@ public class OrdersUI : MonoBehaviour, IUpgradeable, IBindable<KitchenData> {
 
     public void StartCook(Order order) {
         _ordersManager.StartCook(order);
-        IngredientCountList ingredients = order.Food.Ingredients;
-        for (int i = 0; i < ingredients.Size; i++) {
-            if (ingredients.Get(i).Ingredient == _spice && _data.IsAutoSpice) {
-                MoneyManager.Instance.ChangeMoney(-_spice.Price * ingredients.Get(i).Count);
+        foreach (var count in order.Food.Ingredients) {
+            if (count.Ingredient == _spice && _data.IsAutoSpice) {
+                MoneyManager.Instance.ChangeMoney(-_spice.Price * count.Count);
                 break;
             }
         }

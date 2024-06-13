@@ -935,6 +935,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 13597738}
+  - component: {fileID: 13597739}
   m_Layer: 0
   m_Name: Bar
   m_TagString: Untagged
@@ -959,6 +960,22 @@ Transform:
   - {fileID: 2131138996}
   m_Father: {fileID: 1832416031}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &13597739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 13597737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c64f7efd36315ef47b12ef18976edf30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _decorHolders:
+  - {fileID: 918219882}
+  - {fileID: 1179739272}
+  - {fileID: 1686274869}
 --- !u!1 &16532513
 GameObject:
   m_ObjectHideFlags: 0
@@ -4582,12 +4599,16 @@ MonoBehaviour:
   _shop: {fileID: 145651391}
   _catalog: {fileID: 1931358365}
   _decorToBuy:
-  - {fileID: 11400000, guid: 4a564f336d265eb47b5daf68bf9921c8, type: 2}
+  - {fileID: 11400000, guid: a228927c2ada28f439ab270179e3d603, type: 2}
+  - {fileID: 11400000, guid: 293e247468f89f34d97abfdc9e934a2c, type: 2}
+  - {fileID: 11400000, guid: f42d7dff24558264daa25b93e840da08, type: 2}
   - {fileID: 11400000, guid: b86f25e29e674ce4d9c9dfa69e46ac79, type: 2}
+  - {fileID: 11400000, guid: 4a564f336d265eb47b5daf68bf9921c8, type: 2}
   - {fileID: 11400000, guid: a75b23f3f82bc5b44bd4659c61507125, type: 2}
-  _cat: {fileID: 11400000, guid: 686de94c06e4a214eb4c82a9ce6faf64, type: 2}
-  _kitchenManager: {fileID: 1280892845}
-  _officeManager: {fileID: 1543794859}
+  _decorManagers:
+  - {fileID: 13597739}
+  - {fileID: 1280892845}
+  - {fileID: 1543794859}
 --- !u!222 &138484173
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -23631,7 +23652,6 @@ Transform:
   m_Children:
   - {fileID: 333835044}
   - {fileID: 918219880}
-  - {fileID: 1179739270}
   - {fileID: 652019347}
   m_Father: {fileID: 13597738}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -29031,6 +29051,7 @@ GameObject:
   m_Component:
   - component: {fileID: 918219880}
   - component: {fileID: 918219881}
+  - component: {fileID: 918219882}
   m_Layer: 0
   m_Name: BarShelf
   m_TagString: Untagged
@@ -29050,7 +29071,8 @@ Transform:
   m_LocalPosition: {x: -1.6123085, y: -7.692308, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1179739270}
   m_Father: {fileID: 745891399}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &918219881
@@ -29105,6 +29127,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &918219882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 918219879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81fc68df28a21c640b574f2d62a6e5da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _decor: {fileID: 11400000, guid: a228927c2ada28f439ab270179e3d603, type: 2}
 --- !u!1 &918836921
 GameObject:
   m_ObjectHideFlags: 0
@@ -36893,6 +36928,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1179739270}
   - component: {fileID: 1179739271}
+  - component: {fileID: 1179739272}
   m_Layer: 0
   m_Name: Bottles
   m_TagString: Untagged
@@ -36909,11 +36945,11 @@ Transform:
   m_GameObject: {fileID: 1179739269}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.920001, y: -4.1538463, z: 0}
+  m_LocalPosition: {x: -0.30769253, y: 3.5384617, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 745891399}
+  m_Father: {fileID: 918219880}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1179739271
 SpriteRenderer:
@@ -36967,6 +37003,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1179739272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1179739269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81fc68df28a21c640b574f2d62a6e5da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _decor: {fileID: 11400000, guid: e8104ce00d5dbc54e86087f8d6e81382, type: 2}
 --- !u!1001 &1181155303
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -45326,7 +45375,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c00caadbdf55c9142affdf6fefb42640, type: 2}
   - {fileID: 11400000, guid: d962533a8198db345b4b5944ebc95faf, type: 2}
   - {fileID: 11400000, guid: 87f6dce480009e647827c7826e4351c7, type: 2}
-  _foodManager: {fileID: 0}
+  _foodManager: {fileID: 1103085983}
 --- !u!222 &1452928100
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -52273,6 +52322,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1686274868}
+  - component: {fileID: 1686274869}
   m_Layer: 0
   m_Name: Candies
   m_TagString: Untagged
@@ -52296,6 +52346,19 @@ Transform:
   - {fileID: 893037271}
   m_Father: {fileID: 2131138996}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1686274869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1686274867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81fc68df28a21c640b574f2d62a6e5da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _decor: {fileID: 11400000, guid: 293e247468f89f34d97abfdc9e934a2c, type: 2}
 --- !u!1 &1692783793
 GameObject:
   m_ObjectHideFlags: 0

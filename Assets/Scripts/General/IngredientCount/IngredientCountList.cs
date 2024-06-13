@@ -37,7 +37,7 @@ public class IngredientCountList {
     }
 
     private void UpdateAvailableIngredients() {
-        _availableIngredients = _ingredientCounts.Select(x => x.Ingredient).ToList();
+        _availableIngredients = _ingredientCounts.Select(count => count.Ingredient).ToList();
     }
 
     public bool ContainsIngredient(IngredientCount ingredientCount) {
@@ -66,6 +66,10 @@ public class IngredientCountList {
     public IEnumerator<IngredientCount> GetEnumerator() {
         foreach (var count in _ingredientCounts)
             yield return count;
-        yield break;
+    }
+
+    public IEnumerable<IngredientCount> GetIngredients() {
+        foreach (var count in _ingredientCounts)
+            yield return count;
     }
 }

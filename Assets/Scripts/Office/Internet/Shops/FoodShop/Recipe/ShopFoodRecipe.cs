@@ -1,9 +1,13 @@
+using System.Linq;
+
 public class ShopFoodRecipe : FoodRecipe<ShopFoodRecipePart> {
-    protected override void SetupIngredients(IngredientCountList ingredients, ref bool canCook) {
-        for (int i = 0; i < ingredients.Size; i++) {
-            bool haveCount = _kitchenStorage.HaveCount(ingredients.Get(i));
+    protected override void SetupIngredients(Food food, ref bool canCook) {
+        int index = 0;
+        foreach (var ingredientCount in food.Ingredients.Select((value, index) => new { value, index })) {
+            bool haveCount = _kitchenStorage.HaveCount(ingredientCount.value);
             _canCook &= haveCount;
-            _recipeParts[i].Setup(ingredients.Get(i), haveCount);
+            _recipeParts[index].Setup(ingredientCount.value, haveCount);
+            index++;
         }
     }
 

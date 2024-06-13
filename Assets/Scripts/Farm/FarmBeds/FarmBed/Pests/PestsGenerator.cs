@@ -67,7 +67,6 @@ public class PestsGenerator : MonoBehaviour {
     public IEnumerable<Pest> Pests() {
         foreach (var pest in _pests)
             yield return pest;
-        yield break;
     }
 
     public void RemovePest(Pest pest) {
