@@ -1,4 +1,4 @@
 public class ChoiceBuyPool<TItem> : ChoicePool<TItem, ChoiceBuyButton<TItem>>
-    where TItem : BuyableObject {
+    where TItem : BuyableItem {
 
 }

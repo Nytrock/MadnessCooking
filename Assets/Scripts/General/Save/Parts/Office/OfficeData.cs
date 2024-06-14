@@ -2,7 +2,6 @@ using System;
 
 [Serializable]
 public class OfficeData : ISaveable {
-    public DecorManagerData DecorData = new();
     public bool IsSleeping;
     public float InternetDownloadSpeed = 1;
     public bool IsInternetDownloadInstant;

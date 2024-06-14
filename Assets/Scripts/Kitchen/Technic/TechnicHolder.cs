@@ -12,7 +12,7 @@ public class TechnicHolder : MonoBehaviour {
     private TechnicCooker _cooker;
     private TechnicRepairer _repair;
 
-    public TechnicData TechnicData { get; private set; }
+    public TechnicHolderData TechnicData { get; private set; }
 
     public Technic Technic => _technic;
     public Transform UITarget => _UITarget;
@@ -59,12 +59,12 @@ public class TechnicHolder : MonoBehaviour {
         _data = data;
 
         if (isFileEmpty) {
-            _data.AllTechnic[index] = new() {
+            _data.TechnicHolders[index] = new() {
                 NowStrength = _technic.Strength
             };
         }
 
-        TechnicData = _data.AllTechnic[index];
+        TechnicData = _data.TechnicHolders[index];
         if (TechnicData.IsRepairing)
             StartRepair();
     }

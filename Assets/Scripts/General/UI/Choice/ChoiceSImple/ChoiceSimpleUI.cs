@@ -1,5 +1,5 @@
 public abstract class ChoiceSimpleUI<TItem> : ChoiceUI<TItem, ChoiceSimpleButton<TItem>>
-    where TItem : BuyableObject {
+    where TItem : BuyableItem {
 
     public void Choice(int index) {
         if (_chosedIndex != -1)

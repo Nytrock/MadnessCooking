@@ -4,7 +4,7 @@ using UnityEngine;
 
 [Serializable]
 public class ShopData<TItem>
-    where TItem : BuyableObject {
+    where TItem : BuyableItem {
 
     [SerializeField] private List<TItem> _itemsToBuy;
 

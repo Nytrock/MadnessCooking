@@ -5,7 +5,7 @@ public class ChoiceBuyDescriptionUI : MonoBehaviour {
     [SerializeField] private string _buyDescription;
     [SerializeField] private string _freeDescription;
 
-    public void UpdateDescription(BuyableObject item) {
+    public void UpdateDescription(BuyableItem item) {
         _renderer.SetItemInfo(item);
         if (item.Price > 0)
             _renderer.SetPrice(_buyDescription, item.Price);

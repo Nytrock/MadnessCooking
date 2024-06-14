@@ -3,7 +3,7 @@ using UnityEngine;
 
 [CreateAssetMenu(menuName = AssetMenuName + nameof(Food))]
 
-public class Food : BuyableObject {
+public class Food : BuyableItem {
     [SerializeField] private FoodType _type;
     [SerializeField] private Technic _typeTechnic;
     [SerializeField] private Sprite _miniSprite;

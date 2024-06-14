@@ -2,9 +2,10 @@ using System;
 using UnityEngine;
 
 public abstract class SaveableBaseShop<TItem, TData> : BaseShop, IBindable<TData>
-    where TItem : BuyableObject where TData : ISaveable {
+    where TItem : BuyableItem where TData : ISaveable {
 
     [SerializeField] protected TItem[] _defaultItemsToBuy;
+    [SerializeField] protected BuyableItemManager<TItem> _itemManager;
 
     protected ShopData<TItem> _data;
 
@@ -22,12 +23,13 @@ public abstract class SaveableBaseShop<TItem, TData> : BaseShop, IBindable<TData
         }
     }
 
-    public override void BuyItem(BuyableObject item) {
+    public override void BuyItem(BuyableItem item) {
         BuyItem(item as TItem);
     }
 
     public virtual void BuyItem(TItem item) {
         MoneyManager.Instance.ChangeMoney(-item.Price);
+        _itemManager.AddItem(item);
         ChangePanelsState(item);
     }
 

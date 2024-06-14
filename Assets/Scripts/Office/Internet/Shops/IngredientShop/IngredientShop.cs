@@ -1,15 +1,14 @@
 using UnityEngine;
 
 public class IngredientShop : BaseInstantShop<Ingredient, OfficeData>, IUpgradeable {
-    [SerializeField] private IngredientsManager _ingredientsManager;
-    [SerializeField] private BedTypesManager _bedTypesManager;
+    [SerializeField] private BedTypeManager _bedTypesManager;
     [SerializeField] private KitchenStorage _ingredientStorage;
 
     [Header("Upgrades")]
     [SerializeField] private BaseUpgrade _spiceAutoBuy;
 
     private void Awake() {
-        _bedTypesManager.TypeAdded += delegate { UpdatePanels(); };
+        _bedTypesManager.ItemAdded += delegate { UpdatePanels(); };
     }
 
     public void CheckUpgrade(BaseUpgrade upgrade) {
@@ -21,12 +20,10 @@ public class IngredientShop : BaseInstantShop<Ingredient, OfficeData>, IUpgradea
     }
 
     protected override void RemoveItemPanel(Ingredient item, int index) {
-        if (item.Type == IngredientType.Buyable) {
+        if (item.Type == IngredientType.Buyable)
             _ingredientStorage.PutIngredientWithRemain(new IngredientCount(item, 1));
-        } else {
-            _ingredientsManager.AddIngredient(item);
+        else
             base.RemoveItemPanel(item, index);
-        }
     }
 
     protected override bool IsBuyable(Ingredient ingredient) {

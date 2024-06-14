@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public abstract class ChoiceUI<TItem, TButton> : MonoBehaviour
-    where TItem : BuyableObject where TButton : ChoiceButton<TItem> {
+    where TItem : BuyableItem where TButton : ChoiceButton<TItem> {
 
     [SerializeField] protected GameObject _UI;
     [SerializeField] protected ChoicePool<TItem, TButton> _choiceButtonPool;

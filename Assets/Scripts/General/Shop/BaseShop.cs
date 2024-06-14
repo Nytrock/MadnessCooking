@@ -16,6 +16,6 @@ public abstract class BaseShop : MonoBehaviour {
     }
 
     protected abstract void GenerateShop();
-    public abstract void BuyItem(BuyableObject item);
-    protected abstract UnityAction GetPanelAction(BuyableObject item);
+    public abstract void BuyItem(BuyableItem item);
+    protected abstract UnityAction GetPanelAction(BuyableItem item);
 }

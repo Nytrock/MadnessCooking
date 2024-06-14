@@ -1,7 +1,7 @@
 using System;
 
 [Serializable]
-public class TechnicData {
+public class TechnicHolderData {
     public bool IsCooking;
     public bool IsRepairing;
     public float NowStrength;

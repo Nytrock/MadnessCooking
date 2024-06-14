@@ -1,28 +1,22 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
-public class IngredientsManager : MonoBehaviour, IBindable<FarmData> {
+public class IngredientsManager : BuyableItemManager<Ingredient>, IBindable<FarmData> {
     [SerializeField] private Ingredient[] _allIngredients;
-    [SerializeField] private Ingredient[] _defaultIngredients;
-    private FarmData _data;
-
-    public event Action<Ingredient> IngredientAdded;
 
     public bool HaveIngredient(Ingredient ingredient) {
-        return _data.AvailableIngredients.Contains(ingredient);
+        return _data.IsItemAvailable(ingredient);
     }
 
     public bool HaveIngredientsOfBedType(BedType bedType) {
-        foreach (var ingredient in _data.AvailableIngredients)
+        foreach (var ingredient in _data.AvailableItems)
             if (ingredient.Type == bedType.AcceptableType)
                 return true;
         return false;
     }
 
     public IEnumerable<Ingredient> GetAvailableIngredientsOfBedType(BedType bedType) {
-        foreach (var ingredient in _data.AvailableIngredients)
+        foreach (var ingredient in _data.AvailableItems)
             if (ingredient.Type == bedType.AcceptableType)
                 yield return ingredient;
     }
@@ -33,14 +27,14 @@ public class IngredientsManager : MonoBehaviour, IBindable<FarmData> {
                 yield return ingredient;
     }
 
-    public void AddIngredient(Ingredient ingredient) {
-        _data.AvailableIngredients.Add(ingredient);
-        IngredientAdded?.Invoke(ingredient);
+    public override void AddItem(Ingredient item) {
+        if (item.Type != IngredientType.Buyable)
+            base.AddItem(item);
     }
 
     public void Bind(FarmData data, bool isFileEmpty) {
-        _data = data;
         if (isFileEmpty)
-            _data.AvailableIngredients = _defaultIngredients.ToList();
+            data.IngredientManager = new(_defaultItems);
+        _data = data.IngredientManager;
     }
 }

@@ -969,9 +969,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 13597737}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c64f7efd36315ef47b12ef18976edf30, type: 3}
+  m_Script: {fileID: 11500000, guid: 9e169070a6bc82e49919126f73388d8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _location: 3
   _decorHolders:
   - {fileID: 918219882}
   - {fileID: 1179739272}
@@ -4605,10 +4606,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b86f25e29e674ce4d9c9dfa69e46ac79, type: 2}
   - {fileID: 11400000, guid: 4a564f336d265eb47b5daf68bf9921c8, type: 2}
   - {fileID: 11400000, guid: a75b23f3f82bc5b44bd4659c61507125, type: 2}
-  _decorManagers:
-  - {fileID: 13597739}
-  - {fileID: 1280892845}
-  - {fileID: 1543794859}
+  _itemManager: {fileID: 403464058}
 --- !u!222 &138484173
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -12290,6 +12288,55 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bedType: {fileID: 11400000, guid: 80529c8439c585945b072b791ee2a6a4, type: 2}
+--- !u!1 &403464057
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 403464059}
+  - component: {fileID: 403464058}
+  m_Layer: 0
+  m_Name: DecorManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &403464058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 403464057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 926afee01962eb742a712f7d9d2f24c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _defaultItems: []
+  _localDecorManagers:
+  - {fileID: 13597739}
+  - {fileID: 1280892845}
+  - {fileID: 1543794859}
+--- !u!4 &403464059
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 403464057}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.6725173, y: -1.3956934, z: -0.046585374}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &405101627
 GameObject:
   m_ObjectHideFlags: 0
@@ -18506,7 +18553,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bindableObjects:
-  - {fileID: 1543794859}
   - {fileID: 442335472}
   - {fileID: 1989249264}
   - {fileID: 1475506784}
@@ -18543,14 +18589,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb7a680bc967afe458b6b548e086c541, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _defaultItems:
+  - {fileID: 11400000, guid: 80529c8439c585945b072b791ee2a6a4, type: 2}
   _allBeds:
   - {fileID: 11400000, guid: 80529c8439c585945b072b791ee2a6a4, type: 2}
   - {fileID: 11400000, guid: f9538ea17e1133f4090ea83b5e0827bb, type: 2}
   - {fileID: 11400000, guid: 2e37d524597e5d2499cc7a496f717a91, type: 2}
   - {fileID: 11400000, guid: 3627450b9a024af45a0e4f14c3308c09, type: 2}
   - {fileID: 11400000, guid: 7e3fc35901153c8499d08566fb3e07cf, type: 2}
-  _defaultBeds:
-  - {fileID: 11400000, guid: 80529c8439c585945b072b791ee2a6a4, type: 2}
   _bedsUpgrades:
   - {fileID: 11400000, guid: 41c5dc56c0ea776468098bbfca8b0d8b, type: 2}
   - {fileID: 11400000, guid: 9b73285b9270c0b4895b5e9dff90b061, type: 2}
@@ -22921,6 +22967,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d705ae12938ce0f4f999a7b713f85038, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _defaultItems: []
   _upgradeablesObjects:
   - {fileID: 197975456}
   - {fileID: 502661638}
@@ -24515,7 +24562,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2a65908cd78c0474d8e496dc8c194e34, type: 2}
   - {fileID: 11400000, guid: 0abc0cd0e69ad8d4081478ea3d26f762, type: 2}
   - {fileID: 11400000, guid: af45ffd0a860e6c43aad174de4a3fb3f, type: 2}
-  _upgradeManager: {fileID: 1299343206}
+  _itemManager: {fileID: 1299343206}
 --- !u!222 &768940556
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -28986,6 +29033,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6db5004f15b939048ab717a37821b90f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _defaultItems: []
   _allIngredients:
   - {fileID: 11400000, guid: 552016a33cc72bb44b4eb6addf12b2f4, type: 2}
   - {fileID: 11400000, guid: 897523a5d3e8cc843a91257d85a26f6b, type: 2}
@@ -29005,8 +29053,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 24d7a663aa0937f4b8ed7ab357e76093, type: 2}
   - {fileID: 11400000, guid: 6b8daec792815f44b8b8c781a3adfdcd, type: 2}
   - {fileID: 11400000, guid: 1a1acf5d79493354cad0d0956b0d8689, type: 2}
-  _defaultIngredients:
-  - {fileID: 11400000, guid: 897523a5d3e8cc843a91257d85a26f6b, type: 2}
 --- !u!4 &917452952
 Transform:
   m_ObjectHideFlags: 0
@@ -34789,8 +34835,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4412966a588bcd24bb3d62149cfa8cd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _defaultFood:
-  - {fileID: 11400000, guid: 6eeb62fd94072e542bf940359b8cbca0, type: 2}
+  _defaultItems: []
 --- !u!4 &1103085984
 Transform:
   m_ObjectHideFlags: 0
@@ -40686,9 +40731,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1280892843}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e45915f0bb79d146a23bc09e5081851, type: 3}
+  m_Script: {fileID: 11500000, guid: 9e169070a6bc82e49919126f73388d8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _location: 1
   _decorHolders:
   - {fileID: 1548146671}
   - {fileID: 1736457558}
@@ -40837,7 +40883,7 @@ GameObject:
   - component: {fileID: 1297580538}
   - component: {fileID: 1297580539}
   m_Layer: 0
-  m_Name: Techics
+  m_Name: TechicManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40879,6 +40925,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc465388eb5e55a4286d55a93c138a95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _defaultItems:
+  - {fileID: 11400000, guid: 8fe5a1b5c2c60e04e8303266be891355, type: 2}
   _UI: {fileID: 750651162}
   _holders:
   - {fileID: 671535676}
@@ -40890,8 +40938,6 @@ MonoBehaviour:
   - {fileID: 906710675}
   - {fileID: 1555909737}
   - {fileID: 1425203900}
-  _defaultTechnic:
-  - {fileID: 11400000, guid: 8fe5a1b5c2c60e04e8303266be891355, type: 2}
   _technicCookSpeedUps:
   - {fileID: 11400000, guid: 2a65908cd78c0474d8e496dc8c194e34, type: 2}
   - {fileID: 11400000, guid: 238ad575a697644479a2b9b75b841277, type: 2}
@@ -40906,6 +40952,22 @@ MonoBehaviour:
   - {fileID: 11400000, guid: af45ffd0a860e6c43aad174de4a3fb3f, type: 2}
   - {fileID: 11400000, guid: 5453d2a3ccbd45c4ba890c0e59138596, type: 2}
   - {fileID: 11400000, guid: 659b69870727ee9439fff4684d168527, type: 2}
+  _tempDataDontForgetToDelete:
+    FoodManager:
+      _availableItems: []
+    KitchenStorage:
+      _ingredients:
+        _ingredientCounts: []
+      _maxSpace: 0
+      _nowSpace: 0
+    TechnicManager:
+      _availableItems: []
+    TechnicHolders: []
+    IsAutoSpice: 0
+    IsStrengthShow: 0
+    TechnicCookSpeed: 1
+    TechnicRepairSpeed: 1
+    TechnicStrength: 1
 --- !u!1 &1299343205
 GameObject:
   m_ObjectHideFlags: 0
@@ -40935,6 +40997,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d705ae12938ce0f4f999a7b713f85038, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _defaultItems: []
   _upgradeablesObjects:
   - {fileID: 1646719850}
   - {fileID: 1436171022}
@@ -45381,8 +45444,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c00caadbdf55c9142affdf6fefb42640, type: 2}
   - {fileID: 11400000, guid: d962533a8198db345b4b5944ebc95faf, type: 2}
   - {fileID: 11400000, guid: 87f6dce480009e647827c7826e4351c7, type: 2}
+  _itemManager: {fileID: 1103085983}
   _itemView: {fileID: 580367322}
-  _foodManager: {fileID: 1103085983}
   _ingredientManager: {fileID: 917452951}
   _technicManager: {fileID: 1297580539}
 --- !u!222 &1452928100
@@ -46296,7 +46359,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c20c3d0744f967340882fea91042167a, type: 2}
   - {fileID: 11400000, guid: 2ab180e87c606ae48ba55132f53ee430, type: 2}
   - {fileID: 11400000, guid: d3baf7cdadf53954d801bb39ed04c251, type: 2}
-  _technicManager: {fileID: 1297580539}
+  _itemManager: {fileID: 1297580539}
 --- !u!222 &1475506785
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -48475,9 +48538,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1543794857}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0c82980fc47d7443823e692a427ed00, type: 3}
+  m_Script: {fileID: 11500000, guid: 9e169070a6bc82e49919126f73388d8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _location: 2
   _decorHolders:
   - {fileID: 10944526}
   - {fileID: 1133440834}
@@ -48625,6 +48689,7 @@ MonoBehaviour:
   - {fileID: 1646719850}
   - {fileID: 1154027454}
   - {fileID: 1560551276}
+  - {fileID: 403464058}
 --- !u!1 &1553389292
 GameObject:
   m_ObjectHideFlags: 0
@@ -52152,8 +52217,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d1350d47e88b0904ab9c25e62685c672, type: 2}
   - {fileID: 11400000, guid: fefc1b67be3a6d74f8840576d177f83d, type: 2}
   - {fileID: 11400000, guid: 7e3142bdddde499469effe9504e38213, type: 2}
+  _itemManager: {fileID: 726145196}
   _itemView: {fileID: 1656205582}
-  _upgradeManager: {fileID: 726145196}
   _defaultConsumableUpgrades:
   - {fileID: 11400000, guid: 66c5710e75d6b7b40808e1bba8713f70, type: 2}
 --- !u!1 &1674498012
@@ -58964,7 +59029,6 @@ MonoBehaviour:
   _bindableObjects:
   - {fileID: 1297580539}
   - {fileID: 397481016}
-  - {fileID: 1280892845}
   - {fileID: 1103085983}
   - {fileID: 2098111177}
   - {fileID: 1017138916}
@@ -61737,7 +61801,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 72a975fb0e4957047b8160771602c871, type: 2}
   - {fileID: 11400000, guid: 521ee8b0837e79540b0c3208ad1528ad, type: 2}
   - {fileID: 11400000, guid: 7755e9f6a50793a45afe949b36406069, type: 2}
-  _ingredientsManager: {fileID: 917452951}
+  _itemManager: {fileID: 917452951}
   _bedTypesManager: {fileID: 585307979}
   _ingredientStorage: {fileID: 397481016}
   _spiceAutoBuy: {fileID: 11400000, guid: 8e6abd0bb54401244a0c7c6f4c7c8ff9, type: 2}
@@ -67175,6 +67239,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 915244615}
   - {fileID: 597507962}
+  - {fileID: 403464059}
   - {fileID: 1412654021}
   - {fileID: 1251689377}
   - {fileID: 1095035882}

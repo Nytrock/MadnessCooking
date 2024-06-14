@@ -2,7 +2,7 @@ using UnityEngine;
 
 [CreateAssetMenu(menuName = AssetMenuName + nameof(Ingredient))]
 
-public class Ingredient : BuyableObject {
+public class Ingredient : BuyableItem {
     [SerializeField] private IngredientType _typeIngredient;
     [SerializeField, Min(0)] private int _timeGrow;
     [SerializeField, Min(0)] private int _maxCount;

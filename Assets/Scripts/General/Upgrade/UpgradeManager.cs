@@ -1,12 +1,10 @@
 using System;
 using UnityEngine;
 
-public class UpgradeManager : MonoBehaviour {
+public class UpgradeManager : BuyableItemManager<BaseUpgrade> {
     [RequireInterface(typeof(IUpgradeable)), SerializeField]
     private MonoBehaviour[] _upgradeablesObjects;
     private IUpgradeable[] _upgradeables;
-
-    public event Action<BaseUpgrade> UpgradeAdded;
 
     private void Awake() {
         _upgradeables = new IUpgradeable[_upgradeablesObjects.Length];
@@ -17,10 +15,10 @@ public class UpgradeManager : MonoBehaviour {
         }
     }
 
-    public void AddUpgrade(BaseUpgrade upgrade) {
+    public override void AddItem(BaseUpgrade upgrade) {
         foreach (var upgradeable in _upgradeables) {
             upgradeable.CheckUpgrade(upgrade);
         }
-        UpgradeAdded?.Invoke(upgrade);
+        base.AddItem(upgrade);
     }
 }

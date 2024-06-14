@@ -3,7 +3,7 @@ using UnityEngine.Events;
 using UnityEngine.UI;
 
 public abstract class BaseChooseShopItemView<TItem> : MonoBehaviour
-    where TItem : BuyableObject {
+    where TItem : BuyableItem {
 
     [SerializeField] private ItemInfoRendererWithPrice _renderer;
     [SerializeField] private string _priceDescription;

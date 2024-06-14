@@ -2,27 +2,27 @@ using System;
 using System.Linq;
 using UnityEngine;
 
-public class TechnicManager : MonoBehaviour, IUpgradeable, IBindable<KitchenData> {
+public class TechnicManager : BuyableItemManager<Technic>, IUpgradeable, IBindable<KitchenData> {
     [SerializeField] private TechnicHolderUI _UI;
     [SerializeField] private TechnicHolder[] _holders;
-    [SerializeField] private Technic[] _defaultTechnic;
-    private KitchenData _data;
 
     [Header("Upgrades")]
     [SerializeField] private CoefficientUpgrade[] _technicCookSpeedUps;
     [SerializeField] private CoefficientUpgrade[] _technicRepairSpeedUps;
     [SerializeField] private CoefficientUpgrade[] _technicStrengthAdds;
 
-    public event Action TechnicAdded;
+    public KitchenData _tempDataDontForgetToDelete;
+
+    public event Action TechnicChanged;
 
     private void ActivateHolders() {
         foreach (var holder in _holders)
-            holder.ChangeState(_data.AvailableTechnic.Contains(holder.Technic));
-        TechnicAdded?.Invoke();
+            holder.ChangeState(_data.IsItemAvailable(holder.Technic));
+        TechnicChanged?.Invoke();
     }
 
     public bool HaveTechnic(Technic technic) {
-        if (!_data.AvailableTechnic.Contains(technic))
+        if (!_data.IsItemAvailable(technic))
             return false;
         TechnicHolder holder = FindHolderByTechic(technic);
         return holder.Accessible();
@@ -45,40 +45,41 @@ public class TechnicManager : MonoBehaviour, IUpgradeable, IBindable<KitchenData
         return null;
     }
 
-    public void AddTechnic(Technic technic) {
-        _data.AvailableTechnic.Add(technic);
+    public override void AddItem(Technic technic) {
+        base.AddItem(technic);
         TechnicHolder holder = FindHolderByTechic(technic);
         holder.ChangeState(true);
-        TechnicAdded?.Invoke();
+        TechnicChanged?.Invoke();
     }
 
     public void CheckUpgrade(BaseUpgrade upgrade) {
         if (_technicCookSpeedUps.Contains(upgrade)) {
             var coefUpgrade = upgrade as CoefficientUpgrade;
-            _data.TechnicCookSpeed = coefUpgrade.Coefficient;
+            _tempDataDontForgetToDelete.TechnicCookSpeed = coefUpgrade.Coefficient;
         } else if (_technicStrengthAdds.Contains(upgrade)) {
             var coefUpgrade = upgrade as CoefficientUpgrade;
-            _data.TechnicStrength = coefUpgrade.Coefficient;
+            _tempDataDontForgetToDelete.TechnicStrength = coefUpgrade.Coefficient;
         } else if (_technicRepairSpeedUps.Contains(upgrade)) {
             var coefUpgrade = upgrade as CoefficientUpgrade;
-            _data.TechnicRepairSpeed = coefUpgrade.Coefficient;
+            _tempDataDontForgetToDelete.TechnicRepairSpeed = coefUpgrade.Coefficient;
         }
     }
 
     public void Bind(KitchenData data, bool isFileEmpty) {
-        _data = data;
-        if (isFileEmpty) {
-            _data.AllTechnic = new TechnicData[_holders.Length];
-            _data.AvailableTechnic = _defaultTechnic.ToList();
-        }
+        _tempDataDontForgetToDelete = data;
+        if (isFileEmpty)
+            data.TechnicManager = new(_defaultItems);
+        _data = data.TechnicManager;
 
         ActivateHolders();
-        BindHolders(isFileEmpty);
+        BindHolders(data, isFileEmpty);
     }
 
-    private void BindHolders(bool isFileEmpty) {
-        for (int i = 0; i < _data.AllTechnic.Length; i++) {
-            _holders[i].Bind(_data, i, isFileEmpty);
-        }
+    private void BindHolders(KitchenData data, bool isFileEmpty) {
+        if (isFileEmpty)
+            data.TechnicHolders = new TechnicHolderData[_holders.Length];
+
+        for (int i = 0; i < data.TechnicHolders.Length; i++)
+            _holders[i].Bind(data, i, isFileEmpty);
     }
 }

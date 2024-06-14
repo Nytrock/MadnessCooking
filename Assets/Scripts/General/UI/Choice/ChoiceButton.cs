@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 [RequireComponent(typeof(Button))]
 public abstract class ChoiceButton<TItem> : MonoBehaviour
-    where TItem : BuyableObject {
+    where TItem : BuyableItem {
 
     [SerializeField] private Sprite _deselectedSprite;
     [SerializeField] private Sprite _selectedSprite;

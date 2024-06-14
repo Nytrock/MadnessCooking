@@ -1,7 +1,7 @@
 using UnityEngine;
 
-public abstract class BuyableObject : ScriptableObject {
-    public const string AssetMenuName = nameof(BuyableObject) + "/";
+public abstract class BuyableItem : ScriptableObject {
+    public const string AssetMenuName = nameof(BuyableItem) + "/";
 
     [SerializeField] private Sprite _icon;
     [SerializeField, Min(0)] private int _price;

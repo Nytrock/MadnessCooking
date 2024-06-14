@@ -8,4 +8,8 @@ public class DecorHolder : MonoBehaviour {
     public virtual void ChangeState(bool newValue) {
         gameObject.SetActive(newValue);
     }
+
+    public bool CheckLocation(DecorLocation location) {
+        return location == _decor.Location;
+    }
 }

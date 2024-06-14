@@ -5,10 +5,10 @@ using UnityEngine;
 using Object = UnityEngine.Object;
 
 #if UNITY_EDITOR
-[CustomEditor(typeof(BuyableObject), true)]
+[CustomEditor(typeof(BuyableItem), true)]
 [CanEditMultipleObjects]
 public class BuyableObjectEditor : Editor {
-    private BuyableObject Item { get { return target as BuyableObject; } }
+    private BuyableItem Item { get { return target as BuyableItem; } }
 
     public override Texture2D RenderStaticPreview(string assetPath, Object[] subAssets, int width, int height) {
         if (Item.Icon != null) {

@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public abstract class ChoiceBuyUI<TItem> : ChoiceUI<TItem, ChoiceBuyButton<TItem>>
-    where TItem : BuyableObject {
+    where TItem : BuyableItem {
 
     [SerializeField] protected ChoiceBuyDescriptionUI _description;
 

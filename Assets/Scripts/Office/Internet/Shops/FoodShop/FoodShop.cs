@@ -1,19 +1,13 @@
 using UnityEngine;
 
 public class FoodShop : BaseChooseShop<Food, OfficeData> {
-    [SerializeField] private FoodManager _foodManager;
     [SerializeField] private IngredientsManager _ingredientManager;
     [SerializeField] private TechnicManager _technicManager;
 
     protected override void Awake() {
         base.Awake();
-        _ingredientManager.IngredientAdded += delegate { UpdatePanels(); };
-        _technicManager.TechnicAdded += delegate { UpdatePanels(); };
-    }
-
-    public override void BuyItem(Food food) {
-        _foodManager.AddFood(food);
-        base.BuyItem(food);
+        _ingredientManager.ItemAdded += delegate { UpdatePanels(); };
+        _technicManager.ItemAdded += delegate { UpdatePanels(); };
     }
 
     protected override bool IsBuyable(Food food) {

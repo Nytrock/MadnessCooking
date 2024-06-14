@@ -1,4 +1,4 @@
-public enum DecorType {
+public enum DecorLocation {
     None,
     Kitchen,
     Office,

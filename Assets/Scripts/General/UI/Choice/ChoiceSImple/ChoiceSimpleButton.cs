@@ -1,7 +1,7 @@
 using UnityEngine.UI;
 
 public abstract class ChoiceSimpleButton<TItem> : ChoiceButton<TItem>
-    where TItem : BuyableObject {
+    where TItem : BuyableItem {
 
     public virtual void Setup(TItem item, int index, ChoiceSimpleUI<TItem> ui) {
         _button = GetComponent<Button>();

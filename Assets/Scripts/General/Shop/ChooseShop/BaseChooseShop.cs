@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 public abstract class BaseChooseShop<TItem, TData> : SaveableBaseShop<TItem, TData>
-    where TItem : BuyableObject where TData : ISaveable {
+    where TItem : BuyableItem where TData : ISaveable {
 
     [SerializeField] private BaseChooseShopItemView<TItem> _itemView;
     private TItem _itemToBuy;
@@ -40,7 +40,7 @@ public abstract class BaseChooseShop<TItem, TData> : SaveableBaseShop<TItem, TDa
         _itemView.ResetInfo();
     }
 
-    protected override UnityAction GetPanelAction(BuyableObject item) {
+    protected override UnityAction GetPanelAction(BuyableItem item) {
         return () => ChooseItem(item as TItem);
     }
 }

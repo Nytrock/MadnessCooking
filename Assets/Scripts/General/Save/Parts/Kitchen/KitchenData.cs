@@ -1,14 +1,12 @@
 using System;
-using System.Collections.Generic;
 
 [Serializable]
 public class KitchenData : ISaveable {
-    public List<Food> AvailableFood;
+    public BuyableItemManagerData<Food> FoodManager;
     public IngredientStorageData KitchenStorage;
-    public DecorManagerData DecorData = new();
 
-    public List<Technic> AvailableTechnic;
-    public TechnicData[] AllTechnic;
+    public BuyableItemManagerData<Technic> TechnicManager;
+    public TechnicHolderData[] TechnicHolders;
 
     public bool IsAutoSpice;
     public bool IsStrengthShow;
