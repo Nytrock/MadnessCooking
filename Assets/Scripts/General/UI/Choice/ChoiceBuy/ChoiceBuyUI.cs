@@ -1,6 +1,8 @@
 using UnityEngine;
 
-public abstract class ChoiceBuyUI<TItem> : ChoiceUI<TItem, ChoiceBuyButton<TItem>> where TItem : BuyableObject {
+public abstract class ChoiceBuyUI<TItem> : ChoiceUI<TItem, ChoiceBuyButton<TItem>>
+    where TItem : BuyableObject {
+
     [SerializeField] protected ChoiceBuyDescriptionUI _description;
 
     public virtual void Choice(int index, bool isBuyable) {

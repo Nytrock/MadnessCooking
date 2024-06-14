@@ -4143,7 +4143,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9037f5d40da9b884299e1b6df4ef1a62, type: 3}
+  m_Script: {fileID: 11500000, guid: 2480d095c66ee7b4faba9e97a203e79a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &125939286
@@ -4598,7 +4598,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _shop: {fileID: 145651391}
   _catalog: {fileID: 1931358365}
-  _decorToBuy:
+  _defaultItemsToBuy:
   - {fileID: 11400000, guid: a228927c2ada28f439ab270179e3d603, type: 2}
   - {fileID: 11400000, guid: 293e247468f89f34d97abfdc9e934a2c, type: 2}
   - {fileID: 11400000, guid: f42d7dff24558264daa25b93e840da08, type: 2}
@@ -11865,7 +11865,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9037f5d40da9b884299e1b6df4ef1a62, type: 3}
+  m_Script: {fileID: 11500000, guid: 2480d095c66ee7b4faba9e97a203e79a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &396402424
@@ -18013,7 +18013,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02135ab99ccef3140a76dfb38398d702, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _shop: {fileID: 1452928099}
   _renderer:
     _icon: {fileID: 1603776846}
     _nameText: {fileID: 463537531}
@@ -19026,7 +19025,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9037f5d40da9b884299e1b6df4ef1a62, type: 3}
+  m_Script: {fileID: 11500000, guid: 2480d095c66ee7b4faba9e97a203e79a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &613763050
@@ -24506,8 +24505,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _shop: {fileID: 40142232}
   _catalog: {fileID: 1241721094}
-  _upgradeManager: {fileID: 1299343206}
-  _upgradesToBuy:
+  _defaultItemsToBuy:
   - {fileID: 11400000, guid: 5becd9c26c71db1489f747414f938e9d, type: 2}
   - {fileID: 11400000, guid: a04fd64390135eb4cb05b6f2b74f582a, type: 2}
   - {fileID: 11400000, guid: 62639c93432a4664993c9cc144d7ac01, type: 2}
@@ -24517,6 +24515,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2a65908cd78c0474d8e496dc8c194e34, type: 2}
   - {fileID: 11400000, guid: 0abc0cd0e69ad8d4081478ea3d26f762, type: 2}
   - {fileID: 11400000, guid: af45ffd0a860e6c43aad174de4a3fb3f, type: 2}
+  _upgradeManager: {fileID: 1299343206}
 --- !u!222 &768940556
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -27024,7 +27023,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9037f5d40da9b884299e1b6df4ef1a62, type: 3}
+  m_Script: {fileID: 11500000, guid: 2480d095c66ee7b4faba9e97a203e79a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &880111085
@@ -30169,14 +30168,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ingredientImages:
-  - {fileID: 601040628}
-  - {fileID: 696779637}
-  - {fileID: 2111629212}
-  - {fileID: 227726123}
-  - {fileID: 1436281158}
-  - {fileID: 496575278}
-  - {fileID: 1726139273}
-  _grayscaleMaterial: {fileID: 2100000, guid: 7c2aa74e2b2bca04f9fea58636c61649, type: 2}
+  - _grayscaleMaterial: {fileID: 0}
+    _image: {fileID: 0}
+  - _grayscaleMaterial: {fileID: 0}
+    _image: {fileID: 0}
+  - _grayscaleMaterial: {fileID: 0}
+    _image: {fileID: 0}
+  - _grayscaleMaterial: {fileID: 0}
+    _image: {fileID: 0}
+  - _grayscaleMaterial: {fileID: 0}
+    _image: {fileID: 0}
+  - _grayscaleMaterial: {fileID: 0}
+    _image: {fileID: 0}
+  - _grayscaleMaterial: {fileID: 0}
+    _image: {fileID: 0}
   _ingredientsManager: {fileID: 917452951}
 --- !u!1 &949209865
 GameObject:
@@ -35870,7 +35875,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9037f5d40da9b884299e1b6df4ef1a62, type: 3}
+  m_Script: {fileID: 11500000, guid: 2480d095c66ee7b4faba9e97a203e79a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1150330515
@@ -36086,7 +36091,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9037f5d40da9b884299e1b6df4ef1a62, type: 3}
+  m_Script: {fileID: 11500000, guid: 2480d095c66ee7b4faba9e97a203e79a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1159207025
@@ -36256,7 +36261,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9037f5d40da9b884299e1b6df4ef1a62, type: 3}
+  m_Script: {fileID: 11500000, guid: 2480d095c66ee7b4faba9e97a203e79a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1162682864
@@ -37910,6 +37915,7 @@ MonoBehaviour:
   - {fileID: 1144833439}
   _kitchenStorage: {fileID: 397481016}
   _technicManager: {fileID: 1297580539}
+  _ingredientManager: {fileID: 0}
 --- !u!114 &1209240107
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40449,7 +40455,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9037f5d40da9b884299e1b6df4ef1a62, type: 3}
+  m_Script: {fileID: 11500000, guid: 2480d095c66ee7b4faba9e97a203e79a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1276766699
@@ -40817,7 +40823,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9037f5d40da9b884299e1b6df4ef1a62, type: 3}
+  m_Script: {fileID: 11500000, guid: 2480d095c66ee7b4faba9e97a203e79a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1297580537
@@ -42049,7 +42055,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9037f5d40da9b884299e1b6df4ef1a62, type: 3}
+  m_Script: {fileID: 11500000, guid: 2480d095c66ee7b4faba9e97a203e79a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1341675044
@@ -43321,6 +43327,7 @@ MonoBehaviour:
   - {fileID: 2013816825}
   _kitchenStorage: {fileID: 397481016}
   _technicManager: {fileID: 1297580539}
+  _ingredientManager: {fileID: 917452951}
 --- !u!1 &1393102042
 GameObject:
   m_ObjectHideFlags: 0
@@ -45343,8 +45350,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _shop: {fileID: 694945887}
   _catalog: {fileID: 2048893941}
-  _itemView: {fileID: 580367322}
-  _foodToBuy:
+  _defaultItemsToBuy:
   - {fileID: 11400000, guid: 5e2491c030e31474a987b00dde45521a, type: 2}
   - {fileID: 11400000, guid: 0c162a520a4552647beda626af5e896d, type: 2}
   - {fileID: 11400000, guid: 8bc862ab2570ee64b9e8ff324b321c7b, type: 2}
@@ -45375,7 +45381,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c00caadbdf55c9142affdf6fefb42640, type: 2}
   - {fileID: 11400000, guid: d962533a8198db345b4b5944ebc95faf, type: 2}
   - {fileID: 11400000, guid: 87f6dce480009e647827c7826e4351c7, type: 2}
+  _itemView: {fileID: 580367322}
   _foodManager: {fileID: 1103085983}
+  _ingredientManager: {fileID: 917452951}
+  _technicManager: {fileID: 1297580539}
 --- !u!222 &1452928100
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -46277,7 +46286,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _shop: {fileID: 1428399313}
   _catalog: {fileID: 977822384}
-  _technicToBuy:
+  _defaultItemsToBuy:
   - {fileID: 11400000, guid: 8fe5a1b5c2c60e04e8303266be891355, type: 2}
   - {fileID: 11400000, guid: b9a3806faa925c349973bf0ea4d3f160, type: 2}
   - {fileID: 11400000, guid: 7a3095255cbd1074dba21111d12d19ae, type: 2}
@@ -48328,7 +48337,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9037f5d40da9b884299e1b6df4ef1a62, type: 3}
+  m_Script: {fileID: 11500000, guid: 2480d095c66ee7b4faba9e97a203e79a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1541666139
@@ -50645,8 +50654,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _panel: {fileID: 461941791}
   _downloadBar: {fileID: 995300347}
-  _minWait: 1
-  _maxWait: 4
+  _minWait: 0
+  _maxWait: 0
   _speedUpgrades:
   - {fileID: 11400000, guid: a95ed5fb47287f74bb27c597c67df11f, type: 2}
   - {fileID: 11400000, guid: 171083ec7a3923a4495da11e8e3e308b, type: 2}
@@ -51355,7 +51364,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12db2bb6cf1147e49926458120e1df07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _shop: {fileID: 1671263195}
   _renderer:
     _icon: {fileID: 908150623}
     _nameText: {fileID: 1458276953}
@@ -52126,12 +52134,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _shop: {fileID: 1723905300}
   _catalog: {fileID: 317724486}
-  _itemView: {fileID: 1656205582}
-  _upgradeManager: {fileID: 726145196}
-  _upgradesHolders:
-  - _consumableUpgrade: {fileID: 11400000, guid: 66c5710e75d6b7b40808e1bba8713f70, type: 2}
-    _nowCount: 0
-  _upgradesToBuy:
+  _defaultItemsToBuy:
   - {fileID: 11400000, guid: d7ba24184fd3ada45858988ee97f9a14, type: 2}
   - {fileID: 11400000, guid: a4d51e622ef1ec247afd10ec64670ee0, type: 2}
   - {fileID: 11400000, guid: f70f6b07b4f13e241bb07edeeff27664, type: 2}
@@ -52149,6 +52152,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d1350d47e88b0904ab9c25e62685c672, type: 2}
   - {fileID: 11400000, guid: fefc1b67be3a6d74f8840576d177f83d, type: 2}
   - {fileID: 11400000, guid: 7e3142bdddde499469effe9504e38213, type: 2}
+  _itemView: {fileID: 1656205582}
+  _upgradeManager: {fileID: 726145196}
+  _defaultConsumableUpgrades:
+  - {fileID: 11400000, guid: 66c5710e75d6b7b40808e1bba8713f70, type: 2}
 --- !u!1 &1674498012
 GameObject:
   m_ObjectHideFlags: 0
@@ -59964,7 +59971,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9037f5d40da9b884299e1b6df4ef1a62, type: 3}
+  m_Script: {fileID: 11500000, guid: 2480d095c66ee7b4faba9e97a203e79a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1923875771
@@ -60113,7 +60120,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9037f5d40da9b884299e1b6df4ef1a62, type: 3}
+  m_Script: {fileID: 11500000, guid: 2480d095c66ee7b4faba9e97a203e79a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1931213748
@@ -61716,7 +61723,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _shop: {fileID: 1727089039}
   _catalog: {fileID: 689410985}
-  _ingredientsToBuy:
+  _defaultItemsToBuy:
   - {fileID: 11400000, guid: 1a1acf5d79493354cad0d0956b0d8689, type: 2}
   - {fileID: 11400000, guid: b6acdd96a3df47242adb35216986550f, type: 2}
   - {fileID: 11400000, guid: 78d7c77369aa8f64d996e81e9461096f, type: 2}
@@ -62398,7 +62405,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9037f5d40da9b884299e1b6df4ef1a62, type: 3}
+  m_Script: {fileID: 11500000, guid: 2480d095c66ee7b4faba9e97a203e79a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2014099707
@@ -66256,7 +66263,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9037f5d40da9b884299e1b6df4ef1a62, type: 3}
+  m_Script: {fileID: 11500000, guid: 2480d095c66ee7b4faba9e97a203e79a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2103450608
@@ -67031,10 +67038,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: RecipePart
       objectReference: {fileID: 0}
-    - target: {fileID: 7348740036019757012, guid: d08aaa491f9c74b45916e7fb2e2dbbc3, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -67053,7 +67056,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9037f5d40da9b884299e1b6df4ef1a62, type: 3}
+  m_Script: {fileID: 11500000, guid: 2480d095c66ee7b4faba9e97a203e79a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &6550800951891498834

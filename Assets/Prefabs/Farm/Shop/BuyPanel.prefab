@@ -340,7 +340,7 @@ GameObject:
   - component: {fileID: 4473664777590076585}
   - component: {fileID: 8026930321077372554}
   - component: {fileID: 3140355953497521022}
-  - component: {fileID: 8391754332927031852}
+  - component: {fileID: 1678979839515813486}
   m_Layer: 0
   m_Name: BuyPanel
   m_TagString: Untagged
@@ -409,7 +409,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &8391754332927031852
+--- !u!114 &1678979839515813486
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -418,9 +418,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 6751845763254829717}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f177f46e46fed94d8331ce6e62e16e5, type: 3}
+  m_Script: {fileID: 11500000, guid: e6076c39c01c65840a75ed3a48fec05f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _sideInfo:
+    _grayscaleMaterial: {fileID: 0}
+    _image: {fileID: 0}
   _buyButton: {fileID: 736381651559135907}
   _itemInfoRenderer:
     _icon: {fileID: 2320696172845768531}

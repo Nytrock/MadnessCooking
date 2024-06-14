@@ -2,7 +2,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public abstract class ChoiceUI<TItem, TButton> : MonoBehaviour where TItem : BuyableObject where TButton : ChoiceButton<TItem> {
+public abstract class ChoiceUI<TItem, TButton> : MonoBehaviour
+    where TItem : BuyableObject where TButton : ChoiceButton<TItem> {
+
     [SerializeField] protected GameObject _UI;
     [SerializeField] protected ChoicePool<TItem, TButton> _choiceButtonPool;
     [SerializeField] protected Button _submitButton;

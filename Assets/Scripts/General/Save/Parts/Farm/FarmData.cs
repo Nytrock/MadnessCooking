@@ -8,10 +8,7 @@ public class FarmData : ISaveable {
 
     public SpaceManagerData FarmBedGroups = new();
     public FarmBedData[] FarmBeds;
-
-    public LimitedConsumableUpgradeHolder[] UpgradesHolders;
-    public BaseUpgrade[] UpgradesToBuy;
-    public List<BaseUpgrade> AvailableUpgrades = new();
+    public FarmShopData FarmShop;
 
     public bool IsCowNextWheat = true;
     public bool IsWheatDistributing;

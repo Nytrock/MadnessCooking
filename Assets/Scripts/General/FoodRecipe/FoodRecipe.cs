@@ -13,7 +13,7 @@ public abstract class FoodRecipe<T> : MonoBehaviour {
         _canCook = true;
 
         SetupIngredients(food, ref _canCook);
-        SetupTechnic(food.TypeTechnic, food.IngredientsCount, ref _canCook);
+        SetupTechnic(food.TypeTechnic, food.CountIngredients, ref _canCook);
     }
 
     public abstract void DisableParts();

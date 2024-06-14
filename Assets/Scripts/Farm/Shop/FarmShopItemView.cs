@@ -1,8 +1,6 @@
-public class FarmShopItemView : BaseChooseShopItemView {
-    public override void BuyChosen() {
-        _shop.BuyItem(_itemToBuy);
-        var farmShop = _shop as FarmShop;
-        if (farmShop.IsNoNextUpgrade)
-            ResetInfo();
+public class FarmShopItemView : BaseChooseShopItemView<BaseUpgrade> {
+    protected override void SetInfo(BaseUpgrade item) {
+        base.SetInfo(item);
+        // Show addition data
     }
 }

@@ -1,20 +1,19 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class FoodRecipePart : MonoBehaviour {
-    [SerializeField] protected Image _icon;
+    [SerializeField] protected GrayscaleImageRenderer _icon;
     [SerializeField] protected TextMeshProUGUI _countText;
 
-    public virtual void Setup(IngredientCount count, bool isHave) {
+    public virtual void Setup(IngredientCount count, bool isAvailable) {
         gameObject.SetActive(true);
-        _icon.sprite = count.Ingredient.Icon;
+        _icon.Setup(count.Ingredient.Icon, !isAvailable);
         _countText.text = count.Count.ToString() + "x";
     }
 
-    public virtual void Setup(Technic technic, bool isFree) {
+    public virtual void Setup(Technic technic, bool isAvailable) {
         gameObject.SetActive(true);
-        _icon.sprite = technic.Icon;
+        _icon.Setup(technic.Icon, !isAvailable);
         _countText.text = "1x";
     }
 }

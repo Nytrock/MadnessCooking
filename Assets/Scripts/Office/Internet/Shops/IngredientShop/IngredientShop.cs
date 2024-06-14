@@ -1,10 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
-public class IngredientShop : BaseInstantShop, IUpgradeable, IBindable<OfficeData> {
-    [SerializeField] private List<Ingredient> _ingredientsToBuy;
+public class IngredientShop : BaseInstantShop<Ingredient, OfficeData>, IUpgradeable {
     [SerializeField] private IngredientsManager _ingredientsManager;
     [SerializeField] private BedTypesManager _bedTypesManager;
     [SerializeField] private KitchenStorage _ingredientStorage;
@@ -12,48 +8,47 @@ public class IngredientShop : BaseInstantShop, IUpgradeable, IBindable<OfficeDat
     [Header("Upgrades")]
     [SerializeField] private BaseUpgrade _spiceAutoBuy;
 
-    private OfficeData _data;
-
-    public BedTypesManager BedTypesManager => _bedTypesManager;
-    public override Type Type => typeof(Ingredient);
-
-    public override void BuyItem(BuyableObject item) {
-        var ingredient = item as Ingredient;
-        if (ingredient == null)
-            throw new NullReferenceException($"Buying item is not {Type}");
-
-        MoneyManager.Instance.ChangeMoney(-ingredient.Price);
-        if (ingredient.Type == IngredientType.Buyable) {
-            _ingredientStorage.PutIngredientWithRemain(new IngredientCount(ingredient, 1));
-        } else {
-            _ingredientsManager.AddIngredient(ingredient);
-            RemoveIngredient(ingredient);
-        }
+    private void Awake() {
+        _bedTypesManager.TypeAdded += delegate { UpdatePanels(); };
     }
 
     public void CheckUpgrade(BaseUpgrade upgrade) {
-        if (upgrade == _spiceAutoBuy)
-            RemoveIngredient(ConstIngredients.Instance.Spice);
+        if (upgrade == _spiceAutoBuy) {
+            Ingredient spice = ConstIngredients.Instance.Spice;
+            int index = _data.IndexOfItemPanel(spice);
+            RemoveItemPanel(spice, index);
+        }
     }
 
-    private void RemoveIngredient(Ingredient ingredient) {
-        int index = _ingredientsToBuy.IndexOf(ingredient);
-        _ingredientsToBuy.RemoveAt(index);
-        _catalog.RemovePanel(index);
-        SetObjectsArray();
+    protected override void RemoveItemPanel(Ingredient item, int index) {
+        if (item.Type == IngredientType.Buyable) {
+            _ingredientStorage.PutIngredientWithRemain(new IngredientCount(item, 1));
+        } else {
+            _ingredientsManager.AddIngredient(item);
+            base.RemoveItemPanel(item, index);
+        }
     }
 
-    protected override void SetObjectsArray() {
-        _ingredientsToBuy = _ingredientsToBuy.OrderBy(x =>
-        (x.Type != IngredientType.Buyable, x.Price)).ToList();
-        _data.ShopIngredients = _ingredientsToBuy.ToArray();
-        _itemsToBuy = _data.ShopIngredients;
+    protected override bool IsBuyable(Ingredient ingredient) {
+        if (ingredient.Type == IngredientType.Buyable)
+            return true;
+
+        return _bedTypesManager.HaveBedForIngredient(ingredient);
     }
 
-    public void Bind(OfficeData data, bool isFileEmpty) {
-        _data = data;
-        if (!isFileEmpty)
-            _ingredientsToBuy = _data.ShopIngredients.ToList();
-        LateStart();
+    protected override GrayscaleImageData GenerateSideInfo(Ingredient ingredient) {
+        if (ingredient.Type == IngredientType.Buyable)
+            return null;
+
+        BedType bedType = _bedTypesManager.GetBedWithIngredientType(ingredient.Type);
+        bool isBedAvailable = _bedTypesManager.HaveBed(bedType);
+        return new GrayscaleImageData(bedType.Icon, isBedAvailable);
+    }
+
+    public override void Bind(OfficeData data, bool isFileEmpty) {
+        if (isFileEmpty)
+            data.IngredientShop = new(_defaultItemsToBuy);
+        _data = data.IngredientShop;
+        base.Bind(data, isFileEmpty);
     }
 }

@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class IngredientStorage<TData> : MonoBehaviour, IBindable<TData> where TData : ISaveable {
+public abstract class IngredientStorage<TData> : MonoBehaviour, IBindable<TData>
+    where TData : ISaveable {
+
     [SerializeField] protected int _defaultMaxSpace = 100;
 
     public IngredientStorageData Data { get; protected set; }

@@ -1,41 +1,36 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
-public class FoodShop : BaseChooseShop, IBindable<OfficeData> {
-    [SerializeField] private List<Food> _foodToBuy;
+public class FoodShop : BaseChooseShop<Food, OfficeData> {
     [SerializeField] private FoodManager _foodManager;
-    private OfficeData _data;
+    [SerializeField] private IngredientsManager _ingredientManager;
+    [SerializeField] private TechnicManager _technicManager;
 
-    public override Type Type => typeof(Food);
+    protected override void Awake() {
+        base.Awake();
+        _ingredientManager.IngredientAdded += delegate { UpdatePanels(); };
+        _technicManager.TechnicAdded += delegate { UpdatePanels(); };
+    }
 
-    public override void BuyItem(BuyableObject item) {
-        base.BuyItem(item);
-
-        var food = item as Food;
-        if (food == null)
-            throw new NullReferenceException($"Buying item is not {Type}");
-
-        MoneyManager.Instance.ChangeMoney(-food.Price);
+    public override void BuyItem(Food food) {
         _foodManager.AddFood(food);
-
-        int index = _foodToBuy.IndexOf(food);
-        _foodToBuy.RemoveAt(index);
-        _catalog.RemovePanel(index);
-        SetObjectsArray();
+        base.BuyItem(food);
     }
 
-    protected override void SetObjectsArray() {
-        _foodToBuy = _foodToBuy.OrderBy(x => x.Price).ToList();
-        _data.ShopFood = _foodToBuy.ToArray();
-        _itemsToBuy = _data.ShopFood;
+    protected override bool IsBuyable(Food food) {
+        foreach (var ingredientCount in food.Ingredients)
+            if (!_ingredientManager.HaveIngredient(ingredientCount.Ingredient))
+                return false;
+
+        if (!_technicManager.HaveTechnic(food.TypeTechnic))
+            return false;
+
+        return true;
     }
 
-    public void Bind(OfficeData data, bool isFileEmpty) {
-        _data = data;
-        if (!isFileEmpty)
-            _foodToBuy = _data.ShopFood.ToList();
-        LateStart();
+    public override void Bind(OfficeData data, bool isFileEmpty) {
+        if (isFileEmpty)
+            data.FoodShop = new(_defaultItemsToBuy);
+        _data = data.FoodShop;
+        base.Bind(data, isFileEmpty);
     }
 }

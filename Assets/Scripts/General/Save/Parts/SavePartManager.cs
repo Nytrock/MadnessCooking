@@ -1,6 +1,8 @@
 using UnityEngine;
 
-public abstract class SavePartManager<TData> : MonoBehaviour where TData : ISaveable {
+public abstract class SavePartManager<TData> : MonoBehaviour
+    where TData : ISaveable {
+
     protected IBindable<TData>[] _bindables;
 
     public void LoadData(TData data, bool isFileEmpty) {

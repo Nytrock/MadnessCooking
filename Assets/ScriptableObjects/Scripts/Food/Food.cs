@@ -20,5 +20,5 @@ public class Food : BuyableObject {
     public int MoneyGet => _moneyGet;
 
     public IEnumerable<IngredientCount> Ingredients => _ingredients.GetIngredients();
-    public int IngredientsCount => _ingredients.Size;
+    public int CountIngredients => _ingredients.Size;
 }

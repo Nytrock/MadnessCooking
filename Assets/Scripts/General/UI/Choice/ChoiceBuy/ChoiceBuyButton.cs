@@ -1,5 +1,7 @@
 using UnityEngine.UI;
-public abstract class ChoiceBuyButton<TItem> : ChoiceButton<TItem> where TItem : BuyableObject {
+public abstract class ChoiceBuyButton<TItem> : ChoiceButton<TItem>
+    where TItem : BuyableObject {
+
     private int _price;
     protected bool _isBuyable;
 

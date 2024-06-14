@@ -33,6 +33,13 @@ public class BedTypesManager : MonoBehaviour, IUpgradeable, IBindable<FarmData> 
         return false;
     }
 
+    public bool HaveBedForIngredient(Ingredient ingredient) {
+        foreach (var bed in _data.AvailableBedTypes)
+            if (bed.AcceptableType == ingredient.Type)
+                return true;
+        return false;
+    }
+
     public void CheckUpgrade(BaseUpgrade upgrade) {
         if (_bedsUpgrades.Contains(upgrade)) {
             var bedTypeUpgrade = upgrade as BedTypeUpgrade;

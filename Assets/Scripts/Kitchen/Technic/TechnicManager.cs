@@ -13,12 +13,12 @@ public class TechnicManager : MonoBehaviour, IUpgradeable, IBindable<KitchenData
     [SerializeField] private CoefficientUpgrade[] _technicRepairSpeedUps;
     [SerializeField] private CoefficientUpgrade[] _technicStrengthAdds;
 
-    public event Action TechnicChanged;
+    public event Action TechnicAdded;
 
     private void ActivateHolders() {
         foreach (var holder in _holders)
             holder.ChangeState(_data.AvailableTechnic.Contains(holder.Technic));
-        TechnicChanged?.Invoke();
+        TechnicAdded?.Invoke();
     }
 
     public bool HaveTechnic(Technic technic) {
@@ -49,7 +49,7 @@ public class TechnicManager : MonoBehaviour, IUpgradeable, IBindable<KitchenData
         _data.AvailableTechnic.Add(technic);
         TechnicHolder holder = FindHolderByTechic(technic);
         holder.ChangeState(true);
-        TechnicChanged?.Invoke();
+        TechnicAdded?.Invoke();
     }
 
     public void CheckUpgrade(BaseUpgrade upgrade) {

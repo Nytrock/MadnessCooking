@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = AssetMenuName + nameof(FarmBedUpgrade))]
-public class FarmBedUpgrade : GraphUpgrade {
+public class FarmBedUpgrade : BaseUpgrade {
     public new const string AssetMenuName = BaseUpgrade.AssetMenuName + "FarmBedUpgrades/";
 
     [SerializeField, Min(0)] private int _priceAdd;

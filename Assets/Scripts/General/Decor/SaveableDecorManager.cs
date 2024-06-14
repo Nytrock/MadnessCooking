@@ -1,6 +1,8 @@
 using System.Linq;
 
-public abstract class SaveableDecorManager<TData> : BaseDecorManager, IBindable<TData> where TData : ISaveable {
+public abstract class SaveableDecorManager<TData> : BaseDecorManager, IBindable<TData>
+    where TData : ISaveable {
+
     protected DecorManagerData _data;
 
     public override void AddDecor(Decor decor) {

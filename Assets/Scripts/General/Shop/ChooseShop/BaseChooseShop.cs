@@ -1,8 +1,15 @@
 using UnityEngine;
+using UnityEngine.Events;
 
-public abstract class BaseChooseShop : BaseShop {
-    [SerializeField] private BaseChooseShopItemView _itemView;
-    public BaseChooseBuyPanel NowPanel { get; private set; }
+public abstract class BaseChooseShop<TItem, TData> : SaveableBaseShop<TItem, TData>
+    where TItem : BuyableObject where TData : ISaveable {
+
+    [SerializeField] private BaseChooseShopItemView<TItem> _itemView;
+    private TItem _itemToBuy;
+
+    protected virtual void Awake() {
+        _itemView.SetButtonAction(delegate { BuyItem(_itemToBuy); });
+    }
 
     public override void ChangeShopState(bool newState) {
         base.ChangeShopState(newState);
@@ -11,12 +18,29 @@ public abstract class BaseChooseShop : BaseShop {
             _itemView.ResetInfo();
     }
 
-    public override void BuyItem(BuyableObject item) {
-        NowPanel.BuyChosenItem();
+    protected override void ReplaceItemPanel(TItem newItem, int index) {
+        base.ReplaceItemPanel(newItem, index);
+        _itemToBuy = newItem;
+        _itemView.ShowItem(newItem, IsBuyable(newItem));
     }
 
-    public void ChooseItem(BaseChooseBuyPanel panel) {
-        NowPanel = panel;
-        _itemView.ShowItem(panel.Item);
+    private void ChooseItem(TItem item) {
+        _itemToBuy = item;
+        _itemView.ShowItem(_itemToBuy, IsBuyable(_itemToBuy));
+    }
+
+    protected override void UpdatePanels() {
+        base.UpdatePanels();
+        if (_itemToBuy != null)
+            _itemView.UpdateBuyable(IsBuyable(_itemToBuy));
+    }
+
+    protected override void RemoveItemPanel(TItem item, int index) {
+        base.RemoveItemPanel(item, index);
+        _itemView.ResetInfo();
+    }
+
+    protected override UnityAction GetPanelAction(BuyableObject item) {
+        return () => ChooseItem(item as TItem);
     }
 }

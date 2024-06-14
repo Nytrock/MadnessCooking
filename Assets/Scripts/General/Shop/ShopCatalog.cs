@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,31 +7,23 @@ public class ShopCatalog : MonoBehaviour {
     [SerializeField] private ShopCatalogPage _pagePrefab;
     [SerializeField] private Button _nextButton;
     [SerializeField] private Button _previousButton;
-    private BaseShop _shop;
 
     private readonly List<ShopCatalogPage> _pages = new();
     private int _nowPage = 0;
 
     public Transform PagesContainer => _pagesContainer;
 
-    public void SetShop(BaseShop shop) {
-        if (_pagePrefab.ItemType != shop.Type)
-            throw new ArgumentException("Buyable object type of shop and buy panel don't match");
-
-        _shop = shop;
-    }
-
-    public void GeneratePanel(BuyableObject item) {
+    public void GeneratePanel(BuyPanelData panelData) {
         if (_pages.Count == 0 || _pages[^1].ItemCount == _pages[^1].MaxItemCount) {
             GeneratePage();
             UpdateButtons();
         }
-        _pages[^1].GeneratePanel(item);
+
+        _pages[^1].GeneratePanel(panelData);
     }
 
     public void GeneratePage() {
         ShopCatalogPage page = Instantiate(_pagePrefab, _pagesContainer);
-        page.SetShop(_shop);
         _pages.Add(page);
         page.ChangeState(false);
     }
@@ -65,9 +56,13 @@ public class ShopCatalog : MonoBehaviour {
         _previousButton.gameObject.SetActive(_pages.Count != 1);
     }
 
+    private void CalculateIndexes(int index, out int startPageIndex, out int panelIndex) {
+        startPageIndex = index / _pages[0].MaxItemCount;
+        panelIndex = index % _pages[0].MaxItemCount;
+    }
+
     public void RemovePanel(int removedItemIndex) {
-        int startPageIndex = removedItemIndex / _pages[0].MaxItemCount;
-        int panelIndex = removedItemIndex % _pages[0].MaxItemCount;
+        CalculateIndexes(removedItemIndex, out int startPageIndex, out int panelIndex);
         _pages[startPageIndex].DestroyPanelByIndex(panelIndex);
         UpdatePages(startPageIndex);
     }
@@ -82,10 +77,14 @@ public class ShopCatalog : MonoBehaviour {
             DestroyLastPage();
     }
 
-    public void UpdatePanel(int updatedItemIndex, BuyableObject newItem) {
-        int startPageIndex = updatedItemIndex / _pages[0].MaxItemCount;
-        int panelIndex = updatedItemIndex % _pages[0].MaxItemCount;
-        _pages[startPageIndex].UpdatePanelByIndex(panelIndex, newItem);
+    public void ReplacePanelItem(int updatedItemIndex, BuyPanelData newData) {
+        CalculateIndexes(updatedItemIndex, out int startPageIndex, out int panelIndex);
+        _pages[startPageIndex].UpdatePanelDataByIndex(panelIndex, newData);
+    }
+
+    public void UpdatePanel(int updatedItemIndex, BuyPanelData panelData) {
+        CalculateIndexes(updatedItemIndex, out int startPageIndex, out int panelIndex);
+        _pages[startPageIndex].UpdatePanelDataByIndex(panelIndex, panelData);
     }
 
     private void DestroyLastPage() {

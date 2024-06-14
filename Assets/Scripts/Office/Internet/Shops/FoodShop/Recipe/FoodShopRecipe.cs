@@ -1,12 +1,15 @@
-using System.Linq;
+using UnityEngine;
 
-public class ShopFoodRecipe : FoodRecipe<ShopFoodRecipePart> {
+public class FoodShopRecipe : FoodRecipe<FoodShopRecipePart> {
+
+    [SerializeField] protected IngredientsManager _ingredientManager;
+
     protected override void SetupIngredients(Food food, ref bool canCook) {
         int index = 0;
-        foreach (var ingredientCount in food.Ingredients.Select((value, index) => new { value, index })) {
-            bool haveCount = _kitchenStorage.HaveCount(ingredientCount.value);
+        foreach (var ingredientCount in food.Ingredients) {
+            bool haveCount = _ingredientManager.HaveIngredient(ingredientCount.Ingredient);
             _canCook &= haveCount;
-            _recipeParts[index].Setup(ingredientCount.value, haveCount);
+            _recipeParts[index].Setup(ingredientCount, haveCount);
             index++;
         }
     }

@@ -57,7 +57,7 @@ public class OrderButton : MonoBehaviour {
         _cookSlider = GetComponent<OrderCookingSlider>();
 
         kitchenStorage.IngredientsChanged += UpdateRecipe;
-        technicManager.TechnicChanged += UpdateRecipe;
+        technicManager.TechnicAdded += UpdateRecipe;
 
         _cookSlider.SetTechnicManager(technicManager);
         _recipe.Setup(kitchenStorage, technicManager);

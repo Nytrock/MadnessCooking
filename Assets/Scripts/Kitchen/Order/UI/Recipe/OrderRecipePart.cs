@@ -1,35 +1,26 @@
 using UnityEngine;
 
-public class OrderRecipePart : ShopFoodRecipePart {
+public class OrderRecipePart : FoodRecipePart {
     [SerializeField] private Sprite _moneySprite;
-    [SerializeField] private Color _availableColor;
-    [SerializeField] private Color _notAvailableColor;
+    [SerializeField] private TextAvailableRenderer _countTextRenderer;
 
     public override void Setup(IngredientCount count, bool isAvailable) {
         base.Setup(count, isAvailable);
-        if (isAvailable)
-            _countText.color = _availableColor;
-        else
-            _countText.color = _notAvailableColor;
+        _countTextRenderer.UpdateAvailable(isAvailable);
     }
 
     public void SetupAutoSpice(IngredientCount ingredientCount) {
         gameObject.SetActive(true);
-        _icon.sprite = _moneySprite;
         int price = ingredientCount.Count * ConstIngredients.Instance.Spice.Price;
+        bool isMoneyEnough = MoneyManager.Instance.MoneyCount >= price;
 
         _countText.text = price.ToString() + "x";
-        if (MoneyManager.Instance.MoneyCount >= price)
-            _countText.color = _availableColor;
-        else
-            _countText.color = _notAvailableColor;
+        _icon.Setup(_moneySprite, isMoneyEnough);
+        _countTextRenderer.UpdateAvailable(isMoneyEnough);
     }
 
-    public override void Setup(Technic technic, bool isFree) {
-        base.Setup(technic, isFree);
-        if (isFree)
-            _countText.color = _availableColor;
-        else
-            _countText.color = _notAvailableColor;
+    public override void Setup(Technic technic, bool isAvailable) {
+        base.Setup(technic, isAvailable);
+        _countTextRenderer.UpdateAvailable(isAvailable);
     }
 }

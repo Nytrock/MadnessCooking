@@ -1,6 +1,8 @@
 using UnityEngine;
 
-public class ChoicePool<TItem, TButton> : Pool<TButton> where TItem : BuyableObject where TButton : ChoiceButton<TItem> {
+public class ChoicePool<TItem, TButton> : Pool<TButton>
+    where TItem : BuyableObject where TButton : ChoiceButton<TItem> {
+
     [SerializeField] private TButton _prefab;
 
     public override TButton GetObject() {

@@ -3,7 +3,9 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Slider))]
-public abstract class LocationSlider<TData> : MonoBehaviour, IPointerDownHandler, IPointerUpHandler where TData : ISaveable {
+public abstract class LocationSlider<TData> : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
+    where TData : ISaveable {
+
     protected CameraManager<TData> _cameraManager;
     protected Slider _slider;
 

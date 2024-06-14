@@ -1,45 +1,53 @@
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
-public abstract class BaseChooseShopItemView : MonoBehaviour {
-    [SerializeField] protected BaseChooseShop _shop;
+public abstract class BaseChooseShopItemView<TItem> : MonoBehaviour
+    where TItem : BuyableObject {
+
     [SerializeField] private ItemInfoRendererWithPrice _renderer;
     [SerializeField] private string _priceDescription;
     [SerializeField] private Button _buyButton;
-    protected BuyableObject _itemToBuy;
+    protected bool _isItemBuyable;
+    protected TItem _selectedItem;
 
     private void Start() {
         ResetInfo();
-        UpdateButton();
     }
 
-    public void ShowItem(BuyableObject item) {
-        if (item == _itemToBuy)
+    public void SetButtonAction(UnityAction action) {
+        _buyButton.onClick.AddListener(action);
+    }
+
+    public void ShowItem(TItem item, bool isBuyable) {
+        _isItemBuyable = isBuyable;
+        if (item == _selectedItem)
             ResetInfo();
         else
             SetInfo(item);
     }
 
-    protected virtual void SetInfo(BuyableObject item) {
-        _itemToBuy = item;
-        _renderer.SetItemInfo(_itemToBuy);
-        _renderer.SetPrice(_priceDescription, _itemToBuy.Price);
+    protected virtual void SetInfo(TItem item) {
+        _selectedItem = item;
+        _renderer.SetItemInfo(_selectedItem);
+        _renderer.SetPrice(_priceDescription, _selectedItem.Price);
         UpdateButton();
     }
 
     public virtual void ResetInfo() {
-        _itemToBuy = null;
+        _selectedItem = null;
         _renderer.ResetInfo();
         UpdateButton();
     }
 
     private void UpdateButton() {
-        _buyButton.interactable = _itemToBuy != null
-            && MoneyManager.Instance.MoneyCount >= _itemToBuy.Price;
+        _buyButton.interactable = _selectedItem != null
+            && MoneyManager.Instance.MoneyCount >= _selectedItem.Price
+            && _isItemBuyable;
     }
 
-    public virtual void BuyChosen() {
-        _shop.BuyItem(_itemToBuy);
-        ResetInfo();
+    public void UpdateBuyable(bool newValue) {
+        _isItemBuyable = newValue;
+        UpdateButton();
     }
 }

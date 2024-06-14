@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,19 +5,13 @@ public class ShopCatalogPage : MonoBehaviour {
     [SerializeField] private BaseBuyPanel _buyPanelPrefab;
     [SerializeField, Min(1)] private int _maxItemCount;
     protected readonly List<BaseBuyPanel> _buyPanels = new();
-    private BaseShop _shop;
 
     public int MaxItemCount => _maxItemCount;
     public int ItemCount => _buyPanels.Count;
-    public Type ItemType => _buyPanelPrefab.Type;
 
-    public void SetShop(BaseShop shop) {
-        _shop = shop;
-    }
-
-    public void GeneratePanel(BuyableObject item) {
+    public void GeneratePanel(BuyPanelData panelData) {
         BaseBuyPanel buyPanel = Instantiate(_buyPanelPrefab, transform);
-        buyPanel.Setup(item, _shop);
+        buyPanel.Setup(panelData);
         _buyPanels.Add(buyPanel);
     }
 
@@ -42,8 +35,8 @@ public class ShopCatalogPage : MonoBehaviour {
         _buyPanels.RemoveAt(index);
     }
 
-    public void UpdatePanelByIndex(int index, BuyableObject item) {
-        _buyPanels[index].Setup(item, _shop);
+    public void UpdatePanelDataByIndex(int index, BuyPanelData updatedData) {
+        _buyPanels[index].Setup(updatedData);
     }
 
     public void Destroy() {

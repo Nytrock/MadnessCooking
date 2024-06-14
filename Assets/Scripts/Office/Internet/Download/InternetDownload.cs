@@ -11,7 +11,7 @@ public class InternetDownload : MonoBehaviour, IUpgradeable, IBindable<OfficeDat
     [SerializeField, Min(0)] private float _maxWait;
 
     [Header("Upgrades")]
-    [SerializeField] private GraphUpgrade[] _speedUpgrades;
+    [SerializeField] private BaseUpgrade[] _speedUpgrades;
 
     private float _nowProgress;
     private float _needProgress;
@@ -28,7 +28,7 @@ public class InternetDownload : MonoBehaviour, IUpgradeable, IBindable<OfficeDat
             return;
 
         if (_nowProgress < _needProgress)
-            _nowProgress += Time.deltaTime * _data.InternetDownloadSpeed;
+            _nowProgress += Time.deltaTime * _data.InternetDownloadSpeed * Random.Range(0.1f, 5f);
         else
             EndDownload();
         _downloadBar.value = _nowProgress;

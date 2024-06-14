@@ -2,7 +2,9 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Button))]
-public abstract class ChoiceButton<TItem> : MonoBehaviour where TItem : BuyableObject {
+public abstract class ChoiceButton<TItem> : MonoBehaviour
+    where TItem : BuyableObject {
+
     [SerializeField] private Sprite _deselectedSprite;
     [SerializeField] private Sprite _selectedSprite;
     [SerializeField] protected Image _icon;

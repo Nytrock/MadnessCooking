@@ -1,13 +1,11 @@
 using UnityEngine;
 
-public class FoodShopItemView : BaseChooseShopItemView {
-    [SerializeField] private ShopFoodRecipe _recipeRenderer;
+public class FoodShopItemView : BaseChooseShopItemView<Food> {
+    [SerializeField] private FoodShopRecipe _recipeRenderer;
 
-    protected override void SetInfo(BuyableObject item) {
+    protected override void SetInfo(Food item) {
         base.SetInfo(item);
-
-        var food = item as Food;
-        _recipeRenderer.SetupRecipe(food);
+        _recipeRenderer.SetupRecipe(item);
     }
 
     public override void ResetInfo() {

@@ -2,7 +2,9 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class IngredientStorageUI<TData> : MonoBehaviour where TData : ISaveable {
+public class IngredientStorageUI<TData> : MonoBehaviour
+    where TData : ISaveable {
+
     [SerializeField] protected IngredientStorage<TData> _storage;
     [SerializeField] protected GameObject _panel;
     [SerializeField] protected IngredientStorageButtonPool _buttonPool;

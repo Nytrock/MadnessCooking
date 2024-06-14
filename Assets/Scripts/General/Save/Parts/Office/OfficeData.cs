@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 
 [Serializable]
 public class OfficeData : ISaveable {
@@ -8,11 +7,9 @@ public class OfficeData : ISaveable {
     public float InternetDownloadSpeed = 1;
     public bool IsInternetDownloadInstant;
 
-    public Ingredient[] ShopIngredients;
-    public Technic[] ShopTechnic;
-    public Food[] ShopFood;
-    public Decor[] ShopDecor;
-    public List<Decor> AvailableDecor = new();
-    public BaseUpgrade[] ShopUpgrades;
-    public List<BaseUpgrade> AvailableUpgrades = new();
+    public GraphShopData<Decor> DecorShop;
+    public ShopData<Ingredient> IngredientShop;
+    public ShopData<Food> FoodShop;
+    public ShopData<Technic> TechnicShop;
+    public GraphShopData<BaseUpgrade> UpgradesShop;
 }

@@ -1,13 +1,9 @@
-using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 public abstract class BaseShop : MonoBehaviour {
     [SerializeField] private GameObject _shop;
     [SerializeField] protected ShopCatalog _catalog;
-
-    public abstract Type Type { get; }
-
-    protected BuyableObject[] _itemsToBuy;
 
     protected void LateStart() {
         GenerateShop();
@@ -19,14 +15,7 @@ public abstract class BaseShop : MonoBehaviour {
         _catalog.ActivateFirstPage();
     }
 
-    protected void GenerateShop() {
-        SetObjectsArray();
-        _catalog.SetShop(this);
-        for (int i = 0; i < _itemsToBuy.Length; i++)
-            _catalog.GeneratePanel(_itemsToBuy[i]);
-        _catalog.ActivateFirstPage();
-    }
-
-    protected abstract void SetObjectsArray();
+    protected abstract void GenerateShop();
     public abstract void BuyItem(BuyableObject item);
+    protected abstract UnityAction GetPanelAction(BuyableObject item);
 }

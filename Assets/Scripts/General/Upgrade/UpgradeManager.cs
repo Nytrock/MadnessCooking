@@ -17,7 +17,7 @@ public class UpgradeManager : MonoBehaviour {
         }
     }
 
-    public void NewUpgrade(BaseUpgrade upgrade) {
+    public void AddUpgrade(BaseUpgrade upgrade) {
         foreach (var upgradeable in _upgradeables) {
             upgradeable.CheckUpgrade(upgrade);
         }

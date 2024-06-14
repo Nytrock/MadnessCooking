@@ -1,9 +1,11 @@
 using System;
 using UnityEngine;
 
-public class Singleton<T> : MonoBehaviour where T : Component {
-    protected static T _instance;
-    public static T Instance => _instance;
+public class Singleton<TObject> : MonoBehaviour
+    where TObject : Component {
+
+    protected static TObject _instance;
+    public static TObject Instance => _instance;
 
     protected virtual void Awake() => InitializeSingleton();
 
@@ -15,9 +17,9 @@ public class Singleton<T> : MonoBehaviour where T : Component {
             return;
         }
 
-        if (this is not T)
-            throw new ArgumentNullException($"Singletone don't have a type {typeof(T)}");
+        if (this is not TObject)
+            throw new ArgumentNullException($"Singletone don't have a type {typeof(TObject)}");
 
-        _instance = this as T;
+        _instance = this as TObject;
     }
 }

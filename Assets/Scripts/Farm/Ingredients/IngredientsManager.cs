@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -6,6 +7,8 @@ public class IngredientsManager : MonoBehaviour, IBindable<FarmData> {
     [SerializeField] private Ingredient[] _allIngredients;
     [SerializeField] private Ingredient[] _defaultIngredients;
     private FarmData _data;
+
+    public event Action<Ingredient> IngredientAdded;
 
     public bool HaveIngredient(Ingredient ingredient) {
         return _data.AvailableIngredients.Contains(ingredient);
@@ -32,6 +35,7 @@ public class IngredientsManager : MonoBehaviour, IBindable<FarmData> {
 
     public void AddIngredient(Ingredient ingredient) {
         _data.AvailableIngredients.Add(ingredient);
+        IngredientAdded?.Invoke(ingredient);
     }
 
     public void Bind(FarmData data, bool isFileEmpty) {

@@ -1,4 +1,6 @@
-public abstract class ChoiceSimpleUI<TItem> : ChoiceUI<TItem, ChoiceSimpleButton<TItem>> where TItem : BuyableObject {
+public abstract class ChoiceSimpleUI<TItem> : ChoiceUI<TItem, ChoiceSimpleButton<TItem>>
+    where TItem : BuyableObject {
+
     public void Choice(int index) {
         if (_chosedIndex != -1)
             SetSelectedState(_chosedIndex);

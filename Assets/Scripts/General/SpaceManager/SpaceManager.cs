@@ -1,7 +1,9 @@
 using System;
 using UnityEngine;
 
-public abstract class SpaceManager<TData> : MonoBehaviour, IUpgradeable, IBindable<TData> where TData : ISaveable {
+public abstract class SpaceManager<TData> : MonoBehaviour, IUpgradeable, IBindable<TData>
+    where TData : ISaveable {
+
     [SerializeField] protected SpacePrefab _spacePrefab;
     [SerializeField] protected int _defaultSpaceCount;
     [SerializeField] protected CountUpgrade[] _spaceAddUpgrades;
