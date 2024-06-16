@@ -1,27 +1,29 @@
 using System;
 using UnityEngine;
 
-public class WheatManager : MonoBehaviour, IUpgradeable, IBindable<FarmData> {
+public class WheatManager : MonoBehaviour, IUpgradeable<FarmUpgradeData>, IBindable<FarmData> {
     [SerializeField] private Cow _cow;
     [SerializeField] private FlourMill _flourMill;
     [SerializeField] private BaseUpgrade _wheatDistributeUpgrade;
-    private FarmData _data;
+
+    private WheatManagerData _data;
+    private FarmUpgradeData _upgradeData;
 
     public void AddWheat(int count) {
-        if (_data.IsWheatDistributing) {
+        if (_upgradeData.IsWheatDistributing) {
             DistributeWheat(count);
         } else {
-            _data.Cow.MaterialCount += count;
-            _data.FlourMill.MaterialCount += count;
+            _cow.AddMaterial(count);
+            _flourMill.AddMaterial(count);
         }
     }
 
-    public void CheckUpgrade(BaseUpgrade upgrade) {
+    public void CheckAddedUpgrade(BaseUpgrade upgrade) {
         if (upgrade == _wheatDistributeUpgrade) {
-            _data.IsWheatDistributing = true;
-            int count = _data.Cow.MaterialCount;
-            _data.Cow.MaterialCount = 0;
-            _data.FlourMill.MaterialCount = 0;
+            _upgradeData.ChangeWheatDistributing();
+            int count = _cow.MaterialCount;
+            _cow.ClearMaterials();
+            _flourMill.ClearMaterials();
             DistributeWheat(count);
         }
     }
@@ -29,17 +31,23 @@ public class WheatManager : MonoBehaviour, IUpgradeable, IBindable<FarmData> {
     private void DistributeWheat(int count) {
         int halfCount = count / 2;
 
-        _data.Cow.MaterialCount += halfCount;
-        _data.FlourMill.MaterialCount += halfCount;
+        _cow.AddMaterial(halfCount);
+        _flourMill.AddMaterial(halfCount);
 
         if (count % 2 != 0) {
-            _data.Cow.MaterialCount += Convert.ToInt32(_data.IsCowNextWheat);
-            _data.FlourMill.MaterialCount += Convert.ToInt32(!_data.IsCowNextWheat);
-            _data.IsCowNextWheat = !_data.IsCowNextWheat;
+            _cow.AddMaterial(Convert.ToInt32(_data.IsCowNextWheat));
+            _flourMill.AddMaterial(Convert.ToInt32(!_data.IsCowNextWheat));
+            _data.ChangeCowNextWheat();
         }
     }
 
     public void Bind(FarmData data, bool isFileEmpty) {
-        _data = data;
+        if (isFileEmpty)
+            data.WheatManager = new();
+        _data = data.WheatManager;
+    }
+
+    public void BindUpgrade(FarmUpgradeData upgradeData) {
+        _upgradeData = upgradeData;
     }
 }

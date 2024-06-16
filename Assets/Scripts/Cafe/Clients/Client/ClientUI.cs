@@ -11,14 +11,14 @@ public class ClientUI : MonoBehaviour {
     [SerializeField] private Slider _eatSlider;
     private Image _foodImage;
 
-    private CafeData _data;
+    private CafeUpgradeData _data;
     private ClientData _clientData;
 
     private void Awake() {
         _foodImage = _mainButton.GetComponent<Image>();
     }
 
-    public void SetData(CafeData data) {
+    public void SetData(CafeUpgradeData data) {
         _data = data;
     }
 

@@ -57,7 +57,7 @@ public class ClientSkin : MonoBehaviour {
             return ClientSkinType.GrayMan;
         } else {
             int skinChance = Random.Range(0, 100);
-            if (skinChance == 42 || true) {
+            if (skinChance == 42) {
                 int skinCount = Enum.GetNames(typeof(ClientSkinType)).Length;
                 return (ClientSkinType)Random.Range(3, skinCount);
             } else {

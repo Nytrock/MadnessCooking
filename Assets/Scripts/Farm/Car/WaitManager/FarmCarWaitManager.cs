@@ -2,63 +2,67 @@ using System;
 using System.Linq;
 using UnityEngine;
 
-public class FarmCarWaitManager : MonoBehaviour, IUpgradeable, IBindable<FarmData> {
+public class FarmCarWaitManager : MonoBehaviour, IBindable<FarmData> {
     [SerializeField] private FarmCar _car;
+    [SerializeField] private UpgradeManager _upgradeManager;
     [SerializeField] private KitchenStorage _kitchenStorage;
     [SerializeField, Min(0)] private float _defaultWaitTime;
+    private CarWaitManagerData _data;
 
     [Header("Upgrades")]
     [SerializeField] private CountUpgrade[] _speedUpgrades;
 
-    public CarWaitManagerData Data { get; private set; }
+    public float NowWaitTime => _data.NowWaitTime;
 
-    public void CheckUpgrade(BaseUpgrade upgrade) {
+    public event Action<CarState> StateChanged;
+
+    private void Awake() {
+        _upgradeManager.ItemAdded += CheckSpeedChanged;
+    }
+
+    private void LateStart() {
+        StateChanged?.Invoke(_data.CarState);
+    }
+
+    public void CheckSpeedChanged(BaseUpgrade upgrade) {
         if (_speedUpgrades.Contains(upgrade)) {
             var countUpgrade = upgrade as CountUpgrade;
-            Data.NeedWaitTime = countUpgrade.Count;
-            if (Data.CarState != CarState.Calm) {
-                Data.NowWaitTime = Mathf.Min(Data.NowWaitTime, Data.NeedWaitTime);
-            }
+            _data.UpdateSpeed(countUpgrade);
         }
     }
 
     public void StartWait() {
-        Data.IngredientsSended.Clear();
-        Data.IngredientsSended.Extend(_car.Data.Ingredients);
-
-        Data.NowWaitTime = Data.NeedWaitTime;
-        Data.CarState = CarState.Sent;
+        _data.SetIngredientsSended(_car.Data.Ingredients);
+        _data.StartWait();
         _car.Leave();
+        StateChanged?.Invoke(_data.CarState);
     }
 
     private void Update() {
-        if (Data.CarState == CarState.Calm)
+        if (_data.CarState == CarState.Calm)
             return;
 
-        if (Data.NowWaitTime > 0) {
-            Data.NowWaitTime -= InGameTime.Instance.DeltaTime;
+        if (_data.NowWaitTime > 0) {
+            _data.UpdateTime();
         } else {
-            if (Data.CarState == CarState.Returns) {
-                Data.CarState = CarState.Calm;
+            if (_data.CarState == CarState.Returns) {
+                _data.StartCalm();
                 _car.Return();
             } else {
-                Data.CarState = CarState.Returns;
-                _kitchenStorage.PutIngredients(Data.IngredientsSended);
-                Data.IngredientsSended.Clear();
-                Data.NowWaitTime = Data.NeedWaitTime;
+                _kitchenStorage.PutIngredients(_data.IngredientsSended);
+                _data.StartReturn();
             }
+            StateChanged?.Invoke(_data.CarState);
         }
     }
 
     public void Bind(FarmData data, bool isFileEmpty) {
-        if (isFileEmpty) {
-            data.CarWaitManager = new() {
-                NeedWaitTime = _defaultWaitTime
-            };
-        }
-        Data = data.CarWaitManager;
+        if (isFileEmpty)
+            data.CarWaitManager = new(_defaultWaitTime);
+        _data = data.CarWaitManager;
 
-        if (Data.CarState != CarState.Calm)
+        if (_data.CarState != CarState.Calm)
             _car.InstantLeave();
+        LateStart();
     }
 }

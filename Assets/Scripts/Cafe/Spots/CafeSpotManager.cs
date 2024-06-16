@@ -120,7 +120,7 @@ public class CafeSpotManager : MonoBehaviour, IBindable<CafeData> {
     }
 
     public int GetFreeSpace() {
-        int freeSpace = _spaceManager.SpaceData.Count * 2;
+        int freeSpace = _spaceManager.SpaceCount * 2;
         foreach (var spot in _spots)
             freeSpace -= spot.SeatsCount;
         return freeSpace;

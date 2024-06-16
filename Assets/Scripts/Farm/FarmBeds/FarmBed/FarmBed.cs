@@ -7,7 +7,7 @@ public class FarmBed : MonoBehaviour {
     [SerializeField] private FarmBedGrowSlider _growStatusSlider;
 
     public FarmBedData BedData { get; private set; }
-    private FarmData _data;
+    private FarmUpgradeData _upgradeData;
 
     private WheatManager _wheatManager;
     private Ingredient _wheat;
@@ -46,7 +46,7 @@ public class FarmBed : MonoBehaviour {
         } else {
             BedData.Count++;
             BedData.NowTime = 0;
-            if (_data.IsAutoWheat && BedData.PlantedIngredient == _wheat) {
+            if (_upgradeData.IsAutoWheat && BedData.PlantedIngredient == _wheat) {
                 _wheatManager.AddWheat(BedData.Count);
                 BedData.Count = 0;
                 return;
@@ -58,7 +58,7 @@ public class FarmBed : MonoBehaviour {
             _bedHolder.UpdateAnimation();
         }
 
-        if (_data.IsGrowStatusShow)
+        if (_upgradeData.IsGrowStatusShow)
             _growStatusSlider.UpdateSlider(BedData.NowTime);
     }
 
@@ -159,7 +159,7 @@ public class FarmBed : MonoBehaviour {
     }
 
     private void UpdateUpgrades() {
-        _growStatusSlider.SetActive(_data.IsGrowStatusShow && BedData.PlantedIngredient != null);
+        _growStatusSlider.SetActive(_upgradeData.IsGrowStatusShow && BedData.PlantedIngredient != null);
     }
 
     public bool HaveUpgrade(FarmBedUpgrade upgrade) => _upgrader.HaveUpgrade(upgrade);
@@ -185,7 +185,7 @@ public class FarmBed : MonoBehaviour {
     }
 
     public void Bind(FarmData data, FarmBedData bedData, BedTypeHolder holder) {
-        _data = data;
+        _upgradeData = data.UpgradeData;
         BedData = bedData;
 
         if (BedData.BedType != null) {

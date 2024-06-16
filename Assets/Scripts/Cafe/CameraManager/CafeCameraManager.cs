@@ -14,7 +14,7 @@ public class CafeCameraManager : CameraManager<CafeData> {
 
     protected override void CalculateBorderPositions() {
         _startPosition = transform.position.x;
-        _endPosition = _startPosition + ((_spaceManager.SpaceData.Count - 1) * _spaceManager.SpaceSize)
+        _endPosition = _startPosition + ((_spaceManager.SpaceCount - 1) * _spaceManager.SpaceSize)
             + (_spaceManager.SpaceSize / 2) - _horizontalExtention;
         InvokeBordersFound();
     }

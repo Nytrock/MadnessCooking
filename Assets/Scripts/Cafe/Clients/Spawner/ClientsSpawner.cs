@@ -3,7 +3,7 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(PopularityXpAdder))]
-public class ClientsSpawner : MonoBehaviour, IUpgradeable, IBindable<CafeData> {
+public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBindable<CafeData> {
     [SerializeField] private Transform _spawnPoint;
     [SerializeField] private PopularityCalculator _popularityCalculate;
     [SerializeField] private CafeOpener _cafeOpener;
@@ -21,6 +21,7 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable, IBindable<CafeData> {
     [SerializeField] private BaseUpgrade _eatTimeShowUpgrade;
 
     private CafeData _data;
+    private CafeUpgradeData _upgradeData;
     private PopularityXpAdder _xpAdder;
 
     public Vector2 SpawnPoint => _spawnPoint.position;
@@ -148,7 +149,7 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable, IBindable<CafeData> {
     }
 
     private void SetupClient(Client client, int spotIndex, int tableIndex) {
-        client.ClientUI.SetData(_data);
+        client.ClientUI.SetData(_upgradeData);
         ClientData clientData = _data.Spots[spotIndex].Clients[tableIndex];
         ClientSettings clientSettings = new(clientData, spotIndex, tableIndex, this);
         client.Setup(clientSettings);
@@ -160,9 +161,13 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable, IBindable<CafeData> {
         _data.IsWaitingCritic = newValue;
     }
 
-    public void CheckUpgrade(BaseUpgrade upgrade) {
+    public void CheckAddedUpgrade(BaseUpgrade upgrade) {
         if (upgrade == _eatTimeShowUpgrade)
-            _data.IsEatTimeShow = true;
+            _upgradeData.ChangeEatTimeShow(true);
+    }
+
+    public void BindUpgrade(CafeUpgradeData upgradeData) {
+        _upgradeData = upgradeData;
     }
 
     public void Bind(CafeData data, bool isFileEmpty) {

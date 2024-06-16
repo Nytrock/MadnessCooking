@@ -8,8 +8,8 @@ public class CafeSpaceManager : SpaceManager<CafeData> {
     }
 
     protected override void BindData(bool isFileEmpty) {
-        SpaceData = _data.Space;
         if (isFileEmpty)
-            SpaceData.Count = _defaultSpaceCount;
+            _data.Space = new(_defaultSpaceCount);
+        _spaceData = _data.Space;
     }
 }

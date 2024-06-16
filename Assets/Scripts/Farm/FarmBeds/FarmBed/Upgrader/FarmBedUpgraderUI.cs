@@ -13,8 +13,7 @@ public class FarmBedUpgraderUI : ChoiceBuyWithCameraStopUI<FarmBedUpgrade, FarmD
 
     protected override void GenerateChoiceButtons() {
         int index = 0;
-        for (int i = 0; i < _manager.UpgradesCount; i++) {
-            FarmBedUpgrade upgrade = _manager.GetUpgradeByIndex(i);
+        foreach (var upgrade in _manager.GetAvailableUpgrades()) {
             bool isAccessable = CheckUpgradeAccessable(upgrade);
             if (isAccessable) {
                 ChoiceBuyButton<FarmBedUpgrade> button = _choiceButtonPool.GetObject();

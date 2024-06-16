@@ -8,12 +8,12 @@ public class FarmCarUI : IngredientStorageUI<FarmData> {
     protected override void Awake() {
         _sendButton.onClick.AddListener(_waitManager.StartWait);
         _sendButton.onClick.AddListener(CarLeave);
+        _waitManager.StateChanged += UpdateState;
         base.Awake();
     }
 
-    protected override void Update() {
-        base.Update();
-        _sendButton.interactable = _waitManager.Data.CarState == CarState.Calm;
+    private void UpdateState(CarState newState) {
+        _sendButton.interactable = newState == CarState.Calm;
     }
 
     private void CarLeave() {

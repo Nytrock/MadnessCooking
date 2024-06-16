@@ -1,19 +1,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OrdersUI : MonoBehaviour, IUpgradeable, IBindable<KitchenData> {
+public class OrdersUI : MonoBehaviour, IUpgradeable<KitchenUpgradeData>, IBindable<KitchenData> {
     [SerializeField] private OrdersManager _ordersManager;
     [SerializeField] private OrderButtonsPool _pool;
     [SerializeField] private GameObject _panel;
 
     private readonly List<OrderButton> _orderButtons = new();
-    private KitchenData _data;
+    private KitchenUpgradeData _upgradeData;
 
     [Header("Upgrades")]
     [SerializeField] private BaseUpgrade _autoSpice;
     private Ingredient _spice;
-
-    public bool IsAutoSpice => _data.IsAutoSpice;
 
     private void Awake() {
         _ordersManager.OrderAdded += AddOrder;
@@ -33,7 +31,7 @@ public class OrdersUI : MonoBehaviour, IUpgradeable, IBindable<KitchenData> {
         order.OrderStarted += delegate { StartCook(order); };
         order.OrderFinished += UpdateRecipes;
         OrderButton button = _pool.GetObject();
-        button.SetOrder(order, _data);
+        button.SetOrder(order, _upgradeData);
         _orderButtons.Add(button);
     }
 
@@ -46,7 +44,7 @@ public class OrdersUI : MonoBehaviour, IUpgradeable, IBindable<KitchenData> {
     public void StartCook(Order order) {
         _ordersManager.StartCook(order);
         foreach (var count in order.Food.Ingredients) {
-            if (count.Ingredient == _spice && _data.IsAutoSpice) {
+            if (count.Ingredient == _spice && _upgradeData.IsAutoSpice) {
                 MoneyManager.Instance.ChangeMoney(-_spice.Price * count.Count);
                 break;
             }
@@ -60,20 +58,23 @@ public class OrdersUI : MonoBehaviour, IUpgradeable, IBindable<KitchenData> {
             button.UpdateRecipe();
     }
 
-    public void CheckUpgrade(BaseUpgrade upgrade) {
-        if (upgrade == _autoSpice) {
-            _data.IsAutoSpice = true;
-            UpdateRecipes();
-        }
-    }
-
     public void Bind(KitchenData data, bool isFileEmpty) {
-        _data = data;
         foreach (var button in _orderButtons) {
             if (button.Order.IsCooking)
                 button.Cook();
             else if (button.Order.IsFinished)
                 button.Order.FinishCook();
+        }
+    }
+
+    public void BindUpgrade(KitchenUpgradeData upgradeData) {
+        _upgradeData = upgradeData;
+    }
+
+    public void CheckAddedUpgrade(BaseUpgrade upgrade) {
+        if (upgrade == _autoSpice) {
+            _upgradeData.SetAutoSpice();
+            UpdateRecipes();
         }
     }
 }

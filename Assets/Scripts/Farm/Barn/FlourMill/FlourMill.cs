@@ -1,9 +1,9 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
-public class FlourMill : NeedHoldAdd {
+public class FlourMill : NeedHoldAdd, IUpgradeable<FarmUpgradeData> {
     private NeedHoldAddData _cowData;
-    private FarmData _data;
+    private FarmUpgradeData _upgradeData;
 
     private Animator _animator;
 
@@ -11,21 +11,27 @@ public class FlourMill : NeedHoldAdd {
         _animator = GetComponent<Animator>();
     }
 
-    protected override void Add() {
-        if (!_data.IsWheatDistributing)
-            _cowData.MaterialCount--;
-        base.Add();
+    protected override void AddReady() {
+        if (!_upgradeData.IsWheatDistributing)
+            _cowData.SubstractMaterial();
+        base.AddReady();
     }
 
     public override void ChangeWorkMode(bool newValue) {
-        _animator.SetBool("isHold", newValue && NeedHoldData.MaterialCount > 0);
+        _animator.SetBool("isHold", newValue && _needHoldData.MaterialCount > 0);
         base.ChangeWorkMode(newValue);
     }
 
     public override void Bind(FarmData data, bool isFileEmpty) {
-        HoldData = data.FlourMill;
+        if (isFileEmpty)
+            data.FlourMill = new();
+        _holdData = data.FlourMill;
+
         _cowData = data.Cow;
-        _data = data;
         base.Bind(data, isFileEmpty);
+    }
+
+    public void BindUpgrade(FarmUpgradeData upgradeData) {
+        _upgradeData = upgradeData;
     }
 }

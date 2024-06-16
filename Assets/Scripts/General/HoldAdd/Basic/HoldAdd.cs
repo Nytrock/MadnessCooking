@@ -1,7 +1,9 @@
 using UnityEngine;
 
-public abstract class HoldAdd : MonoBehaviour, IUpgradeable, IBindable<FarmData> {
-    [Header("Upgades")]
+public abstract class HoldAdd : MonoBehaviour, IBindable<FarmData> {
+    [SerializeField] private UpgradeManager _upgradeManager;
+
+    [Header("Upgrades")]
     [SerializeField] protected BaseUpgrade _unlockUpgrade;
     [SerializeField] protected CoefficientUpgrade _autoWorkUpgrade;
 
@@ -11,10 +13,13 @@ public abstract class HoldAdd : MonoBehaviour, IUpgradeable, IBindable<FarmData>
     [SerializeField, Min(0)] private float _fatigueCoef;
 
     protected bool _isWork;
+    protected HoldAddData _holdData;
 
-    public HoldAddData HoldData { get; protected set; }
+    public int ReadyCount => _holdData.ReadyCount;
 
-    public float TimeWait => _timeWait;
+    private void Awake() {
+        _upgradeManager.ItemAdded += CheckAddedUpgrade;
+    }
 
     protected virtual void LateStart() {
         ResetAll();
@@ -23,56 +28,65 @@ public abstract class HoldAdd : MonoBehaviour, IUpgradeable, IBindable<FarmData>
 
     private void ResetAll() {
         _isWork = false;
-        _holdUI.Setup(this);
+        _holdUI.SetTimeWait(_timeWait);
         _holdUI.ChangeUI(_isWork);
-
-        if (!HoldData.IsAuto)
-            HoldData.NowTime = 0;
+        _holdData.ResetAll();
     }
 
     private void UpdateUpgrades() {
-        gameObject.SetActive(HoldData.IsUnlocked);
-        if (HoldData.IsAuto)
-            HoldData.Speed = _autoWorkUpgrade.Coefficient;
+        gameObject.SetActive(_holdData.IsUnlocked);
+        _holdData.UpdateUpgrades(_autoWorkUpgrade);
     }
 
     public virtual void ChangeWorkMode(bool newValue) {
         _holdUI.ChangeUI(newValue);
-        if (HoldData.IsAuto)
+        if (_holdData.IsAuto)
             return;
 
         _isWork = newValue;
         if (!_isWork)
-            HoldData.NowTime = 0;
+            _holdData.ResetTime();
     }
 
     private void Update() {
-        if (!_isWork && !HoldData.IsAuto)
+        if (!_isWork && !_holdData.IsAuto)
             return;
 
         UpdateTimer();
     }
 
     protected virtual void UpdateTimer() {
-        if (!HoldData.IsAuto)
+        if (!_holdData.IsAuto)
             FatigueManager.Instance.ChangeFatigue(_fatigueCoef);
 
-        if (HoldData.NowTime < _timeWait)
-            HoldData.NowTime += Time.deltaTime * HoldData.Speed;
-        else
-            Add();
+        if (_holdData.NowTime < _timeWait) {
+            _holdData.UpdateTime();
+            _holdUI.UpdateTime(_holdData.NowTime);
+        } else {
+            AddReady();
+        }
     }
 
-    protected virtual void Add() {
-        HoldData.NowTime = 0;
-        HoldData.ReadyCount++;
+    protected virtual void AddReady() {
+        _holdData.AddReady();
+        _holdUI.UpdateCount(_holdData);
     }
 
-    public virtual void CheckUpgrade(BaseUpgrade upgrade) {
+    public void SetReady(int count) {
+        _holdData.SetReady(count);
+        _holdUI.UpdateCount(_holdData);
+    }
+
+    public virtual void SubtractReady() {
+        _holdData.SubtractReady();
+        _holdUI.UpdateCount(_holdData);
+    }
+
+    public virtual void CheckAddedUpgrade(BaseUpgrade upgrade) {
         if (upgrade == _unlockUpgrade)
-            HoldData.IsUnlocked = true;
+            _holdData.Unlock();
         else if (upgrade == _autoWorkUpgrade)
-            HoldData.IsAuto = true;
+            _holdData.MakeAuto();
 
         UpdateUpgrades();
     }

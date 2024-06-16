@@ -1,9 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FarmBedManager : SpaceManager<FarmData> {
+public class FarmBedManager : SpaceManager<FarmData>, IUpgradeable<FarmUpgradeData> {
     [SerializeField] private FarmBedSettings _bedsSettings;
     private readonly List<FarmBedGroup> _beds = new();
+    private FarmUpgradeData _upgradeData;
 
     [Header("Upgrades")]
     [SerializeField] private BaseUpgrade _autoWheatUpgrade;
@@ -19,20 +20,23 @@ public class FarmBedManager : SpaceManager<FarmData> {
         InvokeSpaceAdded();
     }
 
-    public override void CheckUpgrade(BaseUpgrade upgrade) {
-        base.CheckUpgrade(upgrade);
-        if (upgrade == _growStatusShowUpgrade)
-            _data.IsGrowStatusShow = true;
-        else if (upgrade == _autoWheatUpgrade)
-            _data.IsAutoWheat = true;
-    }
-
     protected override void BindData(bool isFileEmpty) {
-        SpaceData = _data.FarmBedGroups;
         if (isFileEmpty) {
             _data.GenerateFarmBeds(_spaceAddUpgrades[^1].Count * 3);
-            SpaceData.Count = _defaultSpaceCount;
+            _data.FarmBedGroups = new(_defaultSpaceCount);
         }
+        _spaceData = _data.FarmBedGroups;
         _bedsSettings.UIManager.Bind(_data);
+    }
+
+    public void BindUpgrade(FarmUpgradeData upgradeData) {
+        _upgradeData = upgradeData;
+    }
+
+    public void CheckAddedUpgrade(BaseUpgrade upgrade) {
+        if (upgrade == _growStatusShowUpgrade)
+            _upgradeData.ChangeGrowStatusShow();
+        else if (upgrade == _autoWheatUpgrade)
+            _upgradeData.ChangeAutoWheat();
     }
 }

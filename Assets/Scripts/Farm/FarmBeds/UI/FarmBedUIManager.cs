@@ -91,12 +91,12 @@ public class FarmBedUIManager : MonoBehaviour {
     }
 
     public void Water() {
-        _farmWell.SubtractWater();
+        _farmWell.SubtractReady();
         _farmBed.Water();
     }
 
     public void Fertilize() {
-        _puncher.SubtractFertilize();
+        _puncher.SubtractReady();
         _farmBed.Fertilize();
     }
 

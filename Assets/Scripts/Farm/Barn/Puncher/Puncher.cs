@@ -4,26 +4,22 @@ public class Puncher : NeedHoldAdd {
     public event Action FertilizeChanged;
 
     protected override void LateStart() {
-        NeedHoldData.IsUnlocked = true;
+        _needHoldData.Unlock();
         base.LateStart();
     }
 
-    public void AddShit() {
-        NeedHoldData.MaterialCount++;
-    }
-
-    public void SubtractFertilize() {
-        HoldData.ReadyCount--;
+    public override void SubtractReady() {
+        base.SubtractReady();
         FertilizeChanged?.Invoke();
     }
 
-    protected override void Add() {
-        base.Add();
+    protected override void AddReady() {
+        base.AddReady();
         FertilizeChanged?.Invoke();
     }
 
     public override void Bind(FarmData data, bool isFileEmpty) {
-        HoldData = data.Puncher;
+        _holdData = data.Puncher;
         base.Bind(data, isFileEmpty);
     }
 }

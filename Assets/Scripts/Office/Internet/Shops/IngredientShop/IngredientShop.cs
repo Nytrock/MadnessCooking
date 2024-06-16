@@ -1,22 +1,12 @@
 using UnityEngine;
 
-public class IngredientShop : BaseInstantShop<Ingredient, OfficeData>, IUpgradeable {
+public class IngredientShop : BaseInstantShop<Ingredient, OfficeData>, IUpgradeable<KitchenUpgradeData> {
     [SerializeField] private BedTypeManager _bedTypesManager;
     [SerializeField] private KitchenStorage _ingredientStorage;
-
-    [Header("Upgrades")]
-    [SerializeField] private BaseUpgrade _spiceAutoBuy;
+    private KitchenUpgradeData _upgradeData;
 
     private void Awake() {
         _bedTypesManager.ItemAdded += delegate { UpdatePanels(); };
-    }
-
-    public void CheckUpgrade(BaseUpgrade upgrade) {
-        if (upgrade == _spiceAutoBuy) {
-            Ingredient spice = ConstIngredients.Instance.Spice;
-            int index = _data.IndexOfItemPanel(spice);
-            RemoveItemPanel(spice, index);
-        }
     }
 
     protected override void RemoveItemPanel(Ingredient item, int index) {
@@ -47,5 +37,17 @@ public class IngredientShop : BaseInstantShop<Ingredient, OfficeData>, IUpgradea
             data.IngredientShop = new(_defaultItemsToBuy);
         _data = data.IngredientShop;
         base.Bind(data, isFileEmpty);
+    }
+
+    public void BindUpgrade(KitchenUpgradeData upgradeData) {
+        _upgradeData = upgradeData;
+    }
+
+    public void CheckAddedUpgrade(BaseUpgrade upgrade) {
+        if (_upgradeData.IsAutoSpice) {
+            Ingredient spice = ConstIngredients.Instance.Spice;
+            int index = _data.IndexOfItemPanel(spice);
+            RemoveItemPanel(spice, index);
+        }
     }
 }

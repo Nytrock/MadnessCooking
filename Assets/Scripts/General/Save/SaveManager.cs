@@ -5,6 +5,8 @@ public class SaveManager : MonoBehaviour {
     private GameData _gameData;
     private FileDataService _dataService;
 
+    [SerializeField] private UpgradeManager _upgradeManager;
+
     [Header("Save parts")]
     [SerializeField] private SaveGeneralManager _mainPart;
     [SerializeField] private SaveCafeManager _cafePart;
@@ -42,5 +44,6 @@ public class SaveManager : MonoBehaviour {
         _kitchenPart.LoadData(_gameData.Kitchen, isFileEmpty);
         _farmPart.LoadData(_gameData.Farm, isFileEmpty);
         _officePart.LoadData(_gameData.Office, isFileEmpty);
+        _upgradeManager.LoadUpgrades();
     }
 }

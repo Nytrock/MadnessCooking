@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using UnityEngine;
 
-public class TechnicManager : BuyableItemManager<Technic>, IUpgradeable, IBindable<KitchenData> {
+public class TechnicManager : SaveableItemManager<Technic, KitchenData>, IUpgradeable<KitchenUpgradeData> {
     [SerializeField] private TechnicHolderUI _UI;
     [SerializeField] private TechnicHolder[] _holders;
 
@@ -11,7 +11,7 @@ public class TechnicManager : BuyableItemManager<Technic>, IUpgradeable, IBindab
     [SerializeField] private CoefficientUpgrade[] _technicRepairSpeedUps;
     [SerializeField] private CoefficientUpgrade[] _technicStrengthAdds;
 
-    public KitchenData _tempDataDontForgetToDelete;
+    private KitchenUpgradeData _upgradeData;
 
     public event Action TechnicChanged;
 
@@ -52,21 +52,7 @@ public class TechnicManager : BuyableItemManager<Technic>, IUpgradeable, IBindab
         TechnicChanged?.Invoke();
     }
 
-    public void CheckUpgrade(BaseUpgrade upgrade) {
-        if (_technicCookSpeedUps.Contains(upgrade)) {
-            var coefUpgrade = upgrade as CoefficientUpgrade;
-            _tempDataDontForgetToDelete.TechnicCookSpeed = coefUpgrade.Coefficient;
-        } else if (_technicStrengthAdds.Contains(upgrade)) {
-            var coefUpgrade = upgrade as CoefficientUpgrade;
-            _tempDataDontForgetToDelete.TechnicStrength = coefUpgrade.Coefficient;
-        } else if (_technicRepairSpeedUps.Contains(upgrade)) {
-            var coefUpgrade = upgrade as CoefficientUpgrade;
-            _tempDataDontForgetToDelete.TechnicRepairSpeed = coefUpgrade.Coefficient;
-        }
-    }
-
-    public void Bind(KitchenData data, bool isFileEmpty) {
-        _tempDataDontForgetToDelete = data;
+    public override void Bind(KitchenData data, bool isFileEmpty) {
         if (isFileEmpty)
             data.TechnicManager = new(_defaultItems);
         _data = data.TechnicManager;
@@ -81,5 +67,18 @@ public class TechnicManager : BuyableItemManager<Technic>, IUpgradeable, IBindab
 
         for (int i = 0; i < data.TechnicHolders.Length; i++)
             _holders[i].Bind(data, i, isFileEmpty);
+    }
+
+    public void BindUpgrade(KitchenUpgradeData upgradeData) {
+        _upgradeData = upgradeData;
+    }
+
+    public void CheckAddedUpgrade(BaseUpgrade upgrade) {
+        if (_technicCookSpeedUps.Contains(upgrade))
+            _upgradeData.ChangeTechnicCookSpeed(upgrade as CoefficientUpgrade);
+        else if (_technicStrengthAdds.Contains(upgrade))
+            _upgradeData.ChangeTechnicStrength(upgrade as CoefficientUpgrade);
+        else if (_technicRepairSpeedUps.Contains(upgrade))
+            _upgradeData.ChangeTechnicRepairSpeed(upgrade as CoefficientUpgrade);
     }
 }

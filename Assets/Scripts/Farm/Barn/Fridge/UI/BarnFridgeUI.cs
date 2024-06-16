@@ -6,15 +6,19 @@ public class BarnFridgeUI : MonoBehaviour {
     [SerializeField] private ItemInfoRendererWithCount _milkRenderer;
     [SerializeField] private ItemInfoRendererWithCount _flourRenderer;
 
+    private void Awake() {
+        _barnFridge.CountsUpdated += UpdateCounts;
+    }
+
+    private void UpdateCounts(int milkCount, int flourCount) {
+        _milkRenderer.SetCount(milkCount);
+        _flourRenderer.SetCount(flourCount);
+    }
+
     private void Start() {
         _panel.SetActive(false);
         _milkRenderer.SetItemInfo(ConstIngredients.Instance.Milk);
         _flourRenderer.SetItemInfo(ConstIngredients.Instance.Flour);
-    }
-
-    private void Update() {
-        _milkRenderer.SetCount(_barnFridge.Cow.ReadyCount);
-        _flourRenderer.SetCount(_barnFridge.FlourMill.ReadyCount);
     }
 
     public void ChangeState() {

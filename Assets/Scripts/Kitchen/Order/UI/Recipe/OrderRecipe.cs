@@ -1,20 +1,20 @@
 public class OrderRecipe : FoodRecipe<OrderRecipePart> {
-    private KitchenData _data;
+    private KitchenUpgradeData _upgradeData;
 
     public void Setup(KitchenStorage kitchenStorage, TechnicManager technicManager) {
         _kitchenStorage = kitchenStorage;
         _technicManager = technicManager;
     }
 
-    public void SetupRecipe(Food food, KitchenData data) {
-        _data = data;
+    public void SetupRecipe(Food food, KitchenUpgradeData data) {
+        _upgradeData = data;
         SetupRecipe(food);
     }
 
     protected override void SetupIngredients(Food food, ref bool canCook) {
         int index = 0;
         foreach (var count in food.Ingredients) {
-            if (count.Ingredient == ConstIngredients.Instance.Spice && _data.IsAutoSpice) {
+            if (count.Ingredient == ConstIngredients.Instance.Spice && _upgradeData.IsAutoSpice) {
                 _canCook &= MoneyManager.Instance.MoneyCount >= count.Count * count.Ingredient.Price;
                 _recipeParts[index].SetupAutoSpice(count);
             } else {

@@ -5,14 +5,13 @@ public class TechnicHolder : MonoBehaviour {
     [SerializeField] private Technic _technic;
     [SerializeField] private Transform _UITarget;
     private Animator _animator;
-
-    private KitchenData _data;
     private Order _nowOrder;
 
     private TechnicCooker _cooker;
     private TechnicRepairer _repair;
 
     public TechnicHolderData TechnicData { get; private set; }
+    private KitchenUpgradeData _upgradeData;
 
     public Technic Technic => _technic;
     public Transform UITarget => _UITarget;
@@ -29,11 +28,11 @@ public class TechnicHolder : MonoBehaviour {
 
     public void StartCook(Order order) {
         TechnicData.IsCooking = true;
-        TechnicData.NowStrength = Mathf.Max(TechnicData.NowStrength - (Random.Range(1f, 2f) / _data.TechnicStrength), 0);
+        TechnicData.NowStrength = Mathf.Max(TechnicData.NowStrength - (Random.Range(1f, 2f) / _upgradeData.TechnicStrength), 0);
         _animator.SetBool("isCooking", true);
 
         _nowOrder = order;
-        _cooker.StartWork(order.Food.TimeToCook / _data.TechnicCookSpeed);
+        _cooker.StartWork(order.Food.TimeToCook / _upgradeData.TechnicCookSpeed);
     }
 
     public void StopCook() {
@@ -48,7 +47,7 @@ public class TechnicHolder : MonoBehaviour {
 
     public void StartRepair() {
         TechnicData.IsRepairing = true;
-        _repair.StartWork(_technic.TimeRepair / _data.TechnicRepairSpeed);
+        _repair.StartWork(_technic.TimeRepair / _upgradeData.TechnicRepairSpeed);
     }
 
     public void StopRepair() {
@@ -56,15 +55,15 @@ public class TechnicHolder : MonoBehaviour {
     }
 
     public void Bind(KitchenData data, int index, bool isFileEmpty) {
-        _data = data;
+        _upgradeData = data.UpgradeData;
 
         if (isFileEmpty) {
-            _data.TechnicHolders[index] = new() {
+            data.TechnicHolders[index] = new() {
                 NowStrength = _technic.Strength
             };
         }
 
-        TechnicData = _data.TechnicHolders[index];
+        TechnicData = data.TechnicHolders[index];
         if (TechnicData.IsRepairing)
             StartRepair();
     }

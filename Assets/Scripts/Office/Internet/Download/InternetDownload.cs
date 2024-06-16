@@ -2,7 +2,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InternetDownload : MonoBehaviour, IUpgradeable, IBindable<OfficeData> {
+public class InternetDownload : MonoBehaviour, IUpgradeable<OfficeUpgradeData> {
     [SerializeField] private GameObject _panel;
     [SerializeField] private Slider _downloadBar;
 
@@ -17,9 +17,9 @@ public class InternetDownload : MonoBehaviour, IUpgradeable, IBindable<OfficeDat
     private float _needProgress;
     private bool _isDownloading;
     private BaseShop _shop;
-    private OfficeData _data;
+    private OfficeUpgradeData _upgradeData;
 
-    private void LateStart() {
+    private void Start() {
         ChangeState(false);
     }
 
@@ -28,7 +28,7 @@ public class InternetDownload : MonoBehaviour, IUpgradeable, IBindable<OfficeDat
             return;
 
         if (_nowProgress < _needProgress)
-            _nowProgress += Time.deltaTime * _data.InternetDownloadSpeed * Random.Range(0.1f, 5f);
+            _nowProgress += Time.deltaTime * _upgradeData.InternetDownloadSpeed * Random.Range(0.1f, 5f);
         else
             EndDownload();
         _downloadBar.value = _nowProgress;
@@ -39,7 +39,7 @@ public class InternetDownload : MonoBehaviour, IUpgradeable, IBindable<OfficeDat
     }
 
     public void StartDownload(BaseShop openingShop) {
-        if (_data.IsInternetDownloadInstant) {
+        if (_upgradeData.IsInternetDownloadInstant) {
             openingShop.ChangeShopState(true);
             return;
         }
@@ -59,19 +59,17 @@ public class InternetDownload : MonoBehaviour, IUpgradeable, IBindable<OfficeDat
         _shop = null;
     }
 
-    public void CheckUpgrade(BaseUpgrade upgrade) {
-        if (_speedUpgrades.Contains(upgrade)) {
-            var coefUpgrade = upgrade as CoefficientUpgrade;
-            if (coefUpgrade != null) {
-                _data.InternetDownloadSpeed = coefUpgrade.Coefficient;
-            } else {
-                _data.IsInternetDownloadInstant = true;
-            }
-        }
+    public void BindUpgrade(OfficeUpgradeData upgradeData) {
+        _upgradeData = upgradeData;
     }
 
-    public void Bind(OfficeData data, bool isFileEmpty) {
-        _data = data;
-        LateStart();
+    public void CheckAddedUpgrade(BaseUpgrade upgrade) {
+        if (_speedUpgrades.Contains(upgrade)) {
+            var coefUpgrade = upgrade as CoefficientUpgrade;
+            if (coefUpgrade != null)
+                _upgradeData.ChangeInternetDownloadSpeed(coefUpgrade);
+            else
+                _upgradeData.ChangeInternetDownloadInstant();
+        }
     }
 }

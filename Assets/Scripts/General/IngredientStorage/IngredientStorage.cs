@@ -11,9 +11,9 @@ public abstract class IngredientStorage<TData> : MonoBehaviour, IBindable<TData>
 
     public event Action<IngredientCount> IngredientAdded;
 
-    public virtual void PutIngredients(IngredientCountList puttingCountList) {
-        for (int i = 0; i < puttingCountList.Size; i++)
-            PutIngredientWithRemain(puttingCountList.Get(i));
+    public void PutIngredients(IEnumerable<IngredientCount> puttingCountList) {
+        foreach (var count in puttingCountList)
+            PutIngredientWithRemain(count);
     }
 
     public virtual int PutIngredientWithRemain(IngredientCount puttingCount) {

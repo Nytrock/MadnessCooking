@@ -1,23 +1,26 @@
 using System;
 using UnityEngine;
 
-public abstract class SpaceManager<TData> : MonoBehaviour, IUpgradeable, IBindable<TData>
+public abstract class SpaceManager<TData> : MonoBehaviour, IBindable<TData>
     where TData : ISaveable {
 
     [SerializeField] protected SpacePrefab _spacePrefab;
+    [SerializeField] protected UpgradeManager _upgradeManager;
     [SerializeField] protected int _defaultSpaceCount;
     [SerializeField] protected CountUpgrade[] _spaceAddUpgrades;
 
     protected Transform _spaceContainer;
     protected TData _data;
+    protected SpaceManagerData _spaceData;
 
-    public SpaceManagerData SpaceData { get; protected set; }
     public event Action SpaceAdded;
 
     public float SpaceSize => _spacePrefab.Size;
+    public int SpaceCount => _spaceData.Count;
 
     private void Awake() {
         _spaceContainer = transform;
+        _upgradeManager.ItemAdded += CheckSpaceAdded;
     }
 
     protected void LateStart() {
@@ -25,15 +28,14 @@ public abstract class SpaceManager<TData> : MonoBehaviour, IUpgradeable, IBindab
     }
 
     private void GenerateSpaces() {
-        for (int i = 0; i < SpaceData.Count; i++)
+        for (int i = 0; i < _spaceData.Count; i++)
             AddSpace(i);
     }
 
-    public virtual void CheckUpgrade(BaseUpgrade upgrade) {
-        if (upgrade == _spaceAddUpgrades[SpaceData.Count - _defaultSpaceCount]) {
-            var countUpgrade = upgrade as CountUpgrade;
-            SpaceData.Count = countUpgrade.Count;
-            AddSpace(SpaceData.Count - 1);
+    public virtual void CheckSpaceAdded(BaseUpgrade upgrade) {
+        if (upgrade == _spaceAddUpgrades[_spaceData.Count - _defaultSpaceCount]) {
+            _spaceData.SetCount(upgrade as CountUpgrade);
+            AddSpace(_spaceData.Count - 1);
         }
     }
 

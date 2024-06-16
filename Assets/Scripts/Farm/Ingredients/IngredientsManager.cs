@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IngredientsManager : BuyableItemManager<Ingredient>, IBindable<FarmData> {
+public class IngredientsManager : SaveableItemManager<Ingredient, FarmData> {
     [SerializeField] private Ingredient[] _allIngredients;
 
     public bool HaveIngredient(Ingredient ingredient) {
@@ -32,7 +32,7 @@ public class IngredientsManager : BuyableItemManager<Ingredient>, IBindable<Farm
             base.AddItem(item);
     }
 
-    public void Bind(FarmData data, bool isFileEmpty) {
+    public override void Bind(FarmData data, bool isFileEmpty) {
         if (isFileEmpty)
             data.IngredientManager = new(_defaultItems);
         _data = data.IngredientManager;

@@ -26,7 +26,7 @@ public class OrderButton : MonoBehaviour {
         gameObject.SetActive(true);
     }
 
-    public void SetOrder(Order order, KitchenData data) {
+    public void SetOrder(Order order, KitchenUpgradeData data) {
         StartNewCycle();
         Order = order;
         Order.OrderFinished += FinishCook;

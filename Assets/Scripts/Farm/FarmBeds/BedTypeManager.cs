@@ -2,13 +2,18 @@ using System;
 using System.Linq;
 using UnityEngine;
 
-public class BedTypeManager : BuyableItemManager<BedType>, IUpgradeable, IBindable<FarmData> {
+public class BedTypeManager : SaveableItemManager<BedType, FarmData> {
     [SerializeField] private BedType[] _allBeds;
+    [SerializeField] private UpgradeManager _upgradeManager;
 
     [Header("Upgrades")]
     [SerializeField] private BedTypeUpgrade[] _bedsUpgrades;
 
     public int BedsCount => _allBeds.Length;
+
+    private void Awake() {
+        _upgradeManager.ItemAdded += CheckBedTypeAdded;
+    }
 
     public BedType GetBed(int index) {
         return _allBeds[index];
@@ -35,14 +40,14 @@ public class BedTypeManager : BuyableItemManager<BedType>, IUpgradeable, IBindab
         return false;
     }
 
-    public void CheckUpgrade(BaseUpgrade upgrade) {
+    public void CheckBedTypeAdded(BaseUpgrade upgrade) {
         if (_bedsUpgrades.Contains(upgrade)) {
             var bedTypeUpgrade = upgrade as BedTypeUpgrade;
             AddItem(bedTypeUpgrade.BedType);
         }
     }
 
-    public void Bind(FarmData data, bool isFileEmpty) {
+    public override void Bind(FarmData data, bool isFileEmpty) {
         if (isFileEmpty)
             data.BedTypeManager = new(_defaultItems);
         _data = data.BedTypeManager;

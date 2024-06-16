@@ -2,8 +2,9 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Chickens : MonoBehaviour, IUpgradeable, IBindable<FarmData> {
+public class Chickens : MonoBehaviour, IBindable<FarmData> {
     [SerializeField] private FarmCar _car;
+    [SerializeField] private UpgradeManager _upgradeManager;
     [SerializeField, Min(0)] private float _maxFoodWorkTime;
     [SerializeField, Min(0)] private float _eggTime;
 
@@ -19,11 +20,16 @@ public class Chickens : MonoBehaviour, IUpgradeable, IBindable<FarmData> {
 
     public ChickensData Data { get; private set; }
 
-    public event Action FoodCountChanged;
+    public event Action<int> FoodCountChanged;
+    public event Action<int> EggCountChanged;
+
+    private void Awake() {
+        _upgradeManager.ItemAdded += CheckUpgrades;
+    }
 
     private void LateStart() {
         _egg = ConstIngredients.Instance.Egg;
-        FoodCountChanged?.Invoke();
+        FoodCountChanged?.Invoke(Data.FoodCount);
         ChangeState();
     }
 
@@ -33,10 +39,10 @@ public class Chickens : MonoBehaviour, IUpgradeable, IBindable<FarmData> {
 
         UpdateFoods();
         if (Data.NowTime < _eggTime) {
-            Data.NowTime += InGameTime.Instance.DeltaTime * Data.Speed;
+            Data.UpdateTime();
         } else {
-            Data.NowTime = 0;
-            Data.EggCount++;
+            Data.AddEgg();
+            EggCountChanged?.Invoke(Data.EggCount);
         }
     }
 
@@ -54,35 +60,27 @@ public class Chickens : MonoBehaviour, IUpgradeable, IBindable<FarmData> {
     }
 
     private void RemoveFood(ChickenFoodData food) {
-        Data.FoodList.Remove(food);
-        Data.Speed -= food.FoodCoef;
-        if (Data.FoodList.Count == 0)
-            Data.IsFeed = false;
+        Data.RemoveFood(food);
     }
 
     public void Feed() {
-        float foodCoef = _foodSpeedCoef / (Data.FoodList.Count + 1);
-        Data.FoodList.Add(new ChickenFoodData(_maxFoodWorkTime, foodCoef));
+        float foodCoef = _foodSpeedCoef / (Data.UsedFoodCount + 1);
+        ChickenFoodData newFood = new(_maxFoodWorkTime, foodCoef);
+        Data.AddFood(newFood);
 
-        Data.Speed += foodCoef;
-        Data.IsFeed = true;
-
-        if (Data.IsInfiniteFood)
-            return;
-
-        Data.FoodCount--;
-        FoodCountChanged?.Invoke();
+        FoodCountChanged?.Invoke(Data.FoodCount);
     }
 
     public void EggsToCar() {
         int remainCount = _car.PutIngredientWithRemain(new IngredientCount(_egg, Data.EggCount));
         FatigueManager.Instance.ChangeFatigue(_egg.FatigueCount * (Data.EggCount - remainCount));
-        Data.EggCount = remainCount;
+        Data.SetEggCount(remainCount);
+        EggCountChanged?.Invoke(remainCount);
     }
 
-    public void CheckUpgrade(BaseUpgrade upgrade) {
+    public void CheckUpgrades(BaseUpgrade upgrade) {
         if (upgrade == _unlockUpgrade) {
-            Data.IsUnlocked = true;
+            Data.Unlock();
             ChangeState();
         } else if (upgrade == _food) {
             AddFood();
@@ -96,17 +94,18 @@ public class Chickens : MonoBehaviour, IUpgradeable, IBindable<FarmData> {
     }
 
     private void SetInfiniteFood() {
-        Data.FoodCount = -1;
-        Data.IsInfiniteFood = true;
-        FoodCountChanged?.Invoke();
+        Data.SetInfiniteFood();
+        FoodCountChanged?.Invoke(Data.FoodCount);
     }
 
     private void AddFood() {
-        Data.FoodCount++;
-        FoodCountChanged?.Invoke();
+        Data.AddFood();
+        FoodCountChanged?.Invoke(Data.FoodCount);
     }
 
     public void Bind(FarmData data, bool isFileEmpty) {
+        if (isFileEmpty)
+            data.Chickens = new();
         Data = data.Chickens;
         LateStart();
     }

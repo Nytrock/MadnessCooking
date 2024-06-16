@@ -6,8 +6,8 @@ public class FarmWell : HoldAdd {
 
     public event Action WaterChanged;
 
-    protected override void Add() {
-        base.Add();
+    protected override void AddReady() {
+        base.AddReady();
         WaterChanged?.Invoke();
     }
 
@@ -16,13 +16,13 @@ public class FarmWell : HoldAdd {
         _cameraManager.ChangeWorkMode(!_isWork);
     }
 
-    public void SubtractWater() {
-        HoldData.ReadyCount--;
+    public override void SubtractReady() {
+        base.SubtractReady();
         WaterChanged?.Invoke();
     }
 
     public override void Bind(FarmData data, bool isFileEmpty) {
-        HoldData = data.FarmWell;
+        _holdData = data.FarmWell;
         base.Bind(data, isFileEmpty);
     }
 }

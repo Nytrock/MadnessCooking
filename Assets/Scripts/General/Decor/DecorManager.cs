@@ -1,14 +1,14 @@
 using UnityEngine;
 
-public class DecorManager : BuyableItemManager<Decor>, IBindable<GeneralData> {
-    [SerializeField] private LocationDecorManager[] _localDecorManagers;
+public class DecorManager : SaveableItemManager<Decor, GeneralData> {
+    [SerializeField] private LocalDecorManager[] _localDecorManagers;
 
     public override void AddItem(Decor item) {
         base.AddItem(item);
         AddDecorToLocalManagers(item);
     }
 
-    public void Bind(GeneralData data, bool isFileEmpty) {
+    public override void Bind(GeneralData data, bool isFileEmpty) {
         if (isFileEmpty)
             data.DecorManager = new(_defaultItems);
         _data = data.DecorManager;
