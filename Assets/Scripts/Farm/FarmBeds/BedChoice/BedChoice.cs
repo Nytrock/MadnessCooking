@@ -37,9 +37,9 @@ public class BedChoice : MonoBehaviour {
         _farmBed.enabled = true;
     }
 
-    public void Bind(FarmData data, int bedIndex) {
+    public void Bind(FarmData data, FarmBedData bedData) {
         _data = data;
-        _bedData = _data.FarmBeds[bedIndex];
+        _bedData = bedData;
 
         _farmBed.Bind(data, _bedData, FindBedHolder(_bedData.BedType));
         LateStart();

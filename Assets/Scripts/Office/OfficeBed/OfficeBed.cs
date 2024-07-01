@@ -3,10 +3,12 @@ using UnityEngine;
 public class OfficeBed : MonoBehaviour, IBindable<OfficeData> {
     [SerializeField] private TimeManager _timeManager;
     [SerializeField] private OfficeBedUI _officeBedUI;
-    private OfficeData _data;
+    private OfficeBedData _data;
 
     public void Bind(OfficeData data, bool isFileEmpty) {
-        _data = data;
+        if (isFileEmpty)
+            data.OfficeBed = new();
+        _data = data.OfficeBed;
 
         if (_officeBedUI != null)
             _officeBedUI.LateStart(_data.IsSleeping);
@@ -14,7 +16,7 @@ public class OfficeBed : MonoBehaviour, IBindable<OfficeData> {
     }
 
     public void ChangeSleepState() {
-        _data.IsSleeping = !_data.IsSleeping;
+        _data.ChangeSleepState();
         UpdateSleepState();
     }
 

@@ -44,7 +44,7 @@ public class CriticSpawner : MonoBehaviour {
     }
 
     private IEnumerator WaitCriticTime(TimeSpan timeCritic) {
-        yield return new WaitUntil(() => timeCritic >= _timeManager.TimeSpan);
+        yield return new WaitUntil(() => timeCritic >= _timeManager.GlobalTime);
         _clientSpawner.ChangeCriticWait(true);
     }
 

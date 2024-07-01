@@ -1,11 +1,10 @@
 using System;
-using UnityEditor;
 using UnityEngine;
 
 public class LocationManager : MonoBehaviour, IBindable<GeneralData> {
     [SerializeField] private Camera _mainCamera;
     [SerializeField] private LocationButton[] _locations;
-    private GeneralData _data;
+    private LocationManagerData _data;
 
     public event Action<Vector2> LocationChanged;
 
@@ -19,12 +18,14 @@ public class LocationManager : MonoBehaviour, IBindable<GeneralData> {
     }
 
     public void ChangeLocation(LocationButton newLocation) {
-        _data.StartLocationIndex = ArrayUtility.IndexOf(_locations, newLocation);
+        _data.ChangeLocation(Array.IndexOf(_locations, newLocation));
         ChangeLocation(newLocation.Location);
     }
 
     public void Bind(GeneralData data, bool isFileEmpty) {
-        _data = data;
+        if (isFileEmpty)
+            data.LocationManager = new();
+        _data = data.LocationManager;
         LateStart();
     }
 }

@@ -26,13 +26,13 @@ public abstract class TechnicWaiter : MonoBehaviour {
             return;
 
         if (_holder.TechnicData.NowWaitTime < _needTime)
-            _holder.TechnicData.NowWaitTime += _speedMultiplier * InGameTime.Instance.DeltaTime;
+            _holder.TechnicData.AddTime(_speedMultiplier);
         else
             EndWork();
     }
 
     protected virtual void EndWork() {
         _isWorking = false;
-        _holder.TechnicData.NowWaitTime = 0f;
+        _holder.TechnicData.ResetTime();
     }
 }

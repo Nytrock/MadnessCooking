@@ -20,7 +20,8 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
     [Header("Upgrades")]
     [SerializeField] private BaseUpgrade _eatTimeShowUpgrade;
 
-    private CafeData _data;
+    private ClientsSpawnerData _data;
+    private CafeSpotManagerData _spotData;
     private CafeUpgradeData _upgradeData;
     private PopularityXpAdder _xpAdder;
 
@@ -41,11 +42,11 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
     }
 
     private void Update() {
-        if (!_data.IsSpawning || !_data.IsOpened)
+        if (!_data.IsSpawning || !_cafeOpener.IsOpened)
             return;
 
         if (_data.NowSpawnTime < _data.NeedSpawnTime) {
-            _data.NowSpawnTime += InGameTime.Instance.DeltaTime;
+            _data.AddTime();
         } else {
             Spawn();
             SetNewTime();
@@ -61,14 +62,15 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
         float waitMultiplier = _popularityCalculate.GetSpaceMultiplier();
         ClientType clientType = GetRandomType(clientCount);
         CafeSpot spot = _spotManager.GetSpotByIndex(spotIndex);
+        SpotData spotData = _spotData.GetSpot(spotIndex);
         Order order;
         for (int i = 0; i < spot.SeatsCount; i++) {
             order = new(_foodManager.GetRandomFood(), spotIndex + 1);
-            _data.Spots[spotIndex].Clients[i] = new ClientData(_spawnPoint.position,
+            spotData.Clients[i] = new ClientData(_spawnPoint.position,
                 clientType, clientCount, waitMultiplier, order);
         }
         SpawnGroupOfClients(spot);
-        _data.Spots[spotIndex].AvailableClients = true;
+        spotData.AvailableClients = true;
 
         if (!_spotManager.CheckHavingSpots())
             ChangeSpawnMode();
@@ -78,13 +80,11 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
         float popular = _popularityCalculate.GetPopularity();
         float minTime = _minSpawnTime / popular;
         float maxTime = _maxSpawnTime / popular;
-
-        _data.NeedSpawnTime = Random.Range(minTime, maxTime);
-        _data.NowSpawnTime = 0;
+        _data.SetNewTime(minTime, maxTime);
     }
 
     private void ChangeSpawnMode() {
-        _data.IsSpawning = !_data.IsSpawning;
+        _data.ChangeSpawnMode();
         SetNewTime();
     }
 
@@ -130,11 +130,10 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
     }
 
     private void ClientsLeave(CafeSpot spot) {
-        _data.IsSpawning = true;
         _spotManager.ReturnSpot(spot.Index);
 
-        SpotData spotData = _data.Spots[spot.Index];
-        if (spot.SeatsCount > 1 && !_data.IsOpened) {
+        SpotData spotData = _spotData.GetSpot(spot.Index);
+        if (spot.SeatsCount > 1 && !_cafeOpener.IsOpened) {
             if (spotData.GroupState == GroupClientState.Talk) {
                 for (int i = 0; i < spot.SeatsCount; i++) {
                     _xpAdder.RemoveXp(spotData.Clients[i].Type);
@@ -143,14 +142,14 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
         }
 
         for (int i = 0; i < spot.SeatsCount; i++) {
-            _data.LeavingClients.Add(spotData.Clients[i]);
+            _data.AddLeavingClient(spotData.Clients[i]);
+            spotData.ClearClients();
         }
-        spotData.ClearClients();
     }
 
     private void SetupClient(Client client, int spotIndex, int tableIndex) {
         client.ClientUI.SetData(_upgradeData);
-        ClientData clientData = _data.Spots[spotIndex].Clients[tableIndex];
+        ClientData clientData = _spotData.GetSpot(spotIndex).Clients[tableIndex];
         ClientSettings clientSettings = new(clientData, spotIndex, tableIndex, this);
         client.Setup(clientSettings);
         _ordersManager.SetNewOrder(client);
@@ -158,7 +157,7 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
     }
 
     public void ChangeCriticWait(bool newValue) {
-        _data.IsWaitingCritic = newValue;
+        _data.ChangeCriticWait(newValue);
     }
 
     public void CheckAddedUpgrade(BaseUpgrade upgrade) {
@@ -171,16 +170,22 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
     }
 
     public void Bind(CafeData data, bool isFileEmpty) {
-        _data = data;
+        if (isFileEmpty)
+            data.ClientsSpawner = new();
+        _data = data.ClientsSpawner;
+        _spotData = data.SpotManager;
+
         if (isFileEmpty) {
             LateStart();
             return;
         }
 
-        for (int spotIndex = 0; spotIndex < _data.Spots.Count; spotIndex++) {
-            SpotData spotData = _data.Spots[spotIndex];
-            if (!spotData.AvailableClients)
+        int spotIndex = 0;
+        foreach (var spotData in _spotData.Spots) {
+            if (!spotData.AvailableClients) {
+                spotIndex++;
                 continue;
+            }
 
             _spotManager.TakeSpot(spotIndex);
             CafeSpot spot = _spotManager.GetSpotByIndex(spotIndex);
@@ -190,19 +195,19 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
                 table.CheckWait();
             else if (spotData.GroupState == GroupClientState.Talk)
                 table.CheckTalk();
+
+            spotIndex++;
         }
 
-        for (int i = 0; i < _data.LeavingClients.Count; i++) {
+        foreach (var clientData in _data.LeavingClients) {
             Client client = _pool.GetObject();
-            ClientData clientData = _data.LeavingClients[i];
             client.transform.position = clientData.Position.GetVector();
             client.Setup(new ClientSettings(clientData, -1, -1, this));
         }
     }
 
     public void PutClient(Client client) {
-        if (_data.LeavingClients.Contains(client.ClientData))
-            _data.LeavingClients.Remove(client.ClientData);
+        _data.TryRemoveLeavingClient(client.ClientData);
         _pool.PutObject(client);
     }
 

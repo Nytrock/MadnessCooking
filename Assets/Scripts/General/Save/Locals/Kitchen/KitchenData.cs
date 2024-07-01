@@ -6,6 +6,5 @@ public class KitchenData : ISaveable {
     public BuyableItemManagerData<Food> FoodManager;
     public IngredientStorageData KitchenStorage;
     public BuyableItemManagerData<Technic> TechnicManager;
-
     public TechnicHolderData[] TechnicHolders;
 }

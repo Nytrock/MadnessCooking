@@ -9,7 +9,7 @@ public class TimeRenderClock : TimeRenderer {
     public Transform hoursPoint, minutesPoint;
 
     protected override void UpdateVisual() {
-        TimeSpan timespan = _timeManager.TimeSpan;
+        TimeSpan timespan = _timeManager.GlobalTime;
         hoursPoint.localRotation = Quaternion.Euler(
                 0f, 0f, (float)timespan.TotalHours * -hoursToDegrees);
         minutesPoint.localRotation = Quaternion.Euler(

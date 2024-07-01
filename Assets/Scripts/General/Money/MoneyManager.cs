@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class MoneyManager : Singleton<MoneyManager>, IBindable<GeneralData> {
     [SerializeField, Min(0)] private int _moneyDefault;
-    private GeneralData _data;
+    private MoneyManagerData _data;
 
     public int MoneyCount => _data.MoneyCount;
 
@@ -14,17 +14,14 @@ public class MoneyManager : Singleton<MoneyManager>, IBindable<GeneralData> {
     }
 
     public void ChangeMoney(int changeValue) {
-        if (_data.MoneyCount + changeValue < 0)
-            throw new ArgumentException("Incorrect value for changing money count.");
-
-        _data.MoneyCount += changeValue;
+        _data.ChangeMoneyCount(changeValue);
         MoneyChanged?.Invoke(_data.MoneyCount);
     }
 
     public void Bind(GeneralData data, bool isFileEmpty) {
-        _data = data;
         if (isFileEmpty)
-            data.MoneyCount = _moneyDefault;
+            data.MoneyManager = new(_moneyDefault);
+        _data = data.MoneyManager;
         LateStart();
     }
 }

@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 public class CafeOpener : MonoBehaviour, IBindable<CafeData> {
-    private CafeData _data;
+    private CafeOpenerData _data;
 
     public bool IsOpened => _data.IsOpened;
 
@@ -13,12 +13,14 @@ public class CafeOpener : MonoBehaviour, IBindable<CafeData> {
     }
 
     public void Bind(CafeData data, bool isFileEmpty) {
-        _data = data;
+        if (isFileEmpty)
+            data.CafeOpener = new();
+        _data = data.CafeOpener;
         LateStart();
     }
 
     public void ChangeCafeState() {
-        _data.IsOpened = !_data.IsOpened;
+        _data.ChangeCafeState();
         CafeChanged?.Invoke();
     }
 }

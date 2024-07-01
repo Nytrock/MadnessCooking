@@ -12,7 +12,7 @@ public class CafeSpotManager : MonoBehaviour, IBindable<CafeData> {
     private readonly List<CafeSpot> _spots = new();
     private List<List<int>> _freeSpots;
     private float _cellSize;
-    private CafeData _data;
+    private CafeSpotManagerData _data;
 
     public float CellSize => _cellSize;
 
@@ -40,8 +40,8 @@ public class CafeSpotManager : MonoBehaviour, IBindable<CafeData> {
     }
 
     private void GenerateSpots() {
-        for (int i = 0; i < _data.Spots.Count; i++)
-            AddNewSpot(_data.Spots[i].SeatsCount - 1, false);
+        foreach (var spotData in _data.Spots)
+            AddNewSpot(spotData.SeatsCount - 1, false);
     }
 
     public void GenerateFreeSpotsList() {
@@ -61,7 +61,7 @@ public class CafeSpotManager : MonoBehaviour, IBindable<CafeData> {
             _opener.CafeChanged -= clientTable.CafeClosed;
         _spots[spotIndex].Destroy();
         _spots.RemoveAt(spotIndex);
-        _data.Spots.RemoveAt(spotIndex);
+        _data.RemoveSpotAt(spotIndex);
         SetupSpotsRemoveButtons();
     }
 
@@ -130,11 +130,13 @@ public class CafeSpotManager : MonoBehaviour, IBindable<CafeData> {
         CafeSpot spot = Instantiate(_spotPrefabs[index], transform);
         spot.ChangeEditorState(isAddedByEditor);
         spot.SetIndex(_spots.Count);
+
+        SpotData newData = new(spot.SeatsCount);
         if (isAddedByEditor)
-            _data.Spots.Add(new SpotData(spot.SeatsCount));
+            _data.AddSpot(newData);
         if (spot.TryGetComponent(out ClientsHolder clientTable)) {
             _opener.CafeChanged += clientTable.CafeClosed;
-            clientTable.SetData(_data.Spots[spot.Index]);
+            clientTable.SetData(newData);
         }
 
         float offset = _cellSize;
@@ -151,13 +153,9 @@ public class CafeSpotManager : MonoBehaviour, IBindable<CafeData> {
     }
 
     public void Bind(CafeData data, bool isFileEmpty) {
-        _data = data;
-        if (isFileEmpty) {
-            foreach (var spot in _spots) {
-                _data.Spots.Add(new SpotData(spot.SeatsCount));
-            }
-        }
-
+        if (isFileEmpty)
+            data.SpotManager = new();
+        _data = data.SpotManager;
         LateStart();
     }
 

@@ -27,8 +27,7 @@ public class TechnicHolder : MonoBehaviour {
     }
 
     public void StartCook(Order order) {
-        TechnicData.IsCooking = true;
-        TechnicData.NowStrength = Mathf.Max(TechnicData.NowStrength - (Random.Range(1f, 2f) / _upgradeData.TechnicStrength), 0);
+        TechnicData.StartCooking(_upgradeData);
         _animator.SetBool("isCooking", true);
 
         _nowOrder = order;
@@ -39,37 +38,35 @@ public class TechnicHolder : MonoBehaviour {
         if (!TechnicData.IsCooking)
             return;
 
-        TechnicData.IsCooking = false;
+        TechnicData.StopCooking();
         _animator.SetBool("isCooking", false);
         _nowOrder.FinishCook();
         _nowOrder = null;
     }
 
     public void StartRepair() {
-        TechnicData.IsRepairing = true;
+        TechnicData.ChangeRepairState(true);
         _repair.StartWork(_technic.TimeRepair / _upgradeData.TechnicRepairSpeed);
     }
 
     public void StopRepair() {
-        TechnicData.IsRepairing = false;
+        TechnicData.ChangeRepairState(false);
     }
 
     public void Bind(KitchenData data, int index, bool isFileEmpty) {
         _upgradeData = data.UpgradeData;
 
-        if (isFileEmpty) {
-            data.TechnicHolders[index] = new() {
-                NowStrength = _technic.Strength
-            };
-        }
-
+        if (isFileEmpty)
+            data.TechnicHolders[index] = new(_technic);
         TechnicData = data.TechnicHolders[index];
+
         if (TechnicData.IsRepairing)
             StartRepair();
     }
 
     public bool Accessible() {
-        return !TechnicData.IsCooking && TechnicData.NowStrength != 0 && !TechnicData.IsRepairing;
+        return !TechnicData.IsCooking && TechnicData.NowStrength != 0
+            && !TechnicData.IsRepairing;
     }
 
     public bool Repairable() {

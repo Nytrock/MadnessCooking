@@ -7,12 +7,11 @@ public class TimeManager : MonoBehaviour, IBindable<GeneralData> {
     [SerializeField] private DaytimeStart[] _daytimeStarts;
 
     private int _nowTimeSpeed;
-    private GeneralData _data;
-
-    private TimeSpan _timespan = new(7, 0, 0);
+    private TimeSpan _defaultTime = new(7, 0, 0);
     private Daytime _daytime = Daytime.Morning;
+    private TimeManagerData _data;
 
-    public TimeSpan TimeSpan => _timespan;
+    public TimeSpan GlobalTime => _data.GlobalTime.GetTimeSpan();
     public bool IsSleep => _sleepTimeSpeed == _nowTimeSpeed;
     public int NowTimeSpeed => _nowTimeSpeed;
 
@@ -24,14 +23,13 @@ public class TimeManager : MonoBehaviour, IBindable<GeneralData> {
     }
 
     private void Update() {
-        _timespan = _timespan.Add(new TimeSpan(0, 0, _nowTimeSpeed));
-        _data.GlobalTime = new(_timespan);
+        _data.AddTime(_nowTimeSpeed);
         CheckDaytime();
     }
 
     private void CheckDaytime() {
         foreach (var daytimeStart in _daytimeStarts) {
-            if (daytimeStart.TimeFits(_timespan, _daytime)) {
+            if (daytimeStart.TimeFits(_defaultTime, _daytime)) {
                 ChangeDaytime(daytimeStart.Daytime);
                 return;
             }
@@ -57,14 +55,11 @@ public class TimeManager : MonoBehaviour, IBindable<GeneralData> {
     public float GetSleepBonus(float needHours, float maxFatigue) => maxFatigue / (needHours * 3600 / _sleepTimeSpeed);
 
     public void Bind(GeneralData data, bool isFileEmpty) {
-        _data = data;
-        if (isFileEmpty) {
-            _data.GlobalTime = new(_timespan);
-            LateStart();
-            return;
-        }
+        if (isFileEmpty)
+            data.TimeManager = new(_defaultTime);
+        _data = data.TimeManager;
 
-        _timespan = _data.GlobalTime.GetTimeSpan();
+        _defaultTime = _data.GlobalTime.GetTimeSpan();
         CheckDaytime();
         LateStart();
     }

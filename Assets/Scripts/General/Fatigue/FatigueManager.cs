@@ -6,11 +6,11 @@ public class FatigueManager : Singleton<FatigueManager>, IBindable<GeneralData> 
 
     [SerializeField, Min(0)] private float _fatigueMax;
     [SerializeField, Min(1)] private float _needHoursToRecovery;
+
     private float _decorBonus = 1;
     private float _sleepBonus;
-
     private bool _isTired;
-    private GeneralData _data;
+    private FatigueManagerData _data;
 
     public float FatigueMax => _fatigueMax;
     public float FatigueNow => _data.Fatigue;
@@ -23,14 +23,14 @@ public class FatigueManager : Singleton<FatigueManager>, IBindable<GeneralData> 
 
     private void Update() {
         if (_timeManager.IsSleep) {
-            _data.Fatigue = Mathf.Max(_data.Fatigue - _sleepBonus, 0);
+            _data.ChangeFatigue(-_sleepBonus, _fatigueMax);
             if (_data.Fatigue == 0 && _isTired)
                 ChangeTiredState(false);
         }
     }
 
     public void ChangeFatigue(float fatigueValue) {
-        _data.Fatigue = Mathf.Clamp(_data.Fatigue + (fatigueValue / _decorBonus), 0, _fatigueMax);
+        _data.ChangeFatigue(fatigueValue / _decorBonus, _fatigueMax);
         if (_data.Fatigue >= _fatigueMax)
             ChangeTiredState(true);
     }
@@ -46,7 +46,9 @@ public class FatigueManager : Singleton<FatigueManager>, IBindable<GeneralData> 
     }
 
     public void Bind(GeneralData data, bool isFileEmpty) {
-        _data = data;
+        if (isFileEmpty)
+            data.FatigueManager = new();
+        _data = data.FatigueManager;
         LateStart();
     }
 }

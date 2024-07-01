@@ -6,23 +6,14 @@ public class FarmData : ISaveable {
     public BuyableItemManagerData<Ingredient> IngredientManager;
     public BuyableItemManagerData<BedType> BedTypeManager;
     public WheatManagerData WheatManager;
-    public SpaceManagerData FarmBedGroups;
-
-    public FarmBedData[] FarmBeds;
-
+    public FarmBedManagerData FarmBedGroups;
     public FarmShopData FarmShop;
-    public HoldAddData FarmWell = new();
+    public HoldAddData FarmWell;
     public NeedHoldAddData Cow;
     public ShitGeneratorData ShitGenerator;
-    public NeedHoldAddData Puncher = new();
+    public NeedHoldAddData Puncher;
     public NeedHoldAddData FlourMill;
     public ChickensData Chickens;
     public IngredientStorageData Car;
     public CarWaitManagerData CarWaitManager;
-
-    public void GenerateFarmBeds(int lenght) {
-        FarmBeds = new FarmBedData[lenght];
-        for (int i = 0; i < FarmBeds.Length; i++)
-            FarmBeds[i] = new();
-    }
 }

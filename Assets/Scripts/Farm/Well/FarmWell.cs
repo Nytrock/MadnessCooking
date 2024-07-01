@@ -22,6 +22,8 @@ public class FarmWell : HoldAdd {
     }
 
     public override void Bind(FarmData data, bool isFileEmpty) {
+        if (isFileEmpty)
+            data.FarmWell = new();
         _holdData = data.FarmWell;
         base.Bind(data, isFileEmpty);
     }

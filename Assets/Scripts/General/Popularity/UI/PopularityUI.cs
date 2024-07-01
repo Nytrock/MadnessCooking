@@ -10,8 +10,6 @@ public class PopularityUI : MonoBehaviour {
     [SerializeField] private TextMeshProUGUI _levelText;
     [SerializeField] private Slider _progress;
 
-    private bool _isLastLevel;
-
     private void Awake() {
         _popularityManager.LevelChanged += UpdateLevel;
         _popularityManager.XpChanged += UpdateProgress;
@@ -22,16 +20,14 @@ public class PopularityUI : MonoBehaviour {
         _levelText.text = (_popularityManager.NowLevel + 1).ToString();
         _additionalUI.UpdateInfo(level);
 
-        if (_popularityManager.IsMaxLevel) {
-            _isLastLevel = true;
+        if (_popularityManager.IsMaxLevel)
             _progress.value = _progress.maxValue;
-        } else {
+        else
             _progress.maxValue = level.NeedXp;
-        }
     }
 
     private void UpdateProgress(int xp) {
-        if (_isLastLevel)
+        if (_popularityManager.IsMaxLevel)
             return;
 
         _progress.value = xp;

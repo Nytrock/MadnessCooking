@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+[Serializable]
 public class FarmUpgradeData : LocalUpgradeData {
     [SerializeField] private bool _isAutoWheat;
     [SerializeField] private bool _isGrowStatusShow;

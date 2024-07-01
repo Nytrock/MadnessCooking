@@ -23,12 +23,10 @@ public class ChickensUI : MonoBehaviour {
 
     private void Update() {
         _eggSlider.value = _chickens.Data.NowTime;
+        _eggSlider.gameObject.SetActive(_chickens.Data.IsFeed);
     }
 
-    public void Feed() {
-        _chickens.Feed();
-        _eggSlider.gameObject.SetActive(true);
-    }
+    public void Feed() => _chickens.Feed();
 
     private void UpdateFoodCount(int foodCount) {
         _feedButton.interactable = foodCount > 0 || _chickens.Data.IsInfiniteFood;

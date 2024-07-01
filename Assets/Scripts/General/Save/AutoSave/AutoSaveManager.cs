@@ -5,7 +5,7 @@ public class AutoSaveManager : MonoBehaviour, IBindable<GeneralData> {
     [SerializeField, Min(1)] private int _needAutoSaveMinutes;
     [SerializeField] private AutoSaveUI _UI;
     private SaveManager _saveManager;
-    private GeneralData _data;
+    private AutoSaveManagerData _data;
 
     private float _needAutoSaveTime;
     private bool _isSaving;
@@ -13,9 +13,6 @@ public class AutoSaveManager : MonoBehaviour, IBindable<GeneralData> {
     private void Awake() {
         _saveManager = GetComponent<SaveManager>();
         _saveManager.SaveEnded += EndAutoSave;
-    }
-
-    private void Start() {
         _needAutoSaveTime = 60 * _needAutoSaveMinutes;
     }
 
@@ -24,7 +21,7 @@ public class AutoSaveManager : MonoBehaviour, IBindable<GeneralData> {
             return;
 
         if (_data.AutoSaveNowTime < _needAutoSaveTime)
-            _data.AutoSaveNowTime += Time.deltaTime;
+            _data.AddTime();
         else
             StartAutoSave();
     }
@@ -38,7 +35,7 @@ public class AutoSaveManager : MonoBehaviour, IBindable<GeneralData> {
     }
 
     private void EndAutoSave() {
-        _data.AutoSaveNowTime = 0;
+        _data.ResetTime();
         _isSaving = false;
 
         if (_UI != null)
@@ -46,6 +43,8 @@ public class AutoSaveManager : MonoBehaviour, IBindable<GeneralData> {
     }
 
     public void Bind(GeneralData data, bool isFileEmpty) {
-        _data = data;
+        if (isFileEmpty)
+            data.AutoSaveManager = new();
+        _data = data.AutoSaveManager;
     }
 }

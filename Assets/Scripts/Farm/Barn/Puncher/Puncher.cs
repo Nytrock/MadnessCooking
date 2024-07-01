@@ -19,6 +19,8 @@ public class Puncher : NeedHoldAdd {
     }
 
     public override void Bind(FarmData data, bool isFileEmpty) {
+        if (isFileEmpty)
+            data.Puncher = new();
         _holdData = data.Puncher;
         base.Bind(data, isFileEmpty);
     }

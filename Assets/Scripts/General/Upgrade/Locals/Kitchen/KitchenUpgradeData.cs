@@ -13,7 +13,7 @@ public class KitchenUpgradeData : LocalUpgradeData {
     public bool IsStrengthShow => _isStrengthShow;
     public float TechnicCookSpeed => _technicCookSpeed;
     public float TechnicRepairSpeed => _technicRepairSpeed;
-    public float TechnicStrength => _technicStrength;
+    public float TechnicStrengthMultiplier => _technicStrength;
 
     public void SetAutoSpice() {
         _isAutoSpice = true;

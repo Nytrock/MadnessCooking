@@ -16,4 +16,8 @@ public struct SerializableTimeSpan {
     public TimeSpan GetTimeSpan() {
         return new TimeSpan(_hours, _minutes, _seconds);
     }
+
+    public SerializableTimeSpan Add(TimeSpan timeSpan) {
+        return new SerializableTimeSpan(GetTimeSpan().Add(timeSpan));
+    }
 }
