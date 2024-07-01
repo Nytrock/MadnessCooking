@@ -1,7 +1,7 @@
 using UnityEngine;
 
 
-public class CafeCameraManager : CameraManager<CafeData> {
+public class HorizontalCameraManager : CameraManager {
     private float _horizontalExtention;
 
     protected override string _cameraAxis => "Mouse X";
@@ -14,7 +14,7 @@ public class CafeCameraManager : CameraManager<CafeData> {
 
     protected override void CalculateBorderPositions() {
         _startPosition = transform.position.x;
-        _endPosition = _startPosition + ((_spaceManager.SpaceCount - 1) * _spaceManager.SpaceSize)
+        _endPosition = _startPosition + _spaceManager.GetSpacesSize()
             + (_spaceManager.SpaceSize / 2) - _horizontalExtention;
         InvokeBordersFound();
     }

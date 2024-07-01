@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FarmBedManager : SpaceManager<FarmData>, IUpgradeable<FarmUpgradeData> {
+public class FarmBedManager : SaveableSpaceManager<FarmData>, IUpgradeable<FarmUpgradeData> {
     [SerializeField] private FarmBedSettings _bedsSettings;
     private readonly List<FarmBedGroup> _beds = new();
     private FarmUpgradeData _upgradeData;

@@ -1,4 +1,4 @@
-public class CafeSlider : LocationSlider<CafeData> {
+public class HorizontalLocationSlider : LocationSlider {
     protected override void ChangeSliderValue() {
         _slider.value = _cameraManager.MainCameraPos.position.x;
     }

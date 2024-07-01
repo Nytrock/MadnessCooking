@@ -7,7 +7,7 @@ public class CriticSpawner : MonoBehaviour {
     [SerializeField] private TimeManager _timeManager;
     [SerializeField] private PopularityCalculator _popularityCalculator;
     [SerializeField] private ClientsSpawner _clientSpawner;
-    [SerializeField] private CriticUIManager _criticUI;
+    [SerializeField] private CriticUI _criticUI;
     private PopularityManager _popularityManager;
 
     [SerializeField, Min(0)] private float[] _needPopularity;
@@ -40,7 +40,7 @@ public class CriticSpawner : MonoBehaviour {
         TimeSpan timeCritic = new(hour, minute, 0);
         StartCoroutine(WaitCriticTime(timeCritic));
 
-        _criticUI.ChangeCriticWaitStartUI(true);
+        _criticUI.SetMessage(CriticMessageType.Start);
     }
 
     private IEnumerator WaitCriticTime(TimeSpan timeCritic) {
@@ -58,12 +58,12 @@ public class CriticSpawner : MonoBehaviour {
         DisableCriticWait();
         _nextPopularityIndex++;
         _popularityManager.NextLevel();
-        _criticUI.ChangeCriticWaitSuccessUI(true);
+        _criticUI.SetMessage(CriticMessageType.Success);
     }
 
     public void WaitFailure() {
         DisableCriticWait();
         _popularityManager.PreviousLevel();
-        _criticUI.ChangeCriticWaitFailureUI(true);
+        _criticUI.SetMessage(CriticMessageType.Failure);
     }
 }

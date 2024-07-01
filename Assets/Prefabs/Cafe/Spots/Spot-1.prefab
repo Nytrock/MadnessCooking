@@ -426,6 +426,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4692688501716929338}
   - component: {fileID: 1602978493788171441}
+  - component: {fileID: 7900337207322168884}
   m_Layer: 5
   m_Name: Slider
   m_TagString: Untagged
@@ -442,7 +443,7 @@ RectTransform:
   m_GameObject: {fileID: 3462848334895243203}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.043808196, y: 0.106308, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6499794044763662316}
@@ -451,8 +452,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.036000013, y: 3}
-  m_SizeDelta: {x: 100, y: 20}
+  m_AnchoredPosition: {x: 0, y: 5.154}
+  m_SizeDelta: {x: 5.07375, y: 1.07625}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1602978493788171441
 MonoBehaviour:
@@ -501,10 +502,52 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &7900337207322168884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3462848334895243203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4283f106fe89402459ff45bb29cd7ed3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gradient:
+    serializedVersion: 2
+    key0: {r: 0.92941177, g: 0.08235294, b: 0.08235294, a: 1}
+    key1: {r: 0.9019608, g: 0.7647059, b: 0.05490196, a: 1}
+    key2: {r: 0.078431375, g: 0.59607846, b: 0.05490196, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 32768
+    ctime2: 65535
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_ColorSpace: -1
+    m_NumColorKeys: 3
+    m_NumAlphaKeys: 2
 --- !u!1 &3802189741268777417
 GameObject:
   m_ObjectHideFlags: 0
@@ -621,8 +664,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 4692688501716929338}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.25}
-  m_AnchorMax: {x: 1, y: 0.75}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -654,7 +697,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 1112669737, guid: 69cc2dbbf4e4daa47960f0376c98cf08, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -779,10 +822,10 @@ RectTransform:
   - {fileID: 4167804660447476626}
   m_Father: {fileID: 4692688501716929338}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.25}
-  m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: 1.2750015, y: 0}
-  m_SizeDelta: {x: -7.451, y: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -0.000099897385, y: 0.0011000037}
+  m_SizeDelta: {x: -0.3005, y: -0.3044}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &7689033143623057899
 GameObject:
@@ -819,7 +862,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 10, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8844638959193647648
 CanvasRenderer:
@@ -849,7 +892,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 0}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -930,6 +973,7 @@ MonoBehaviour:
   _waitSlider: {fileID: 1602978493788171441}
   _minTalk: 2
   _maxTalk: 5
+  _clientWaitMultiplier: 0
 --- !u!1001 &260970595457607048
 PrefabInstance:
   m_ObjectHideFlags: 0

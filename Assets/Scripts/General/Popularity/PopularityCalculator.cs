@@ -31,14 +31,10 @@ public class PopularityCalculator : MonoBehaviour {
     }
 
     public void GetClientChances(out int singleChance, out int doubleChance, out int tripleChance, out int quarterChance) {
-        singleChance = (int)(_nowLevel.SingleChance * 10);
-        doubleChance = (int)(_nowLevel.DoubleChance * 10);
-        tripleChance = (int)(_nowLevel.TripleChance * 10);
-        quarterChance = (int)(_nowLevel.QuarterChance * 10);
-
-        doubleChance += singleChance;
-        tripleChance += doubleChance;
-        quarterChance += tripleChance;
+        singleChance = _nowLevel.SingleChance;
+        doubleChance = _nowLevel.DoubleChance + singleChance;
+        tripleChance = _nowLevel.TripleChance + doubleChance;
+        quarterChance = _nowLevel.QuarterChance + tripleChance;
     }
 
     public float GetSpaceMultiplier() {

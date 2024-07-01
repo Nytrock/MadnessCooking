@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: dff0afd22563bf14bacfa7165266009c
+guid: 69cc2dbbf4e4daa47960f0376c98cf08
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -45,11 +45,11 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 6.5
-  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteBorder: {x: 2, y: 2, z: 2, w: 2}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -149,43 +149,64 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Yes
+      name: Panel
       rect:
         serializedVersion: 2
         x: 0
-        y: 9
-        width: 15
-        height: 8
+        y: 0
+        width: 5
+        height: 5
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 2, y: 2, z: 2, w: 2}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 84e9297dbbe659848b8a27439732a051
-      internalID: -1421695366
+      spriteID: c14e866eef96b2743a218db47e135315
+      internalID: -698757038
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: No
+      name: PanelNoBorder
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 15
-        height: 8
+        x: 12
+        y: 2
+        width: 3
+        height: 3
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 1, y: 1, z: 1, w: 1}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6e2100d9be8df6a4cbc5446027fb3c73
-      internalID: -1035187861
+      spriteID: 181a38ba8cfb93245a23edf5dfaf07d0
+      internalID: 1112669737
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ActivePanel
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 0
+        width: 5
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 2, y: 2, z: 2, w: 2}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e9ece921de6f6e948816201389714478
+      internalID: 1386745251
       vertices: []
       indices: 
       edges: []
@@ -194,19 +215,20 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 0
+    internalID: 1537655665
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      ActivePanel: 1386745251
       Background: 1901407923
       Lamp: 1955946697
-      No: -1035187861
+      Panel: -698757038
+      PanelNoBorder: 1112669737
       Pot: 470648381
       Window: -805373322
-      Yes: -1421695366
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

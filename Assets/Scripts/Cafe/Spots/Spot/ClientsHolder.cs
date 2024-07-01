@@ -11,6 +11,7 @@ public class ClientsHolder : MonoBehaviour {
     [SerializeField] private Slider _waitSlider;
     [SerializeField, Min(0)] private float _minTalk;
     [SerializeField, Min(0)] private float _maxTalk;
+    [SerializeField, Min(0)] private float _clientWaitMultiplier = 0.75f;
 
     private SpotData _data;
     private CafeSpot _spot;
@@ -31,7 +32,7 @@ public class ClientsHolder : MonoBehaviour {
 
         if (_data.NowTime < _data.WaitTime) {
             _data.NowTime += InGameTime.Instance.DeltaTime;
-            _waitSlider.value = _data.NowTime;
+            _waitSlider.value = _data.WaitTime - _data.NowTime;
         } else {
             _data.NowTime = 0;
             EndVisit();
@@ -67,6 +68,7 @@ public class ClientsHolder : MonoBehaviour {
         _data.GroupState = GroupClientState.Wait;
         if (_data.WaitTime == 0)
             _data.WaitTime = _clients[0].ClientData.WaitTime;
+        _data.WaitTime *= Mathf.Max(1, _clients.Count * _clientWaitMultiplier);
         _waitSlider.maxValue = _data.WaitTime;
 
         ChangeSliderState(true);

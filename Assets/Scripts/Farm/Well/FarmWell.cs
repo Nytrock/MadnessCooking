@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 public class FarmWell : HoldAdd {
-    [SerializeField] private FarmCameraManager _cameraManager;
+    [SerializeField] private VerticalCameraManager _cameraManager;
 
     public event Action WaterChanged;
 

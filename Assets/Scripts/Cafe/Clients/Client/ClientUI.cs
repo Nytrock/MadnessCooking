@@ -7,16 +7,12 @@ public class ClientUI : MonoBehaviour {
     [SerializeField] private GameObject _chooseFoodPanel;
     [SerializeField] private GameObject _buttonsBlock;
     [SerializeField] private Button _mainButton;
+    [SerializeField] private Image _foodImage;
     [SerializeField] private Button _yesButton;
     [SerializeField] private Slider _eatSlider;
-    private Image _foodImage;
 
     private CafeUpgradeData _data;
     private ClientData _clientData;
-
-    private void Awake() {
-        _foodImage = _mainButton.GetComponent<Image>();
-    }
 
     public void SetData(CafeUpgradeData data) {
         _data = data;

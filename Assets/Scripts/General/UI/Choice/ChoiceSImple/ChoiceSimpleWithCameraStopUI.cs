@@ -1,9 +1,9 @@
 using UnityEngine;
 
-public abstract class ChoiceSimpleWithCameraStopUI<TItem, TData> : ChoiceSimpleUI<TItem>
-    where TItem : BuyableItem where TData : ISaveable {
+public abstract class ChoiceSimpleWithCameraStopUI<TItem> : ChoiceSimpleUI<TItem>
+    where TItem : BuyableItem {
 
-    [SerializeField] protected CameraManager<TData> _cameraManager;
+    [SerializeField] protected CameraManager _cameraManager;
 
     protected override void Activate() {
         base.Activate();

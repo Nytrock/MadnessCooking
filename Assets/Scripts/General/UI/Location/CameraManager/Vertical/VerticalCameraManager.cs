@@ -1,12 +1,12 @@
 using UnityEngine;
 
-public class FarmCameraManager : CameraManager<FarmData> {
+public class VerticalCameraManager : CameraManager {
     protected override string _cameraAxis => "Mouse Y";
     protected override string _keyAxis => "Vertical";
 
     protected override void CalculateBorderPositions() {
         _endPosition = transform.position.y;
-        _startPosition = _endPosition - ((_spaceManager.SpaceCount - 1) * _spaceManager.SpaceSize);
+        _startPosition = _endPosition - _spaceManager.GetSpacesSize();
         InvokeBordersFound();
     }
 

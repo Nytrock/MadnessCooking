@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BedChoiceUI : ChoiceBuyWithCameraStopUI<BedType, FarmData>, IBindable<FarmData> {
+public class BedChoiceUI : ChoiceBuyWithCameraStopUI<BedType>, IBindable<FarmData> {
     [SerializeField] private BedTypeManager _bedTypesManager;
     [SerializeField] private BedTypeIngredientsRenderer _ingredientsRenderer;
     private BedChoice _changingBed;

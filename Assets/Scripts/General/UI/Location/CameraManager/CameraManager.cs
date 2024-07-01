@@ -1,13 +1,12 @@
 using System;
 using UnityEngine;
 
-public abstract class CameraManager<TData> : MonoBehaviour
-    where TData : ISaveable {
+public abstract class CameraManager : MonoBehaviour {
 
     [SerializeField] protected Camera _mainCamera;
     [SerializeField] protected LocationManager _locationManager;
-    [SerializeField] protected LocationSlider<TData> _locationSlider;
-    [SerializeField] protected SpaceManager<TData> _spaceManager;
+    [SerializeField] protected LocationSlider _locationSlider;
+    [SerializeField] protected SpaceManager _spaceManager;
     protected float _startPosition;
     protected float _endPosition;
     protected abstract string _cameraAxis { get; }

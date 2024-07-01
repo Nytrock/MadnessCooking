@@ -3,10 +3,9 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Slider))]
-public abstract class LocationSlider<TData> : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
-    where TData : ISaveable {
+public abstract class LocationSlider : MonoBehaviour, IPointerDownHandler, IPointerUpHandler {
 
-    protected CameraManager<TData> _cameraManager;
+    protected CameraManager _cameraManager;
     protected Slider _slider;
 
     private float _startPosition;
@@ -14,7 +13,7 @@ public abstract class LocationSlider<TData> : MonoBehaviour, IPointerDownHandler
 
     private bool _isDragging;
 
-    public void Bootup(CameraManager<TData> cameraManager) {
+    public void Bootup(CameraManager cameraManager) {
         _cameraManager = cameraManager;
         _slider = GetComponent<Slider>();
         _cameraManager.BordersFound += SetSliderValues;

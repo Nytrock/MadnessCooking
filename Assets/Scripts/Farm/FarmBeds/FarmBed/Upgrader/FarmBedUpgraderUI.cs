@@ -1,7 +1,7 @@
 using System.Linq;
 using UnityEngine;
 
-public class FarmBedUpgraderUI : ChoiceBuyWithCameraStopUI<FarmBedUpgrade, FarmData> {
+public class FarmBedUpgraderUI : ChoiceBuyWithCameraStopUI<FarmBedUpgrade> {
     [SerializeField] private FarmBedUpgradeManager _manager;
     private FarmBed _changingBed;
 
