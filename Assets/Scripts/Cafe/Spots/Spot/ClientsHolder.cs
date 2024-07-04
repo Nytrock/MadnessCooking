@@ -121,6 +121,7 @@ public class ClientsHolder : MonoBehaviour {
     }
 
     private void StartTalking() {
+        _data.GroupState = GroupClientState.Talk;
         if (_data.TalkIndex == 0 || _clients.Count == 1) {
             EndVisit();
             StartCoroutine(ClientsLeave());
@@ -129,7 +130,6 @@ public class ClientsHolder : MonoBehaviour {
 
         _data.WaitTime = _data.TalkIndex * Random.Range(_minTalk, _maxTalk);
         _waitSlider.maxValue = _data.WaitTime;
-        _data.GroupState = GroupClientState.Talk;
         ChangeSliderState(true);
     }
 

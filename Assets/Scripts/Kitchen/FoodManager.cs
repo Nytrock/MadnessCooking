@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class FoodManager : SaveableItemManager<Food, KitchenData> {
+public class FoodManager : SaveableItemContainer<Food, KitchenData> {
     public int FoodCount => _data.ItemsCount;
 
     public Food GetRandomFood() {

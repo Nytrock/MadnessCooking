@@ -133,14 +133,6 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
         _spotManager.ReturnSpot(spot.Index);
 
         SpotData spotData = _spotData.GetSpot(spot.Index);
-        if (spot.SeatsCount > 1 && !_cafeOpener.IsOpened) {
-            if (spotData.GroupState == GroupClientState.Talk) {
-                for (int i = 0; i < spot.SeatsCount; i++) {
-                    _xpAdder.RemoveXp(spotData.Clients[i].Type);
-                }
-            }
-        }
-
         for (int i = 0; i < spot.SeatsCount; i++) {
             _data.AddLeavingClient(spotData.Clients[i]);
             spotData.ClearClients();

@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using UnityEngine;
 
-public class BedTypeManager : SaveableItemManager<BedType, FarmData> {
+public class BedTypeManager : SaveableItemContainer<BedType, FarmData> {
     [SerializeField] private BedType[] _allBeds;
     [SerializeField] private UpgradeManager _upgradeManager;
 
