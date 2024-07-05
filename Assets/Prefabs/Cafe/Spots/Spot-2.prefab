@@ -219,6 +219,7 @@ GameObject:
   - component: {fileID: 8143899425263734112}
   - component: {fileID: 8977340131088458684}
   - component: {fileID: 5997551740270015426}
+  - component: {fileID: 2590385082426204656}
   m_Layer: 0
   m_Name: RemoveButton
   m_TagString: Untagged
@@ -235,7 +236,7 @@ RectTransform:
   m_GameObject: {fileID: 3541760615423355941}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7023154777263676254}
@@ -244,7 +245,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 108, y: 180}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8143899425263734112
 CanvasRenderer:
@@ -328,6 +329,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2590385082426204656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3541760615423355941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e952cc1b002e754a9a95a1ba86d447b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4122819096820020046
 GameObject:
   m_ObjectHideFlags: 0
@@ -386,7 +399,7 @@ MonoBehaviour:
   - {fileID: 9104158340885288787}
   - {fileID: 7169849244501226833}
   _border: {fileID: 8151701406759532964}
-  _removeButton: {fileID: 5997551740270015426}
+  _removeButton: {fileID: 2590385082426204656}
 --- !u!114 &-7621174372396858964
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -770,7 +783,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0.0001122, y: 0}
-  m_SizeDelta: {x: 61.51, y: 9.43}
+  m_SizeDelta: {x: 6.151, y: 0.943}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5475484125441527364
 CanvasRenderer:
@@ -809,7 +822,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 0.1
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &8151701406759532964
 GameObject:
   m_ObjectHideFlags: 0

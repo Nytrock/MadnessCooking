@@ -20,7 +20,7 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
     [Header("Upgrades")]
     [SerializeField] private BaseUpgrade _eatTimeShowUpgrade;
 
-    private ClientsSpawnerData _data;
+    [SerializeField] private ClientsSpawnerData _data;
     private CafeSpotManagerData _spotData;
     private CafeUpgradeData _upgradeData;
     private PopularityXpAdder _xpAdder;
@@ -133,10 +133,8 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
         _spotManager.ReturnSpot(spot.Index);
 
         SpotData spotData = _spotData.GetSpot(spot.Index);
-        for (int i = 0; i < spot.SeatsCount; i++) {
+        for (int i = 0; i < spot.SeatsCount; i++)
             _data.AddLeavingClient(spotData.Clients[i]);
-            spotData.ClearClients();
-        }
     }
 
     private void SetupClient(Client client, int spotIndex, int tableIndex) {

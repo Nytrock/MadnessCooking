@@ -6,6 +6,7 @@ using Random = UnityEngine.Random;
 
 public class CafeSpotManager : MonoBehaviour, IBindable<CafeData> {
     [SerializeField] private CafeSpaceManager _spaceManager;
+    [SerializeField] private HorizontalCameraManager _cameraManager;
     [SerializeField] private CafeOpener _opener;
     [SerializeField] private CafeSpot[] _spotPrefabs;
 
@@ -34,7 +35,7 @@ public class CafeSpotManager : MonoBehaviour, IBindable<CafeData> {
     }
 
     private void SetupSpotRemoveButton(int i) {
-        Button.ButtonClickedEvent eventHandler = _spots[i].RemoveButton.onClick;
+        Button.ButtonClickedEvent eventHandler = _spots[i].GetOnClick();
         eventHandler.RemoveAllListeners();
         eventHandler.AddListener(delegate { RemoveSpot(i); });
     }
@@ -53,6 +54,9 @@ public class CafeSpotManager : MonoBehaviour, IBindable<CafeData> {
     }
 
     private void RemoveSpot(int spotIndex) {
+        if (!_spots[spotIndex].CanRemove)
+            return;
+
         float offset = _cellSize * _spots[spotIndex].SeatsCount;
         SpotsPositionChanged?.Invoke(-offset);
 
@@ -84,6 +88,7 @@ public class CafeSpotManager : MonoBehaviour, IBindable<CafeData> {
 
         int randomSpotIndex = _freeSpots[needSeat][Random.Range(0, _freeSpots[needSeat].Count)];
         _freeSpots[needSeat].Remove(randomSpotIndex);
+        Debug.Log($"Get {randomSpotIndex}");
         return randomSpotIndex;
     }
 
@@ -99,6 +104,7 @@ public class CafeSpotManager : MonoBehaviour, IBindable<CafeData> {
     }
 
     public void ReturnSpot(int index) {
+        Debug.Log($"Return {index}");
         _freeSpots[_spots[index].SeatsCount - 1].Add(index);
     }
 
@@ -130,6 +136,7 @@ public class CafeSpotManager : MonoBehaviour, IBindable<CafeData> {
         CafeSpot spot = Instantiate(_spotPrefabs[index], transform);
         spot.ChangeEditorState(isAddedByEditor);
         spot.SetIndex(_spots.Count);
+        spot.SetCameraManager(_cameraManager);
 
         SpotData newData = new(spot.SeatsCount);
         if (isAddedByEditor)

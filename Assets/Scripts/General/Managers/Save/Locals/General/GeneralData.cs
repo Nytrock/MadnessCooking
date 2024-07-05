@@ -8,7 +8,6 @@ public class GeneralData : ISaveable {
     public MoneyManagerData MoneyManager;
     public PopularityManagerData PopularityManager;
     public TimeManagerData TimeManager;
-    public SkyManagerData SkyManager;
     public LightManagerData LightManager;
     public FatigueManagerData FatigueManager;
     public LocationManagerData LocationManager;

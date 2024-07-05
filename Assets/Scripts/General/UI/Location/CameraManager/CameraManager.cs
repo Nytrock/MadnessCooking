@@ -27,6 +27,7 @@ public abstract class CameraManager : MonoBehaviour {
     public float StartPosition => _startPosition;
     public float EndPosition => _endPosition;
     public Transform MainCameraPos => _mainCameraPos;
+    public bool IsMouseMoving => _cameraVelocity != 0 && !_isKeyPressed;
 
     protected virtual void Awake() {
         _locationManager.LocationChanged += ChangeWorkMode;

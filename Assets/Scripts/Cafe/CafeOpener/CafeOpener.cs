@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 public class CafeOpener : MonoBehaviour, IBindable<CafeData> {
-    private CafeOpenerData _data;
+    [SerializeField] private CafeOpenerData _data;
 
     public bool IsOpened => _data.IsOpened;
 

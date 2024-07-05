@@ -232,6 +232,7 @@ GameObject:
   - component: {fileID: 2050372476137001815}
   - component: {fileID: 549018527626118792}
   - component: {fileID: 1558098677110438770}
+  - component: {fileID: 103349438615258591}
   m_Layer: 0
   m_Name: RemoveButton
   m_TagString: Untagged
@@ -248,7 +249,7 @@ RectTransform:
   m_GameObject: {fileID: 2925918125924391263}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8299946813182789466}
@@ -257,7 +258,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 54, y: 180}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2050372476137001815
 CanvasRenderer:
@@ -310,7 +311,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -341,6 +342,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &103349438615258591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2925918125924391263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e952cc1b002e754a9a95a1ba86d447b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3263698846459201768
 GameObject:
   m_ObjectHideFlags: 0
@@ -376,7 +389,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0.001122, y: 0}
-  m_SizeDelta: {x: 43.1, y: 6.131}
+  m_SizeDelta: {x: 4.31, y: 0.6131}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3797509605677392491
 CanvasRenderer:
@@ -415,7 +428,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 0.1
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &3462848334895243203
 GameObject:
   m_ObjectHideFlags: 0
@@ -691,7 +704,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -886,7 +899,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.06132126, g: 1, b: 0, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -957,7 +970,7 @@ MonoBehaviour:
   _tableFoods:
   - {fileID: 6724161912601488736}
   _border: {fileID: 3802189741268777417}
-  _removeButton: {fileID: 1558098677110438770}
+  _removeButton: {fileID: 103349438615258591}
 --- !u!114 &4608233568211056375
 MonoBehaviour:
   m_ObjectHideFlags: 0

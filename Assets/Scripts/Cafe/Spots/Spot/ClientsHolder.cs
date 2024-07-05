@@ -13,7 +13,7 @@ public class ClientsHolder : MonoBehaviour {
     [SerializeField, Min(0)] private float _maxTalk;
     [SerializeField, Min(0)] private float _clientWaitMultiplier = 0.75f;
 
-    private SpotData _data;
+    [SerializeField] private SpotData _data;
     private CafeSpot _spot;
     private readonly List<Client> _clients = new();
 
@@ -77,7 +77,6 @@ public class ClientsHolder : MonoBehaviour {
 
     public IEnumerator ClientsLeave() {
         RandomizeClients();
-        WaitStarted = null;
 
         Client[] leaveClients = _clients.ToArray();
         _clients.Clear();
@@ -144,6 +143,7 @@ public class ClientsHolder : MonoBehaviour {
         EndVisit();
         _data.NowTime = 0;
         _clients.Clear();
+        _data.ClearClients();
         StopAllCoroutines();
     }
 
@@ -156,6 +156,7 @@ public class ClientsHolder : MonoBehaviour {
         ChangeSliderState(false);
         ClientsLeaved?.Invoke(_spot);
         ClientsLeaved = null;
+        WaitStarted = null;
         _waitSlider.value = 0;
         if (_data.GroupState == GroupClientState.Talk)
             PayToPlayer();

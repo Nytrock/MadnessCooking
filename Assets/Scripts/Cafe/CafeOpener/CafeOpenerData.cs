@@ -7,7 +7,7 @@ public class CafeOpenerData {
 
     public bool IsOpened => _isOpened;
 
-    internal void ChangeCafeState() {
+    public void ChangeCafeState() {
         _isOpened = !_isOpened;
     }
 }

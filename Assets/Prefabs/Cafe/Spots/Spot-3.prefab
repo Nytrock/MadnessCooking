@@ -416,7 +416,7 @@ MonoBehaviour:
   - {fileID: 7441886422440401306}
   - {fileID: 6606475074013899175}
   _border: {fileID: 4195171861685878547}
-  _removeButton: {fileID: 474265515481244230}
+  _removeButton: {fileID: 1862147629340851056}
 --- !u!114 &-3593941806977181301
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -529,6 +529,7 @@ GameObject:
   - component: {fileID: 560632658467525745}
   - component: {fileID: 1581918391269702346}
   - component: {fileID: 474265515481244230}
+  - component: {fileID: 1862147629340851056}
   m_Layer: 0
   m_Name: RemoveButton
   m_TagString: Untagged
@@ -545,7 +546,7 @@ RectTransform:
   m_GameObject: {fileID: 5419755405918382526}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8670171564360746571}
@@ -554,7 +555,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 162, y: 180}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &560632658467525745
 CanvasRenderer:
@@ -638,6 +639,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1862147629340851056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5419755405918382526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e952cc1b002e754a9a95a1ba86d447b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5772415911010169685
 GameObject:
   m_ObjectHideFlags: 0
@@ -942,7 +955,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0.0001122, y: 0}
-  m_SizeDelta: {x: 63.1, y: 9.43}
+  m_SizeDelta: {x: 6.31, y: 0.943}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &117910948239451935
 CanvasRenderer:
@@ -981,7 +994,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 0.1
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1001 &387530493955023183
 PrefabInstance:
   m_ObjectHideFlags: 0

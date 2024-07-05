@@ -13,8 +13,7 @@ public class SpotPreview : MonoBehaviour {
                     $"({i}, but should be {_spotsPreviews[i].SeatsCount - 1})");
             }
 
-            _spotsPreviews[i].ChangeEditorState(true);
-            _spotsPreviews[i].RemoveButton.gameObject.SetActive(false);
+            _spotsPreviews[i].ChangeEditorState(true, true);
             _spotsPreviews[i].enabled = false;
         }
     }

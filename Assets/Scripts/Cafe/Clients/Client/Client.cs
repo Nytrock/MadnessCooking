@@ -14,7 +14,7 @@ public class Client : MonoBehaviour {
     [SerializeField, Min(0)] private float _maxWaitTime;
     private ClientsHolder _table;
 
-    public ClientData ClientData { get; private set; }
+    public ClientData ClientData;
     public ClientsSpawner Spawner { get; private set; }
     public ClientUI ClientUI { get; private set; }
     public int SpotIndex { get; private set; }

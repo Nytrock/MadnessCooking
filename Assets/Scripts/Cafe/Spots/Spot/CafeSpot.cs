@@ -5,14 +5,13 @@ public class CafeSpot : MonoBehaviour {
     [SerializeField] private CafeSeat[] _seats;
     [SerializeField] private TableFoodView[] _tableFoods;
     [SerializeField] private GameObject _border;
-    [SerializeField] private Button _removeButton;
+    [SerializeField] private SpotRemoveButton _removeButton;
     private int _index;
     private bool _isEditor;
 
     public int Index => _index;
-
     public int SeatsCount => _seats.Length;
-    public Button RemoveButton => _removeButton;
+    public bool CanRemove => _removeButton.CanRemove;
 
     private void Start() {
         _border.SetActive(_isEditor);
@@ -27,14 +26,18 @@ public class CafeSpot : MonoBehaviour {
         _tableFoods[index].SetSprite(food.MiniSprite);
     }
 
+    public void SetCameraManager(CameraManager cameraManager) {
+        _removeButton.SetCameraManager(cameraManager);
+    }
+
     public void ResetTableFoodSprite(int index) {
         _tableFoods[index].ResetSprite();
     }
 
-    public void ChangeEditorState(bool state) {
+    public void ChangeEditorState(bool state, bool isPreview = false) {
         _isEditor = state;
         _border.SetActive(_isEditor);
-        _removeButton.gameObject.SetActive(_isEditor);
+        _removeButton.gameObject.SetActive(_isEditor && !isPreview);
     }
 
     public void SetIndex(int index) {
@@ -43,5 +46,9 @@ public class CafeSpot : MonoBehaviour {
 
     public void Destroy() {
         Destroy(gameObject);
+    }
+
+    public Button.ButtonClickedEvent GetOnClick() {
+        return _removeButton.GetOnClick();
     }
 }
