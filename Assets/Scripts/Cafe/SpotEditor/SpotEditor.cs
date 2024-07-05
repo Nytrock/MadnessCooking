@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 public class SpotEditor : MonoBehaviour {
-    [SerializeField] private CafeOpener _opener;
+    [SerializeField] private CafeStateChanger _opener;
     [SerializeField] private CafeSpotManager _spotManager;
     [SerializeField] private SpotPreview _preview;
 

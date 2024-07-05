@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class BuyableItemContainer<TItem> : MonoBehaviour
+public abstract class BuyableItemManager<TItem> : MonoBehaviour
     where TItem : BuyableItem {
 
     [SerializeField] protected List<TItem> _defaultItems;

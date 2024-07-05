@@ -3,13 +3,18 @@ using UnityEngine;
 
 [Serializable]
 public class PopularityManagerData {
-    [SerializeField] private int _level = 0;
-    [SerializeField] private int _xp = 0;
+    [SerializeField] private int _level;
+    [SerializeField] private int _xp;
     [SerializeField] private bool _isMaxLevel;
 
     public int Level => _level;
     public int Xp => _xp;
     public bool IsMaxLevel => _isMaxLevel;
+
+    public PopularityManagerData() {
+        _level = 0;
+        _xp = 0;
+    }
 
     public void AddXp(int xp) {
         _xp += xp;

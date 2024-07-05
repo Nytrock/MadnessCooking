@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBindable<CafeData> {
     [SerializeField] private Transform _spawnPoint;
     [SerializeField] private PopularityCalculator _popularityCalculate;
-    [SerializeField] private CafeOpener _cafeOpener;
+    [SerializeField] private CafeStateChanger _cafeOpener;
     [SerializeField] private CafeSpaceManager _spaceManager;
     [SerializeField] private CafeSpotManager _spotManager;
     [SerializeField] private OrdersManager _ordersManager;
@@ -21,6 +21,7 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
     [SerializeField] private BaseUpgrade _eatTimeShowUpgrade;
 
     [SerializeField] private ClientsSpawnerData _data;
+    private CriticSpawnerData _criticData;
     private CafeSpotManagerData _spotData;
     private CafeUpgradeData _upgradeData;
     private PopularityXpAdder _xpAdder;
@@ -45,9 +46,8 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
         if (!_data.IsSpawning || !_cafeOpener.IsOpened)
             return;
 
-        if (_data.NowSpawnTime < _data.NeedSpawnTime) {
-            _data.AddTime();
-        } else {
+        _data.AddTime();
+        if (_data.NowSpawnTime > _data.NeedSpawnTime) {
             Spawn();
             SetNewTime();
         }
@@ -66,11 +66,10 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
         Order order;
         for (int i = 0; i < spot.SeatsCount; i++) {
             order = new(_foodManager.GetRandomFood(), spotIndex + 1);
-            spotData.Clients[i] = new ClientData(_spawnPoint.position,
-                clientType, clientCount, waitMultiplier, order);
+            ClientData newClient = new(_spawnPoint.position, clientType, waitMultiplier, order);
+            spotData.SetClient(i, newClient);
         }
         SpawnGroupOfClients(spot);
-        spotData.AvailableClients = true;
 
         if (!_spotManager.CheckHavingSpots())
             ChangeSpawnMode();
@@ -93,7 +92,7 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
     }
 
     private ClientCount GetRandomCount() {
-        if (_data.IsWaitingCritic)
+        if (_criticData.IsWaitingCritic)
             return ClientCount.One;
 
         _popularityCalculate.GetClientChances(out int singleChance, out int doubleChance, out int tripleChance, out int quarterChance);
@@ -108,7 +107,7 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
     }
 
     private ClientType GetRandomType(ClientCount clientCount) {
-        if (_data.IsWaitingCritic)
+        if (_criticData.IsWaitingCritic)
             return ClientType.Critic;
 
         int number = Random.Range(1, 1001);
@@ -134,20 +133,16 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
 
         SpotData spotData = _spotData.GetSpot(spot.Index);
         for (int i = 0; i < spot.SeatsCount; i++)
-            _data.AddLeavingClient(spotData.Clients[i]);
+            _data.AddLeavingClient(spotData.GetClient(i));
     }
 
     private void SetupClient(Client client, int spotIndex, int tableIndex) {
         client.ClientUI.SetData(_upgradeData);
-        ClientData clientData = _spotData.GetSpot(spotIndex).Clients[tableIndex];
+        ClientData clientData = _spotData.GetSpot(spotIndex).GetClient(tableIndex);
         ClientSettings clientSettings = new(clientData, spotIndex, tableIndex, this);
         client.Setup(clientSettings);
         _ordersManager.SetNewOrder(client);
         _cafeOpener.CafeChanged += client.Leave;
-    }
-
-    public void ChangeCriticWait(bool newValue) {
-        _data.ChangeCriticWait(newValue);
     }
 
     public void CheckAddedUpgrade(BaseUpgrade upgrade) {
@@ -164,6 +159,7 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
             data.ClientsSpawner = new();
         _data = data.ClientsSpawner;
         _spotData = data.SpotManager;
+        _criticData = data.CriticSpawner;
 
         if (isFileEmpty) {
             LateStart();
@@ -172,7 +168,7 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
 
         int spotIndex = 0;
         foreach (var spotData in _spotData.Spots) {
-            if (!spotData.AvailableClients) {
+            if (!spotData.HaveClients) {
                 spotIndex++;
                 continue;
             }

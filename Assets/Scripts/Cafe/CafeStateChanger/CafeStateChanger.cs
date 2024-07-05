@@ -1,8 +1,8 @@
 using System;
 using UnityEngine;
 
-public class CafeOpener : MonoBehaviour, IBindable<CafeData> {
-    [SerializeField] private CafeOpenerData _data;
+public class CafeStateChanger : MonoBehaviour, IBindable<CafeData> {
+    [SerializeField] private CafeStateChangerData _data;
 
     public bool IsOpened => _data.IsOpened;
 

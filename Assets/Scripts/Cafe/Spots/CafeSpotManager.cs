@@ -7,7 +7,7 @@ using Random = UnityEngine.Random;
 public class CafeSpotManager : MonoBehaviour, IBindable<CafeData> {
     [SerializeField] private CafeSpaceManager _spaceManager;
     [SerializeField] private HorizontalCameraManager _cameraManager;
-    [SerializeField] private CafeOpener _opener;
+    [SerializeField] private CafeStateChanger _opener;
     [SerializeField] private CafeSpot[] _spotPrefabs;
 
     private readonly List<CafeSpot> _spots = new();

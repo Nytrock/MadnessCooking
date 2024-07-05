@@ -4,7 +4,6 @@ using UnityEngine;
 [RequireComponent(typeof(FarmBed))]
 public class BedChoice : MonoBehaviour {
     [SerializeField] private BedTypeHolder[] _beds;
-    private FarmData _data;
     private FarmBedData _bedData;
 
     private BedChoiceUI _UI;
@@ -24,7 +23,7 @@ public class BedChoice : MonoBehaviour {
     private void LateStart() {
         if (!_bedData.IsActive) {
             _farmBed.enabled = false;
-            _bedData.IsActive = false;
+            _bedData.SetActive(false);
         }
     }
 
@@ -32,13 +31,12 @@ public class BedChoice : MonoBehaviour {
         MoneyManager.Instance.ChangeMoney(-bedType.Price);
         BedTypeHolder bed = FindBedHolder(bedType);
 
-        _bedData.IsActive = true;
+        _bedData.SetActive(true);
         _farmBed.SetBedType(bed);
         _farmBed.enabled = true;
     }
 
     public void Bind(FarmData data, FarmBedData bedData) {
-        _data = data;
         _bedData = bedData;
 
         _farmBed.Bind(data, _bedData, FindBedHolder(_bedData.BedType));

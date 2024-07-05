@@ -6,19 +6,18 @@ using Random = UnityEngine.Random;
 [Serializable]
 public class ClientsSpawnerData {
     [SerializeField] List<ClientData> _leavingClients;
-    [SerializeField] bool _isSpawning = true;
+    [SerializeField] bool _isSpawning;
     [SerializeField] float _nowSpawnTime;
     [SerializeField] float _needSpawnTime;
-    [SerializeField] bool _isWaitingCritic;
 
     public IEnumerable<ClientData> LeavingClients => _leavingClients;
     public bool IsSpawning => _isSpawning;
     public float NowSpawnTime => _nowSpawnTime;
     public float NeedSpawnTime => _needSpawnTime;
-    public bool IsWaitingCritic => _isWaitingCritic;
 
     public ClientsSpawnerData() {
         _leavingClients = new();
+        _isSpawning = true;
     }
 
     public void AddTime() {
@@ -28,10 +27,6 @@ public class ClientsSpawnerData {
     public void SetNewTime(float minTime, float maxTime) {
         _needSpawnTime = Random.Range(minTime, maxTime);
         _nowSpawnTime = 0;
-    }
-
-    public void ChangeCriticWait(bool newValue) {
-        _isWaitingCritic = newValue;
     }
 
     public void ChangeSpawnMode() {

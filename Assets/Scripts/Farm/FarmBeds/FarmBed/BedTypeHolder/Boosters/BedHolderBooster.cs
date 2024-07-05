@@ -1,20 +1,18 @@
 using System;
 using UnityEngine;
 
-public class BedHolderBooster : MonoBehaviour {
+public abstract class BedHolderBooster : MonoBehaviour {
     [SerializeField] private SpriteRenderer _boostSprite;
     [SerializeField] protected float _boostMultiplier;
     [SerializeField] protected float _boostLength;
     [SerializeField] protected float _defaultSpeed;
 
     protected BedHolderBoosterData _data;
-    private float _boostStep;
 
     public event Action BoostEnded;
 
     protected virtual void Awake() {
         ChangeSpriteAlpha(0);
-        _boostStep = 1 / _boostLength * Time.deltaTime;
     }
 
     private void Update() {
@@ -22,30 +20,27 @@ public class BedHolderBooster : MonoBehaviour {
             return;
 
         if (_data.NowTime < _boostLength) {
-            _data.NowTime += InGameTime.Instance.DeltaTime;
+            _data.UpdateTime();
             ChangeSpriteAlpha(1 - (_data.NowTime / _boostLength));
         } else {
             EndBoost();
         }
     }
 
-    public void SetData(BedHolderBoosterData data) {
+    public virtual void SetData(BedHolderBoosterData data) {
         _data = data;
         if (_data.IsEternal)
             ChangeSpriteAlpha(1);
     }
 
     public virtual void StartBoost() {
-        _data.IsBoosting = true;
-        _data.NowTime = 0;
-        _data.Boost = _boostMultiplier;
+        _data.StartBoost(_boostMultiplier);
         ChangeSpriteAlpha(1);
     }
 
     public virtual void EndBoost() {
-        _data.IsBoosting = false;
+        _data.EndBoost(_defaultSpeed);
         ChangeSpriteAlpha(0);
-        _data.Boost = _defaultSpeed;
         BoostEnded?.Invoke();
     }
 

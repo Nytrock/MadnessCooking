@@ -36,7 +36,7 @@ public class PestUI : MonoBehaviour {
         gameObject.SetActive(value);
     }
 
-    internal void SetupRemoveButton() {
+    public void SetupRemoveButton() {
         _buttonRemove.onClick.AddListener(delegate { _pestsRemover.RemovePest(this); });
     }
 }

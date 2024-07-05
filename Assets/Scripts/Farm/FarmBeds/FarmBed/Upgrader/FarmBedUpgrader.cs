@@ -13,15 +13,15 @@ public class FarmBedUpgrader : MonoBehaviour {
 
     public void AddUpgrade(FarmBedUpgrade upgrade) {
         if (upgrade == _eternalWater)
-            _bedData.WaterBoost.IsEternal = true;
+            _bedData.WaterBoost.BecomeEternal();
         else if (upgrade == _eternalFertilize)
-            _bedData.FertilizeBoost.IsEternal = true;
+            _bedData.FertilizeBoost.BecomeEternal();
         else if (upgrade == _technicSpeedUp)
-            _bedData.IndependentBoost = _technicSpeedUp.Coefficient;
+            _bedData.SetIndependentBoost(_technicSpeedUp);
         else if (upgrade == _instantPests)
-            _bedData.PestsGenerator.IsPestsInstant = true;
+            _bedData.PestsGenerator.SetInstantUpgrade();
         else if (upgrade == _pestsRemove)
-            _bedData.PestsGenerator.IsPestsRemoved = true;
+            _bedData.PestsGenerator.SetRemoveUpgrade();
         _availableUpgrades.Add(upgrade);
     }
 
@@ -32,11 +32,7 @@ public class FarmBedUpgrader : MonoBehaviour {
     public void DisableUpgrades() {
         foreach (var upgrade in _availableUpgrades)
             MoneyManager.Instance.ChangeMoney(upgrade.Price);
-
-        _bedData.WaterBoost.IsEternal = false;
-        _bedData.FertilizeBoost.IsEternal = false;
-        _bedData.PestsGenerator.IsPestsInstant = false;
-        _bedData.PestsGenerator.IsPestsRemoved = false;
+        _bedData.DisableUpgrades();
     }
 
     public void Bind(FarmBedData bedData) {

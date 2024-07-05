@@ -6,14 +6,17 @@ public class HoldAddData {
     [SerializeField] private float _nowTime;
     [SerializeField] private bool _isUnlocked;
     [SerializeField] private bool _isAuto;
-    [SerializeField] private float _speed = 1;
+    [SerializeField] private float _speed;
     [SerializeField] private int _readyCount;
 
     public float NowTime => _nowTime;
     public bool IsUnlocked => _isUnlocked;
     public bool IsAuto => _isAuto;
-    public float Speed => _speed;
     public int ReadyCount => _readyCount;
+
+    public HoldAddData() {
+        _speed = 1;
+    }
 
     public void ResetAll() {
         if (_isAuto)

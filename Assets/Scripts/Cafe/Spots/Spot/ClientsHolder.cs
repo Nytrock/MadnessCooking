@@ -30,11 +30,10 @@ public class ClientsHolder : MonoBehaviour {
             _data.GroupState != GroupClientState.Talk)
             return;
 
-        if (_data.NowTime < _data.WaitTime) {
-            _data.NowTime += InGameTime.Instance.DeltaTime;
-            _waitSlider.value = _data.WaitTime - _data.NowTime;
-        } else {
-            _data.NowTime = 0;
+        _data.UpdateTime();
+        _waitSlider.value = _data.WaitTime - _data.NowTime;
+
+        if (_data.NowTime > _data.WaitTime) {
             EndVisit();
             StartCoroutine(ClientsLeave());
         }
@@ -45,7 +44,8 @@ public class ClientsHolder : MonoBehaviour {
     }
 
     public IEnumerator SpawnGroupOfClients() {
-        _data.TalkIndex = _clients.Count;
+        _data.SetupOnSpawn();
+
         float spawn = _clients[0].Spawner.SpawnPoint.x;
         RandomizeClients();
 
@@ -65,10 +65,7 @@ public class ClientsHolder : MonoBehaviour {
     }
 
     private void StartWait() {
-        _data.GroupState = GroupClientState.Wait;
-        if (_data.WaitTime == 0)
-            _data.WaitTime = _clients[0].ClientData.WaitTime;
-        _data.WaitTime *= Mathf.Max(1, _clients.Count * _clientWaitMultiplier);
+        _data.StartWait(_clientWaitMultiplier);
         _waitSlider.maxValue = _data.WaitTime;
 
         ChangeSliderState(true);
@@ -81,9 +78,8 @@ public class ClientsHolder : MonoBehaviour {
         Client[] leaveClients = _clients.ToArray();
         _clients.Clear();
 
-        for (int i = 0; i < leaveClients.Length; i++) {
-            leaveClients[i].ClientData.State = ClientState.Leave;
-        }
+        for (int i = 0; i < leaveClients.Length; i++)
+            leaveClients[i].ClientData.ChangeState(ClientState.Leave);
 
         for (int i = 0; i < leaveClients.Length; i++) {
             leaveClients[i].Leave();
@@ -98,36 +94,32 @@ public class ClientsHolder : MonoBehaviour {
         }
     }
 
-    public void EndlessWait() {
+    public void StartEndlessWait() {
         ChangeSliderState(false);
-        _data.GroupState = GroupClientState.EndlessWait;
-        _data.NowTime = 0;
+        _data.StartEndlessWait();
     }
 
-    public void AddMoney(int money) {
-        _data.MoneyCount += money;
-    }
+    public void AddMoney(int money) => _data.AddMoney(money);
 
     public void CheckTalk() {
         bool allClientsWait = _data.Clients.All(x => x.State == ClientState.Wait);
         if (allClientsWait)
-            StartTalking();
+            StartTalk();
     }
 
     public void DecreaseTalk() {
-        _data.TalkIndex--;
+        _data.DecreaseTalk();
         CheckTalk();
     }
 
-    private void StartTalking() {
-        _data.GroupState = GroupClientState.Talk;
+    private void StartTalk() {
+        _data.StartTalk(_minTalk, _maxTalk);
         if (_data.TalkIndex == 0 || _clients.Count == 1) {
             EndVisit();
             StartCoroutine(ClientsLeave());
             return;
         }
 
-        _data.WaitTime = _data.TalkIndex * Random.Range(_minTalk, _maxTalk);
         _waitSlider.maxValue = _data.WaitTime;
         ChangeSliderState(true);
     }
@@ -141,16 +133,12 @@ public class ClientsHolder : MonoBehaviour {
             return;
 
         EndVisit();
-        _data.NowTime = 0;
         _clients.Clear();
         _data.ClearClients();
         StopAllCoroutines();
     }
 
-    private void PayToPlayer() {
-        MoneyManager.Instance.ChangeMoney(_data.MoneyCount);
-        _data.MoneyCount = 0;
-    }
+    private void PayToPlayer() => _data.PayToPlayer();
 
     private void EndVisit() {
         ChangeSliderState(false);
@@ -160,7 +148,7 @@ public class ClientsHolder : MonoBehaviour {
         _waitSlider.value = 0;
         if (_data.GroupState == GroupClientState.Talk)
             PayToPlayer();
-        _data.GroupState = GroupClientState.None;
+        _data.EndVisit();
     }
 
     public void SetData(SpotData spot) {

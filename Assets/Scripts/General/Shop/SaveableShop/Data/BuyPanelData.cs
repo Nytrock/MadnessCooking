@@ -1,10 +1,10 @@
 using UnityEngine.Events;
 
 public class BuyPanelData {
-    private BuyableItem _item;
-    private bool _isBuyable;
-    private UnityAction _panelAction;
-    private GrayscaleImageData _sideImageData;
+    private readonly BuyableItem _item;
+    private readonly bool _isBuyable;
+    private readonly UnityAction _panelAction;
+    private readonly GrayscaleImageData _sideImageData;
 
     public BuyableItem Item => _item;
     public bool IsBuyable => _isBuyable;

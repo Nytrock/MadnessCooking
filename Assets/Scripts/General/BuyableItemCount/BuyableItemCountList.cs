@@ -1,0 +1,77 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+
+[Serializable]
+public class BuyableItemCountList<TItem>
+    where TItem : BuyableItem {
+
+    [SerializeField] private List<BuyableItemCount<TItem>> _itemCounts = new();
+    private List<TItem> _availableItems = new();
+
+    public int Size => _itemCounts.Count;
+
+    public void Add(BuyableItemCount<TItem> itemCount) {
+        if (ContainsItem(itemCount))
+            _itemCounts[IndexOf(itemCount)].ChangeCount(itemCount.Count);
+        else
+            _itemCounts.Add(itemCount);
+
+        UpdateAvailableItems();
+    }
+
+    public void Extend(BuyableItemCountList<TItem> itemCountList) {
+        foreach (var ingredientCount in itemCountList)
+            Add(ingredientCount);
+    }
+
+    public void Remove(BuyableItemCount<TItem> itemCount) {
+        if (!ContainsItem(itemCount))
+            return;
+
+        int index = IndexOf(itemCount);
+        _itemCounts[index].ChangeCount(-itemCount.Count);
+        if (_itemCounts[index].Count == 0)
+            _itemCounts.RemoveAt(index);
+
+        UpdateAvailableItems();
+    }
+
+    private void UpdateAvailableItems() {
+        _availableItems = _itemCounts.Select(count => count.Item).ToList();
+    }
+
+    public bool ContainsItem(BuyableItemCount<TItem> itemCount) {
+        return _availableItems.Contains(itemCount.Item);
+    }
+
+    public bool ContainsCount(BuyableItemCount<TItem> itemCount) {
+        if (!ContainsItem(itemCount))
+            return false;
+        return _itemCounts[IndexOf(itemCount)].Count >= itemCount.Count;
+    }
+
+    public int IndexOf(BuyableItemCount<TItem> itemCount) {
+        return _availableItems.IndexOf(itemCount.Item);
+    }
+
+    public BuyableItemCount<TItem> Get(int index) {
+        return _itemCounts[index];
+    }
+
+    public void Clear() {
+        _itemCounts.Clear();
+        _availableItems.Clear();
+    }
+
+    public IEnumerator<BuyableItemCount<TItem>> GetEnumerator() {
+        foreach (var count in _itemCounts)
+            yield return count;
+    }
+
+    public IEnumerable<BuyableItemCount<TItem>> GetItems() {
+        foreach (var count in _itemCounts)
+            yield return count;
+    }
+}

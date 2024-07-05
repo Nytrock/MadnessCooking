@@ -4,10 +4,10 @@ using UnityEngine;
 
 [Serializable]
 public class ChickensData {
-    [SerializeField] private List<ChickenFoodData> _foodList = new();
+    [SerializeField] private List<ChickenFoodData> _foodList;
     [SerializeField] private bool _isUnlocked;
     [SerializeField] private float _nowTime;
-    [SerializeField] private float _speed = 1;
+    [SerializeField] private float _speed;
 
     [SerializeField] private int _eggCount;
     [SerializeField] private int _foodCount;
@@ -18,12 +18,15 @@ public class ChickensData {
     public int UsedFoodCount => _foodList.Count;
     public bool IsUnlocked => _isUnlocked;
     public float NowTime => _nowTime;
-    public float Speed => _speed;
-
     public int EggCount => _eggCount;
     public int FoodCount => _foodCount;
     public bool IsFeed => _isFeed;
     public bool IsInfiniteFood => _isInfiniteFood;
+
+    public ChickensData() {
+        _foodList = new();
+        _speed = 1;
+    }
 
     public void UpdateTime() {
         _nowTime += InGameTime.Instance.DeltaTime * _speed;

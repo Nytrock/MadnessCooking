@@ -3,8 +3,8 @@ using UnityEngine;
 
 [Serializable]
 public class GrayscaleImageData {
-    private Sprite _sprite;
-    private bool _isGrayscale;
+    private readonly Sprite _sprite;
+    private readonly bool _isGrayscale;
 
     public Sprite Sprite => _sprite;
     public bool IsGrayscale => _isGrayscale;

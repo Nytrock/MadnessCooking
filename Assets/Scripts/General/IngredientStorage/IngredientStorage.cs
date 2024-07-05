@@ -9,18 +9,20 @@ public abstract class IngredientStorage<TData> : MonoBehaviour, IBindable<TData>
 
     public IngredientStorageData Data { get; protected set; }
 
-    public event Action<IngredientCount> IngredientAdded;
+    public event Action<BuyableItemCount<Ingredient>> IngredientAdded;
 
-    public void PutIngredients(IEnumerable<IngredientCount> puttingCountList) {
+    public void PutIngredients(IEnumerable<BuyableItemCount<Ingredient>> puttingCountList) {
         foreach (var count in puttingCountList)
-            PutIngredientWithRemain(count);
+            PutIngredientWithRemain(count.Item, count.Count);
     }
 
-    public virtual int PutIngredientWithRemain(IngredientCount puttingCount) {
+    public virtual int PutIngredientWithRemain(Ingredient ingredient, int count) {
         int remainCount = 0;
-        if (!Data.CanAddCount(puttingCount.Count)) {
-            remainCount = Data.NowSpace + puttingCount.Count - Data.MaxSpace;
-            puttingCount = new(puttingCount.Ingredient, Data.LeftSpace);
+        BuyableItemCount<Ingredient> puttingCount = new(ingredient, count);
+
+        if (!Data.CanAddCount(count)) {
+            remainCount = Data.NowSpace + count - Data.MaxSpace;
+            puttingCount = new(ingredient, Data.LeftSpace);
         }
 
         int oldSize = Data.Ingredients.Size;
@@ -31,12 +33,12 @@ public abstract class IngredientStorage<TData> : MonoBehaviour, IBindable<TData>
         return remainCount;
     }
 
-    public virtual void RemoveIngredients(IEnumerable<IngredientCount> ingredients) {
+    public virtual void RemoveIngredients(IEnumerable<BuyableItemCount<Ingredient>> ingredients) {
         foreach (var count in ingredients)
             Data.Ingredients.Remove(count);
     }
 
-    public bool HaveCount(IngredientCount count) {
+    public bool HaveCount(BuyableItemCount<Ingredient> count) {
         return Data.Ingredients.ContainsCount(count);
     }
 

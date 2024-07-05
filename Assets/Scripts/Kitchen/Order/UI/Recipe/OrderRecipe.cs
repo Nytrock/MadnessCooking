@@ -14,8 +14,8 @@ public class OrderRecipe : FoodRecipe<OrderRecipePart> {
     protected override void SetupIngredients(Food food, ref bool canCook) {
         int index = 0;
         foreach (var count in food.Ingredients) {
-            if (count.Ingredient == ConstIngredients.Instance.Spice && _upgradeData.IsAutoSpice) {
-                _canCook &= MoneyManager.Instance.MoneyCount >= count.Count * count.Ingredient.Price;
+            if (count.Item == ConstIngredients.Instance.Spice && _upgradeData.IsAutoSpice) {
+                _canCook &= MoneyManager.Instance.MoneyCount >= count.Count * count.Item.Price;
                 _recipeParts[index].SetupAutoSpice(count);
             } else {
                 bool haveCount = _kitchenStorage.HaveCount(count);

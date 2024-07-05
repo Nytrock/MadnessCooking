@@ -3,9 +3,13 @@ using UnityEngine;
 
 [Serializable]
 public class ShitGeneratorData {
-    [SerializeField] private float _nowTime = 0;
+    [SerializeField] private float _nowTime;
 
     public float NowTime => _nowTime;
+
+    public ShitGeneratorData() {
+        _nowTime = 0;
+    }
 
     public void AddTime() {
         _nowTime += InGameTime.Instance.DeltaTime;

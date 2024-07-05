@@ -11,7 +11,7 @@ public class IngredientShop : BaseInstantShop<Ingredient, OfficeData>, IUpgradea
 
     protected override void RemoveItemPanel(Ingredient item, int index) {
         if (item.Type == IngredientType.Buyable)
-            _ingredientStorage.PutIngredientWithRemain(new IngredientCount(item, 1));
+            _ingredientStorage.PutIngredientWithRemain(item, 1);
         else
             base.RemoveItemPanel(item, index);
     }

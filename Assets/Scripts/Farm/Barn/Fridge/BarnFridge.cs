@@ -33,7 +33,7 @@ public class BarnFridge : MonoBehaviour {
         else
             changingHoldAdd = _flourMill;
 
-        int remainCount = _car.PutIngredientWithRemain(new IngredientCount(ingredient, changingHoldAdd.ReadyCount));
+        int remainCount = _car.PutIngredientWithRemain(ingredient, changingHoldAdd.ReadyCount);
         FatigueManager.Instance.ChangeFatigue(ingredient.FatigueCount * (changingHoldAdd.ReadyCount - remainCount));
         changingHoldAdd.SetReady(remainCount);
     }

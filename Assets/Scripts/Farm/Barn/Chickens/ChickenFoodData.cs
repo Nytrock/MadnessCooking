@@ -16,6 +16,6 @@ public class ChickenFoodData {
     }
 
     public void AddTime() {
-        _nowTime += Time.deltaTime;
+        _nowTime += InGameTime.Instance.DeltaTime;
     }
 }

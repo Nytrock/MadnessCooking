@@ -5,11 +5,11 @@ using UnityEngine.UI;
 public class IngredientStorageButton : MonoBehaviour {
     [SerializeField] private Image _icon;
     [SerializeField] private TextMeshProUGUI _countText;
-    private IngredientCount _countRenderer;
+    private BuyableItemCount<Ingredient> _countRenderer;
     private int _count;
 
-    public void SetVisual(IngredientCount count) {
-        _icon.sprite = count.Ingredient.Icon;
+    public void SetVisual(BuyableItemCount<Ingredient> count) {
+        _icon.sprite = count.Item.Icon;
         _countRenderer = count;
     }
 

@@ -7,17 +7,17 @@ public class KitchenStorage : IngredientStorage<KitchenData> {
 
     [ContextMenu("AddLemon")]
     public void AddLemon() {
-        PutIngredientWithRemain(new IngredientCount(ConstIngredients.Instance.Lemon, 2));
+        PutIngredientWithRemain(ConstIngredients.Instance.Lemon, 2);
         IngredientsChanged?.Invoke();
     }
 
-    public override int PutIngredientWithRemain(IngredientCount puttingCount) {
-        int remain = base.PutIngredientWithRemain(puttingCount);
+    public override int PutIngredientWithRemain(Ingredient ingredient, int count) {
+        int remain = base.PutIngredientWithRemain(ingredient, count);
         IngredientsChanged?.Invoke();
         return remain;
     }
 
-    public override void RemoveIngredients(IEnumerable<IngredientCount> countList) {
+    public override void RemoveIngredients(IEnumerable<BuyableItemCount<Ingredient>> countList) {
         base.RemoveIngredients(countList);
         IngredientsChanged?.Invoke();
     }

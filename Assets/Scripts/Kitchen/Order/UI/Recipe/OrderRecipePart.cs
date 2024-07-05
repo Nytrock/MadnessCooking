@@ -4,12 +4,12 @@ public class OrderRecipePart : FoodRecipePart {
     [SerializeField] private Sprite _moneySprite;
     [SerializeField] private TextAvailableRenderer _countTextRenderer;
 
-    public override void Setup(IngredientCount count, bool isAvailable) {
+    public override void Setup(BuyableItemCount<Ingredient> count, bool isAvailable) {
         base.Setup(count, isAvailable);
         _countTextRenderer.UpdateAvailable(isAvailable);
     }
 
-    public void SetupAutoSpice(IngredientCount ingredientCount) {
+    public void SetupAutoSpice(BuyableItemCount<Ingredient> ingredientCount) {
         gameObject.SetActive(true);
         int price = ingredientCount.Count * ConstIngredients.Instance.Spice.Price;
         bool isMoneyEnough = MoneyManager.Instance.MoneyCount >= price;

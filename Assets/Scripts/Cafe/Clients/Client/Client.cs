@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(ClientUI))]
 public class Client : MonoBehaviour {
@@ -95,9 +94,7 @@ public class Client : MonoBehaviour {
         SpotIndex = settings.SpotIndex;
 
         ClientData = settings.Data;
-        if (ClientData.WaitTime == 0) {
-            ClientData.WaitTime = ClientData.WaitMultiplier * Random.Range(_minWaitTime, _maxWaitTime);
-        }
+        ClientData.SetWaitTime(_minWaitTime, _maxWaitTime);
 
         transform.position = ClientData.Position.GetVector();
         ClientUI.Setup(ClientData);
@@ -131,14 +128,16 @@ public class Client : MonoBehaviour {
         _table.CheckWait();
     }
 
-    public void Pay() {
+    public void EndEat() {
         WaitOthers();
         _table.CheckTalk();
     }
 
     public void Leave() {
         ClientLeave?.Invoke(this);
-        ClientData.State = ClientState.Leave;
+        if (!ClientData.IsEated)
+            ClientRejected?.Invoke(this);
+        ClientData.ChangeState(ClientState.Leave);
 
         ChangeState();
         ClientUI.ChangeSliderState(false);
@@ -157,16 +156,14 @@ public class Client : MonoBehaviour {
             payingMoney *= 100;
         _table.AddMoney(payingMoney);
 
-        _table.EndlessWait();
-        ClientData.WaitTime = ClientData.Order.Food.TimeToEat * Random.Range(0.9f, 1.2f);
-        ClientData.NowTime = 0;
-        ClientData.State = ClientState.Eat;
+        _table.StartEndlessWait();
+        ClientData.ChangeState(ClientState.Eat);
         ChangeState();
         ClientEat?.Invoke(this);
     }
 
     public void Sit() {
-        ClientData.State = ClientState.Sit;
+        ClientData.ChangeState(ClientState.Sit);
         ChangeState();
     }
 
@@ -184,12 +181,8 @@ public class Client : MonoBehaviour {
         spot.ResetTableFoodSprite(TableIndex);
     }
 
-    private void InvokeRejected() {
-
-    }
-
     private void WaitOthers() {
-        ClientData.State = ClientState.Wait;
+        ClientData.ChangeState(ClientState.Wait);
         ChangeState();
     }
 }

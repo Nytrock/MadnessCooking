@@ -2,15 +2,17 @@ using System;
 using UnityEngine;
 
 [Serializable]
-public class IngredientCount {
-    [SerializeField] private Ingredient _ingredient;
+public class BuyableItemCount<TItem>
+    where TItem : BuyableItem {
+
+    [SerializeField] private TItem _item;
     [SerializeField, Min(1)] private int _count;
 
-    public Ingredient Ingredient => _ingredient;
+    public TItem Item => _item;
     public int Count => _count;
 
-    public IngredientCount(Ingredient ingredient, int count) {
-        _ingredient = ingredient;
+    public BuyableItemCount(TItem ingredient, int count) {
+        _item = ingredient;
         _count = count;
     }
 

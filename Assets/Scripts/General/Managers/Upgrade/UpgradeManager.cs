@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class UpgradeManager : SaveableItemContainer<BaseUpgrade, GeneralData> {
+public class UpgradeManager : SaveableItemManager<BaseUpgrade, GeneralData> {
     [Header("Local upgrade managers")]
     [SerializeField] private GeneralUpgradeManager _generalManager;
     [SerializeField] private CafeUpgradeManager _cafeManager;

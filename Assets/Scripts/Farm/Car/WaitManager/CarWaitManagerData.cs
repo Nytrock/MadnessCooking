@@ -4,18 +4,19 @@ using UnityEngine;
 
 [Serializable]
 public class CarWaitManagerData {
-    [SerializeField] private IngredientCountList _ingredientsSended = new();
-    [SerializeField] private CarState _carState = CarState.Calm;
+    [SerializeField] private BuyableItemCountList<Ingredient> _ingredientsSended;
+    [SerializeField] private CarState _carState;
     [SerializeField] private float _nowWaitTime;
     [SerializeField] private float _needWaitTime;
 
-    public IEnumerable<IngredientCount> IngredientsSended => _ingredientsSended.GetIngredients();
+    public IEnumerable<BuyableItemCount<Ingredient>> IngredientsSended => _ingredientsSended.GetItems();
     public CarState CarState => _carState;
     public float NowWaitTime => _nowWaitTime;
-    public float NeedWaitTime => _needWaitTime;
 
     public CarWaitManagerData(float defaultWaitTime) {
         _needWaitTime = defaultWaitTime;
+        _carState = CarState.Calm;
+        _ingredientsSended = new();
     }
 
     public void UpdateSpeed(CountUpgrade countUpgrade) {
@@ -34,7 +35,7 @@ public class CarWaitManagerData {
         _carState = CarState.Sent;
     }
 
-    public void SetIngredientsSended(IngredientCountList ingredients) {
+    public void SetIngredientsSended(BuyableItemCountList<Ingredient> ingredients) {
         _ingredientsSended.Clear();
         _ingredientsSended.Extend(ingredients);
     }

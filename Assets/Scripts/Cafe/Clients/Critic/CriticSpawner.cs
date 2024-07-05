@@ -3,17 +3,17 @@ using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class CriticSpawner : MonoBehaviour {
+public class CriticSpawner : MonoBehaviour, IBindable<CafeData> {
     [SerializeField] private TimeManager _timeManager;
     [SerializeField] private PopularityCalculator _popularityCalculator;
     [SerializeField] private ClientsSpawner _clientSpawner;
     [SerializeField] private CriticUI _criticUI;
+    [SerializeField, Min(0)] private float[] _needPopularity;
+
+    private CriticSpawnerData _data;
+    private int _nextPopularityIndex = 0;
     private PopularityManager _popularityManager;
 
-    [SerializeField, Min(0)] private float[] _needPopularity;
-    private int _nextPopularityIndex = 0;
-
-    private bool _isWaitingCritic;
 
     private void Awake() {
         _popularityManager = _popularityCalculator.GetComponent<PopularityManager>();
@@ -21,7 +21,7 @@ public class CriticSpawner : MonoBehaviour {
     }
 
     private void CheckDaytime(Daytime daytime) {
-        if (daytime == Daytime.Night && _isWaitingCritic)
+        if (daytime == Daytime.Night && _data.IsWaitingCritic)
             WaitFailure();
 
         if (daytime == Daytime.Morning)
@@ -30,8 +30,6 @@ public class CriticSpawner : MonoBehaviour {
     }
 
     private void ActivateCriticWait() {
-        _isWaitingCritic = true;
-
         DaytimeStart morging = _timeManager.GetDaytimeStartInfo(Daytime.Morning);
         DaytimeStart night = _timeManager.GetDaytimeStartInfo(Daytime.Night);
 
@@ -45,12 +43,11 @@ public class CriticSpawner : MonoBehaviour {
 
     private IEnumerator WaitCriticTime(TimeSpan timeCritic) {
         yield return new WaitUntil(() => timeCritic >= _timeManager.GlobalTime);
-        _clientSpawner.ChangeCriticWait(true);
+        _data.ChangeCriticWait(true);
     }
 
     private void DisableCriticWait() {
-        _isWaitingCritic = false;
-        _clientSpawner.ChangeCriticWait(false);
+        _data.ChangeCriticWait(false);
     }
 
 
@@ -65,5 +62,11 @@ public class CriticSpawner : MonoBehaviour {
         DisableCriticWait();
         _popularityManager.PreviousLevel();
         _criticUI.SetMessage(CriticMessageType.Failure);
+    }
+
+    public void Bind(CafeData data, bool isFileEmpty) {
+        if (isFileEmpty)
+            data.CriticSpawner = new();
+        _data = data.CriticSpawner;
     }
 }

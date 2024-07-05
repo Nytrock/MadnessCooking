@@ -5,9 +5,9 @@ public class FoodRecipePart : MonoBehaviour {
     [SerializeField] protected GrayscaleImageRenderer _icon;
     [SerializeField] protected TextMeshProUGUI _countText;
 
-    public virtual void Setup(IngredientCount count, bool isAvailable) {
+    public virtual void Setup(BuyableItemCount<Ingredient> count, bool isAvailable) {
         gameObject.SetActive(true);
-        _icon.Setup(count.Ingredient.Icon, !isAvailable);
+        _icon.Setup(count.Item.Icon, !isAvailable);
         _countText.text = count.Count.ToString() + "x";
     }
 

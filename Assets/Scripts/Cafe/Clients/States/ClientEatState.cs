@@ -14,10 +14,9 @@ public class ClientEatState : ClientBaseState {
     }
 
     public override void UpdateState(Client client) {
-        if (_clientData.NowTime < _clientData.WaitTime)
-            _clientData.NowTime += InGameTime.Instance.DeltaTime;
-        else
-            client.Pay();
+        _clientData.UpdateTime();
+        if (_clientData.NowTime > _clientData.WaitTime)
+            client.EndEat();
         client.ClientUI.UpdateSlider();
     }
 }

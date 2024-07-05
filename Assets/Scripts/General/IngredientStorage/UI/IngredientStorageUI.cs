@@ -27,7 +27,7 @@ public class IngredientStorageUI<TData> : MonoBehaviour
         _panel.SetActive(!_panel.activeSelf);
     }
 
-    private void AddButton(IngredientCount count) {
+    private void AddButton(BuyableItemCount<Ingredient> count) {
         IngredientStorageButton button = _buttonPool.GetObject(count);
         _buttons.Add(button);
     }

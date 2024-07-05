@@ -3,9 +3,13 @@ using UnityEngine;
 
 [Serializable]
 public class AutoSaveManagerData {
-    [SerializeField] private float _autoSaveNowTime = 0;
+    [SerializeField] private float _autoSaveNowTime;
 
     public float AutoSaveNowTime => _autoSaveNowTime;
+
+    public AutoSaveManagerData() {
+        _autoSaveNowTime = 0;
+    }
 
     public void AddTime() {
         _autoSaveNowTime += Time.deltaTime;

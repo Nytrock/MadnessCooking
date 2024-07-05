@@ -3,11 +3,11 @@ using UnityEngine;
 
 [Serializable]
 public class IngredientStorageData {
-    [SerializeField] private IngredientCountList _ingredients;
+    [SerializeField] private BuyableItemCountList<Ingredient> _ingredients;
     [SerializeField] private int _maxSpace;
-    [SerializeField] private int _nowSpace = 0;
+    [SerializeField] private int _nowSpace;
 
-    public IngredientCountList Ingredients => _ingredients;
+    public BuyableItemCountList<Ingredient> Ingredients => _ingredients;
     public int NowSpace => _nowSpace;
     public int MaxSpace => _maxSpace;
     public int LeftSpace => _maxSpace - _nowSpace;
@@ -15,6 +15,7 @@ public class IngredientStorageData {
     public IngredientStorageData(int maxSize) {
         _ingredients = new();
         _maxSpace = maxSize;
+        _nowSpace = 0;
     }
 
     public bool CanAddCount(int count) {

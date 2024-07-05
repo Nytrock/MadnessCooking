@@ -2,8 +2,8 @@ using TMPro;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
-public class CafeOpenerAnimator : MonoBehaviour {
-    [SerializeField] private CafeOpener _cafeOpener;
+public class CafeStateChangerAnimator : MonoBehaviour {
+    [SerializeField] private CafeStateChanger _cafeOpener;
     [SerializeField] private TextMeshProUGUI _text;
     [SerializeField] private string _descriptionOpened;
     [SerializeField] private string _descriptionClosed;

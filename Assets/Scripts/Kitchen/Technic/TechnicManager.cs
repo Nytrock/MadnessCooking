@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using UnityEngine;
 
-public class TechnicManager : SaveableItemContainer<Technic, KitchenData>, IUpgradeable<KitchenUpgradeData> {
+public class TechnicManager : SaveableItemManager<Technic, KitchenData>, IUpgradeable<KitchenUpgradeData> {
     [SerializeField] private TechnicHolderUI _UI;
     [SerializeField] private TechnicHolder[] _holders;
 

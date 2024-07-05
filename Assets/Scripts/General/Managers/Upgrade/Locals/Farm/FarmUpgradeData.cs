@@ -13,6 +13,10 @@ public class FarmUpgradeData : LocalUpgradeData {
     public bool IsGrowStatusShow => _isGrowStatusShow;
     public bool IsWheatDistributing => _isWheatDistributing;
 
+    public FarmUpgradeData() {
+        _availableFarmBedUpgrades = new();
+    }
+
     public void ChangeAutoWheat() {
         _isAutoWheat = true;
     }

@@ -72,7 +72,7 @@ public class Chickens : MonoBehaviour, IBindable<FarmData> {
     }
 
     public void EggsToCar() {
-        int remainCount = _car.PutIngredientWithRemain(new IngredientCount(_egg, Data.EggCount));
+        int remainCount = _car.PutIngredientWithRemain(_egg, Data.EggCount);
         FatigueManager.Instance.ChangeFatigue(_egg.FatigueCount * (Data.EggCount - remainCount));
         Data.SetEggCount(remainCount);
         EggCountChanged?.Invoke(remainCount);

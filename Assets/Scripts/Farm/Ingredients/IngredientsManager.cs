@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IngredientsManager : SaveableItemContainer<Ingredient, FarmData> {
+public class IngredientsManager : SaveableItemManager<Ingredient, FarmData> {
     [SerializeField] private Ingredient[] _allIngredients;
 
     public bool HaveIngredient(Ingredient ingredient) {

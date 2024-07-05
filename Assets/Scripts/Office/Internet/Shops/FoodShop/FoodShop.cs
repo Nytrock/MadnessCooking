@@ -12,7 +12,7 @@ public class FoodShop : BaseChooseShop<Food, OfficeData> {
 
     protected override bool IsBuyable(Food food) {
         foreach (var ingredientCount in food.Ingredients)
-            if (!_ingredientManager.HaveIngredient(ingredientCount.Ingredient))
+            if (!_ingredientManager.HaveIngredient(ingredientCount.Item))
                 return false;
 
         if (!_technicManager.HaveTechnic(food.TypeTechnic))

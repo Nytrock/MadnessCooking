@@ -3,7 +3,7 @@ using UnityEngine;
 public class IngredientStorageButtonPool : Pool<IngredientStorageButton> {
     [SerializeField] private IngredientStorageButton _prefab;
 
-    public IngredientStorageButton GetObject(IngredientCount count) {
+    public IngredientStorageButton GetObject(BuyableItemCount<Ingredient> count) {
         IngredientStorageButton button = GetObject();
         button.SetVisual(count);
         button.gameObject.SetActive(true);

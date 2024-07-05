@@ -19,13 +19,10 @@ public class Pest : MonoBehaviour {
     }
 
     public void Randomize(Vector2 leftDown, Vector2 rightUp, int prefabIndex) {
-        PestData = new() {
-            PrefabIndex = prefabIndex
-        };
-
+        int spriteIndex = -1;
         if (_isSpriteChanging) {
-            PestData.SpriteIndex = Random.Range(0, _sprites.Length);
-            _renderer.sprite = _sprites[PestData.SpriteIndex];
+            spriteIndex = Random.Range(0, _sprites.Length);
+            _renderer.sprite = _sprites[spriteIndex];
         }
 
         if (_isMovable) {
@@ -36,12 +33,13 @@ public class Pest : MonoBehaviour {
 
         float xNormalized = Mathf.InverseLerp(leftDown.x, rightUp.x, transform.position.x);
         float yNormalized = Mathf.InverseLerp(leftDown.y, rightUp.y, transform.position.y);
-        PestData.NormalizedPosition = new(xNormalized, yNormalized);
-        PestData.Position = new(transform.position);
+
 
         if (_isRotatable)
             transform.rotation = Quaternion.Euler(0, 0, Random.Range(0, 360f));
-        PestData.RotationDegree = new(transform.rotation);
+
+        PestData = new(prefabIndex, spriteIndex, new(transform.rotation),
+            new(transform.position), new(xNormalized, yNormalized));
     }
 
     public void Bind(PestData pestData) {

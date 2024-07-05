@@ -45,7 +45,7 @@ public class ClientSkin : MonoBehaviour {
 
     public void StartNewCycle(ClientData data) {
         if (data.SkinType == ClientSkinType.None)
-            data.SkinType = GetRandomSkinType(data.Type);
+            data.SetSkinType(GetRandomSkinType(data.Type));
 
         foreach (var skinPart in _skinParts)
             skinPart.SetSprite(data.SkinType);

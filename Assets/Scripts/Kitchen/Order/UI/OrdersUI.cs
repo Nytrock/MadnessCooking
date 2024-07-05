@@ -44,7 +44,7 @@ public class OrdersUI : MonoBehaviour, IUpgradeable<KitchenUpgradeData>, IBindab
     public void StartCook(Order order) {
         _ordersManager.StartCook(order);
         foreach (var count in order.Food.Ingredients) {
-            if (count.Ingredient == _spice && _upgradeData.IsAutoSpice) {
+            if (count.Item && _upgradeData.IsAutoSpice) {
                 MoneyManager.Instance.ChangeMoney(-_spice.Price * count.Count);
                 break;
             }

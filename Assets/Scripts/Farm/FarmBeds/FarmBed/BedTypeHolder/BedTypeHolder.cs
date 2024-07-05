@@ -32,7 +32,8 @@ public class BedTypeHolder : MonoBehaviour {
         if (_bedData.PlantedIngredient == null)
             return;
 
-        _bedData.AnimationTime = _animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
+        float animationTime = _animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
+        _bedData.SetAnimationTime(animationTime);
     }
 
     public void ChangeMode(bool newMode) {
@@ -44,7 +45,7 @@ public class BedTypeHolder : MonoBehaviour {
                 _fertilize.EndBoost();
             _pestsGenerator.ChangeMode(false);
         } else {
-            Bind();
+            SetupBind();
         }
     }
 
@@ -107,12 +108,12 @@ public class BedTypeHolder : MonoBehaviour {
         _animator.SetFloat("growTime", _animationSpeed * _bedData.SummarizedBoost);
     }
 
-    public void Bind() {
+    public void SetupBind() {
         _bedData = _farmBed.BedData;
         if (_water != null)
             _water.SetData(_bedData.WaterBoost);
         if (_fertilize != null)
             _fertilize.SetData(_bedData.FertilizeBoost);
-        _pestsGenerator.SetData(_bedData);
+        _pestsGenerator.SetData(_bedData.PestsGenerator);
     }
 }

@@ -5,15 +5,21 @@ using UnityEngine;
 public class KitchenUpgradeData : LocalUpgradeData {
     [SerializeField] private bool _isAutoSpice;
     [SerializeField] private bool _isStrengthShow;
-    [SerializeField] private float _technicCookSpeed = 1;
-    [SerializeField] private float _technicRepairSpeed = 1;
-    [SerializeField] private float _technicStrength = 1;
+    [SerializeField] private float _technicCookSpeed;
+    [SerializeField] private float _technicRepairSpeed;
+    [SerializeField] private float _technicStrength;
 
     public bool IsAutoSpice => _isAutoSpice;
     public bool IsStrengthShow => _isStrengthShow;
     public float TechnicCookSpeed => _technicCookSpeed;
     public float TechnicRepairSpeed => _technicRepairSpeed;
     public float TechnicStrengthMultiplier => _technicStrength;
+
+    public KitchenUpgradeData() {
+        _technicCookSpeed = 1;
+        _technicRepairSpeed = 1;
+        _technicStrength = 1;
+    }
 
     public void SetAutoSpice() {
         _isAutoSpice = true;

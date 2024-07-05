@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class DecorManager : SaveableItemContainer<Decor, GeneralData> {
+public class DecorManager : SaveableItemManager<Decor, GeneralData> {
     [SerializeField] private LocalDecorManager[] _localDecorManagers;
     [SerializeField] private FatigueManager _fatigueManager;
 

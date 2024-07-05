@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 public class PestsGenerator : MonoBehaviour {
     [SerializeField, Min(1)] private int _maxPests;
@@ -11,9 +10,7 @@ public class PestsGenerator : MonoBehaviour {
     [Header("Time settings")]
     [SerializeField, Min(0)] private float _minTime;
     [SerializeField, Min(0)] private float _maxTime;
-
-    private FarmBedData _bedData;
-    private PestsGeneratorData _generatorData => _bedData.PestsGenerator;
+    private PestsGeneratorData _data;
 
     private readonly List<Pest> _pests = new();
     private bool _isPause;
@@ -21,15 +18,13 @@ public class PestsGenerator : MonoBehaviour {
     public event Action PestsChanged;
 
     private void Update() {
-        if (!_generatorData.IsActive || _isPause || _generatorData.IsPestsRemoved)
+        if (!_data.IsActive || _isPause || _data.IsPestsRemoved)
             return;
 
-        if (_generatorData.NowTime < _generatorData.NeedTime) {
-            _generatorData.NowTime += InGameTime.Instance.DeltaTime;
-        } else {
+        _data.UpdateTime();
+        if (_data.NowTime > _data.NeedTime) {
             SpawnPest();
-            _generatorData.NowTime = 0;
-            _generatorData.NeedTime = Random.Range(_minTime, _maxTime);
+            _data.SetNewTime(_minTime, _maxTime);
         }
     }
 
@@ -40,27 +35,23 @@ public class PestsGenerator : MonoBehaviour {
     private void SpawnPest() {
         Pest pest = _pool.GetObject();
         _pests.Add(pest);
-        _generatorData.Pests.Add(pest.PestData);
-        CheckWork();
+        _data.AddPest(pest.PestData);
+        CheckSlowdown();
     }
 
     public void ChangeMode(bool newMode) {
-        _generatorData.IsActive = newMode;
-        if (!newMode) {
+        _data.ChangeMode(newMode);
+        if (!newMode)
             CleanPests();
-        } else {
-            _generatorData.NeedTime = Random.Range(_minTime, _maxTime);
-            _generatorData.NowTime = 0;
-        }
+        else
+            _data.SetNewTime(_minTime, _maxTime);
     }
 
     public void CleanPests() {
         foreach (var pest in _pests)
             _pool.PutObject(pest);
         _pests.Clear();
-        _generatorData.Pests.Clear();
-
-        _bedData.PestsSlowdown = 1;
+        _data.CleanPests();
         PestsChanged?.Invoke();
     }
 
@@ -71,25 +62,22 @@ public class PestsGenerator : MonoBehaviour {
 
     public void RemovePest(Pest pest) {
         _pool.PutObject(pest);
-        _generatorData.Pests.Remove(pest.PestData);
+        _data.RemovePest(pest.PestData);
         _pests.Remove(pest);
-        CheckWork();
+        CheckSlowdown();
     }
 
-    private void CheckWork() {
-        if (_pests.Count == _maxPests) {
-            _bedData.PestsSlowdown = 0;
-            _generatorData.IsActive = false;
-        } else {
-            _generatorData.IsActive = true;
-            _bedData.PestsSlowdown = 1 - (_pests.Count * _onePestSlowdown);
-        }
+    private void CheckSlowdown() {
+        if (_pests.Count == _maxPests)
+            _data.SetMaxSlowdown();
+        else
+            _data.SetRegularSlowdown(_onePestSlowdown);
         PestsChanged?.Invoke();
     }
 
-    public void SetData(FarmBedData bedData) {
-        _bedData = bedData;
-        foreach (var pestData in _generatorData.Pests) {
+    public void SetData(PestsGeneratorData data) {
+        _data = data;
+        foreach (var pestData in _data.Pests) {
             Pest pest = _pool.GetObject(pestData.PrefabIndex);
             _pests.Add(pest);
             pest.Bind(pestData);

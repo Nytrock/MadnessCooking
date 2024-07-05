@@ -51,7 +51,7 @@ public class ClientUI : MonoBehaviour {
     }
 
     public void ChangeSliderState(bool newValue) {
-        _eatSlider.gameObject.SetActive(newValue);
+        _eatSlider.gameObject.SetActive(newValue && _data.IsEatTimeShow);
     }
 
     public void Setup(ClientData clientData) {
