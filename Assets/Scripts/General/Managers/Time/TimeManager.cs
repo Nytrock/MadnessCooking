@@ -5,20 +5,25 @@ public class TimeManager : MonoBehaviour, IBindable<GeneralData> {
     [SerializeField, Min(0)] private int _defaultTimeSpeed;
     [SerializeField, Min(0)] private int _sleepTimeSpeed;
     [SerializeField] private DaytimeStart[] _daytimeStarts;
+    [SerializeField] private Daytime _defaultDaytime;
 
+    private int _daytimeCount;
     private int _nowTimeSpeed;
-    private Daytime _daytime = Daytime.Morning;
     private TimeManagerData _data;
 
     public TimeSpan GlobalTime => _data.GlobalTime;
-    public int DaysCount => _data.DaysCount;
+    public int DaysCount => _data.GlobalTime.Days;
     public bool IsSleep => _sleepTimeSpeed == _nowTimeSpeed;
     public int NowTimeSpeed => _nowTimeSpeed;
 
     public event Action<Daytime> DaytimeChanged;
 
+    private void Awake() {
+        _daytimeCount = Enum.GetNames(typeof(Daytime)).Length;
+    }
+
     private void LateStart() {
-        DaytimeChanged?.Invoke(_daytime);
+        DaytimeChanged?.Invoke(_data.Daytime);
         _nowTimeSpeed = _defaultTimeSpeed;
     }
 
@@ -28,20 +33,17 @@ public class TimeManager : MonoBehaviour, IBindable<GeneralData> {
     }
 
     private void CheckDaytime() {
-        foreach (var daytimeStart in _daytimeStarts) {
-            if (daytimeStart.TimeFits(_data.GlobalTime, _daytime)) {
-                ChangeDaytime(daytimeStart.Daytime);
-                return;
-            }
-        }
+        if (_data.IsWaitingNextDay)
+            return;
+
+        int nextDaytimeIndex = ((int)_data.Daytime + 1) % _daytimeCount;
+        if (_daytimeStarts[nextDaytimeIndex].TimeFits(_data.GlobalTime))
+            ChangeDaytime(nextDaytimeIndex);
     }
 
-    private void ChangeDaytime(Daytime newDaytime) {
-        _daytime = newDaytime;
-        if (_daytime == Daytime.Night)
-            _data.AddDay();
-
-        DaytimeChanged?.Invoke(_daytime);
+    private void ChangeDaytime(int newDaytimeIndex) {
+        _data.ChangeDaytime(newDaytimeIndex, _daytimeCount);
+        DaytimeChanged?.Invoke(_data.Daytime);
     }
 
     public void ChangeSleepState(bool isSleep) {
@@ -61,7 +63,7 @@ public class TimeManager : MonoBehaviour, IBindable<GeneralData> {
 
     public void Bind(GeneralData data, bool isFileEmpty) {
         if (isFileEmpty) {
-            DaytimeStart defaultDaytimeStart = GetDaytimeStartInfo(_daytime);
+            DaytimeStart defaultDaytimeStart = GetDaytimeStartInfo(_defaultDaytime);
             data.TimeManager = new(defaultDaytimeStart.Hour, defaultDaytimeStart.Minute);
         }
         _data = data.TimeManager;

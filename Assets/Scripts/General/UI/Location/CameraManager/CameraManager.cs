@@ -2,7 +2,6 @@ using System;
 using UnityEngine;
 
 public abstract class CameraManager : MonoBehaviour {
-
     [SerializeField] protected Camera _mainCamera;
     [SerializeField] protected LocationManager _locationManager;
     [SerializeField] protected LocationSlider _locationSlider;
@@ -27,7 +26,7 @@ public abstract class CameraManager : MonoBehaviour {
     public float StartPosition => _startPosition;
     public float EndPosition => _endPosition;
     public Transform MainCameraPos => _mainCameraPos;
-    public bool IsMouseMoving => _cameraVelocity != 0 && !_isKeyPressed;
+    public bool IsMouseMoving => Mathf.Abs(_cameraVelocity) >= 0.01f && !_isKeyPressed;
 
     protected virtual void Awake() {
         _locationManager.LocationChanged += ChangeWorkMode;

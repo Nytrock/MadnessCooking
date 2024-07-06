@@ -11,10 +11,7 @@ public struct DaytimeStart {
     public int Hour => _startHour;
     public int Minute => _startMinute;
 
-    public bool TimeFits(TimeSpan nowTime, Daytime nowDaytime) {
-        if (nowDaytime == _daytime)
-            return false;
-
-        return nowTime.Hours == _startHour && nowTime.Minutes == _startMinute;
+    public bool TimeFits(TimeSpan nowTime) {
+        return nowTime.Hours >= _startHour && nowTime.Minutes >= _startMinute;
     }
 }
