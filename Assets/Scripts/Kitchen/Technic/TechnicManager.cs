@@ -3,7 +3,7 @@ using System.Linq;
 using UnityEngine;
 
 public class TechnicManager : SaveableItemManager<Technic, KitchenData>, IUpgradeable<KitchenUpgradeData> {
-    [SerializeField] private TechnicHolderUI _UI;
+    [SerializeField] private TechnicRepairUI _UI;
     [SerializeField] private TechnicHolder[] _holders;
 
     [Header("Upgrades")]
@@ -35,7 +35,7 @@ public class TechnicManager : SaveableItemManager<Technic, KitchenData>, IUpgrad
 
     public void DisableTechnic(Technic typeTechnic) {
         TechnicHolder technic = FindHolderByTechic(typeTechnic);
-        technic.StopCook();
+        technic.Data.DisableTechnic();
     }
 
     public TechnicHolder FindHolderByTechic(Technic technic) {
@@ -65,8 +65,10 @@ public class TechnicManager : SaveableItemManager<Technic, KitchenData>, IUpgrad
         if (isFileEmpty)
             data.TechnicHolders = new TechnicHolderData[_holders.Length];
 
-        for (int i = 0; i < data.TechnicHolders.Length; i++)
+        for (int i = 0; i < data.TechnicHolders.Length; i++) {
             _holders[i].Bind(data, i, isFileEmpty);
+            _holders[i].SetRepairUI(_UI);
+        }
     }
 
     public void BindUpgrade(KitchenUpgradeData upgradeData) {

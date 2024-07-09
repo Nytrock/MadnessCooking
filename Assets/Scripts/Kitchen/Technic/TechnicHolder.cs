@@ -1,25 +1,24 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Animator), typeof(TechnicCooker), typeof(TechnicRepairer))]
+[RequireComponent(typeof(TechnicHolderRenderer))]
 public class TechnicHolder : MonoBehaviour {
     [SerializeField] private Technic _technic;
+    [SerializeField] private TechnicHolderUI _UI;
     [SerializeField] private Transform _UITarget;
-    private Animator _animator;
-    private Order _nowOrder;
 
-    private TechnicCooker _cooker;
-    private TechnicRepairer _repair;
-
-    public TechnicHolderData TechnicData { get; private set; }
+    public TechnicHolderData Data { get; private set; }
     private KitchenUpgradeData _upgradeData;
+    private TechnicHolderRenderer _renderer;
 
     public Technic Technic => _technic;
     public Transform UITarget => _UITarget;
 
     private void Awake() {
-        _animator = GetComponent<Animator>();
-        _cooker = GetComponent<TechnicCooker>();
-        _repair = GetComponent<TechnicRepairer>();
+        _renderer = GetComponent<TechnicHolderRenderer>();
+    }
+
+    private void Update() {
+        Data.Update();
     }
 
     public void ChangeState(bool newState) {
@@ -27,30 +26,28 @@ public class TechnicHolder : MonoBehaviour {
     }
 
     public void StartCook(Order order) {
-        TechnicData.StartCooking(_upgradeData);
-        _animator.SetBool("isCooking", true);
-
-        _nowOrder = order;
-        _cooker.StartWork(order.Food.TimeToCook / _upgradeData.TechnicCookSpeed);
+        Data.StartCook(_upgradeData, order);
+        _UI.StartWork();
+        _renderer.UpdateVisual(Data);
     }
 
-    public void StopCook() {
-        if (!TechnicData.IsCooking)
+    private void StopCook() {
+        if (!Data.IsCooking)
             return;
 
-        TechnicData.StopCooking();
-        _animator.SetBool("isCooking", false);
-        _nowOrder.FinishCook();
-        _nowOrder = null;
+        _UI.StopWork();
+        _renderer.UpdateVisual(Data);
     }
 
     public void StartRepair() {
-        TechnicData.ChangeRepairState(true);
-        _repair.StartWork(_technic.TimeRepair / _upgradeData.TechnicRepairSpeed);
+        Data.StartRepair(_upgradeData);
+        _UI.StartWork();
+        _renderer.UpdateVisual(Data);
     }
 
-    public void StopRepair() {
-        TechnicData.ChangeRepairState(false);
+    private void StopRepair() {
+        _UI.StopWork();
+        _renderer.UpdateVisual(Data);
     }
 
     public void Bind(KitchenData data, int index, bool isFileEmpty) {
@@ -58,19 +55,24 @@ public class TechnicHolder : MonoBehaviour {
 
         if (isFileEmpty)
             data.TechnicHolders[index] = new(_technic);
-        TechnicData = data.TechnicHolders[index];
+        Data = data.TechnicHolders[index];
+        _UI.SetData(Data);
 
-        if (TechnicData.IsRepairing)
-            StartRepair();
+        Data.CookStoped += StopCook;
+        Data.RepairStoped += StopRepair;
     }
 
     public bool Accessible() {
-        return !TechnicData.IsCooking && TechnicData.NowStrength != 0
-            && !TechnicData.IsRepairing;
+        return !Data.IsCooking && Data.NowStrength != 0
+            && !Data.IsRepairing;
     }
 
     public bool Repairable() {
-        return TechnicData.NowStrength != _technic.Strength &&
+        return Data.NowStrength != _technic.Strength &&
             MoneyManager.Instance.MoneyCount >= _technic.PriceRepair;
+    }
+
+    public void SetRepairUI(TechnicRepairUI repairUI) {
+        _UI.SetRepairUI(repairUI, this);
     }
 }
