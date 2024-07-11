@@ -9,7 +9,7 @@ public class TimeManager : MonoBehaviour, IBindable<GeneralData> {
 
     private int _daytimeCount;
     private int _nowTimeSpeed;
-    private TimeManagerData _data;
+    [SerializeField] private TimeManagerData _data;
 
     public TimeSpan GlobalTime => _data.GlobalTime;
     public int DaysCount => _data.GlobalTime.Days;

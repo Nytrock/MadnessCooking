@@ -6,10 +6,10 @@ public abstract class SaveableBaseShop<TItem, TData> : BaseShop, IBindable<TData
 
     [SerializeField] protected TItem[] _defaultItemsToBuy;
     [SerializeField] protected BuyableItemManager<TItem> _itemManager;
-
-    protected ShopData<TItem> _data;
+    [SerializeField] protected ShopData<TItem> _data;
 
     protected override void GenerateShop() {
+        SortItems();
         foreach (var item in _data.ItemsToBuy)
             _catalog.GeneratePanel(GeneratePanelData(item));
         _catalog.ActivateFirstPage();
@@ -106,6 +106,11 @@ public abstract class SaveableBaseShop<TItem, TData> : BaseShop, IBindable<TData
 
     protected virtual bool IsBuyable(TItem item) {
         return true;
+    }
+
+    protected virtual void SortItems() {
+        Func<TItem, int> sortMethod = (item) => item.Price;
+        _data.OrderItems(sortMethod);
     }
 
     public virtual void Bind(TData data, bool isFileEmpty) {

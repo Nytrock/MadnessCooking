@@ -25,6 +25,9 @@ public class TechnicManager : SaveableItemManager<Technic, KitchenData>, IUpgrad
         if (!_data.IsItemAvailable(technic))
             return false;
         TechnicHolder holder = FindHolderByTechic(technic);
+        if (holder == null)
+            return false;
+
         return holder.Accessible();
     }
 
@@ -35,6 +38,9 @@ public class TechnicManager : SaveableItemManager<Technic, KitchenData>, IUpgrad
 
     public void DisableTechnic(Technic typeTechnic) {
         TechnicHolder technic = FindHolderByTechic(typeTechnic);
+        if (technic == null)
+            return;
+
         technic.Data.DisableTechnic();
     }
 

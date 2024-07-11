@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class IngredientShop : BaseInstantShop<Ingredient, OfficeData>, IUpgradeable<KitchenUpgradeData> {
@@ -7,6 +8,11 @@ public class IngredientShop : BaseInstantShop<Ingredient, OfficeData>, IUpgradea
 
     private void Awake() {
         _bedTypesManager.ItemAdded += delegate { UpdatePanels(); };
+    }
+
+    protected override void SortItems() {
+        Func<Ingredient, int> sortMethod = (ingredient) => ingredient.Type == IngredientType.Buyable ? 0 : ingredient.Price;
+        _data.OrderItems(sortMethod);
     }
 
     protected override void RemoveItemPanel(Ingredient item, int index) {

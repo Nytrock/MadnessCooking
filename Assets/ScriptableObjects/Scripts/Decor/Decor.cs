@@ -10,7 +10,6 @@ public class Decor : BuyableItem, IGraphable<Decor> {
 
     public DecorLocation Location => _location;
     public float FatigueCoef => _fatigueDecreaseCoef;
-
     public IEnumerable<Decor> NeedItems => _needDecor;
     public IEnumerable<Decor> NextItems => _nextDecor;
 }

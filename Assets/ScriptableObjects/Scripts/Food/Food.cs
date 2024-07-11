@@ -11,6 +11,8 @@ public class Food : BuyableItem {
     [SerializeField, Min(0)] private float _timeToEat;
     [SerializeField, Min(0)] private int _moneyGet;
     [SerializeField] private BuyableItemCountList<Ingredient> _ingredients;
+    [SerializeField] private Color _color;
+    [SerializeField] private bool _isNeedWater;
 
     public FoodType Type => _type;
     public Technic TypeTechnic => _typeTechnic;
@@ -18,6 +20,8 @@ public class Food : BuyableItem {
     public float TimeToCook => _timeToCook;
     public float TimeToEat => _timeToEat;
     public int MoneyGet => _moneyGet;
+    public Color Color => _color;
+    public bool IsNeedWater => _isNeedWater;
 
     public IEnumerable<BuyableItemCount<Ingredient>> Ingredients => _ingredients.GetItems();
     public int CountIngredients => _ingredients.Size;

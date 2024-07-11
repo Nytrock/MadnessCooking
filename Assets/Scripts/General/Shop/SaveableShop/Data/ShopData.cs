@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [Serializable]
@@ -44,5 +45,9 @@ public class ShopData<TItem>
 
     public TItem GetItemToBuy(int index) {
         return _itemsToBuy[index];
+    }
+
+    public void OrderItems(Func<TItem, int> sortMethod) {
+        _itemsToBuy = _itemsToBuy.OrderBy(sortMethod).ToList();
     }
 }

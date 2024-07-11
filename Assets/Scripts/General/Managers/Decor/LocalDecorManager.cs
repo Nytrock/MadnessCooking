@@ -6,9 +6,13 @@ public class LocalDecorManager : MonoBehaviour {
     [SerializeField] protected DecorHolder[] _decorHolders;
 
     private void Awake() {
-        foreach (var holder in _decorHolders)
+        foreach (var holder in _decorHolders) {
+            if (holder.Decor == null)
+                throw new ArgumentNullException($"Holder {holder.name} have not decor.");
             if (!holder.CheckLocation(_location))
                 throw new ArgumentException($"Location of decor {holder.Decor.name} does not match");
+        }
+
 
         foreach (var holder in _decorHolders)
             holder.ChangeState(false);

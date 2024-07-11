@@ -21,7 +21,7 @@ public class TechnicHolder : MonoBehaviour {
         Data.Update();
     }
 
-    public void ChangeState(bool newState) {
+    public virtual void ChangeState(bool newState) {
         gameObject.SetActive(newState);
     }
 

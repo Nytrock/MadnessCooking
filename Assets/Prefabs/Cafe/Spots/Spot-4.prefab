@@ -530,6 +530,15 @@ MonoBehaviour:
   _minTalk: 2
   _maxTalk: 5
   _clientWaitMultiplier: 0.75
+  _data:
+    _haveClients: 0
+    _groupState: 0
+    _waitTime: 0
+    _nowTime: 0
+    _talkIndex: 0
+    _moneyCount: 0
+    _seatsCount: 0
+    _clients: []
 --- !u!1 &6046200884695634029
 GameObject:
   m_ObjectHideFlags: 0
@@ -1533,10 +1542,6 @@ PrefabInstance:
     - target: {fileID: 5961323848364616049, guid: 4a26450d44109de418ec920aa1faceb7, type: 3}
       propertyPath: m_Name
       value: RightSeat
-      objectReference: {fileID: 0}
-    - target: {fileID: 6234299334378047606, guid: 4a26450d44109de418ec920aa1faceb7, type: 3}
-      propertyPath: _seatDirection
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7335289998871645541, guid: 4a26450d44109de418ec920aa1faceb7, type: 3}
       propertyPath: m_LocalPosition.x
