@@ -6,10 +6,6 @@ public class TimeRenderChange : MonoBehaviour, IUpgradeable<GeneralUpgradeData> 
     [SerializeField] private TimeRenderWatch _watch;
     private GeneralUpgradeData _upgradeData;
 
-    private void Start() {
-        UpdateTimeRenderer();
-    }
-
     private void UpdateTimeRenderer() {
         _clock.gameObject.SetActive(!_upgradeData.IsUpgradedTimeRenderer);
         _watch.gameObject.SetActive(_upgradeData.IsUpgradedTimeRenderer);
@@ -17,6 +13,7 @@ public class TimeRenderChange : MonoBehaviour, IUpgradeable<GeneralUpgradeData> 
 
     public void BindUpgrade(GeneralUpgradeData upgradeData) {
         _upgradeData = upgradeData;
+        UpdateTimeRenderer();
     }
 
     public void CheckAddedUpgrade(BaseUpgrade upgrade) {

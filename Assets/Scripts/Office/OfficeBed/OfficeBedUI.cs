@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-public class OfficeBedUI : MonoBehaviour {
+public class OfficeBedUI : MonoBehaviour, IActivable {
     [SerializeField] private GameObject _panel;
     [SerializeField] private GameObject _blockPanel;
     [SerializeField] private TextMeshProUGUI _sleepButtonText;
@@ -10,6 +10,10 @@ public class OfficeBedUI : MonoBehaviour {
 
     public void LateStart(bool isSleep) {
         _panel.SetActive(isSleep);
+    }
+
+    public void ChangeState(bool newState) {
+        _panel.SetActive(newState);
     }
 
     public void ChangeState() {

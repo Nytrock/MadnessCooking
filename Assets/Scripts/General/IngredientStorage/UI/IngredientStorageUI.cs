@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class IngredientStorageUI<TData> : MonoBehaviour
+public class IngredientStorageUI<TData> : MonoBehaviour, IActivable
     where TData : ISaveable {
 
     [SerializeField] protected IngredientStorage<TData> _storage;
@@ -23,8 +23,12 @@ public class IngredientStorageUI<TData> : MonoBehaviour
         UpdateSizeRenderer();
     }
 
-    public void ChangePanelState() {
+    public void ChangeState() {
         _panel.SetActive(!_panel.activeSelf);
+    }
+
+    public void ChangeState(bool newState) {
+        _panel.SetActive(newState);
     }
 
     private void AddButton(BuyableItemCount<Ingredient> count) {

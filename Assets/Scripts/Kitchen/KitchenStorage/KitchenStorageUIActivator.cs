@@ -1,17 +1,17 @@
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider2D))]
-public class KitchenStorageActivator : UIActivator {
-    [SerializeField] private KitchenStorageUI _kitchenStorage;
+public class KitchenStorageUIActivator : UIActivator {
     private Animator _animator;
     private bool _hasAnimation;
 
-    private void Awake() {
+    protected override void Awake() {
+        base.Awake();
         _hasAnimation = TryGetComponent(out _animator);
     }
 
     protected override void Press() {
-        _kitchenStorage.ChangePanelState();
+        base.Press();
         if (_hasAnimation)
             _animator.SetBool("isOpen", !_animator.GetBool("isOpen"));
     }

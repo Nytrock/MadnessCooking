@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class SpotEditor : MonoBehaviour {
     [SerializeField] private CafeStateChanger _opener;
+    [SerializeField] private LocationManager _locationManager;
     [SerializeField] private CafeSpotManager _spotManager;
     [SerializeField] private SpotPreview _preview;
 
@@ -15,12 +16,22 @@ public class SpotEditor : MonoBehaviour {
 
     private void Awake() {
         _opener.CafeChanged += CheckCafeOpener;
+        _locationManager.LocationChanged += delegate { ChangeWorkMode(false); };
         _spotManager.SpotsPositionChanged += _preview.Move;
         EditorDisabled += _spotManager.GenerateFreeSpotsList;
     }
 
     public void ChangeWorkMode() {
         _isActive = !_isActive;
+        ChangeEditorState();
+    }
+
+    public void ChangeWorkMode(bool newState) {
+        _isActive = newState;
+        ChangeEditorState();
+    }
+
+    private void ChangeEditorState() {
         if (_isActive)
             ActivateEditor();
         else

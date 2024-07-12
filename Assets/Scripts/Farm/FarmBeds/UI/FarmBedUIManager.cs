@@ -1,6 +1,7 @@
 using UnityEngine;
 
 public class FarmBedUIManager : MonoBehaviour {
+    [SerializeField] private LocationManager _locationManager;
     [SerializeField] private BedTypeUI[] _bedsUI;
     [SerializeField] private FarmBedUpgraderUI _upgrade;
     [SerializeField] private FarmWell _farmWell;
@@ -14,10 +15,18 @@ public class FarmBedUIManager : MonoBehaviour {
     private void Awake() {
         _farmWell.WaterChanged += CheckWater;
         _puncher.FertilizeChanged += CheckFertilize;
+        _locationManager.LocationChanged += delegate { ChangeMode(false); };
     }
 
     public void ChangeMode() {
         _nowUI.ChangeMode();
+    }
+
+    private void ChangeMode(bool newState) {
+        if (_nowUI == null)
+            return;
+
+        _nowUI.ChangeMode(newState);
     }
 
     private void CheckWater() {

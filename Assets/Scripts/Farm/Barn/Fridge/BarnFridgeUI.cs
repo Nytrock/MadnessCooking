@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BarnFridgeUI : MonoBehaviour {
+public class BarnFridgeUI : MonoBehaviour, IActivable {
     [SerializeField] private GameObject _panel;
     [SerializeField] private BarnFridge _barnFridge;
     [SerializeField] private ItemInfoRendererWithCount _milkRenderer;
@@ -23,5 +23,9 @@ public class BarnFridgeUI : MonoBehaviour {
 
     public void ChangeState() {
         _panel.SetActive(!_panel.activeSelf);
+    }
+
+    public void ChangeState(bool newState) {
+        _panel.SetActive(newState);
     }
 }

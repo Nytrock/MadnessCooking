@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OrdersUI : MonoBehaviour, IUpgradeable<KitchenUpgradeData>, IBindable<KitchenData> {
+public class OrdersUI : MonoBehaviour, IUpgradeable<KitchenUpgradeData>, IBindable<KitchenData>, IActivable {
     [SerializeField] private OrdersManager _ordersManager;
     [SerializeField] private OrderButtonsPool _pool;
     [SerializeField] private GameObject _panel;
@@ -25,6 +25,10 @@ public class OrdersUI : MonoBehaviour, IUpgradeable<KitchenUpgradeData>, IBindab
 
     public void ChangeState() {
         _panel.SetActive(!_panel.activeSelf);
+    }
+
+    public void ChangeState(bool newState) {
+        _panel.SetActive(newState);
     }
 
     private void AddOrder(Order order) {

@@ -1,11 +1,11 @@
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider2D))]
-public abstract class UIActivator : MonoBehaviour {
+public abstract class ColliderActivator : MonoBehaviour {
     [SerializeField] private UIHoverListener _hoverListener;
     private bool _isHover;
 
-    private void Awake() {
+    protected virtual void Awake() {
         _hoverListener.OnHover += ChangeMode;
     }
 

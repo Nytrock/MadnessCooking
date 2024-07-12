@@ -6,6 +6,7 @@ public class LocationButton : MonoBehaviour {
     [SerializeField] private LocationManager _locationManager;
     [SerializeField] private Transform _location;
     [SerializeField, Min(0)] private float _fatigueCoef;
+    private bool _isSceneLoading = true;
 
     public Vector2 Location => _location.position;
 
@@ -19,8 +20,10 @@ public class LocationButton : MonoBehaviour {
 
     private void ChangeMode(Vector2 newPosition) {
         bool isOurLocation = newPosition == (Vector2)_location.position;
-        if (isOurLocation)
+        if (isOurLocation && !_isSceneLoading)
             FatigueManager.Instance.ChangeFatigue(_fatigueCoef);
+        if (_isSceneLoading)
+            _isSceneLoading = false;
         _button.interactable = !isOurLocation;
     }
 }

@@ -8,7 +8,7 @@ public class SaveManager : MonoBehaviour {
     [SerializeField] private UpgradeManager _upgradeManager;
 
     [Header("Save parts")]
-    [SerializeField] private SaveGeneralManager _mainPart;
+    [SerializeField] private SaveGeneralManager _generalPart;
     [SerializeField] private SaveCafeManager _cafePart;
     [SerializeField] private SaveKitchenManager _kitchenPart;
     [SerializeField] private SaveFarmManager _farmPart;
@@ -39,7 +39,7 @@ public class SaveManager : MonoBehaviour {
             _gameData = new GameData();
         }
 
-        _mainPart.LoadData(_gameData.Main, isFileEmpty);
+        _generalPart.LoadData(_gameData.General, isFileEmpty);
         _cafePart.LoadData(_gameData.Cafe, isFileEmpty);
         _kitchenPart.LoadData(_gameData.Kitchen, isFileEmpty);
         _farmPart.LoadData(_gameData.Farm, isFileEmpty);

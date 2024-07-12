@@ -15,7 +15,10 @@ public class WatchDaytimeRenderer : MonoBehaviour {
 
     public void UpdateDaytime(Daytime daytime) {
         DaytimeRenderInfo newDaytime = FindDaytime(daytime);
+
         _daytimeIcon.sprite = newDaytime.Icon;
+        _daytimeIcon.color = newDaytime.Color;
+
         _daytimeText.color = newDaytime.Color;
         _daytimeText.text = daytime.ToString();
     }

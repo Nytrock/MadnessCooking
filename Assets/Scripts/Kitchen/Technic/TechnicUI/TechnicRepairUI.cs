@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class TechnicRepairUI : MonoBehaviour, IUpgradeable<KitchenUpgradeData> {
+    [SerializeField] private LocationManager _locationManager;
     [SerializeField] private Transform _targetPoint;
     [SerializeField] private GameObject _panel;
     [SerializeField] private Camera _camera;
@@ -12,6 +13,10 @@ public class TechnicRepairUI : MonoBehaviour, IUpgradeable<KitchenUpgradeData> {
     [SerializeField] private BaseUpgrade _technicStrengthShow;
     [SerializeField] private Slider _strengthSlider;
     private KitchenUpgradeData _upgradeData;
+
+    private void Awake() {
+        _locationManager.LocationChanged += delegate { ChangeState(false); };
+    }
 
     private void Start() {
         ChangeState(false);

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ChickensUI : MonoBehaviour {
+public class ChickensUI : MonoBehaviour, IActivable {
     [SerializeField] private Chickens _chickens;
     [SerializeField] private GameObject _panel;
     [SerializeField] private Button _feedButton;
@@ -35,6 +35,10 @@ public class ChickensUI : MonoBehaviour {
 
     public void ChangeState() {
         _panel.SetActive(!_panel.activeSelf);
+    }
+
+    public void ChangeState(bool newState) {
+        _panel.SetActive(newState);
     }
 
     public void EggsToCar() => _chickens.EggsToCar();
