@@ -29,7 +29,7 @@ public class OrderRecipe : FoodRecipe<OrderRecipePart> {
     protected override void SetupTechnic(Technic technic, int index, ref bool canCook) {
         bool haveTechnic = _technicManager.HaveTechnic(technic);
         _canCook &= haveTechnic;
-        _recipeParts[index].Setup(technic, haveTechnic);
+        _techicIcon.Setup(technic.Icon, haveTechnic);
     }
 
     public override void DisableParts() {

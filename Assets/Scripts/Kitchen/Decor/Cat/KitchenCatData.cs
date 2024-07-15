@@ -21,13 +21,12 @@ public class KitchenCatData {
             return;
 
         _nowTime += InGameTime.Instance.DeltaTime;
-        if (_nowTime > _needTime) {
-            _nowTime = 0;
+        if (_nowTime > _needTime)
             _isPetted = false;
-        }
     }
 
     public void Pet() {
         _isPetted = true;
+        _nowTime = 0;
     }
 }

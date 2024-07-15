@@ -2,6 +2,7 @@ using UnityEngine;
 
 public abstract class FoodRecipe<T> : MonoBehaviour {
     [SerializeField] protected T[] _recipeParts = new T[8];
+    [SerializeField] protected GrayscaleImageRenderer _techicIcon;
     [SerializeField] protected KitchenStorage _kitchenStorage;
     [SerializeField] protected TechnicManager _technicManager;
     protected bool _canCook;

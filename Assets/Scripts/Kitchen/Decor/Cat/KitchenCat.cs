@@ -18,6 +18,7 @@ public class KitchenCat : DecorHolder, IBindable<KitchenData> {
             return;
 
         _animator.SetTrigger("isPet");
+        _eyes.ChangeState(false);
         FatigueManager.Instance.ChangeFatigue(-_fatigueDecreaseCoef);
         _data.Pet();
     }
@@ -37,5 +38,9 @@ public class KitchenCat : DecorHolder, IBindable<KitchenData> {
 
     private void UpdateEyes() {
         _eyes.UpdateScale(_data);
+    }
+
+    public void EnableEyes() {
+        _eyes.ChangeState(true);
     }
 }

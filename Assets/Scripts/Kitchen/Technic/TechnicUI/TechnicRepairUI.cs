@@ -28,7 +28,6 @@ public class TechnicRepairUI : MonoBehaviour, IUpgradeable<KitchenUpgradeData>, 
     }
 
     public void StartRepair() {
-        MoneyManager.Instance.ChangeMoney(-_nowTechnicHolder.Technic.PriceRepair);
         _nowTechnicHolder.StartRepair();
         ChangeState(false);
     }
