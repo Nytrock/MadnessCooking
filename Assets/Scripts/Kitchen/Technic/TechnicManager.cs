@@ -71,10 +71,8 @@ public class TechnicManager : SaveableItemManager<Technic, KitchenData>, IUpgrad
         if (isFileEmpty)
             data.TechnicHolders = new TechnicHolderData[_holders.Length];
 
-        for (int i = 0; i < data.TechnicHolders.Length; i++) {
+        for (int i = 0; i < data.TechnicHolders.Length; i++)
             _holders[i].Bind(data, i, isFileEmpty);
-            _holders[i].SetRepairUI(_UI);
-        }
     }
 
     public void BindUpgrade(KitchenUpgradeData upgradeData) {

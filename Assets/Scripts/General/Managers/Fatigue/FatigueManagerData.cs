@@ -3,20 +3,22 @@ using UnityEngine;
 
 [Serializable]
 public class FatigueManagerData {
-    [SerializeField] private float _fatigue;
+    [SerializeField] private float _fatigueNow;
+    [SerializeField] private float _fatigueMax;
 
-    public float Fatigue => _fatigue;
+    public float FatigueNow => _fatigueNow;
 
-    public FatigueManagerData() {
-        _fatigue = 0;
+    public FatigueManagerData(float fatigueMax, float fatigueDefault) {
+        _fatigueMax = fatigueMax;
+        _fatigueNow = Mathf.Clamp(fatigueDefault, 0, fatigueMax);
     }
 
-    public void ChangeFatigue(float count, float fatigueMax) {
-        _fatigue += count;
+    public void ChangeFatigue(float count) {
+        _fatigueNow += count;
 
-        if (_fatigue < 0)
-            _fatigue = 0;
-        if (_fatigue > fatigueMax)
-            _fatigue = fatigueMax;
+        if (_fatigueNow < 0)
+            _fatigueNow = 0;
+        if (_fatigueNow > _fatigueMax)
+            _fatigueNow = _fatigueMax;
     }
 }

@@ -3,7 +3,8 @@ using UnityEngine.UI;
 
 [RequireComponent(typeof(Image))]
 public class CircleSlider : MonoBehaviour {
-    private Image _slider;
+    protected Image _slider;
+    protected float _nowCoef;
     private float _maxValue = 1;
     private float _value = 0;
 
@@ -22,8 +23,8 @@ public class CircleSlider : MonoBehaviour {
         _maxValue = value;
     }
 
-    private void UpdateValue() {
-        float coef = Mathf.InverseLerp(0, _maxValue, _value);
-        _slider.fillAmount = coef;
+    protected virtual void UpdateValue() {
+        _nowCoef = Mathf.InverseLerp(0, _maxValue, _value);
+        _slider.fillAmount = _nowCoef;
     }
 }

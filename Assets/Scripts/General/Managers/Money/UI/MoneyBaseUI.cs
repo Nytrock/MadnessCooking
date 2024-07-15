@@ -12,7 +12,7 @@ public abstract class MoneyBaseUI : MonoBehaviour {
     }
 
     private void UpdateCount(int newCount) {
-        _countConverted = CountConverter.ConvertCount(newCount);
+        _countConverted = CountConverter.ConvertCount(newCount, true);
         _isCountAdded = newCount > _oldCount;
 
         StartAnimation();

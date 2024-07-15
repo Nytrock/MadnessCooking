@@ -56,14 +56,14 @@ public class TechnicHolderData {
     }
 
     private void StopRepair() {
-        RepairStoped?.Invoke();
         _isRepairing = false;
+        RepairStoped?.Invoke();
         _nowStrength = _technic.Strength;
     }
 
     private void StopCook() {
-        CookStoped?.Invoke();
         _isCooking = false;
+        CookStoped?.Invoke();
         _nowOrder.FinishCook();
         _nowOrder = null;
     }
@@ -72,8 +72,8 @@ public class TechnicHolderData {
         if (!_isCooking)
             return;
 
-        CookStoped?.Invoke();
         _isCooking = false;
+        CookStoped?.Invoke();
         _nowOrder = null;
     }
 }

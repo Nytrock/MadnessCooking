@@ -4,7 +4,7 @@ using UnityEngine;
 public class MoneyMainUI : MoneyBaseUI {
     [SerializeField] private MoneyCell[] _moneyCells = new MoneyCell[MONEY_CELLS_COUNT];
     [SerializeField, Min(0)] private float _cellsCheckDelay;
-    private const int MONEY_CELLS_COUNT = 5;
+    public const int MONEY_CELLS_COUNT = 5;
 
     protected override void StartAnimation() {
         StartCoroutine(CheckMoneyCells());

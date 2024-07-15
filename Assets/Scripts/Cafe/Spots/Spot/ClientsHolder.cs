@@ -12,6 +12,8 @@ public class ClientsHolder : MonoBehaviour {
     [SerializeField, Min(0)] private float _minTalk;
     [SerializeField, Min(0)] private float _maxTalk;
     [SerializeField, Min(0)] private float _clientWaitMultiplier = 0.75f;
+    [SerializeField, Min(0)] private float _minClientInterval = 0.5f;
+    [SerializeField, Min(0)] private float _maxClientInterval = 1.2f;
 
     [SerializeField] private SpotData _data;
     private CafeSpot _spot;
@@ -50,10 +52,10 @@ public class ClientsHolder : MonoBehaviour {
         RandomizeClients();
 
         foreach (var client in _clients) {
-            client.enabled = true;
+            client.ChangeEnable(true);
             if (client.transform.position.x == spawn) {
                 client.StartNewCycle();
-                yield return new WaitForSeconds(Random.Range(0.5f, 1.2f));
+                yield return new WaitForSeconds(Random.Range(_minClientInterval, _maxClientInterval));
             }
         }
     }

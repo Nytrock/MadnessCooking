@@ -185,4 +185,9 @@ public class Client : MonoBehaviour {
         ClientData.ChangeState(ClientState.Wait);
         ChangeState();
     }
+
+    public void ChangeEnable(bool value) {
+        enabled = value;
+        _skin.ChangeEnable(value);
+    }
 }

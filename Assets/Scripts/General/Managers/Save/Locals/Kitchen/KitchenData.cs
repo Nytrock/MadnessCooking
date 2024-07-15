@@ -7,4 +7,5 @@ public class KitchenData : ISaveable {
     public IngredientStorageData KitchenStorage;
     public BuyableItemContainerData<Technic> TechnicManager;
     public TechnicHolderData[] TechnicHolders;
+    public KitchenCatData Cat;
 }

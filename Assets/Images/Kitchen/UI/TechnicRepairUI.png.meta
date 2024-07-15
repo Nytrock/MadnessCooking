@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: bd649e932f23d88419308a3c20b1b1cc
+guid: 6c0fcc5eb23bc3b428bd793964c4039a
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -45,7 +45,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 6.5
@@ -149,64 +149,43 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: OrderView
+      name: TechnicRepairUIMain
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 6
+        width: 5
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 2, y: 2, z: 2, w: 2}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2786ec978b08e9943924dca20fef40ff
+      internalID: 707848611
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TechnicRepairUISlider
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 25
-        height: 31
-      alignment: 9
-      pivot: {x: 0.48, y: 0.48387095}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f8b9c7f1559a1cc4a887ff5b8048c6d6
-      internalID: 365471756
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Order
-      rect:
-        serializedVersion: 2
-        x: 26
-        y: 27
-        width: 4
-        height: 4
+        width: 5
+        height: 5
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      pivot: {x: 0, y: 0}
+      border: {x: 2, y: 2, z: 2, w: 2}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 04ee0eea9c6473a4a9385ecfcb108566
-      internalID: -291461345
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: OrderViewHook
-      rect:
-        serializedVersion: 2
-        x: 23
-        y: 22
-        width: 2
-        height: 2
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a350068de4a9f1b4c981058bedcd835b
-      internalID: -1316697330
+      spriteID: 4d3b3c7a5b5e5804f9198133159c1d5b
+      internalID: 1804262056
       vertices: []
       indices: 
       edges: []
@@ -224,10 +203,9 @@ TextureImporter:
     nameFileIdTable:
       Background: 1901407923
       Lamp: 1955946697
-      Order: -291461345
-      OrderView: 365471756
-      OrderViewHook: -1316697330
       Pot: 470648381
+      TechnicRepairUIMain: 707848611
+      TechnicRepairUISlider: 1804262056
       Window: -805373322
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0

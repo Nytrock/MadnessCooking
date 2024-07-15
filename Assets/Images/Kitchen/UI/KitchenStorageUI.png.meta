@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: bd649e932f23d88419308a3c20b1b1cc
+guid: 33eaaaabf61eea940ab7285fd7a05841
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -45,7 +45,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 6.5
@@ -149,64 +149,85 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: OrderView
+      name: KitchenBoxUI
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 6
+        width: 5
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 2, y: 2, z: 2, w: 2}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43327bf81970e324fb51271f472d4d5f
+      internalID: -1951894206
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KitchenBoxIngredientUI
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 8
+        width: 3
+        height: 3
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 1, y: 1, z: 1, w: 1}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3f6dedb40e8200149934221bd228376d
+      internalID: 55205767
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KitchenFridgeUI
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 25
-        height: 31
-      alignment: 9
-      pivot: {x: 0.48, y: 0.48387095}
-      border: {x: 0, y: 0, z: 0, w: 0}
+        width: 5
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 2, y: 2, z: 2, w: 2}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f8b9c7f1559a1cc4a887ff5b8048c6d6
-      internalID: 365471756
+      spriteID: a7ef4fefe72b2144c9f82b9e9329ac66
+      internalID: 1579028089
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Order
+      name: KitchenFridgeIngredientUI
       rect:
         serializedVersion: 2
-        x: 26
-        y: 27
-        width: 4
-        height: 4
+        x: 6
+        y: 2
+        width: 3
+        height: 3
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      pivot: {x: 0, y: 0}
+      border: {x: 1, y: 1, z: 1, w: 1}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 04ee0eea9c6473a4a9385ecfcb108566
-      internalID: -291461345
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: OrderViewHook
-      rect:
-        serializedVersion: 2
-        x: 23
-        y: 22
-        width: 2
-        height: 2
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a350068de4a9f1b4c981058bedcd835b
-      internalID: -1316697330
+      spriteID: 0471feef1d73a864c80c9e0215666155
+      internalID: -1452549940
       vertices: []
       indices: 
       edges: []
@@ -223,10 +244,11 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       Background: 1901407923
+      KitchenBoxIngredientUI: 55205767
+      KitchenBoxUI: -1951894206
+      KitchenFridgeIngredientUI: -1452549940
+      KitchenFridgeUI: 1579028089
       Lamp: 1955946697
-      Order: -291461345
-      OrderView: 365471756
-      OrderViewHook: -1316697330
       Pot: 470648381
       Window: -805373322
   mipmapLimitGroupName: 

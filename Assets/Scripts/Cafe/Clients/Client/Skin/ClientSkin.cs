@@ -83,4 +83,8 @@ public class ClientSkin : MonoBehaviour {
     public void ChangeWalkState(bool isWalk) {
         _animator.SetBool("isWalk", isWalk);
     }
+
+    public void ChangeEnable(bool value) {
+        _animator.enabled = value;
+    }
 }

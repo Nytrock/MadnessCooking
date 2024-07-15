@@ -10,7 +10,7 @@ public class ClientsPool : Pool<Client> {
         else
             client = _pool.Dequeue();
         client.gameObject.SetActive(true);
-        client.enabled = false;
+        client.ChangeEnable(false);
         return client;
     }
 

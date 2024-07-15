@@ -433,6 +433,17 @@ MonoBehaviour:
   _minTalk: 2
   _maxTalk: 5
   _clientWaitMultiplier: 0.75
+  _minClientInterval: 0.5
+  _maxClientInterval: 1.2
+  _data:
+    _haveClients: 0
+    _groupState: 0
+    _waitTime: 0
+    _nowTime: 0
+    _talkIndex: 0
+    _moneyCount: 0
+    _seatsCount: 0
+    _clients: []
 --- !u!1 &4195171861685878547
 GameObject:
   m_ObjectHideFlags: 0

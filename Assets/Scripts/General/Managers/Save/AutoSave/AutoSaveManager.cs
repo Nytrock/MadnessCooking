@@ -1,11 +1,11 @@
 using UnityEngine;
 
 [RequireComponent(typeof(SaveManager))]
-public class AutoSaveManager : MonoBehaviour, IBindable<GeneralData> {
+public class AutoSaveManager : MonoBehaviour {
     [SerializeField, Min(1)] private int _needAutoSaveMinutes;
     [SerializeField] private AutoSaveUI _UI;
     private SaveManager _saveManager;
-    private AutoSaveManagerData _data;
+    private float _nowTime;
 
     private float _needAutoSaveTime;
     private bool _isSaving;
@@ -20,8 +20,8 @@ public class AutoSaveManager : MonoBehaviour, IBindable<GeneralData> {
         if (_isSaving)
             return;
 
-        if (_data.AutoSaveNowTime < _needAutoSaveTime)
-            _data.AddTime();
+        if (_nowTime < _needAutoSaveTime)
+            _nowTime += Time.deltaTime;
         else
             StartAutoSave();
     }
@@ -35,16 +35,10 @@ public class AutoSaveManager : MonoBehaviour, IBindable<GeneralData> {
     }
 
     private void EndAutoSave() {
-        _data.ResetTime();
+        _nowTime = 0;
         _isSaving = false;
 
         if (_UI != null)
             _UI.StopSaveAnimation();
-    }
-
-    public void Bind(GeneralData data, bool isFileEmpty) {
-        if (isFileEmpty)
-            data.AutoSaveManager = new();
-        _data = data.AutoSaveManager;
     }
 }

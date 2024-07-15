@@ -2,15 +2,18 @@ using System;
 using System.Linq;
 using UnityEngine;
 
+[RequireComponent(typeof(Animator))]
 public class FarmCar : IngredientStorage<FarmData> {
-    [SerializeField] private Animator _animator;
     [SerializeField] private UpgradeManager _upgradeManager;
 
     [Header("Upgrades")]
     [SerializeField] private CountUpgrade[] _sizeUpgrades;
 
+    private Animator _animator;
+
     private void Awake() {
         _upgradeManager.ItemAdded += CheckSizeChanged;
+        _animator = GetComponent<Animator>();
     }
 
     public void CheckSizeChanged(BaseUpgrade upgrade) {

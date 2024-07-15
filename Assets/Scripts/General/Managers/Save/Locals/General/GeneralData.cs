@@ -11,5 +11,4 @@ public class GeneralData : ISaveable {
     public LightManagerData LightManager;
     public FatigueManagerData FatigueManager;
     public LocationManagerData LocationManager;
-    public AutoSaveManagerData AutoSaveManager;
 }

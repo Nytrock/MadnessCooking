@@ -4,6 +4,7 @@ using UnityEngine;
 public class TechnicHolder : MonoBehaviour {
     [SerializeField] private Technic _technic;
     [SerializeField] private TechnicHolderUI _UI;
+    [SerializeField] private TechnicHolderUIActivator _UIActivator;
     [SerializeField] private Transform _UITarget;
 
     public TechnicHolderData Data { get; private set; }
@@ -15,6 +16,7 @@ public class TechnicHolder : MonoBehaviour {
 
     private void Awake() {
         _renderer = GetComponent<TechnicHolderRenderer>();
+        _UIActivator.SetHolder(this);
     }
 
     private void Update() {
@@ -70,9 +72,5 @@ public class TechnicHolder : MonoBehaviour {
     public bool Repairable() {
         return Data.NowStrength != _technic.Strength &&
             MoneyManager.Instance.MoneyCount >= _technic.PriceRepair;
-    }
-
-    public void SetRepairUI(TechnicRepairUI repairUI) {
-        _UI.SetRepairUI(repairUI, this);
     }
 }

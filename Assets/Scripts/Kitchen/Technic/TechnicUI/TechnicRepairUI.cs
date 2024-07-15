@@ -1,8 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TechnicRepairUI : MonoBehaviour, IUpgradeable<KitchenUpgradeData> {
-    [SerializeField] private LocationManager _locationManager;
+public class TechnicRepairUI : MonoBehaviour, IUpgradeable<KitchenUpgradeData>, IActivable {
     [SerializeField] private Transform _targetPoint;
     [SerializeField] private GameObject _panel;
     [SerializeField] private Camera _camera;
@@ -14,13 +13,8 @@ public class TechnicRepairUI : MonoBehaviour, IUpgradeable<KitchenUpgradeData> {
     [SerializeField] private Slider _strengthSlider;
     private KitchenUpgradeData _upgradeData;
 
-    private void Awake() {
-        _locationManager.LocationChanged += delegate { ChangeState(false); };
-    }
-
     private void Start() {
         ChangeState(false);
-        ChangeStrengthShowState();
     }
 
     public void OpenTechnic(TechnicHolder technicHolder) {
@@ -39,10 +33,19 @@ public class TechnicRepairUI : MonoBehaviour, IUpgradeable<KitchenUpgradeData> {
         ChangeState(false);
     }
 
-    private void ChangeState(bool newState) {
+    public void ChangeState(bool newState) {
         _panel.SetActive(newState);
 
         if (newState)
+            UpdateInfo();
+        else
+            _nowTechnicHolder = null;
+    }
+
+    public void ChangeState() {
+        _panel.SetActive(!_panel.activeSelf);
+
+        if (_panel.activeSelf)
             UpdateInfo();
         else
             _nowTechnicHolder = null;
@@ -59,6 +62,7 @@ public class TechnicRepairUI : MonoBehaviour, IUpgradeable<KitchenUpgradeData> {
 
     public void BindUpgrade(KitchenUpgradeData upgradeData) {
         _upgradeData = upgradeData;
+        ChangeStrengthShowState();
     }
 
     public void CheckAddedUpgrade(BaseUpgrade upgrade) {
