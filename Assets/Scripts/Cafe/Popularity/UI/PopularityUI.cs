@@ -31,5 +31,6 @@ public class PopularityUI : MonoBehaviour {
             return;
 
         _progress.value = xp;
+        _additionalUI.ChangeCriticWaitText(_popularityManager.CheckLevelWaitCritic());
     }
 }

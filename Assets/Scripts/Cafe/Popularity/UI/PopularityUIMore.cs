@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class PopularityUIMore : MonoBehaviour {
     [SerializeField] private GameObject _panel;
+    [SerializeField] private GameObject _criticWaitText;
     [SerializeField] private TextMeshProUGUI _descriptionText;
     [SerializeField] private TextMeshProUGUI _singleChanceText;
     [SerializeField] private TextMeshProUGUI _doubleChanceText;
@@ -23,5 +24,9 @@ public class PopularityUIMore : MonoBehaviour {
         _doubleChanceText.text = (level.DoubleChance / 10.0).ToString() + "%";
         _tripleChanceText.text = (level.TripleChance / 10.0).ToString() + "%";
         _quarterChanceText.text = (level.QuarterChance / 10.0).ToString() + "%";
+    }
+
+    public void ChangeCriticWaitText(bool newState) {
+        _criticWaitText.SetActive(newState);
     }
 }

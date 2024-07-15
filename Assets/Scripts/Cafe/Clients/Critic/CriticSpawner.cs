@@ -5,18 +5,14 @@ using Random = UnityEngine.Random;
 
 public class CriticSpawner : MonoBehaviour, IBindable<CafeData> {
     [SerializeField] private TimeManager _timeManager;
-    [SerializeField] private PopularityCalculator _popularityCalculator;
+    [SerializeField] private PopularityManager _popularityManager;
     [SerializeField] private ClientsSpawner _clientSpawner;
     [SerializeField] private CriticUI _criticUI;
-    [SerializeField, Min(0)] private float[] _needPopularity;
 
     private CriticSpawnerData _data;
-    private int _nextPopularityIndex = 0;
-    private PopularityManager _popularityManager;
 
 
     private void Awake() {
-        _popularityManager = _popularityCalculator.GetComponent<PopularityManager>();
         _timeManager.DaytimeChanged += CheckDaytime;
     }
 
@@ -25,7 +21,7 @@ public class CriticSpawner : MonoBehaviour, IBindable<CafeData> {
             WaitFailure();
 
         if (daytime == Daytime.Morning)
-            if (_needPopularity[_nextPopularityIndex] <= _popularityCalculator.GetPopularity())
+            if (_popularityManager.CheckLevelWaitCritic())
                 ActivateCriticWait();
     }
 
@@ -53,14 +49,13 @@ public class CriticSpawner : MonoBehaviour, IBindable<CafeData> {
 
     public void WaitSuccess() {
         DisableCriticWait();
-        _nextPopularityIndex++;
         _popularityManager.NextLevel();
         _criticUI.SetMessage(CriticMessageType.Success);
     }
 
     public void WaitFailure() {
         DisableCriticWait();
-        _popularityManager.PreviousLevel();
+        _popularityManager.CriticFailure();
         _criticUI.SetMessage(CriticMessageType.Failure);
     }
 

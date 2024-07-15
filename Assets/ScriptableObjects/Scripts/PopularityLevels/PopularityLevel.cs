@@ -1,12 +1,10 @@
 using System;
 using UnityEngine;
 
-[Serializable]
-public class PopularityLevel {
+[CreateAssetMenu(menuName = nameof(PopularityLevel))]
+public class PopularityLevel : ScriptableObject {
     [SerializeField, Min(1)] private int _needXp;
     [SerializeField, Min(1)] private float _popularityMultiplier = 1;
-    [SerializeField] private string _name;
-    [TextArea, SerializeField] private string _description;
 
     [Header("ClientsChances")]
     [SerializeField, Range(0, 1000)] private int _singleChance;
@@ -16,8 +14,8 @@ public class PopularityLevel {
 
     public int NeedXp => _needXp;
     public float PopularityMultiplier => _popularityMultiplier;
-    public string Name => _name;
-    public string Description => _description;
+    public string Name => "Popularity" + name + ".Name";
+    public string Description => "Popularity" + name + ".Description";
     public int SingleChance => _singleChance;
     public int DoubleChance => _doubleChance;
     public int TripleChance => _tripleChance;
