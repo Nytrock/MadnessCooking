@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
@@ -7,7 +8,7 @@ public class IngredientStorageData {
     [SerializeField] private int _maxSpace;
     [SerializeField] private int _nowSpace;
 
-    public BuyableItemCountList<Ingredient> Ingredients => _ingredients;
+    public IEnumerable<BuyableItemCount<Ingredient>> Ingredients => _ingredients.GetItems();
     public int NowSpace => _nowSpace;
     public int MaxSpace => _maxSpace;
     public int LeftSpace => _maxSpace - _nowSpace;
@@ -38,5 +39,17 @@ public class IngredientStorageData {
 
     public void UpdateMaxSpace(CountUpgrade upgrade) {
         _maxSpace = upgrade.Count;
+    }
+
+    public void AddIngredient(BuyableItemCount<Ingredient> puttingCount) {
+        _ingredients.Add(puttingCount);
+    }
+
+    public bool ContainsCount(BuyableItemCount<Ingredient> count) {
+        return _ingredients.ContainsCount(count);
+    }
+
+    public void RemoveIngredient(BuyableItemCount<Ingredient> count) {
+        _ingredients.Remove(count);
     }
 }

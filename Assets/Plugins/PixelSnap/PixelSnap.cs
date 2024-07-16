@@ -1,33 +1,27 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
 
-public class PixelSnap : EditorWindow
-{
+public class PixelSnap : EditorWindow {
     [MenuItem("Window/Pixel Snap")]
-    public static void ShowWindow()
-    {
+    public static void ShowWindow() {
         EditorWindow ew = EditorWindow.GetWindow(typeof(PixelSnap));
         ew.minSize = new Vector2(200, 116);
         ew.maxSize = new Vector2(200, 116);
     }
 
-    private float pixelsPerUnit = 32;
-    private float gridSize = 16;
+    private float pixelsPerUnit = 6.5f;
+    private float gridSize = 1;
 
     private bool autoSnap = false;
     private float unitScale;
     private Transform[] trans;
 
-    public void OnEnable()
-    {
+    public void OnEnable() {
         unitScale = 1 / pixelsPerUnit;
         trans = Selection.transforms;
     }
 
-    public void OnGUI()
-    {
+    public void OnGUI() {
         EditorGUILayout.BeginHorizontal();
         GUILayout.Label("Pixels Per Unit : ");
         pixelsPerUnit = EditorGUILayout.FloatField(pixelsPerUnit);
@@ -62,10 +56,8 @@ public class PixelSnap : EditorWindow
         EditorGUI.EndDisabledGroup();
     }
 
-    private void Update()
-    {
-        if (Selection.transforms != trans)
-        {
+    private void Update() {
+        if (Selection.transforms != trans) {
             int len = trans.Length;
             trans = Selection.transforms;
             if (trans.Length != len) Repaint();
@@ -77,18 +69,14 @@ public class PixelSnap : EditorWindow
         SnapAllToGrid();
     }
 
-    void SnapAllToGrid()
-    {
+    void SnapAllToGrid() {
         SnapXToGrid();
         SnapYToGrid();
     }
 
-    void SnapXToGrid()
-    {
-        foreach (Transform t in trans)
-        {
-            if (t.gameObject.activeInHierarchy)
-            {
+    void SnapXToGrid() {
+        foreach (Transform t in trans) {
+            if (t.gameObject.activeInHierarchy) {
                 Vector3 pos = t.position;
                 float newX = SnapToGrid(pos.x);
                 t.position = new Vector2(newX, pos.y);
@@ -96,12 +84,9 @@ public class PixelSnap : EditorWindow
         }
     }
 
-    void SnapYToGrid()
-    {
-        foreach (Transform t in trans)
-        {
-            if (t.gameObject.activeInHierarchy)
-            {
+    void SnapYToGrid() {
+        foreach (Transform t in trans) {
+            if (t.gameObject.activeInHierarchy) {
                 Vector3 pos = t.position;
                 float newY = SnapToGrid(pos.y);
                 t.position = new Vector2(pos.x, newY);
@@ -109,8 +94,7 @@ public class PixelSnap : EditorWindow
         }
     }
 
-    float SnapToGrid(float value)
-    {
+    float SnapToGrid(float value) {
         float scale = gridSize * unitScale;
         float firstPass = Mathf.Round(value / scale) * scale;
         float newValue = Mathf.Round(firstPass / unitScale) * unitScale;

@@ -47,13 +47,14 @@ public class PopularityManager : MonoBehaviour, IBindable<GeneralData> {
         _data.AddXp(xp);
 
         if (_data.Xp >= _nowLevel.NeedXp && !_data.IsMaxLevel) {
-            if ((_data.Level + 1) % 5 == 0) {
-                _data.RemoveXp(_data.Xp - _nowLevel.NeedXp);
-            } else {
-                while (_data.Xp >= _nowLevel.NeedXp && !_data.IsMaxLevel) {
-                    _data.RemoveXp(_nowLevel.NeedXp);
-                    NextLevel();
+            while (_data.Xp >= _nowLevel.NeedXp && !_data.IsMaxLevel) {
+                if ((_data.Level + 1) % 5 == 0) {
+                    _data.RemoveXp(_data.Xp - _nowLevel.NeedXp);
+                    break;
                 }
+
+                _data.RemoveXp(_nowLevel.NeedXp);
+                NextLevel();
             }
         }
         XpChanged?.Invoke(_data.Xp);

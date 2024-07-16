@@ -2,14 +2,13 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class IngredientStorage<TData> : MonoBehaviour, IBindable<TData>
-    where TData : ISaveable {
-
+public abstract class IngredientStorage : MonoBehaviour {
     [SerializeField] protected int _defaultMaxSpace = 100;
 
     public IngredientStorageData Data { get; protected set; }
 
-    public event Action<BuyableItemCount<Ingredient>> IngredientAdded;
+    public event Action<BuyableItemCount<Ingredient>> IngredientCountAdded;
+    public event Action<BuyableItemCount<Ingredient>> IngredientCountRemoved;
 
     public void PutIngredients(IEnumerable<BuyableItemCount<Ingredient>> puttingCountList) {
         foreach (var count in puttingCountList)
@@ -25,25 +24,24 @@ public abstract class IngredientStorage<TData> : MonoBehaviour, IBindable<TData>
             puttingCount = new(ingredient, Data.LeftSpace);
         }
 
-        int oldSize = Data.Ingredients.Size;
-        Data.Ingredients.Add(puttingCount);
+        Data.AddIngredient(puttingCount);
         Data.AddCount(puttingCount.Count);
-        if (Data.Ingredients.Size != oldSize)
-            IngredientAdded?.Invoke(puttingCount);
+        InvokeIngredientCountAdded(puttingCount);
         return remainCount;
     }
 
     public virtual void RemoveIngredients(IEnumerable<BuyableItemCount<Ingredient>> ingredients) {
-        foreach (var count in ingredients)
-            Data.Ingredients.Remove(count);
+        foreach (var count in ingredients) {
+            Data.RemoveIngredient(count);
+            IngredientCountRemoved?.Invoke(count);
+        }
     }
 
     public bool HaveCount(BuyableItemCount<Ingredient> count) {
-        return Data.Ingredients.ContainsCount(count);
+        return Data.ContainsCount(count);
     }
 
-    public virtual void Bind(TData data, bool isFileEmpty) {
-        foreach (var ingredientCount in Data.Ingredients)
-            IngredientAdded?.Invoke(ingredientCount);
+    protected void InvokeIngredientCountAdded(BuyableItemCount<Ingredient> count) {
+        IngredientCountAdded?.Invoke(count);
     }
 }

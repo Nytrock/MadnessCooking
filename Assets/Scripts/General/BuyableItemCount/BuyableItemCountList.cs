@@ -21,21 +21,20 @@ public class BuyableItemCountList<TItem>
         UpdateAvailableItems();
     }
 
-    public void Extend(BuyableItemCountList<TItem> itemCountList) {
-        foreach (var ingredientCount in itemCountList)
-            Add(ingredientCount);
-    }
-
     public void Remove(BuyableItemCount<TItem> itemCount) {
         if (!ContainsItem(itemCount))
             return;
 
         int index = IndexOf(itemCount);
         _itemCounts[index].ChangeCount(-itemCount.Count);
-        if (_itemCounts[index].Count == 0)
+        if (_itemCounts[index].Count <= 0)
             _itemCounts.RemoveAt(index);
 
         UpdateAvailableItems();
+    }
+
+    public void Remove(TItem item, int count) {
+        Remove(new(item, count));
     }
 
     private void UpdateAvailableItems() {
@@ -56,10 +55,6 @@ public class BuyableItemCountList<TItem>
         return _availableItems.IndexOf(itemCount.Item);
     }
 
-    public BuyableItemCount<TItem> Get(int index) {
-        return _itemCounts[index];
-    }
-
     public void Clear() {
         _itemCounts.Clear();
         _availableItems.Clear();
@@ -73,5 +68,12 @@ public class BuyableItemCountList<TItem>
     public IEnumerable<BuyableItemCount<TItem>> GetItems() {
         foreach (var count in _itemCounts)
             yield return count;
+    }
+
+    public int GetItemCount(TItem item) {
+        foreach (var count in _itemCounts)
+            if (count.Item == item)
+                return count.Count;
+        return 0;
     }
 }

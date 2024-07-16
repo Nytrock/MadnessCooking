@@ -35,9 +35,11 @@ public class CarWaitManagerData {
         _carState = CarState.Sent;
     }
 
-    public void SetIngredientsSended(BuyableItemCountList<Ingredient> ingredients) {
+    public void SetIngredientsSended(IEnumerable<BuyableItemCount<Ingredient>> ingredients) {
         _ingredientsSended.Clear();
-        _ingredientsSended.Extend(ingredients);
+
+        foreach (var ingredient in ingredients)
+            _ingredientsSended.Add(ingredient);
     }
 
     public void StartReturn() {

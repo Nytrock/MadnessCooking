@@ -5,14 +5,14 @@ using UnityEngine;
 public class IngredientStorageUI<TData> : MonoBehaviour, IActivable
     where TData : ISaveable {
 
-    [SerializeField] protected IngredientStorage<TData> _storage;
+    [SerializeField] protected SaveableIngredientStorage<TData> _storage;
     [SerializeField] protected GameObject _panel;
     [SerializeField] protected IngredientStorageButtonPool _buttonPool;
     [SerializeField] private TextMeshProUGUI _sizeText;
     protected List<IngredientStorageButton> _buttons = new();
 
     protected virtual void Awake() {
-        _storage.IngredientAdded += AddButton;
+        _storage.IngredientCountAdded += CheckChangedIngredient;
     }
 
     private void Start() {
@@ -31,7 +31,7 @@ public class IngredientStorageUI<TData> : MonoBehaviour, IActivable
         _panel.SetActive(newState);
     }
 
-    private void AddButton(BuyableItemCount<Ingredient> count) {
+    private void CheckChangedIngredient(BuyableItemCount<Ingredient> count) {
         IngredientStorageButton button = _buttonPool.GetObject(count);
         _buttons.Add(button);
     }

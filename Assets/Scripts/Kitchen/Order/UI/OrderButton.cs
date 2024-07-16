@@ -39,11 +39,19 @@ public class OrderButton : MonoBehaviour {
         _cookButton.interactable = _recipe.CanCook;
     }
 
-    public void UpdateRecipe() {
+    public void UpdateRecipeIngredients(BuyableItemCount<Ingredient> count) {
         if (Order == null) return;
         if (Order.IsCooking || Order.IsFinished) return;
 
-        _recipe.SetupRecipe(Order.Food);
+        _recipe.UpdateRecipeIngredients(count);
+        _cookButton.interactable = _recipe.CanCook;
+    }
+
+    public void UpdateRecipeTechnic() {
+        if (Order == null) return;
+        if (Order.IsCooking || Order.IsFinished) return;
+
+        _recipe.UpdateRecipeTechnic();
         _cookButton.interactable = _recipe.CanCook;
     }
 
@@ -56,8 +64,8 @@ public class OrderButton : MonoBehaviour {
     public void Setup(TechnicManager technicManager, KitchenStorage kitchenStorage) {
         _cookSlider = GetComponent<OrderCookingSlider>();
 
-        kitchenStorage.IngredientsChanged += UpdateRecipe;
-        technicManager.TechnicChanged += UpdateRecipe;
+        kitchenStorage.IngredientCountAdded += UpdateRecipeIngredients;
+        technicManager.TechnicChanged += UpdateRecipeTechnic;
 
         _cookSlider.SetTechnicManager(technicManager);
         _recipe.Setup(kitchenStorage, technicManager);

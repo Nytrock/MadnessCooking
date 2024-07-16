@@ -3,7 +3,7 @@ using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
-public class FarmCar : IngredientStorage<FarmData> {
+public class FarmCar : SaveableIngredientStorage<FarmData> {
     [SerializeField] private UpgradeManager _upgradeManager;
 
     [Header("Upgrades")]

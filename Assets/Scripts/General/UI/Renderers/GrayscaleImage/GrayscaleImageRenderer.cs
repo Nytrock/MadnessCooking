@@ -17,7 +17,7 @@ public class GrayscaleImageRenderer {
         SetImage(sprite);
     }
 
-    private void SetGrayscaleVisibility(bool isGrayscale) {
+    public void SetGrayscaleVisibility(bool isGrayscale) {
         if (isGrayscale)
             _image.material = _grayscaleMaterial;
         else
