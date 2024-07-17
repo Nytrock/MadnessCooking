@@ -35,7 +35,7 @@ public abstract class IngredientStorageRenderer : MonoBehaviour {
     }
 
     private void CheckAddedIngredient(BuyableItemCount<Ingredient> addedCount) {
-        _ingredients.Add(addedCount);
+        _ingredients.Add(addedCount.Copy());
         int nowCount = _ingredients.GetItemCount(addedCount.Item);
         int addedRenderersCount = nowCount / _needCount;
 

@@ -4,7 +4,7 @@ public class FoodShopRecipe : FoodRecipe<FoodShopRecipePart> {
 
     [SerializeField] protected IngredientsManager _ingredientManager;
 
-    protected override void SetupIngredients(ref bool canCook) {
+    protected override void SetupIngredients() {
         int index = 0;
         foreach (var ingredientCount in _food.Ingredients) {
             bool haveCount = _ingredientManager.HaveIngredient(ingredientCount.Item);
@@ -14,10 +14,10 @@ public class FoodShopRecipe : FoodRecipe<FoodShopRecipePart> {
         }
     }
 
-    protected override void SetupTechnic(ref bool canCook) {
+    protected override void SetupTechnic() {
         bool haveTechnic = _technicManager.HaveTechnic(_food.TypeTechnic);
         _canCook &= haveTechnic;
-        _techicIcon.Setup(_food.TypeTechnic.Icon, haveTechnic);
+        _techicIcon.SetTechnic(_food.TypeTechnic, haveTechnic);
     }
 
     public override void DisableParts() {

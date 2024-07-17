@@ -1,17 +1,12 @@
 public class OrderRecipe : FoodRecipe<OrderRecipePart> {
     private KitchenUpgradeData _upgradeData;
 
-    public void Setup(KitchenStorage kitchenStorage, TechnicManager technicManager) {
-        _kitchenStorage = kitchenStorage;
-        _technicManager = technicManager;
-    }
-
     public void SetupRecipe(Food food, KitchenUpgradeData data) {
         _upgradeData = data;
         SetupRecipe(food);
     }
 
-    protected override void SetupIngredients(ref bool canCook) {
+    protected override void SetupIngredients() {
         int index = 0;
         foreach (var count in _food.Ingredients) {
             if (count.Item == ConstIngredients.Instance.Spice && _upgradeData.IsAutoSpice) {
@@ -26,10 +21,10 @@ public class OrderRecipe : FoodRecipe<OrderRecipePart> {
         }
     }
 
-    protected override void SetupTechnic(ref bool canCook) {
+    protected override void SetupTechnic() {
         bool haveTechnic = _technicManager.HaveTechnic(_food.TypeTechnic);
         _canCook &= haveTechnic;
-        _techicIcon.Setup(_food.TypeTechnic.Icon, haveTechnic);
+        _techicIcon.SetTechnic(_food.TypeTechnic, !haveTechnic);
     }
 
     public override void DisableParts() {
@@ -47,9 +42,5 @@ public class OrderRecipe : FoodRecipe<OrderRecipePart> {
         }
     }
 
-    public void UpdateRecipeTechnic() {
-        bool haveTechnic = _technicManager.HaveTechnic(_food.TypeTechnic);
-        _canCook &= haveTechnic;
-        _techicIcon.SetGrayscaleVisibility(!haveTechnic);
-    }
+    public void UpdateRecipeTechnic() => SetupTechnic();
 }

@@ -9,6 +9,7 @@ public class InternetDownload : MonoBehaviour, IUpgradeable<OfficeUpgradeData> {
     [Header("Wait borders")]
     [SerializeField, Min(0)] private float _minWait;
     [SerializeField, Min(0)] private float _maxWait;
+    [SerializeField, Min(0)] private float[] _possibleProgress;
 
     [Header("Upgrades")]
     [SerializeField] private BaseUpgrade[] _speedUpgrades;
@@ -28,7 +29,8 @@ public class InternetDownload : MonoBehaviour, IUpgradeable<OfficeUpgradeData> {
             return;
 
         if (_nowProgress < _needProgress)
-            _nowProgress += Time.deltaTime * _upgradeData.InternetDownloadSpeed * Random.Range(0.1f, 5f);
+            _nowProgress += Time.deltaTime * _upgradeData.InternetDownloadSpeed *
+                _possibleProgress[Random.Range(0, _possibleProgress.Length)];
         else
             EndDownload();
         _downloadBar.value = _nowProgress;

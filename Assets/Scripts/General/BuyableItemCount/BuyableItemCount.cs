@@ -13,8 +13,8 @@ public class BuyableItemCount<TItem>
 
     public event Action<int> CountChanged;
 
-    public BuyableItemCount(TItem ingredient, int count) {
-        _item = ingredient;
+    public BuyableItemCount(TItem item, int count) {
+        _item = item;
         _count = count;
     }
 
@@ -24,5 +24,9 @@ public class BuyableItemCount<TItem>
         else
             _count += count;
         CountChanged?.Invoke(_count);
+    }
+
+    public BuyableItemCount<TItem> Copy() {
+        return new(_item, _count);
     }
 }

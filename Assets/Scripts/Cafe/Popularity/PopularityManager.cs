@@ -7,7 +7,6 @@ public class PopularityManager : MonoBehaviour, IBindable<GeneralData> {
 
     private PopularityLevel _nowLevel => _levels[_data.Level];
 
-    public int NowLevel => _data.Level;
     public bool IsMaxLevel => _data.IsMaxLevel;
 
     public event Action<PopularityLevel> LevelChanged;

@@ -3,9 +3,9 @@ using UnityEngine.UI;
 
 public class OrderCookingSlider : MonoBehaviour {
     [SerializeField] private Slider _cookingSlider;
+    [SerializeField] private TechnicManager _technicManager;
     private bool _isCooking;
 
-    private TechnicManager _technicManager;
     private TechnicHolderData _technicData;
 
     private void Update() {
@@ -21,10 +21,6 @@ public class OrderCookingSlider : MonoBehaviour {
 
         _cookingSlider.maxValue = order.Food.TimeToCook;
         _technicData = _technicManager.FindHolderByTechic(order.Food.TypeTechnic).Data;
-    }
-
-    public void SetTechnicManager(TechnicManager technicManager) {
-        _technicManager = technicManager;
     }
 
     private void EndCook() {

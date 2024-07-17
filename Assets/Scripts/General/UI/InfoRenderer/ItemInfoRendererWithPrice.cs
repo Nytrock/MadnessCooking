@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 
 [Serializable]
-public class ItemInfoRendererWithPrice : ItemInfoRenderer {
+public class ItemInfoRendererWithPrice : ItemInfoRendererWithDescription {
     [SerializeField] private TextMeshProUGUI _priceText;
 
     public void SetPrice(string buyNote, int price = -1) {

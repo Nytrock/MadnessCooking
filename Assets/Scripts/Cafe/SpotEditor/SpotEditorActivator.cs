@@ -1,14 +1,11 @@
 using UnityEngine;
 
-public class SpotEditorActivator : MonoBehaviour {
+public class SpotEditorActivator : ColliderActivator {
     [SerializeField] private ErrorMessageRenderer _errorRenderer;
     [SerializeField] private SpotEditor _spotEditor;
     [SerializeField] private CafeStateChanger _opener;
 
-    public void OnMouseDown() {
-        if (FatigueManager.Instance.IsTired)
-            return;
-
+    protected override void Press() {
         if (_opener.IsOpened)
             _errorRenderer.ShowError();
         else

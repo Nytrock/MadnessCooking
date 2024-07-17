@@ -1,28 +1,28 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
-[RequireComponent(typeof(OrderCookingSlider))]
 public class OrderButton : MonoBehaviour {
-    [SerializeField] private Image _icon;
-    [SerializeField] private TextMeshProUGUI _titleText;
+    [SerializeField] private TechnicManager _technicManager;
+    [SerializeField] private KitchenStorage _kitchenStorage;
+
+    [SerializeField] private ItemInfoRenderer _foodInfo;
     [SerializeField] private TextMeshProUGUI _tableIndexText;
-
-    [SerializeField] private GameObject _startButton;
-    [SerializeField] private GameObject _cookingSlider;
-    [SerializeField] private GameObject _finishText;
-
     [SerializeField] private OrderRecipe _recipe;
-    [SerializeField] private Button _cookButton;
 
-    private OrderCookingSlider _cookSlider;
+    [Header("States")]
+    [SerializeField] private OrderUIStartState _startState;
+    [SerializeField] private OrderUICookState _cookState;
+    [SerializeField] private OrderUIBaseState _finishState;
 
     public Order Order { get; private set; }
 
+    private void Awake() {
+        _kitchenStorage.IngredientCountAdded += UpdateRecipeIngredients;
+        _technicManager.TechnicChanged += UpdateRecipeTechnic;
+    }
+
     public void StartNewCycle() {
-        _cookingSlider.SetActive(false);
-        _startButton.SetActive(true);
-        _finishText.SetActive(false);
+        ChangeState(OrderUIState.Start);
         gameObject.SetActive(true);
     }
 
@@ -30,29 +30,29 @@ public class OrderButton : MonoBehaviour {
         StartNewCycle();
         Order = order;
         Order.OrderFinished += FinishCook;
+        _cookState.SetOrder(order);
 
-        _icon.sprite = Order.Food.Icon;
-        _titleText.text = Order.Food.Name;
+        _foodInfo.SetItemInfo(Order.Food);
         _tableIndexText.text = Order.TableIndex.ToString();
 
         _recipe.SetupRecipe(Order.Food, data);
-        _cookButton.interactable = _recipe.CanCook;
+        UpdateCookSlider();
     }
 
     public void UpdateRecipeIngredients(BuyableItemCount<Ingredient> count) {
-        if (Order == null) return;
-        if (Order.IsCooking || Order.IsFinished) return;
+        if (CheckOrderStarted())
+            return;
 
         _recipe.UpdateRecipeIngredients(count);
-        _cookButton.interactable = _recipe.CanCook;
+        UpdateCookSlider();
     }
 
     public void UpdateRecipeTechnic() {
-        if (Order == null) return;
-        if (Order.IsCooking || Order.IsFinished) return;
+        if (CheckOrderStarted())
+            return;
 
         _recipe.UpdateRecipeTechnic();
-        _cookButton.interactable = _recipe.CanCook;
+        UpdateCookSlider();
     }
 
     public void Disable() {
@@ -61,30 +61,35 @@ public class OrderButton : MonoBehaviour {
         gameObject.SetActive(false);
     }
 
-    public void Setup(TechnicManager technicManager, KitchenStorage kitchenStorage) {
-        _cookSlider = GetComponent<OrderCookingSlider>();
-
-        kitchenStorage.IngredientCountAdded += UpdateRecipeIngredients;
-        technicManager.TechnicChanged += UpdateRecipeTechnic;
-
-        _cookSlider.SetTechnicManager(technicManager);
-        _recipe.Setup(kitchenStorage, technicManager);
-    }
-
     public void Cook() {
-        _cookingSlider.SetActive(true);
-        _startButton.SetActive(false);
+        ChangeState(OrderUIState.Cook);
         _recipe.DisableParts();
-        _cookSlider.StartCook(Order);
         Order.StartCook();
     }
 
     public void FinishCook() {
-        _startButton.SetActive(false);
+        ChangeState(OrderUIState.Finish);
         _recipe.DisableParts();
-
-        _cookingSlider.SetActive(false);
-        _finishText.SetActive(true);
         Order = null;
+    }
+
+    private void UpdateCookSlider() {
+        _startState.UpdateCookButton(_recipe.CanCook);
+    }
+
+    private void ChangeState(OrderUIState newState) {
+        _startState.UpdateState(newState);
+        _cookState.UpdateState(newState);
+        _finishState.UpdateState(newState);
+    }
+
+    private bool CheckOrderStarted() {
+        if (Order == null)
+            return true;
+
+        if (Order.IsCooking || Order.IsFinished)
+            return true;
+
+        return false;
     }
 }

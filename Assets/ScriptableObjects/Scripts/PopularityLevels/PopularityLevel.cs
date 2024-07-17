@@ -3,6 +3,7 @@ using UnityEngine;
 
 [CreateAssetMenu(menuName = nameof(PopularityLevel))]
 public class PopularityLevel : ScriptableObject {
+    [SerializeField, Min(1)] private int _number;
     [SerializeField, Min(1)] private int _needXp;
     [SerializeField, Min(1)] private float _popularityMultiplier = 1;
 
@@ -12,6 +13,7 @@ public class PopularityLevel : ScriptableObject {
     [SerializeField, Range(0, 1000)] private int _tripleChance;
     [SerializeField, Range(0, 1000)] private int _quarterChance;
 
+    public int Number => _number;
     public int NeedXp => _needXp;
     public float PopularityMultiplier => _popularityMultiplier;
     public string Name => "Popularity" + name + ".Name";

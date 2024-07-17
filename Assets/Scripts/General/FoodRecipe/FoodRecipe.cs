@@ -2,7 +2,7 @@ using UnityEngine;
 
 public abstract class FoodRecipe<T> : MonoBehaviour {
     [SerializeField] protected T[] _recipeParts = new T[8];
-    [SerializeField] protected GrayscaleImageRenderer _techicIcon;
+    [SerializeField] protected FoodRecipeTechnic _techicIcon;
     [SerializeField] protected KitchenStorage _kitchenStorage;
     [SerializeField] protected TechnicManager _technicManager;
     protected bool _canCook;
@@ -15,11 +15,11 @@ public abstract class FoodRecipe<T> : MonoBehaviour {
         _canCook = true;
         _food = food;
 
-        SetupIngredients(ref _canCook);
-        SetupTechnic(ref _canCook);
+        SetupIngredients();
+        SetupTechnic();
     }
 
     public abstract void DisableParts();
-    protected abstract void SetupIngredients(ref bool canCook);
-    protected abstract void SetupTechnic(ref bool canCook);
+    protected abstract void SetupIngredients();
+    protected abstract void SetupTechnic();
 }
