@@ -14,7 +14,7 @@ public class KitchenCat : DecorHolder, IBindable<KitchenData> {
     }
 
     private void OnMouseDown() {
-        if (_data.IsPetted)
+        if (_data.IsPetted || FatigueManager.Instance.IsTired)
             return;
 
         _animator.SetTrigger("isPet");

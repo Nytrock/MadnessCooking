@@ -22,7 +22,7 @@ public class AutoSaveManager : MonoBehaviour {
 
         if (_nowTime < _needAutoSaveTime)
             _nowTime += Time.deltaTime;
-        else
+        else if (!FatigueManager.Instance.IsTired)
             StartAutoSave();
     }
 

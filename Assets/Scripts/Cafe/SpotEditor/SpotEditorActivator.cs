@@ -6,6 +6,9 @@ public class SpotEditorActivator : MonoBehaviour {
     [SerializeField] private CafeStateChanger _opener;
 
     public void OnMouseDown() {
+        if (FatigueManager.Instance.IsTired)
+            return;
+
         if (_opener.IsOpened)
             _errorRenderer.ShowError();
         else

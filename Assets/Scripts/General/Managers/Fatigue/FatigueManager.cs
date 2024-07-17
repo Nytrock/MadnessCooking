@@ -15,6 +15,7 @@ public class FatigueManager : Singleton<FatigueManager>, IBindable<GeneralData> 
 
     public float FatigueMax => _fatigueMax;
     public float FatigueNow => _data.FatigueNow;
+    public bool IsTired => _isTired;
 
     public event Action<bool> TiredChanged;
 
@@ -39,7 +40,8 @@ public class FatigueManager : Singleton<FatigueManager>, IBindable<GeneralData> 
     private void ChangeTiredState(bool isTired) {
         _isTired = isTired;
         TiredChanged?.Invoke(_isTired);
-        _timeManager.ChangeSleepState(_isTired);
+        if (!_isTired)
+            _timeManager.ChangeSleepState(false);
     }
 
     public void AddDecorBonus(Decor decor) {
@@ -48,7 +50,7 @@ public class FatigueManager : Singleton<FatigueManager>, IBindable<GeneralData> 
 
     public void Bind(GeneralData data, bool isFileEmpty) {
         if (isFileEmpty)
-            data.FatigueManager = new(_fatigueDefault, _fatigueMax);
+            data.FatigueManager = new(_fatigueMax, _fatigueDefault);
         _data = data.FatigueManager;
         LateStart();
     }

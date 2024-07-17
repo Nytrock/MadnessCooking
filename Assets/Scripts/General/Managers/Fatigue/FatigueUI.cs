@@ -16,6 +16,6 @@ public class FatigueUI : MonoBehaviour {
     }
 
     private void ChangeTiredAnimation(bool newState) {
-        _screenAnimator.SetBool("isSleep", newState);
+        _screenAnimator.SetBool("isTired", newState);
     }
 }

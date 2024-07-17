@@ -14,7 +14,7 @@ public abstract class ColliderActivator : MonoBehaviour {
     }
 
     private void OnMouseDown() {
-        if (_isHover)
+        if (_isHover || FatigueManager.Instance.IsTired)
             return;
 
         Press();
