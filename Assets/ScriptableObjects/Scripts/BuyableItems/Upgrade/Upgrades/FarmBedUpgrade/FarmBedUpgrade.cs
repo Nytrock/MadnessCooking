@@ -9,7 +9,8 @@ public class FarmBedUpgrade : BaseUpgrade {
     [SerializeField, Min(0)] private float _fatigueCoef;
     [SerializeField] private BedType[] _suitableBedTypes;
 
-    public int PriceAdd => _priceAdd;
+    public int PriceToAdd => _priceAdd;
     public float FatigueCoef => _fatigueCoef;
     public IEnumerable<BedType> SuitableBedTypes => _suitableBedTypes;
+    public override UpgradeType Type => UpgradeType.FarmBed;
 }

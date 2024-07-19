@@ -12,7 +12,7 @@ public abstract class IngredientStorageRenderer : MonoBehaviour {
 
     private void Awake() {
         _ingredientStorage.IngredientCountAdded += CheckAddedIngredient;
-        _ingredientStorage.IngredientCountAdded += CheckRemovedIngredient;
+        _ingredientStorage.IngredientCountRemoved += CheckRemovedIngredient;
         _availableIngredientRenderers = _ingredientsRenderers.ToList();
     }
 

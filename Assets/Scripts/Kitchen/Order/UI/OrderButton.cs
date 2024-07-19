@@ -5,7 +5,7 @@ public class OrderButton : MonoBehaviour {
     [SerializeField] private TechnicManager _technicManager;
     [SerializeField] private KitchenStorage _kitchenStorage;
 
-    [SerializeField] private ItemInfoRenderer _foodInfo;
+    [SerializeField] private ItemInfoRendererWithName _foodInfo;
     [SerializeField] private TextMeshProUGUI _tableIndexText;
     [SerializeField] private OrderRecipe _recipe;
 

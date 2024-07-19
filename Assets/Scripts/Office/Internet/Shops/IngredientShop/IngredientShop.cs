@@ -35,7 +35,7 @@ public class IngredientShop : BaseInstantShop<Ingredient, OfficeData>, IUpgradea
 
         BedType bedType = _bedTypesManager.GetBedWithIngredientType(ingredient.Type);
         bool isBedAvailable = _bedTypesManager.HaveBed(bedType);
-        return new GrayscaleImageData(bedType.Icon, isBedAvailable);
+        return new GrayscaleImageData(bedType.Icon, !isBedAvailable);
     }
 
     public override void Bind(OfficeData data, bool isFileEmpty) {

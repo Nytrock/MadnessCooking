@@ -5,6 +5,10 @@ using UnityEngine;
 public class CountRenderer : MonoBehaviour {
     private TextMeshProUGUI _countText;
 
+    private void Awake() {
+        GetCountText();
+    }
+
     private void GetCountText() {
         _countText = GetComponent<TextMeshProUGUI>();
     }

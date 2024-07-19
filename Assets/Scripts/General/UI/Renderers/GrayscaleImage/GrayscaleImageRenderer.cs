@@ -4,8 +4,8 @@ using UnityEngine.UI;
 
 [Serializable]
 public class GrayscaleImageRenderer {
-    [SerializeField] private Material _grayscaleMaterial;
     [SerializeField] private Image _image;
+    private Material _grayscaleMaterial;
 
     public void Setup(GrayscaleImageData data) {
         SetGrayscaleVisibility(data.IsGrayscale);
@@ -18,6 +18,9 @@ public class GrayscaleImageRenderer {
     }
 
     public void SetGrayscaleVisibility(bool isGrayscale) {
+        if (_grayscaleMaterial == null)
+            _grayscaleMaterial = MaterialManager.Instance.GrayscaleMaterial;
+
         if (isGrayscale)
             _image.material = _grayscaleMaterial;
         else

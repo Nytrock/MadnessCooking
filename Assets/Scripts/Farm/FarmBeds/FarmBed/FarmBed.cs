@@ -112,7 +112,7 @@ public class FarmBed : MonoBehaviour {
             return;
 
         int remainCount = _car.PutIngredientWithRemain(BedData.PlantedIngredient, BedData.Count);
-        FatigueManager.Instance.ChangeFatigue(BedData.PlantedIngredient.FatigueCount
+        FatigueManager.Instance.ChangeFatigue(BedData.PlantedIngredient.FatigueCoef
             * (BedData.Count - remainCount));
         BedData.SetCount(remainCount);
 

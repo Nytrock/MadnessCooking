@@ -7,7 +7,9 @@ public class BaseUpgrade : BuyableItem, IGraphable<BaseUpgrade> {
 
     [SerializeField] private BaseUpgrade[] _needUpgrades;
     [SerializeField] private BaseUpgrade[] _nextUpgrades;
+    [SerializeField] private UpgradeType _type;
 
     public IEnumerable<BaseUpgrade> NeedItems => _needUpgrades;
     public IEnumerable<BaseUpgrade> NextItems => _nextUpgrades;
+    public virtual UpgradeType Type => _type;
 }

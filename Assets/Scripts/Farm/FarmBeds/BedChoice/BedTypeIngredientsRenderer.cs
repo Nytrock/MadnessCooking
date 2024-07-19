@@ -8,7 +8,7 @@ public class BedTypeIngredientsRenderer : MonoBehaviour {
         int index = 0;
         foreach (var ingredient in _ingredientsManager.GetAllIngredientsOfBedType(bedType)) {
             bool isAvailable = _ingredientsManager.HaveIngredient(ingredient);
-            _ingredientImages[index].Setup(ingredient.Icon, isAvailable);
+            _ingredientImages[index].Setup(ingredient.Icon, !isAvailable);
             _ingredientImages[index].SetActive(true);
             index++;
         }

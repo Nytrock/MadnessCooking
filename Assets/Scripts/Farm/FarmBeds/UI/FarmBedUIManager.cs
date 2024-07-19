@@ -8,6 +8,7 @@ public class FarmBedUIManager : MonoBehaviour {
     [SerializeField] private Puncher _puncher;
     [SerializeField] private PestsRemoverUI _pestsRemoverUI;
     [SerializeField] private IngredientChoiceUI _ingredientChoice;
+    [SerializeField] private ConfirmPanel _confirmPanel;
 
     private FarmBed _farmBed;
     private BedTypeUI _nowUI;
@@ -82,12 +83,26 @@ public class FarmBedUIManager : MonoBehaviour {
         _farmBed.SendIngredients();
     }
 
-    public void ChangeBedType() {
+    public void ChangeBedTypeRequest() {
+        _confirmPanel.StartConfirm(ChangeBedType, "FarmBedUI.RemoveBedConfirm");
+    }
+
+    private void ChangeBedType(bool confirmed) {
+        if (!confirmed)
+            return;
+
         ChangeMode();
         _farmBed.ResetBedType();
     }
 
-    public void ChangeIngredient() {
+    public void ChangeIngredientRequest() {
+        _confirmPanel.StartConfirm(ChangeIngredient, "FarmBedUI.RemoveIngredientConfirm");
+    }
+
+    private void ChangeIngredient(bool confirmed) {
+        if (!confirmed)
+            return;
+
         ChangeMode();
         _farmBed.ResetIngredient();
         _ingredientChoice.ActivateIngredientChoice(_farmBed);
@@ -105,7 +120,7 @@ public class FarmBedUIManager : MonoBehaviour {
     }
 
     public void Fertilize() {
-        _puncher.SubtractReady();
+        _puncher.SubtractFertilizer();
         _farmBed.Fertilize();
     }
 

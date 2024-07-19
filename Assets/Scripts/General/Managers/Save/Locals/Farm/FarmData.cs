@@ -10,8 +10,7 @@ public class FarmData : ISaveable {
     public FarmShopData FarmShop;
     public HoldAddData FarmWell;
     public NeedHoldAddData Cow;
-    public ShitGeneratorData ShitGenerator;
-    public NeedHoldAddData Puncher;
+    public PuncherData Puncher;
     public NeedHoldAddData FlourMill;
     public ChickensData Chickens;
     public IngredientStorageData Car;

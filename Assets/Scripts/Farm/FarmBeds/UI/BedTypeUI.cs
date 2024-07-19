@@ -40,7 +40,7 @@ public class BedTypeUI : MonoBehaviour {
     }
 
     public void CheckFertilize() {
-        _fertilizeButton.interactable = _data.Puncher.ReadyCount > 0 &&
+        _fertilizeButton.interactable = _data.Puncher.FertilizerCount > 0 &&
             !_bedData.FertilizeBoost.IsEternal;
     }
 

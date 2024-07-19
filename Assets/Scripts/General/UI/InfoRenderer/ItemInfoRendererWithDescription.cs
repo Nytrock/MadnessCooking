@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 
 [Serializable]
-public class ItemInfoRendererWithDescription : ItemInfoRenderer {
+public class ItemInfoRendererWithDescription : ItemInfoRendererWithName {
     [SerializeField] private TextMeshProUGUI _descriptionText;
 
     public override void SetItemInfo(BuyableItem item) {

@@ -25,8 +25,9 @@ public class FarmBedUpgraderUI : ChoiceBuyWithCameraStopUI<FarmBedUpgrade> {
     }
 
     public override void SetChoice() {
-        base.SetChoice();
         FarmBedUpgrade upgrade = _choiceButtons[_chosedIndex].Item;
+        MoneyManager.Instance.ChangeMoney(upgrade.PriceToAdd);
+        FatigueManager.Instance.ChangeFatigue(upgrade.FatigueCoef);
         _changingBed.AddUpgrade(upgrade);
 
         int index = 0;

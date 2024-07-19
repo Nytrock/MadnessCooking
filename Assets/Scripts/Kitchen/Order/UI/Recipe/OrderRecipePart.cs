@@ -19,7 +19,7 @@ public class OrderRecipePart : FoodRecipePart {
         bool isMoneyEnough = MoneyManager.Instance.MoneyCount >= price;
 
         _countText.text = price.ToString() + "x";
-        _icon.Setup(_moneySprite, isMoneyEnough);
+        _icon.Setup(_moneySprite, !isMoneyEnough);
         _countTextRenderer.UpdateAvailable(isMoneyEnough);
     }
 
