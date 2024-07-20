@@ -6,7 +6,7 @@ public abstract class BuyableItemManager<TItem> : MonoBehaviour
     where TItem : BuyableItem {
 
     [SerializeField] protected List<TItem> _defaultItems;
-    protected BuyableItemContainerData<TItem> _data;
+    protected BuyableItemManagerData<TItem> _data;
 
     public event Action<TItem> ItemAdded;
 

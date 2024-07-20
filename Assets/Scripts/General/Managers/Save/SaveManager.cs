@@ -44,6 +44,6 @@ public class SaveManager : MonoBehaviour {
         _kitchenPart.LoadData(_gameData.Kitchen, isFileEmpty);
         _farmPart.LoadData(_gameData.Farm, isFileEmpty);
         _officePart.LoadData(_gameData.Office, isFileEmpty);
-        _upgradeManager.LoadUpgrades();
+        _upgradeManager.Bind(_gameData, isFileEmpty);
     }
 }

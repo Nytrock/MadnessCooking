@@ -9,7 +9,8 @@ public class FoodManager : SaveableItemManager<Food, KitchenData> {
 
     public override void Bind(KitchenData data, bool isFileEmpty) {
         if (isFileEmpty)
-            data.FoodManager = new(_defaultItems);
+            data.FoodManager = new();
         _data = data.FoodManager;
+        base.Bind(data, isFileEmpty);
     }
 }

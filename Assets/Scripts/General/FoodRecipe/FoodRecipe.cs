@@ -10,7 +10,7 @@ public abstract class FoodRecipe<T> : MonoBehaviour {
 
     public bool CanCook => _canCook;
 
-    public void SetupRecipe(Food food) {
+    public virtual void SetupRecipe(Food food) {
         DisableParts();
         _canCook = true;
         _food = food;

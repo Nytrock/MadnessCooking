@@ -3,8 +3,8 @@ using System;
 [Serializable]
 public class FarmData : ISaveable {
     public FarmUpgradeData UpgradeData;
-    public BuyableItemContainerData<Ingredient> IngredientManager;
-    public BuyableItemContainerData<BedType> BedTypeManager;
+    public BuyableItemManagerData<Ingredient> IngredientManager;
+    public BuyableItemManagerData<BedType> BedTypeManager;
     public WheatManagerData WheatManager;
     public FarmBedManagerData FarmBedGroups;
     public FarmShopData FarmShop;

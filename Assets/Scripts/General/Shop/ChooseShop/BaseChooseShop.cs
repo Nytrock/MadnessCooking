@@ -4,7 +4,7 @@ using UnityEngine.Events;
 public abstract class BaseChooseShop<TItem, TData> : SaveableBaseShop<TItem, TData>
     where TItem : BuyableItem where TData : ISaveable {
 
-    [SerializeField] private BaseChooseShopItemView<TItem> _itemView;
+    [SerializeField] protected BaseChooseShopItemView<TItem> _itemView;
     private TItem _itemToBuy;
 
     protected virtual void Awake() {

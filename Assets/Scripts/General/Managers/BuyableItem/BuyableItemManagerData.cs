@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public class BuyableItemContainerData<TItem>
+public class BuyableItemManagerData<TItem>
     where TItem : BuyableItem {
 
     [SerializeField] private List<TItem> _availableItems;
@@ -11,10 +11,8 @@ public class BuyableItemContainerData<TItem>
     public IEnumerable<TItem> AvailableItems => _availableItems;
     public int ItemsCount => _availableItems.Count;
 
-    public BuyableItemContainerData(IEnumerable<TItem> defaultItems) {
+    public BuyableItemManagerData() {
         _availableItems = new();
-        foreach (var item in defaultItems)
-            _availableItems.Add(item);
     }
 
     public void AddItem(TItem item) {

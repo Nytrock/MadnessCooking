@@ -3,8 +3,7 @@ using System;
 [Serializable]
 public class GeneralData : ISaveable {
     public GeneralUpgradeData UpgradeData;
-    public BuyableItemContainerData<BaseUpgrade> UpgradeManager;
-    public BuyableItemContainerData<Decor> DecorManager;
+    public BuyableItemManagerData<Decor> DecorManager;
     public MoneyManagerData MoneyManager;
     public PopularityManagerData PopularityManager;
     public TimeManagerData TimeManager;

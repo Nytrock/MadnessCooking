@@ -60,11 +60,12 @@ public class TechnicManager : SaveableItemManager<Technic, KitchenData>, IUpgrad
 
     public override void Bind(KitchenData data, bool isFileEmpty) {
         if (isFileEmpty)
-            data.TechnicManager = new(_defaultItems);
+            data.TechnicManager = new();
         _data = data.TechnicManager;
 
         ActivateHolders();
         BindHolders(data, isFileEmpty);
+        base.Bind(data, isFileEmpty);
     }
 
     private void BindHolders(KitchenData data, bool isFileEmpty) {

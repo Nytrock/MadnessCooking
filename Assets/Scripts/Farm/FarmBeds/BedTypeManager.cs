@@ -49,7 +49,8 @@ public class BedTypeManager : SaveableItemManager<BedType, FarmData> {
 
     public override void Bind(FarmData data, bool isFileEmpty) {
         if (isFileEmpty)
-            data.BedTypeManager = new(_defaultItems);
+            data.BedTypeManager = new();
         _data = data.BedTypeManager;
+        base.Bind(data, isFileEmpty);
     }
 }

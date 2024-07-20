@@ -3,9 +3,9 @@ using System;
 [Serializable]
 public class KitchenData : ISaveable {
     public KitchenUpgradeData UpgradeData;
-    public BuyableItemContainerData<Food> FoodManager;
+    public BuyableItemManagerData<Food> FoodManager;
     public IngredientStorageData KitchenStorage;
-    public BuyableItemContainerData<Technic> TechnicManager;
+    public BuyableItemManagerData<Technic> TechnicManager;
     public TechnicHolderData[] TechnicHolders;
     public KitchenCatData Cat;
 }

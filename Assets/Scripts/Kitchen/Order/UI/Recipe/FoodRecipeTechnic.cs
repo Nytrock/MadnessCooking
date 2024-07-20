@@ -1,10 +1,6 @@
-using UnityEngine;
-
-public class FoodRecipeTechnic : HoverTextActivator {
-    [SerializeField] protected GrayscaleImageRenderer _techicIcon;
-
+public class FoodRecipeTechnic : FoodRecipeAdditionalPart {
     public void SetTechnic(Technic technic, bool haveTechnic) {
         _showingMessage = technic.Name;
-        _techicIcon.Setup(technic.Icon, !haveTechnic);
+        _icon.Setup(technic.Icon, !haveTechnic);
     }
 }

@@ -5,11 +5,13 @@ using UnityEngine;
 public class KitchenUpgradeData : LocalUpgradeData {
     [SerializeField] private bool _isAutoSpice;
     [SerializeField] private bool _isStrengthShow;
+    [SerializeField] private bool _isWaterAvailable;
     [SerializeField] private float _technicCookSpeed;
     [SerializeField] private float _technicRepairSpeed;
     [SerializeField] private float _technicStrength;
 
     public bool IsAutoSpice => _isAutoSpice;
+    public bool IsWaterAvailable => _isWaterAvailable;
     public bool IsStrengthShow => _isStrengthShow;
     public float TechnicCookSpeed => _technicCookSpeed;
     public float TechnicRepairSpeed => _technicRepairSpeed;
@@ -27,6 +29,10 @@ public class KitchenUpgradeData : LocalUpgradeData {
 
     public void ChangeStrengthShow() {
         _isStrengthShow = true;
+    }
+
+    public void ChangeWaterAvailable() {
+        _isWaterAvailable = true;
     }
 
     public void ChangeTechnicCookSpeed(CoefficientUpgrade coefficientUpgrade) {

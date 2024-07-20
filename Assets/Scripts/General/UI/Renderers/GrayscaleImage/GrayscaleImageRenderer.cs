@@ -9,12 +9,13 @@ public class GrayscaleImageRenderer {
 
     public void Setup(GrayscaleImageData data) {
         SetGrayscaleVisibility(data.IsGrayscale);
-        SetImage(data.Sprite);
+        SetSprite(data.Sprite);
     }
 
     public void Setup(Sprite sprite, bool isGrayscale) {
         SetGrayscaleVisibility(isGrayscale);
-        SetImage(sprite);
+        SetSprite(sprite);
+        SetActive(true);
     }
 
     public void SetGrayscaleVisibility(bool isGrayscale) {
@@ -27,7 +28,11 @@ public class GrayscaleImageRenderer {
             _image.material = null;
     }
 
-    private void SetImage(Sprite sprite) {
+    public void SetImage(Image image) {
+        _image = image;
+    }
+
+    private void SetSprite(Sprite sprite) {
         if (_image == null)
             return;
 

@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 public class UIHoverListener : MonoBehaviour {
-    private bool _isHover;
+    [field: SerializeField] private bool _isHover;
 
     public event Action<bool> OnHover;
 

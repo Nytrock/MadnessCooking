@@ -10,9 +10,7 @@ public abstract class LocalUpgradeManager<TUpgradeData, TData> : MonoBehaviour, 
     protected TUpgradeData _data;
 
     private void Awake() {
-        if (_upgradeablesObjects == null)
-            SetUpgradeableObjects();
-
+        SetUpgradeableObjects();
         GenerateUpgradeables();
     }
 
@@ -21,11 +19,11 @@ public abstract class LocalUpgradeManager<TUpgradeData, TData> : MonoBehaviour, 
         for (int i = 0; i < _upgradeablesObjects.Length; i++) {
             _upgradeables[i] = _upgradeablesObjects[i].GetComponent<IUpgradeable<TUpgradeData>>();
             if (_upgradeables[i] == null)
-                throw new NullReferenceException($"Object {i} don't have type {typeof(FarmData)}");
+                throw new NullReferenceException($"Object {i} don't have type {typeof(TUpgradeData)}");
         }
     }
 
-    public void LoadUpgrades() {
+    public void BingUpgradeData() {
         foreach (var upgradeable in _upgradeables)
             upgradeable.BindUpgrade(_data);
     }
