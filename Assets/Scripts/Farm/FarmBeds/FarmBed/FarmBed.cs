@@ -6,16 +6,17 @@ public class FarmBed : MonoBehaviour {
     [Header("Upgrades")]
     [SerializeField] private FarmBedGrowSlider _growStatusSlider;
 
-    public FarmBedData BedData { get; private set; }
+    public FarmBedData Data { get; private set; }
     private FarmUpgradeData _upgradeData;
 
     private WheatManager _wheatManager;
     private Ingredient _wheat;
+    private FarmCar _car;
+    private Puncher _puncher;
 
     private BedTypeHolder _bedHolder;
     private FarmBedUpgrader _upgrader;
     private FarmBedUIManager _UI;
-    private FarmCar _car;
     private float _growTime;
 
     public PestsGenerator PestsGenerator => _bedHolder.PestsGenerator;
@@ -27,7 +28,7 @@ public class FarmBed : MonoBehaviour {
     }
 
     public void MouseDown() {
-        if (BedData.PlantedIngredient == null)
+        if (Data.PlantedIngredient == null)
             _UI.ActivateIngredientChoice(this);
         else
             _UI.ChangeState(this);
@@ -38,15 +39,15 @@ public class FarmBed : MonoBehaviour {
     }
 
     private void Update() {
-        if (BedData.IsFull || BedData.PlantedIngredient == null)
+        if (Data.IsFull || Data.PlantedIngredient == null)
             return;
 
-        BedData.UpdateTime();
-        if (BedData.NowTime > _growTime) {
-            BedData.AddIngredient();
-            if (_upgradeData.IsAutoWheat && BedData.PlantedIngredient == _wheat) {
-                _wheatManager.AddWheat(BedData.Count);
-                BedData.SetCount(0);
+        Data.UpdateTime();
+        if (Data.NowTime > _growTime) {
+            Data.AddIngredient();
+            if (_upgradeData.IsAutoWheat && Data.PlantedIngredient == _wheat) {
+                _wheatManager.AddWheat(Data.Count);
+                Data.SetCount(0);
                 return;
             }
 
@@ -55,11 +56,11 @@ public class FarmBed : MonoBehaviour {
         }
 
         if (_upgradeData.IsGrowStatusShow)
-            _growStatusSlider.UpdateSlider(BedData.NowTime);
+            _growStatusSlider.UpdateSlider(Data.NowTime);
     }
 
     public void ResetIngredient() {
-        BedData.ResetIngredient();
+        Data.ResetIngredient();
         _bedHolder.StopAnimation();
         UpdateUpgrades();
     }
@@ -67,30 +68,31 @@ public class FarmBed : MonoBehaviour {
     public void SetBedType(BedTypeHolder bedType) {
         _bedHolder = bedType;
         _bedHolder.ChangeMode(true);
-        BedData.SetBedType(_bedHolder.Type);
+        Data.SetBedType(_bedHolder.Type);
     }
 
     public void ResetBedType() {
-        if (BedData.BedType.Price > 0)
-            MoneyManager.Instance.ChangeMoney(BedData.BedType.Price);
+        if (Data.BedType.Price > 0)
+            MoneyManager.Instance.ChangeMoney(Data.BedType.Price);
 
         ResetIngredient();
         _bedHolder.ChangeMode(false);
         DisableUpgrades();
 
         _bedHolder = null;
-        BedData.ResetBedType();
+        Data.ResetBedType();
     }
 
     public void Setup(FarmBedSettings settings) {
         _UI = settings.UIManager;
         _car = settings.Car;
+        _puncher = settings.Puncher;
         _wheatManager = settings.WheatManager;
         _wheat = ConstIngredients.Instance.Wheat;
     }
 
     public void SetIngredient(Ingredient ingredient) {
-        BedData.SetIngredient(ingredient);
+        Data.SetIngredient(ingredient);
         _bedHolder.SetIngredient();
         _growTime = ingredient.TimeGrow;
         _growStatusSlider.SetMaxTime(_growTime);
@@ -98,12 +100,12 @@ public class FarmBed : MonoBehaviour {
     }
 
     public void SendIngredients() {
-        if (BedData.Count == 0)
+        if (Data.Count == 0)
             return;
 
-        if (BedData.PlantedIngredient == _wheat) {
-            _wheatManager.AddWheat(BedData.Count);
-            BedData.SetCount(0);
+        if (Data.PlantedIngredient == _wheat) {
+            _wheatManager.AddWheat(Data.Count);
+            Data.SetCount(0);
             UnfullBed();
             return;
         }
@@ -111,18 +113,19 @@ public class FarmBed : MonoBehaviour {
         if (_car.Data.LeftSpace == 0)
             return;
 
-        int remainCount = _car.PutIngredientWithRemain(BedData.PlantedIngredient, BedData.Count);
-        FatigueManager.Instance.ChangeFatigue(BedData.PlantedIngredient.FatigueCoef
-            * (BedData.Count - remainCount));
-        BedData.SetCount(remainCount);
+        int remainCount = _car.PutIngredientWithRemain(Data.PlantedIngredient, Data.Count);
+        FatigueManager.Instance.ChangeFatigue(Data.PlantedIngredient.FatigueCoef
+            * (Data.Count - remainCount));
+        Data.SetCount(remainCount);
+        _puncher.AddWaste(remainCount * Data.PlantedIngredient.WasteAmount);
 
         UnfullBed();
     }
 
     private void UnfullBed() {
         CountChanged?.Invoke();
-        if (BedData.IsFull) {
-            BedData.Unfull();
+        if (Data.IsFull) {
+            Data.Unfull();
             _bedHolder.UpdateAnimation();
         }
     }
@@ -146,7 +149,7 @@ public class FarmBed : MonoBehaviour {
     }
 
     private void UpdateUpgrades() {
-        _growStatusSlider.SetActive(_upgradeData.IsGrowStatusShow && BedData.PlantedIngredient != null);
+        _growStatusSlider.SetActive(_upgradeData.IsGrowStatusShow && Data.PlantedIngredient != null);
     }
 
     public bool HaveUpgrade(FarmBedUpgrade upgrade) => _upgrader.HaveUpgrade(upgrade);
@@ -162,7 +165,7 @@ public class FarmBed : MonoBehaviour {
         ChangeEternalWater();
         ChangeEternalFertilize();
 
-        if (BedData.PestsGenerator.IsPestsRemoved)
+        if (Data.PestsGenerator.IsPestsRemoved)
             RemovePests();
     }
 
@@ -173,15 +176,15 @@ public class FarmBed : MonoBehaviour {
 
     public void Bind(FarmData data, FarmBedData bedData, BedTypeHolder holder) {
         _upgradeData = data.UpgradeData;
-        BedData = bedData;
+        Data = bedData;
 
-        if (BedData.BedType != null) {
+        if (Data.BedType != null) {
             SetBedType(holder);
-            if (BedData.PlantedIngredient != null)
-                SetIngredient(BedData.PlantedIngredient);
+            if (Data.PlantedIngredient != null)
+                SetIngredient(Data.PlantedIngredient);
         }
 
-        _upgrader.Bind(BedData);
+        _upgrader.Bind(Data);
         LateStart();
     }
 }

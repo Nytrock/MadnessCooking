@@ -81,7 +81,7 @@ public class ClientsHolder : MonoBehaviour {
         _clients.Clear();
 
         for (int i = 0; i < leaveClients.Length; i++)
-            leaveClients[i].ClientData.ChangeState(ClientState.Leave);
+            leaveClients[i].Data.ChangeState(ClientState.Leave);
 
         for (int i = 0; i < leaveClients.Length; i++) {
             leaveClients[i].Leave();

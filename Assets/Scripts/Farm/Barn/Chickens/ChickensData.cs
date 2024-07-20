@@ -18,6 +18,7 @@ public class ChickensData {
     public int UsedFoodCount => _foodList.Count;
     public bool IsUnlocked => _isUnlocked;
     public float NowTime => _nowTime;
+    public float Speed => _speed;
     public int EggCount => _eggCount;
     public int FoodCount => _foodCount;
     public bool IsFeed => _isFeed;

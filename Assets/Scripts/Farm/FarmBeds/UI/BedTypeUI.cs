@@ -30,8 +30,8 @@ public class BedTypeUI : MonoBehaviour {
     }
 
     public void UpdateInfo(FarmBed farmBed) {
-        _renderer.SetItemInfo(farmBed.BedData.PlantedIngredient);
-        _renderer.SetCount(farmBed.BedData.Count);
+        _renderer.SetItemInfo(farmBed.Data.PlantedIngredient);
+        _renderer.SetCount(farmBed.Data.Count);
     }
 
     public void CheckWater() {
@@ -49,7 +49,7 @@ public class BedTypeUI : MonoBehaviour {
     }
 
     public void UpdateSideButtons(FarmBed farmBed) {
-        _bedData = farmBed.BedData;
+        _bedData = farmBed.Data;
         _pestsButton.interactable = !_bedData.PestsGenerator.IsPestsRemoved;
         if (!_isSideButtonsWork)
             return;

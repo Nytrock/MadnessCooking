@@ -13,7 +13,7 @@ public class Client : MonoBehaviour {
     [SerializeField, Min(0)] private float _maxWaitTime;
     private ClientsHolder _table;
 
-    public ClientData ClientData { get; private set; }
+    public ClientData Data { get; private set; }
     public ClientsSpawner Spawner { get; private set; }
     public ClientUI ClientUI { get; private set; }
     public int SpotIndex { get; private set; }
@@ -29,13 +29,13 @@ public class Client : MonoBehaviour {
     }
 
     public void StartNewCycle() {
-        _skin.StartNewCycle(ClientData);
+        _skin.StartNewCycle(Data);
         ClientUI.StartNewCycle(ActivateOrder);
     }
 
     private void ChangeState() {
         ClientBaseState clientState = null;
-        switch (ClientData.State) {
+        switch (Data.State) {
             case ClientState.Spawn:
             case ClientState.Leave:
                 clientState = _walkState;
@@ -93,17 +93,17 @@ public class Client : MonoBehaviour {
         TableIndex = settings.TableIndex;
         SpotIndex = settings.SpotIndex;
 
-        ClientData = settings.Data;
-        ClientData.SetWaitTime(_minWaitTime, _maxWaitTime);
+        Data = settings.Data;
+        Data.SetWaitTime(_minWaitTime, _maxWaitTime);
 
-        transform.position = ClientData.Position.GetVector();
-        ClientUI.Setup(ClientData);
+        transform.position = Data.Position.GetVector();
+        ClientUI.Setup(Data);
         ChangeState();
 
-        if (ClientData.State != ClientState.Spawn && ClientData.State != ClientState.Leave)
+        if (Data.State != ClientState.Spawn && Data.State != ClientState.Leave)
             TakeSeat();
 
-        if (ClientData.State == ClientState.Leave)
+        if (Data.State == ClientState.Leave)
             return;
 
         CafeSpot spot = Spawner.GetSpot(SpotIndex);
@@ -114,12 +114,12 @@ public class Client : MonoBehaviour {
 
     public void ActivateOrder() {
         OrderActivated?.Invoke(this);
-        ClientUI.SetFood(ClientData.Order.Food);
-        ClientData.Order.Activate();
+        ClientUI.SetFood(Data.Order.Food);
+        Data.Order.Activate();
     }
 
     public void CheckOrder() {
-        if (ClientData.Order.IsFinished)
+        if (Data.Order.IsFinished)
             ClientUI.ActivateYesButton();
     }
 
@@ -135,9 +135,9 @@ public class Client : MonoBehaviour {
 
     public void Leave() {
         ClientLeave?.Invoke(this);
-        if (!ClientData.IsEated)
+        if (!Data.IsEated)
             ClientRejected?.Invoke(this);
-        ClientData.ChangeState(ClientState.Leave);
+        Data.ChangeState(ClientState.Leave);
 
         ChangeState();
         ClientUI.ChangeSliderState(false);
@@ -151,19 +151,19 @@ public class Client : MonoBehaviour {
     }
 
     public virtual void Eat() {
-        int payingMoney = ClientData.Order.Food.MoneyGet;
-        if (ClientData.Type == ClientType.Rich)
+        int payingMoney = Data.Order.Food.MoneyGet;
+        if (Data.Type == ClientType.Rich)
             payingMoney *= 100;
         _table.AddMoney(payingMoney);
 
         _table.StartEndlessWait();
-        ClientData.ChangeState(ClientState.Eat);
+        Data.ChangeState(ClientState.Eat);
         ChangeState();
         ClientEat?.Invoke(this);
     }
 
     public void Sit() {
-        ClientData.ChangeState(ClientState.Sit);
+        Data.ChangeState(ClientState.Sit);
         ChangeState();
     }
 
@@ -173,7 +173,7 @@ public class Client : MonoBehaviour {
 
     public void SetSpotTableFood() {
         CafeSpot spot = Spawner.GetSpot(SpotIndex);
-        spot.SetTableFoodSprite(ClientData.Order.Food, TableIndex);
+        spot.SetTableFoodSprite(Data.Order.Food, TableIndex);
     }
 
     public void ResetSpotTableFood() {
@@ -182,7 +182,7 @@ public class Client : MonoBehaviour {
     }
 
     private void WaitOthers() {
-        ClientData.ChangeState(ClientState.Wait);
+        Data.ChangeState(ClientState.Wait);
         ChangeState();
     }
 

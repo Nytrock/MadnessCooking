@@ -8,7 +8,7 @@ public class Pest : MonoBehaviour {
     [SerializeField] private bool _isMovable;
     private SpriteRenderer _renderer;
 
-    public PestData PestData { get; private set; }
+    public PestData Data { get; private set; }
 
     private void Awake() {
         _renderer = GetComponent<SpriteRenderer>();
@@ -38,17 +38,17 @@ public class Pest : MonoBehaviour {
         if (_isRotatable)
             transform.rotation = Quaternion.Euler(0, 0, Random.Range(0, 360f));
 
-        PestData = new(prefabIndex, spriteIndex, new(transform.rotation),
+        Data = new(prefabIndex, spriteIndex, new(transform.rotation),
             new(transform.position), new(xNormalized, yNormalized));
     }
 
     public void Bind(PestData pestData) {
-        PestData = pestData;
-        transform.SetPositionAndRotation(PestData.Position.GetVector(),
-            PestData.RotationDegree.GetQuaternion());
+        Data = pestData;
+        transform.SetPositionAndRotation(Data.Position.GetVector(),
+            Data.RotationDegree.GetQuaternion());
 
         if (_isSpriteChanging)
-            _renderer.sprite = _sprites[PestData.SpriteIndex];
+            _renderer.sprite = _sprites[Data.SpriteIndex];
     }
 
     public Sprite GetSprite() => _renderer.sprite;

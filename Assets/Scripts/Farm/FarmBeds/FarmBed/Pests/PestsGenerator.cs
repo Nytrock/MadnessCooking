@@ -35,7 +35,7 @@ public class PestsGenerator : MonoBehaviour {
     private void SpawnPest() {
         Pest pest = _pool.GetObject();
         _pests.Add(pest);
-        _data.AddPest(pest.PestData);
+        _data.AddPest(pest.Data);
         CheckSlowdown();
     }
 
@@ -62,7 +62,7 @@ public class PestsGenerator : MonoBehaviour {
 
     public void RemovePest(Pest pest) {
         _pool.PutObject(pest);
-        _data.RemovePest(pest.PestData);
+        _data.RemovePest(pest.Data);
         _pests.Remove(pest);
         CheckSlowdown();
     }

@@ -109,7 +109,7 @@ public class BedTypeHolder : MonoBehaviour {
     }
 
     public void SetupBind() {
-        _bedData = _farmBed.BedData;
+        _bedData = _farmBed.Data;
         if (_water != null)
             _water.SetData(_bedData.WaterBoost);
         if (_fertilize != null)

@@ -5,6 +5,8 @@ using UnityEngine;
 public class Chickens : MonoBehaviour, IBindable<FarmData> {
     [SerializeField] private FarmCar _car;
     [SerializeField] private UpgradeManager _upgradeManager;
+    [SerializeField] private Puncher _puncher;
+    [SerializeField, Min(0)] private float _baseWasteAmount;
     [SerializeField, Min(0)] private float _maxFoodWorkTime;
     [SerializeField, Min(0)] private float _eggTime;
 
@@ -38,6 +40,7 @@ public class Chickens : MonoBehaviour, IBindable<FarmData> {
             return;
 
         UpdateFoods();
+        _puncher.AddWaste(_baseWasteAmount * Data.Speed);
         if (Data.NowTime < _eggTime) {
             Data.UpdateTime();
         } else {

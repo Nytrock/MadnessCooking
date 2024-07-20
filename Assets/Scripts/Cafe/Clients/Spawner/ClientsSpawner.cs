@@ -120,12 +120,12 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
 
     private void ClientEat(Client client) {
         client.ClientEat -= ClientEat;
-        _xpAdder.AddXp(client.ClientData.Type);
+        _xpAdder.AddXp(client.Data.Type);
     }
 
     private void ClientRejected(Client client) {
         client.ClientRejected -= ClientRejected;
-        _xpAdder.RemoveXp(client.ClientData.Type);
+        _xpAdder.RemoveXp(client.Data.Type);
     }
 
     private void ClientsLeave(CafeSpot spot) {
@@ -193,7 +193,7 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
     }
 
     public void PutClient(Client client) {
-        _data.TryRemoveLeavingClient(client.ClientData);
+        _data.TryRemoveLeavingClient(client.Data);
         _pool.PutObject(client);
     }
 

@@ -6,7 +6,7 @@ public class ClientEatState : ClientBaseState {
         client.SetSpotTableFood();
         clientUI.StartEat();
 
-        _clientData = client.ClientData;
+        _clientData = client.Data;
     }
 
     public override void ExitState(Client client) {

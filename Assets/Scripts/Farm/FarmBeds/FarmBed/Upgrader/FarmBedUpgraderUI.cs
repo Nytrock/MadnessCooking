@@ -46,7 +46,7 @@ public class FarmBedUpgraderUI : ChoiceBuyWithCameraStopUI<FarmBedUpgrade> {
     }
 
     private bool CheckUpgradeAccessable(FarmBedUpgrade upgrade) {
-        BedType bedType = _changingBed.BedData.BedType;
+        BedType bedType = _changingBed.Data.BedType;
         bool isAccessable = true;
 
         isAccessable &= _manager.ContainsUpgrade(upgrade);

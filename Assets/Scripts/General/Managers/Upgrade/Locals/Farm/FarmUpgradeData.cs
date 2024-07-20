@@ -7,10 +7,12 @@ public class FarmUpgradeData : LocalUpgradeData {
     [SerializeField] private bool _isAutoWheat;
     [SerializeField] private bool _isGrowStatusShow;
     [SerializeField] private bool _isWheatDistributing;
+    [SerializeField] private bool _isPuncherProgressShow;
     [SerializeField] private List<FarmBedUpgrade> _availableFarmBedUpgrades;
 
     public bool IsAutoWheat => _isAutoWheat;
     public bool IsGrowStatusShow => _isGrowStatusShow;
+    public bool IsPuncherProgressShow => _isPuncherProgressShow;
     public bool IsWheatDistributing => _isWheatDistributing;
 
     public FarmUpgradeData() {
@@ -31,6 +33,10 @@ public class FarmUpgradeData : LocalUpgradeData {
 
     public void AddFarmBedUpgrade(FarmBedUpgrade farmBedUpgrade) {
         _availableFarmBedUpgrades.Add(farmBedUpgrade);
+    }
+
+    public void ChangePuncherProgressShow() {
+        _isPuncherProgressShow = true;
     }
 
     public bool ContainsFarmBedUpgrade(FarmBedUpgrade upgrade) {

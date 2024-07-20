@@ -2,6 +2,9 @@ using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
 public class FlourMill : NeedHoldAdd, IUpgradeable<FarmUpgradeData> {
+    [SerializeField] private Puncher _puncher;
+    [SerializeField, Min(0)] private float _wasteAmount;
+
     private NeedHoldAddData _cowData;
     private FarmUpgradeData _upgradeData;
 
@@ -14,6 +17,7 @@ public class FlourMill : NeedHoldAdd, IUpgradeable<FarmUpgradeData> {
     protected override void AddReady() {
         if (!_upgradeData.IsWheatDistributing)
             _cowData.SubstractMaterial();
+        _puncher.AddWaste(_wasteAmount);
         base.AddReady();
     }
 

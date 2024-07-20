@@ -14,10 +14,10 @@ public class OrdersManager : MonoBehaviour {
     public event Action<Order> OrderRemoved;
 
     public void SetNewOrder(Client client) {
-        if (!_suitableStates.Contains(client.ClientData.State))
+        if (!_suitableStates.Contains(client.Data.State))
             return;
 
-        Order order = client.ClientData.Order;
+        Order order = client.Data.Order;
         client.OrderActivated += AddOrder;
         client.ClientLeave += RemoveOrder;
         client.ClientEat += RemoveOrder;
@@ -28,18 +28,18 @@ public class OrdersManager : MonoBehaviour {
     }
 
     private void AddOrder(Client client) {
-        if (client.ClientData.Type == ClientType.GrayMan) {
+        if (client.Data.Type == ClientType.GrayMan) {
             _kitchenStorage.RemoveAll();
             _saveManager.Save();
             Application.Quit();
         }
 
-        _orders.Add(client.ClientData.Order);
-        OrderAdded?.Invoke(client.ClientData.Order);
+        _orders.Add(client.Data.Order);
+        OrderAdded?.Invoke(client.Data.Order);
     }
 
     private void RemoveOrder(Client client) {
-        Order order = client.ClientData.Order;
+        Order order = client.Data.Order;
 
         client.OrderActivated -= AddOrder;
         client.ClientLeave -= RemoveOrder;

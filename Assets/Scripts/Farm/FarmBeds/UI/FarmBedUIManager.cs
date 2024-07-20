@@ -15,7 +15,7 @@ public class FarmBedUIManager : MonoBehaviour {
 
     private void Awake() {
         _farmWell.WaterChanged += CheckWater;
-        _puncher.FertilizeChanged += CheckFertilize;
+        _puncher.FertilizerChanged += CheckFertilize;
         _locationManager.LocationChanged += delegate { ChangeMode(false); };
     }
 
@@ -56,7 +56,7 @@ public class FarmBedUIManager : MonoBehaviour {
             }
         }
 
-        _nowUI = FindUI(farmBed.BedData.BedType);
+        _nowUI = FindUI(farmBed.Data.BedType);
         _nowUI.UpdateInfo(farmBed);
         _nowUI.ChangeMode(true);
 
@@ -125,10 +125,10 @@ public class FarmBedUIManager : MonoBehaviour {
     }
 
     public void Pests() {
-        if (_farmBed.BedData.PestsGenerator.IsPestsInstant)
+        if (_farmBed.Data.PestsGenerator.IsPestsInstant)
             _farmBed.PestsGenerator.CleanPests();
         else
-            _pestsRemoverUI.Activate(_farmBed.BedData.BedType, _farmBed.PestsGenerator);
+            _pestsRemoverUI.Activate(_farmBed.Data.BedType, _farmBed.PestsGenerator);
     }
 
     public void UpdateSideButtons() {

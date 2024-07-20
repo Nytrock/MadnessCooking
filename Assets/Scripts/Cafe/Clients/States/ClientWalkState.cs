@@ -6,7 +6,7 @@ public class ClientWalkState : ClientBaseState {
     private float _directionMultiplier;
 
     public override void EnterState(Client client) {
-        bool isLeaving = client.ClientData.State == ClientState.Leave;
+        bool isLeaving = client.Data.State == ClientState.Leave;
         if (isLeaving)
             _target = client.Spawner.SpawnPoint.x;
         else
@@ -17,7 +17,7 @@ public class ClientWalkState : ClientBaseState {
     }
 
     public override void ExitState(Client client) {
-        if (client.ClientData.State == ClientState.Leave)
+        if (client.Data.State == ClientState.Leave)
             return;
 
         client.TakeSeat();
@@ -25,10 +25,10 @@ public class ClientWalkState : ClientBaseState {
 
     public override void UpdateState(Client client) {
         client.transform.position += new Vector3(_speed * InGameTime.Instance.DeltaTime * _directionMultiplier, 0, 0);
-        client.ClientData.UpdatePosition(client.transform.position);
+        client.Data.UpdatePosition(client.transform.position);
 
         if (Mathf.Abs(client.transform.position.x - _target) < 0.1f) {
-            if (client.ClientData.State == ClientState.Leave)
+            if (client.Data.State == ClientState.Leave)
                 client.Destroy();
             else
                 client.Wait();

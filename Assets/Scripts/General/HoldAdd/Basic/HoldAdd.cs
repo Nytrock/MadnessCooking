@@ -48,7 +48,7 @@ public abstract class HoldAdd : MonoBehaviour, IBindable<FarmData> {
             _holdData.ResetTime();
     }
 
-    private void Update() {
+    protected virtual void Update() {
         if (!_isWork && !_holdData.IsAuto)
             return;
 
