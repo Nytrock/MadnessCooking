@@ -2,9 +2,6 @@ using TMPro;
 using UnityEngine;
 
 public class OrderButton : MonoBehaviour {
-    [SerializeField] private TechnicManager _technicManager;
-    [SerializeField] private KitchenStorage _kitchenStorage;
-
     [SerializeField] private ItemInfoRendererWithName _foodInfo;
     [SerializeField] private TextMeshProUGUI _tableIndexText;
     [SerializeField] private OrderRecipe _recipe;
@@ -15,11 +12,6 @@ public class OrderButton : MonoBehaviour {
     [SerializeField] private OrderUIBaseState _finishState;
 
     public Order Order { get; private set; }
-
-    private void Awake() {
-        _kitchenStorage.IngredientCountAdded += UpdateRecipeIngredients;
-        _technicManager.TechnicChanged += UpdateRecipeTechnic;
-    }
 
     public void StartNewCycle() {
         ChangeState(OrderUIState.Start);
@@ -37,6 +29,16 @@ public class OrderButton : MonoBehaviour {
 
         _recipe.SetupRecipe(Order.Food, data);
         UpdateCookSlider();
+    }
+
+    public void SetManagers(TechnicManager technicManager, KitchenStorage kitchenStorage) {
+        kitchenStorage.IngredientCountAdded += UpdateRecipeIngredients;
+        technicManager.TechnicChanged += UpdateRecipeTechnic;
+        _recipe.SetManagers(kitchenStorage, technicManager);
+    }
+
+    public void SetHoverText(HoverText hoverText) {
+        _recipe.SetHoverText(hoverText);
     }
 
     public void UpdateRecipeIngredients(BuyableItemCount<Ingredient> count) {

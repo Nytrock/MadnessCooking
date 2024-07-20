@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class HoverTextActivator : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
-    [SerializeField] private HoverText _hoverText;
+    private HoverText _hoverText;
     protected string _showingMessage;
 
     public void OnPointerEnter(PointerEventData eventData) {
@@ -11,5 +11,9 @@ public class HoverTextActivator : MonoBehaviour, IPointerEnterHandler, IPointerE
 
     public void OnPointerExit(PointerEventData eventData) {
         _hoverText.ChangeState(false);
+    }
+
+    public void SetHoverText(HoverText hoverText) {
+        _hoverText = hoverText;
     }
 }

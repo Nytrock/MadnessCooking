@@ -1,6 +1,16 @@
 public class OrderRecipe : FoodRecipe<OrderRecipePart> {
     private KitchenUpgradeData _upgradeData;
 
+    public void SetManagers(KitchenStorage kitchenStorage, TechnicManager technicManager) {
+        _kitchenStorage = kitchenStorage;
+        _technicManager = technicManager;
+    }
+
+    public void SetHoverText(HoverText hoverText) {
+        foreach (var recipePart in _recipeParts)
+            recipePart.SetHoverText(hoverText);
+    }
+
     public void SetupRecipe(Food food, KitchenUpgradeData data) {
         _upgradeData = data;
         SetupRecipe(food);
