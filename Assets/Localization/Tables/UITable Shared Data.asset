@@ -1,0 +1,144 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: UITable Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: UITable
+  m_TableCollectionNameGuidString: 0b35790c421a01448815f40c1a83a10b
+  m_Entries:
+  - m_Id: 17822677852160
+    m_Key: OfficeBed.Sleep
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28177722368000
+    m_Key: OfficeBed.WakeUp
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26761310101504
+    m_Key: General.Ok
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31908337672192
+    m_Key: Daytime.Morning
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31978030227456
+    m_Key: Daytime.Day
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32001291837440
+    m_Key: Daytime.Evening
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32022913474560
+    m_Key: Daytime.Night
+    m_Metadata:
+      m_Items: []
+  - m_Id: 48022144802816
+    m_Key: CriticStart.Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 48047621005312
+    m_Key: CriticStart.Description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 48065874616320
+    m_Key: CriticSuccess.Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 48083239034880
+    m_Key: CriticSuccess.Description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 48112599162880
+    m_Key: CriticFailure.Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 48157637599232
+    m_Key: CriticFailure.Description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 54924543123456
+    m_Key: Internet.IngredientShopIcon
+    m_Metadata:
+      m_Items: []
+  - m_Id: 55307910897664
+    m_Key: Internet.FoodShopIcon
+    m_Metadata:
+      m_Items: []
+  - m_Id: 56700205916160
+    m_Key: Internet.TechnicShopIcon
+    m_Metadata:
+      m_Items: []
+  - m_Id: 57134106664960
+    m_Key: Internet.UpgradeShopIcon
+    m_Metadata:
+      m_Items: []
+  - m_Id: 57432560754688
+    m_Key: Internet.DecorShopIcon
+    m_Metadata:
+      m_Items: []
+  - m_Id: 57582792335360
+    m_Key: Internet.Download
+    m_Metadata:
+      m_Items: []
+  - m_Id: 63011765215232
+    m_Key: General.Price
+    m_Metadata:
+      m_Items: []
+  - m_Id: 64258475941888
+    m_Key: General.Buy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 69792004431872
+    m_Key: General.Free
+    m_Metadata:
+      m_Items: []
+  - m_Id: 63685487878144
+    m_Key: Client.Yes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 63727825182720
+    m_Key: Client.No
+    m_Metadata:
+      m_Items: []
+  - m_Id: 70333816233984
+    m_Key: ConfirmPanel.YouSure
+    m_Metadata:
+      m_Items: []
+  - m_Id: 70449667104768
+    m_Key: FarmBedUI.RemoveBedConfirm
+    m_Metadata:
+      m_Items: []
+  - m_Id: 71212954935296
+    m_Key: FarmBedUI.RemoveIngredientConfirm
+    m_Metadata:
+      m_Items: []
+  - m_Id: 71457969397760
+    m_Key: General.Yes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 71533152296960
+    m_Key: General.No
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 3311739403002183704
+  references:
+    version: 2
+    RefIds:
+    - rid: 3311739403002183704
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1721554325085

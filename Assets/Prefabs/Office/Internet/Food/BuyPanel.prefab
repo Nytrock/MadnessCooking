@@ -206,6 +206,7 @@ GameObject:
   - component: {fileID: 6805302801317532070}
   - component: {fileID: 208376829363787805}
   - component: {fileID: 1861469390694902705}
+  - component: {fileID: 7887249892054820222}
   m_Layer: 0
   m_Name: Description
   m_TagString: Untagged
@@ -329,6 +330,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &7887249892054820222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3538070368223619078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64b8cfe32092a2d4686b80689560f005, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _table: FoodAndTechnicTable
 --- !u!1 &6751845763254829717
 GameObject:
   m_ObjectHideFlags: 0
@@ -422,13 +436,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _sideInfo:
-    _grayscaleMaterial: {fileID: 0}
     _image: {fileID: 0}
   _buyButton: {fileID: 736381651559135907}
   _itemInfoRenderer:
     _icon: {fileID: 2320696172845768531}
-    _nameText: {fileID: 9075677675145465874}
-    _descriptionText: {fileID: 1861469390694902705}
+    _nameText: {fileID: 1653571690180528877}
+    _descriptionText: {fileID: 7887249892054820222}
 --- !u!1 &7431017340219757589
 GameObject:
   m_ObjectHideFlags: 0
@@ -440,6 +453,7 @@ GameObject:
   - component: {fileID: 4742270158955239160}
   - component: {fileID: 1766599378022082175}
   - component: {fileID: 9075677675145465874}
+  - component: {fileID: 1653571690180528877}
   m_Layer: 0
   m_Name: Name
   m_TagString: Untagged
@@ -563,3 +577,16 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &1653571690180528877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7431017340219757589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64b8cfe32092a2d4686b80689560f005, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _table: FoodAndTechnicTable

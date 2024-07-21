@@ -8,6 +8,9 @@ public class PopularityUIRenderer : MonoBehaviour {
     [SerializeField] private Sprite[] _levelJewelsSprites;
 
     public void UpdateInfo(PopularityLevel level) {
+        if (_panel == null || _levelJewels == null)
+            return;
+
         if (_panelSprites.Length <= level.Number / 5)
             return;
 

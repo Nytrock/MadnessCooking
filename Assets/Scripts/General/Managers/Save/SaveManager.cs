@@ -35,9 +35,8 @@ public class SaveManager : MonoBehaviour {
     private void Load() {
         _gameData = _dataService.Load();
         bool isFileEmpty = _gameData == null;
-        if (isFileEmpty) {
+        if (isFileEmpty)
             _gameData = new GameData();
-        }
 
         _generalPart.LoadData(_gameData.General, isFileEmpty);
         _cafePart.LoadData(_gameData.Cafe, isFileEmpty);

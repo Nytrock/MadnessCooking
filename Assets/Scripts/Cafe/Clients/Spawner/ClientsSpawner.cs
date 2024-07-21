@@ -120,7 +120,7 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
 
     private void ClientEat(Client client) {
         client.ClientEat -= ClientEat;
-        _xpAdder.AddXp(client.Data.Type);
+        _xpAdder.AddXp(client.Data.Type, client.Data.WaitCoef);
     }
 
     private void ClientRejected(Client client) {

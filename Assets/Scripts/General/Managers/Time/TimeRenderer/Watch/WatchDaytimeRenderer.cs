@@ -1,4 +1,3 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,7 +5,7 @@ using UnityEngine.UI;
 public class WatchDaytimeRenderer : MonoBehaviour {
     [SerializeField] private TimeManager _timeManager;
     [SerializeField] private Image _daytimeIcon;
-    [SerializeField] private TextMeshProUGUI _daytimeText;
+    [SerializeField] private LocalizedText _daytimeText;
     [SerializeField] private DaytimeRenderInfo[] _daytimeInfos;
 
     private void Awake() {
@@ -19,8 +18,8 @@ public class WatchDaytimeRenderer : MonoBehaviour {
         _daytimeIcon.sprite = newDaytime.Icon;
         _daytimeIcon.color = newDaytime.Color;
 
-        _daytimeText.color = newDaytime.Color;
-        _daytimeText.text = daytime.ToString();
+        _daytimeText.SetColor(newDaytime.Color);
+        _daytimeText.SetText(daytime.GetText());
     }
 
     private DaytimeRenderInfo FindDaytime(Daytime daytime) {

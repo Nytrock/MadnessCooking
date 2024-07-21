@@ -13,6 +13,7 @@ public class ClientData {
     [SerializeField] private float _waitMultiplier;
     [SerializeField] private bool _isEated;
     [SerializeField] private Order _order;
+    private float _waitCoef;
 
     public ClientType Type => _type;
     public ClientSkinType SkinType => _skinType;
@@ -20,6 +21,7 @@ public class ClientData {
     public SerializableVector Position => _position;
     public float WaitTime => _waitTime;
     public float NowTime => _nowTime;
+    public float WaitCoef => _waitCoef;
     public bool IsEated => _isEated;
     public Order Order => _order;
 
@@ -46,6 +48,7 @@ public class ClientData {
         _state = newState;
 
         if (newState == ClientState.Eat) {
+            _waitCoef = _nowTime / _waitTime;
             _waitTime = _order.Food.TimeToEat * Random.Range(0.9f, 1.2f);
             _nowTime = 0;
         }

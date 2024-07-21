@@ -1,18 +1,17 @@
 using System;
-using TMPro;
 using UnityEngine;
 
 [Serializable]
 public class ItemInfoRendererWithName : ItemInfoRenderer {
-    [SerializeField] private TextMeshProUGUI _nameText;
+    [SerializeField] private LocalizedText _nameText;
 
     public override void SetItemInfo(BuyableItem item) {
         base.SetItemInfo(item);
-        _nameText.text = item.Name;
+        _nameText.SetText(item.Name);
     }
 
     public override void ResetInfo() {
         base.ResetInfo();
-        _nameText.text = "";
+        _nameText.SetText("");
     }
 }

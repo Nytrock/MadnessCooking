@@ -4,7 +4,7 @@ using UnityEngine;
 public class PopularityUIMore : MonoBehaviour {
     [SerializeField] private GameObject _panel;
     [SerializeField] private GameObject _criticWaitText;
-    [SerializeField] private TextMeshProUGUI _descriptionText;
+    [SerializeField] private LocalizedText _descriptionText;
     [SerializeField] private TextMeshProUGUI _singleChanceText;
     [SerializeField] private TextMeshProUGUI _doubleChanceText;
     [SerializeField] private TextMeshProUGUI _tripleChanceText;
@@ -19,7 +19,7 @@ public class PopularityUIMore : MonoBehaviour {
     }
 
     public void UpdateInfo(PopularityLevel level) {
-        _descriptionText.text = level.Description;
+        _descriptionText.SetText(level.Description);
         _singleChanceText.text = (level.SingleChance / 10.0).ToString() + "%";
         _doubleChanceText.text = (level.DoubleChance / 10.0).ToString() + "%";
         _tripleChanceText.text = (level.TripleChance / 10.0).ToString() + "%";

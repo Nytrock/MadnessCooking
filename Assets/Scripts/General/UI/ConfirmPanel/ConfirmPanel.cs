@@ -1,5 +1,4 @@
 using System;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,7 +6,7 @@ public class ConfirmPanel : MonoBehaviour {
     [SerializeField] private GameObject _panel;
     [SerializeField] private Button _yesButton;
     [SerializeField] private Button _noButton;
-    [SerializeField] private TextMeshProUGUI _confirmText;
+    [SerializeField] private LocalizedText _confirmText;
 
     private void Awake() {
         ChangeState(false);
@@ -16,7 +15,7 @@ public class ConfirmPanel : MonoBehaviour {
     public void StartConfirm(Action<bool> pressAction, string confirmMessage) {
         ChangeState(true);
 
-        _confirmText.text = confirmMessage;
+        _confirmText.SetText(confirmMessage);
         _yesButton.onClick.AddListener(delegate { pressAction(true); EndConfirm(); });
         _noButton.onClick.AddListener(delegate { pressAction(false); EndConfirm(); });
     }

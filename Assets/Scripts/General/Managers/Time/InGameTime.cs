@@ -10,6 +10,4 @@ public class InGameTime : Singleton<InGameTime> {
         base.Awake();
         _timeManager = GetComponent<TimeManager>();
     }
-
-
 }

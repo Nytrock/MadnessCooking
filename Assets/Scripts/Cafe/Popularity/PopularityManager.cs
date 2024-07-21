@@ -42,8 +42,8 @@ public class PopularityManager : MonoBehaviour, IBindable<GeneralData> {
         Debug.Log(_data.Xp);
     }
 
-    public void AddXp(int xp) {
-        _data.AddXp(xp);
+    public void AddXp(float xp) {
+        _data.AddXp((int)xp);
 
         if (_data.Xp >= _nowLevel.NeedXp && !_data.IsMaxLevel) {
             while (_data.Xp >= _nowLevel.NeedXp && !_data.IsMaxLevel) {

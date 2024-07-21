@@ -7,7 +7,7 @@ public class PopularityUI : MonoBehaviour {
     [SerializeField] private PopularityUIMore _additionalUI;
     [SerializeField] private PopularityUIRenderer _renderer;
 
-    [SerializeField] private TextMeshProUGUI _nameText;
+    [SerializeField] private LocalizedText _nameText;
     [SerializeField] private TextMeshProUGUI _levelText;
     [SerializeField] private Slider _progress;
 
@@ -17,7 +17,7 @@ public class PopularityUI : MonoBehaviour {
     }
 
     private void UpdateLevel(PopularityLevel level) {
-        _nameText.text = level.Name;
+        _nameText.SetText(level.Name);
         _levelText.text = level.Number.ToString();
 
         _additionalUI.UpdateInfo(level);

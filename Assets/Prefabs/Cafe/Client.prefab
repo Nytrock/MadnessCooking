@@ -2059,6 +2059,7 @@ GameObject:
   - component: {fileID: 2346223407894411774}
   - component: {fileID: 8098309164740784583}
   - component: {fileID: 1031464870642297000}
+  - component: {fileID: 9030336219340192013}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -2113,7 +2114,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u041D\u0435\u0442"
+  m_text: Client.No
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1528e4081f4f5e342bab2676099abda8, type: 2}
   m_sharedMaterial: {fileID: -2524687543222470605, guid: 1528e4081f4f5e342bab2676099abda8, type: 2}
@@ -2182,6 +2183,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &9030336219340192013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3674571650964132775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64b8cfe32092a2d4686b80689560f005, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _table: UITable
 --- !u!1 &3738705040134803322
 GameObject:
   m_ObjectHideFlags: 0
@@ -2798,6 +2812,7 @@ GameObject:
   - component: {fileID: 3190712817664182587}
   - component: {fileID: 7636008871792548068}
   - component: {fileID: 123926051307009547}
+  - component: {fileID: 5510423313036108512}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -2852,7 +2867,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u0414\u0430"
+  m_text: Client.Yes
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1528e4081f4f5e342bab2676099abda8, type: 2}
   m_sharedMaterial: {fileID: -2524687543222470605, guid: 1528e4081f4f5e342bab2676099abda8, type: 2}
@@ -2921,6 +2936,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &5510423313036108512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4610395138467687475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64b8cfe32092a2d4686b80689560f005, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _table: UITable
 --- !u!1 &4678762926297021207
 GameObject:
   m_ObjectHideFlags: 0

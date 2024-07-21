@@ -1,11 +1,10 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class HoverText : MonoBehaviour {
     [SerializeField] private RectTransform _panel;
     [SerializeField] private Vector2 _offset;
-    [SerializeField] private TextMeshProUGUI _text;
+    [SerializeField] private LocalizedText _text;
     private bool _isHovered = false;
 
     private void Awake() {
@@ -20,7 +19,7 @@ public class HoverText : MonoBehaviour {
     }
 
     public void ShowText(string text) {
-        _text.text = text;
+        _text.SetText(text);
         ChangeState(true);
 
         float mousePosition = Input.mousePosition.x;

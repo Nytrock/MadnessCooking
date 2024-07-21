@@ -286,11 +286,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a23e13baddd24e478e8805ac8c34180, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _technicManager: {fileID: 0}
-  _kitchenStorage: {fileID: 0}
   _foodInfo:
     _icon: {fileID: 5382870114338775653}
-    _nameText: {fileID: 6935317983241640630}
+    _nameText: {fileID: 1086899706960445692}
   _tableIndexText: {fileID: 8829304574815163656}
   _recipe: {fileID: 414551659102923663}
   _startState: {fileID: 3869116745533427104}
@@ -1435,6 +1433,7 @@ GameObject:
   - component: {fileID: 8875687582342981563}
   - component: {fileID: 7726401637936808416}
   - component: {fileID: 6935317983241640630}
+  - component: {fileID: 1086899706960445692}
   m_Layer: 0
   m_Name: Name
   m_TagString: Untagged
@@ -1558,6 +1557,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &1086899706960445692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6445528066952413863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64b8cfe32092a2d4686b80689560f005, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _table: FoodAndTechnicTable
 --- !u!1 &7085556654474556945
 GameObject:
   m_ObjectHideFlags: 0
@@ -1682,9 +1694,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 929b2cd462abf724189ca0032b4892d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hoverText: {fileID: 0}
-  _techicIcon:
-    _image: {fileID: 1207480647909498236}
 --- !u!1001 &327030360554470286
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -1,10 +1,9 @@
-using TMPro;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
 public class CafeStateChangerAnimator : MonoBehaviour {
     [SerializeField] private CafeStateChanger _cafeOpener;
-    [SerializeField] private TextMeshProUGUI _text;
+    [SerializeField] private LocalizedText _text;
     [SerializeField] private string _descriptionOpened;
     [SerializeField] private string _descriptionClosed;
 
@@ -23,8 +22,8 @@ public class CafeStateChangerAnimator : MonoBehaviour {
     public void ChangeSignText() {
         _cafeOpener.CafeChanged -= ChangeSignText;
         if (_cafeOpener.IsOpened)
-            _text.text = _descriptionOpened;
+            _text.SetText(_descriptionOpened);
         else
-            _text.text = _descriptionClosed;
+            _text.SetText(_descriptionClosed);
     }
 }

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1509674352141130188}
   - component: {fileID: 8936444757748563491}
   - component: {fileID: 7204561524006139522}
+  - component: {fileID: 2905500427022427285}
   m_Layer: 0
   m_Name: Price
   m_TagString: Untagged
@@ -136,6 +137,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &2905500427022427285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1994906781104072094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64b8cfe32092a2d4686b80689560f005, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _table: UITable
 --- !u!1 &2440588609278893291
 GameObject:
   m_ObjectHideFlags: 0
@@ -344,6 +358,7 @@ GameObject:
   - component: {fileID: 6805302801317532070}
   - component: {fileID: 208376829363787805}
   - component: {fileID: 1861469390694902705}
+  - component: {fileID: 4271301347158919436}
   m_Layer: 0
   m_Name: Description
   m_TagString: Untagged
@@ -467,6 +482,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &4271301347158919436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3538070368223619078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64b8cfe32092a2d4686b80689560f005, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _table: DecorTable
 --- !u!1 &6751845763254829717
 GameObject:
   m_ObjectHideFlags: 0
@@ -560,15 +588,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _sideInfo:
-    _grayscaleMaterial: {fileID: 2100000, guid: 7c2aa74e2b2bca04f9fea58636c61649, type: 2}
     _image: {fileID: 3097027470754428958}
   _buyButton: {fileID: 736381651559135907}
   _itemInfoRenderer:
     _icon: {fileID: 2320696172845768531}
-    _nameText: {fileID: 9075677675145465874}
-    _descriptionText: {fileID: 1861469390694902705}
-    _priceText: {fileID: 7204561524006139522}
-  _priceDescription: BuyPanel.Buy
+    _nameText: {fileID: 5852672576248962883}
+    _descriptionText: {fileID: 4271301347158919436}
+    _priceText: {fileID: 2905500427022427285}
+  _priceDescription: General.Price
 --- !u!1 &7431017340219757589
 GameObject:
   m_ObjectHideFlags: 0
@@ -580,6 +607,7 @@ GameObject:
   - component: {fileID: 4742270158955239160}
   - component: {fileID: 1766599378022082175}
   - component: {fileID: 9075677675145465874}
+  - component: {fileID: 5852672576248962883}
   m_Layer: 0
   m_Name: Name
   m_TagString: Untagged
@@ -703,6 +731,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &5852672576248962883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7431017340219757589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64b8cfe32092a2d4686b80689560f005, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _table: DecorTable
 --- !u!1 &8133812222958491930
 GameObject:
   m_ObjectHideFlags: 0
