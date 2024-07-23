@@ -13,9 +13,9 @@ public abstract class HoldAdd : MonoBehaviour, IBindable<FarmData> {
     [SerializeField, Min(0)] private float _fatigueCoef;
 
     protected bool _isWork;
-    protected HoldAddData _holdData;
+    protected HoldAddData _data;
 
-    public int ReadyCount => _holdData.ReadyCount;
+    public int ReadyCount => _data.ReadyCount;
 
     private void Awake() {
         _upgradeManager.ItemAdded += CheckAddedUpgrade;
@@ -30,63 +30,63 @@ public abstract class HoldAdd : MonoBehaviour, IBindable<FarmData> {
         _isWork = false;
         _holdUI.SetTimeWait(_timeWait);
         _holdUI.ChangeUI(_isWork);
-        _holdData.ResetAll();
+        _data.ResetAll();
     }
 
-    private void UpdateUpgrades() {
-        gameObject.SetActive(_holdData.IsUnlocked);
-        _holdData.UpdateUpgrades(_autoWorkUpgrade);
+    protected virtual void UpdateUpgrades() {
+        gameObject.SetActive(_data.IsUnlocked);
+        _data.UpdateUpgrades(_autoWorkUpgrade);
     }
 
     public virtual void ChangeWorkMode(bool newValue) {
         _holdUI.ChangeUI(newValue);
-        if (_holdData.IsAuto)
+        if (_data.IsAuto)
             return;
 
         _isWork = newValue;
         if (!_isWork)
-            _holdData.ResetTime();
+            _data.ResetTime();
     }
 
     protected virtual void Update() {
-        if (!_isWork && !_holdData.IsAuto)
+        if (!_isWork && !_data.IsAuto)
             return;
 
         UpdateTimer();
     }
 
     protected virtual void UpdateTimer() {
-        if (!_holdData.IsAuto)
+        if (!_data.IsAuto)
             FatigueManager.Instance.ChangeFatigue(_fatigueCoef);
 
-        if (_holdData.NowTime < _timeWait) {
-            _holdData.UpdateTime();
-            _holdUI.UpdateTime(_holdData.NowTime);
+        if (_data.NowTime < _timeWait) {
+            _data.UpdateTime();
+            _holdUI.UpdateTime(_data.NowTime);
         } else {
             AddReady();
         }
     }
 
     protected virtual void AddReady() {
-        _holdData.AddReady();
-        _holdUI.UpdateCount(_holdData);
+        _data.AddReady();
+        _holdUI.UpdateCount(_data);
     }
 
     public void SetReady(int count) {
-        _holdData.SetReady(count);
-        _holdUI.UpdateCount(_holdData);
+        _data.SetReady(count);
+        _holdUI.UpdateCount(_data);
     }
 
     public virtual void SubtractReady() {
-        _holdData.SubtractReady();
-        _holdUI.UpdateCount(_holdData);
+        _data.SubtractReady();
+        _holdUI.UpdateCount(_data);
     }
 
     public virtual void CheckAddedUpgrade(BaseUpgrade upgrade) {
         if (upgrade == _unlockUpgrade)
-            _holdData.Unlock();
+            _data.Unlock();
         else if (upgrade == _autoWorkUpgrade)
-            _holdData.MakeAuto();
+            _data.MakeAuto();
 
         UpdateUpgrades();
     }

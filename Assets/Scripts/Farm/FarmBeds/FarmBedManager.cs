@@ -7,7 +7,6 @@ public class FarmBedManager : SaveableSpaceManager<FarmData>, IUpgradeable<FarmU
     private FarmUpgradeData _upgradeData;
 
     [Header("Upgrades")]
-    [SerializeField] private BaseUpgrade _autoWheatUpgrade;
     [SerializeField] private BaseUpgrade _growStatusShowUpgrade;
 
     protected override void AddSpace(int index) {
@@ -34,7 +33,5 @@ public class FarmBedManager : SaveableSpaceManager<FarmData>, IUpgradeable<FarmU
     public void CheckAddedUpgrade(BaseUpgrade upgrade) {
         if (upgrade == _growStatusShowUpgrade)
             _upgradeData.ChangeGrowStatusShow();
-        else if (upgrade == _autoWheatUpgrade)
-            _upgradeData.ChangeAutoWheat();
     }
 }

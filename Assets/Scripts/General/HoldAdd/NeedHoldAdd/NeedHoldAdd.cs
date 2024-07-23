@@ -2,7 +2,7 @@ using System;
 
 public abstract class NeedHoldAdd : HoldAdd {
     protected NeedHoldAddUI _needHoldUI => _holdUI as NeedHoldAddUI;
-    protected NeedHoldAddData _needHoldData => _holdData as NeedHoldAddData;
+    protected NeedHoldAddData _needHoldData => _data as NeedHoldAddData;
 
     protected override void LateStart() {
         if (_needHoldData == null || _needHoldUI == null)

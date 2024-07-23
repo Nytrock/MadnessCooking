@@ -13,7 +13,7 @@ public class FarmBedUpgraderUI : ChoiceBuyWithCameraStopUI<FarmBedUpgrade> {
 
     protected override void GenerateChoiceButtons() {
         int index = 0;
-        foreach (var upgrade in _manager.GetAvailableUpgrades()) {
+        foreach (var upgrade in _manager.GetAllUpgrades()) {
             bool isAccessable = CheckUpgradeAccessable(upgrade);
             if (isAccessable) {
                 ChoiceBuyButton<FarmBedUpgrade> button = _choiceButtonPool.GetObject();
@@ -54,6 +54,9 @@ public class FarmBedUpgraderUI : ChoiceBuyWithCameraStopUI<FarmBedUpgrade> {
         isAccessable &= !_changingBed.HaveUpgrade(upgrade);
         foreach (var needUpgrade in upgrade.NeedItems) {
             var needFarmBedUpgrade = needUpgrade as FarmBedUpgrade;
+            if (needFarmBedUpgrade == null)
+                continue;
+
             isAccessable &= _changingBed.HaveUpgrade(needFarmBedUpgrade);
         }
 

@@ -45,9 +45,8 @@ public class FarmBed : MonoBehaviour {
         Data.UpdateTime();
         if (Data.NowTime > _growTime) {
             Data.AddIngredient();
-            if (_upgradeData.IsAutoWheat && Data.PlantedIngredient == _wheat) {
-                _wheatManager.AddWheat(Data.Count);
-                Data.SetCount(0);
+            if (Data.IsAutoCollect) {
+                SendIngredients();
                 return;
             }
 

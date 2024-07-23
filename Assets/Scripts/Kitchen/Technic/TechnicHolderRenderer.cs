@@ -4,6 +4,7 @@ using UnityEngine;
 public class TechnicHolderRenderer : MonoBehaviour {
     [SerializeField] private GameObject _standardVisual;
     [SerializeField] private GameObject _repairVisual;
+    [SerializeField] private GameObject _brokenVisual;
 
     private Animator _animator;
 
@@ -15,5 +16,6 @@ public class TechnicHolderRenderer : MonoBehaviour {
         _animator.SetBool("isCooking", data.IsCooking);
         _repairVisual.SetActive(data.IsRepairing);
         _standardVisual.SetActive(!data.IsRepairing);
+        _brokenVisual.SetActive(data.NowStrength == 0);
     }
 }

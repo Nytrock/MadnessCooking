@@ -7,6 +7,7 @@ public class FarmBedUpgrader : MonoBehaviour {
     [SerializeField] private CoefficientFarmBedUpgrade _technicSpeedUp;
     [SerializeField] private FarmBedUpgrade _instantPests;
     [SerializeField] private FarmBedUpgrade _pestsRemove;
+    [SerializeField] private FarmBedUpgrade _autoCollect;
 
     private readonly List<FarmBedUpgrade> _availableUpgrades = new();
     private FarmBedData _bedData;
@@ -22,6 +23,8 @@ public class FarmBedUpgrader : MonoBehaviour {
             _bedData.PestsGenerator.SetInstantUpgrade();
         else if (upgrade == _pestsRemove)
             _bedData.PestsGenerator.SetRemoveUpgrade();
+        else if (upgrade == _autoCollect)
+            _bedData.SetAutoCollect();
         _availableUpgrades.Add(upgrade);
     }
 

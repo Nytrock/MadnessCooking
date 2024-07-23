@@ -2,6 +2,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
 public class FlourMill : NeedHoldAdd, IUpgradeable<FarmUpgradeData> {
+    [SerializeField] private IngredientsManager _ingredientsManager;
     [SerializeField] private Puncher _puncher;
     [SerializeField, Min(0)] private float _wasteAmount;
 
@@ -29,7 +30,7 @@ public class FlourMill : NeedHoldAdd, IUpgradeable<FarmUpgradeData> {
     public override void Bind(FarmData data, bool isFileEmpty) {
         if (isFileEmpty)
             data.FlourMill = new();
-        _holdData = data.FlourMill;
+        _data = data.FlourMill;
 
         _cowData = data.Cow;
         base.Bind(data, isFileEmpty);
@@ -37,5 +38,11 @@ public class FlourMill : NeedHoldAdd, IUpgradeable<FarmUpgradeData> {
 
     public void BindUpgrade(FarmUpgradeData upgradeData) {
         _upgradeData = upgradeData;
+    }
+
+    protected override void UpdateUpgrades() {
+        base.UpdateUpgrades();
+        if (_data.IsUnlocked)
+            _ingredientsManager.AddItem(ConstIngredients.Instance.Flour);
     }
 }

@@ -16,6 +16,7 @@ public class FarmBedData {
     [SerializeField] private BedHolderBoosterData _fertilizeBoost;
     [SerializeField] private PestsGeneratorData _pestsGenerator;
     [SerializeField] private float _independentBoost;
+    [SerializeField] private bool _isAutoCollect;
 
     public BedType BedType => _bedType;
     public Ingredient PlantedIngredient => _plantedIngredient;
@@ -29,6 +30,7 @@ public class FarmBedData {
     public PestsGeneratorData PestsGenerator => _pestsGenerator;
     public float SummarizedBoost => _waterBoost.Boost * _fertilizeBoost.Boost
         * _independentBoost * _pestsGenerator.PestsSlowdown;
+    public bool IsAutoCollect => _isAutoCollect;
 
     public FarmBedData() {
         _waterBoost = new();
@@ -95,5 +97,9 @@ public class FarmBedData {
 
     public void SetIndependentBoost(CoefficientFarmBedUpgrade upgrade) {
         _independentBoost = upgrade.Coefficient;
+    }
+
+    public void SetAutoCollect() {
+        _isAutoCollect = true;
     }
 }

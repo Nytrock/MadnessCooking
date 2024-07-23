@@ -6,7 +6,7 @@ public class FarmBedUpgradeManager : MonoBehaviour, IUpgradeable<FarmUpgradeData
     [SerializeField] private FarmBedUpgrade[] _allUpgrades;
     private FarmUpgradeData _upgradeData;
 
-    public IEnumerable<FarmBedUpgrade> GetAvailableUpgrades() {
+    public IEnumerable<FarmBedUpgrade> GetAllUpgrades() {
         foreach (var upgrade in _allUpgrades)
             yield return upgrade;
     }

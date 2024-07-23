@@ -4,23 +4,17 @@ using UnityEngine;
 
 [Serializable]
 public class FarmUpgradeData : LocalUpgradeData {
-    [SerializeField] private bool _isAutoWheat;
     [SerializeField] private bool _isGrowStatusShow;
     [SerializeField] private bool _isWheatDistributing;
     [SerializeField] private bool _isPuncherProgressShow;
     [SerializeField] private List<FarmBedUpgrade> _availableFarmBedUpgrades;
 
-    public bool IsAutoWheat => _isAutoWheat;
     public bool IsGrowStatusShow => _isGrowStatusShow;
     public bool IsPuncherProgressShow => _isPuncherProgressShow;
     public bool IsWheatDistributing => _isWheatDistributing;
 
     public FarmUpgradeData() {
         _availableFarmBedUpgrades = new();
-    }
-
-    public void ChangeAutoWheat() {
-        _isAutoWheat = true;
     }
 
     public void ChangeGrowStatusShow() {
