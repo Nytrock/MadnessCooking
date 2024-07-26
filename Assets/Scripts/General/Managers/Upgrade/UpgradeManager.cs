@@ -26,10 +26,10 @@ public class UpgradeManager : SaveableItemManager<BaseUpgrade, GameData> {
     }
 
     private void BindUpgradeData() {
-        _generalManager.BingUpgradeData();
-        _cafeManager.BingUpgradeData();
-        _kitchenManager.BingUpgradeData();
-        _farmManager.BingUpgradeData();
-        _officeManager.BingUpgradeData();
+        _generalManager.BindUpgradeData();
+        _cafeManager.BindUpgradeData();
+        _kitchenManager.BindUpgradeData();
+        _farmManager.BindUpgradeData();
+        _officeManager.BindUpgradeData();
     }
 }

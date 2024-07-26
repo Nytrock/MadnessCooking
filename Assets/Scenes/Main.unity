@@ -3763,8 +3763,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 382b38333d73dc14eafb2742cda40d57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _officeUpgradeableObjects:
-  - {fileID: 1557177629}
+  _upgradeables:
+  - _underlyingValue: {fileID: 1557177629}
 --- !u!1 &125939286
 GameObject:
   m_ObjectHideFlags: 0
@@ -17149,6 +17149,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c9b5012d648e464494841b02feb876b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _locales: []
+  _defaultLocale: {fileID: 0}
 --- !u!1 &487815580
 GameObject:
   m_ObjectHideFlags: 0
@@ -17648,13 +17650,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: feb8f71eca01d484d83d7ed1838ed5cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _kitchenUpgradeableObjects:
-  - {fileID: 2098111177}
-  - {fileID: 1297580539}
-  - {fileID: 750651162}
-  - {fileID: 1288455442}
-  - {fileID: 206523383}
-  - {fileID: 1893563482}
+  _upgradeables:
+  - _underlyingValue: {fileID: 2098111177}
+  - _underlyingValue: {fileID: 1297580539}
+  - _underlyingValue: {fileID: 750651162}
+  - _underlyingValue: {fileID: 1288455442}
+  - _underlyingValue: {fileID: 206523383}
+  - _underlyingValue: {fileID: 1893563482}
 --- !u!1 &496575275
 GameObject:
   m_ObjectHideFlags: 0
@@ -20660,14 +20662,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7549a3856f307e847b28fa9ce188bea5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _officeBindableObjects:
-  - {fileID: 125818470}
-  - {fileID: 442335472}
-  - {fileID: 1288455442}
-  - {fileID: 1711172969}
-  - {fileID: 206523383}
-  - {fileID: 1131650979}
-  - {fileID: 804304421}
+  _bindables:
+  - _underlyingValue: {fileID: 125818470}
+  - _underlyingValue: {fileID: 442335472}
+  - _underlyingValue: {fileID: 1288455442}
+  - _underlyingValue: {fileID: 1711172969}
+  - _underlyingValue: {fileID: 206523383}
+  - _underlyingValue: {fileID: 1131650979}
+  - _underlyingValue: {fileID: 804304421}
 --- !u!1 &585307978
 GameObject:
   m_ObjectHideFlags: 0
@@ -27212,13 +27214,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed2bbb2ada8084a4bbd4179adf266c70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _farmUpgradeableObjects:
-  - {fileID: 1231044660}
-  - {fileID: 1257875750}
-  - {fileID: 590866774}
-  - {fileID: 197975456}
-  - {fileID: 502661638}
-  - {fileID: 1401554208}
+  _upgradeables:
+  - _underlyingValue: {fileID: 1231044660}
+  - _underlyingValue: {fileID: 1257875750}
+  - _underlyingValue: {fileID: 590866774}
+  - _underlyingValue: {fileID: 502661638}
+  - _underlyingValue: {fileID: 502661638}
+  - _underlyingValue: {fileID: 1401554208}
 --- !u!1 &757342391
 GameObject:
   m_ObjectHideFlags: 0
@@ -35632,8 +35634,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efc90ddd4a6c8ca46a13f51a21d9bfe3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cafeUpgradeableObjects:
-  - {fileID: 2125806884}
+  _upgradeables:
+  - _underlyingValue: {fileID: 2125806884}
 --- !u!1 &1006096968
 GameObject:
   m_ObjectHideFlags: 0
@@ -38213,6 +38215,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cursors: []
+  _defaultCursor: {fileID: 0}
+  _offset: {x: 0, y: 0}
 --- !u!1 &1095035880
 GameObject:
   m_ObjectHideFlags: 0
@@ -38861,8 +38865,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1f1c904a6b48494780746627f9ea850, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _generalUpgradeableObjects:
-  - {fileID: 1646719850}
+  _upgradeables:
+  - _underlyingValue: {fileID: 1646719850}
 --- !u!1 &1122314938
 GameObject:
   m_ObjectHideFlags: 0
@@ -54721,15 +54725,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd253f98eded6c344b53f06a8f55c7d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _generalBindableObjects:
-  - {fileID: 1119929040}
-  - {fileID: 1412654020}
-  - {fileID: 1251689376}
-  - {fileID: 2059865003}
-  - {fileID: 1095035881}
-  - {fileID: 1154027454}
-  - {fileID: 1560551276}
-  - {fileID: 403464058}
+  _bindables:
+  - _underlyingValue: {fileID: 1119929040}
+  - _underlyingValue: {fileID: 1412654020}
+  - _underlyingValue: {fileID: 1251689376}
+  - _underlyingValue: {fileID: 2059865003}
+  - _underlyingValue: {fileID: 1095035881}
+  - _underlyingValue: {fileID: 1154027454}
+  - _underlyingValue: {fileID: 1560551276}
+  - _underlyingValue: {fileID: 403464058}
 --- !u!1 &1552029841
 GameObject:
   m_ObjectHideFlags: 0
@@ -58938,21 +58942,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11ddcfafc09defb4a8b48917abb5f35d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _farmBindableObjects:
-  - {fileID: 756927575}
-  - {fileID: 917452951}
-  - {fileID: 585307979}
-  - {fileID: 461820189}
-  - {fileID: 1671263195}
-  - {fileID: 852812873}
-  - {fileID: 590866774}
-  - {fileID: 1276766701}
-  - {fileID: 1231044660}
-  - {fileID: 1257875750}
-  - {fileID: 1344608377}
-  - {fileID: 1090935202}
-  - {fileID: 1766492819}
-  - {fileID: 197975456}
+  _bindables:
+  - _underlyingValue: {fileID: 756927575}
+  - _underlyingValue: {fileID: 917452951}
+  - _underlyingValue: {fileID: 585307979}
+  - _underlyingValue: {fileID: 461820189}
+  - _underlyingValue: {fileID: 1671263195}
+  - _underlyingValue: {fileID: 852812873}
+  - _underlyingValue: {fileID: 590866774}
+  - _underlyingValue: {fileID: 1276766701}
+  - _underlyingValue: {fileID: 1231044660}
+  - _underlyingValue: {fileID: 1257875750}
+  - _underlyingValue: {fileID: 1344608377}
+  - _underlyingValue: {fileID: 1090935202}
+  - _underlyingValue: {fileID: 1766492819}
+  - _underlyingValue: {fileID: 197975456}
 --- !u!1 &1704386232
 GameObject:
   m_ObjectHideFlags: 0
@@ -65001,13 +65005,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a00cabec4f0675743a6f5512a1c4f15d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cafeBindableObjects:
-  - {fileID: 1005973284}
-  - {fileID: 1436171022}
-  - {fileID: 2131011339}
-  - {fileID: 681891816}
-  - {fileID: 1319052735}
-  - {fileID: 2125806884}
+  _bindables:
+  - _underlyingValue: {fileID: 1005973284}
+  - _underlyingValue: {fileID: 1436171022}
+  - _underlyingValue: {fileID: 2131011339}
+  - _underlyingValue: {fileID: 681891816}
+  - _underlyingValue: {fileID: 1319052735}
+  - _underlyingValue: {fileID: 2125806884}
 --- !u!1 &1857313546
 GameObject:
   m_ObjectHideFlags: 0
@@ -66413,13 +66417,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c439e8e39fe0144ba9cff9f969e4303, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _kithenBindableObjects:
-  - {fileID: 495244800}
-  - {fileID: 1297580539}
-  - {fileID: 397481016}
-  - {fileID: 1103085983}
-  - {fileID: 2098111177}
-  - {fileID: 1548146671}
+  _bindables:
+  - _underlyingValue: {fileID: 495244800}
+  - _underlyingValue: {fileID: 1297580539}
+  - _underlyingValue: {fileID: 397481016}
+  - _underlyingValue: {fileID: 1103085983}
+  - _underlyingValue: {fileID: 2098111177}
+  - _underlyingValue: {fileID: 1548146671}
 --- !u!1 &1902078501
 GameObject:
   m_ObjectHideFlags: 0

@@ -1250,6 +1250,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _panelsManager: {fileID: 2092433439}
+  _saveManager: {fileID: 888605957}
   _submitButton: {fileID: 501898209}
   _cancelButton: {fileID: 615792286}
 --- !u!1 &244183197
@@ -2717,6 +2718,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a087da402baf87043958bdfd0acb80ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _bindables:
+  - _underlyingValue: {fileID: 1513888411}
+  - _underlyingValue: {fileID: 846734629}
   _videoBindableObjects:
   - {fileID: 1513888411}
   - {fileID: 846734629}
@@ -7597,6 +7601,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cd76a6b123e6e2478e1e4d426f16897, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _bindables:
+  - _underlyingValue: {fileID: 2071640277}
   _audioBindableObjects:
   - {fileID: 2071640277}
 --- !u!1 &1106967773
@@ -12473,6 +12479,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d9bef8538d0824f8df9167a32b8e00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _bindables:
+  - _underlyingValue: {fileID: 1674438282}
+  - _underlyingValue: {fileID: 1170333507}
+  - _underlyingValue: {fileID: 1699524143}
   _gameBindableObjects:
   - {fileID: 1674438282}
   - {fileID: 1170333507}

@@ -1,7 +1,8 @@
 using UnityEngine;
 
+
 public class UIActivator : ColliderActivator {
-    [SerializeField, RequireInterface(typeof(IActivable))]
+    [SerializeField, AYellowpaper.RequireInterface(typeof(IActivable))]
     protected MonoBehaviour _activableObject;
     [SerializeField] private LocationManager _locationManager;
 
