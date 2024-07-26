@@ -1,24 +1,20 @@
 using System;
 using UnityEngine;
 
-public class SaveManager : MonoBehaviour {
-    private GameData _gameData;
-    private FileDataService _dataService;
+public abstract class SaveManager<TData> : MonoBehaviour
+    where TData : ISaveable, new() {
 
-    [SerializeField] private UpgradeManager _upgradeManager;
+    [SerializeField] private DataLoader<TData> _loader;
 
-    [Header("Save parts")]
-    [SerializeField] private SaveGeneralManager _generalPart;
-    [SerializeField] private SaveCafeManager _cafePart;
-    [SerializeField] private SaveKitchenManager _kitchenPart;
-    [SerializeField] private SaveFarmManager _farmPart;
-    [SerializeField] private SaveOfficeManager _officePart;
+    private TData _data;
+    private FileDataService<TData> _dataService;
+
+    protected abstract string _fileName { get; }
 
     public event Action SaveEnded;
 
     private void Awake() {
-        _dataService = new FileDataService();
-        Application.targetFrameRate = 60;
+        _dataService = new FileDataService<TData>(_fileName);
     }
 
     private void Start() {
@@ -27,22 +23,28 @@ public class SaveManager : MonoBehaviour {
 
     [ContextMenu("Save")]
     public void Save() {
-        _dataService.Save(_gameData);
+        _dataService.Save(_data);
         SaveEnded?.Invoke();
     }
 
-    [ContextMenu("Load")]
     private void Load() {
-        _gameData = _dataService.Load();
-        bool isFileEmpty = _gameData == null;
-        if (isFileEmpty)
-            _gameData = new GameData();
+        if (_loader == null)
+            return;
 
-        _generalPart.LoadData(_gameData.General, isFileEmpty);
-        _cafePart.LoadData(_gameData.Cafe, isFileEmpty);
-        _kitchenPart.LoadData(_gameData.Kitchen, isFileEmpty);
-        _farmPart.LoadData(_gameData.Farm, isFileEmpty);
-        _officePart.LoadData(_gameData.Office, isFileEmpty);
-        _upgradeManager.Bind(_gameData, isFileEmpty);
+        bool isFileEmpty = !IsDataExists();
+        if (isFileEmpty)
+            _data = new();
+        else
+            _data = _dataService.Load();
+
+        _loader.Load(_data, isFileEmpty);
+    }
+
+    public void Delete() {
+        _dataService.Delete();
+    }
+
+    public bool IsDataExists() {
+        return _dataService.IsFileExists();
     }
 }

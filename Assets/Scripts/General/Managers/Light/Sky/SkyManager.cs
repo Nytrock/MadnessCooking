@@ -16,9 +16,7 @@ public class SkyManager : SubLightManager {
         return null;
     }
 
-    public override void Bind(ref SubLightManagerData data, bool isFileEmpty) {
-        if (isFileEmpty)
-            data = new SkyManagerData();
+    public override void Bind(SubLightManagerData data) {
         _data = data;
         _specialData = _data as SkyManagerData;
     }

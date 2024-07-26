@@ -5,6 +5,9 @@ public class IngredientsManager : SaveableItemManager<Ingredient, FarmData> {
     [SerializeField] private Ingredient[] _allIngredients;
 
     public bool HaveIngredient(Ingredient ingredient) {
+        if (ingredient.Type == IngredientType.Buyable)
+            return true;
+
         return _data.IsItemAvailable(ingredient);
     }
 

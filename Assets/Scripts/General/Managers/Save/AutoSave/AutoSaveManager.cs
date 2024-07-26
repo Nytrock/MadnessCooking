@@ -1,17 +1,15 @@
 using UnityEngine;
 
-[RequireComponent(typeof(SaveManager))]
 public class AutoSaveManager : MonoBehaviour {
     [SerializeField, Min(1)] private int _needAutoSaveMinutes;
     [SerializeField] private AutoSaveUI _UI;
-    private SaveManager _saveManager;
+    [SerializeField] private GameSaveManager _saveManager;
     private float _nowTime;
 
     private float _needAutoSaveTime;
     private bool _isSaving;
 
     private void Awake() {
-        _saveManager = GetComponent<SaveManager>();
         _saveManager.SaveEnded += EndAutoSave;
         _needAutoSaveTime = 60 * _needAutoSaveMinutes;
     }

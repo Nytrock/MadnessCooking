@@ -11,9 +11,9 @@ public class TimeManagerData {
     public Daytime Daytime => _daytime;
     public bool IsWaitingNextDay => _isWaitingNextDay;
 
-    public TimeManagerData(int hours, int minutes) {
-        _globalTime = new SerializableTimeSpan(hours, minutes);
-        _daytime = Daytime.Morning;
+    public TimeManagerData(DaytimeStart daytimeStart) {
+        _globalTime = new SerializableTimeSpan(daytimeStart.Hour, daytimeStart.Minute);
+        _daytime = daytimeStart.Daytime;
     }
 
     public void AddTime(int timeSpeed) {

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class SpritesManager : SubLightManager {
     [SerializeField] private DaytimeSprites[] _lights;
-    protected SpritesManagerData _specialData;
+    [SerializeField] protected SpritesManagerData _specialData;
 
     public override void UpdateMaterial() {
         _material.SetColor("_LightColor", _specialData.NowLight);
@@ -15,9 +15,7 @@ public class SpritesManager : SubLightManager {
         return null;
     }
 
-    public override void Bind(ref SubLightManagerData data, bool isFileEmpty) {
-        if (isFileEmpty)
-            data = new SpritesManagerData();
+    public override void Bind(SubLightManagerData data) {
         _data = data;
         _specialData = _data as SpritesManagerData;
     }

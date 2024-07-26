@@ -5,21 +5,17 @@ using UnityEngine;
 public class LightManagerData {
     [SerializeField] private float _nowTime;
     [SerializeField] private bool _isChanging;
-    [SerializeField] private SubLightManagerData[] _subDatas;
+    [SerializeField] private SkyManagerData _skyData;
+    [SerializeField] private SpritesManagerData _spritesData;
     private float _timeStep;
 
     public bool IsChanging => _isChanging;
+    public SkyManagerData SkyData => _skyData;
+    public SpritesManagerData SpritesData => _spritesData;
 
-    public LightManagerData(int subLightsCount) {
-        _subDatas = new SubLightManagerData[subLightsCount];
-    }
-
-    public SubLightManagerData GetData(int i) {
-        return _subDatas[i];
-    }
-
-    public void SetData(int i, SubLightManagerData data) {
-        _subDatas[i] = data;
+    public LightManagerData() {
+        _skyData = new();
+        _spritesData = new();
     }
 
     public void StartChange() {
@@ -35,7 +31,7 @@ public class LightManagerData {
         _nowTime += _timeStep * InGameTime.Instance.DeltaTime;
         if (_nowTime >= 1)
             _isChanging = false;
-        foreach (var subLight in _subDatas)
-            subLight.UpdateMaterial(_nowTime);
+        _skyData.UpdateMaterial(_nowTime);
+        _spritesData.UpdateMaterial(_nowTime);
     }
 }

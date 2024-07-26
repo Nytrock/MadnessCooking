@@ -16,5 +16,5 @@ public abstract class SubLightManager : MonoBehaviour {
 
     protected abstract DaytimeLight FindLightByDaytime(Daytime daytime);
     public abstract void UpdateMaterial();
-    public abstract void Bind(ref SubLightManagerData data, bool isFileEmpty);
+    public abstract void Bind(SubLightManagerData data);
 }

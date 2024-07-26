@@ -1,35 +1,38 @@
+using System;
 using System.IO;
 using UnityEngine;
 
-public class FileDataService {
+public class FileDataService<TData>
+    where TData : ISaveable {
+
     private readonly JsonSerializer _serializer = new();
     private readonly string _dataPath = Application.persistentDataPath;
-    private readonly string _fileName = "save";
-    private readonly string _fileExtension = "nyt";
+    private readonly string _filePath = Application.persistentDataPath;
+    private readonly string _fileName;
+    private const string _fileExtension = "nyt";
 
-    string GetPathToFile() {
-        return Path.Combine(_dataPath, string.Concat(_fileName, ".", _fileExtension));
+    public FileDataService(string fileName) {
+        _fileName = fileName;
+        _filePath = Path.Combine(_dataPath, string.Concat(_fileName, ".", _fileExtension));
     }
 
-    public void Save(GameData data) {
-        string fileLocation = GetPathToFile();
-        File.WriteAllText(fileLocation, _serializer.Serialize(data));
+    public void Save(TData data) {
+        File.WriteAllText(_filePath, _serializer.Serialize(data));
     }
 
-    public GameData Load() {
-        string fileLocation = GetPathToFile();
+    public TData Load() {
+        if (!IsFileExists())
+            throw new NullReferenceException($"File {_fileName} not exist.");
 
-        if (!File.Exists(fileLocation))
-            return null;
-
-        return _serializer.Deserialize<GameData>(File.ReadAllText(fileLocation));
+        return _serializer.Deserialize<TData>(File.ReadAllText(_filePath));
     }
 
     public void Delete() {
-        string fileLocation = GetPathToFile();
+        if (IsFileExists())
+            File.Delete(_filePath);
+    }
 
-        if (File.Exists(fileLocation)) {
-            File.Delete(fileLocation);
-        }
+    public bool IsFileExists() {
+        return File.Exists(_filePath);
     }
 }

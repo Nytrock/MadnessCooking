@@ -6,7 +6,7 @@ using UnityEngine;
 public class OrdersManager : MonoBehaviour {
     [SerializeField] private KitchenStorage _kitchenStorage;
     [SerializeField] private TechnicManager _technicManager;
-    [SerializeField] private SaveManager _saveManager;
+    [SerializeField] private GameSaveManager _saveManager;
     private readonly List<Order> _orders = new();
     private readonly ClientState[] _suitableStates = { ClientState.Spawn, ClientState.Sit };
 

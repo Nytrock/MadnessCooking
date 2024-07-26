@@ -5,6 +5,7 @@ using UnityEngine;
 public class Chickens : MonoBehaviour, IBindable<FarmData> {
     [SerializeField] private FarmCar _car;
     [SerializeField] private UpgradeManager _upgradeManager;
+    [SerializeField] private IngredientsManager _ingredientsManager;
     [SerializeField] private Puncher _puncher;
     [SerializeField, Min(0)] private float _baseWasteAmount;
     [SerializeField, Min(0)] private float _maxFoodWorkTime;
@@ -94,6 +95,8 @@ public class Chickens : MonoBehaviour, IBindable<FarmData> {
 
     private void ChangeState() {
         gameObject.SetActive(Data.IsUnlocked);
+        if (Data.IsUnlocked)
+            _ingredientsManager.AddItem(_egg);
     }
 
     private void SetInfiniteFood() {

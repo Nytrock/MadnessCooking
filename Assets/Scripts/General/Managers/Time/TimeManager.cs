@@ -64,11 +64,9 @@ public class TimeManager : MonoBehaviour, IBindable<GeneralData> {
     public void Bind(GeneralData data, bool isFileEmpty) {
         if (isFileEmpty) {
             DaytimeStart defaultDaytimeStart = GetDaytimeStartInfo(_defaultDaytime);
-            data.TimeManager = new(defaultDaytimeStart.Hour, defaultDaytimeStart.Minute);
+            data.TimeManager = new(defaultDaytimeStart);
         }
         _data = data.TimeManager;
-
-        CheckDaytime();
         LateStart();
     }
 }
