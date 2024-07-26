@@ -4,7 +4,7 @@ using UnityEngine;
 [Serializable]
 public class SettingsPointData<TValue> {
     [SerializeField] private TValue _nowValue;
-    private TValue _lastValue;
+    [SerializeField] private TValue _lastValue;
 
     public TValue LastValue => _lastValue;
     public bool IsValueChanged => !Equals(_nowValue, _lastValue);

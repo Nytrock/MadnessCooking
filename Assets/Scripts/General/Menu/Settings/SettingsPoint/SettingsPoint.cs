@@ -4,7 +4,7 @@ using UnityEngine;
 public abstract class SettingsPoint<TValue> : BaseSettingsPoint {
     [SerializeField] protected InterfaceReference<ISettingable<TValue>> _settingable;
 
-    protected SettingsPointData<TValue> _data;
+    [SerializeField] protected SettingsPointData<TValue> _data;
 
     public override bool IsValueChanged => _data.IsValueChanged;
 
@@ -21,6 +21,7 @@ public abstract class SettingsPoint<TValue> : BaseSettingsPoint {
 
     public override void Cancel() {
         _data.CancelChanginng();
+        UpdateState();
     }
 
     public override void Submit() {

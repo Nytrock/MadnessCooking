@@ -17,6 +17,7 @@ public class SettingsActionButtonsManager : MonoBehaviour {
             _nowPanel.SettingsChanged -= UpdateButtons;
         _nowPanel = panel;
         _nowPanel.SettingsChanged += UpdateButtons;
+        UpdateButtons();
     }
 
     private void UpdateButtons() {
@@ -33,7 +34,7 @@ public class SettingsActionButtonsManager : MonoBehaviour {
     }
 
     public void SubmitChanges() {
-        _saveManager.Save();
         _nowPanel.SubmitChanges();
+        _saveManager.Save();
     }
 }
