@@ -4,6 +4,7 @@ using UnityEngine;
 public abstract class CameraManager : MonoBehaviour {
     [SerializeField] protected Camera _mainCamera;
     [SerializeField] protected LocationManager _locationManager;
+    [SerializeField] protected Location _location;
     [SerializeField] protected LocationSlider _locationSlider;
     [SerializeField] protected SpaceManager _spaceManager;
     protected float _startPosition;
@@ -64,8 +65,8 @@ public abstract class CameraManager : MonoBehaviour {
         }
     }
 
-    private void ChangeWorkMode(Vector2 newPosition) {
-        _isWorking = newPosition.x == transform.position.x;
+    private void ChangeWorkMode(Location newLocation) {
+        _isWorking = newLocation == _location;
         CameraMoved?.Invoke();
     }
 

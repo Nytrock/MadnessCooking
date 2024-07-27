@@ -3,15 +3,15 @@ using UnityEngine;
 
 [Serializable]
 public class LocationManagerData {
-    [SerializeField] private int _startLocationIndex;
+    [SerializeField] private Location _startLocation;
 
-    public int StartLocationIndex => _startLocationIndex;
+    public Location StartLocation => _startLocation;
 
     public LocationManagerData() {
-        _startLocationIndex = 0;
+        _startLocation = Location.Cafe;
     }
 
-    public void ChangeLocation(int newIndex) {
-        _startLocationIndex = newIndex;
+    public void ChangeLocation(Location newLocation) {
+        _startLocation = newLocation;
     }
 }

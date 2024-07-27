@@ -3,23 +3,30 @@ using UnityEngine;
 
 public class LocationManager : MonoBehaviour, IBindable<GeneralData> {
     [SerializeField] private Camera _mainCamera;
-    [SerializeField] private LocationButton[] _locations;
+    [SerializeField] private LocationPoint[] _locations;
+    [SerializeField] private GameObject _generalUI;
     private LocationManagerData _data;
 
-    public event Action<Vector2> LocationChanged;
+    public event Action<Location> LocationChanged;
 
     private void LateStart() {
-        ChangeLocation(_locations[_data.StartLocationIndex]);
+        ChangeLocation(_data.StartLocation);
     }
 
-    public void ChangeLocation(Vector2 newLocation) {
-        _mainCamera.transform.position = new Vector3(newLocation.x, newLocation.y, -10);
-        LocationChanged?.Invoke(newLocation);
-    }
+    public void ChangeLocation(Location location) {
+        LocationPoint locationPoint = null;
+        foreach (var point in _locations)
+            if (point.Location == location)
+                locationPoint = point;
+        if (locationPoint == null)
+            throw new ArgumentNullException($"There is no point for {location} location");
 
-    public void ChangeLocation(LocationButton newLocation) {
-        _data.ChangeLocation(Array.IndexOf(_locations, newLocation));
-        ChangeLocation(newLocation.Location);
+        _data.ChangeLocation(locationPoint.Location);
+        _mainCamera.transform.position = new Vector3(locationPoint.Point.x, locationPoint.Point.y, -10);
+        _generalUI.SetActive(!locationPoint.IsHideUI);
+        FatigueManager.Instance.ChangeFatigue(locationPoint.FatigueCoef);
+
+        LocationChanged?.Invoke(locationPoint.Location);
     }
 
     public void Bind(GeneralData data, bool isFileEmpty) {

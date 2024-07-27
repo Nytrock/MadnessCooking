@@ -4,26 +4,17 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Button))]
 public class LocationButton : MonoBehaviour {
     [SerializeField] private LocationManager _locationManager;
-    [SerializeField] private Transform _location;
-    [SerializeField, Min(0)] private float _fatigueCoef;
-    private bool _isSceneLoading = true;
-
-    public Vector2 Location => _location.position;
-
+    [SerializeField] private Location _location;
     private Button _button;
 
     private void Awake() {
         _button = GetComponent<Button>();
-        _button.onClick.AddListener(delegate { _locationManager.ChangeLocation(this); });
+        _button.onClick.AddListener(delegate { _locationManager.ChangeLocation(_location); });
         _locationManager.LocationChanged += ChangeMode;
     }
 
-    private void ChangeMode(Vector2 newPosition) {
-        bool isOurLocation = newPosition == (Vector2)_location.position;
-        if (isOurLocation && !_isSceneLoading)
-            FatigueManager.Instance.ChangeFatigue(_fatigueCoef);
-        if (_isSceneLoading)
-            _isSceneLoading = false;
+    private void ChangeMode(Location newLocation) {
+        bool isOurLocation = newLocation == _location;
         _button.interactable = !isOurLocation;
     }
 }

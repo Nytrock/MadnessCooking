@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public class LocationAdditionUI : MonoBehaviour {
-    [SerializeField] private Transform _point;
+    [SerializeField] private Location _location;
     [SerializeField] private LocationManager _locationManager;
     [SerializeField] private GameObject _UI;
 
@@ -9,8 +9,8 @@ public class LocationAdditionUI : MonoBehaviour {
         _locationManager.LocationChanged += UpdateUI;
     }
 
-    private void UpdateUI(Vector2 newPosition) {
-        _UI.SetActive(_point.position.x == newPosition.x);
+    private void UpdateUI(Location newLocation) {
+        _UI.SetActive(_location == newLocation);
     }
 
     public void ChangeUIState(bool newValue) {
