@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SettingsManager : MonoBehaviour, IBindable<SetttingsData> {
+public class SettingsManager : MonoBehaviour, ILoadable<SettingsData> {
     [SerializeField] private GameObject _panel;
     [SerializeField] private SettingsPanelsManager _panelsManager;
 
@@ -25,7 +25,7 @@ public class SettingsManager : MonoBehaviour, IBindable<SetttingsData> {
             _panelsManager.SetDefaultPanel();
     }
 
-    public void Bind(SetttingsData data, bool isFileEmpty) {
+    public void Load(SettingsData data, bool isFileEmpty) {
         _gameSettings.Bind(data.GameSettings, isFileEmpty);
         _audioSettings.Bind(data.AudioSettings, isFileEmpty);
         _videoSettings.Bind(data.VideoSettings, isFileEmpty);

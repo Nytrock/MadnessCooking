@@ -1305,6 +1305,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _settingable:
     _underlyingValue: {fileID: 2071640277}
+  _data:
+    _nowValue: 0
+    _lastValue: 0
   _slider: {fileID: 761292972}
 --- !u!1 &260079805
 GameObject:
@@ -1640,6 +1643,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _settingable:
     _underlyingValue: {fileID: 1674438282}
+  _data:
+    _nowValue: 0
+    _lastValue: 0
   _cursorImage: {fileID: 809761435}
 --- !u!1 &304848662
 GameObject:
@@ -2012,6 +2018,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _settingable:
     _underlyingValue: {fileID: 2071640277}
+  _data:
+    _nowValue: 0
+    _lastValue: 0
   _slider: {fileID: 1521674375}
 --- !u!1 &376579473
 GameObject:
@@ -3495,6 +3504,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _settingable:
     _underlyingValue: {fileID: 1170333507}
+  _data:
+    _nowValue: 0
+    _lastValue: 0
 --- !u!224 &549778337
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4237,6 +4249,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _settingable:
     _underlyingValue: {fileID: 1513888411}
+  _data:
+    _nowValue: 0
+    _lastValue: 0
   _text: {fileID: 1401223265}
 --- !u!1 &676574091
 GameObject:
@@ -6073,10 +6088,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb69cf7de9e7ce245b050777a91ae673, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameLoader: {fileID: 2047788853}
-  _audioLoader: {fileID: 1095952962}
-  _videoLoader: {fileID: 490634998}
-  _settingsManager: {fileID: 397963812}
+  _loadables:
+  - _underlyingValue: {fileID: 2047788853}
+  - _underlyingValue: {fileID: 1095952962}
+  - _underlyingValue: {fileID: 490634998}
+  - _underlyingValue: {fileID: 397963812}
 --- !u!114 &888605957
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8528,6 +8544,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _settingable:
     _underlyingValue: {fileID: 1699524143}
+  _data:
+    _nowValue: 0
+    _lastValue: 0
   _toggle: {fileID: 1248294029}
 --- !u!224 &1296277487
 RectTransform:
@@ -12059,6 +12078,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _settingable:
     _underlyingValue: {fileID: 846734629}
+  _data:
+    _nowValue: 0
+    _lastValue: 0
   _windowSizeSettings: {fileID: 661491308}
   _text: {fileID: 1578111916}
   _textExtension: VideoSettings.
@@ -12856,6 +12878,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _settingable:
     _underlyingValue: {fileID: 2071640277}
+  _data:
+    _nowValue: 0
+    _lastValue: 0
   _slider: {fileID: 457144043}
 --- !u!224 &1996508055
 RectTransform:
@@ -13027,6 +13052,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _settingable:
     _underlyingValue: {fileID: 2071640277}
+  _data:
+    _nowValue: 0
+    _lastValue: 0
   _slider: {fileID: 1881910461}
 --- !u!1 &2017543941
 GameObject:

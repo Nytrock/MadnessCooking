@@ -28907,12 +28907,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c5f897b2e239694a9337e6aa782d315, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _generalLoader: {fileID: 1550007704}
-  _cafeLoader: {fileID: 1856739612}
-  _kitchenLoader: {fileID: 1898106306}
-  _farmLoader: {fileID: 1704086921}
-  _officeLoader: {fileID: 585237260}
-  _upgradeManager: {fileID: 1299343206}
+  _loadables:
+  - _underlyingValue: {fileID: 1550007704}
+  - _underlyingValue: {fileID: 1856739612}
+  - _underlyingValue: {fileID: 1898106306}
+  - _underlyingValue: {fileID: 1704086921}
+  - _underlyingValue: {fileID: 585237260}
+  - _underlyingValue: {fileID: 1299343206}
 --- !u!1 &819326168
 GameObject:
   m_ObjectHideFlags: 0
@@ -46323,11 +46324,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5becd9c26c71db1489f747414f938e9d, type: 2}
   - {fileID: 11400000, guid: 5c5e9bb4f8ad81e4285b8b96d8ea731b, type: 2}
   - {fileID: 11400000, guid: a5ccdd619285b584e8c79d36780d02a0, type: 2}
-  _generalManager: {fileID: 1119929040}
-  _cafeManager: {fileID: 1005973284}
-  _kitchenManager: {fileID: 495244800}
-  _farmManager: {fileID: 756927575}
-  _officeManager: {fileID: 125818470}
+  _localUpgradeManagers:
+  - {fileID: 1119929040}
+  - {fileID: 1005973284}
+  - {fileID: 495244800}
+  - {fileID: 756927575}
+  - {fileID: 125818470}
 --- !u!4 &1299343207
 Transform:
   m_ObjectHideFlags: 0
