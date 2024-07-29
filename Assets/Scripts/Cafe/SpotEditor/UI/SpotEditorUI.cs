@@ -22,7 +22,9 @@ public class SpotEditorUI : MonoBehaviour {
     public void ChangeCanvasState(bool newState) {
         _canvas.gameObject.SetActive(newState);
 
-        if (!newState) {
+        if (newState) {
+            ChangeChoiceState(false);
+        } else {
             ResizeCanvas(0);
             SetCanvasPosition(0);
         }
@@ -36,12 +38,14 @@ public class SpotEditorUI : MonoBehaviour {
         _canvas.position = new Vector3(xPosition - (_cellSize / 2), _canvas.position.y, _canvas.position.z);
     }
 
-    public void ChangeChoiceState(bool isChoiceActive) {
-        _buttonsContainer.gameObject.SetActive(isChoiceActive);
-        _buttonAdd.SetActive(!isChoiceActive);
+    public void ChangeChoiceState(bool newState) {
+        _buttonsContainer.gameObject.SetActive(newState);
+        _buttonAdd.SetActive(!newState);
 
-        if (isChoiceActive)
+        if (newState) {
             _buttonsContainer.SetButtonsNumber(_editor.SpotManager.GetFreeSpace());
+            _editor.SetPreviewIndex(0);
+        }
     }
 
     public void SetPreview(int previewIndex) {

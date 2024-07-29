@@ -7,6 +7,7 @@ public class MenuManager : MonoBehaviour {
     [SerializeField] private MenuButton _continueButton;
     [SerializeField] private ConfirmPanel _confirmPanel;
     [SerializeField] private SettingsManager _settings;
+    [SerializeField] private MenuButtonSelector _buttonSelector;
 
     private void Start() {
         _continueButton.SetInteractable(_saveManager.IsDataExists());
@@ -14,6 +15,7 @@ public class MenuManager : MonoBehaviour {
     }
 
     public void NewGameConfirm() {
+        _buttonSelector.ChangeState(false);
         if (_saveManager.IsDataExists())
             _confirmPanel.StartConfirm(NewGame, "Menu.NewGameConfirm");
         else
@@ -21,8 +23,10 @@ public class MenuManager : MonoBehaviour {
     }
 
     private void NewGame(bool isConfirm = true) {
-        if (!isConfirm)
+        if (!isConfirm) {
+            _buttonSelector.ChangeState(true);
             return;
+        }
 
         _saveManager.Delete();
         LoadGame();
@@ -47,9 +51,11 @@ public class MenuManager : MonoBehaviour {
 
     private void ChangeState() {
         _panel.SetActive(!_panel.activeSelf);
+        _buttonSelector.ChangeState(_panel.activeSelf);
     }
 
     private void ChangeState(bool newState) {
         _panel.SetActive(newState);
+        _buttonSelector.ChangeState(newState);
     }
 }

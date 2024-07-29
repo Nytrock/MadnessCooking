@@ -63,7 +63,6 @@ public class Client : MonoBehaviour {
         _skin.RotateSkin(direction);
 
         _skin.ChangeWalkState(true);
-        MoveClient(true);
     }
 
     private void RotateSkin() {
@@ -75,16 +74,6 @@ public class Client : MonoBehaviour {
         RotateSkin();
         _skin.ChangeSortingLayer(false);
         _skin.ChangeWalkState(false);
-        MoveClient(false);
-    }
-
-    private void MoveClient(bool isWalk) {
-        float posY;
-        if (isWalk)
-            posY = Spawner.SpawnPoint.y;
-        else
-            posY = Spawner.GetSpot(SpotIndex).GetTarget(TableIndex).y;
-        transform.position = new Vector2(transform.position.x, posY);
     }
 
     public void Setup(ClientSettings settings) {
