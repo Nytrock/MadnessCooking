@@ -29,9 +29,8 @@ public class KitchenCat : DecorHolder, IBindable<KitchenData> {
         _data.Update();
     }
 
-    public void Bind(KitchenData data, bool isFileEmpty) {
-        if (isFileEmpty)
-            data.Cat = new(_needTime);
+    public void Bind(KitchenData data) {
+        data.Cat ??= new(_needTime);
         _data = data.Cat;
         UpdateEyes();
     }

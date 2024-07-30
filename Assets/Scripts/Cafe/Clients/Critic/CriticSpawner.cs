@@ -59,9 +59,8 @@ public class CriticSpawner : MonoBehaviour, IBindable<CafeData> {
         _criticUI.SetMessage(CriticMessageType.Failure);
     }
 
-    public void Bind(CafeData data, bool isFileEmpty) {
-        if (isFileEmpty)
-            data.CriticSpawner = new();
+    public void Bind(CafeData data) {
+        data.CriticSpawner ??= new();
         _data = data.CriticSpawner;
     }
 }

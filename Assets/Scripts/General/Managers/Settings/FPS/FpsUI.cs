@@ -18,9 +18,8 @@ public class FpsUI : MonoBehaviour, IBindable<GameSettingsData>, ISettingable<bo
         _text.text = $"{_manager.GetFPS():F0} fps";
     }
 
-    public void Bind(GameSettingsData data, bool isFileEmpty) {
-        if (isFileEmpty)
-            data.FpsManager = new(DefaultValue);
+    public void Bind(GameSettingsData data) {
+        data.FpsManager ??= new(DefaultValue);
         _data = data.FpsManager;
         UpdateValue();
     }

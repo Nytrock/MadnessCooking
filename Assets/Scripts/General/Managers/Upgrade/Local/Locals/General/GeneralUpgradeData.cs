@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 [Serializable]
-public class GeneralUpgradeData : LocalUpgradeData {
+public class GeneralUpgradeData : ISaveable {
     [SerializeField] private bool _isUpgradedTimeRenderer;
 
     public bool IsUpgradedTimeRenderer => _isUpgradedTimeRenderer;

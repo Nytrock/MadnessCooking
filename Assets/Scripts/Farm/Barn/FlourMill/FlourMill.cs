@@ -27,13 +27,12 @@ public class FlourMill : NeedHoldAdd, IUpgradeable<FarmUpgradeData> {
         base.ChangeWorkMode(newValue);
     }
 
-    public override void Bind(FarmData data, bool isFileEmpty) {
-        if (isFileEmpty)
-            data.FlourMill = new();
+    public override void Bind(FarmData data) {
+        data.FlourMill ??= new();
         _data = data.FlourMill;
 
         _cowData = data.Cow;
-        base.Bind(data, isFileEmpty);
+        base.Bind(data);
     }
 
     public void BindUpgrade(FarmUpgradeData upgradeData) {

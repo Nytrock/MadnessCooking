@@ -21,7 +21,7 @@ public class ScreenSizeSettingsPoint : IntSettingsPoint, IBindable<VideoSettings
         gameObject.SetActive(newState);
     }
 
-    public void Bind(VideoSettingsData data, bool isFileEmpty) {
+    public void Bind(VideoSettingsData data) {
         _data = data.ScreenSize;
         UpdateState();
     }

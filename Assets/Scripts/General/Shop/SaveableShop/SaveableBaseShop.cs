@@ -113,7 +113,7 @@ public abstract class SaveableBaseShop<TItem, TData> : BaseShop, IBindable<TData
         _data.OrderItems(sortMethod);
     }
 
-    public virtual void Bind(TData data, bool isFileEmpty) {
+    public virtual void Bind(TData data) {
         LateStart();
     }
 }

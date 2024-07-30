@@ -33,9 +33,8 @@ public class LightManager : MonoBehaviour, IBindable<GeneralData> {
         _skyManager.SetNewLight(newDaytime);
     }
 
-    public void Bind(GeneralData data, bool isFileEmpty) {
-        if (isFileEmpty)
-            data.LightManager = new();
+    public void Bind(GeneralData data) {
+        data.LightManager ??= new();
         _data = data.LightManager;
 
         _data.SetTimeStep(_secondsToChangeColor);

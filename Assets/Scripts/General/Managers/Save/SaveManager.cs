@@ -4,7 +4,7 @@ using UnityEngine;
 public abstract class SaveManager<TData> : MonoBehaviour
     where TData : ISaveable, new() {
 
-    [SerializeField] private DataLoader<TData> _loader;
+    [SerializeField] private DataBinder<TData> _binder;
 
     private TData _data;
     private FileDataService<TData> _dataService;
@@ -28,7 +28,7 @@ public abstract class SaveManager<TData> : MonoBehaviour
     }
 
     private void Load() {
-        if (_loader == null)
+        if (_binder == null)
             return;
 
         bool isFileEmpty = !IsDataExists();
@@ -37,7 +37,7 @@ public abstract class SaveManager<TData> : MonoBehaviour
         else
             _data = _dataService.Load();
 
-        _loader.Load(_data, isFileEmpty);
+        _binder.Bind(_data);
     }
 
     public void Delete() {

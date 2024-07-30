@@ -62,7 +62,7 @@ public class OrdersUI : MonoBehaviour, IUpgradeable<KitchenUpgradeData>, IBindab
             button.UpdateRecipeTechnic();
     }
 
-    public void Bind(KitchenData data, bool isFileEmpty) {
+    public void Bind(KitchenData data) {
         foreach (var button in _orderButtons) {
             if (button.Order.IsCooking)
                 button.Cook();

@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 [Serializable]
-public class KitchenUpgradeData : LocalUpgradeData {
+public class KitchenUpgradeData : ISaveable {
     [SerializeField] private bool _isAutoSpice;
     [SerializeField] private bool _isStrengthShow;
     [SerializeField] private bool _isWaterAvailable;

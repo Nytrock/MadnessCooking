@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 [Serializable]
-public class OfficeUpgradeData : LocalUpgradeData {
+public class OfficeUpgradeData : ISaveable {
     [SerializeField] private float _internetDownloadSpeed;
     [SerializeField] private bool _isInternetDownloadInstant;
 

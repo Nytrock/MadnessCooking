@@ -2,7 +2,7 @@ using AYellowpaper;
 using UnityEngine;
 
 public abstract class SaveableLocalUpgradeManager<TUpgradeData, TData> : LocalUpgradeManager, IBindable<TData>
-    where TUpgradeData : LocalUpgradeData where TData : ISaveable {
+    where TUpgradeData : ISaveable where TData : ISaveable {
 
     [SerializeField] private InterfaceReference<IUpgradeable<TUpgradeData>>[] _upgradeables;
 
@@ -18,5 +18,5 @@ public abstract class SaveableLocalUpgradeManager<TUpgradeData, TData> : LocalUp
             upgradeable.Value.CheckAddedUpgrade(upgrade);
     }
 
-    public abstract void Bind(TData data, bool isFileEmpty);
+    public abstract void Bind(TData data);
 }

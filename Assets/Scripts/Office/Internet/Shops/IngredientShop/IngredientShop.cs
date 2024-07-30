@@ -38,11 +38,10 @@ public class IngredientShop : BaseInstantShop<Ingredient, OfficeData>, IUpgradea
         return new GrayscaleImageData(bedType.Icon, !isBedAvailable);
     }
 
-    public override void Bind(OfficeData data, bool isFileEmpty) {
-        if (isFileEmpty)
-            data.IngredientShop = new(_defaultItemsToBuy);
+    public override void Bind(OfficeData data) {
+        data.IngredientShop ??= new(_defaultItemsToBuy);
         _data = data.IngredientShop;
-        base.Bind(data, isFileEmpty);
+        base.Bind(data);
     }
 
     public void BindUpgrade(KitchenUpgradeData upgradeData) {

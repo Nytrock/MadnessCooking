@@ -159,9 +159,8 @@ public class CafeSpotManager : MonoBehaviour, IBindable<CafeData> {
         SpotsPositionChanged?.Invoke(_cellSize * spot.SeatsCount);
     }
 
-    public void Bind(CafeData data, bool isFileEmpty) {
-        if (isFileEmpty)
-            data.SpotManager = new();
+    public void Bind(CafeData data) {
+        data.SpotManager ??= new();
         _data = data.SpotManager;
         LateStart();
     }

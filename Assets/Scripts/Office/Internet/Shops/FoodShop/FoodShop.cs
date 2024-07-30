@@ -25,11 +25,10 @@ public class FoodShop : BaseChooseShop<Food, OfficeData>, IUpgradeable<KitchenUp
         return true;
     }
 
-    public override void Bind(OfficeData data, bool isFileEmpty) {
-        if (isFileEmpty)
-            data.FoodShop = new(_defaultItemsToBuy);
+    public override void Bind(OfficeData data) {
+        data.FoodShop ??= new(_defaultItemsToBuy);
         _data = data.FoodShop;
-        base.Bind(data, isFileEmpty);
+        base.Bind(data);
     }
 
     public void BindUpgrade(KitchenUpgradeData upgradeData) {

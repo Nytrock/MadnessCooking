@@ -7,10 +7,9 @@ public class FoodManager : SaveableItemManager<Food, KitchenData> {
         return _data.GetItem(Random.Range(0, FoodCount));
     }
 
-    public override void Bind(KitchenData data, bool isFileEmpty) {
-        if (isFileEmpty)
-            data.FoodManager = new();
+    public override void Bind(KitchenData data) {
+        data.FoodManager ??= new();
         _data = data.FoodManager;
-        base.Bind(data, isFileEmpty);
+        base.Bind(data);
     }
 }

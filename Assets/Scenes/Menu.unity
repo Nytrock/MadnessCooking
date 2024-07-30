@@ -3163,7 +3163,7 @@ GameObject:
   - component: {fileID: 490634997}
   - component: {fileID: 490634998}
   m_Layer: 5
-  m_Name: VideoLoader
+  m_Name: VideoBinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6398,7 +6398,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb69cf7de9e7ce245b050777a91ae673, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _loadables:
+  _bindables:
   - _underlyingValue: {fileID: 2047788853}
   - _underlyingValue: {fileID: 1095952962}
   - _underlyingValue: {fileID: 490634998}
@@ -6415,7 +6415,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6168a31ac28489348a61ee6bf2be3dd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _loader: {fileID: 888605956}
+  _binder: {fileID: 888605956}
 --- !u!1 &897792373
 GameObject:
   m_ObjectHideFlags: 0
@@ -8234,7 +8234,7 @@ GameObject:
   - component: {fileID: 1095952961}
   - component: {fileID: 1095952962}
   m_Layer: 5
-  m_Name: AudioLoader
+  m_Name: AudioBinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10500,7 +10500,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58dd5bf06bfd5974d8933e6a8fbcb86f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _loader: {fileID: 0}
+  _binder: {fileID: 0}
 --- !u!4 &1569068873
 Transform:
   m_ObjectHideFlags: 0
@@ -13866,7 +13866,7 @@ GameObject:
   - component: {fileID: 2047788852}
   - component: {fileID: 2047788853}
   m_Layer: 5
-  m_Name: GameLoader
+  m_Name: GameBinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

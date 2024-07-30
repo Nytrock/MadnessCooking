@@ -48,9 +48,8 @@ public class FatigueManager : Singleton<FatigueManager>, IBindable<GeneralData> 
         _decorBonus += decor.FatigueCoef;
     }
 
-    public void Bind(GeneralData data, bool isFileEmpty) {
-        if (isFileEmpty)
-            data.FatigueManager = new(_fatigueMax, _fatigueDefault);
+    public void Bind(GeneralData data) {
+        data.FatigueManager ??= new(_fatigueMax, _fatigueDefault);
         _data = data.FatigueManager;
         LateStart();
     }

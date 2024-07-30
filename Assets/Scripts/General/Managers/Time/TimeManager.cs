@@ -61,11 +61,12 @@ public class TimeManager : MonoBehaviour, IBindable<GeneralData> {
         return maxFatigue / (needHours * 3600 / _sleepTimeSpeed);
     }
 
-    public void Bind(GeneralData data, bool isFileEmpty) {
-        if (isFileEmpty) {
+    public void Bind(GeneralData data) {
+        if (data.TimeManager == null) {
             DaytimeStart defaultDaytimeStart = GetDaytimeStartInfo(_defaultDaytime);
             data.TimeManager = new(defaultDaytimeStart);
         }
+
         _data = data.TimeManager;
         LateStart();
     }

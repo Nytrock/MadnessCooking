@@ -36,9 +36,8 @@ public class Puncher : MonoBehaviour, IBindable<FarmData> {
             Data.ChangeSpeed(_puncherSpeedUp);
     }
 
-    public void Bind(FarmData data, bool isFileEmpty) {
-        if (isFileEmpty)
-            data.Puncher = new();
+    public void Bind(FarmData data) {
+        data.Puncher ??= new();
         Data = data.Puncher;
         LateStart();
     }

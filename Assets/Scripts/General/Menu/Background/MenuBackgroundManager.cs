@@ -6,7 +6,7 @@ public class MenuBackgroundManager : MonoBehaviour {
 
     private void Start() {
         GeneralData stubData = new();
-        _lightManager.Bind(stubData, true);
-        _timeManager.Bind(stubData, true);
+        _lightManager.Bind(stubData);
+        _timeManager.Bind(stubData);
     }
 }

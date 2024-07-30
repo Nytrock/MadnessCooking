@@ -21,7 +21,7 @@ public class ScreenModeSettingsPoint : IntSettingsPoint, IBindable<VideoSettings
         _text.SetText(modeName);
     }
 
-    public void Bind(VideoSettingsData data, bool isFileEmpty) {
+    public void Bind(VideoSettingsData data) {
         _data = data.ScreenMode;
         UpdateState();
     }

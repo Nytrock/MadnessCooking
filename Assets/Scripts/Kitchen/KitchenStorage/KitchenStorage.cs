@@ -11,10 +11,9 @@ public class KitchenStorage : SaveableIngredientStorage<KitchenData> {
         Data.ClearList();
     }
 
-    public override void Bind(KitchenData data, bool isFileEmpty) {
-        if (isFileEmpty)
-            data.KitchenStorage = new(_defaultMaxSpace);
+    public override void Bind(KitchenData data) {
+        data.KitchenStorage ??= new(_defaultMaxSpace);
         Data = data.KitchenStorage;
-        base.Bind(data, isFileEmpty);
+        base.Bind(data);
     }
 }

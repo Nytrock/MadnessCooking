@@ -35,10 +35,9 @@ public class FarmCar : SaveableIngredientStorage<FarmData> {
         _animator.SetBool("isLeave", false);
     }
 
-    public override void Bind(FarmData data, bool isFileEmpty) {
-        if (isFileEmpty)
-            data.Car = new(_defaultMaxSpace);
+    public override void Bind(FarmData data) {
+        data.Car ??= new(_defaultMaxSpace);
         Data = data.Car;
-        base.Bind(data, isFileEmpty);
+        base.Bind(data);
     }
 }

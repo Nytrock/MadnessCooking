@@ -56,9 +56,8 @@ public class FarmCarWaitManager : MonoBehaviour, IBindable<FarmData> {
         }
     }
 
-    public void Bind(FarmData data, bool isFileEmpty) {
-        if (isFileEmpty)
-            data.CarWaitManager = new(_defaultWaitTime);
+    public void Bind(FarmData data) {
+        data.CarWaitManager ??= new(_defaultWaitTime);
         _data = data.CarWaitManager;
 
         if (_data.CarState != CarState.Calm)

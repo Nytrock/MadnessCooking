@@ -35,10 +35,9 @@ public class IngredientsManager : SaveableItemManager<Ingredient, FarmData> {
             base.AddItem(item);
     }
 
-    public override void Bind(FarmData data, bool isFileEmpty) {
-        if (isFileEmpty)
-            data.IngredientManager = new();
+    public override void Bind(FarmData data) {
+        data.IngredientManager ??= new();
         _data = data.IngredientManager;
-        base.Bind(data, isFileEmpty);
+        base.Bind(data);
     }
 }

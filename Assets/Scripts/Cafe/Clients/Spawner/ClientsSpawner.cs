@@ -76,10 +76,15 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
     }
 
     private void SetNewTime() {
-        float popular = _popularityCalculate.GetPopularity();
-        float minTime = _minSpawnTime / popular;
-        float maxTime = _maxSpawnTime / popular;
+        float minTime, maxTime;
+        GetNewTime(out minTime, out maxTime);
         _data.SetNewTime(minTime, maxTime);
+    }
+
+    private void GetNewTime(out float minTime, out float maxTime) {
+        float popular = _popularityCalculate.GetPopularity();
+        minTime = _minSpawnTime / popular;
+        maxTime = _maxSpawnTime / popular;
     }
 
     private void ChangeSpawnMode() {
@@ -154,17 +159,15 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
         _upgradeData = upgradeData;
     }
 
-    public void Bind(CafeData data, bool isFileEmpty) {
-        if (isFileEmpty)
-            data.ClientsSpawner = new();
+    public void Bind(CafeData data) {
+        if (data.ClientsSpawner == null) {
+            GetNewTime(out float minTime, out float maxTime);
+            data.ClientsSpawner = new(minTime, maxTime);
+        }
+
         _data = data.ClientsSpawner;
         _spotData = data.SpotManager;
         _criticData = data.CriticSpawner;
-
-        if (isFileEmpty) {
-            LateStart();
-            return;
-        }
 
         int spotIndex = 0;
         foreach (var spotData in _spotData.Spots) {

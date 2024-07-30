@@ -1,5 +1,5 @@
 public interface IUpgradeable<TData>
-    where TData : LocalUpgradeData {
+    where TData : ISaveable {
 
     void BindUpgrade(TData upgradeData);
     void CheckAddedUpgrade(BaseUpgrade upgrade);

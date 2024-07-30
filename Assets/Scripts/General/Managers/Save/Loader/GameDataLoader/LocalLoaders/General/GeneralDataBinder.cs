@@ -1,4 +1,4 @@
-public class GeneralDataLoader : LocalDataLoader<GameData, GeneralData> {
+public class GeneralDataBinder : LocalDataBinder<GameData, GeneralData> {
     protected override void SetData(GameData data) {
         _data = data.General;
     }

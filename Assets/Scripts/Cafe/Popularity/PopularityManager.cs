@@ -86,9 +86,8 @@ public class PopularityManager : MonoBehaviour, IBindable<GeneralData> {
             _data.RemoveXp(_data.Xp - _nowLevel.NeedXp + 1);
     }
 
-    public void Bind(GeneralData data, bool isFileEmpty) {
-        if (isFileEmpty)
-            data.PopularityManager = new();
+    public void Bind(GeneralData data) {
+        data.PopularityManager ??= new();
         _data = data.PopularityManager;
         LateStart();
     }

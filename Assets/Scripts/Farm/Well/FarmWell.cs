@@ -21,10 +21,9 @@ public class FarmWell : HoldAdd {
         WaterChanged?.Invoke();
     }
 
-    public override void Bind(FarmData data, bool isFileEmpty) {
-        if (isFileEmpty)
-            data.FarmWell = new();
+    public override void Bind(FarmData data) {
+        data.FarmWell ??= new();
         _data = data.FarmWell;
-        base.Bind(data, isFileEmpty);
+        base.Bind(data);
     }
 }

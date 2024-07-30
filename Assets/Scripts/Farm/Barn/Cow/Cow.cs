@@ -23,13 +23,12 @@ public class Cow : NeedHoldAdd, IUpgradeable<FarmUpgradeData> {
         base.AddReady();
     }
 
-    public override void Bind(FarmData data, bool isFileEmpty) {
-        if (isFileEmpty)
-            data.Cow = new();
-
+    public override void Bind(FarmData data) {
+        data.Cow ??= new();
         _data = data.Cow;
+
         _flourMillData = data.FlourMill;
-        base.Bind(data, isFileEmpty);
+        base.Bind(data);
     }
 
     public void BindUpgrade(FarmUpgradeData upgradeData) {

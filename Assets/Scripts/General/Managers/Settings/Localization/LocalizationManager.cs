@@ -32,9 +32,8 @@ public class LocalizationManager : Singleton<LocalizationManager>, IBindable<Gam
         return result;
     }
 
-    public void Bind(GameSettingsData data, bool isFileEmpty) {
-        if (isFileEmpty)
-            data.LocalizationManager = new(DefaultValue);
+    public void Bind(GameSettingsData data) {
+        data.LocalizationManager ??= new(DefaultValue);
         _data = data.LocalizationManager;
         UpdateValue();
     }

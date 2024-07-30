@@ -109,9 +109,8 @@ public class Chickens : MonoBehaviour, IBindable<FarmData> {
         FoodCountChanged?.Invoke(Data.FoodCount);
     }
 
-    public void Bind(FarmData data, bool isFileEmpty) {
-        if (isFileEmpty)
-            data.Chickens = new();
+    public void Bind(FarmData data) {
+        data.Chickens ??= new();
         Data = data.Chickens;
         LateStart();
     }

@@ -6784,11 +6784,11 @@ Transform:
   m_GameObject: {fileID: 206361364}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 910757095}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &206361368
 MonoBehaviour:
@@ -13354,7 +13354,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 19.7
+  m_fontSize: 10.35
   m_fontSizeBase: 12.91
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -20772,7 +20772,7 @@ GameObject:
   - component: {fileID: 585237259}
   - component: {fileID: 585237260}
   m_Layer: 0
-  m_Name: OfficeLoader
+  m_Name: OfficeBinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21195,7 +21195,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58dd5bf06bfd5974d8933e6a8fbcb86f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _loader: {fileID: 818001063}
+  _binder: {fileID: 818001063}
 --- !u!1 &599907145
 GameObject:
   m_ObjectHideFlags: 0
@@ -28988,7 +28988,7 @@ GameObject:
   - component: {fileID: 818001062}
   - component: {fileID: 818001063}
   m_Layer: 0
-  m_Name: Loader
+  m_Name: Binder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29026,7 +29026,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c5f897b2e239694a9337e6aa782d315, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _loadables:
+  _bindables:
   - _underlyingValue: {fileID: 1550007704}
   - _underlyingValue: {fileID: 1856739612}
   - _underlyingValue: {fileID: 1898106306}
@@ -32017,6 +32017,60 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 908150621}
   m_CullTransparentMesh: 1
+--- !u!1 &910757093
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 910757095}
+  - component: {fileID: 910757094}
+  m_Layer: 0
+  m_Name: Camera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!95 &910757094
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 910757093}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b4a3fa54dd2aace4db52d32a951051db, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!4 &910757095
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 910757093}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 206361367}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &914025693
 GameObject:
   m_ObjectHideFlags: 0
@@ -54836,7 +54890,7 @@ GameObject:
   - component: {fileID: 1550007703}
   - component: {fileID: 1550007704}
   m_Layer: 0
-  m_Name: GeneralLoader
+  m_Name: GeneralBinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -59074,7 +59128,7 @@ GameObject:
   - component: {fileID: 1704086920}
   - component: {fileID: 1704086921}
   m_Layer: 0
-  m_Name: FarmLoader
+  m_Name: FarmBinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -65138,7 +65192,7 @@ GameObject:
   - component: {fileID: 1856739611}
   - component: {fileID: 1856739612}
   m_Layer: 0
-  m_Name: CafeLoader
+  m_Name: CafeBinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -66550,7 +66604,7 @@ GameObject:
   - component: {fileID: 1898106305}
   - component: {fileID: 1898106306}
   m_Layer: 0
-  m_Name: KitchenLoader
+  m_Name: KitchenBinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -66640,7 +66694,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b077e30720616045883a8ac6f099f28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _internetAnimator: {fileID: 405101629}
+  _cameraAnimator: {fileID: 910757094}
 --- !u!225 &1902078504
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -75442,7 +75496,7 @@ MonoBehaviour:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 206361367}
+  - {fileID: 910757095}
   - {fileID: 307428648}
   - {fileID: 216987679}
   - {fileID: 1299343207}

@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 [Serializable]
-public class CafeUpgradeData : LocalUpgradeData {
+public class CafeUpgradeData : ISaveable {
     [SerializeField] private bool _isEatTimeShow;
 
     public bool IsEatTimeShow => _isEatTimeShow;

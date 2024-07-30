@@ -5,10 +5,10 @@ public class GameSettings : SettingsPanel, IBindable<GameSettingsData> {
     [SerializeField] private CursorSettingsPoint _cursor;
     [SerializeField] private FpsShowSettingsPoint _fpsShow;
 
-    public void Bind(GameSettingsData data, bool isFileEmpty) {
-        _localization.Bind(data, isFileEmpty);
-        _cursor.Bind(data, isFileEmpty);
-        _fpsShow.Bind(data, isFileEmpty);
+    public void Bind(GameSettingsData data) {
+        _localization.Bind(data);
+        _cursor.Bind(data);
+        _fpsShow.Bind(data);
     }
 
     protected override void GenerateSettingPointsArray() {

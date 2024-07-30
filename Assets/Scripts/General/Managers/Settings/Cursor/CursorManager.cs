@@ -10,9 +10,8 @@ public class CursorManager : MonoBehaviour, IBindable<GameSettingsData>, ISettin
     public int OptionsCount => _cursors.Length;
     public int DefaultValue => Mathf.Max(Array.IndexOf(_cursors, _defaultCursor), 0);
 
-    public void Bind(GameSettingsData data, bool isFileEmpty) {
-        if (isFileEmpty)
-            data.CursorManager = new(DefaultValue);
+    public void Bind(GameSettingsData data) {
+        data.CursorManager ??= new(DefaultValue);
         _data = data.CursorManager;
         UpdateValue();
     }

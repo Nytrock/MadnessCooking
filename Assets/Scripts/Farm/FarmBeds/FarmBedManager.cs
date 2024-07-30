@@ -19,9 +19,8 @@ public class FarmBedManager : SaveableSpaceManager<FarmData>, IUpgradeable<FarmU
         InvokeSpaceAdded();
     }
 
-    protected override void BindData(bool isFileEmpty) {
-        if (isFileEmpty)
-            _data.FarmBedGroups = new(_defaultSpaceCount, _spaceAddUpgrades[^1].Count * 3);
+    protected override void BindData() {
+        _data.FarmBedGroups ??= new(_defaultSpaceCount, _spaceAddUpgrades[^1].Count * 3);
         _spaceData = _data.FarmBedGroups;
         _bedsSettings.UIManager.Bind(_data);
     }

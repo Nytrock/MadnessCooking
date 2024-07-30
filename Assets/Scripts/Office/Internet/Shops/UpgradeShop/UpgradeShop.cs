@@ -9,9 +9,8 @@ public class UpgradeShop : BaseInstantShop<BaseUpgrade, OfficeData> {
         _data.OrderItems(sortMethod);
     }
 
-    public override void Bind(OfficeData data, bool isFileEmpty) {
-        if (isFileEmpty)
-            data.UpgradesShop = new(_defaultItemsToBuy);
+    public override void Bind(OfficeData data) {
+        data.UpgradesShop ??= new(_defaultItemsToBuy);
         _data = data.UpgradesShop;
         LateStart();
     }

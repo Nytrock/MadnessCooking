@@ -10,10 +10,11 @@ public class GameData : ISaveable {
     public BuyableItemManagerData<BaseUpgrade> UpgradeManager;
 
     public GameData() {
-        General = new GeneralData();
-        Cafe = new CafeData();
-        Kitchen = new KitchenData();
-        Farm = new FarmData();
-        Office = new OfficeData();
+        General = new();
+        Cafe = new();
+        Kitchen = new();
+        Farm = new();
+        Office = new();
+        UpgradeManager = new();
     }
 }

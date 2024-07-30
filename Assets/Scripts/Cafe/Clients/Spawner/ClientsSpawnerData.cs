@@ -15,9 +15,10 @@ public class ClientsSpawnerData {
     public float NowSpawnTime => _nowSpawnTime;
     public float NeedSpawnTime => _needSpawnTime;
 
-    public ClientsSpawnerData() {
+    public ClientsSpawnerData(float minTime, float maxTime) {
         _leavingClients = new();
         _isSpawning = true;
+        SetNewTime(minTime, maxTime);
     }
 
     public void AddTime() {

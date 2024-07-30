@@ -9,11 +9,10 @@ public class DecorManager : SaveableItemManager<Decor, GeneralData> {
         AddDecorToLocalManagers(item);
     }
 
-    public override void Bind(GeneralData data, bool isFileEmpty) {
-        if (isFileEmpty)
-            data.DecorManager = new();
+    public override void Bind(GeneralData data) {
+        data.DecorManager ??= new();
         _data = data.DecorManager;
-        base.Bind(data, isFileEmpty);
+        base.Bind(data);
     }
 
     private void AddDecorToLocalManagers(Decor decor) {

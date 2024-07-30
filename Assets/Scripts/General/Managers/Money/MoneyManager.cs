@@ -18,9 +18,8 @@ public class MoneyManager : Singleton<MoneyManager>, IBindable<GeneralData> {
         MoneyChanged?.Invoke(_data.MoneyCount);
     }
 
-    public void Bind(GeneralData data, bool isFileEmpty) {
-        if (isFileEmpty)
-            data.MoneyManager = new(_moneyDefault);
+    public void Bind(GeneralData data) {
+        data.MoneyManager ??= new(_moneyDefault);
         _data = data.MoneyManager;
         LateStart();
     }

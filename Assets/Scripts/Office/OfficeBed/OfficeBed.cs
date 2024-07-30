@@ -5,9 +5,8 @@ public class OfficeBed : MonoBehaviour, IBindable<OfficeData> {
     [SerializeField] private OfficeBedUI _officeBedUI;
     private OfficeBedData _data;
 
-    public void Bind(OfficeData data, bool isFileEmpty) {
-        if (isFileEmpty)
-            data.OfficeBed = new();
+    public void Bind(OfficeData data) {
+        data.OfficeBed ??= new();
         _data = data.OfficeBed;
 
         if (_officeBedUI != null)

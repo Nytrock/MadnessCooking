@@ -58,22 +58,20 @@ public class TechnicManager : SaveableItemManager<Technic, KitchenData>, IUpgrad
         TechnicChanged?.Invoke();
     }
 
-    public override void Bind(KitchenData data, bool isFileEmpty) {
-        if (isFileEmpty)
-            data.TechnicManager = new();
+    public override void Bind(KitchenData data) {
+        data.TechnicManager ??= new();
         _data = data.TechnicManager;
 
         ActivateHolders();
-        BindHolders(data, isFileEmpty);
-        base.Bind(data, isFileEmpty);
+        BindHolders(data);
+        base.Bind(data);
     }
 
-    private void BindHolders(KitchenData data, bool isFileEmpty) {
-        if (isFileEmpty)
-            data.TechnicHolders = new TechnicHolderData[_holders.Length];
+    private void BindHolders(KitchenData data) {
+        data.TechnicHolders ??= new TechnicHolderData[_holders.Length];
 
         for (int i = 0; i < data.TechnicHolders.Length; i++)
-            _holders[i].Bind(data, i, isFileEmpty);
+            _holders[i].Bind(data, i);
     }
 
     public void BindUpgrade(KitchenUpgradeData upgradeData) {

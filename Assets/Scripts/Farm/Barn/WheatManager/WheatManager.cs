@@ -41,9 +41,8 @@ public class WheatManager : MonoBehaviour, IUpgradeable<FarmUpgradeData>, IBinda
         }
     }
 
-    public void Bind(FarmData data, bool isFileEmpty) {
-        if (isFileEmpty)
-            data.WheatManager = new();
+    public void Bind(FarmData data) {
+        data.WheatManager ??= new();
         _data = data.WheatManager;
     }
 

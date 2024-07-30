@@ -29,9 +29,8 @@ public class LocationManager : MonoBehaviour, IBindable<GeneralData> {
         LocationChanged?.Invoke(locationPoint.Location);
     }
 
-    public void Bind(GeneralData data, bool isFileEmpty) {
-        if (isFileEmpty)
-            data.LocationManager = new();
+    public void Bind(GeneralData data) {
+        data.LocationManager ??= new();
         _data = data.LocationManager;
         LateStart();
     }

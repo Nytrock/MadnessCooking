@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public class FarmUpgradeData : LocalUpgradeData {
+public class FarmUpgradeData : ISaveable {
     [SerializeField] private bool _isGrowStatusShow;
     [SerializeField] private bool _isWheatDistributing;
     [SerializeField] private bool _isPuncherProgressShow;

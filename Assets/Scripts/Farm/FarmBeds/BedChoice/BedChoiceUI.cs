@@ -68,7 +68,7 @@ public class BedChoiceUI : ChoiceBuyWithCameraStopUI<BedType>, IBindable<FarmDat
         _changingBed = null;
     }
 
-    public void Bind(FarmData data, bool isFileEmpty) {
+    public void Bind(FarmData data) {
         LateStart();
     }
 }

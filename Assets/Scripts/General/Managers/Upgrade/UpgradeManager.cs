@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class UpgradeManager : SaveableItemManager<BaseUpgrade, GameData>, ILoadable<GameData> {
+public class UpgradeManager : SaveableItemManager<BaseUpgrade, GameData>, IBindable<GameData> {
     [SerializeField] private LocalUpgradeManager[] _localUpgradeManagers;
 
     public override void AddItem(BaseUpgrade upgrade) {
@@ -9,13 +9,12 @@ public class UpgradeManager : SaveableItemManager<BaseUpgrade, GameData>, ILoada
             manager.UpgradeAdded(upgrade);
     }
 
-    public void Load(GameData data, bool isFileEmpty) {
-        if (isFileEmpty)
-            data.UpgradeManager = new();
+    public override void Bind(GameData data) {
+        data.UpgradeManager ??= new();
         _data = data.UpgradeManager;
 
         BindUpgradeData();
-        base.Bind(data, isFileEmpty);
+        base.Bind(data);
     }
 
     private void BindUpgradeData() {

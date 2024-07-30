@@ -91,7 +91,7 @@ public abstract class HoldAdd : MonoBehaviour, IBindable<FarmData> {
         UpdateUpgrades();
     }
 
-    public virtual void Bind(FarmData data, bool isFileEmpty) {
+    public virtual void Bind(FarmData data) {
         LateStart();
     }
 }

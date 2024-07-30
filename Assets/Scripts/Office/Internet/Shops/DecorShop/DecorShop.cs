@@ -16,10 +16,9 @@ public class DecorShop : BaseInstantShop<Decor, OfficeData> {
         return null;
     }
 
-    public override void Bind(OfficeData data, bool isFileEmpty) {
-        if (isFileEmpty)
-            data.DecorShop = new(_defaultItemsToBuy);
+    public override void Bind(OfficeData data) {
+        data.DecorShop ??= new(_defaultItemsToBuy);
         _data = data.DecorShop;
-        base.Bind(data, isFileEmpty);
+        base.Bind(data);
     }
 }

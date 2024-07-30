@@ -52,11 +52,10 @@ public class TechnicHolder : MonoBehaviour {
         _renderer.UpdateVisual(Data);
     }
 
-    public void Bind(KitchenData data, int index, bool isFileEmpty) {
+    public void Bind(KitchenData data, int index) {
         _upgradeData = data.UpgradeData;
 
-        if (isFileEmpty)
-            data.TechnicHolders[index] = new(_technic);
+        data.TechnicHolders[index] ??= new(_technic);
         Data = data.TechnicHolders[index];
         _UI.SetData(Data);
 

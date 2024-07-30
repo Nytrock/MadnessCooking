@@ -17,11 +17,10 @@ public class FarmShop : BaseChooseShop<BaseUpgrade, FarmData> {
         }
     }
 
-    public override void Bind(FarmData data, bool isFileEmpty) {
-        if (isFileEmpty)
-            data.FarmShop = new(_defaultItemsToBuy, _defaultConsumableUpgrades);
+    public override void Bind(FarmData data) {
+        data.FarmShop ??= new(_defaultItemsToBuy, _defaultConsumableUpgrades);
         _data = data.FarmShop;
 
-        base.Bind(data, isFileEmpty);
+        base.Bind(data);
     }
 }

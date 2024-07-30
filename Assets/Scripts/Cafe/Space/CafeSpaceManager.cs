@@ -7,9 +7,8 @@ public class CafeSpaceManager : SaveableSpaceManager<CafeData> {
         InvokeSpaceAdded();
     }
 
-    protected override void BindData(bool isFileEmpty) {
-        if (isFileEmpty)
-            _data.Space = new(_defaultSpaceCount);
+    protected override void BindData() {
+        _data.Space ??= new(_defaultSpaceCount);
         _spaceData = _data.Space;
     }
 }

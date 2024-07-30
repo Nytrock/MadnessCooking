@@ -33,9 +33,9 @@ public abstract class SaveableSpaceManager<TData> : SpaceManager, IBindable<TDat
         }
     }
 
-    public virtual void Bind(TData data, bool isFileEmpty) {
+    public virtual void Bind(TData data) {
         _data = data;
-        BindData(isFileEmpty);
+        BindData();
         LateStart();
     }
 
@@ -43,5 +43,5 @@ public abstract class SaveableSpaceManager<TData> : SpaceManager, IBindable<TDat
         return (_spaceData.Count - 1) * SpaceSize;
     }
 
-    protected abstract void BindData(bool isFileEmpty);
+    protected abstract void BindData();
 }

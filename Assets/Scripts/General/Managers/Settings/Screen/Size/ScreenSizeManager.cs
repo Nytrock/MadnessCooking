@@ -9,9 +9,8 @@ public class ScreenSizeManager : MonoBehaviour, IBindable<VideoSettingsData>, IS
     public int DefaultValue => Mathf.Max(Array.IndexOf(_sizes, _defaultSize), 0);
     public int OptionsCount => _sizes.Length;
 
-    public void Bind(VideoSettingsData data, bool isFileEmpty) {
-        if (isFileEmpty)
-            data.ScreenSize = new(DefaultValue);
+    public void Bind(VideoSettingsData data) {
+        data.ScreenSize ??= new(DefaultValue);
         _data = data;
     }
 

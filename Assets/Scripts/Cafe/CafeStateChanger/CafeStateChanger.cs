@@ -12,9 +12,8 @@ public class CafeStateChanger : MonoBehaviour, IBindable<CafeData> {
         CafeChanged?.Invoke();
     }
 
-    public void Bind(CafeData data, bool isFileEmpty) {
-        if (isFileEmpty)
-            data.CafeOpener = new();
+    public void Bind(CafeData data) {
+        data.CafeOpener ??= new();
         _data = data.CafeOpener;
         LateStart();
     }

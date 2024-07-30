@@ -11,7 +11,7 @@ public class CursorSettingsPoint : IntSettingsPoint, IBindable<GameSettingsData>
             throw new NullReferenceException($"{_settingable} is not cursorManager");
     }
 
-    public void Bind(GameSettingsData data, bool isFileEmpty) {
+    public void Bind(GameSettingsData data) {
         _data = data.CursorManager;
         UpdateState();
     }
