@@ -53,7 +53,7 @@ public class FarmBedData {
     }
 
     public void UpdateTime() {
-        _nowTime += SummarizedBoost * InGameTime.Instance.DeltaTime;
+        _nowTime += SummarizedBoost * InGameTime.Instance.NormalizedDeltaTime;
     }
 
     public void AddIngredient() {

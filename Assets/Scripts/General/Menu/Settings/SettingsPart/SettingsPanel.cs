@@ -14,25 +14,29 @@ public abstract class SettingsPanel : MonoBehaviour {
     private void Start() {
         GenerateSettingPointsArray();
         foreach (var point in _settingPoints)
-            point.ValueChanged += SettingsChanged;
+            point.ValueChanged += InvokeSettingsChanged;
+    }
+
+    private void InvokeSettingsChanged() {
+        SettingsChanged?.Invoke();
     }
 
     public void SetDefaultValues() {
         foreach (var settingPoint in _settingPoints)
             settingPoint.SetDefaultValue();
-        SettingsChanged?.Invoke();
+        InvokeSettingsChanged();
     }
 
     public void CancelChanges() {
         foreach (var settingPoint in _settingPoints)
             settingPoint.Cancel();
-        SettingsChanged?.Invoke();
+        InvokeSettingsChanged();
     }
 
     public void SubmitChanges() {
         foreach (var settingPoint in _settingPoints)
             settingPoint.Submit();
-        SettingsChanged?.Invoke();
+        InvokeSettingsChanged();
     }
 
     public void ChangeState(bool newState) {

@@ -4,32 +4,28 @@ public abstract class PestsPool : Pool<Pest> {
     [Header("Borders")]
     [SerializeField] private Transform _leftDown;
     [SerializeField] private Transform _rightUp;
+    protected int _lastId;
 
     public Pest GetObject(int id) {
-        if (_pool.Count == 0)
-            _pool.Enqueue(SpawnPest(ref id));
+        _lastId = id;
+        Pest pest = base.GetObject();
 
-        Pest pest = _pool.Dequeue();
         pest.ChangeState(true);
         pest.Randomize(_leftDown.position, _rightUp.position, id);
         return pest;
     }
 
     public override Pest GetObject() {
-        int id = -1;
-        if (_pool.Count == 0)
-            _pool.Enqueue(SpawnPest(ref id));
-        Pest pest = _pool.Dequeue();
+        _lastId = -1;
+        Pest pest = base.GetObject();
 
         pest.ChangeState(true);
-        pest.Randomize(_leftDown.position, _rightUp.position, id);
+        pest.Randomize(_leftDown.position, _rightUp.position, _lastId);
         return pest;
     }
 
     public override void PutObject(Pest pest) {
-        _pool.Enqueue(pest);
+        base.PutObject(pest);
         pest.ChangeState(false);
     }
-
-    protected abstract Pest SpawnPest(ref int id);
 }

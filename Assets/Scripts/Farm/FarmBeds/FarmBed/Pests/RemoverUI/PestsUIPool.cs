@@ -15,10 +15,8 @@ public class PestsUIPool : Pool<PestUI> {
         return pestUI;
     }
 
-    public override PestUI GetObject() {
-        if (_pool.Count == 0)
-            return Instantiate(_pestPrefab, _container);
-        return _pool.Dequeue();
+    protected override PestUI CreateObject() {
+        return Instantiate(_pestPrefab, _container);
     }
 
     public override void PutObject(PestUI pest) {

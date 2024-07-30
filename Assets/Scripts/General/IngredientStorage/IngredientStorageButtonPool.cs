@@ -16,14 +16,12 @@ public class IngredientStorageButtonPool : Pool<IngredientStorageButton> {
         return button;
     }
 
-    public override IngredientStorageButton GetObject() {
-        if (_pool.Count == 0)
-            return Instantiate(_prefab, _container);
-        return _pool.Dequeue();
+    protected override IngredientStorageButton CreateObject() {
+        return Instantiate(_prefab, _container);
     }
 
     public override void PutObject(IngredientStorageButton button) {
-        _pool.Enqueue(button);
+        base.PutObject(button);
         button.gameObject.SetActive(false);
     }
 }

@@ -7,6 +7,15 @@ public abstract class Pool<TObject> : MonoBehaviour
     [SerializeField] protected Transform _container;
     protected Queue<TObject> _pool = new();
 
-    public abstract TObject GetObject();
-    public abstract void PutObject(TObject obj);
+    public virtual TObject GetObject() {
+        if (_pool.Count == 0)
+            return CreateObject();
+        return _pool.Dequeue();
+    }
+
+    public virtual void PutObject(TObject obj) {
+        _pool.Enqueue(obj);
+    }
+
+    protected abstract TObject CreateObject();
 }

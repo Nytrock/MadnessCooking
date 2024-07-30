@@ -24,7 +24,7 @@ public class ClientWalkState : ClientBaseState {
     public override void UpdateState(Client client) {
         Transform clientPos = client.transform;
 
-        clientPos.position = Vector2.MoveTowards(clientPos.position, _nowTarget, _speed * InGameTime.Instance.DeltaTime);
+        clientPos.position = Vector2.MoveTowards(clientPos.position, _nowTarget, _speed * InGameTime.Instance.NormalizedDeltaTime);
         client.Data.UpdatePosition(clientPos.position);
 
         if (Mathf.Abs(clientPos.position.x - _nowTarget.x) < 0.1f) {

@@ -27,7 +27,7 @@ public class CarWaitManagerData {
     }
 
     public void UpdateTime() {
-        _nowWaitTime -= InGameTime.Instance.DeltaTime;
+        _nowWaitTime -= InGameTime.Instance.NormalizedDeltaTime;
     }
 
     public void StartWait() {

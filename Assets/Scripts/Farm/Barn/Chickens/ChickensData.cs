@@ -30,7 +30,7 @@ public class ChickensData {
     }
 
     public void UpdateTime() {
-        _nowTime += InGameTime.Instance.DeltaTime * _speed;
+        _nowTime += InGameTime.Instance.NormalizedDeltaTime * _speed;
     }
 
     public void AddEgg() {

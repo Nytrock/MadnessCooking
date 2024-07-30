@@ -53,7 +53,7 @@ public class TechnicHolderData {
         if (!_isCooking && !_isRepairing)
             return;
 
-        _nowWaitTime += InGameTime.Instance.DeltaTime;
+        _nowWaitTime += InGameTime.Instance.NormalizedDeltaTime;
         if (_nowWaitTime > _needWaitTime) {
             if (_isCooking)
                 StopCook();

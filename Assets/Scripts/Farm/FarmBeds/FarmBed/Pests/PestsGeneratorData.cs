@@ -26,7 +26,7 @@ public class PestsGeneratorData {
     }
 
     public void UpdateTime() {
-        _nowTime += InGameTime.Instance.DeltaTime;
+        _nowTime += InGameTime.Instance.NormalizedDeltaTime;
     }
 
     public void DisableUpgrades() {

@@ -6,19 +6,17 @@ public class ChoicePool<TItem, TButton> : Pool<TButton>
     [SerializeField] private TButton _prefab;
 
     public override TButton GetObject() {
-        if (_pool.Count == 0) {
-            TButton newButton = Instantiate(_prefab, _container);
-            newButton.ChangeState(true);
-            return newButton;
-        }
-
-        TButton button = _pool.Dequeue();
+        TButton button = base.GetObject();
         button.ChangeState(true);
         return button;
     }
 
+    protected override TButton CreateObject() {
+        return Instantiate(_prefab, _container);
+    }
+
     public override void PutObject(TButton button) {
-        _pool.Enqueue(button);
+        base.PutObject(button);
         button.Disable();
     }
 }

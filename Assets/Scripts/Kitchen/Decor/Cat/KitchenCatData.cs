@@ -20,7 +20,7 @@ public class KitchenCatData {
         if (!_isPetted)
             return;
 
-        _nowTime += InGameTime.Instance.DeltaTime;
+        _nowTime += InGameTime.Instance.NormalizedDeltaTime;
         if (_nowTime > _needTime)
             _isPetted = false;
     }

@@ -10,10 +10,10 @@ public class StaticPestsPool : PestsPool {
             _freePests.Add(pest);
     }
 
-    protected override Pest SpawnPest(ref int id) {
-        if (id == -1)
-            id = Random.Range(0, _freePests.Count);
-        _freePests.RemoveAt(id);
-        return _freePests[id];
+    protected override Pest CreateObject() {
+        if (_lastId == -1)
+            _lastId = Random.Range(0, _freePests.Count);
+        _freePests.RemoveAt(_lastId);
+        return _freePests[_lastId];
     }
 }

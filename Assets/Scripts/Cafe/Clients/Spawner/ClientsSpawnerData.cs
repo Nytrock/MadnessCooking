@@ -22,7 +22,7 @@ public class ClientsSpawnerData {
     }
 
     public void AddTime() {
-        _nowSpawnTime += InGameTime.Instance.DeltaTime;
+        _nowSpawnTime += InGameTime.Instance.NormalizedDeltaTime;
     }
 
     public void SetNewTime(float minTime, float maxTime) {

@@ -14,6 +14,8 @@ public class TimeManager : MonoBehaviour, IBindable<GeneralData> {
     public TimeSpan GlobalTime => _data.GlobalTime;
     public int DaysCount => _data.GlobalTime.Days;
     public bool IsSleep => _sleepTimeSpeed == _nowTimeSpeed;
+
+    public int NormalizedNowTimeSpeed => _nowTimeSpeed / _defaultTimeSpeed;
     public int NowTimeSpeed => _nowTimeSpeed;
 
     public event Action<Daytime> DaytimeChanged;

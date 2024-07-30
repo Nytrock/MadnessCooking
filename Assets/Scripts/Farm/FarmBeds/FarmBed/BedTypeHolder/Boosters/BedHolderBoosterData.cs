@@ -29,7 +29,7 @@ public class BedHolderBoosterData {
     }
 
     public void UpdateTime() {
-        _nowTime += InGameTime.Instance.DeltaTime;
+        _nowTime += InGameTime.Instance.NormalizedDeltaTime;
     }
 
     public void SetBoost(int boost) {
