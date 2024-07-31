@@ -112,8 +112,10 @@ MonoBehaviour:
   _maxPests: 10
   _pool: {fileID: 1979318883052758845}
   _onePestSlowdown: 0.05
-  _minTime: 2
-  _maxTime: 5
+  _spawnTime:
+    _min: 2
+    _max: 5
+    _isGreaterZero: 1
 --- !u!1 &406543231666612119
 GameObject:
   m_ObjectHideFlags: 0
@@ -710,8 +712,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _container: {fileID: 7584462946728973801}
-  _leftDown: {fileID: 1641583832946212213}
-  _rightUp: {fileID: 9105291604026169107}
+  _position:
+    _leftDown: {fileID: 1641583832946212213}
+    _rightUp: {fileID: 9105291604026169107}
   _pests:
   - {fileID: 6118852901477770171}
   - {fileID: 7172249691033663354}
@@ -827,8 +830,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _container: {fileID: 1438477657768244391}
-  _leftDown: {fileID: 8902618564121154430}
-  _rightUp: {fileID: 3133090156379895895}
+  _position:
+    _leftDown: {fileID: 8902618564121154430}
+    _rightUp: {fileID: 3133090156379895895}
   _prefabs:
   - {fileID: 8342348954772312041, guid: 48d6c67f468167b44926307c15345b8e, type: 3}
   - {fileID: -702117690435084310, guid: 68f951f31e04414498df1600a330783f, type: 3}
@@ -1697,8 +1701,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _container: {fileID: 3037963810005785931}
-  _leftDown: {fileID: 1369455831431045462}
-  _rightUp: {fileID: 8879884621267538119}
+  _position:
+    _leftDown: {fileID: 1369455831431045462}
+    _rightUp: {fileID: 8879884621267538119}
   _prefabs:
   - {fileID: 8342348954772312041, guid: be9838ea654ec3540bb8b8706bf5dcf4, type: 3}
   - {fileID: -702117690435084310, guid: c9647adcd3d8109498140230f0965f2a, type: 3}
@@ -1815,8 +1820,10 @@ MonoBehaviour:
   _maxPests: 10
   _pool: {fileID: 2363392315758504381}
   _onePestSlowdown: 0.05
-  _minTime: 2
-  _maxTime: 5
+  _spawnTime:
+    _min: 2
+    _max: 5
+    _isGreaterZero: 1
 --- !u!1 &3685577293218397832
 GameObject:
   m_ObjectHideFlags: 0
@@ -1926,8 +1933,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _container: {fileID: 926345695542062854}
-  _leftDown: {fileID: 1059200168694423184}
-  _rightUp: {fileID: 4819053749551584520}
+  _position:
+    _leftDown: {fileID: 1059200168694423184}
+    _rightUp: {fileID: 4819053749551584520}
   _pests:
   - {fileID: 6392747766346704450}
   - {fileID: 2516745125236228226}
@@ -1981,8 +1989,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _container: {fileID: 6761003976341139443}
-  _leftDown: {fileID: 7589344497605978692}
-  _rightUp: {fileID: 6954110605686074398}
+  _position:
+    _leftDown: {fileID: 7589344497605978692}
+    _rightUp: {fileID: 6954110605686074398}
   _prefabs:
   - {fileID: 8342348954772312041, guid: 0ad6b42eee0ab9a4db2b273de5edd86a, type: 3}
   - {fileID: -702117690435084310, guid: 7d85a51c3c41b3b44a878299642f438c, type: 3}
@@ -2221,8 +2230,10 @@ MonoBehaviour:
   _maxPests: 10
   _pool: {fileID: 3914156333124551444}
   _onePestSlowdown: 0.05
-  _minTime: 2
-  _maxTime: 5
+  _spawnTime:
+    _min: 2
+    _max: 5
+    _isGreaterZero: 1
 --- !u!1 &5025394060489669640
 GameObject:
   m_ObjectHideFlags: 0
@@ -3182,8 +3193,10 @@ MonoBehaviour:
   _maxPests: 10
   _pool: {fileID: 2067615603938320234}
   _onePestSlowdown: 0.05
-  _minTime: 2
-  _maxTime: 5
+  _spawnTime:
+    _min: 2
+    _max: 5
+    _isGreaterZero: 1
 --- !u!1 &7294666993996244298
 GameObject:
   m_ObjectHideFlags: 0
@@ -3817,8 +3830,10 @@ MonoBehaviour:
   _maxPests: 10
   _pool: {fileID: 2600007182148234775}
   _onePestSlowdown: 0.05
-  _minTime: 2
-  _maxTime: 5
+  _spawnTime:
+    _min: 2
+    _max: 5
+    _isGreaterZero: 1
 --- !u!1 &9143079026240815192
 GameObject:
   m_ObjectHideFlags: 0

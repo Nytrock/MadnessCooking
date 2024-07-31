@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 [Serializable]
 public class SpotData {
@@ -77,9 +76,9 @@ public class SpotData {
         _nowTime = 0;
     }
 
-    public void StartTalk(float minTalkTime, float maxTalkTime) {
+    public void StartTalk(float talkTime) {
         _groupState = GroupClientState.Talk;
-        _waitTime = _talkIndex * Random.Range(minTalkTime, maxTalkTime);
+        _waitTime = _talkIndex * talkTime;
     }
 
     public void DecreaseTalk() {

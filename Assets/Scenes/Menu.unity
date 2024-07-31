@@ -1208,8 +1208,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26708cdd2ce5d60469801716197e02ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _minSpawnTime: 0.5
-  _maxSpawnTime: 1
+  _spawnTime:
+    _min: 0.5
+    _max: 1
+    _isGreaterZero: 1
   _pool: {fileID: 1437009332}
   _moveController: {fileID: 1545747628}
   _items:
@@ -10563,12 +10565,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c72135fcc0549942b6eb94b2b8716d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _leftEdge: {fileID: 1517522376}
-  _rightEdge: {fileID: 176855585}
-  _minAngle: 45
-  _maxAngle: 135
-  _minForce: 10
-  _maxForce: 20
+  _position:
+    _leftDown: {fileID: 1517522376}
+    _rightUp: {fileID: 176855585}
+  _angle:
+    _min: 0
+    _max: 180
+    _isGreaterZero: 1
+  _force:
+    _min: 10
+    _max: 20
+    _isGreaterZero: 1
 --- !u!1 &1555303806
 GameObject:
   m_ObjectHideFlags: 0
@@ -14397,8 +14404,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mixer: {fileID: 24100000, guid: c2232c781fb4fe6458c8d53a2e082d03, type: 2}
   _defaultVolumeCoef: 0.5
-  _minValue: -60
-  _maxValue: 10
+  _volume:
+    _min: -60
+    _max: 10
+    _isGreaterZero: 0
 --- !u!1 &2087367780
 GameObject:
   m_ObjectHideFlags: 0

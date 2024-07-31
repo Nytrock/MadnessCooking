@@ -9,8 +9,7 @@ public class Client : MonoBehaviour {
     private readonly ClientSitState _sitState = new();
 
     [SerializeField] private ClientSkin _skin;
-    [SerializeField, Min(0)] private float _minWaitTime;
-    [SerializeField, Min(0)] private float _maxWaitTime;
+    [SerializeField] private RangeFloat _waitTime;
     private ClientsHolder _table;
 
     public ClientData Data { get; private set; }
@@ -83,7 +82,7 @@ public class Client : MonoBehaviour {
         SpotIndex = settings.SpotIndex;
 
         Data = settings.Data;
-        Data.SetWaitTime(_minWaitTime, _maxWaitTime);
+        Data.SetWaitTime(_waitTime.RandomValue);
 
         transform.position = Data.Position.GetVector();
         ClientUI.Setup(Data);

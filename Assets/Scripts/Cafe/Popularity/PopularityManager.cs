@@ -59,8 +59,8 @@ public class PopularityManager : MonoBehaviour, IBindable<GeneralData> {
         XpChanged?.Invoke(_data.Xp);
     }
 
-    public void RemoveXp(int xp) {
-        _data.RemoveXp(xp);
+    public void RemoveXp(float xp) {
+        _data.RemoveXp((int)xp);
         if (_data.Xp < 0 && _data.Level > 0) {
             while (_data.Xp < 0 && _data.Level > 0) {
                 _data.AddXp(_levels[_data.Level - 1].NeedXp);

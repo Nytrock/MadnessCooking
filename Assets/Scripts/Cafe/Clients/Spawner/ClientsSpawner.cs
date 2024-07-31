@@ -12,10 +12,7 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
     [SerializeField] private OrdersManager _ordersManager;
     [SerializeField] private FoodManager _foodManager;
     [SerializeField] private ClientsPool _pool;
-
-    [Header("Spawn time")]
-    [SerializeField, Min(0)] private float _minSpawnTime;
-    [SerializeField, Min(0)] private float _maxSpawnTime;
+    [SerializeField] private RangeFloat _spawnTime;
 
     [Header("Upgrades")]
     [SerializeField] private BaseUpgrade _eatTimeShowUpgrade;
@@ -76,15 +73,8 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
     }
 
     private void SetNewTime() {
-        float minTime, maxTime;
-        GetNewTime(out minTime, out maxTime);
-        _data.SetNewTime(minTime, maxTime);
-    }
-
-    private void GetNewTime(out float minTime, out float maxTime) {
         float popular = _popularityCalculate.GetPopularity();
-        minTime = _minSpawnTime / popular;
-        maxTime = _maxSpawnTime / popular;
+        _data.SetSpawnTime(_spawnTime.RandomValue / popular);
     }
 
     private void ChangeSpawnMode() {
@@ -161,8 +151,8 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
 
     public void Bind(CafeData data) {
         if (data.ClientsSpawner == null) {
-            GetNewTime(out float minTime, out float maxTime);
-            data.ClientsSpawner = new(minTime, maxTime);
+            float popular = _popularityCalculate.GetPopularity();
+            data.ClientsSpawner = new(_spawnTime.RandomValue / popular);
         }
 
         _data = data.ClientsSpawner;

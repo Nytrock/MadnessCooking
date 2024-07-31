@@ -7,8 +7,7 @@ public class InternetDownload : MonoBehaviour, IUpgradeable<OfficeUpgradeData> {
     [SerializeField] private Slider _downloadBar;
 
     [Header("Wait borders")]
-    [SerializeField, Min(0)] private float _minWait;
-    [SerializeField, Min(0)] private float _maxWait;
+    [SerializeField] private RangeFloat _waitTime;
     [SerializeField, Min(0)] private float[] _possibleProgress;
 
     [Header("Upgrades")]
@@ -47,7 +46,7 @@ public class InternetDownload : MonoBehaviour, IUpgradeable<OfficeUpgradeData> {
         }
 
         ChangeState(true);
-        _needProgress = Random.Range(_minWait, _maxWait);
+        _needProgress = _waitTime.RandomValue;
         _downloadBar.maxValue = _needProgress;
         _isDownloading = true;
         _shop = openingShop;

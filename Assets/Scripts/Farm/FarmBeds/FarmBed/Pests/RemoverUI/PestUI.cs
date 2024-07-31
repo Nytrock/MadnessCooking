@@ -14,15 +14,13 @@ public class PestUI : MonoBehaviour {
         _buttonRemove = GetComponent<Button>();
     }
 
-    public void Setup(Pest pest, Vector2 leftDown, Vector2 rightUp, PestsRemoverUI remover) {
+    public void Setup(Pest pest, RangeVector position, PestsRemoverUI remover) {
         _pestsRemover = remover;
         _image.sprite = pest.GetSprite();
         _image.SetNativeSize();
 
         Vector2 normalizedPosition = pest.Data.NormalizedPosition.GetVector();
-        float x = Mathf.Lerp(leftDown.x, rightUp.x, normalizedPosition.x);
-        float y = Mathf.Lerp(leftDown.y, rightUp.y, normalizedPosition.y);
-        transform.SetPositionAndRotation(new Vector2(x, y), pest.Data.RotationDegree.GetQuaternion());
+        transform.SetPositionAndRotation(position.Lerp(normalizedPosition), pest.Data.RotationDegree.GetQuaternion());
 
         Pest = pest;
     }

@@ -6,10 +6,7 @@ public class PestsGenerator : MonoBehaviour {
     [SerializeField, Min(1)] private int _maxPests;
     [SerializeField] private PestsPool _pool;
     [SerializeField, Min(0)] private float _onePestSlowdown;
-
-    [Header("Time settings")]
-    [SerializeField, Min(0)] private float _minTime;
-    [SerializeField, Min(0)] private float _maxTime;
+    [SerializeField] private RangeFloat _spawnTime;
     private PestsGeneratorData _data;
 
     private readonly List<Pest> _pests = new();
@@ -24,7 +21,7 @@ public class PestsGenerator : MonoBehaviour {
         _data.UpdateTime();
         if (_data.NowTime > _data.NeedTime) {
             SpawnPest();
-            _data.SetNewTime(_minTime, _maxTime);
+            _data.SetNewTime(_spawnTime.RandomValue);
         }
     }
 
@@ -44,7 +41,7 @@ public class PestsGenerator : MonoBehaviour {
         if (!newMode)
             CleanPests();
         else
-            _data.SetNewTime(_minTime, _maxTime);
+            _data.SetNewTime(_spawnTime.RandomValue);
     }
 
     public void CleanPests() {

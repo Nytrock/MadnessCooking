@@ -34,12 +34,12 @@ public class ClientData {
     }
 
     public void UpdateTime() {
-        _nowTime += InGameTime.Instance.DeltaTime;
+        _nowTime += InGameTime.Instance.NormalizedDeltaTime;
     }
 
-    public void SetWaitTime(float minWaitTime, float maxWaitTime) {
+    public void SetWaitTime(float waitTime) {
         if (_waitTime == 0)
-            _waitTime = _waitMultiplier * Random.Range(minWaitTime, maxWaitTime);
+            _waitTime = _waitMultiplier * waitTime;
     }
 
     public void ChangeState(ClientState newState) {

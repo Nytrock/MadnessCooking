@@ -1,8 +1,7 @@
 using UnityEngine;
 
 public class FlyingItemSpawner : MonoBehaviour {
-    [SerializeField, Min(0)] private float _minSpawnTime;
-    [SerializeField, Min(0)] private float _maxSpawnTime;
+    [SerializeField] private RangeFloat _spawnTime;
     [SerializeField] private FlyingItemPool _pool;
     [SerializeField] private FlyingItemMoveController _moveController;
     [SerializeField] private BuyableItem[] _items;
@@ -23,7 +22,7 @@ public class FlyingItemSpawner : MonoBehaviour {
 
     private void SetNewTime() {
         _nowTime = 0;
-        _needTime = Random.Range(_minSpawnTime, _maxSpawnTime);
+        _needTime = _spawnTime.RandomValue;
     }
 
     private void Spawn() {

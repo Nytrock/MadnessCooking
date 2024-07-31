@@ -9,8 +9,7 @@ using Random = UnityEngine.Random;
 [RequireComponent(typeof(CafeSpot))]
 public class ClientsHolder : MonoBehaviour {
     [SerializeField] private Slider _waitSlider;
-    [SerializeField, Min(0)] private float _minTalk;
-    [SerializeField, Min(0)] private float _maxTalk;
+    [SerializeField] private RangeFloat _talkTime;
     [SerializeField, Min(0)] private float _clientWaitMultiplier = 0.75f;
     [SerializeField, Min(0)] private float _minClientInterval = 0.5f;
     [SerializeField, Min(0)] private float _maxClientInterval = 1.2f;
@@ -115,7 +114,7 @@ public class ClientsHolder : MonoBehaviour {
     }
 
     private void StartTalk() {
-        _data.StartTalk(_minTalk, _maxTalk);
+        _data.StartTalk(_talkTime.RandomValue);
         if (_data.TalkIndex == 0 || _clients.Count == 1) {
             EndVisit();
             StartCoroutine(ClientsLeave());

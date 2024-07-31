@@ -152,9 +152,9 @@ TextureImporter:
       name: TableOne
       rect:
         serializedVersion: 2
-        x: 0
-        y: 56
-        width: 21
+        x: 22
+        y: 73
+        width: 15
         height: 23
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -173,9 +173,9 @@ TextureImporter:
       name: TableTwo
       rect:
         serializedVersion: 2
-        x: 22
-        y: 56
-        width: 27
+        x: 65
+        y: 73
+        width: 22
         height: 23
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -194,9 +194,9 @@ TextureImporter:
       name: TableThree
       rect:
         serializedVersion: 2
-        x: 0
-        y: 28
-        width: 43
+        x: 44
+        y: 45
+        width: 41
         height: 27
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -217,7 +217,7 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 58
+        width: 55
         height: 27
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -228,6 +228,90 @@ TextureImporter:
       bones: []
       spriteID: 26e65e342780c9f4cb7ed959b3d009e1
       internalID: -937145473
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TableOneCover
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 73
+        width: 21
+        height: 23
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 77238d01bc3f7da4f8bb382e8d769623
+      internalID: -1973221413
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TableTwoCover
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 73
+        width: 26
+        height: 23
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 08bc763575357a84b865aa9243afa8c2
+      internalID: 979271252
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TableThreeCover
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 45
+        width: 43
+        height: 27
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c1c2ecdefb1b74479f9dcd16a39d824
+      internalID: 1315888818
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TableFourCover
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 28
+        width: 58
+        height: 16
+      alignment: 9
+      pivot: {x: 0.5, y: -0.6875}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7cebdb50c457b644aae323ef0661fb82
+      internalID: 389642029
       vertices: []
       indices: 
       edges: []
@@ -247,9 +331,13 @@ TextureImporter:
       Lamp: 1955946697
       Pot: 470648381
       TableFour: -937145473
+      TableFourCover: 389642029
       TableOne: -1642030445
+      TableOneCover: -1973221413
       TableThree: 572932605
+      TableThreeCover: 1315888818
       TableTwo: 606594854
+      TableTwoCover: 979271252
       Window: -805373322
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0

@@ -4252,8 +4252,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _skin: {fileID: 3703463240899266760}
-  _minWaitTime: 40
-  _maxWaitTime: 60
+  _waitTime:
+    _min: 40
+    _max: 60
+    _isGreaterZero: 1
 --- !u!114 &7984458469416964061
 MonoBehaviour:
   m_ObjectHideFlags: 0

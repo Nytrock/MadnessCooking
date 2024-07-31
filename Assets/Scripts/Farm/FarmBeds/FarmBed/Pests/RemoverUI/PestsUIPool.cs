@@ -4,14 +4,13 @@ public class PestsUIPool : Pool<PestUI> {
     [SerializeField] private PestUI _pestPrefab;
 
     [Header("Borders")]
-    [SerializeField] private Transform _leftDown;
-    [SerializeField] private Transform _rightUp;
+    [SerializeField] private RangeVector _position;
     private PestsRemoverUI _remover;
 
     public PestUI GetObject(Pest pest) {
         PestUI pestUI = GetObject();
         pestUI.ChangeState(true);
-        pestUI.Setup(pest, _leftDown.position, _rightUp.position, _remover);
+        pestUI.Setup(pest, _position, _remover);
         return pestUI;
     }
 

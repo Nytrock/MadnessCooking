@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 [Serializable]
 public class PestsGeneratorData {
@@ -34,9 +33,9 @@ public class PestsGeneratorData {
         _isPestsRemoved = false;
     }
 
-    public void SetNewTime(float minTime, float maxTime) {
+    public void SetNewTime(float spawnTime) {
         _nowTime = 0;
-        _needTime = Random.Range(minTime, maxTime);
+        _needTime = spawnTime;
     }
 
     public void AddPest(PestData pestData) {

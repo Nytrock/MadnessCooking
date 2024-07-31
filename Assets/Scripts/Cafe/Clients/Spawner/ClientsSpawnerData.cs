@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 [Serializable]
 public class ClientsSpawnerData {
@@ -15,18 +14,18 @@ public class ClientsSpawnerData {
     public float NowSpawnTime => _nowSpawnTime;
     public float NeedSpawnTime => _needSpawnTime;
 
-    public ClientsSpawnerData(float minTime, float maxTime) {
+    public ClientsSpawnerData(float spawnTime) {
         _leavingClients = new();
         _isSpawning = true;
-        SetNewTime(minTime, maxTime);
+        SetSpawnTime(spawnTime);
     }
 
     public void AddTime() {
         _nowSpawnTime += InGameTime.Instance.NormalizedDeltaTime;
     }
 
-    public void SetNewTime(float minTime, float maxTime) {
-        _needSpawnTime = Random.Range(minTime, maxTime);
+    public void SetSpawnTime(float spawnTime) {
+        _needSpawnTime = spawnTime;
         _nowSpawnTime = 0;
     }
 
