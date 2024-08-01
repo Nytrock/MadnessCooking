@@ -3,11 +3,11 @@ using UnityEngine.UI;
 
 [RequireComponent(typeof(Button))]
 public class InternetShopOpener : MonoBehaviour {
-    [SerializeField] private InternetDownload _download;
-    [SerializeField] private BaseShop _internetShop;
+    [SerializeField] private InternetPageManager _pageManager;
+    [SerializeField] private InternetShopPage _shopPage;
 
     private void Awake() {
         var button = GetComponent<Button>();
-        button.onClick.AddListener(delegate { _download.StartDownload(_internetShop); });
+        button.onClick.AddListener(delegate { _pageManager.ChangePage(_shopPage); });
     }
 }

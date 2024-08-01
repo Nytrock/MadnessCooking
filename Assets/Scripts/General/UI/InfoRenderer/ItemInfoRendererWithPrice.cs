@@ -7,7 +7,7 @@ public class ItemInfoRendererWithPrice : ItemInfoRendererWithDescription {
 
     public void SetPrice(string buyNote, int price = -1) {
         if (price != -1)
-            _priceText.AddArgumenst("price", price.ToString());
+            _priceText.AddArguments("price", price.ToString());
         _priceText.SetText(buyNote);
     }
 

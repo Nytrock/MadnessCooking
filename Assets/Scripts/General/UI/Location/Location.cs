@@ -4,5 +4,6 @@ public enum Location {
     Office,
     Farm,
     Barn,
-    FarmShop
+    FarmShop,
+    Internet
 }

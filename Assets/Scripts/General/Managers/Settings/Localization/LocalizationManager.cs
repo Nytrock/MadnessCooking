@@ -25,8 +25,14 @@ public class LocalizationManager : Singleton<LocalizationManager>, IBindable<Gam
         LocalizationChanged?.Invoke();
     }
 
-    public string GetLocalization(string table, string key, Dictionary<string, string> arguments) {
-        var result = LocalizationSettings.StringDatabase.GetLocalizedString(table, key, arguments: arguments);
+    public string GetLocalization(string table, string key, Dictionary<string, string> arguments = null) {
+        if (arguments != null) {
+            List<string> keys = new(arguments.Keys);
+            foreach (var argumentKey in keys)
+                arguments[argumentKey] = GetLocalization(table, arguments[argumentKey]);
+        }
+
+        string result = LocalizationSettings.StringDatabase.GetLocalizedString(table, key, arguments: arguments);
         if (result.StartsWith("No translation found"))
             return key;
         return result;

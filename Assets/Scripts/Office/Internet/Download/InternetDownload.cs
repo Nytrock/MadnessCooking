@@ -2,6 +2,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(InternetDownloadRenderer))]
 public class InternetDownload : MonoBehaviour, IUpgradeable<OfficeUpgradeData> {
     [SerializeField] private GameObject _panel;
     [SerializeField] private Slider _downloadBar;
@@ -16,8 +17,14 @@ public class InternetDownload : MonoBehaviour, IUpgradeable<OfficeUpgradeData> {
     private float _nowProgress;
     private float _needProgress;
     private bool _isDownloading;
-    private BaseShop _shop;
+
+    private InternetDownloadRenderer _renderer;
+    private InternetPage _openingPage;
     private OfficeUpgradeData _upgradeData;
+
+    private void Awake() {
+        _renderer = GetComponent<InternetDownloadRenderer>();
+    }
 
     private void Start() {
         ChangeState(false);
@@ -39,25 +46,28 @@ public class InternetDownload : MonoBehaviour, IUpgradeable<OfficeUpgradeData> {
         _panel.SetActive(newValue);
     }
 
-    public void StartDownload(BaseShop openingShop) {
+    public void StartDownload(InternetPage openingPage) {
         if (_upgradeData.IsInternetDownloadInstant) {
-            openingShop.ChangeShopState(true);
+            openingPage.ChangeState(true);
             return;
         }
 
+        _isDownloading = true;
+        _openingPage = openingPage;
+
         ChangeState(true);
+        _renderer.UpdateVisual(_openingPage);
+
+        _nowProgress = 0;
         _needProgress = _waitTime.RandomValue;
         _downloadBar.maxValue = _needProgress;
-        _isDownloading = true;
-        _shop = openingShop;
     }
 
     private void EndDownload() {
         ChangeState(false);
         _isDownloading = false;
-        _nowProgress = 0;
-        _shop.ChangeShopState(true);
-        _shop = null;
+        _openingPage.ChangeState(true);
+        _openingPage = null;
     }
 
     public void BindUpgrade(OfficeUpgradeData upgradeData) {

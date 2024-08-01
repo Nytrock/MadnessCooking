@@ -44,7 +44,11 @@ public class LocalizedText : MonoBehaviour {
             _key = _text.text;
     }
 
-    public void AddArgumenst(string name, string variable) {
+    public void AddArguments(string name, string variable) {
         _arguments[name] = variable;
+    }
+
+    public void ClearArguments() {
+        _arguments.Clear();
     }
 }
