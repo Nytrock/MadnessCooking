@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[RequireComponent(typeof(BoxCollider2D))]
+[RequireComponent(typeof(Collider2D))]
 public abstract class ColliderActivator : MonoBehaviour {
     [SerializeField] private UIHoverListener _hoverListener;
     private bool _isHover;

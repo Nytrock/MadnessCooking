@@ -5,6 +5,11 @@ public class FarmShop : BaseChooseShop<BaseUpgrade, FarmData> {
 
     private FarmShopData _specialData => _data as FarmShopData;
 
+    protected override void LateStart() {
+        base.LateStart();
+        GenerateShop();
+    }
+
     protected override void ChangePanelsState(BaseUpgrade upgrade) {
         int index = _data.IndexOfItemPanel(upgrade);
         if (upgrade as ConsumableUpgrade) {

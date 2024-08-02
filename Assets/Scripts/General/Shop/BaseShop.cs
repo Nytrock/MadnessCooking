@@ -5,7 +5,7 @@ public abstract class BaseShop : MonoBehaviour {
     [SerializeField] private GameObject _shop;
     [SerializeField] protected ShopCatalog _catalog;
 
-    protected void LateStart() {
+    protected virtual void LateStart() {
         ChangeShopState(false);
     }
 
