@@ -3,6 +3,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(FarmBed))]
 public class BedChoice : MonoBehaviour {
+    [SerializeField] private GameObject _addButton;
     [SerializeField] private BedTypeHolder[] _beds;
     private FarmBedData _bedData;
 
@@ -25,6 +26,8 @@ public class BedChoice : MonoBehaviour {
             _farmBed.enabled = false;
             _bedData.SetActive(false);
         }
+
+        _addButton.SetActive(!_bedData.IsActive);
     }
 
     public void SetType(BedType bedType) {
@@ -34,6 +37,7 @@ public class BedChoice : MonoBehaviour {
         _bedData.SetActive(true);
         _farmBed.SetBedType(bed);
         _farmBed.enabled = true;
+        _addButton.SetActive(false);
     }
 
     public void Bind(FarmData data, FarmBedData bedData) {

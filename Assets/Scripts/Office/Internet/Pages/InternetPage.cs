@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class InternetPage : MonoBehaviour {
     [SerializeField] protected string _pageName;
+    [SerializeField] protected GameObject _panel;
 
     public string PageName => _pageName;
 
@@ -10,6 +11,6 @@ public class InternetPage : MonoBehaviour {
     }
 
     public virtual void ChangeState(bool newValue) {
-        gameObject.SetActive(newValue);
+        _panel.SetActive(newValue);
     }
 }

@@ -2,7 +2,6 @@ using UnityEngine;
 using UnityEngine.Events;
 
 public abstract class BaseShop : MonoBehaviour {
-    [SerializeField] private GameObject _shop;
     [SerializeField] protected ShopCatalog _catalog;
 
     protected virtual void LateStart() {
@@ -10,7 +9,6 @@ public abstract class BaseShop : MonoBehaviour {
     }
 
     public virtual void ChangeShopState(bool newState) {
-        _shop.SetActive(newState);
         if (newState) {
             GenerateShop();
             _catalog.ActivateFirstPage();

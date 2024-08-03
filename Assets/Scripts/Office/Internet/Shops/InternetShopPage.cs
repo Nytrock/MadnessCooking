@@ -9,6 +9,7 @@ public class InternetShopPage : InternetPage {
     }
 
     public override void ChangeState(bool newValue) {
+        base.ChangeState(newValue);
         _shop.ChangeShopState(newValue);
     }
 }

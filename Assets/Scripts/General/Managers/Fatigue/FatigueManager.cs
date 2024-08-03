@@ -53,4 +53,8 @@ public class FatigueManager : Singleton<FatigueManager>, IBindable<GeneralData> 
         _data = data.FatigueManager;
         LateStart();
     }
+
+    public void MultiplySleepBonus(float coef) {
+        _sleepBonus *= coef;
+    }
 }
