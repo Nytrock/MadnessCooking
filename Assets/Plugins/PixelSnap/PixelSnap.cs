@@ -96,8 +96,7 @@ public class PixelSnap : EditorWindow {
 
     float SnapToGrid(float value) {
         float scale = gridSize * unitScale;
-        float firstPass = Mathf.Round(value / scale) * scale;
-        float newValue = Mathf.Round(firstPass / unitScale) * unitScale;
+        float newValue = Mathf.Round(value / scale) * scale;
         return newValue;
     }
 }

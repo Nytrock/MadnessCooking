@@ -5,8 +5,10 @@ using UnityEngine.UI;
 public class FoodRecipeAdditionalPart : HoverTextActivator {
     protected GrayscaleImageRenderer _icon;
 
-    private void Awake() {
+    protected void Awake() {
+        _icon = new();
         _icon.SetImage(GetComponent<Image>());
+
         ChangeState(false);
     }
 

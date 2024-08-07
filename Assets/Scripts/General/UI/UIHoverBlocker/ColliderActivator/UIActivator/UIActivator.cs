@@ -20,7 +20,7 @@ public class UIActivator : ColliderActivator {
         _activable.ChangeState();
     }
 
-    protected void CloseUI() {
+    protected virtual void CloseUI() {
         _activable.ChangeState(false);
     }
 }

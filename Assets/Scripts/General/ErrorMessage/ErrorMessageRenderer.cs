@@ -8,6 +8,9 @@ public class ErrorMessageRenderer : MonoBehaviour {
 
     private void Awake() {
         _errorAnimator = GetComponent<Animator>();
+    }
+
+    private void Start() {
         _errorText.SetText(_errorMessage);
     }
 

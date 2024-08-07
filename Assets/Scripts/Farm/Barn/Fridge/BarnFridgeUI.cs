@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class BarnFridgeUI : MonoBehaviour, IActivable {
     [SerializeField] private GameObject _panel;
-    [SerializeField] private BarnFridge _barnFridge;
+    [SerializeField] private BarnStorage _barnFridge;
     [SerializeField] private ItemInfoRendererWithCount _milkRenderer;
     [SerializeField] private ItemInfoRendererWithCount _flourRenderer;
 

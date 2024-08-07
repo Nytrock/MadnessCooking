@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class BarnFridge : MonoBehaviour {
+public class BarnStorage : MonoBehaviour {
     [SerializeField] private FarmCar _car;
     [SerializeField] private Cow _cow;
     [SerializeField] private FlourMill _flourMill;
