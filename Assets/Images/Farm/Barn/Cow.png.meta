@@ -45,7 +45,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 6.5
@@ -295,6 +295,69 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: CowUI
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 0
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 3, y: 3, z: 3, w: 3}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4441be4a68c51e7418f76d0f965fc135
+      internalID: 1604107430
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CowUISlider
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 8
+        width: 3
+        height: 3
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 1, y: 1, z: 1, w: 1}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 21cbdd7ae3a955d4c95fedd57c9dc093
+      internalID: -1196599873
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CowUICount
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 8
+        width: 3
+        height: 3
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 1, y: 1, z: 1, w: 1}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4627d43c7f789f147a77176bdb4ae1ac
+      internalID: -1951996515
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -314,6 +377,9 @@ TextureImporter:
       CowFrontLegs: -1618774762
       CowHay: -1496171462
       CowHead: 159203128
+      CowUI: 1604107430
+      CowUICount: -1951996515
+      CowUISlider: -1196599873
       CowUdder: -2107743322
       Lamp: 1955946697
       Pot: 470648381

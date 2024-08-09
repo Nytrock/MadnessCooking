@@ -19,6 +19,7 @@ public class BedChoice : MonoBehaviour {
 
     private void Awake() {
         _farmBed = GetComponent<FarmBed>();
+        _farmBed.BedReseted += delegate { _addButton.SetActive(true); };
     }
 
     private void LateStart() {

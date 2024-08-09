@@ -17,4 +17,8 @@ public class GradientSlider : MonoBehaviour {
         _slider.value = value;
         _sliderImage.color = _gradient.Evaluate(value / _slider.maxValue);
     }
+
+    public void SetGradient(Gradient gradient) {
+        _gradient = gradient;
+    }
 }

@@ -31,7 +31,7 @@ public class LocalizedText : MonoBehaviour {
         _text.color = color;
     }
 
-    private void UpdateText() {
+    public void UpdateText() {
         if (_text == null)
             GetText();
 

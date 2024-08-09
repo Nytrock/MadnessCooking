@@ -2,7 +2,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
 public class IngredientRenderer : MonoBehaviour {
-    private SpriteRenderer _renderer;
+    protected SpriteRenderer _renderer;
     private Ingredient _ingredient;
 
     public Ingredient Ingredient => _ingredient;
@@ -17,7 +17,7 @@ public class IngredientRenderer : MonoBehaviour {
         _ingredient = null;
     }
 
-    public void SetSprite(Ingredient ingredient) {
+    public virtual void SetSprite(Ingredient ingredient) {
         _renderer.sprite = ingredient.MiniSprite;
         _ingredient = ingredient;
     }

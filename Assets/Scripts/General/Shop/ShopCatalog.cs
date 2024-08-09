@@ -28,6 +28,12 @@ public class ShopCatalog : MonoBehaviour {
         page.ChangeState(false);
     }
 
+    public void ClearPages() {
+        foreach (var page in _pages)
+            page.Destroy();
+        _pages.Clear();
+    }
+
     public void ActivateFirstPage() {
         _pages[_nowPage].ChangeState(false);
         _nowPage = 0;

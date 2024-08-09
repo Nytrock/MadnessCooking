@@ -24,9 +24,10 @@ public class ChickensData {
     public bool IsFeed => _isFeed;
     public bool IsInfiniteFood => _isInfiniteFood;
 
-    public ChickensData() {
+    public ChickensData(int foodCount) {
         _foodList = new();
-        _speed = 1;
+        _foodCount = foodCount;
+        _speed = 0;
     }
 
     public void UpdateTime() {

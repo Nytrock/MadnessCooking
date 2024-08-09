@@ -7,6 +7,9 @@ public class RangeVector {
     [SerializeField] private Transform _leftDown;
     [SerializeField] private Transform _rightUp;
 
+    public Transform LeftDown => _leftDown;
+    public Transform RightUp => _rightUp;
+
     public Vector2 RandomValue => new(
         Random.Range(_leftDown.position.x, _rightUp.position.x),
         Random.Range(_leftDown.position.y, _rightUp.position.y)
@@ -21,6 +24,12 @@ public class RangeVector {
     public Vector2 Lerp(Vector2 value) {
         float x = Mathf.Lerp(_leftDown.position.x, _rightUp.position.x, value.x);
         float y = Mathf.Lerp(_leftDown.position.y, _rightUp.position.y, value.y);
+        return new(x, y);
+    }
+
+    public Vector2 Lerp(float value) {
+        float x = Mathf.Lerp(_leftDown.position.x, _rightUp.position.x, value);
+        float y = Mathf.Lerp(_leftDown.position.y, _rightUp.position.y, value);
         return new(x, y);
     }
 }

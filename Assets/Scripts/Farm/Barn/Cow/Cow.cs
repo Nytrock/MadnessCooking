@@ -1,15 +1,10 @@
 using UnityEngine;
 
-public class Cow : NeedHoldAdd, IUpgradeable<FarmUpgradeData> {
+public class Cow : NeedHoldAdd {
     [SerializeField] private IngredientsManager _ingredientsManager;
     [SerializeField] private Puncher _puncher;
     [SerializeField, Min(0)] private float _wastePassiveAmount;
     [SerializeField, Min(0)] private float _wasteActiveAmount;
-
-    private NeedHoldAddData _flourMillData;
-    private FarmUpgradeData _upgradeData;
-
-    public int MaterialCount => _needHoldData.MaterialCount;
 
     protected override void Update() {
         base.Update();
@@ -17,27 +12,19 @@ public class Cow : NeedHoldAdd, IUpgradeable<FarmUpgradeData> {
     }
 
     protected override void AddReady() {
-        if (!_upgradeData.IsWheatDistributing)
-            _flourMillData.SubstractMaterial();
         _puncher.AddWaste(_wasteActiveAmount);
         base.AddReady();
     }
 
     public override void Bind(FarmData data) {
-        data.Cow ??= new();
-        _data = data.Cow;
-
-        _flourMillData = data.FlourMill;
+        data.Cow ??= new(_readyDefaultCount, _materialDefaultCount);
+        Data = data.Cow;
         base.Bind(data);
-    }
-
-    public void BindUpgrade(FarmUpgradeData upgradeData) {
-        _upgradeData = upgradeData;
     }
 
     protected override void UpdateUpgrades() {
         base.UpdateUpgrades();
-        if (_data.IsUnlocked)
+        if (Data.IsUnlocked)
             _ingredientsManager.AddItem(ConstIngredients.Instance.Milk);
     }
 }

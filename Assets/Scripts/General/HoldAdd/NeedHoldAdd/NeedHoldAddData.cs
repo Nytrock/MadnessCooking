@@ -7,8 +7,8 @@ public class NeedHoldAddData : HoldAddData {
 
     public int MaterialCount => _materialCount;
 
-    public NeedHoldAddData() : base() {
-        _materialCount = 1;
+    public NeedHoldAddData(int readyCount, int materialCount) : base(readyCount) {
+        _materialCount = materialCount;
     }
 
     public void AddMaterial() {

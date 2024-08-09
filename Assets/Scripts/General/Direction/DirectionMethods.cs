@@ -13,6 +13,14 @@ public static class DirectionMethods {
         return Direction.Left;
     }
 
+    public static Direction Reverse(this Direction direction) {
+        switch (direction) {
+            case Direction.Right: return Direction.Left;
+            case Direction.Left: return Direction.Right;
+            default: return Direction.None;
+        }
+    }
+
     public static float ToFloat(this Direction direction) {
         switch (direction) {
             case Direction.Right: return 1f;

@@ -8,7 +8,7 @@ public class InternetDownloadRenderer : MonoBehaviour {
 
     [SerializeField] private Image _background;
     [SerializeField] private Image _sliderBackground;
-    [SerializeField] private Image _sliderFill;
+    [SerializeField] private GradientSlider _slider;
     [SerializeField] private LocalizedText _downloadText;
 
     public void UpdateVisual(InternetPage page) {
@@ -26,9 +26,9 @@ public class InternetDownloadRenderer : MonoBehaviour {
     }
 
     private void SetStyle(InternetDownloadStyle style) {
-        _background.sprite = style.Background;
-        _sliderBackground.sprite = style.SliderBackground;
-        _sliderFill.color = style.SliderColor;
+        _background.color = style.BackgroundColor;
+        _slider.SetGradient(style.SliderGradient);
+        _sliderBackground.sprite = style.SliderSprite;
         _downloadText.SetColor(style.TextColor);
     }
 }

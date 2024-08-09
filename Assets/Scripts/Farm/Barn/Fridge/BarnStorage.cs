@@ -1,18 +1,42 @@
 using System;
 using UnityEngine;
 
-public class BarnStorage : MonoBehaviour {
+public class BarnStorage : IngredientStorage {
     [SerializeField] private FarmCar _car;
     [SerializeField] private Cow _cow;
     [SerializeField] private FlourMill _flourMill;
+
     private Ingredient _milk;
     private Ingredient _flour;
+    private int _milkCount = 0;
 
     public event Action<int, int> CountsUpdated;
+
+    private void Awake() {
+        Data = new(_defaultMaxSpace);
+        _cow.CountChanged += UpdateCounts;
+        _flourMill.CountChanged += UpdateCounts;
+    }
 
     private void Start() {
         _milk = ConstIngredients.Instance.Milk;
         _flour = ConstIngredients.Instance.Flour;
+        UpdateMilkCount();
+    }
+
+    private void UpdateCounts() {
+        UpdateMilkCount();
+        CountsUpdated?.Invoke(_cow.Data.ReadyCount, _flourMill.Data.ReadyCount);
+    }
+
+    private void UpdateMilkCount() {
+        int difference = _cow.Data.ReadyCount - _milkCount;
+        if (difference > 0)
+            PutIngredientWithRemain(_milk, difference);
+        else if (difference < 0)
+            RemoveIngredient(_milk, -difference);
+
+        _milkCount = _cow.Data.ReadyCount;
     }
 
     public void PutIngredient(Ingredient ingredient) {
@@ -23,7 +47,7 @@ public class BarnStorage : MonoBehaviour {
             return;
 
         MoveToCar(ingredient);
-        CountsUpdated?.Invoke(_cow.ReadyCount, _flourMill.ReadyCount);
+        UpdateCounts();
     }
 
     private void MoveToCar(Ingredient ingredient) {
@@ -33,8 +57,12 @@ public class BarnStorage : MonoBehaviour {
         else
             changingHoldAdd = _flourMill;
 
-        int remainCount = _car.PutIngredientWithRemain(ingredient, changingHoldAdd.ReadyCount);
-        FatigueManager.Instance.ChangeFatigue(ingredient.FatigueCoef * (changingHoldAdd.ReadyCount - remainCount));
+        int oldCount = changingHoldAdd.Data.ReadyCount;
+        int remainCount = _car.PutIngredientWithRemain(ingredient, changingHoldAdd.Data.ReadyCount);
+        FatigueManager.Instance.ChangeFatigue(ingredient.FatigueCoef * (changingHoldAdd.Data.ReadyCount - remainCount));
         changingHoldAdd.SetReady(remainCount);
+
+        if (ingredient == _milk)
+            RemoveIngredient(ingredient, oldCount - remainCount);
     }
 }

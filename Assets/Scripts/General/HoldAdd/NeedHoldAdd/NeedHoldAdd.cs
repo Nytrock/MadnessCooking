@@ -1,25 +1,27 @@
 using System;
+using UnityEngine;
 
 public abstract class NeedHoldAdd : HoldAdd {
-    protected NeedHoldAddUI _needHoldUI => _holdUI as NeedHoldAddUI;
-    protected NeedHoldAddData _needHoldData => _data as NeedHoldAddData;
+    [SerializeField, Min(0)] protected int _materialDefaultCount;
+
+    public NeedHoldAddData NeedHoldData => Data as NeedHoldAddData;
 
     protected override void LateStart() {
-        if (_needHoldData == null || _needHoldUI == null)
+        if (NeedHoldData == null)
             throw new ArgumentNullException("Argument for data or for UI are null");
         base.LateStart();
     }
 
     protected override void UpdateTimer() {
-        if (_needHoldData.MaterialCount == 0)
+        if (NeedHoldData.MaterialCount == 0)
             return;
 
         base.UpdateTimer();
     }
 
     public override void ChangeWorkMode(bool newValue) {
-        if (_needHoldData.MaterialCount == 0) {
-            _needHoldUI.ChangeUI(newValue);
+        if (NeedHoldData.MaterialCount == 0) {
+            InvokeWorkChanged(newValue);
             return;
         }
 
@@ -27,22 +29,22 @@ public abstract class NeedHoldAdd : HoldAdd {
     }
 
     protected override void AddReady() {
-        _needHoldData.SubstractMaterial();
+        NeedHoldData.SubstractMaterial();
         base.AddReady();
 
-        if (_needHoldData.MaterialCount == 0)
-            _isWork = false;
+        if (NeedHoldData.MaterialCount == 0)
+            Data.ChangeWork(false);
     }
 
     public void AddMaterial(int count) {
-        _needHoldData.AddMaterial(count);
+        NeedHoldData.AddMaterial(count);
     }
 
     public void AddMaterial() {
-        _needHoldData.AddMaterial();
+        NeedHoldData.AddMaterial();
     }
 
     public void ClearMaterials() {
-        _needHoldData.SetMaterial(0);
+        NeedHoldData.SetMaterial(0);
     }
 }

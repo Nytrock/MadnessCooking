@@ -5,6 +5,7 @@ public class HoldActivator : MonoBehaviour {
     [SerializeField] private UIHoverListener _hoverListener;
     [SerializeField] private HoldAdd _hold;
     private bool _isHover;
+    private bool _isMouseDown;
 
     private void Start() {
         _hoverListener.OnHover += ChangeMode;
@@ -18,14 +19,20 @@ public class HoldActivator : MonoBehaviour {
         if (_isHover)
             return;
 
+        _isMouseDown = true;
         _hold.ChangeWorkMode(true);
     }
 
     private void OnMouseExit() {
+        if (!_isMouseDown)
+            return;
+
+        _isMouseDown = false;
         _hold.ChangeWorkMode(false);
     }
 
     private void OnMouseUp() {
+        _isMouseDown = false;
         _hold.ChangeWorkMode(false);
     }
 }

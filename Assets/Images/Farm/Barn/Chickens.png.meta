@@ -45,7 +45,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 6.5
@@ -346,7 +346,7 @@ TextureImporter:
         width: 3
         height: 2
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -354,6 +354,90 @@ TextureImporter:
       bones: []
       spriteID: 3907b4f424afc1041bea147bf883dc3b
       internalID: 1682562959
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChickenEye
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 8
+        width: 1
+        height: 1
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f393bb91c211dd64c930ea8cc305a5f9
+      internalID: -115064449
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChickensUI
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 0
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 3, y: 3, z: 3, w: 3}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf4262cc5e4d87843adae6477aa0d7e3
+      internalID: -480165607
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChickensUICount
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 4
+        width: 3
+        height: 3
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 1, y: 1, z: 1, w: 1}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 67d8e38a1ecb89041b8b27cacc197380
+      internalID: -1182912522
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChickensUISlider
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 2
+        width: 5
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 2, y: 2, z: 2, w: 2}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 290b14dbdc007c649844ad5afa1d4a80
+      internalID: 773957989
       vertices: []
       indices: 
       edges: []
@@ -373,6 +457,7 @@ TextureImporter:
       ChickenBeige: 270637793
       ChickenBlack: -1654166518
       ChickenBrown: -1065879798
+      ChickenEye: -115064449
       ChickenGray: 2022386442
       ChickenLeg: 1682562959
       ChickenWhite: 518443438
@@ -380,6 +465,9 @@ TextureImporter:
       ChickensFenceSide: -860491310
       ChickensHay: 524848896
       ChickensHouse: 134737494
+      ChickensUI: -480165607
+      ChickensUICount: -1182912522
+      ChickensUISlider: 773957989
       Lamp: 1955946697
       Pot: 470648381
       Window: -805373322

@@ -31,10 +31,18 @@ public abstract class IngredientStorage : MonoBehaviour {
     }
 
     public virtual void RemoveIngredients(IEnumerable<BuyableItemCount<Ingredient>> ingredients) {
-        foreach (var count in ingredients) {
-            Data.RemoveIngredient(count);
-            IngredientCountRemoved?.Invoke(count);
-        }
+        foreach (var count in ingredients)
+            RemoveIngredient(count);
+    }
+
+    public void RemoveIngredient(Ingredient ingredient, int count) {
+        BuyableItemCount<Ingredient> removingCount = new(ingredient, count);
+        RemoveIngredient(removingCount);
+    }
+
+    public void RemoveIngredient(BuyableItemCount<Ingredient> removingCount) {
+        Data.RemoveIngredient(removingCount);
+        IngredientCountRemoved?.Invoke(removingCount);
     }
 
     public bool HaveCount(BuyableItemCount<Ingredient> count) {

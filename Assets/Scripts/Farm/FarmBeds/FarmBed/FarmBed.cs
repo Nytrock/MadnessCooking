@@ -22,6 +22,7 @@ public class FarmBed : MonoBehaviour {
     public PestsGenerator PestsGenerator => _bedHolder.PestsGenerator;
 
     public event Action CountChanged;
+    public event Action BedReseted;
 
     private void Awake() {
         _upgrader = GetComponent<FarmBedUpgrader>();
@@ -79,6 +80,7 @@ public class FarmBed : MonoBehaviour {
         DisableUpgrades();
 
         _bedHolder = null;
+        BedReseted?.Invoke();
         Data.ResetBedType();
     }
 

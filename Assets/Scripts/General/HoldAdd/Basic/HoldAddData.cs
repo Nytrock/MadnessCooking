@@ -8,17 +8,23 @@ public class HoldAddData {
     [SerializeField] private bool _isAuto;
     [SerializeField] private float _speed;
     [SerializeField] private int _readyCount;
+    private float _waitTime;
+    private bool _isWork;
 
     public float NowTime => _nowTime;
     public bool IsUnlocked => _isUnlocked;
     public bool IsAuto => _isAuto;
     public int ReadyCount => _readyCount;
+    public float WaitTime => _waitTime;
+    public bool IsWork => _isWork;
 
-    public HoldAddData() {
+    public HoldAddData(int readyCount) {
+        _readyCount = readyCount;
         _speed = 1;
     }
 
     public void ResetAll() {
+        _isWork = false;
         if (_isAuto)
             ResetTime();
     }
@@ -59,5 +65,15 @@ public class HoldAddData {
 
     public void MakeAuto() {
         _isAuto = true;
+    }
+
+    public void SetTimeWait(float timeWait) {
+        _waitTime = timeWait;
+    }
+
+    public void ChangeWork(bool newValue) {
+        _isWork = newValue;
+        if (!_isWork)
+            ResetTime();
     }
 }

@@ -1,9 +1,12 @@
+using System;
 using TMPro;
 using UnityEngine;
 
 public class InternetSearchPage : InternetPage {
     [SerializeField] private InternetSearchManager _searchManager;
     [SerializeField] private TMP_InputField _searchInput;
+
+    public event Action PageLoaded;
 
     private void Awake() {
         _searchInput.onSubmit.AddListener(_searchManager.Search);
@@ -16,5 +19,11 @@ public class InternetSearchPage : InternetPage {
     public void UpdateName(string name) {
         _pageName = name;
         _searchInput.text = name;
+    }
+
+    public override void ChangeState(bool newValue) {
+        base.ChangeState(newValue);
+        if (newValue)
+            PageLoaded?.Invoke();
     }
 }

@@ -15,6 +15,7 @@ public class InternetSearchManager : MonoBehaviour {
     private void Awake() {
         _pageManager.PageChanged += CheckOpenedPage;
         _inputField.onSubmit.AddListener(Search);
+        _searchPage.PageLoaded += CheckResults;
     }
 
     private void CheckOpenedPage(InternetPage page) {
@@ -40,7 +41,6 @@ public class InternetSearchManager : MonoBehaviour {
 
         _searchPage.UpdateName(query);
         _pageManager.ChangePage(_searchPage);
-        CheckResults();
     }
 
     private void CheckResults() {

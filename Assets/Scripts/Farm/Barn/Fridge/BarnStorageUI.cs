@@ -1,13 +1,13 @@
 using UnityEngine;
 
-public class BarnFridgeUI : MonoBehaviour, IActivable {
+public class BarnStorageUI : MonoBehaviour, IActivable {
     [SerializeField] private GameObject _panel;
-    [SerializeField] private BarnStorage _barnFridge;
+    [SerializeField] private BarnStorage _barnStorage;
     [SerializeField] private ItemInfoRendererWithCount _milkRenderer;
     [SerializeField] private ItemInfoRendererWithCount _flourRenderer;
 
     private void Awake() {
-        _barnFridge.CountsUpdated += UpdateCounts;
+        _barnStorage.CountsUpdated += UpdateCounts;
     }
 
     private void UpdateCounts(int milkCount, int flourCount) {
@@ -16,7 +16,7 @@ public class BarnFridgeUI : MonoBehaviour, IActivable {
     }
 
     private void Start() {
-        _panel.SetActive(false);
+        ChangeState(false);
         _milkRenderer.SetItemInfo(ConstIngredients.Instance.Milk);
         _flourRenderer.SetItemInfo(ConstIngredients.Instance.Flour);
     }

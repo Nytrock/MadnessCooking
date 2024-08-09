@@ -45,7 +45,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 6.5
@@ -232,6 +232,69 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: MacroMilk
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 14
+        width: 3
+        height: 5
+      alignment: 9
+      pivot: {x: 0.33333334, y: 0.4}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d241a79f1085c04ba36c05f1b334372
+      internalID: 1927401522
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BarnStorageUI
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 6
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 3, y: 3, z: 3, w: 3}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 01ecb8f8cfd99eb43a410daac3a989d6
+      internalID: -215956561
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BarnStorageCountUI
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 10
+        width: 3
+        height: 3
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 1, y: 1, z: 1, w: 1}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6842cb21646c2194285718c883b3e0c9
+      internalID: -1011496614
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -249,7 +312,10 @@ TextureImporter:
       BarnFridgeDoor: 1242635816
       BarnFridgeOpened: 453146026
       BarnFrigdeDoorOpened: 163314586
+      BarnStorageCountUI: -1011496614
+      BarnStorageUI: -215956561
       Lamp: 1955946697
+      MacroMilk: 1927401522
       Pot: 470648381
       Window: -805373322
   mipmapLimitGroupName: 

@@ -45,7 +45,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 6.5
@@ -190,6 +190,69 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: PuncherUI
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 4
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 3, y: 3, z: 3, w: 3}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6133bb0b96085334088ffacc1142afaa
+      internalID: 1428395550
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PuncherUICount
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 8
+        width: 3
+        height: 3
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 1, y: 1, z: 1, w: 1}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 40cd81b554129d8479ceb53771a21548
+      internalID: -707894347
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PuncherUISlider
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 8
+        width: 3
+        height: 3
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 1, y: 1, z: 1, w: 1}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 98e7df1c71a52f94da8fb1cbbbd470a7
+      internalID: -752745392
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -206,6 +269,9 @@ TextureImporter:
       Pot: 470648381
       Puncher: -2072079119
       PuncherOpened: -911597041
+      PuncherUI: 1428395550
+      PuncherUICount: -707894347
+      PuncherUISlider: -752745392
       Window: -805373322
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
