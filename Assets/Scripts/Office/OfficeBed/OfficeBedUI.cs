@@ -1,14 +1,15 @@
 using UnityEngine;
 
 public class OfficeBedUI : MonoBehaviour, IActivable {
+    [SerializeField] private OfficeBed _officeBed;
     [SerializeField] private GameObject _panel;
     [SerializeField] private GameObject _blockPanel;
     [SerializeField] private LocalizedText _sleepButtonText;
     [SerializeField] private string _sleepingNote;
     [SerializeField] private string _notSleepingNote;
 
-    public void LateStart(bool isSleep) {
-        _panel.SetActive(isSleep);
+    private void Awake() {
+        _officeBed.SleepChanged += UpdateSleepState;
     }
 
     public void ChangeState(bool newState) {

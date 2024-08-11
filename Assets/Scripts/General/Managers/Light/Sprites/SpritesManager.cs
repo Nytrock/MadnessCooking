@@ -1,11 +1,13 @@
 using UnityEngine;
 
 public class SpritesManager : SubLightManager {
+    [SerializeField] private Material _textMaterial;
     [SerializeField] private DaytimeSprites[] _lights;
     [SerializeField] protected SpritesManagerData _specialData;
 
     public override void UpdateMaterial() {
         _material.SetColor("_LightColor", _specialData.NowLight);
+        _textMaterial.SetColor("_FaceColor", _specialData.NowLight);
     }
 
     protected override DaytimeLight FindLightByDaytime(Daytime daytime) {

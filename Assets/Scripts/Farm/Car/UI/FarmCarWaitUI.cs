@@ -5,7 +5,7 @@ public class FarmCarWaitUI : MonoBehaviour {
     [SerializeField] private FarmCarWaitManager _manager;
     [SerializeField] private GameObject _panel;
 
-    [SerializeField] private TextMeshProUGUI _infoText;
+    [SerializeField] private LocalizedText _infoText;
     [SerializeField] private string _sentMessage;
     [SerializeField] private string _returnsMessage;
 
@@ -26,9 +26,9 @@ public class FarmCarWaitUI : MonoBehaviour {
         _panel.SetActive(_isWait);
 
         if (newState == CarState.Sent)
-            _infoText.text = _sentMessage;
+            _infoText.SetText(_sentMessage);
         else if (newState == CarState.Returns)
-            _infoText.text = _returnsMessage;
+            _infoText.SetText(_returnsMessage);
     }
 
     private void Update() {

@@ -28,6 +28,7 @@ public abstract class HoldAdd : MonoBehaviour, IBindable<FarmData> {
         UpdateUpgrades();
         Data.SetTimeWait(_timeWait);
 
+        WorkChanged?.Invoke(false);
         SetupEnded?.Invoke();
         CountChanged?.Invoke();
     }

@@ -9,15 +9,9 @@ public abstract class SaveableBaseShop<TItem, TData> : BaseShop, IBindable<TData
     [SerializeField] protected ShopData<TItem> _data;
 
     protected override void GenerateShop() {
-        ClearShop();
         SortItems();
         foreach (var item in _data.ItemsToBuy)
             _catalog.GeneratePanel(GeneratePanelData(item));
-        _catalog.ActivateFirstPage();
-    }
-
-    protected void ClearShop() {
-        _catalog.ClearPages();
     }
 
     protected virtual void UpdatePanels() {

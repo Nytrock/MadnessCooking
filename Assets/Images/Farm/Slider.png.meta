@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d109fe6375f64614ba6137c5984d1932
+guid: 1f339733e659934428054ddb991f6a39
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -45,7 +45,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 0
+  spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 6.5
@@ -149,76 +149,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: FarmCar
+      name: FarmSlider
       rect:
         serializedVersion: 2
         x: 0
-        y: 27
-        width: 75
-        height: 28
-      alignment: 9
-      pivot: {x: 0.49333334, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3c6e7b3ff54753549ba325ef5ee9d4e5
-      internalID: -188697464
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FarmCarWheel
-      rect:
-        serializedVersion: 2
-        x: 55
-        y: 13
-        width: 13
-        height: 13
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 57a5cfafb46fbb248a2765aa93565201
-      internalID: 1839512235
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: CarBox
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 6
-        width: 28
-        height: 20
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 91b660e900982df4e99bdade885379ea
-      internalID: -1169313381
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: CarWait
-      rect:
-        serializedVersion: 2
-        x: 30
         y: 0
-        width: 24
-        height: 26
+        width: 5
+        height: 74
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -226,50 +163,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a71173025a5d18140b1b878721cae0c4
-      internalID: -1848823731
+      spriteID: 308f2f5e852533c4fbef7ac2fc18f984
+      internalID: -1941557613
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CarUI
+      name: FarmSliderHandler
       rect:
         serializedVersion: 2
-        x: 70
-        y: 20
-        width: 5
-        height: 5
+        x: 6
+        y: 70
+        width: 7
+        height: 4
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 2, y: 2, z: 2, w: 2}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0d6d283b477affc4895f5a0bcd5d1642
-      internalID: 1186304576
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: CarUIIngredient
-      rect:
-        serializedVersion: 2
-        x: 70
-        y: 16
-        width: 3
-        height: 3
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 1, y: 1, z: 1, w: 1}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f587d7bad0a36804990de31cc30ef93e
-      internalID: 698145135
+      spriteID: a26794caf078a4041b2cbaf3cfe3b0b3
+      internalID: -314625052
       vertices: []
       indices: 
       edges: []
@@ -286,12 +202,8 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       Background: 1901407923
-      CarBox: -1169313381
-      CarUI: 1186304576
-      CarUIIngredient: 698145135
-      CarWait: -1848823731
-      FarmCar: -188697464
-      FarmCarWheel: 1839512235
+      FarmSlider: -1941557613
+      FarmSliderHandler: -314625052
       Lamp: 1955946697
       Pot: 470648381
       Window: -805373322

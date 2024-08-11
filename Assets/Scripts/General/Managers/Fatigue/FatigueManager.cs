@@ -24,11 +24,12 @@ public class FatigueManager : Singleton<FatigueManager>, IBindable<GeneralData> 
     }
 
     private void Update() {
-        if (_timeManager.IsSleep) {
-            _data.ChangeFatigue(-_sleepBonus);
-            if (_data.FatigueNow == 0 && _isTired)
-                ChangeTiredState(false);
-        }
+        if (!_timeManager.IsSleep)
+            return;
+
+        _data.ChangeFatigue(-_sleepBonus);
+        if (_data.FatigueNow == 0 && _isTired)
+            ChangeTiredState(false);
     }
 
     public void ChangeFatigue(float fatigueValue) {

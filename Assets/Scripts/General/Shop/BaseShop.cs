@@ -3,16 +3,20 @@ using UnityEngine.Events;
 
 public abstract class BaseShop : MonoBehaviour {
     [SerializeField] protected ShopCatalog _catalog;
+    private bool _isShopGenerated;
 
     protected virtual void LateStart() {
         ChangeShopState(false);
     }
 
     public virtual void ChangeShopState(bool newState) {
-        if (newState) {
+        if (newState && !_isShopGenerated) {
             GenerateShop();
-            _catalog.ActivateFirstPage();
+            _isShopGenerated = true;
         }
+
+        if (newState)
+            _catalog.ActivateFirstPage();
     }
 
     protected abstract void GenerateShop();

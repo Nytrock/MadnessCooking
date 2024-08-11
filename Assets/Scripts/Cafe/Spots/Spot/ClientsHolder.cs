@@ -41,7 +41,14 @@ public class ClientsHolder : MonoBehaviour {
     }
 
     public void AddClient(Client newClient) {
+        newClient.OrderActivated += ActivateAllOrders;
         _clients.Add(newClient);
+    }
+
+    private void ActivateAllOrders(Client activatedClient) {
+        foreach (var client in _clients)
+            if (activatedClient != client)
+                client.ActivateOrder();
     }
 
     public IEnumerator SpawnGroupOfClients() {

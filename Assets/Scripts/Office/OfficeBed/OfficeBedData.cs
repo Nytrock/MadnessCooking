@@ -3,11 +3,11 @@ using UnityEngine;
 
 [Serializable]
 public class OfficeBedData {
-    [SerializeField] private bool _isSleeping;
+    [SerializeField] private bool _isSleep;
 
-    public bool IsSleeping => _isSleeping;
+    public bool IsSleep => _isSleep;
 
     public void ChangeSleepState() {
-        _isSleeping = !_isSleeping;
+        _isSleep = !_isSleep;
     }
 }
