@@ -20,9 +20,8 @@ public class FlourMill : NeedHoldAdd {
     }
 
     public override void ChangeWorkMode(bool newValue) {
-        bool isWork = newValue && NeedHoldData.MaterialCount > 0;
-        _animator.SetBool("isHold", isWork);
-        _flourParticle.ChangeState(isWork);
+        bool isWork = (newValue || Data.IsAuto) && NeedHoldData.MaterialCount > 0;
+        ChangeAnimationState(isWork);
         base.ChangeWorkMode(newValue);
     }
 
@@ -36,5 +35,12 @@ public class FlourMill : NeedHoldAdd {
         base.UpdateUpgrades();
         if (Data.IsUnlocked)
             _ingredientsManager.AddItem(ConstIngredients.Instance.Flour);
+        if (Data.IsAuto)
+            ChangeAnimationState(true);
+    }
+
+    private void ChangeAnimationState(bool newState) {
+        _animator.SetBool("isHold", newState);
+        _flourParticle.ChangeState(newState);
     }
 }

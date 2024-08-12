@@ -17,6 +17,7 @@ public class HoldAddData {
     public int ReadyCount => _readyCount;
     public float WaitTime => _waitTime;
     public bool IsWork => _isWork;
+    public float Speed => _speed;
 
     public HoldAddData(int readyCount) {
         _readyCount = readyCount;

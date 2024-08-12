@@ -43,8 +43,10 @@ public abstract class HoldAdd : MonoBehaviour, IBindable<FarmData> {
     }
 
     public virtual void ChangeWorkMode(bool newValue) {
-        if (Data.IsAuto)
+        if (Data.IsAuto) {
+            InvokeWorkChanged(newValue);
             return;
+        }
 
         Data.ChangeWork(newValue);
         InvokeWorkChanged(Data.IsWork);

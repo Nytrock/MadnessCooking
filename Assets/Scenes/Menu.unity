@@ -7826,6 +7826,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _material: {fileID: 2100000, guid: 31af9167f1cb94f479cf87629622f8c3, type: 2}
+  _textMaterial: {fileID: 2100000, guid: d832b3fcd816a0643a8cf25fcc7eb3a4, type: 2}
   _lights:
   - _daytime: 0
     _spriteColor: {r: 1, g: 0.96862745, b: 0.80784315, a: 1}
@@ -8109,7 +8110,7 @@ MonoBehaviour:
   m_text: Menu.Start
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1528e4081f4f5e342bab2676099abda8, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 9146103655038203910, guid: 1528e4081f4f5e342bab2676099abda8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -9215,7 +9216,7 @@ MonoBehaviour:
   m_text: Menu.Continue
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1528e4081f4f5e342bab2676099abda8, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 9146103655038203910, guid: 1528e4081f4f5e342bab2676099abda8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -11006,7 +11007,7 @@ MonoBehaviour:
   m_text: Menu.Settings
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1528e4081f4f5e342bab2676099abda8, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 9146103655038203910, guid: 1528e4081f4f5e342bab2676099abda8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -11409,9 +11410,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cursors:
-  - {fileID: 2800000, guid: b6f7b8cafd84953449b4e488c645b948, type: 3}
-  _defaultCursor: {fileID: 2800000, guid: b6f7b8cafd84953449b4e488c645b948, type: 3}
-  _offset: {x: 0, y: 0}
+  - {fileID: 11400000, guid: 752fd1da8eec6374d891cca4566ea3f0, type: 2}
+  - {fileID: 11400000, guid: 5fe19d44c018db24ebac6e927e4db681, type: 2}
+  - {fileID: 11400000, guid: 0b2d7e1798fffcf4081962c81a316014, type: 2}
+  - {fileID: 11400000, guid: cfad274d76f02944f9ed656574fa379e, type: 2}
+  - {fileID: 11400000, guid: b0ada8ffd301ce34e8c3142ee2851de4, type: 2}
+  - {fileID: 11400000, guid: 3ba61763a23597c488d44751c63ede8b, type: 2}
+  - {fileID: 11400000, guid: d771d4fc710a96c4898890dadf5aa0e0, type: 2}
+  - {fileID: 11400000, guid: fbe06ca7e3551ce4494b9c61a96a8b57, type: 2}
+  _defaultCursor: {fileID: 11400000, guid: 752fd1da8eec6374d891cca4566ea3f0, type: 2}
+  _offset: {x: 5, y: 5}
 --- !u!1 &1692127926
 GameObject:
   m_ObjectHideFlags: 0
@@ -11608,7 +11616,7 @@ MonoBehaviour:
   m_text: 12 fps
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1528e4081f4f5e342bab2676099abda8, type: 2}
-  m_sharedMaterial: {fileID: -2524687543222470605, guid: 1528e4081f4f5e342bab2676099abda8, type: 2}
+  m_sharedMaterial: {fileID: 9146103655038203910, guid: 1528e4081f4f5e342bab2676099abda8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -14083,7 +14091,7 @@ MonoBehaviour:
   m_text: Menu.Exit
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1528e4081f4f5e342bab2676099abda8, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 9146103655038203910, guid: 1528e4081f4f5e342bab2676099abda8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -14902,4 +14910,3 @@ SceneRoots:
   - {fileID: 1618820659}
   - {fileID: 1442593750}
   - {fileID: 906252498}
-

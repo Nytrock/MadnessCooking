@@ -51,11 +51,9 @@ public class FarmWell : HoldAdd {
     }
 
     public override void ChangeWorkMode(bool newValue) {
-        if (!newValue)
+        if (!newValue && !Data.IsAuto)
             ChangePause(true);
-
-        _animator.SetBool("isHold", newValue);
-        _animator.SetFloat("waitTime", 1 / _timeWait);
+        ChangeAnimationState(newValue || Data.IsAuto);
 
         base.ChangeWorkMode(newValue);
         _cameraManager.ChangeWorkMode(!newValue);
@@ -64,6 +62,17 @@ public class FarmWell : HoldAdd {
     public override void SubtractReady() {
         base.SubtractReady();
         WaterChanged?.Invoke();
+    }
+
+    private void ChangeAnimationState(bool newValue) {
+        _animator.SetBool("isHold", newValue);
+        _animator.SetFloat("waitTime", 1 / _timeWait * Data.Speed);
+    }
+
+    protected override void UpdateUpgrades() {
+        base.UpdateUpgrades();
+        if (Data.IsAuto)
+            ChangeAnimationState(true);
     }
 
     public override void Bind(FarmData data) {
