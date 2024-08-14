@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 public class DecorShop : BaseInstantShop<Decor, OfficeData> {
-    [SerializeField] private DecorLocationImage[] _decorLocations;
+    [SerializeField] private LocationSprite[] _decorLocations;
 
     protected override void SortItems() {
         Func<Decor, int> sortMethod = (decor) => decor.Price + ((int)decor.Location * 10000);

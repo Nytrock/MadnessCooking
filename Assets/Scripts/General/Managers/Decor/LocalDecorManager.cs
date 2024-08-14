@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 public class LocalDecorManager : MonoBehaviour {
-    [SerializeField] private DecorLocation _location;
+    [SerializeField] private Location _location;
     [SerializeField] protected DecorHolder[] _decorHolders;
 
     private void Awake() {

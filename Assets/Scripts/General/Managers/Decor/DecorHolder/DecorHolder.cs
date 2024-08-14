@@ -9,7 +9,7 @@ public class DecorHolder : MonoBehaviour {
         gameObject.SetActive(newValue);
     }
 
-    public bool CheckLocation(DecorLocation location) {
+    public bool CheckLocation(Location location) {
         return location == _decor.Location;
     }
 }

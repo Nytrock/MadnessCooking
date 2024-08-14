@@ -12,6 +12,7 @@ public abstract class SaveableBaseShop<TItem, TData> : BaseShop, IBindable<TData
         SortItems();
         foreach (var item in _data.ItemsToBuy)
             _catalog.GeneratePanel(GeneratePanelData(item));
+        _catalog.UpdateEmptyState();
     }
 
     protected virtual void UpdatePanels() {

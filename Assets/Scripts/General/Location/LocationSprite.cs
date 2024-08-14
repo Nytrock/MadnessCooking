@@ -2,10 +2,10 @@ using System;
 using UnityEngine;
 
 [Serializable]
-public class UpgradeTypeImage {
-    [SerializeField] private UpgradeType _type;
+public class LocationSprite {
+    [SerializeField] private Location _location;
     [SerializeField] private Sprite _sprite;
 
-    public UpgradeType Type => _type;
+    public Location Location => _location;
     public Sprite Sprite => _sprite;
 }

@@ -1,16 +1,39 @@
 using TMPro;
 using UnityEngine;
 
-[RequireComponent(typeof(TextMeshProUGUI))]
 public class MoneyInternetUI : MoneyBaseUI {
-    private TextMeshProUGUI _countText;
+    [SerializeField] private TextMeshProUGUI _countText;
+    [SerializeField] private Animator _animator;
+    [SerializeField, Min(0.0001f)] private float _animationDuration;
 
-    protected override void Awake() {
-        base.Awake();
-        _countText = GetComponent<TextMeshProUGUI>();
+    private bool _isPlaying;
+    private float _animationNow;
+    private int _animationCount;
+
+    private void Update() {
+        if (!_isPlaying)
+            return;
+
+        _animationNow += Time.deltaTime / _animationDuration;
+        _animationCount = (int)Mathf.Lerp(_oldCount, _nowCount, _animationNow);
+        _countText.text = CountConverter.ToCount(_animationCount);
+
+        if (_animationNow >= 1)
+            StopAnimation();
     }
 
     protected override void StartAnimation() {
-        _countText.text = _countConverted;
+        _isPlaying = true;
+        _animator.SetBool("isGet", _isCountAdded);
+        _animator.SetBool("isLost", !_isCountAdded);
+
+        _animationCount = _oldCount;
+        _animationNow = 0;
+    }
+
+    private void StopAnimation() {
+        _isPlaying = false;
+        _animator.SetBool("isGet", false);
+        _animator.SetBool("isLost", false);
     }
 }

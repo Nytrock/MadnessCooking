@@ -5,13 +5,12 @@ using UnityEngine.UI;
 public class ShopCatalog : MonoBehaviour {
     [SerializeField] private Transform _pagesContainer;
     [SerializeField] private ShopCatalogPage _pagePrefab;
+    [SerializeField] private GameObject _emptyMessage;
     [SerializeField] private Button _nextButton;
     [SerializeField] private Button _previousButton;
 
     private readonly List<ShopCatalogPage> _pages = new();
     private int _nowPage = 0;
-
-    public Transform PagesContainer => _pagesContainer;
 
     public void GeneratePanel(BuyPanelData panelData) {
         if (_pages.Count == 0 || _pages[^1].ItemCount == _pages[^1].MaxItemCount) {
@@ -50,10 +49,8 @@ public class ShopCatalog : MonoBehaviour {
     }
 
     private void UpdateButtons() {
-        _nextButton.interactable = _nowPage < _pages.Count - 1;
-        _previousButton.interactable = _nowPage > 0;
-        _nextButton.gameObject.SetActive(_pages.Count != 1);
-        _previousButton.gameObject.SetActive(_pages.Count != 1);
+        _nextButton.gameObject.SetActive(_nowPage < _pages.Count - 1);
+        _previousButton.gameObject.SetActive(_nowPage > 0);
     }
 
     private void CalculateIndexes(int index, out int startPageIndex, out int panelIndex) {
@@ -65,6 +62,7 @@ public class ShopCatalog : MonoBehaviour {
         CalculateIndexes(removedItemIndex, out int startPageIndex, out int panelIndex);
         _pages[startPageIndex].DestroyPanelByIndex(panelIndex);
         UpdatePages(startPageIndex);
+        UpdateEmptyState();
     }
 
     private void UpdatePages(int startPageIndex) {
@@ -83,6 +81,9 @@ public class ShopCatalog : MonoBehaviour {
     }
 
     public void UpdatePanel(int updatedItemIndex, BuyPanelData panelData) {
+        if (updatedItemIndex >= _pages.Count * _pagePrefab.MaxItemCount)
+            return;
+
         CalculateIndexes(updatedItemIndex, out int startPageIndex, out int panelIndex);
         _pages[startPageIndex].UpdatePanelDataByIndex(panelIndex, panelData);
     }
@@ -95,5 +96,13 @@ public class ShopCatalog : MonoBehaviour {
         _pages.RemoveAt(_pages.Count - 1);
 
         UpdateButtons();
+    }
+
+    public void UpdateEmptyState() {
+        if (_emptyMessage == null)
+            return;
+
+        bool isEmpty = _pages.Count == 1 && _pages[_nowPage].ItemCount == 0;
+        _emptyMessage.SetActive(isEmpty);
     }
 }

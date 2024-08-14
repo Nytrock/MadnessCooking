@@ -17,7 +17,7 @@ public class CountRenderer : MonoBehaviour {
         if (_countText == null)
             GetCountText();
 
-        _countText.text = CountConverter.ConvertCount(count);
+        _countText.text = CountConverter.ToCount(count);
     }
 
     public void ResetText() {

@@ -3,16 +3,20 @@ using UnityEngine;
 
 public class ShopCatalogPage : MonoBehaviour {
     [SerializeField] private BaseBuyPanel _buyPanelPrefab;
+    [SerializeField] private ShopCatalogPageUpper _upper;
+    [SerializeField] private Transform _container;
+
     [SerializeField, Min(1)] private int _maxItemCount;
+
     protected readonly List<BaseBuyPanel> _buyPanels = new();
 
     public int MaxItemCount => _maxItemCount;
     public int ItemCount => _buyPanels.Count;
 
     public void GeneratePanel(BuyPanelData panelData) {
-        BaseBuyPanel buyPanel = Instantiate(_buyPanelPrefab, transform);
+        BaseBuyPanel buyPanel = Instantiate(_buyPanelPrefab);
         buyPanel.Setup(panelData);
-        _buyPanels.Add(buyPanel);
+        AddPanel(buyPanel);
     }
 
     public void ChangeState(bool newValue) {
@@ -21,18 +25,26 @@ public class ShopCatalogPage : MonoBehaviour {
 
     public BaseBuyPanel PopFirstPanel() {
         BaseBuyPanel panel = _buyPanels[0];
-        _buyPanels.RemoveAt(0);
+        RemovePanelByIndex(0);
         return panel;
     }
 
     public void AddPanel(BaseBuyPanel panel) {
-        panel.transform.SetParent(transform);
+        if (_upper)
+            _upper.ActivateUpper(_buyPanels.Count);
+        panel.transform.SetParent(_container);
         _buyPanels.Add(panel);
+    }
+
+    private void RemovePanelByIndex(int index) {
+        _buyPanels.RemoveAt(index);
+        if (_upper)
+            _upper.DisableUpper(_buyPanels.Count);
     }
 
     public void DestroyPanelByIndex(int index) {
         _buyPanels[index].Destroy();
-        _buyPanels.RemoveAt(index);
+        RemovePanelByIndex(index);
     }
 
     public void UpdatePanelDataByIndex(int index, BuyPanelData updatedData) {
