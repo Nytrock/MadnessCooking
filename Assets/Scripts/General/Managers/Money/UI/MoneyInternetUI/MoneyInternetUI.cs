@@ -24,8 +24,10 @@ public class MoneyInternetUI : MoneyBaseUI {
 
     protected override void StartAnimation() {
         _isPlaying = true;
-        _animator.SetBool("isGet", _isCountAdded);
-        _animator.SetBool("isLost", !_isCountAdded);
+        if (_animator.isActiveAndEnabled) {
+            _animator.SetBool("isGet", _isCountAdded);
+            _animator.SetBool("isLost", !_isCountAdded);
+        }
 
         _animationCount = _oldCount;
         _animationNow = 0;
@@ -33,6 +35,9 @@ public class MoneyInternetUI : MoneyBaseUI {
 
     private void StopAnimation() {
         _isPlaying = false;
+        if (!_animator.isActiveAndEnabled)
+            return;
+
         _animator.SetBool("isGet", false);
         _animator.SetBool("isLost", false);
     }

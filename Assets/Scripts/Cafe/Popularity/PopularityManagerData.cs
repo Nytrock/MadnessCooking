@@ -5,11 +5,9 @@ using UnityEngine;
 public class PopularityManagerData {
     [SerializeField] private int _level;
     [SerializeField] private int _xp;
-    [SerializeField] private bool _isMaxLevel;
 
     public int Level => _level;
     public int Xp => _xp;
-    public bool IsMaxLevel => _isMaxLevel;
 
     public PopularityManagerData() {
         _level = 0;
@@ -24,10 +22,8 @@ public class PopularityManagerData {
         _xp -= xp;
     }
 
-    public void NextLevel(int levelsCount) {
+    public void NextLevel() {
         _level++;
-        if (levelsCount == _level + 1)
-            _isMaxLevel = true;
     }
 
     public void PreviousLevel() {
@@ -35,6 +31,5 @@ public class PopularityManagerData {
             return;
 
         _level--;
-        _isMaxLevel = false;
     }
 }

@@ -7,7 +7,7 @@ public class PopularityManager : MonoBehaviour, IBindable<GeneralData> {
 
     private PopularityLevel _nowLevel => _levels[_data.Level];
 
-    public bool IsMaxLevel => _data.IsMaxLevel;
+    public bool IsMaxLevel => _data.Level == _levels.Length - 1;
 
     public event Action<PopularityLevel> LevelChanged;
     public event Action<int> XpChanged;
@@ -45,8 +45,8 @@ public class PopularityManager : MonoBehaviour, IBindable<GeneralData> {
     public void AddXp(float xp) {
         _data.AddXp((int)xp);
 
-        if (_data.Xp >= _nowLevel.NeedXp && !_data.IsMaxLevel) {
-            while (_data.Xp >= _nowLevel.NeedXp && !_data.IsMaxLevel) {
+        if (_data.Xp >= _nowLevel.NeedXp && !IsMaxLevel) {
+            while (_data.Xp >= _nowLevel.NeedXp && !IsMaxLevel) {
                 if ((_data.Level + 1) % 5 == 0) {
                     _data.RemoveXp(_data.Xp - _nowLevel.NeedXp);
                     break;
@@ -75,7 +75,7 @@ public class PopularityManager : MonoBehaviour, IBindable<GeneralData> {
     }
 
     public void NextLevel() {
-        _data.NextLevel(_levels.Length);
+        _data.NextLevel();
         LevelChanged?.Invoke(_nowLevel);
     }
 
