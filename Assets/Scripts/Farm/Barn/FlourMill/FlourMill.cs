@@ -3,7 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class FlourMill : NeedHoldAdd {
     [SerializeField] private IngredientsManager _ingredientsManager;
-    [SerializeField] private CustomParticleSystem _flourParticle;
+    [SerializeField] private ExtendedParticleSystem _flourParticle;
     [SerializeField] private Puncher _puncher;
     [SerializeField, Min(0)] private float _wasteAmount;
 

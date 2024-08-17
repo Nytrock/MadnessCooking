@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public class FarmShopData : GraphShopData<BaseUpgrade> {
+public class FarmShopData : ShopData<BaseUpgrade> {
     [SerializeField] private List<ConsumableUpgradeHolder> _upgradeHolders;
 
     public FarmShopData(IEnumerable<BaseUpgrade> defaultItems, IEnumerable<ConsumableUpgrade> comsumableUpgrades) : base(defaultItems) {

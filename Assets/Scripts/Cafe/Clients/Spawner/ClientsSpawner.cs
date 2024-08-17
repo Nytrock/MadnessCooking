@@ -35,10 +35,6 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
         _spawnPoint.position += new Vector3(_spaceManager.SpaceSize, 0, 0);
     }
 
-    private void LateStart() {
-        SetNewTime();
-    }
-
     private void Update() {
         if (!_data.IsSpawning || !_cafeOpener.IsOpened)
             return;
@@ -116,6 +112,7 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
     private void ClientEat(Client client) {
         client.ClientEat -= ClientEat;
         _xpAdder.AddXp(client.Data.Type, client.Data.WaitCoef);
+        _data.AddServicedClient();
     }
 
     private void ClientRejected(Client client) {

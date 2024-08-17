@@ -51,7 +51,7 @@ public class TechnicRepairUI : MonoBehaviour, IUpgradeable<KitchenUpgradeData>, 
     }
 
     private void UpdateInfo() {
-        float maxStrength = _nowTechnicHolder.Technic.Strength;
+        float maxStrength = _nowTechnicHolder.Data.Technic.Strength;
         float nowStrength = _nowTechnicHolder.Data.NowStrength;
 
         _repairButton.interactable = _nowTechnicHolder.Repairable();

@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(AudioSource))]
 public class MusicManager : MonoBehaviour {
-    [SerializeField] private MusicInfo _mainMenuMusic;
+    [SerializeField] private AudioInfo _mainMenuMusic;
     [SerializeField] private LocationMusicInfo[] _locationMusic;
     [SerializeField] private LocationManager _locationManager;
 
@@ -19,12 +19,12 @@ public class MusicManager : MonoBehaviour {
             _locationManager.LocationChanged += SetLocationMusic;
     }
 
-    private void SetMusic(MusicInfo music) {
-        if (_source.clip == music.Music)
+    private void SetMusic(AudioInfo music) {
+        if (_source.clip == music.Audio)
             return;
 
         _source.volume = music.Volume;
-        _source.clip = music.Music;
+        _source.clip = music.Audio;
         _source.Play();
     }
 

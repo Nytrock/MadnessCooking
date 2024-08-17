@@ -1,6 +1,8 @@
+using UnityEngine;
+
 public class TechnicHolderUIActivator : UIActivator {
+    [SerializeField] private TechnicHolder _technicHolder;
     private TechnicRepairUI _repairUI;
-    private TechnicHolder _technicHolder;
 
     protected override void Awake() {
         base.Awake();

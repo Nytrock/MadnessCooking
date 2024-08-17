@@ -29,6 +29,7 @@ public abstract class SaveableBaseShop<TItem, TData> : BaseShop, IBindable<TData
 
     public virtual void BuyItem(TItem item) {
         MoneyManager.Instance.ChangeMoney(-item.Price);
+        _data.BuyItem(item);
         _itemManager.AddItem(item);
         ChangePanelsState(item);
     }
@@ -42,7 +43,7 @@ public abstract class SaveableBaseShop<TItem, TData> : BaseShop, IBindable<TData
     }
 
     protected virtual void RemoveItemPanel(TItem item, int index) {
-        _data.RemoveItemToBuy(index);
+        _data.RemoveItemByIndex(index);
         _catalog.RemovePanel(index);
     }
 
@@ -52,26 +53,24 @@ public abstract class SaveableBaseShop<TItem, TData> : BaseShop, IBindable<TData
     }
 
     protected virtual void CheckGraph(TItem item, int index) {
-        GraphShopData<TItem> graphData = _data as GraphShopData<TItem>;
-        if (graphData == null)
+        if (_data == null)
             throw new ArgumentNullException($"Data of shop {name} does not match the existing interface");
-        graphData.BuyItem(item);
 
         bool isFirstReplaced = false;
-        CheckNextItems(graphData, item, index, ref isFirstReplaced);
+        CheckNextItems(item, index, ref isFirstReplaced);
     }
 
-    protected void CheckNextItems(GraphShopData<TItem> data, TItem item, int index, ref bool isFirstReplaced) {
+    protected void CheckNextItems(TItem item, int index, ref bool isFirstReplaced) {
         IGraphable<TItem> graphItem = item as IGraphable<TItem>;
         if (graphItem == null)
             return;
 
         foreach (var nextItem in graphItem.NextItems) {
-            if (data.IsItemBuyable(nextItem))
+            if (_data.IsItemBuyable(nextItem))
                 continue;
 
-            if (data.IsItemAvailable(nextItem)) {
-                CheckNextItems(data, nextItem, index, ref isFirstReplaced);
+            if (_data.IsItemAvailable(nextItem)) {
+                CheckNextItems(nextItem, index, ref isFirstReplaced);
                 continue;
             }
 
@@ -79,14 +78,14 @@ public abstract class SaveableBaseShop<TItem, TData> : BaseShop, IBindable<TData
             IGraphable<TItem> graphNextItem = nextItem as IGraphable<TItem>;
             if (graphNextItem != null)
                 foreach (var needUpgrade in graphNextItem.NeedItems)
-                    canAdd &= data.IsItemAvailable(needUpgrade);
+                    canAdd &= _data.IsItemAvailable(needUpgrade);
 
             if (canAdd) {
                 if (!isFirstReplaced) {
                     ReplaceItemPanel(nextItem, index);
                     isFirstReplaced = true;
                 } else {
-                    data.AddItemToBuy(nextItem);
+                    _data.AddItemToBuy(nextItem);
                     _catalog.GeneratePanel(GeneratePanelData(nextItem));
                 }
             }
@@ -114,6 +113,7 @@ public abstract class SaveableBaseShop<TItem, TData> : BaseShop, IBindable<TData
     }
 
     public virtual void Bind(TData data) {
+        _data.CheckDefaultItems(_defaultItemsToBuy);
         LateStart();
     }
 }

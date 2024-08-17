@@ -4,10 +4,11 @@ using UnityEngine;
 
 [Serializable]
 public class ClientsSpawnerData {
-    [SerializeField] List<ClientData> _leavingClients;
-    [SerializeField] bool _isSpawning;
-    [SerializeField] float _nowSpawnTime;
-    [SerializeField] float _needSpawnTime;
+    [SerializeField] private List<ClientData> _leavingClients;
+    [SerializeField] private bool _isSpawning;
+    [SerializeField] private float _nowSpawnTime;
+    [SerializeField] private float _needSpawnTime;
+    [SerializeField] private int _servicedClientsCount;
 
     public IEnumerable<ClientData> LeavingClients => _leavingClients;
     public bool IsSpawning => _isSpawning;
@@ -41,5 +42,9 @@ public class ClientsSpawnerData {
     public void TryRemoveLeavingClient(ClientData clientData) {
         if (_leavingClients.Contains(clientData))
             _leavingClients.Remove(clientData);
+    }
+
+    public void AddServicedClient() {
+        _servicedClientsCount++;
     }
 }

@@ -18,6 +18,7 @@ public class TechnicHolderData {
     public float NowWaitTime => _nowWaitTime;
     public float NeedWaitTime => _needWaitTime;
     public Order NowOrder => _nowOrder;
+    public Technic Technic => _technic;
 
     public event Action CookStoped;
     public event Action RepairStoped;

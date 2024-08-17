@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(ParticleSystem))]
-public class CustomParticleSystem : MonoBehaviour {
+public class ExtendedParticleSystem : MonoBehaviour {
     private ParticleSystem _particleSystem;
 
     private void Awake() {
@@ -13,5 +13,10 @@ public class CustomParticleSystem : MonoBehaviour {
             _particleSystem.Play();
         else
             _particleSystem.Stop();
+    }
+
+    public void SetColor(Color color) {
+        ParticleSystem.MainModule main = _particleSystem.main;
+        main.startColor = color;
     }
 }
