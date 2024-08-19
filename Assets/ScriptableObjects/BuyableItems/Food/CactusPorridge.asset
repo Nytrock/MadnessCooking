@@ -13,12 +13,11 @@ MonoBehaviour:
   m_Name: CactusPorridge
   m_EditorClassIdentifier: 
   _icon: {fileID: -895583191, guid: fcf5fb943f0e2034c91e28b0e7a9498a, type: 3}
-  _name: CactusPorridge.Name
-  _description: CactusPorridge.Description
   _price: 150
   _type: 2
   _typeTechnic: {fileID: 11400000, guid: c20c3d0744f967340882fea91042167a, type: 2}
   _miniSprite: {fileID: 0}
+  _cookingSprite: {fileID: 0}
   _timeToCook: 13
   _timeToEat: 0
   _moneyGet: 60
@@ -28,3 +27,5 @@ MonoBehaviour:
       _count: 2
     - _item: {fileID: 11400000, guid: 1a1acf5d79493354cad0d0956b0d8689, type: 2}
       _count: 1
+  _color: {r: 0, g: 0, b: 0, a: 0}
+  _isNeedWater: 1

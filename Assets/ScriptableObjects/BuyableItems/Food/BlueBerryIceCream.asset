@@ -13,12 +13,11 @@ MonoBehaviour:
   m_Name: BlueBerryIceCream
   m_EditorClassIdentifier: 
   _icon: {fileID: 708266734, guid: fcf5fb943f0e2034c91e28b0e7a9498a, type: 3}
-  _name: BlueBerryIceCream.Name
-  _description: BlueBerryIceCream.Description
   _price: 75
   _type: 2
   _typeTechnic: {fileID: 11400000, guid: 2ae0f2699c8f7ec41bc65add3c6294b9, type: 2}
   _miniSprite: {fileID: 0}
+  _cookingSprite: {fileID: 0}
   _timeToCook: 8
   _timeToEat: 0
   _moneyGet: 12
@@ -28,3 +27,5 @@ MonoBehaviour:
       _count: 2
     - _item: {fileID: 11400000, guid: 6b8daec792815f44b8b8c781a3adfdcd, type: 2}
       _count: 2
+  _color: {r: 1, g: 1, b: 1, a: 1}
+  _isNeedWater: 1
