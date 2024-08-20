@@ -4,7 +4,7 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class CriticSpawner : MonoBehaviour, IBindable<CafeData> {
-    [SerializeField] private TimeManager _timeManager;
+    [SerializeField] private GameTimeManager _timeManager;
     [SerializeField] private PopularityManager _popularityManager;
     [SerializeField] private ClientsSpawner _clientSpawner;
     [SerializeField] private CriticUI _criticUI;

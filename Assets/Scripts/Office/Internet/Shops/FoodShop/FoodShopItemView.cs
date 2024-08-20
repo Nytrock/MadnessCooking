@@ -2,6 +2,12 @@ using UnityEngine;
 
 public class FoodShopItemView : BaseChooseShopItemView<Food> {
     [SerializeField] private FoodShopRecipe _recipeRenderer;
+    [SerializeField] private HoverText _hoverText;
+
+    protected override void Start() {
+        base.Start();
+        _recipeRenderer.SetHoverText(_hoverText);
+    }
 
     public void SetUpgradeDataToRecipe(KitchenUpgradeData upgradeData) {
         _recipeRenderer.SetUpgradeData(upgradeData);

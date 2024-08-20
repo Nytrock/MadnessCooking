@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public class ClientTimeMultiplier : MonoBehaviour {
-    [SerializeField] private TimeManager _timeManager;
+    [SerializeField] private GameTimeManager _timeManager;
 
     [Header("Multiplier")]
     [SerializeField, Min(0)] private float _morning = 1;

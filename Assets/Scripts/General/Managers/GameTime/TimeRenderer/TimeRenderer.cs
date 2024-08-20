@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public abstract class TimeRenderer : MonoBehaviour {
-    [SerializeField] protected TimeManager _timeManager;
+    [SerializeField] protected GameTimeManager _timeManager;
 
     private void Update() {
         UpdateVisual();

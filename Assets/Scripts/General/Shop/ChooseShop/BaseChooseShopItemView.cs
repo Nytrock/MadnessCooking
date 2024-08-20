@@ -11,7 +11,7 @@ public abstract class BaseChooseShopItemView<TItem> : MonoBehaviour
     protected bool _isItemBuyable;
     protected TItem _selectedItem;
 
-    private void Start() {
+    protected virtual void Start() {
         ResetInfo();
     }
 

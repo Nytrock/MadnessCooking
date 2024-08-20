@@ -10,6 +10,11 @@ public class FoodShopRecipe : FoodRecipe<FoodShopRecipePart> {
         SetupWater(food);
     }
 
+    public override void SetHoverText(HoverText hoverText) {
+        base.SetHoverText(hoverText);
+        _waterIcon.SetHoverText(hoverText);
+    }
+
     protected override void SetupIngredients() {
         int index = 0;
         foreach (var ingredientCount in _food.Ingredients) {

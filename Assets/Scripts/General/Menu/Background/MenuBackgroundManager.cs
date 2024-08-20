@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public class MenuBackgroundManager : MonoBehaviour {
-    [SerializeField] private TimeManager _timeManager;
+    [SerializeField] private GameTimeManager _timeManager;
     [SerializeField] private LightManager _lightManager;
 
     private void Start() {

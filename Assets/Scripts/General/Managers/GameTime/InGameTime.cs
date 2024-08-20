@@ -1,14 +1,14 @@
 using UnityEngine;
 
-[RequireComponent(typeof(TimeManager))]
+[RequireComponent(typeof(GameTimeManager))]
 public class InGameTime : Singleton<InGameTime> {
-    private TimeManager _timeManager;
+    private GameTimeManager _timeManager;
 
     public float NormalizedDeltaTime => _timeManager.NormalizedNowTimeSpeed * Time.deltaTime;
     public float DeltaTime => _timeManager.NowTimeSpeed * Time.deltaTime;
 
     protected override void Awake() {
         base.Awake();
-        _timeManager = GetComponent<TimeManager>();
+        _timeManager = GetComponent<GameTimeManager>();
     }
 }

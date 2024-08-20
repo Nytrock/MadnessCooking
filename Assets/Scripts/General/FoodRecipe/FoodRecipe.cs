@@ -1,7 +1,8 @@
 using UnityEngine;
 
-public abstract class FoodRecipe<T> : MonoBehaviour {
-    [SerializeField] protected T[] _recipeParts = new T[8];
+public abstract class FoodRecipe<TPart> : MonoBehaviour
+    where TPart : FoodRecipePart {
+    [SerializeField] protected TPart[] _recipeParts = new TPart[8];
     [SerializeField] protected FoodRecipeTechnic _techicIcon;
     [SerializeField] protected KitchenStorage _kitchenStorage;
     [SerializeField] protected TechnicManager _technicManager;
@@ -17,6 +18,12 @@ public abstract class FoodRecipe<T> : MonoBehaviour {
 
         SetupIngredients();
         SetupTechnic();
+    }
+
+    public virtual void SetHoverText(HoverText hoverText) {
+        foreach (var recipePart in _recipeParts)
+            recipePart.SetHoverText(hoverText);
+        _techicIcon.SetHoverText(hoverText);
     }
 
     public abstract void DisableParts();

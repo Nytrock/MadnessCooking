@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 [Serializable]
-public class TimeManagerData {
+public class GameTimeManagerData {
     [SerializeField] private SerializableTimeSpan _globalTime;
     [SerializeField] private Daytime _daytime;
     [SerializeField] private bool _isWaitingNextDay;
@@ -11,7 +11,7 @@ public class TimeManagerData {
     public Daytime Daytime => _daytime;
     public bool IsWaitingNextDay => _isWaitingNextDay;
 
-    public TimeManagerData(DaytimeStart daytimeStart) {
+    public GameTimeManagerData(DaytimeStart daytimeStart) {
         _globalTime = new SerializableTimeSpan(daytimeStart.Hour, daytimeStart.Minute);
         _daytime = daytimeStart.Daytime;
     }

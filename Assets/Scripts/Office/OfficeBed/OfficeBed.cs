@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 public class OfficeBed : MonoBehaviour, IBindable<OfficeData> {
-    [SerializeField] private TimeManager _timeManager;
+    [SerializeField] private GameTimeManager _timeManager;
     private OfficeBedData _data;
 
     public event Action<bool> SleepChanged;

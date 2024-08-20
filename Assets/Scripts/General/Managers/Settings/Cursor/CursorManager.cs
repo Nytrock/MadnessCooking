@@ -18,24 +18,23 @@ public class CursorManager : MonoBehaviour, IBindable<GameSettingsData>, ISettin
 
     public void UpdateValue() {
         _nowCursor = _cursors[_data.LastValue];
-        SetCursorTexture(_nowCursor.MainTexture);
+        SetCursorTexture(CursorState.Standard);
     }
 
     private void Update() {
-        if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1)) {
-            Texture2D texture = _nowCursor.GetCursor(CursorState.Press);
-            SetCursorTexture(texture);
-        } else if (Input.GetMouseButtonUp(0) || Input.GetMouseButtonUp(1)) {
-            SetCursorTexture(_nowCursor.MainTexture);
-        }
+        if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))
+            SetCursorTexture(CursorState.Press);
+        else if (Input.GetMouseButtonUp(0) || Input.GetMouseButtonUp(1))
+            SetCursorTexture(CursorState.Standard);
     }
 
     public Sprite GetNowCursor() {
-        Texture2D texture = _nowCursor.MainTexture;
+        Texture2D texture = _nowCursor.DefaultTexture;
         return Sprite.Create(texture, new(0, 0, texture.width, texture.height), Vector2.zero);
     }
 
-    private void SetCursorTexture(Texture2D texture) {
+    private void SetCursorTexture(CursorState state) {
+        Texture2D texture = _nowCursor.GetCursor(state);
         Cursor.SetCursor(texture, _offset, CursorMode.ForceSoftware);
     }
 }

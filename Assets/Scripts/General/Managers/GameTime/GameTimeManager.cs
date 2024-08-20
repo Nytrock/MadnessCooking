@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class TimeManager : MonoBehaviour, IBindable<GeneralData> {
+public class GameTimeManager : MonoBehaviour, IBindable<GeneralData> {
     [SerializeField, Min(0)] private int _defaultTimeSpeed;
     [SerializeField, Min(0)] private int _sleepTimeSpeed;
     [SerializeField] private DaytimeStart[] _daytimeStarts;
@@ -9,7 +9,7 @@ public class TimeManager : MonoBehaviour, IBindable<GeneralData> {
 
     private int _daytimeCount;
     private int _nowTimeSpeed;
-    [SerializeField] private TimeManagerData _data;
+    [SerializeField] private GameTimeManagerData _data;
 
     public TimeSpan GlobalTime => _data.GlobalTime;
     public int DaysCount => _data.GlobalTime.Days;
@@ -64,12 +64,12 @@ public class TimeManager : MonoBehaviour, IBindable<GeneralData> {
     }
 
     public void Bind(GeneralData data) {
-        if (data.TimeManager == null) {
+        if (data.GameTimeManager == null) {
             DaytimeStart defaultDaytimeStart = GetDaytimeStartInfo(_defaultDaytime);
-            data.TimeManager = new(defaultDaytimeStart);
+            data.GameTimeManager = new(defaultDaytimeStart);
         }
 
-        _data = data.TimeManager;
+        _data = data.GameTimeManager;
         LateStart();
     }
 }

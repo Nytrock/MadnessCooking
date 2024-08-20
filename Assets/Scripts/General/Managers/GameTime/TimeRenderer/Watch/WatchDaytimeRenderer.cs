@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 [RequireComponent(typeof(TimeRenderWatch))]
 public class WatchDaytimeRenderer : MonoBehaviour {
-    [SerializeField] private TimeManager _timeManager;
+    [SerializeField] private GameTimeManager _timeManager;
     [SerializeField] private Image _daytimeIcon;
     [SerializeField] private LocalizedText _daytimeText;
     [SerializeField] private DaytimeRenderInfo[] _daytimeInfos;

@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 public class FatigueManager : Singleton<FatigueManager>, IBindable<GeneralData> {
-    [SerializeField] private TimeManager _timeManager;
+    [SerializeField] private GameTimeManager _timeManager;
 
     [SerializeField, Min(0)] private float _fatigueMax;
     [SerializeField, Min(0)] private float _fatigueDefault;

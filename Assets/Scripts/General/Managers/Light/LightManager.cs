@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public class LightManager : MonoBehaviour, IBindable<GeneralData> {
-    [SerializeField] private TimeManager _timeManager;
+    [SerializeField] private GameTimeManager _timeManager;
     [SerializeField] private SkyManager _skyManager;
     [SerializeField] private SpritesManager _spritesManager;
     [SerializeField, Min(1)] private float _secondsToChangeColor = 1;

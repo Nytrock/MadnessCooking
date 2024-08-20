@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ce2a558d15679a4ca3c2cc3a3040aac, type: 3}
   m_Name: Kitchen
   m_EditorClassIdentifier: 
-  _mainTexture: {fileID: 2800000, guid: f964f8167aa6a3a4a88465fe793607ce, type: 3}
-  _extraTextures: []
+  _defaultTexture: {fileID: 2800000, guid: f964f8167aa6a3a4a88465fe793607ce, type: 3}
+  _extraTextures:
+  - _state: 1
+    _texture: {fileID: 2800000, guid: f964f8167aa6a3a4a88465fe793607ce, type: 3}

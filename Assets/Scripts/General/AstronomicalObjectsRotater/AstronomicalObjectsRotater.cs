@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 public abstract class AstronomicalObjectsRotater : MonoBehaviour {
-    [SerializeField] protected TimeManager _timeManager;
+    [SerializeField] protected GameTimeManager _timeManager;
     [SerializeField] private float _startDegree;
     [SerializeField] private float _endDegree;
 
