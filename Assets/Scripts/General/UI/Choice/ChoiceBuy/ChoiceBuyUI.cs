@@ -9,7 +9,7 @@ public abstract class ChoiceBuyUI<TItem> : ChoiceUI<TItem, ChoiceBuyButton<TItem
         if (_chosedIndex == -1)
             _description.ChangeActive();
         else
-            _choiceButtons[_chosedIndex].ChangeSelectedState();
+            _choiceButtons[_chosedIndex].ChangeChoosedState();
 
         bool isSame = index == _chosedIndex;
         if (isSame) {
@@ -19,7 +19,7 @@ public abstract class ChoiceBuyUI<TItem> : ChoiceUI<TItem, ChoiceBuyButton<TItem
         }
 
         _chosedIndex = index;
-        _choiceButtons[_chosedIndex].ChangeSelectedState();
+        _choiceButtons[_chosedIndex].ChangeChoosedState();
         _submitButton.interactable = !isSame && isBuyable;
     }
 

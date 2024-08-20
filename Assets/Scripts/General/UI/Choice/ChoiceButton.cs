@@ -1,31 +1,24 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(Button))]
+[RequireComponent(typeof(Button), typeof(Animator))]
 public abstract class ChoiceButton<TItem> : MonoBehaviour
     where TItem : BuyableItem {
-
-    [SerializeField] private Sprite _deselectedSprite;
-    [SerializeField] private Sprite _selectedSprite;
     [SerializeField] protected Image _icon;
 
     protected Button _button;
-    private Image _image;
-    private bool _isSelected;
+    private bool _isChoosed;
+    private Animator _animator;
 
     public TItem Item { get; protected set; }
 
     protected virtual void Awake() {
-        _image = GetComponent<Image>();
-        _image.sprite = _deselectedSprite;
+        _animator = GetComponent<Animator>();
     }
 
-    public void ChangeSelectedState() {
-        _isSelected = !_isSelected;
-        if (_isSelected)
-            _image.sprite = _selectedSprite;
-        else
-            _image.sprite = _deselectedSprite;
+    public void ChangeChoosedState() {
+        _isChoosed = !_isChoosed;
+        _animator.SetBool("isChoosed", _isChoosed);
     }
 
     public void ChangeState(bool newState) {

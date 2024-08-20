@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class IngredientChoiceButton : ChoiceSimpleButton<Ingredient> {
     public override void Setup(Ingredient item, int index, ChoiceSimpleUI<Ingredient> ui) {
         base.Setup(item, index, ui);
@@ -5,5 +7,9 @@ public class IngredientChoiceButton : ChoiceSimpleButton<Ingredient> {
         _button.onClick.AddListener(
             delegate { ui.Choice(index); }
         );
+    }
+
+    public void SetButtonImage(Sprite sprite) {
+        _button.image.sprite = sprite;
     }
 }

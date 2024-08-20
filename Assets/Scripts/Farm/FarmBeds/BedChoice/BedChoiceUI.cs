@@ -60,7 +60,7 @@ public class BedChoiceUI : ChoiceBuyWithCameraStopUI<BedType>, IBindable<FarmDat
     }
 
     protected override void SetSelectedState(int index) {
-        _choiceButtons[index].ChangeSelectedState();
+        _choiceButtons[index].ChangeChoosedState();
     }
 
     public override void Disable() {

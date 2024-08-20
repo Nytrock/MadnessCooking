@@ -64,7 +64,7 @@ public class FarmBedUpgraderUI : ChoiceBuyWithCameraStopUI<FarmBedUpgrade> {
     }
 
     private void Deselect() {
-        _choiceButtons[_chosedIndex].ChangeSelectedState();
+        _choiceButtons[_chosedIndex].ChangeChoosedState();
         _chosedIndex = -1;
         _description.ChangeActive();
         _submitButton.interactable = false;
@@ -81,7 +81,7 @@ public class FarmBedUpgraderUI : ChoiceBuyWithCameraStopUI<FarmBedUpgrade> {
     }
 
     protected override void SetSelectedState(int index) {
-        _choiceButtons[index].ChangeSelectedState();
+        _choiceButtons[index].ChangeChoosedState();
     }
 
     public override void Disable() {

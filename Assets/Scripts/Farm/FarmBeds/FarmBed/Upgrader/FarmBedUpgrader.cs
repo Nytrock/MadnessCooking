@@ -1,12 +1,13 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class FarmBedUpgrader : MonoBehaviour {
     [SerializeField] private FarmBedUpgrade _eternalWater;
     [SerializeField] private FarmBedUpgrade _eternalFertilize;
     [SerializeField] private CoefficientFarmBedUpgrade _technicSpeedUp;
-    [SerializeField] private FarmBedUpgrade _instantPests;
-    [SerializeField] private FarmBedUpgrade _pestsRemove;
+    [SerializeField] private FarmBedUpgrade[] _instantPests;
+    [SerializeField] private FarmBedUpgrade[] _pestsRemove;
     [SerializeField] private FarmBedUpgrade _autoCollect;
 
     private readonly List<FarmBedUpgrade> _availableUpgrades = new();
@@ -19,9 +20,9 @@ public class FarmBedUpgrader : MonoBehaviour {
             _bedData.FertilizeBoost.BecomeEternal();
         else if (upgrade == _technicSpeedUp)
             _bedData.SetIndependentBoost(_technicSpeedUp);
-        else if (upgrade == _instantPests)
+        else if (_instantPests.Contains(upgrade))
             _bedData.PestsGenerator.SetInstantUpgrade();
-        else if (upgrade == _pestsRemove)
+        else if (_pestsRemove.Contains(upgrade))
             _bedData.PestsGenerator.SetRemoveUpgrade();
         else if (upgrade == _autoCollect)
             _bedData.SetAutoCollect();

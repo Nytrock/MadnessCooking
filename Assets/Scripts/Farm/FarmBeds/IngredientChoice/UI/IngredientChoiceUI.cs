@@ -1,24 +1,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(IngredientChoiceRenderer))]
 public class IngredientChoiceUI : ChoiceSimpleWithCameraStopUI<Ingredient> {
     [SerializeField] private IngredientsManager _ingredientsManager;
-    [SerializeField] private IngredientChoiceStyle[] _styles;
+
     private readonly List<Ingredient> _ingredients = new();
-    protected GameObject _stylePanel;
+    private IngredientChoiceRenderer _renderer;
     private FarmBed _changingBed;
 
-    protected override void Start() {
-        DisableAllStyles();
-        base.Start();
+    private void Awake() {
+        _renderer = GetComponent<IngredientChoiceRenderer>();
     }
 
     public void ActivateIngredientChoice(FarmBed farmBed) {
         _changingBed = farmBed;
         BedType bedType = _changingBed.Data.BedType;
+        _renderer.UpdateStyle(bedType);
         DestoyOldButtons();
         GenerateChoiceButtons();
-        SetStyle(bedType);
         Activate();
     }
 
@@ -31,28 +31,11 @@ public class IngredientChoiceUI : ChoiceSimpleWithCameraStopUI<Ingredient> {
     protected override void GenerateChoiceButtons() {
         _ingredients.Clear();
         foreach (var ingredient in _ingredientsManager.GetAvailableIngredientsOfBedType(_changingBed.Data.BedType)) {
-            ChoiceSimpleButton<Ingredient> choiceButton = _choiceButtonPool.GetObject();
+            IngredientChoiceButton choiceButton = (IngredientChoiceButton)_choiceButtonPool.GetObject();
             choiceButton.Setup(ingredient, _ingredients.Count, this);
+            _renderer.SetButtonStyle(choiceButton);
             _choiceButtons.Add(choiceButton);
             _ingredients.Add(ingredient);
-        }
-    }
-
-    private void SetStyle(BedType bedType) {
-        foreach (var style in _styles) {
-            if (style.BedType == bedType) {
-                style.Panel.SetActive(true);
-                _stylePanel = style.Panel;
-                _submitButton = style.MainButton;
-                _submitButton.onClick.AddListener(SetChoice);
-            }
-        }
-    }
-
-    private void DisableAllStyles() {
-        foreach (var style in _styles) {
-            style.Panel.SetActive(false);
-            style.MainButton.interactable = false;
         }
     }
 
@@ -61,18 +44,12 @@ public class IngredientChoiceUI : ChoiceSimpleWithCameraStopUI<Ingredient> {
         Disable();
     }
 
-    private void Deactivate() {
-        _submitButton.onClick.RemoveListener(SetChoice);
-        _stylePanel.SetActive(false);
-    }
-
     protected override void SetSelectedState(int index) {
-        _choiceButtons[index].ChangeSelectedState();
+        _choiceButtons[index].ChangeChoosedState();
     }
 
     public override void Disable() {
         base.Disable();
-        Deactivate();
         _changingBed = null;
     }
 }

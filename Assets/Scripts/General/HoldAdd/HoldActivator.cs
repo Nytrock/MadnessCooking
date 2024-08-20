@@ -32,6 +32,9 @@ public class HoldActivator : MonoBehaviour {
     }
 
     private void OnMouseUp() {
+        if (_isHover)
+            return;
+
         _isMouseDown = false;
         _hold.ChangeWorkMode(false);
     }
