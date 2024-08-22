@@ -1,0 +1,77 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 081264c34d65f2b4cbd83781f209391d, type: 3}
+  m_Name: Full
+  m_EditorClassIdentifier: 
+  _fileName: Full
+  _groups:
+  - _ID: 0e130c8e-d596-4ff2-a948-5394f5f58809
+    _name: DialogueGroup1
+    _position: {x: 255.00003, y: -106.00001}
+  - _ID: 28246897-50b3-4f0a-b3df-d1fa7925d18b
+    _name: DialogueGroup2
+    _position: {x: 588, y: -104}
+  - _ID: 9488ee0d-5ab5-4805-b2e2-eafead9098ec
+    _name: DialogueGroup3
+    _position: {x: 954.86615, y: 219.006}
+  _nodes:
+  - _ID: cf56d84e-9771-4631-81bb-9fb5a8a2c951
+    _name: Dialogue1
+    _text: Dialogue text.
+    _choices:
+    - _text: Next Dialogue
+      _nodeID: 
+    _groupID: 0e130c8e-d596-4ff2-a948-5394f5f58809
+    _dialogueType: 0
+    _position: {x: 280, y: -47}
+  - _ID: 4ffe08ad-66a2-4795-8955-7909a3fe9e15
+    _name: Dialogue2
+    _text: Dialogue text.
+    _choices:
+    - _text: Next Dialogue
+      _nodeID: 
+    _groupID: 28246897-50b3-4f0a-b3df-d1fa7925d18b
+    _dialogueType: 0
+    _position: {x: 613, y: -45}
+  - _ID: 1f6d13e7-9ea0-495a-9e8c-5dfe9b11dd03
+    _name: Dialogue3
+    _text: Dialogue text.
+    _choices:
+    - _text: Next Dialogue
+      _nodeID: 
+    _groupID: 
+    _dialogueType: 0
+    _position: {x: 269, y: 216}
+  - _ID: c64e43c6-a464-4117-8855-8471055db8ea
+    _name: Dialogue4
+    _text: Dialogue text.
+    _choices:
+    - _text: Next Dialogue
+      _nodeID: 
+    _groupID: 
+    _dialogueType: 0
+    _position: {x: 582, y: 227}
+  _oldGroupNames:
+  - DialogueGroup1
+  - DialogueGroup2
+  - DialogueGroup3
+  _oldUngroupedNodeNames:
+  - Dialogue3
+  - Dialogue4
+  _oldGroupedNodeNames:
+    list:
+    - Key: 0e130c8e-d596-4ff2-a948-5394f5f58809
+      Value:
+      - Dialogue1
+    - Key: 28246897-50b3-4f0a-b3df-d1fa7925d18b
+      Value:
+      - Dialogue2

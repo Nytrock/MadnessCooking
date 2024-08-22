@@ -9,6 +9,7 @@ public class DialogueSystemGroup : Group {
     private string _oldTitle;
 
     public string OldTitle => _oldTitle;
+    public string ID => _id;
 
     public DialogueSystemGroup(string groupTitle, Vector2 position) {
         title = groupTitle;
@@ -32,5 +33,9 @@ public class DialogueSystemGroup : Group {
 
     public void UpdateTitle() {
         _oldTitle = title;
+    }
+
+    public void SetID(string ID) {
+        _id = ID;
     }
 }

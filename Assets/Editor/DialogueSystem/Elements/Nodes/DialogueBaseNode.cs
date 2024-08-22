@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -18,12 +19,15 @@ public abstract class DialogueBaseNode : Node {
     private DialogueSystemGroup _group;
 
     public string DialogueName => _dialogueName;
-    public Group Group => _group;
+    public DialogueSystemGroup Group => _group;
     public string ID => _id;
+    public IEnumerable<DialogueChoiceSaveData> Choices => _choices;
+    public string Text => _text;
+    public DialogueType DialogueType => _type;
 
-    public virtual void Initialize(DialogueSystemGraphView graphView, Vector2 position) {
+    public virtual void Initialize(string nodeName, DialogueSystemGraphView graphView, Vector2 position) {
         _id = Guid.NewGuid().ToString();
-        _dialogueName = "DialogueName";
+        _dialogueName = nodeName;
         _choices = new();
         _text = "Dialogue text.";
         _defaultBackgroundColor = new(29f / 255f, 29f / 255f, 30f / 255f);
@@ -48,6 +52,9 @@ public abstract class DialogueBaseNode : Node {
             TextField target = callback.target as TextField;
             target.value = callback.newValue.RemoveWhitespaces().RemoveSpecialCharacters();
 
+            if (string.IsNullOrEmpty(target.value))
+                target.value = _dialogueName;
+
             if (_group == null) {
                 _graphView.RemoveUngroupedNode(this);
                 _dialogueName = target.value;
@@ -71,7 +78,9 @@ public abstract class DialogueBaseNode : Node {
         inputContainer.Add(inputPort);
 
         Foldout textFoldout = UIElementUtility.CreateFoldout("Dialogue Text");
-        TextField dialogueTextField = UIElementUtility.CreateTextArea(_text);
+        TextField dialogueTextField = UIElementUtility.CreateTextArea(_text, onValueChanged: callback => {
+            _text = callback.newValue;
+        });
         dialogueTextField.AddClasses(
             "ds-node__text-field",
             "ds-node__quote-text-field"
@@ -110,6 +119,10 @@ public abstract class DialogueBaseNode : Node {
         DisconnectPorts(outputContainer);
     }
 
+    public DialogueChoiceSaveData GetChoice(int i) {
+        return _choices[i];
+    }
+
     private void DisconnectPorts(VisualElement container) {
         foreach (var element in container.Children())
             if (element is Port port)
@@ -124,7 +137,18 @@ public abstract class DialogueBaseNode : Node {
     public void ResetStyle() {
         mainContainer.style.backgroundColor = _defaultBackgroundColor;
     }
+
+    public bool IsStartingNode() {
+        Port port = inputContainer.Children().First() as Port;
+        return !port.connected;
+    }
     #endregion
+
+    public void Setup(DialogueNodeSaveData data, List<DialogueChoiceSaveData> choices) {
+        _id = data.ID;
+        _choices = choices;
+        _text = data.Text;
+    }
 
     protected abstract Port CreateChoicePort(object userData);
 }

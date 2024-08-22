@@ -4,8 +4,8 @@ using UnityEngine;
 public class DialogueSingleChoiceNode : DialogueBaseNode {
     protected override DialogueType _type => DialogueType.SingleChoice;
 
-    public override void Initialize(DialogueSystemGraphView graphView, Vector2 position) {
-        base.Initialize(graphView, position);
+    public override void Initialize(string nodeName, DialogueSystemGraphView graphView, Vector2 position) {
+        base.Initialize(nodeName, graphView, position);
         DialogueChoiceSaveData choice = new("Next Dialogue");
         _choices.Add(choice);
     }

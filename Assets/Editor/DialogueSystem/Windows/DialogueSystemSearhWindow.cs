@@ -40,18 +40,20 @@ public class DialogueSystemSearhWindow : ScriptableObject, ISearchWindowProvider
         switch (SearchTreeEntry.userData) {
             case DialogueType.SingleChoice:
                 _graphView.CreateNode(
+                    "DialogueName",
                     DialogueType.SingleChoice,
                     _graphView.GetLocalMousePosition(context.screenMousePosition, true)
                 );
                 break;
             case DialogueType.MultipleChoice:
                 _graphView.CreateNode(
+                    "DialogueName",
                     DialogueType.MultipleChoice,
                     _graphView.GetLocalMousePosition(context.screenMousePosition, true)
                 );
                 break;
             case Group _:
-                _graphView.CreateGroup(context.screenMousePosition);
+                _graphView.CreateGroup("Dialogue group", context.screenMousePosition);
                 break;
             default:
                 return false;

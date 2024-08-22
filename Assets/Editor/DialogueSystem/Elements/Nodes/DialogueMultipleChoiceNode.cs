@@ -5,8 +5,8 @@ using UnityEngine.UIElements;
 public class DialogueMultipleChoiceNode : DialogueBaseNode {
     protected override DialogueType _type => DialogueType.MultipleChoice;
 
-    public override void Initialize(DialogueSystemGraphView graphView, Vector2 position) {
-        base.Initialize(graphView, position);
+    public override void Initialize(string nodeName, DialogueSystemGraphView graphView, Vector2 position) {
+        base.Initialize(nodeName, graphView, position);
         DialogueChoiceSaveData choice = new("New Choice");
         _choices.Add(choice);
     }
