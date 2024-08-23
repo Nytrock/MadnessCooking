@@ -130,7 +130,9 @@ public static class DialogueSystemSaveManager {
             choices,
             node.Group?.ID,
             node.DialogueType,
-            node.GetPosition().position
+            node.GetPosition().position,
+            node.Character,
+            node.Emotion
         );
 
         graphData.AddNode(nodeData);
@@ -158,6 +160,8 @@ public static class DialogueSystemSaveManager {
             node.Text,
             ConvertNodeChoicesToDialogueChoices(node.Choices),
             node.DialogueType,
+            node.Character,
+            node.Emotion,
             node.IsStartingNode()
         );
         _createdDialogues.Add(node.ID, dialogue);
@@ -292,6 +296,7 @@ public static class DialogueSystemSaveManager {
     #region Folders
     private static void CreateStaticFolders() {
         CreateFolder("Assets/Editor/DialogueSystem", "Graphs");
+        CreateFolder("Assets", "ScriptableObjects");
         CreateFolder("Assets/ScriptableObjects", "Dialogues"); ;
         CreateFolder("Assets/ScriptableObjects/Dialogues", _graphFileName); ;
 

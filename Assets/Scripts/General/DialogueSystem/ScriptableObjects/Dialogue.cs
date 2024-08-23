@@ -7,16 +7,20 @@ public class Dialogue : ScriptableObject {
     [SerializeField] private List<DialogueChoiceData> _choices;
     [SerializeField] private DialogueType _type;
     [SerializeField] private bool _isStartingDialogue;
+    [SerializeField] private DialogueCharacter _character;
+    [SerializeField] private DialogueCharacterEmotion _emotion;
 
     public string Name => _name;
     public bool IsStartingDialogue => _isStartingDialogue;
 
-    public void Initialize(string name, string text, List<DialogueChoiceData> choices, DialogueType type, bool isStartingDialogue) {
+    public void Initialize(string name, string text, List<DialogueChoiceData> choices, DialogueType type, DialogueCharacter character, DialogueCharacterEmotion emotion, bool isStartingDialogue) {
         _name = name;
         _text = text;
         _choices = choices;
         _type = type;
         _isStartingDialogue = isStartingDialogue;
+        _character = character;
+        _emotion = emotion;
     }
 
     public void SetChoiceNextDialogue(Dialogue nextDialogue, int index) {

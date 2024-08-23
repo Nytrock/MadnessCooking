@@ -11,6 +11,8 @@ public class DialogueNodeSaveData {
     [SerializeField] private string _groupID;
     [SerializeField] private DialogueType _dialogueType;
     [SerializeField] private Vector2 _position;
+    [SerializeField] private DialogueCharacter _character;
+    [SerializeField] private DialogueCharacterEmotion _emotion;
 
     public string ID => _ID;
     public string Name => _name;
@@ -20,7 +22,7 @@ public class DialogueNodeSaveData {
     public DialogueType DialogueType => _dialogueType;
     public Vector2 Position => _position;
 
-    public DialogueNodeSaveData(string id, string name, string text, List<DialogueChoiceSaveData> choices, string groupID, DialogueType dialogueType, Vector2 position) {
+    public DialogueNodeSaveData(string id, string name, string text, List<DialogueChoiceSaveData> choices, string groupID, DialogueType dialogueType, Vector2 position, DialogueCharacter character, DialogueCharacterEmotion emotion) {
         _ID = id;
         _name = name;
         _text = text;
@@ -28,5 +30,7 @@ public class DialogueNodeSaveData {
         _groupID = groupID;
         _dialogueType = dialogueType;
         _position = position;
+        _character = character;
+        _emotion = emotion;
     }
 }

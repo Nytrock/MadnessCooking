@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor.Experimental.GraphView;
+using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
 using NodeDirection = UnityEditor.Experimental.GraphView.Direction;
@@ -11,6 +12,8 @@ public abstract class DialogueBaseNode : Node {
     private string _dialogueName;
     protected List<DialogueChoiceSaveData> _choices;
     private string _text;
+    private DialogueCharacter _character;
+    private DialogueCharacterEmotion _emotion;
 
     protected abstract DialogueType _type { get; }
 
@@ -24,6 +27,8 @@ public abstract class DialogueBaseNode : Node {
     public IEnumerable<DialogueChoiceSaveData> Choices => _choices;
     public string Text => _text;
     public DialogueType DialogueType => _type;
+    public DialogueCharacter Character => _character;
+    public DialogueCharacterEmotion Emotion => _emotion;
 
     public virtual void Initialize(string nodeName, DialogueSystemGraphView graphView, Vector2 position) {
         _id = Guid.NewGuid().ToString();
@@ -77,6 +82,20 @@ public abstract class DialogueBaseNode : Node {
         Port inputPort = this.CreatePort("Dialogue Connection", direction: NodeDirection.Input, capacity: Port.Capacity.Multi);
         inputContainer.Add(inputPort);
 
+        VisualElement customDataContainer = new();
+        customDataContainer.AddToClassList("ds-node__custom-data-container");
+        extensionContainer.Add(customDataContainer);
+
+        ObjectField characterField = UIElementUtility.CreateObjectField("Character", typeof(DialogueCharacter), callback => {
+            _character = callback.newValue as DialogueCharacter;
+        });
+        customDataContainer.Add(characterField);
+
+        EnumField emotionField = UIElementUtility.CreateEnumField("Emotion", DialogueCharacterEmotion.None, callback => {
+            _emotion = (DialogueCharacterEmotion)callback.newValue;
+        });
+        customDataContainer.Add(emotionField);
+
         Foldout textFoldout = UIElementUtility.CreateFoldout("Dialogue Text");
         TextField dialogueTextField = UIElementUtility.CreateTextArea(_text, onValueChanged: callback => {
             _text = callback.newValue;
@@ -86,11 +105,7 @@ public abstract class DialogueBaseNode : Node {
             "ds-node__quote-text-field"
         );
         textFoldout.Add(dialogueTextField);
-
-        VisualElement customDataContainer = new();
-        customDataContainer.AddToClassList("ds-node__custom-data-container");
         customDataContainer.Add(textFoldout);
-        extensionContainer.Add(customDataContainer);
 
         foreach (var choice in _choices) {
             Port choicePort = CreateChoicePort(choice);
