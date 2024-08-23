@@ -11,6 +11,10 @@ public class Dialogue : ScriptableObject {
     [SerializeField] private DialogueCharacterEmotion _emotion;
 
     public string Name => _name;
+    public string Text => _text;
+    public DialogueType Type => _type;
+    public DialogueCharacter Character => _character;
+    public DialogueCharacterEmotion Emotion => _emotion;
     public bool IsStartingDialogue => _isStartingDialogue;
 
     public void Initialize(string name, string text, List<DialogueChoiceData> choices, DialogueType type, DialogueCharacter character, DialogueCharacterEmotion emotion, bool isStartingDialogue) {
@@ -25,5 +29,12 @@ public class Dialogue : ScriptableObject {
 
     public void SetChoiceNextDialogue(Dialogue nextDialogue, int index) {
         _choices[index].SetNextDialogue(nextDialogue);
+    }
+
+    public Dialogue GetNextDialogue() {
+        foreach (var choice in _choices)
+            if (choice.NextDialogue != null)
+                return choice.NextDialogue;
+        return null;
     }
 }

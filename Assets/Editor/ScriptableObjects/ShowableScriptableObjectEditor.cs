@@ -5,18 +5,18 @@ using UnityEngine;
 using Object = UnityEngine.Object;
 
 #if UNITY_EDITOR
-[CustomEditor(typeof(BuyableItem), true)]
+[CustomEditor(typeof(ShowableScriptableObject), true)]
 [CanEditMultipleObjects]
-public class BuyableObjectEditor : Editor {
-    private BuyableItem Item { get { return target as BuyableItem; } }
+public class ShowableScriptableObjectEditor : Editor {
+    private ShowableScriptableObject Object => target as ShowableScriptableObject;
 
     public override Texture2D RenderStaticPreview(string assetPath, Object[] subAssets, int width, int height) {
-        if (Item.Icon != null) {
+        if (Object.Icon != null) {
             Type t = GetType("UnityEditor.SpriteUtility");
             if (t != null) {
                 MethodInfo method = t.GetMethod("RenderStaticPreview", new Type[] { typeof(Sprite), typeof(Color), typeof(int), typeof(int) });
                 if (method != null) {
-                    object ret = method.Invoke("RenderStaticPreview", new object[] { Item.Icon, Color.white, width, height });
+                    object ret = method.Invoke("RenderStaticPreview", new object[] { Object.Icon, Color.white, width, height });
                     if (ret is Texture2D)
                         return ret as Texture2D;
                 }

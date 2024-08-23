@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public abstract class BuyableItem : ScriptableObject {
+public abstract class BuyableItem : ShowableScriptableObject {
     public const string AssetMenuName = nameof(BuyableItem) + "/";
 
     [SerializeField] private Sprite _icon;
@@ -8,6 +8,6 @@ public abstract class BuyableItem : ScriptableObject {
 
     public string Name => name + ".Name";
     public string Description => name + ".Description";
-    public Sprite Icon => _icon;
+    public override Sprite Icon => _icon;
     public int Price => _price;
 }

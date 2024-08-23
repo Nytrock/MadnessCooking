@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
-using UnityEngine;
 
 public static class DialogueSystemSaveManager {
     private static DialogueSystemGraphView _graphView;
@@ -36,17 +35,17 @@ public static class DialogueSystemSaveManager {
         CreateStaticFolders();
         GetElementsFromGraphView();
 
-        DialogueSystemGraphSaveData graphData = CreateAsset<DialogueSystemGraphSaveData>("Assets/Editor/DialogueSystem/Graphs", _graphFileName);
+        DialogueSystemGraphSaveData graphData = AssetsUtility.CreateAsset<DialogueSystemGraphSaveData>("Assets/Editor/DialogueSystem/Graphs", _graphFileName);
         graphData.Initialize(_graphFileName);
 
-        DialogueContainer dialogueContainer = CreateAsset<DialogueContainer>(_graphFolderPath, _graphFileName);
+        DialogueContainer dialogueContainer = AssetsUtility.CreateAsset<DialogueContainer>(_graphFolderPath, _graphFileName);
         dialogueContainer.Initialize(_graphFileName);
 
         SaveGroups(graphData, dialogueContainer);
         SaveNodes(graphData, dialogueContainer);
 
-        SaveAsset(graphData);
-        SaveAsset(dialogueContainer);
+        graphData.Save();
+        dialogueContainer.Save();
     }
 
     #region Groups
@@ -73,15 +72,15 @@ public static class DialogueSystemSaveManager {
 
     private static void SaveGroupToScriptableObject(DialogueSystemGroup group, DialogueContainer dialogueContainer) {
         string groupName = group.title;
-        CreateFolder($"{_graphFolderPath}/Groups", groupName);
-        CreateFolder($"{_graphFolderPath}/Groups/{groupName}", "Dialogues");
+        EditorFoldersUtility.CreateFolder($"{_graphFolderPath}/Groups", groupName);
+        EditorFoldersUtility.CreateFolder($"{_graphFolderPath}/Groups/{groupName}", "Dialogues");
 
-        DialogueGroup dialogueGroup = CreateAsset<DialogueGroup>($"{_graphFolderPath}/Groups/{groupName}", groupName);
+        DialogueGroup dialogueGroup = AssetsUtility.CreateAsset<DialogueGroup>($"{_graphFolderPath}/Groups/{groupName}", groupName);
         dialogueGroup.Initialize(groupName);
         dialogueContainer.AddGroup(dialogueGroup);
         _createdDialogueGroups.Add(group.ID, dialogueGroup);
 
-        SaveAsset(dialogueGroup);
+        dialogueGroup.Save();
     }
 
     private static void UpdateOldGroups(List<string> currentGroupNames, DialogueSystemGraphSaveData graphData) {
@@ -89,7 +88,7 @@ public static class DialogueSystemSaveManager {
             if (currentGroupNames.Contains(oldName))
                 continue;
 
-            RemoveFolder($"{_graphFolderPath}/Groups/{oldName}");
+            EditorFoldersUtility.RemoveFolder($"{_graphFolderPath}/Groups/{oldName}");
         }
 
         graphData.UpdateOldGroupNames(new(currentGroupNames));
@@ -148,10 +147,10 @@ public static class DialogueSystemSaveManager {
     private static void SaveNodeToScriptableObject(DialogueBaseNode node, DialogueContainer dialogueContainer) {
         Dialogue dialogue;
         if (node.Group != null) {
-            dialogue = CreateAsset<Dialogue>($"{_graphFolderPath}/Groups/{node.Group.title}/Dialogues", node.DialogueName);
+            dialogue = AssetsUtility.CreateAsset<Dialogue>($"{_graphFolderPath}/Groups/{node.Group.title}/Dialogues", node.DialogueName);
             dialogueContainer.AddGroupDialogue(_createdDialogueGroups[node.Group.ID], dialogue);
         } else {
-            dialogue = CreateAsset<Dialogue>($"{_graphFolderPath}/Global/Dialogues", node.DialogueName);
+            dialogue = AssetsUtility.CreateAsset<Dialogue>($"{_graphFolderPath}/Global/Dialogues", node.DialogueName);
             dialogueContainer.AddUngroupDialogue(dialogue);
         }
 
@@ -166,7 +165,7 @@ public static class DialogueSystemSaveManager {
         );
         _createdDialogues.Add(node.ID, dialogue);
 
-        SaveAsset(dialogue);
+        dialogue.Save();
     }
 
     private static void UpdateDialoguesChoicesConnections() {
@@ -179,7 +178,7 @@ public static class DialogueSystemSaveManager {
                     continue;
 
                 dialogue.SetChoiceNextDialogue(_createdDialogues[nodeChoice.NodeID], i);
-                SaveAsset(dialogue);
+                dialogue.Save();
             }
         }
     }
@@ -196,7 +195,7 @@ public static class DialogueSystemSaveManager {
             if (currentNodeNames.Contains(oldName))
                 continue;
 
-            RemoveAsset($"{_graphFolderPath}/Global/Dialogues", oldName);
+            AssetsUtility.RemoveAsset($"{_graphFolderPath}/Global/Dialogues", oldName);
         }
 
         graphData.UpdateOldUngroupedNodeNames(new(currentNodeNames));
@@ -211,7 +210,7 @@ public static class DialogueSystemSaveManager {
                 if (currentGroupedNodeNames[oldGroupedNode.Key].Contains(groupedNode))
                     continue;
 
-                RemoveAsset($"{_graphFolderPath}/Global/{oldGroupedNode.Key}/Dialogues", groupedNode);
+                AssetsUtility.RemoveAsset($"{_graphFolderPath}/Global/{oldGroupedNode.Key}/Dialogues", groupedNode);
             }
         }
 
@@ -231,7 +230,7 @@ public static class DialogueSystemSaveManager {
 
     #region Load
     public static void Load() {
-        DialogueSystemGraphSaveData graphData = LoadAsset<DialogueSystemGraphSaveData>("Assets/Editor/DialogueSystem/Graphs", _graphFileName);
+        DialogueSystemGraphSaveData graphData = AssetsUtility.LoadAsset<DialogueSystemGraphSaveData>("Assets/Editor/DialogueSystem/Graphs", _graphFileName);
         if (graphData == null) {
             EditorUtility.DisplayDialog(
                 "Cannot load the file!",
@@ -293,55 +292,14 @@ public static class DialogueSystemSaveManager {
     }
     #endregion
 
-    #region Folders
     private static void CreateStaticFolders() {
-        CreateFolder("Assets/Editor/DialogueSystem", "Graphs");
-        CreateFolder("Assets", "ScriptableObjects");
-        CreateFolder("Assets/ScriptableObjects", "Dialogues"); ;
-        CreateFolder("Assets/ScriptableObjects/Dialogues", _graphFileName); ;
+        EditorFoldersUtility.CreateFolder("Assets/Editor/DialogueSystem", "Graphs");
+        EditorFoldersUtility.CreateFolder("Assets", "ScriptableObjects");
+        EditorFoldersUtility.CreateFolder("Assets/ScriptableObjects", "Dialogues"); ;
+        EditorFoldersUtility.CreateFolder("Assets/ScriptableObjects/Dialogues", _graphFileName); ;
 
-        CreateFolder(_graphFolderPath, "Global");
-        CreateFolder(_graphFolderPath, "Groups");
-        CreateFolder($"{_graphFolderPath}/Global", "Dialogues");
+        EditorFoldersUtility.CreateFolder(_graphFolderPath, "Global");
+        EditorFoldersUtility.CreateFolder(_graphFolderPath, "Groups");
+        EditorFoldersUtility.CreateFolder($"{_graphFolderPath}/Global", "Dialogues");
     }
-
-    public static void CreateFolder(string path, string folderName) {
-        if (AssetDatabase.IsValidFolder($"{path}/{folderName}"))
-            return;
-
-        AssetDatabase.CreateFolder(path, folderName);
-    }
-
-    private static void RemoveFolder(string path) {
-        FileUtil.DeleteFileOrDirectory($"{path}.meta");
-        FileUtil.DeleteFileOrDirectory($"{path}/");
-    }
-
-    #endregion
-
-    #region Assets
-    public static TAsset CreateAsset<TAsset>(string path, string assetName) where TAsset : ScriptableObject {
-        TAsset asset = LoadAsset<TAsset>(path, assetName);
-        if (asset != null)
-            return asset;
-
-        asset = ScriptableObject.CreateInstance<TAsset>();
-        AssetDatabase.CreateAsset(asset, $"{path}/{assetName}.asset");
-        return asset;
-    }
-
-    public static TAsset LoadAsset<TAsset>(string path, string assetName) where TAsset : ScriptableObject {
-        return AssetDatabase.LoadAssetAtPath<TAsset>($"{path}/{assetName}.asset");
-    }
-
-    public static void SaveAsset(Object asset) {
-        EditorUtility.SetDirty(asset);
-        AssetDatabase.SaveAssets();
-        AssetDatabase.Refresh();
-    }
-
-    private static void RemoveAsset(string path, string asset) {
-        AssetDatabase.DeleteAsset($"{path}/{asset}.asset");
-    }
-    #endregion
 }

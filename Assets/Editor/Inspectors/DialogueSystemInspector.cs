@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 
-[CustomEditor(typeof(DialogueRenderer))]
+[CustomEditor(typeof(DialogueChoicer))]
 public class DialogueSystemInspector : Editor {
     private SerializedProperty _dialogueContainer;
     private SerializedProperty _dialogueGroup;
@@ -53,15 +53,15 @@ public class DialogueSystemInspector : Editor {
 
             DialogueGroup dialogueGroup = _dialogueGroup.objectReferenceValue as DialogueGroup;
             dialogueNames = dialogueContainer.GetGroupedDialoguesNames(dialogueGroup, _isStartingDialogues.boolValue);
-            dialogueFolderPath += $"Groups/{dialogueGroup.GroupName}/Dialogues";
+            dialogueFolderPath += $"/Groups/{dialogueGroup.GroupName}/Dialogues";
             dialogueInfoMessage = "There are no " + (_isStartingDialogues.boolValue ? "Starting" : "") + " Dialouges in this Dialogue Group";
         } else {
             dialogueNames = dialogueContainer.GetUngroupedDialoguesNames(_isStartingDialogues.boolValue);
-            dialogueFolderPath += $"Global/Dialogues";
+            dialogueFolderPath += $"/Global/Dialogues";
             dialogueInfoMessage = "There are no " + (_isStartingDialogues.boolValue ? "Starting" : "") + " Ungrouped Dialouges in this Dialogue Container";
         }
 
-        if (dialogueNames.Count > 0) {
+        if (dialogueNames.Count == 0) {
             StopDrawing(dialogueInfoMessage);
             return;
         }
@@ -98,7 +98,7 @@ public class DialogueSystemInspector : Editor {
         _selectedDialogueGroupIndex.intValue = InspectorUtility.DrawPopup("Dialogoue Group", _selectedDialogueGroupIndex, groupNames);
 
         string selectedDialogueGroupName = groupNames[_selectedDialogueGroupIndex.intValue];
-        DialogueGroup selectedDialogueGroup = DialogueSystemSaveManager.LoadAsset<DialogueGroup>($"Assets/ScriptableObjects/Dialogues/{dialogueContainer.FileName}/Groups/{selectedDialogueGroupName}", selectedDialogueGroupName);
+        DialogueGroup selectedDialogueGroup = AssetsUtility.LoadAsset<DialogueGroup>($"Assets/ScriptableObjects/Dialogues/{dialogueContainer.FileName}/Groups/{selectedDialogueGroupName}", selectedDialogueGroupName);
 
 
         _dialogueGroup.objectReferenceValue = selectedDialogueGroup;
@@ -115,10 +115,10 @@ public class DialogueSystemInspector : Editor {
         string oldDialogueName = isOldDialogueNull ? string.Empty : oldDialogue.Name;
         UpdatePropertyIndex(dialogueNames.ToArray(), _selectedDialogueIndex, oldDialogueIndex, isOldDialogueNull, oldDialogueName);
 
-        _selectedDialogueIndex.intValue = InspectorUtility.DrawPopup("Dialogoue", _selectedDialogueIndex, dialogueNames.ToArray());
+        _selectedDialogueIndex.intValue = InspectorUtility.DrawPopup("Dialogue", _selectedDialogueIndex, dialogueNames.ToArray());
 
         string dialogueName = dialogueNames[_selectedDialogueIndex.intValue];
-        Dialogue dialogue = DialogueSystemSaveManager.LoadAsset<Dialogue>(dialogueFolderPath, dialogueName);
+        Dialogue dialogue = AssetsUtility.LoadAsset<Dialogue>(dialogueFolderPath, dialogueName);
         _dialogue.objectReferenceValue = dialogue;
 
         InspectorUtility.DrawDisabledField(() => _dialogue.DrawPropertyField());

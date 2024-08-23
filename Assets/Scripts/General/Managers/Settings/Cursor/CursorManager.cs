@@ -29,8 +29,7 @@ public class CursorManager : MonoBehaviour, IBindable<GameSettingsData>, ISettin
     }
 
     public Sprite GetNowCursor() {
-        Texture2D texture = _nowCursor.DefaultTexture;
-        return Sprite.Create(texture, new(0, 0, texture.width, texture.height), Vector2.zero);
+        return _nowCursor.Icon;
     }
 
     private void SetCursorTexture(CursorState state) {

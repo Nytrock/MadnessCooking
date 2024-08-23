@@ -1,13 +1,20 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DialogueRenderer : MonoBehaviour {
-    [SerializeField] private DialogueContainer _dialogueContainer;
-    [SerializeField] private DialogueGroup _dialogueGroup;
-    [SerializeField] private Dialogue _dialogue;
+    [SerializeField] private Image _characterIcon;
+    [SerializeField] private LocalizedText _characterName;
+    [SerializeField] private AnimatedText _text;
 
-    [SerializeField] private bool _isGroupedDialogues;
-    [SerializeField] private bool _isStartingDialogues;
+    public bool IsAnimated => _text.IsAnimated;
 
-    [SerializeField] private int _selectedDialogueGroupIndex;
-    [SerializeField] private int _selectedDialogueIndex;
+    public void RenderDialogue(Dialogue dialogue) {
+        _characterIcon.sprite = dialogue.Character.GetEmotionSprite(dialogue.Emotion);
+        _characterName.SetText(dialogue.Character.Name);
+        _text.StartAnimation(dialogue.Text);
+    }
+
+    public void StopTextAnimation() {
+        _text.StopAnimation();
+    }
 }

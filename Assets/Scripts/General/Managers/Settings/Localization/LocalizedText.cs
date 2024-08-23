@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(TextMeshProUGUI))]
 public class LocalizedText : MonoBehaviour {
     [SerializeField] private string _table;
-    private TextMeshProUGUI _text;
+    protected TextMeshProUGUI _text;
 
     private string _key;
     private Dictionary<string, string> _arguments = new();
@@ -31,7 +31,7 @@ public class LocalizedText : MonoBehaviour {
         _text.color = color;
     }
 
-    public void UpdateText() {
+    public virtual void UpdateText() {
         if (_text == null)
             GetText();
 
