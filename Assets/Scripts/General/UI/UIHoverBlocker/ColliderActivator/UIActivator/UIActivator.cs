@@ -8,8 +8,7 @@ public class UIActivator : ColliderActivator {
 
     protected IActivable _activable;
 
-    protected override void Awake() {
-        base.Awake();
+    protected virtual void Awake() {
         _activable = _activableObject.GetComponent<IActivable>();
 
         if (_locationManager != null)

@@ -2326,8 +2326,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 326.3305, y: -129.2279}
-  m_SizeDelta: {x: 618.661, y: 47.6}
+  m_AnchoredPosition: {x: 326.3305, y: -128.77791}
+  m_SizeDelta: {x: 618.661, y: 46.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &85599688
 MonoBehaviour:
@@ -2373,8 +2373,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'CriticStart.Description '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 0}
-  m_sharedMaterial: {fileID: 0}
+  m_fontAsset: {fileID: 11400000, guid: f06da98d729a6514197530786709c46e, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: f06da98d729a6514197530786709c46e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4603,6 +4603,7 @@ GameObject:
   m_Component:
   - component: {fileID: 136688650}
   - component: {fileID: 136688651}
+  - component: {fileID: 136688652}
   m_Layer: 5
   m_Name: Clock
   m_TagString: Untagged
@@ -4645,6 +4646,20 @@ MonoBehaviour:
   _timeManager: {fileID: 1095035881}
   _hoursPoint: {fileID: 1839619398}
   _minutesPoint: {fileID: 856659872}
+--- !u!114 &136688652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 136688649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31f00c2292cb140419170a40e94d07bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hoverListener: {fileID: 1453606998}
+  _isReversed: 0
 --- !u!1 &137686044
 GameObject:
   m_ObjectHideFlags: 0
@@ -6707,6 +6722,7 @@ GameObject:
   - component: {fileID: 182768842}
   - component: {fileID: 182768841}
   - component: {fileID: 182768844}
+  - component: {fileID: 182768845}
   m_Layer: 5
   m_Name: Hole
   m_TagString: Untagged
@@ -6798,6 +6814,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _background: {fileID: 1502252819}
+--- !u!114 &182768845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 182768839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31f00c2292cb140419170a40e94d07bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hoverListener: {fileID: 1453606998}
+  _isReversed: 1
 --- !u!1 &183653845
 GameObject:
   m_ObjectHideFlags: 0
@@ -6811,6 +6841,7 @@ GameObject:
   - component: {fileID: 183653848}
   - component: {fileID: 183653847}
   - component: {fileID: 183653850}
+  - component: {fileID: 183653851}
   m_Layer: 5
   m_Name: Watch
   m_TagString: Untagged
@@ -6920,6 +6951,20 @@ MonoBehaviour:
   - _daytime: 3
     _iconSprite: {fileID: -981760437, guid: 6ef4dc5b3ddee0a4caaf18d1c5bf1f0e, type: 3}
     _textColor: {r: 0.08627451, g: 0.30980393, b: 0.88235295, a: 1}
+--- !u!114 &183653851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 183653845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31f00c2292cb140419170a40e94d07bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hoverListener: {fileID: 1453606998}
+  _isReversed: 0
 --- !u!1 &184058489
 GameObject:
   m_ObjectHideFlags: 0
@@ -7766,7 +7811,7 @@ Transform:
   m_GameObject: {fileID: 206361364}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -300, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8710,6 +8755,7 @@ GameObject:
   - component: {fileID: 219682322}
   - component: {fileID: 219682324}
   - component: {fileID: 219682323}
+  - component: {fileID: 219682325}
   m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
@@ -8775,6 +8821,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 219682321}
   m_CullTransparentMesh: 1
+--- !u!114 &219682325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 219682321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31f00c2292cb140419170a40e94d07bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hoverListener: {fileID: 1453606998}
+  _isReversed: 0
 --- !u!1 &220792661
 GameObject:
   m_ObjectHideFlags: 0
@@ -8940,6 +9000,7 @@ GameObject:
   - component: {fileID: 225372446}
   - component: {fileID: 225372445}
   - component: {fileID: 225372444}
+  - component: {fileID: 225372447}
   m_Layer: 5
   m_Name: Pause
   m_TagString: Untagged
@@ -9048,6 +9109,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 225372442}
   m_CullTransparentMesh: 1
+--- !u!114 &225372447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 225372442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31f00c2292cb140419170a40e94d07bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hoverListener: {fileID: 1453606998}
+  _isReversed: 0
 --- !u!1 &226272162
 GameObject:
   m_ObjectHideFlags: 0
@@ -15813,6 +15888,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hoverListener: {fileID: 1850722862}
+  _isReversed: 0
 --- !u!114 &269459660
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18502,6 +18578,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hoverListener: {fileID: 1234881540}
+  _isReversed: 0
 --- !u!114 &334527685
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19658,6 +19735,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hoverListener: {fileID: 1914985226}
+  _isReversed: 0
 --- !u!1 &375440641
 GameObject:
   m_ObjectHideFlags: 0
@@ -21417,6 +21495,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hoverListener: {fileID: 1914985226}
+  _isReversed: 0
 --- !u!1001 &407600287
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21859,6 +21938,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hoverListener: {fileID: 1569875507}
+  _isReversed: 0
 --- !u!1 &423164654
 GameObject:
   m_ObjectHideFlags: 0
@@ -21996,8 +22076,8 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 0}
-  m_sharedMaterial: {fileID: 0}
+  m_fontAsset: {fileID: 11400000, guid: f06da98d729a6514197530786709c46e, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: f06da98d729a6514197530786709c46e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -22021,7 +22101,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 33.75
+  m_fontSize: 34.4
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -29893,8 +29973,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: CriticStart.Title
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 0}
-  m_sharedMaterial: {fileID: 0}
+  m_fontAsset: {fileID: 11400000, guid: f06da98d729a6514197530786709c46e, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: f06da98d729a6514197530786709c46e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -33188,6 +33268,7 @@ GameObject:
   - component: {fileID: 692613758}
   - component: {fileID: 692613757}
   - component: {fileID: 692613756}
+  - component: {fileID: 692613759}
   m_Layer: 5
   m_Name: Disabler
   m_TagString: Untagged
@@ -33266,6 +33347,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 692613754}
   m_CullTransparentMesh: 1
+--- !u!114 &692613759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 692613754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31f00c2292cb140419170a40e94d07bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hoverListener: {fileID: 2036522474}
+  _isReversed: 0
 --- !u!1 &695081014
 GameObject:
   m_ObjectHideFlags: 0
@@ -34319,6 +34414,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mainCamera: {fileID: 206361366}
   _locationManager: {fileID: 1560551276}
+  _hoverListener: {fileID: 1850722862}
   _location: 3
   _locationSlider: {fileID: 269459661}
   _spaceManager: {fileID: 197975456}
@@ -36346,6 +36442,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hoverListener: {fileID: 1234881540}
+  _isReversed: 0
 --- !u!114 &756541230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37328,6 +37425,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hoverListener: {fileID: 1234881540}
+  _isReversed: 0
 --- !u!1 &781546830
 GameObject:
   m_ObjectHideFlags: 0
@@ -39091,6 +39189,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hoverListener: {fileID: 1850722862}
+  _isReversed: 0
 --- !u!222 &827191967
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -41851,6 +41950,7 @@ GameObject:
   - component: {fileID: 903045645}
   - component: {fileID: 903045644}
   - component: {fileID: 903045646}
+  - component: {fileID: 903045647}
   m_Layer: 5
   m_Name: MainPanel
   m_TagString: Untagged
@@ -41931,6 +42031,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moreUI: {fileID: 1103815207}
+--- !u!114 &903045647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 903045642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31f00c2292cb140419170a40e94d07bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hoverListener: {fileID: 2036522474}
+  _isReversed: 0
 --- !u!1 &907590008
 GameObject:
   m_ObjectHideFlags: 0
@@ -44838,8 +44952,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 326.25, y: -93.51395}
-  m_SizeDelta: {x: 652.5, y: 187.0279}
+  m_AnchoredPosition: {x: 326.25, y: -93.06395}
+  m_SizeDelta: {x: 652.5, y: 186.1279}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &987003752
 MonoBehaviour:
@@ -46949,6 +47063,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hoverListener: {fileID: 1850722862}
+  _isReversed: 0
 --- !u!222 &1029451009
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -48560,6 +48675,7 @@ GameObject:
   - component: {fileID: 1059864628}
   - component: {fileID: 1059864629}
   - component: {fileID: 1059864630}
+  - component: {fileID: 1059864631}
   m_Layer: 5
   m_Name: Slider
   m_TagString: Untagged
@@ -48681,6 +48797,20 @@ MonoBehaviour:
     m_ColorSpace: -1
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
+--- !u!114 &1059864631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1059864627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31f00c2292cb140419170a40e94d07bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hoverListener: {fileID: 1453606998}
+  _isReversed: 0
 --- !u!1 &1060603821
 GameObject:
   m_ObjectHideFlags: 0
@@ -52578,6 +52708,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hoverListener: {fileID: 1234881540}
+  _isReversed: 0
 --- !u!114 &1164931451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -53039,6 +53170,7 @@ GameObject:
   - component: {fileID: 1176766181}
   - component: {fileID: 1176766183}
   - component: {fileID: 1176766182}
+  - component: {fileID: 1176766184}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -53104,6 +53236,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1176766180}
   m_CullTransparentMesh: 1
+--- !u!114 &1176766184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1176766180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31f00c2292cb140419170a40e94d07bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hoverListener: {fileID: 1453606998}
+  _isReversed: 0
 --- !u!1 &1178460253
 GameObject:
   m_ObjectHideFlags: 0
@@ -55112,6 +55258,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hoverListener: {fileID: 1850722862}
+  _isReversed: 0
 --- !u!1 &1216346469
 GameObject:
   m_ObjectHideFlags: 0
@@ -55787,6 +55934,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf583d77a68752b42bd1356eba1b36dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _globalListener: {fileID: 1453606998}
   _isHover: 0
 --- !u!114 &1234881541
 MonoBehaviour:
@@ -58999,7 +59147,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 652.5, y: 235.30789}
+  m_SizeDelta: {x: 652.5, y: 234.4079}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1297945088
 MonoBehaviour:
@@ -59246,6 +59394,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hoverListener: {fileID: 1850722862}
+  _isReversed: 0
 --- !u!1 &1304482298
 GameObject:
   m_ObjectHideFlags: 0
@@ -60293,6 +60442,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hoverListener: {fileID: 1914985226}
+  _isReversed: 0
 --- !u!222 &1339739274
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -64017,6 +64167,7 @@ GameObject:
   - component: {fileID: 1451246559}
   - component: {fileID: 1451246558}
   - component: {fileID: 1451246560}
+  - component: {fileID: 1451246561}
   m_Layer: 5
   m_Name: MoneyUI
   m_TagString: Untagged
@@ -64102,6 +64253,20 @@ MonoBehaviour:
   - {fileID: 1658285209}
   - {fileID: 1737793628}
   - {fileID: 7472297884314454813}
+--- !u!114 &1451246561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1451246556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31f00c2292cb140419170a40e94d07bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hoverListener: {fileID: 1453606998}
+  _isReversed: 0
 --- !u!1 &1451571544
 GameObject:
   m_ObjectHideFlags: 0
@@ -64324,6 +64489,7 @@ GameObject:
   - component: {fileID: 1453606994}
   - component: {fileID: 1453606993}
   - component: {fileID: 1453606997}
+  - component: {fileID: 1453606998}
   m_Layer: 5
   m_Name: GeneralUI
   m_TagString: Untagged
@@ -64434,6 +64600,20 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &1453606998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1453606992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf583d77a68752b42bd1356eba1b36dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _globalListener: {fileID: 0}
+  _isHover: 0
 --- !u!1 &1455283709
 GameObject:
   m_ObjectHideFlags: 0
@@ -65411,6 +65591,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hoverListener: {fileID: 1569875507}
+  _isReversed: 0
 --- !u!1 &1475852638
 GameObject:
   m_ObjectHideFlags: 0
@@ -65806,6 +65987,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hoverListener: {fileID: 1850722862}
+  _isReversed: 0
 --- !u!1 &1483593484
 GameObject:
   m_ObjectHideFlags: 0
@@ -66897,6 +67079,7 @@ GameObject:
   - component: {fileID: 1502252818}
   - component: {fileID: 1502252820}
   - component: {fileID: 1502252819}
+  - component: {fileID: 1502252821}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -66961,6 +67144,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1502252817}
   m_CullTransparentMesh: 1
+--- !u!114 &1502252821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1502252817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31f00c2292cb140419170a40e94d07bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hoverListener: {fileID: 1453606998}
+  _isReversed: 0
 --- !u!1 &1504005854
 GameObject:
   m_ObjectHideFlags: 0
@@ -67339,6 +67536,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hoverListener: {fileID: 1914985226}
+  _isReversed: 0
 --- !u!1001 &1513183228
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -68839,6 +69037,7 @@ GameObject:
   - component: {fileID: 1560551274}
   - component: {fileID: 1560551273}
   - component: {fileID: 1560551276}
+  - component: {fileID: 1560551277}
   m_Layer: 5
   m_Name: LocationButtons
   m_TagString: Untagged
@@ -68976,6 +69175,20 @@ MonoBehaviour:
     _fatigueCoef: 0
     _isHideUI: 1
   _generalUI: {fileID: 1453606992}
+--- !u!114 &1560551277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1560551271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31f00c2292cb140419170a40e94d07bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hoverListener: {fileID: 1453606998}
+  _isReversed: 0
 --- !u!1 &1560716156
 GameObject:
   m_ObjectHideFlags: 0
@@ -69478,6 +69691,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf583d77a68752b42bd1356eba1b36dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _globalListener: {fileID: 1453606998}
   _isHover: 0
 --- !u!1 &1572505739
 GameObject:
@@ -70958,6 +71172,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hoverListener: {fileID: 1914985226}
+  _isReversed: 0
 --- !u!1001 &1638258661
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -73659,6 +73874,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hoverListener: {fileID: 1234881540}
+  _isReversed: 0
 --- !u!1 &1694784148
 GameObject:
   m_ObjectHideFlags: 0
@@ -75789,6 +76005,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hoverListener: {fileID: 1850722862}
+  _isReversed: 0
 --- !u!1 &1745990974
 GameObject:
   m_ObjectHideFlags: 0
@@ -79248,6 +79465,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hoverListener: {fileID: 1850722862}
+  _isReversed: 0
 --- !u!222 &1824022674
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -79894,6 +80112,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mainCamera: {fileID: 206361366}
   _locationManager: {fileID: 1560551276}
+  _hoverListener: {fileID: 2036522474}
   _location: 0
   _locationSlider: {fileID: 1463500062}
   _spaceManager: {fileID: 1436171022}
@@ -80735,6 +80954,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf583d77a68752b42bd1356eba1b36dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _globalListener: {fileID: 1453606998}
   _isHover: 0
 --- !u!1 &1850976519
 GameObject:
@@ -82581,6 +82801,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hoverListener: {fileID: 1569875507}
+  _isReversed: 0
 --- !u!114 &1886071809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -83735,6 +83956,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf583d77a68752b42bd1356eba1b36dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _globalListener: {fileID: 1453606998}
   _isHover: 0
 --- !u!1 &1916427756
 GameObject:
@@ -84937,6 +85159,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hoverListener: {fileID: 1850722862}
+  _isReversed: 0
 --- !u!222 &1938675438
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -85158,6 +85381,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hoverListener: {fileID: 1914985226}
+  _isReversed: 0
 --- !u!222 &1945913150
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -86813,6 +87037,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hoverListener: {fileID: 1850722862}
+  _isReversed: 0
 --- !u!1 &1975661354
 GameObject:
   m_ObjectHideFlags: 0
@@ -88131,7 +88356,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 326.25, y: -207.55789}
+  m_AnchoredPosition: {x: 326.25, y: -206.6579}
   m_SizeDelta: {x: 652.5, y: 55.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1999970298
@@ -88679,6 +88904,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hoverListener: {fileID: 1234881540}
+  _isReversed: 0
 --- !u!114 &2003363408
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -90216,6 +90442,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf583d77a68752b42bd1356eba1b36dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _globalListener: {fileID: 1453606998}
   _isHover: 0
 --- !u!1 &2038846218
 GameObject:

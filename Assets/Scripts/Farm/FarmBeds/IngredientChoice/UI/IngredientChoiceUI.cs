@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(IngredientChoiceRenderer))]
-public class IngredientChoiceUI : ChoiceSimpleWithCameraStopUI<Ingredient> {
+public class IngredientChoiceUI : ChoiceSimpleUI<Ingredient> {
     [SerializeField] private IngredientsManager _ingredientsManager;
 
     private readonly List<Ingredient> _ingredients = new();

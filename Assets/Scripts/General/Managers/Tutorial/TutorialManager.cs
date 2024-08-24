@@ -30,6 +30,9 @@ public class TutorialManager : MonoBehaviour, IBindable<GeneralData> {
     }
 
     public void NextTutorialPart() {
+        if (!_data.IsWork)
+            return;
+
         _currentTutorialPartIndex++;
         if (_currentTutorialPartIndex >= _parts.Length) {
             EndTutorial();

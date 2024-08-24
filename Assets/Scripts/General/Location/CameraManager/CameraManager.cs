@@ -4,6 +4,7 @@ using UnityEngine;
 public abstract class CameraManager : MonoBehaviour {
     [SerializeField] protected Camera _mainCamera;
     [SerializeField] protected LocationManager _locationManager;
+    [SerializeField] protected UIHoverListener _hoverListener;
     [SerializeField] protected Location _location;
     [SerializeField] protected LocationSlider _locationSlider;
     [SerializeField] protected SpaceManager _spaceManager;
@@ -37,7 +38,7 @@ public abstract class CameraManager : MonoBehaviour {
     }
 
     private void Update() {
-        if (!_isWorking)
+        if (!_isWorking || _hoverListener.IsHover)
             return;
 
         float keyAxis = Input.GetAxis(_keyAxis);

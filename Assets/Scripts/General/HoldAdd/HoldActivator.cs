@@ -4,19 +4,10 @@ using UnityEngine;
 public class HoldActivator : MonoBehaviour {
     [SerializeField] private UIHoverListener _hoverListener;
     [SerializeField] private HoldAdd _hold;
-    private bool _isHover;
     private bool _isMouseDown;
 
-    private void Start() {
-        _hoverListener.OnHover += ChangeMode;
-    }
-
-    private void ChangeMode(bool newValue) {
-        _isHover = newValue;
-    }
-
     private void OnMouseDown() {
-        if (_isHover)
+        if (_hoverListener.IsHover)
             return;
 
         _isMouseDown = true;
@@ -32,7 +23,7 @@ public class HoldActivator : MonoBehaviour {
     }
 
     private void OnMouseUp() {
-        if (_isHover)
+        if (_hoverListener.IsHover)
             return;
 
         _isMouseDown = false;
