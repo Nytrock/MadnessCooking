@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour {
     [SerializeField] private GameObject _panel;
@@ -7,6 +6,7 @@ public class MenuManager : MonoBehaviour {
     [SerializeField] private MenuButton _continueButton;
     [SerializeField] private ConfirmPanel _confirmPanel;
     [SerializeField] private SettingsManager _settings;
+    [SerializeField] private TutorialManager _tutorial;
     [SerializeField] private MenuButtonSelector _buttonSelector;
 
     private void Start() {
@@ -17,23 +17,30 @@ public class MenuManager : MonoBehaviour {
     public void NewGameConfirm() {
         _buttonSelector.ChangeState(false);
         if (_saveManager.IsDataExists())
-            _confirmPanel.StartConfirm(NewGame, "Menu.NewGameConfirm");
+            _confirmPanel.StartConfirm(TutorialConfirm, "Menu.NewGameConfirm");
         else
-            NewGame();
+            TutorialConfirm();
     }
 
-    private void NewGame(bool isConfirm = true) {
+    private void TutorialConfirm(bool isConfirm = true) {
         if (!isConfirm) {
             _buttonSelector.ChangeState(true);
             return;
         }
 
+        _confirmPanel.StartConfirm(NewGame, "Menu.TutorialConfirmMessage", "Menu.TutorialConfirmTitle");
+    }
+
+    private void NewGame(bool isConfirm) {
         _saveManager.Delete();
+        _tutorial.ChangeWorkState(isConfirm);
+        _saveManager.Save();
+
         LoadGame();
     }
 
     public void LoadGame() {
-        SceneManager.LoadScene(1);
+        SceneUtility.LoadGame();
     }
 
     public void ChangeSettingsState() {
@@ -45,8 +52,8 @@ public class MenuManager : MonoBehaviour {
         Application.Quit();
     }
 
-    public void ExitMenu() {
-        SceneManager.LoadScene(0);
+    public void ExitToMenu() {
+        SceneUtility.LoadMenu();
     }
 
     private void ChangeState() {

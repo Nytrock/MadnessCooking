@@ -10,23 +10,18 @@ public class BarnStorage : IngredientStorage {
     private Ingredient _flour;
     private int _milkCount = 0;
 
-    public event Action<int, int> CountsUpdated;
+    public event Action<int> MilkCountUpdated;
+    public event Action<int> FlourCountUpdated;
 
     private void Awake() {
         Data = new(_defaultMaxSpace);
-        _cow.CountChanged += UpdateCounts;
-        _flourMill.CountChanged += UpdateCounts;
+        _cow.CountChanged += UpdateMilkCount;
+        _flourMill.CountChanged += UpdateFlourCount;
     }
 
     private void Start() {
         _milk = ConstIngredients.Instance.Milk;
         _flour = ConstIngredients.Instance.Flour;
-        UpdateMilkCount();
-    }
-
-    private void UpdateCounts() {
-        UpdateMilkCount();
-        CountsUpdated?.Invoke(_cow.Data.ReadyCount, _flourMill.Data.ReadyCount);
     }
 
     private void UpdateMilkCount() {
@@ -37,6 +32,11 @@ public class BarnStorage : IngredientStorage {
             RemoveIngredient(_milk, -difference);
 
         _milkCount = _cow.Data.ReadyCount;
+        MilkCountUpdated?.Invoke(_cow.Data.ReadyCount);
+    }
+
+    private void UpdateFlourCount() {
+        FlourCountUpdated?.Invoke(_flourMill.Data.ReadyCount);
     }
 
     public void PutIngredient(Ingredient ingredient) {
@@ -47,7 +47,7 @@ public class BarnStorage : IngredientStorage {
             return;
 
         MoveToCar(ingredient);
-        UpdateCounts();
+        UpdateFlourCount();
     }
 
     private void MoveToCar(Ingredient ingredient) {

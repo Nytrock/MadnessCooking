@@ -11,13 +11,14 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
     [SerializeField] private CafeSpotManager _spotManager;
     [SerializeField] private OrdersManager _ordersManager;
     [SerializeField] private FoodManager _foodManager;
+    [SerializeField] private TutorialManager _tutorialManager;
     [SerializeField] private ClientsPool _pool;
     [SerializeField] private RangeFloat _spawnTime;
 
     [Header("Upgrades")]
     [SerializeField] private BaseUpgrade _eatTimeShowUpgrade;
 
-    [SerializeField] private ClientsSpawnerData _data;
+    private ClientsSpawnerData _data;
     private CriticSpawnerData _criticData;
     private CafeSpotManagerData _spotData;
     private CafeUpgradeData _upgradeData;
@@ -36,7 +37,7 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
     }
 
     private void Update() {
-        if (!_data.IsSpawning || !_cafeOpener.IsOpened)
+        if (!_data.IsSpawning || !_cafeOpener.IsOpened || _tutorialManager.IsWork)
             return;
 
         _data.AddTime();
@@ -46,7 +47,7 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
         }
     }
 
-    private void Spawn() {
+    public void Spawn() {
         ClientCount clientCount = GetRandomCount();
         int spotIndex = _spotManager.TakeRandomSpot(clientCount);
         if (spotIndex == -1)
@@ -83,7 +84,7 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
     }
 
     private ClientCount GetRandomCount() {
-        if (_criticData.IsWaitingCritic)
+        if (_criticData.IsWaitingCritic || _tutorialManager.IsWork)
             return ClientCount.One;
 
         _popularityCalculate.GetClientChances(out int singleChance, out int doubleChance, out int tripleChance, out int quarterChance);
@@ -191,6 +192,7 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
         if (!spot.TryGetComponent(out ClientsHolder table))
             throw new ArgumentNullException("Spot doesn't have the required class ClientGroupHolder");
 
+        table.SetTutorialState(_tutorialManager.IsWork);
         for (int i = 0; i < spot.SeatsCount; i++) {
             Client client = _pool.GetObject();
             client.ClientEat += ClientEat;
@@ -199,8 +201,16 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
             SetupClient(client, spot.Index, i);
         }
         table.ClientsLeaved += ClientsLeave;
+        table.WaitStarted += ClientsStartWait;
         StartCoroutine(table.SpawnGroupOfClients());
         return table;
+    }
+
+    private void ClientsStartWait() {
+        if (!_tutorialManager.IsWork)
+            return;
+
+        _tutorialManager.NextTutorialPart();
     }
 
     public CafeSpot GetSpot(int SpotIndex) => _spotManager.GetSpotByIndex(SpotIndex);

@@ -1,13 +1,17 @@
-using UnityEngine;
+using Newtonsoft.Json;
 
 public class JsonSerializer {
     public string Serialize<T>(T obj) {
-        return JsonUtility.ToJson(obj);
-        // return Convert.ToBase64String(Encoding.UTF8.GetBytes(JsonUtility.ToJson(obj)));
+        JsonSerializerSettings settings = new() {
+            NullValueHandling = NullValueHandling.Ignore,
+        };
+        string json = JsonConvert.SerializeObject(obj, Formatting.Indented, settings);
+        return json;
+        // return Convert.ToBase64String(Encoding.UTF8.GetBytes(json));
     }
 
     public T Deserialize<T>(string json) {
-        return JsonUtility.FromJson<T>(json);
-        // return JsonUtility.FromJson<T>(Encoding.UTF8.GetString(Convert.FromBase64String(json)));
+        return JsonConvert.DeserializeObject<T>(json);
+        // Encoding.UTF8.GetString(Convert.FromBase64String(json));
     }
 }

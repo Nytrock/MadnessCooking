@@ -17,6 +17,7 @@ public class ClientsHolder : MonoBehaviour {
     [SerializeField] private SpotData _data;
     private CafeSpot _spot;
     private readonly List<Client> _clients = new();
+    private bool _isTutorial;
 
     public event Action WaitStarted;
     public event Action<CafeSpot> ClientsLeaved;
@@ -29,6 +30,9 @@ public class ClientsHolder : MonoBehaviour {
     private void Update() {
         if (_data.GroupState != GroupClientState.Wait &&
             _data.GroupState != GroupClientState.Talk)
+            return;
+
+        if (_isTutorial)
             return;
 
         _data.UpdateTime();
@@ -163,5 +167,9 @@ public class ClientsHolder : MonoBehaviour {
 
     public void SetData(SpotData spot) {
         _data = spot;
+    }
+
+    public void SetTutorialState(bool isTutorial) {
+        _isTutorial = isTutorial;
     }
 }

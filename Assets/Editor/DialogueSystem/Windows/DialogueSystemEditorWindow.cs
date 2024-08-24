@@ -56,7 +56,7 @@ public class DialogueSystemEditorWindow : EditorWindow {
     }
 
     private void ResetGraph() {
-        _graphView.Clear();
+        _graphView.ClearGraph();
         UpdateFileName(_defaultFileName);
     }
 

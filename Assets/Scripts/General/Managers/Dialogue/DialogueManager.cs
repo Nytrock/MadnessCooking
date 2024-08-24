@@ -1,9 +1,12 @@
+using System;
 using UnityEngine;
 
 public class DialogueManager : MonoBehaviour {
     [SerializeField] private GameObject _panel;
     [SerializeField] private DialogueRenderer _renderer;
     private Dialogue _nowDialogue;
+
+    public event Action DialogueEnded;
 
     private void Awake() {
         _panel.SetActive(false);
@@ -41,5 +44,6 @@ public class DialogueManager : MonoBehaviour {
 
     private void StopDialogue() {
         _panel.SetActive(false);
+        DialogueEnded?.Invoke();
     }
 }

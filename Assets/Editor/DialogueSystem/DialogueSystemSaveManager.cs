@@ -72,8 +72,8 @@ public static class DialogueSystemSaveManager {
 
     private static void SaveGroupToScriptableObject(DialogueSystemGroup group, DialogueContainer dialogueContainer) {
         string groupName = group.title;
-        EditorFoldersUtility.CreateFolder($"{_graphFolderPath}/Groups", groupName);
-        EditorFoldersUtility.CreateFolder($"{_graphFolderPath}/Groups/{groupName}", "Dialogues");
+        FoldersUtility.CreateEditorFolder($"{_graphFolderPath}/Groups", groupName);
+        FoldersUtility.CreateEditorFolder($"{_graphFolderPath}/Groups/{groupName}", "Dialogues");
 
         DialogueGroup dialogueGroup = AssetsUtility.CreateAsset<DialogueGroup>($"{_graphFolderPath}/Groups/{groupName}", groupName);
         dialogueGroup.Initialize(groupName);
@@ -88,7 +88,7 @@ public static class DialogueSystemSaveManager {
             if (currentGroupNames.Contains(oldName))
                 continue;
 
-            EditorFoldersUtility.RemoveFolder($"{_graphFolderPath}/Groups/{oldName}");
+            FoldersUtility.DeleteEditorFolder($"{_graphFolderPath}/Groups/{oldName}");
         }
 
         graphData.UpdateOldGroupNames(new(currentGroupNames));
@@ -293,13 +293,13 @@ public static class DialogueSystemSaveManager {
     #endregion
 
     private static void CreateStaticFolders() {
-        EditorFoldersUtility.CreateFolder("Assets/Editor/DialogueSystem", "Graphs");
-        EditorFoldersUtility.CreateFolder("Assets", "ScriptableObjects");
-        EditorFoldersUtility.CreateFolder("Assets/ScriptableObjects", "Dialogues"); ;
-        EditorFoldersUtility.CreateFolder("Assets/ScriptableObjects/Dialogues", _graphFileName); ;
+        FoldersUtility.CreateEditorFolder("Assets/Editor/DialogueSystem", "Graphs");
+        FoldersUtility.CreateEditorFolder("Assets", "ScriptableObjects");
+        FoldersUtility.CreateEditorFolder("Assets/ScriptableObjects", "Dialogues"); ;
+        FoldersUtility.CreateEditorFolder("Assets/ScriptableObjects/Dialogues", _graphFileName); ;
 
-        EditorFoldersUtility.CreateFolder(_graphFolderPath, "Global");
-        EditorFoldersUtility.CreateFolder(_graphFolderPath, "Groups");
-        EditorFoldersUtility.CreateFolder($"{_graphFolderPath}/Global", "Dialogues");
+        FoldersUtility.CreateEditorFolder(_graphFolderPath, "Global");
+        FoldersUtility.CreateEditorFolder(_graphFolderPath, "Groups");
+        FoldersUtility.CreateEditorFolder($"{_graphFolderPath}/Global", "Dialogues");
     }
 }

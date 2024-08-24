@@ -36,7 +36,6 @@ public abstract class SaveManager<TData> : MonoBehaviour
             _data = new();
         else
             _data = _dataService.Load();
-
         _binder.Bind(_data);
     }
 

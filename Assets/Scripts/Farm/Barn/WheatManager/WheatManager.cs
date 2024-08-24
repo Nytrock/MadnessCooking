@@ -18,7 +18,7 @@ public class WheatManager : MonoBehaviour, IUpgradeable<FarmUpgradeData>, IBinda
         if (_flourMill.NeedHoldData == null || _cow.NeedHoldData == null)
             return;
 
-        if (_upgradeData.IsWheatDistributing)
+        if (_upgradeData == null || _upgradeData.IsWheatDistributing)
             return;
 
         int cowWheatCount = _cow.NeedHoldData.MaterialCount;

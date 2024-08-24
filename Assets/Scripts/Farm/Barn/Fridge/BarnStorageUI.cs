@@ -7,11 +7,15 @@ public class BarnStorageUI : MonoBehaviour, IActivable {
     [SerializeField] private ItemInfoRendererWithCount _flourRenderer;
 
     private void Awake() {
-        _barnStorage.CountsUpdated += UpdateCounts;
+        _barnStorage.MilkCountUpdated += UpdateMilkCount;
+        _barnStorage.FlourCountUpdated += UpdateFlourCount;
     }
 
-    private void UpdateCounts(int milkCount, int flourCount) {
+    private void UpdateMilkCount(int milkCount) {
         _milkRenderer.SetCount(milkCount);
+    }
+
+    private void UpdateFlourCount(int flourCount) {
         _flourRenderer.SetCount(flourCount);
     }
 

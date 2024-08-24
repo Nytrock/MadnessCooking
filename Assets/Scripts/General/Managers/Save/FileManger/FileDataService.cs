@@ -13,7 +13,19 @@ public class FileDataService<TData>
 
     public FileDataService(string fileName) {
         _fileName = fileName;
+        if (_fileName.Contains("/"))
+            FractionFileName();
+
         _filePath = Path.Combine(_dataPath, string.Concat(_fileName, ".", _fileExtension));
+    }
+
+    private void FractionFileName() {
+        string[] folders = _fileName.Split('/')[..^1];
+        string path = _dataPath;
+        foreach (var folder in folders) {
+            FoldersUtility.CreateFolder(path, folder);
+            path += "/" + folder;
+        }
     }
 
     public void Save(TData data) {
@@ -28,8 +40,7 @@ public class FileDataService<TData>
     }
 
     public void Delete() {
-        if (IsFileExists())
-            File.Delete(_filePath);
+        FoldersUtility.DeleteFolder(_filePath);
     }
 
     public bool IsFileExists() {
