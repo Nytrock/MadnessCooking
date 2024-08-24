@@ -1,12 +1,13 @@
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-[Serializable]
+[Serializable, JsonObject(MemberSerialization.OptIn)]
 public class BuyableItemManagerData<TItem>
     where TItem : BuyableItem {
 
-    [SerializeField] private List<TItem> _availableItems;
+    [SerializeField, JsonProperty] private List<TItem> _availableItems;
 
     public IEnumerable<TItem> AvailableItems => _availableItems;
     public int ItemsCount => _availableItems.Count;

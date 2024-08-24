@@ -1,14 +1,15 @@
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-[Serializable]
+[Serializable, JsonObject(MemberSerialization.OptIn)]
 public class ClientsSpawnerData {
-    [SerializeField] private List<ClientData> _leavingClients;
-    [SerializeField] private bool _isSpawning;
-    [SerializeField] private float _nowSpawnTime;
-    [SerializeField] private float _needSpawnTime;
-    [SerializeField] private int _servicedClientsCount;
+    [SerializeField, JsonProperty] private List<ClientData> _leavingClients;
+    [SerializeField, JsonProperty] private bool _isSpawning;
+    [SerializeField, JsonProperty] private float _nowSpawnTime;
+    [SerializeField, JsonProperty] private float _needSpawnTime;
+    [SerializeField, JsonProperty] private int _servicedClientsCount;
 
     public IEnumerable<ClientData> LeavingClients => _leavingClients;
     public bool IsSpawning => _isSpawning;

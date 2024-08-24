@@ -1,16 +1,17 @@
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-[Serializable]
+[Serializable, JsonObject(MemberSerialization.OptIn)]
 public class PestsGeneratorData {
-    [SerializeField] private List<PestData> _pests;
-    [SerializeField] private float _pestsSlowdown;
-    [SerializeField] private float _nowTime;
-    [SerializeField] private float _needTime;
-    [SerializeField] private bool _isActive;
-    [SerializeField] private bool _isPestsInstant;
-    [SerializeField] private bool _isPestsRemoved;
+    [SerializeField, JsonProperty] private List<PestData> _pests;
+    [SerializeField, JsonProperty] private float _pestsSlowdown;
+    [SerializeField, JsonProperty] private float _nowTime;
+    [SerializeField, JsonProperty] private float _needTime;
+    [SerializeField, JsonProperty] private bool _isActive;
+    [SerializeField, JsonProperty] private bool _isPestsInstant;
+    [SerializeField, JsonProperty] private bool _isPestsRemoved;
 
     public IEnumerable<PestData> Pests => _pests;
     public float PestsSlowdown => _pestsSlowdown;

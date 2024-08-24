@@ -1,11 +1,12 @@
+using Newtonsoft.Json;
 using System;
 using UnityEngine;
 
-[Serializable]
+[Serializable, JsonObject(MemberSerialization.OptIn)]
 public class KitchenCatData {
-    [SerializeField] private float _nowTime;
-    [SerializeField] private float _needTime;
-    [SerializeField] private bool _isPetted;
+    [SerializeField, JsonProperty] private float _nowTime;
+    [SerializeField, JsonProperty] private float _needTime;
+    [SerializeField, JsonProperty] private bool _isPetted;
 
     public bool IsPetted => _isPetted;
     public float NowTime => _nowTime;

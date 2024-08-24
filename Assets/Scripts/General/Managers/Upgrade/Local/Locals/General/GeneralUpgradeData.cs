@@ -1,9 +1,10 @@
+using Newtonsoft.Json;
 using System;
 using UnityEngine;
 
-[Serializable]
+[Serializable, JsonObject(MemberSerialization.OptIn)]
 public class GeneralUpgradeData : ISaveable {
-    [SerializeField] private bool _isUpgradedTimeRenderer;
+    [SerializeField, JsonProperty] private bool _isUpgradedTimeRenderer;
 
     public bool IsUpgradedTimeRenderer => _isUpgradedTimeRenderer;
 

@@ -1,9 +1,10 @@
+using Newtonsoft.Json;
 using System;
 using UnityEngine;
 
-[Serializable]
+[Serializable, JsonObject(MemberSerialization.OptIn)]
 public class RealTimeManagerData {
-    [SerializeField] private float _realTime;
+    [SerializeField, JsonProperty] private float _realTime;
 
     public RealTimeManagerData() {
         _realTime = 0;

@@ -1,13 +1,14 @@
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-[Serializable]
+[Serializable, JsonObject(MemberSerialization.OptIn)]
 public class FarmUpgradeData : ISaveable {
-    [SerializeField] private bool _isGrowStatusShow;
-    [SerializeField] private bool _isWheatDistributing;
-    [SerializeField] private bool _isPuncherProgressShow;
-    [SerializeField] private List<FarmBedUpgrade> _availableFarmBedUpgrades;
+    [SerializeField, JsonProperty] private bool _isGrowStatusShow;
+    [SerializeField, JsonProperty] private bool _isWheatDistributing;
+    [SerializeField, JsonProperty] private bool _isPuncherProgressShow;
+    [SerializeField, JsonProperty] private List<FarmBedUpgrade> _availableFarmBedUpgrades;
 
     public bool IsGrowStatusShow => _isGrowStatusShow;
     public bool IsPuncherProgressShow => _isPuncherProgressShow;

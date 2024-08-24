@@ -2,16 +2,16 @@ using System;
 using System.IO;
 using UnityEngine;
 
-public class FileDataService<TData>
+public class SaveFileManager<TData>
     where TData : ISaveable {
 
-    private readonly JsonSerializer _serializer = new();
+    private readonly JsonConverter _serializer = new();
     private readonly string _dataPath = Application.persistentDataPath;
     private readonly string _filePath = Application.persistentDataPath;
     private readonly string _fileName;
     private const string _fileExtension = "nyt";
 
-    public FileDataService(string fileName) {
+    public SaveFileManager(string fileName) {
         _fileName = fileName;
         if (_fileName.Contains("/"))
             FractionFileName();

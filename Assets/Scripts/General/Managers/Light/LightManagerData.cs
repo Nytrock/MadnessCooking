@@ -1,13 +1,14 @@
+using Newtonsoft.Json;
 using System;
 using UnityEngine;
 
-[Serializable]
+[Serializable, JsonObject(MemberSerialization.OptIn)]
 public class LightManagerData {
-    [SerializeField] private float _nowTime;
-    [SerializeField] private bool _isChanging;
-    [SerializeField] private SkyManagerData _skyData;
-    [SerializeField] private SpritesManagerData _spritesData;
-    private float _timeStep;
+    [SerializeField, JsonProperty] private float _nowTime;
+    [SerializeField, JsonProperty] private bool _isChanging;
+    [SerializeField, JsonProperty] private SkyManagerData _skyData;
+    [SerializeField, JsonProperty] private SpritesManagerData _spritesData;
+    [SerializeField] private float _timeStep;
 
     public bool IsChanging => _isChanging;
     public SkyManagerData SkyData => _skyData;

@@ -38,8 +38,8 @@ public class Pest : MonoBehaviour {
 
     public void Bind(PestData pestData) {
         Data = pestData;
-        transform.SetPositionAndRotation(Data.Position.GetVector(),
-            Data.RotationDegree.GetQuaternion());
+        transform.SetPositionAndRotation(Data.Position,
+            Data.RotationDegree);
 
         if (_isSpriteChanging)
             _renderer.sprite = _sprites[Data.SpriteIndex];

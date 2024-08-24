@@ -1,17 +1,18 @@
+using Newtonsoft.Json;
 using System;
 using UnityEngine;
 
-[Serializable]
+[Serializable, JsonObject(MemberSerialization.OptIn)]
 public class LocationManagerData {
-    [SerializeField] private Location _startLocation;
+    [SerializeField, JsonProperty] private Location _location;
 
-    public Location StartLocation => _startLocation;
+    public Location Location => _location;
 
     public LocationManagerData() {
-        _startLocation = Location.Cafe;
+        _location = Location.Cafe;
     }
 
     public void ChangeLocation(Location newLocation) {
-        _startLocation = newLocation;
+        _location = newLocation;
     }
 }

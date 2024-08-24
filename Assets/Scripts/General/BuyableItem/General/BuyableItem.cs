@@ -1,6 +1,8 @@
+using Newtonsoft.Json;
 using UnityEngine;
 
-public abstract class BuyableItem : ShowableScriptableObject {
+[JsonConverter(typeof(ScriptableObjectConverter))]
+public abstract class BuyableItem : ExtendedScriptableObject {
     public const string AssetMenuName = nameof(BuyableItem) + "/";
 
     [SerializeField] private Sprite _icon;

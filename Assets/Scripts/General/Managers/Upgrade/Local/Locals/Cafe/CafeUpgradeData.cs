@@ -1,9 +1,10 @@
+using Newtonsoft.Json;
 using System;
 using UnityEngine;
 
-[Serializable]
+[Serializable, JsonObject(MemberSerialization.OptIn)]
 public class CafeUpgradeData : ISaveable {
-    [SerializeField] private bool _isEatTimeShow;
+    [SerializeField, JsonProperty] private bool _isEatTimeShow;
 
     public bool IsEatTimeShow => _isEatTimeShow;
 

@@ -1,18 +1,19 @@
+using Newtonsoft.Json;
 using System;
 using UnityEngine;
 
-[Serializable]
+[Serializable, JsonObject(MemberSerialization.OptIn)]
 public class GameTimeManagerData {
-    [SerializeField] private SerializableTimeSpan _globalTime;
-    [SerializeField] private Daytime _daytime;
-    [SerializeField] private bool _isWaitingNextDay;
+    [SerializeField, JsonProperty] private JsonTimeSpan _globalTime;
+    [SerializeField, JsonProperty] private Daytime _daytime;
+    [SerializeField, JsonProperty] private bool _isWaitingNextDay;
 
     public TimeSpan GlobalTime => _globalTime.GetTimeSpan();
     public Daytime Daytime => _daytime;
     public bool IsWaitingNextDay => _isWaitingNextDay;
 
     public GameTimeManagerData(DaytimeStart daytimeStart) {
-        _globalTime = new SerializableTimeSpan(daytimeStart.Hour, daytimeStart.Minute);
+        _globalTime = new JsonTimeSpan(daytimeStart.Hour, daytimeStart.Minute);
         _daytime = daytimeStart.Daytime;
     }
 

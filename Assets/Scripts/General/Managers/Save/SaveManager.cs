@@ -7,21 +7,20 @@ public abstract class SaveManager<TData> : MonoBehaviour
     [SerializeField] private DataBinder<TData> _binder;
 
     private TData _data;
-    private FileDataService<TData> _dataService;
+    private SaveFileManager<TData> _dataService;
 
     protected abstract string _fileName { get; }
 
     public event Action SaveEnded;
 
     private void Awake() {
-        _dataService = new FileDataService<TData>(_fileName);
+        _dataService = new SaveFileManager<TData>(_fileName);
     }
 
     private void Start() {
         Load();
     }
 
-    [ContextMenu("Save")]
     public void Save() {
         _dataService.Save(_data);
         SaveEnded?.Invoke();

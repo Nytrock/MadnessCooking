@@ -1,9 +1,10 @@
+using Newtonsoft.Json;
 using System;
 using UnityEngine;
 
-[Serializable]
+[Serializable, JsonObject(MemberSerialization.OptIn)]
 public class SpaceManagerData {
-    [SerializeField] private int _count;
+    [SerializeField, JsonProperty] private int _count;
 
     public int Count => _count;
 

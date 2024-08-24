@@ -1,10 +1,11 @@
+using Newtonsoft.Json;
 using System;
 using UnityEngine;
 
-[Serializable]
+[Serializable, JsonObject(MemberSerialization.OptIn)]
 public class OfficeUpgradeData : ISaveable {
-    [SerializeField] private float _internetDownloadSpeed;
-    [SerializeField] private bool _isInternetDownloadInstant;
+    [SerializeField, JsonProperty] private float _internetDownloadSpeed;
+    [SerializeField, JsonProperty] private bool _isInternetDownloadInstant;
 
     public float InternetDownloadSpeed => _internetDownloadSpeed;
     public bool IsInternetDownloadInstant => _isInternetDownloadInstant;

@@ -1,18 +1,19 @@
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-[Serializable]
+[Serializable, JsonObject(MemberSerialization.OptIn)]
 public class ChickensData {
-    [SerializeField] private List<ChickenFoodData> _foodList;
-    [SerializeField] private bool _isUnlocked;
-    [SerializeField] private float _nowTime;
-    [SerializeField] private float _speed;
+    [SerializeField, JsonProperty] private List<ChickenFoodData> _foodList;
+    [SerializeField, JsonProperty] private bool _isUnlocked;
+    [SerializeField, JsonProperty] private float _nowTime;
+    [SerializeField, JsonProperty] private float _speed;
 
-    [SerializeField] private int _eggCount;
-    [SerializeField] private int _foodCount;
-    [SerializeField] private bool _isFeed;
-    [SerializeField] private bool _isInfiniteFood;
+    [SerializeField, JsonProperty] private int _eggCount;
+    [SerializeField, JsonProperty] private int _foodCount;
+    [SerializeField, JsonProperty] private bool _isFeed;
+    [SerializeField, JsonProperty] private bool _isInfiniteFood;
 
     public IEnumerable<ChickenFoodData> FoodList => _foodList;
     public int UsedFoodCount => _foodList.Count;

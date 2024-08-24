@@ -1,12 +1,13 @@
+using Newtonsoft.Json;
 using System;
 using UnityEngine;
 
-[Serializable]
+[Serializable, JsonObject(MemberSerialization.OptIn)]
 public class BuyableItemCount<TItem>
     where TItem : BuyableItem {
 
-    [SerializeField] private TItem _item;
-    [SerializeField, Min(1)] private int _count;
+    [SerializeField, JsonProperty] private TItem _item;
+    [SerializeField, Min(1), JsonProperty] private int _count;
 
     public TItem Item => _item;
     public int Count => _count;

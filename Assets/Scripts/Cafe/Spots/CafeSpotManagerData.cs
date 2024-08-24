@@ -1,10 +1,11 @@
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-[Serializable]
+[Serializable, JsonObject(MemberSerialization.OptIn)]
 public class CafeSpotManagerData {
-    [SerializeField] private List<SpotData> _spots;
+    [SerializeField, JsonProperty] private List<SpotData> _spots;
 
     public IEnumerable<SpotData> Spots => _spots;
 

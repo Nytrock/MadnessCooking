@@ -1,13 +1,17 @@
+using Newtonsoft.Json;
 using System;
 using UnityEngine;
 
-[Serializable]
+[Serializable, JsonObject(MemberSerialization.OptIn)]
 public class SettingsPointData<TValue> {
-    [SerializeField] private TValue _nowValue;
-    [SerializeField] private TValue _lastValue;
+    [SerializeField, JsonProperty] private TValue _nowValue;
+    [SerializeField, JsonProperty] private TValue _lastValue;
 
     public TValue LastValue => _lastValue;
     public bool IsValueChanged => !Equals(_nowValue, _lastValue);
+
+    [JsonConstructor]
+    public SettingsPointData() { }
 
     public SettingsPointData(TValue defaultValue) {
         _nowValue = defaultValue;

@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(menuName = nameof(Cursor))]
-public class CursorTexture : ShowableScriptableObject {
+public class CursorTexture : ExtendedScriptableObject {
     [SerializeField] private Texture2D _defaultTexture;
     [SerializeField] private CursorStateTexture[] _extraTextures;
 

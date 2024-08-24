@@ -1,13 +1,14 @@
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-[Serializable]
+[Serializable, JsonObject(MemberSerialization.OptIn)]
 public class CarWaitManagerData {
-    [SerializeField] private BuyableItemCountList<Ingredient> _ingredientsSended;
-    [SerializeField] private CarState _carState;
-    [SerializeField] private float _nowWaitTime;
-    [SerializeField] private float _needWaitTime;
+    [SerializeField, JsonProperty] private BuyableItemCountList<Ingredient> _ingredientsSended;
+    [SerializeField, JsonProperty] private CarState _carState;
+    [SerializeField, JsonProperty] private float _nowWaitTime;
+    [SerializeField, JsonProperty] private float _needWaitTime;
 
     public IEnumerable<BuyableItemCount<Ingredient>> IngredientsSended => _ingredientsSended.GetItems();
     public CarState CarState => _carState;

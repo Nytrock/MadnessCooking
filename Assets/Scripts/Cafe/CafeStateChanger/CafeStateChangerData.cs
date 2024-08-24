@@ -1,9 +1,10 @@
+using Newtonsoft.Json;
 using System;
 using UnityEngine;
 
-[Serializable]
+[Serializable, JsonObject(MemberSerialization.OptIn)]
 public class CafeStateChangerData {
-    [SerializeField] private bool _isOpened = true;
+    [SerializeField, JsonProperty] private bool _isOpened = true;
 
     public bool IsOpened => _isOpened;
 

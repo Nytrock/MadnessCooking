@@ -1,16 +1,17 @@
+using Newtonsoft.Json;
 using System;
 using UnityEngine;
 
-[Serializable]
+[Serializable, JsonObject(MemberSerialization.OptIn)]
 public class PestData {
-    [SerializeField] private int _prefabIndex;
-    [SerializeField] private int _spriteIndex;
-    [SerializeField] private SerializableQuaternion _rotationDegree;
-    [SerializeField] private SerializableVector _position;
-    [SerializeField] private SerializableVector _normalizedPosition;
+    [SerializeField, JsonProperty] private int _prefabIndex;
+    [SerializeField, JsonProperty] private int _spriteIndex;
+    [SerializeField, JsonProperty] private JsonQuaternion _rotationDegree;
+    [SerializeField, JsonProperty] private JsonVector _position;
+    [SerializeField, JsonProperty] private JsonVector _normalizedPosition;
 
-    public PestData(int prefabIndex, int spriteIndex, SerializableQuaternion rotation,
-        SerializableVector position, SerializableVector normalizedPosition) {
+    public PestData(int prefabIndex, int spriteIndex, JsonQuaternion rotation,
+        JsonVector position, JsonVector normalizedPosition) {
         _prefabIndex = prefabIndex;
         _spriteIndex = spriteIndex;
         _rotationDegree = rotation;
@@ -20,7 +21,7 @@ public class PestData {
 
     public int PrefabIndex => _prefabIndex;
     public int SpriteIndex => _spriteIndex;
-    public SerializableQuaternion RotationDegree => _rotationDegree;
-    public SerializableVector Position => _position;
-    public SerializableVector NormalizedPosition => _normalizedPosition;
+    public Quaternion RotationDegree => _rotationDegree.GetQuaternion();
+    public Vector2 Position => _position.GetVector();
+    public Vector2 NormalizedPosition => _normalizedPosition.GetVector();
 }

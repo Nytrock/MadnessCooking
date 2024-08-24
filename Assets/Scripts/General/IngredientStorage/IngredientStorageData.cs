@@ -1,12 +1,13 @@
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-[Serializable]
+[Serializable, JsonObject(MemberSerialization.OptIn)]
 public class IngredientStorageData {
-    [SerializeField] private BuyableItemCountList<Ingredient> _ingredients;
-    [SerializeField] private int _maxSpace;
-    [SerializeField] private int _nowSpace;
+    [SerializeField, JsonProperty] private BuyableItemCountList<Ingredient> _ingredients;
+    [SerializeField, JsonProperty] private int _maxSpace;
+    [SerializeField, JsonProperty] private int _nowSpace;
 
     public IEnumerable<BuyableItemCount<Ingredient>> Ingredients => _ingredients.GetItems();
     public int NowSpace => _nowSpace;

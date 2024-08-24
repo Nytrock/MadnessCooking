@@ -1,24 +1,25 @@
+using Newtonsoft.Json;
 using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-[Serializable]
+[Serializable, JsonObject(MemberSerialization.OptIn)]
 public class ClientData {
-    [SerializeField] private ClientType _type;
-    [SerializeField] private ClientSkinType _skinType;
-    [SerializeField] private ClientState _state;
-    [SerializeField] private SerializableVector _position;
-    [SerializeField] private float _waitTime;
-    [SerializeField] private float _nowTime;
-    [SerializeField] private float _waitMultiplier;
-    [SerializeField] private bool _isEated;
-    [SerializeField] private Order _order;
-    private float _waitCoef;
+    [SerializeField, JsonProperty] private ClientType _type;
+    [SerializeField, JsonProperty] private ClientSkinType _skinType;
+    [SerializeField, JsonProperty] private ClientState _state;
+    [SerializeField, JsonProperty] private JsonVector _position;
+    [SerializeField, JsonProperty] private float _waitTime;
+    [SerializeField, JsonProperty] private float _nowTime;
+    [SerializeField, JsonProperty] private float _waitMultiplier;
+    [SerializeField, JsonProperty] private bool _isEated;
+    [SerializeField, JsonProperty] private Order _order;
+    [SerializeField] private float _waitCoef;
 
     public ClientType Type => _type;
     public ClientSkinType SkinType => _skinType;
     public ClientState State => _state;
-    public SerializableVector Position => _position;
+    public JsonVector Position => _position;
     public float WaitTime => _waitTime;
     public float NowTime => _nowTime;
     public float WaitCoef => _waitCoef;
@@ -28,7 +29,7 @@ public class ClientData {
     public ClientData(Vector3 position, ClientType clientType, float waitMultiplier, Order order) {
         _type = clientType;
         _state = ClientState.Spawn;
-        _position = new SerializableVector(position);
+        _position = new JsonVector(position);
         _waitMultiplier = waitMultiplier;
         _order = order;
     }

@@ -1,13 +1,14 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using UnityEngine;
 
-[Serializable]
+[Serializable, JsonObject(MemberSerialization.OptIn)]
 public class Order {
-    [SerializeField] private bool _isActivated;
-    [SerializeField] private bool _isFinished;
-    [SerializeField] private bool _isCooking;
-    [SerializeField] private Food _food;
-    [SerializeField] private int _tableIndex;
+    [SerializeField, JsonProperty] private bool _isActivated;
+    [SerializeField, JsonProperty] private bool _isFinished;
+    [SerializeField, JsonProperty] private bool _isCooking;
+    [SerializeField, JsonProperty] private Food _food;
+    [SerializeField, JsonProperty] private int _tableIndex;
 
     public bool IsActivated => _isActivated;
     public bool IsFinished => _isFinished;

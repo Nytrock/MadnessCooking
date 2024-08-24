@@ -1,10 +1,14 @@
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-[Serializable]
+[Serializable, JsonObject(MemberSerialization.OptIn)]
 public class FarmShopData : ShopData<BaseUpgrade> {
-    [SerializeField] private List<ConsumableUpgradeHolder> _upgradeHolders;
+    [SerializeField, JsonProperty] private List<ConsumableUpgradeHolder> _upgradeHolders;
+
+    [JsonConstructor]
+    public FarmShopData() { }
 
     public FarmShopData(IEnumerable<BaseUpgrade> defaultItems, IEnumerable<ConsumableUpgrade> comsumableUpgrades) : base(defaultItems) {
         _upgradeHolders = new();

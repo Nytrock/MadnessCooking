@@ -5,10 +5,10 @@ using UnityEngine;
 using Object = UnityEngine.Object;
 
 #if UNITY_EDITOR
-[CustomEditor(typeof(ShowableScriptableObject), true)]
+[CustomEditor(typeof(ExtendedScriptableObject), true)]
 [CanEditMultipleObjects]
 public class ShowableScriptableObjectEditor : Editor {
-    private ShowableScriptableObject Object => target as ShowableScriptableObject;
+    private ExtendedScriptableObject Object => target as ExtendedScriptableObject;
 
     public override Texture2D RenderStaticPreview(string assetPath, Object[] subAssets, int width, int height) {
         if (Object.Icon != null) {

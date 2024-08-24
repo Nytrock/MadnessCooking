@@ -1,9 +1,10 @@
+using Newtonsoft.Json;
 using System;
 using UnityEngine;
 
-[Serializable]
+[Serializable, JsonObject(MemberSerialization.OptIn)]
 public class WheatManagerData {
-    [SerializeField] private bool _isCowNextWheat;
+    [SerializeField, JsonProperty] private bool _isCowNextWheat;
 
     public bool IsCowNextWheat => _isCowNextWheat;
 

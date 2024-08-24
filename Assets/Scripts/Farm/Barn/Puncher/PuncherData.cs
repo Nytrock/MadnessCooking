@@ -1,12 +1,13 @@
+using Newtonsoft.Json;
 using System;
 using UnityEngine;
 
-[Serializable]
+[Serializable, JsonObject(MemberSerialization.OptIn)]
 public class PuncherData {
-    [SerializeField] private float _nowWaste;
-    [SerializeField] private int _fertilizerCount;
-    [SerializeField] private float _speed;
-    private float _needWaste;
+    [SerializeField, JsonProperty] private float _nowWaste;
+    [SerializeField, JsonProperty] private int _fertilizerCount;
+    [SerializeField, JsonProperty] private float _speed;
+    [SerializeField] private float _needWaste;
 
     public int FertilizerCount => _fertilizerCount;
     public float NowWaste => _nowWaste;

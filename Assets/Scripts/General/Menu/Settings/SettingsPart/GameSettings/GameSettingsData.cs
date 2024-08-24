@@ -2,7 +2,7 @@ using System;
 
 [Serializable]
 public class GameSettingsData : ISaveable {
-    public SettingsPointData<int> LocalizationManager;
-    public SettingsPointData<int> CursorManager;
-    public SettingsPointData<bool> FpsManager;
+    public SettingsPointData<int> LocalizationManager { get; set; }
+    public SettingsPointData<int> CursorManager { get; set; }
+    public SettingsPointData<bool> FpsManager { get; set; }
 }

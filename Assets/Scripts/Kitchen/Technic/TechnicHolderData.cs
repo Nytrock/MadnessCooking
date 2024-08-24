@@ -1,16 +1,17 @@
+using Newtonsoft.Json;
 using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-[Serializable]
+[Serializable, JsonObject(MemberSerialization.OptIn)]
 public class TechnicHolderData {
-    [SerializeField] private Technic _technic;
-    [SerializeField] private bool _isCooking;
-    [SerializeField] private bool _isRepairing;
-    [SerializeField] private float _nowStrength;
-    [SerializeField] private float _nowWaitTime;
-    [SerializeField] private float _needWaitTime;
-    [SerializeField] private Order _nowOrder;
+    [SerializeField, JsonProperty] private Technic _technic;
+    [SerializeField, JsonProperty] private bool _isCooking;
+    [SerializeField, JsonProperty] private bool _isRepairing;
+    [SerializeField, JsonProperty] private float _nowStrength;
+    [SerializeField, JsonProperty] private float _nowWaitTime;
+    [SerializeField, JsonProperty] private float _needWaitTime;
+    [SerializeField, JsonProperty] private Order _nowOrder;
 
     public bool IsCooking => _isCooking;
     public bool IsRepairing => _isRepairing;
@@ -23,9 +24,12 @@ public class TechnicHolderData {
     public event Action CookStoped;
     public event Action RepairStoped;
 
+    [JsonConstructor]
+    public TechnicHolderData() { }
+
     public TechnicHolderData(Technic technic) {
         _technic = technic;
-        _nowStrength = technic.Strength;
+        _nowStrength = _technic.Strength;
     }
 
     public void StartRepair(KitchenUpgradeData upgradeData) {

@@ -1,10 +1,11 @@
+using Newtonsoft.Json;
 using System;
 using UnityEngine;
 
-[Serializable]
+[Serializable, JsonObject(MemberSerialization.OptIn)]
 public class FatigueManagerData {
-    [SerializeField] private float _fatigueNow;
-    [SerializeField] private float _fatigueMax;
+    [SerializeField, JsonProperty] private float _fatigueNow;
+    [SerializeField, JsonProperty] private float _fatigueMax;
 
     public float FatigueNow => _fatigueNow;
 

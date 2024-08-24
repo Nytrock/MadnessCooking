@@ -1,9 +1,10 @@
+using Newtonsoft.Json;
 using System;
 using UnityEngine;
 
-[Serializable]
+[Serializable, JsonObject(MemberSerialization.OptIn)]
 public class OfficeBedData {
-    [SerializeField] private bool _isSleep;
+    [SerializeField, JsonProperty] private bool _isSleep;
 
     public bool IsSleep => _isSleep;
 

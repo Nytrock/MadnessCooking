@@ -4,6 +4,7 @@ public class TutorialManager : MonoBehaviour, IBindable<GeneralData> {
     [SerializeField] private TutorialPart[] _parts;
     [SerializeField] private DialogueManager _dialogueManager;
     [SerializeField] private ClueManager _clueManager;
+    [SerializeField] private GameSaveManager _saveManager;
 
     private int _currentTutorialPartIndex;
     private TutorialManagerData _data;
@@ -40,6 +41,7 @@ public class TutorialManager : MonoBehaviour, IBindable<GeneralData> {
 
     private void EndTutorial() {
         _data.ChangeWorkState(false);
+        _saveManager.Save();
     }
 
     private void UpdateNowTutorialPart() {

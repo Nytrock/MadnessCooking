@@ -1,9 +1,10 @@
+using Newtonsoft.Json;
 using System;
 using UnityEngine;
 
-[Serializable]
+[Serializable, JsonObject(MemberSerialization.OptIn)]
 public class NeedHoldAddData : HoldAddData {
-    [SerializeField] private int _materialCount;
+    [SerializeField, JsonProperty] private int _materialCount;
 
     public int MaterialCount => _materialCount;
 

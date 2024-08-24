@@ -2,10 +2,10 @@ using System;
 
 [Serializable]
 public class AudioVolumeSettingsData {
-    public SettingsPointData<float> MasterVolume;
-    public SettingsPointData<float> UIVolume;
-    public SettingsPointData<float> MusicVolume;
-    public SettingsPointData<float> SfxVolume;
+    public SettingsPointData<float> MasterVolume { get; set; }
+    public SettingsPointData<float> UIVolume { get; set; }
+    public SettingsPointData<float> MusicVolume { get; set; }
+    public SettingsPointData<float> SfxVolume { get; set; }
 
     public AudioVolumeSettingsData(float defaultValue) {
         MasterVolume = new(defaultValue);

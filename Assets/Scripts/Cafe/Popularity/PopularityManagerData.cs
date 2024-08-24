@@ -1,10 +1,11 @@
+using Newtonsoft.Json;
 using System;
 using UnityEngine;
 
-[Serializable]
+[Serializable, JsonObject(MemberSerialization.OptIn)]
 public class PopularityManagerData {
-    [SerializeField] private int _level;
-    [SerializeField] private int _xp;
+    [SerializeField, JsonProperty] private int _level;
+    [SerializeField, JsonProperty] private int _xp;
 
     public int Level => _level;
     public int Xp => _xp;

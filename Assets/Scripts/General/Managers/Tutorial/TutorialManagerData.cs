@@ -2,7 +2,7 @@ using Newtonsoft.Json;
 using System;
 using UnityEngine;
 
-[Serializable]
+[Serializable, JsonObject(MemberSerialization.OptIn)]
 public class TutorialManagerData {
     [SerializeField, JsonProperty] private bool _isWork;
 

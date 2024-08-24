@@ -1,22 +1,23 @@
+using Newtonsoft.Json;
 using System;
 using UnityEngine;
 
-[Serializable]
+[Serializable, JsonObject(MemberSerialization.OptIn)]
 public class FarmBedData {
-    [SerializeField] private BedType _bedType;
-    [SerializeField] private Ingredient _plantedIngredient;
-    [SerializeField] private bool _isActive;
+    [SerializeField, JsonProperty] private BedType _bedType;
+    [SerializeField, JsonProperty] private Ingredient _plantedIngredient;
+    [SerializeField, JsonProperty] private bool _isActive;
 
-    [SerializeField] private float _nowTime;
-    [SerializeField] private int _count;
-    [SerializeField] private bool _isFull;
-    [SerializeField] private float _animationTime;
+    [SerializeField, JsonProperty] private float _nowTime;
+    [SerializeField, JsonProperty] private int _count;
+    [SerializeField, JsonProperty] private bool _isFull;
+    [SerializeField, JsonProperty] private float _animationTime;
 
-    [SerializeField] private BedHolderBoosterData _waterBoost;
-    [SerializeField] private BedHolderBoosterData _fertilizeBoost;
-    [SerializeField] private PestsGeneratorData _pestsGenerator;
-    [SerializeField] private float _independentBoost;
-    [SerializeField] private bool _isAutoCollect;
+    [SerializeField, JsonProperty] private BedHolderBoosterData _waterBoost;
+    [SerializeField, JsonProperty] private BedHolderBoosterData _fertilizeBoost;
+    [SerializeField, JsonProperty] private PestsGeneratorData _pestsGenerator;
+    [SerializeField, JsonProperty] private float _independentBoost;
+    [SerializeField, JsonProperty] private bool _isAutoCollect;
 
     public BedType BedType => _bedType;
     public Ingredient PlantedIngredient => _plantedIngredient;

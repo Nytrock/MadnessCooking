@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(menuName = nameof(DialogueCharacter))]
-public class DialogueCharacter : ShowableScriptableObject {
+public class DialogueCharacter : ExtendedScriptableObject {
     [SerializeField] private Sprite _defaultSprite;
     [SerializeField] private DialogueCharacterEmotionSprite[] _emotionSprites;
     [SerializeField] private AudioClip _voice;

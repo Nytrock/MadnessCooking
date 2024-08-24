@@ -1,9 +1,10 @@
+using Newtonsoft.Json;
 using System;
 using UnityEngine;
 
-[Serializable]
+[Serializable, JsonObject(MemberSerialization.OptIn)]
 public class MoneyManagerData {
-    [SerializeField] private int _moneyCount;
+    [SerializeField, JsonProperty] private int _moneyCount;
 
     public int MoneyCount => _moneyCount;
 

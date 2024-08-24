@@ -1,14 +1,15 @@
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-[Serializable]
+[Serializable, JsonObject(MemberSerialization.OptIn)]
 public class ShopData<TItem>
     where TItem : BuyableItem {
 
-    [SerializeField] private List<TItem> _itemsToBuy;
-    [SerializeField] private List<TItem> _availableItems;
+    [SerializeField, JsonProperty] private List<TItem> _itemsToBuy;
+    [SerializeField, JsonProperty] private List<TItem> _availableItems;
 
     public IEnumerable<TItem> ItemsToBuy => _itemsToBuy;
 
@@ -18,6 +19,9 @@ public class ShopData<TItem>
         foreach (var item in defaultItems)
             _itemsToBuy.Add(item);
     }
+
+    [JsonConstructor]
+    public ShopData() { }
 
     public void CheckDefaultItems(IEnumerable<TItem> defaultItems) {
         foreach (var item in defaultItems)

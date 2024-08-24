@@ -19,8 +19,8 @@ public class PestUI : MonoBehaviour {
         _image.sprite = pest.GetSprite();
         _image.SetNativeSize();
 
-        Vector2 normalizedPosition = pest.Data.NormalizedPosition.GetVector();
-        transform.SetPositionAndRotation(position.Lerp(normalizedPosition), pest.Data.RotationDegree.GetQuaternion());
+        Vector2 normalizedPosition = pest.Data.NormalizedPosition;
+        transform.SetPositionAndRotation(position.Lerp(normalizedPosition), pest.Data.RotationDegree);
 
         Pest = pest;
     }

@@ -1,11 +1,12 @@
+using Newtonsoft.Json;
 using System;
 using UnityEngine;
 
-[Serializable]
+[Serializable, JsonObject(MemberSerialization.OptIn)]
 public class ChickenFoodData {
-    [SerializeField] private float _nowTime;
-    [SerializeField] private float _needTime;
-    [SerializeField] private float _foodCoef;
+    [SerializeField, JsonProperty] private float _nowTime;
+    [SerializeField, JsonProperty] private float _needTime;
+    [SerializeField, JsonProperty] private float _foodCoef;
 
     public bool IsEnded => _nowTime >= _needTime;
     public float FoodCoef => _foodCoef;

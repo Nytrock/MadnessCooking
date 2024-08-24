@@ -7,7 +7,7 @@ public class TechnicHolder : MonoBehaviour {
     [SerializeField] private Transform _UITarget;
     [SerializeField] private TechnicHolderAnimator _animator;
 
-    public TechnicHolderData Data { get; private set; }
+    [field: SerializeField] public TechnicHolderData Data { get; private set; }
     private KitchenUpgradeData _upgradeData;
     private TechnicHolderRenderer _renderer;
 

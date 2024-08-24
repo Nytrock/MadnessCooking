@@ -1,10 +1,11 @@
+using Newtonsoft.Json;
 using System;
 using UnityEngine;
 
-[Serializable]
+[Serializable, JsonObject(MemberSerialization.OptIn)]
 public class ConsumableUpgradeHolder {
-    [SerializeField] private ConsumableUpgrade _consumableUpgrade;
-    [SerializeField, Min(0)] private int _nowCount;
+    [SerializeField, JsonProperty] private ConsumableUpgrade _consumableUpgrade;
+    [SerializeField, Min(0), JsonProperty] private int _nowCount;
 
     public ConsumableUpgrade ConsumableUpgrade => _consumableUpgrade;
     public bool IsMax => _consumableUpgrade.MaxCount <= _nowCount;

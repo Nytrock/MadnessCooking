@@ -4,6 +4,7 @@ public class AutoSaveManager : MonoBehaviour {
     [SerializeField, Min(1)] private int _needAutoSaveMinutes;
     [SerializeField] private AutoSaveUI _UI;
     [SerializeField] private GameSaveManager _saveManager;
+    [SerializeField] private TutorialManager _titorialManager;
     private float _nowTime;
 
     private float _needAutoSaveTime;
@@ -16,6 +17,9 @@ public class AutoSaveManager : MonoBehaviour {
 
     private void Update() {
         if (_isSaving)
+            return;
+
+        if (_titorialManager.IsWork)
             return;
 
         if (_nowTime < _needAutoSaveTime)

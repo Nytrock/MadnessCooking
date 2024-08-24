@@ -1,9 +1,10 @@
+using Newtonsoft.Json;
 using System;
 using UnityEngine;
 
-[Serializable]
+[Serializable, JsonObject(MemberSerialization.OptIn)]
 public class FarmBedManagerData : SpaceManagerData {
-    [SerializeField] private FarmBedData[] _farmBeds;
+    [SerializeField, JsonProperty] private FarmBedData[] _farmBeds;
 
     public FarmBedManagerData(int defaultSpaceCount, int bedsCount) : base(defaultSpaceCount) {
         _farmBeds = new FarmBedData[bedsCount];

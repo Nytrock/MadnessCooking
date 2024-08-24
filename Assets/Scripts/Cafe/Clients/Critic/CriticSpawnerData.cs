@@ -1,9 +1,10 @@
+using Newtonsoft.Json;
 using System;
 using UnityEngine;
 
-[Serializable]
+[Serializable, JsonObject(MemberSerialization.OptIn)]
 public class CriticSpawnerData {
-    [SerializeField] bool _isWaitingCritic;
+    [SerializeField, JsonProperty] bool _isWaitingCritic;
 
     public bool IsWaitingCritic => _isWaitingCritic;
 

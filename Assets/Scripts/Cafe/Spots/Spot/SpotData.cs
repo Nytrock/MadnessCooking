@@ -1,17 +1,18 @@
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-[Serializable]
+[Serializable, JsonObject(MemberSerialization.OptIn)]
 public class SpotData {
-    [SerializeField] private bool _haveClients;
-    [SerializeField] private GroupClientState _groupState;
-    [SerializeField] private float _waitTime;
-    [SerializeField] private float _nowTime;
-    [SerializeField] private int _talkIndex;
-    [SerializeField] private int _moneyCount;
-    [SerializeField] private int _seatsCount;
-    [SerializeField] private ClientData[] _clients;
+    [SerializeField, JsonProperty] private bool _haveClients;
+    [SerializeField, JsonProperty] private GroupClientState _groupState;
+    [SerializeField, JsonProperty] private float _waitTime;
+    [SerializeField, JsonProperty] private float _nowTime;
+    [SerializeField, JsonProperty] private int _talkIndex;
+    [SerializeField, JsonProperty] private int _moneyCount;
+    [SerializeField, JsonProperty] private int _seatsCount;
+    [SerializeField, JsonProperty] private ClientData[] _clients;
 
     public bool HaveClients => _haveClients;
     public GroupClientState GroupState => _groupState;

@@ -1,12 +1,13 @@
+using Newtonsoft.Json;
 using System;
 using UnityEngine;
 
-[Serializable]
+[Serializable, JsonObject(MemberSerialization.OptIn)]
 public class BedHolderBoosterData {
-    [SerializeField] private float _boost;
-    [SerializeField] private bool _isBoosting;
-    [SerializeField] private bool _isEternal;
-    [SerializeField] private float _nowTime;
+    [SerializeField, JsonProperty] private float _boost;
+    [SerializeField, JsonProperty] private bool _isBoosting;
+    [SerializeField, JsonProperty] private bool _isEternal;
+    [SerializeField, JsonProperty] private float _nowTime;
 
     public float Boost => _boost;
     public bool IsBoosting => _isBoosting;

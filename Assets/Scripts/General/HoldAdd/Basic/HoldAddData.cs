@@ -1,15 +1,16 @@
+using Newtonsoft.Json;
 using System;
 using UnityEngine;
 
-[Serializable]
+[Serializable, JsonObject(MemberSerialization.OptIn)]
 public class HoldAddData {
-    [SerializeField] private float _nowTime;
-    [SerializeField] private bool _isUnlocked;
-    [SerializeField] private bool _isAuto;
-    [SerializeField] private float _speed;
-    [SerializeField] private int _readyCount;
-    private float _waitTime;
-    private bool _isWork;
+    [SerializeField, JsonProperty] private float _nowTime;
+    [SerializeField, JsonProperty] private bool _isUnlocked;
+    [SerializeField, JsonProperty] private bool _isAuto;
+    [SerializeField, JsonProperty] private float _speed;
+    [SerializeField, JsonProperty] private int _readyCount;
+    [SerializeField] private float _waitTime;
+    [SerializeField] private bool _isWork;
 
     public float NowTime => _nowTime;
     public bool IsUnlocked => _isUnlocked;

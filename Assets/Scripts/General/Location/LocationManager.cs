@@ -10,7 +10,7 @@ public class LocationManager : MonoBehaviour, IBindable<GeneralData> {
     public event Action<Location> LocationChanged;
 
     private void LateStart() {
-        ChangeLocation(_data.StartLocation);
+        ChangeLocation(_data.Location);
     }
 
     public void ChangeLocation(Location location) {

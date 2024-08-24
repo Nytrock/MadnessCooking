@@ -1,14 +1,15 @@
+using Newtonsoft.Json;
 using System;
 using UnityEngine;
 
-[Serializable]
+[Serializable, JsonObject(MemberSerialization.OptIn)]
 public class KitchenUpgradeData : ISaveable {
-    [SerializeField] private bool _isAutoSpice;
-    [SerializeField] private bool _isStrengthShow;
-    [SerializeField] private bool _isWaterAvailable;
-    [SerializeField] private float _technicCookSpeed;
-    [SerializeField] private float _technicRepairSpeed;
-    [SerializeField] private float _technicStrength;
+    [SerializeField, JsonProperty] private bool _isAutoSpice;
+    [SerializeField, JsonProperty] private bool _isStrengthShow;
+    [SerializeField, JsonProperty] private bool _isWaterAvailable;
+    [SerializeField, JsonProperty] private float _technicCookSpeed;
+    [SerializeField, JsonProperty] private float _technicRepairSpeed;
+    [SerializeField, JsonProperty] private float _technicStrength;
 
     public bool IsAutoSpice => _isAutoSpice;
     public bool IsWaterAvailable => _isWaterAvailable;
