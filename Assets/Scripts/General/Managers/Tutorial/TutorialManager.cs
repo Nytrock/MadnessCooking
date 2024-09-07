@@ -5,6 +5,7 @@ public class TutorialManager : MonoBehaviour, IBindable<GeneralData> {
     [SerializeField] private DialogueManager _dialogueManager;
     [SerializeField] private ClueManager _clueManager;
     [SerializeField] private GameSaveManager _saveManager;
+    [SerializeField] private BaseShop[] _shops;
 
     private int _currentTutorialPartIndex;
     private TutorialManagerData _data;
@@ -20,8 +21,13 @@ public class TutorialManager : MonoBehaviour, IBindable<GeneralData> {
     }
 
     private void LateStart() {
-        if (SceneUtility.IsGame() && _data.IsWork && _parts.Length > 0)
+        if (SceneUtility.IsGame() && _data.IsWork && _parts.Length > 0) {
             StartTutorial();
+            return;
+        }
+
+        foreach (var shop in _shops)
+            shop.BuyTutorialItems();
     }
 
     private void StartTutorial() {

@@ -7,6 +7,7 @@ public class ConstIngredients : Singleton<ConstIngredients> {
     [SerializeField] private Ingredient _flour;
     [SerializeField] private Ingredient _egg;
     [SerializeField] private Ingredient _wheat;
+    [SerializeField] private Ingredient _ectoplasm;
 
     public Ingredient Lemon => _lemon;
     public Ingredient Spice => _spice;
@@ -14,4 +15,5 @@ public class ConstIngredients : Singleton<ConstIngredients> {
     public Ingredient Flour => _flour;
     public Ingredient Egg => _egg;
     public Ingredient Wheat => _wheat;
+    public Ingredient Ectoplasm => _ectoplasm;
 }

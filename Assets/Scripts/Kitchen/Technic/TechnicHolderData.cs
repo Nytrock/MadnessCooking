@@ -24,10 +24,10 @@ public class TechnicHolderData {
     public event Action CookStoped;
     public event Action RepairStoped;
 
-    [JsonConstructor]
-    public TechnicHolderData() { }
-
     public TechnicHolderData(Technic technic) {
+        if (technic == null)
+            return;
+
         _technic = technic;
         _nowStrength = _technic.Strength;
     }

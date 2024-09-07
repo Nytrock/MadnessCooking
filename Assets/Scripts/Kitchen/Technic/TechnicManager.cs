@@ -46,7 +46,7 @@ public class TechnicManager : SaveableItemManager<Technic, KitchenData>, IUpgrad
 
     public TechnicHolder FindHolderByTechic(Technic technic) {
         for (int i = 0; i < _holders.Length; i++)
-            if (_holders[i].Data.Technic == technic)
+            if (_holders[i].Technic == technic)
                 return _holders[i];
         return null;
     }

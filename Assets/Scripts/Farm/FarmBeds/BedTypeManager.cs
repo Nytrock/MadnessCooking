@@ -5,6 +5,7 @@ using UnityEngine;
 public class BedTypeManager : SaveableItemManager<BedType, FarmData> {
     [SerializeField] private BedType[] _allBeds;
     [SerializeField] private UpgradeManager _upgradeManager;
+    [SerializeField] private IngredientsManager _ingredientsManager;
 
     [Header("Upgrades")]
     [SerializeField] private BedTypeUpgrade[] _bedsUpgrades;
@@ -13,6 +14,12 @@ public class BedTypeManager : SaveableItemManager<BedType, FarmData> {
 
     private void Awake() {
         _upgradeManager.ItemAdded += CheckBedTypeAdded;
+    }
+
+    public override void AddItem(BedType item) {
+        base.AddItem(item);
+        if (item.AcceptableType == IngredientType.Ghost)
+            _ingredientsManager.AddItem(ConstIngredients.Instance.Ectoplasm);
     }
 
     public BedType GetBed(int index) {

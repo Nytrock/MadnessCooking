@@ -159,7 +159,7 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
 
         int spotIndex = 0;
         foreach (var spotData in _spotData.Spots) {
-            if (!spotData.HaveClients) {
+            if (!spotData.HaveClients || spotData.ContainsGrayMan()) {
                 spotIndex++;
                 continue;
             }

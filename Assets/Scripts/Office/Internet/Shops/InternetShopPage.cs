@@ -1,12 +1,7 @@
 using UnityEngine;
 
-[RequireComponent(typeof(BaseShop))]
 public class InternetShopPage : InternetPage {
-    private BaseShop _shop;
-
-    private void Awake() {
-        _shop = GetComponent<BaseShop>();
-    }
+    [SerializeField] private BaseShop _shop;
 
     public override void ChangeState(bool newValue) {
         base.ChangeState(newValue);

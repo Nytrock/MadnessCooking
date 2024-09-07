@@ -69,6 +69,9 @@ public class FarmBed : MonoBehaviour {
         _bedHolder = bedType;
         _bedHolder.ChangeMode(true);
         Data.SetBedType(_bedHolder.Type);
+
+        if (bedType.Type.AcceptableType == IngredientType.Ghost)
+            SetIngredient(ConstIngredients.Instance.Ectoplasm);
     }
 
     public void ResetBedType() {

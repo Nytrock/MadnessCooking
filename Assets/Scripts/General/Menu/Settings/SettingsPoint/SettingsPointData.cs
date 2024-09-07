@@ -10,9 +10,6 @@ public class SettingsPointData<TValue> {
     public TValue LastValue => _lastValue;
     public bool IsValueChanged => !Equals(_nowValue, _lastValue);
 
-    [JsonConstructor]
-    public SettingsPointData() { }
-
     public SettingsPointData(TValue defaultValue) {
         _nowValue = defaultValue;
         _lastValue = defaultValue;

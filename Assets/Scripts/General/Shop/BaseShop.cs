@@ -1,25 +1,41 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
 public abstract class BaseShop : MonoBehaviour {
-    [SerializeField] protected ShopCatalog _catalog;
-    private bool _isShopGenerated;
+    public abstract int ItemsCount { get; }
+
+    public event Action ShopLoaded;
+    public event Action<bool> ShopStateChanged;
+
+
+    public event Action ItemAdded;
+    public event Action<int> ItemRemoved;
+    public event Action<int, BuyableItem> ItemUpdated;
 
     protected virtual void LateStart() {
         ChangeShopState(false);
+        ShopLoaded?.Invoke();
+    }
+
+    protected void InvokeItemUpdated(int index, BuyableItem item) {
+        ItemUpdated?.Invoke(index, item);
+    }
+
+    protected void InvokeItemAdded() {
+        ItemAdded?.Invoke();
+    }
+
+    protected void InvokeItemRemoved(int index) {
+        ItemRemoved?.Invoke(index);
     }
 
     public virtual void ChangeShopState(bool newState) {
-        if (newState && !_isShopGenerated) {
-            GenerateShop();
-            _isShopGenerated = true;
-        }
-
-        if (newState)
-            _catalog.ActivateFirstPage();
+        ShopStateChanged?.Invoke(newState);
     }
 
-    protected abstract void GenerateShop();
-    public abstract void BuyItem(BuyableItem item);
+
+    public abstract BuyPanelData GetPanelData(int index);
+    public abstract void BuyTutorialItems();
     protected abstract UnityAction GetPanelAction(BuyableItem item);
 }

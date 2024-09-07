@@ -85,4 +85,8 @@ public class SpotData {
     public void DecreaseTalk() {
         _talkIndex--;
     }
+
+    public bool ContainsGrayMan() {
+        return _clients.Length == 1 && _clients[0].Type == ClientType.GrayMan;
+    }
 }

@@ -1,12 +1,7 @@
 using UnityEngine;
 
-public class ShopCatalogPageUpper : MonoBehaviour {
+public class ShopRendererPageUpper : MonoBehaviour {
     [SerializeField] private GameObject[] _uppers;
-
-    private void Awake() {
-        foreach (var upper in _uppers)
-            upper.SetActive(false);
-    }
 
     public void ActivateUpper(int index) {
         if (index < 0 || index >= _uppers.Length)

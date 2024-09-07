@@ -16,12 +16,13 @@ public class ShopData<TItem>
     public ShopData(IEnumerable<TItem> defaultItems) {
         _itemsToBuy = new();
         _availableItems = new();
+
+        if (defaultItems == null)
+            return;
+
         foreach (var item in defaultItems)
             _itemsToBuy.Add(item);
     }
-
-    [JsonConstructor]
-    public ShopData() { }
 
     public void CheckDefaultItems(IEnumerable<TItem> defaultItems) {
         foreach (var item in defaultItems)
@@ -86,7 +87,7 @@ public class ShopData<TItem>
         return _availableItems.Contains(item);
     }
 
-    public int IndexOfItemPanel(TItem item) {
+    public int IndexOfItem(TItem item) {
         return _itemsToBuy.IndexOf(item);
     }
 
@@ -96,5 +97,9 @@ public class ShopData<TItem>
 
     public void OrderItems(Func<TItem, int> sortMethod) {
         _itemsToBuy = _itemsToBuy.OrderBy(sortMethod).ToList();
+    }
+
+    public TItem GetItem(int index) {
+        return _itemsToBuy[index];
     }
 }

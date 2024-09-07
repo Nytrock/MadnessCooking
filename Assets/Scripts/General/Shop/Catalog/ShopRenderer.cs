@@ -2,32 +2,60 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ShopCatalog : MonoBehaviour {
+public class ShopRenderer : MonoBehaviour {
+    [SerializeField] private BaseShop _shop;
     [SerializeField] private Transform _pagesContainer;
-    [SerializeField] private ShopCatalogPage _pagePrefab;
+    [SerializeField] private ShopRendererPage _pagePrefab;
     [SerializeField] private GameObject _emptyMessage;
     [SerializeField] private Button _nextButton;
     [SerializeField] private Button _previousButton;
 
-    private readonly List<ShopCatalogPage> _pages = new();
+    private readonly List<ShopRendererPage> _pages = new();
     private int _nowPage = 0;
 
-    public void GeneratePanel(BuyPanelData panelData) {
+    private void Awake() {
+        _shop.ShopLoaded += GenerateShop;
+        _shop.ShopLoaded += SubscribeToActions;
+        _shop.ShopStateChanged += ChangeShopState;
+    }
+
+    private void GenerateShop() {
+        for (int i = 0; i < _shop.ItemsCount; i++)
+            GeneratePanel(i);
+        UpdateEmptyState();
+    }
+
+    private void SubscribeToActions() {
+        _shop.ItemUpdated += UpdatePanel;
+        _shop.ItemAdded += delegate { GeneratePanel(); };
+        _shop.ItemRemoved += RemovePanel;
+    }
+
+    private void ChangeShopState(bool newState) {
+        UpdateEmptyState();
+        if (newState)
+            ActivateFirstPage();
+    }
+
+    public void GeneratePanel(int index = -1) {
         if (_pages.Count == 0 || _pages[^1].ItemCount == _pages[^1].MaxItemCount) {
             GeneratePage();
             UpdateButtons();
         }
 
+        if (index == -1)
+            index = _shop.ItemsCount - 1;
+        BuyPanelData panelData = _shop.GetPanelData(index);
         _pages[^1].GeneratePanel(panelData);
     }
 
     public void GeneratePage() {
-        ShopCatalogPage page = Instantiate(_pagePrefab, _pagesContainer);
+        ShopRendererPage page = Instantiate(_pagePrefab, _pagesContainer);
         _pages.Add(page);
         page.ChangeState(false);
     }
 
-    public void ActivateFirstPage() {
+    private void ActivateFirstPage() {
         _pages[_nowPage].ChangeState(false);
         _nowPage = 0;
         _pages[_nowPage].ChangeState(true);
@@ -75,7 +103,8 @@ public class ShopCatalog : MonoBehaviour {
             DestroyLastPage();
     }
 
-    public void ReplacePanelItem(int updatedItemIndex, BuyPanelData newData) {
+    private void UpdatePanel(int updatedItemIndex, BuyableItem item) {
+        BuyPanelData newData = _shop.GetPanelData(updatedItemIndex);
         CalculateIndexes(updatedItemIndex, out int startPageIndex, out int panelIndex);
         _pages[startPageIndex].UpdatePanelDataByIndex(panelIndex, newData);
     }
@@ -98,7 +127,7 @@ public class ShopCatalog : MonoBehaviour {
         UpdateButtons();
     }
 
-    public void UpdateEmptyState() {
+    private void UpdateEmptyState() {
         if (_emptyMessage == null)
             return;
 

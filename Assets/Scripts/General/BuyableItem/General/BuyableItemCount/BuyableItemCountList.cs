@@ -56,6 +56,13 @@ public class BuyableItemCountList<TItem>
         return _availableItems.IndexOf(itemCount.Item);
     }
 
+    public BuyableItemCountList<TItem> Copy() {
+        BuyableItemCountList<TItem> copyList = new();
+        foreach (var item in _itemCounts)
+            copyList.Add(item.Copy());
+        return copyList;
+    }
+
     public void Clear() {
         _itemCounts.Clear();
         _availableItems.Clear();

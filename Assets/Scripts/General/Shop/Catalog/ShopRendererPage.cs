@@ -1,14 +1,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShopCatalogPage : MonoBehaviour {
+public class ShopRendererPage : MonoBehaviour {
     [SerializeField] private BaseBuyPanel _buyPanelPrefab;
-    [SerializeField] private ShopCatalogPageUpper _upper;
+    [SerializeField] private ShopRendererPageUpper _upper;
     [SerializeField] private Transform _container;
 
     [SerializeField, Min(1)] private int _maxItemCount;
 
-    protected readonly List<BaseBuyPanel> _buyPanels = new();
+    [SerializeField] protected List<BaseBuyPanel> _buyPanels = new();
 
     public int MaxItemCount => _maxItemCount;
     public int ItemCount => _buyPanels.Count;
@@ -30,9 +30,10 @@ public class ShopCatalogPage : MonoBehaviour {
     }
 
     public void AddPanel(BaseBuyPanel panel) {
-        if (_upper)
+        if (_upper != null)
             _upper.ActivateUpper(_buyPanels.Count);
-        panel.transform.SetParent(_container);
+
+        panel.transform.SetParent(_container, false);
         _buyPanels.Add(panel);
     }
 

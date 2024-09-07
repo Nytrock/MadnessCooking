@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.IO;
 using UnityEditor;
 using UnityEngine;
 
@@ -12,8 +14,25 @@ public static class AssetsUtility {
         return asset;
     }
 
+    public static List<TAsset> GetAssets<TAsset>(string path) where TAsset : ScriptableObject {
+        string[] files = Directory.GetFiles(path, "*.asset", SearchOption.AllDirectories);
+        List<TAsset> result = new();
+
+        foreach (string file in files) {
+            TAsset asset = LoadAsset<TAsset>(file);
+            if (asset != null)
+                result.Add(asset);
+        }
+
+        return result;
+    }
+
     public static TAsset LoadAsset<TAsset>(string path, string assetName) where TAsset : ScriptableObject {
-        return AssetDatabase.LoadAssetAtPath<TAsset>($"{path}/{assetName}.asset");
+        return LoadAsset<TAsset>($"{path}/{assetName}.asset");
+    }
+
+    public static TAsset LoadAsset<TAsset>(string path) where TAsset : ScriptableObject {
+        return AssetDatabase.LoadAssetAtPath<TAsset>(path);
     }
 
     public static void Save(this Object asset) {

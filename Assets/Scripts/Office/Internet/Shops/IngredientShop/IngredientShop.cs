@@ -15,11 +15,11 @@ public class IngredientShop : BaseInstantShop<Ingredient, OfficeData>, IUpgradea
         _data.OrderItems(sortMethod);
     }
 
-    protected override void RemoveItemPanel(Ingredient item, int index) {
+    protected override void RemoveItem(Ingredient item, int index) {
         if (item.Type == IngredientType.Buyable)
             _ingredientStorage.PutIngredientWithRemain(item, 1);
         else
-            base.RemoveItemPanel(item, index);
+            base.RemoveItem(item, index);
     }
 
     protected override bool IsBuyable(Ingredient ingredient) {
@@ -51,8 +51,8 @@ public class IngredientShop : BaseInstantShop<Ingredient, OfficeData>, IUpgradea
     public void CheckAddedUpgrade(BaseUpgrade upgrade) {
         if (_upgradeData.IsAutoSpice) {
             Ingredient spice = ConstIngredients.Instance.Spice;
-            int index = _data.IndexOfItemPanel(spice);
-            RemoveItemPanel(spice, index);
+            int index = _data.IndexOfItem(spice);
+            RemoveItem(spice, index);
         }
     }
 }

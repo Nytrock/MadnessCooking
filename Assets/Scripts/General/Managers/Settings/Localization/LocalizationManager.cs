@@ -7,6 +7,7 @@ using UnityEngine.Localization.Settings;
 public class LocalizationManager : Singleton<LocalizationManager>, IBindable<GameSettingsData>, ISettingableWithOptions {
     [SerializeField] private Locale[] _locales;
     [SerializeField] private Locale _defaultLocale;
+    [SerializeField] private string[] _tables;
     private SettingsPointData<int> _data;
 
     public int OptionsCount => _locales.Length;
@@ -46,5 +47,12 @@ public class LocalizationManager : Singleton<LocalizationManager>, IBindable<Gam
 
     public void UpdateValue() {
         LocalizationSettings.SelectedLocale = _locales[_data.LastValue];
+    }
+
+    public bool CheckLocalizationExists(string key) {
+        foreach (var table in _tables)
+            if (GetLocalization(table, key) != key)
+                return true;
+        return false;
     }
 }

@@ -12,6 +12,7 @@ public class TechnicHolder : MonoBehaviour {
     private TechnicHolderRenderer _renderer;
 
     public Transform UITarget => _UITarget;
+    public Technic Technic => _technic;
 
     private void Awake() {
         _renderer = GetComponent<TechnicHolderRenderer>();

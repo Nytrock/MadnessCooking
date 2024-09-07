@@ -7,11 +7,12 @@ using UnityEngine;
 public class FarmShopData : ShopData<BaseUpgrade> {
     [SerializeField, JsonProperty] private List<ConsumableUpgradeHolder> _upgradeHolders;
 
-    [JsonConstructor]
-    public FarmShopData() { }
-
     public FarmShopData(IEnumerable<BaseUpgrade> defaultItems, IEnumerable<ConsumableUpgrade> comsumableUpgrades) : base(defaultItems) {
         _upgradeHolders = new();
+
+        if (comsumableUpgrades == null)
+            return;
+
         foreach (var upgrade in comsumableUpgrades)
             _upgradeHolders.Add(new(upgrade));
     }

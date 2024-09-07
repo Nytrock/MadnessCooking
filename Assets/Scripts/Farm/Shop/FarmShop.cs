@@ -5,20 +5,19 @@ public class FarmShop : BaseChooseShop<BaseUpgrade, FarmData> {
 
     private FarmShopData _specialData => _data as FarmShopData;
 
-    protected override void LateStart() {
-        base.LateStart();
-        GenerateShop();
+    private void Start() {
+        ChangeShopState(true);
     }
 
-    protected override void ChangePanelsState(BaseUpgrade upgrade) {
-        int index = _data.IndexOfItemPanel(upgrade);
+    protected override void UpdateItemsAfterBuying(BaseUpgrade upgrade) {
+        int index = _data.IndexOfItem(upgrade);
         if (upgrade as ConsumableUpgrade) {
             var consumableUpgrade = upgrade as ConsumableUpgrade;
             bool isMax = _specialData.AddCountAndCheckMax(consumableUpgrade);
             if (isMax)
                 CheckGraph(consumableUpgrade, index);
         } else {
-            base.ChangePanelsState(upgrade);
+            base.UpdateItemsAfterBuying(upgrade);
         }
     }
 

@@ -18,8 +18,8 @@ public abstract class BaseChooseShop<TItem, TData> : SaveableBaseShop<TItem, TDa
             _itemView.ResetInfo();
     }
 
-    protected override void ReplaceItemPanel(TItem newItem, int index) {
-        base.ReplaceItemPanel(newItem, index);
+    protected override void UpdateItem(TItem newItem, int index) {
+        base.UpdateItem(newItem, index);
         _itemToBuy = newItem;
         _itemView.ShowItem(newItem, IsBuyable(newItem));
     }
@@ -35,8 +35,8 @@ public abstract class BaseChooseShop<TItem, TData> : SaveableBaseShop<TItem, TDa
             _itemView.UpdateBuyable(IsBuyable(_itemToBuy));
     }
 
-    protected override void RemoveItemPanel(TItem item, int index) {
-        base.RemoveItemPanel(item, index);
+    protected override void RemoveItem(TItem item, int index) {
+        base.RemoveItem(item, index);
         _itemView.ResetInfo();
     }
 
