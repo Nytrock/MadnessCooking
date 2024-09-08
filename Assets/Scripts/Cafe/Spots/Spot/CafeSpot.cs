@@ -11,6 +11,7 @@ public class CafeSpot : MonoBehaviour {
 
     public int Index => _index;
     public int SeatsCount => _seats.Length;
+    public Button RemoveButton => _removeButton.Button;
     public bool CanRemove => _removeButton.CanRemove;
 
     private void Start() {
@@ -46,9 +47,5 @@ public class CafeSpot : MonoBehaviour {
 
     public void Destroy() {
         Destroy(gameObject);
-    }
-
-    public Button.ButtonClickedEvent GetOnClick() {
-        return _removeButton.GetOnClick();
     }
 }

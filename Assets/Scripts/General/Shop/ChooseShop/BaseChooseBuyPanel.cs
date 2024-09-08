@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public class BaseChooseBuyPanel : BaseBuyPanel {
-    [SerializeField] private ItemInfoRendererWithDescription _itemInfoRenderer;
+    [SerializeField] private ItemInfoRendererWithName _itemInfoRenderer;
 
     public override void SetVisual() {
         _itemInfoRenderer.SetItemInfo(_data.Item);

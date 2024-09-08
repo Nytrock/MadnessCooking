@@ -39,7 +39,7 @@ public class ShopRendererPage : MonoBehaviour {
 
     private void RemovePanelByIndex(int index) {
         _buyPanels.RemoveAt(index);
-        if (_upper)
+        if (_upper != null)
             _upper.DisableUpper(_buyPanels.Count);
     }
 

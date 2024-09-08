@@ -19,7 +19,7 @@ public class LocalizedText : MonoBehaviour {
         LocalizationManager.Instance.LocalizationChanged += UpdateText;
     }
 
-    public void SetText(string text) {
+    public virtual void SetText(string text) {
         _key = text;
         UpdateText();
     }

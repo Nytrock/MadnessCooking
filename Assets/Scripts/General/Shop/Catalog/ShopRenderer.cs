@@ -11,12 +11,15 @@ public class ShopRenderer : MonoBehaviour {
     [SerializeField] private Button _previousButton;
 
     private readonly List<ShopRendererPage> _pages = new();
-    private int _nowPage = 0;
+    [SerializeField] private int _nowPage = 0;
 
     private void Awake() {
         _shop.ShopLoaded += GenerateShop;
         _shop.ShopLoaded += SubscribeToActions;
         _shop.ShopStateChanged += ChangeShopState;
+
+        _nextButton.OverrideAllListeners(NextPage);
+        _previousButton.OverrideAllListeners(PreviousPage);
     }
 
     private void GenerateShop() {
@@ -62,14 +65,14 @@ public class ShopRenderer : MonoBehaviour {
         UpdateButtons();
     }
 
-    public void NextPage() {
+    private void NextPage() {
         _pages[_nowPage].ChangeState(false);
         _nowPage++;
         _pages[_nowPage].ChangeState(true);
         UpdateButtons();
     }
 
-    public void PreviousPage() {
+    private void PreviousPage() {
         _pages[_nowPage].ChangeState(false);
         _nowPage--;
         _pages[_nowPage].ChangeState(true);

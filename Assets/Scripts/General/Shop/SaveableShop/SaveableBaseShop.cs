@@ -11,6 +11,7 @@ public abstract class SaveableBaseShop<TItem, TData> : BaseShop, IBindable<TData
     [SerializeField] protected ShopData<TItem> _data;
 
     public override int ItemsCount => _data.ItemsToBuy.Count();
+    public event Action<BuyableItem> ItemBought;
 
     protected override void LateStart() {
         SortItems();
@@ -40,6 +41,7 @@ public abstract class SaveableBaseShop<TItem, TData> : BaseShop, IBindable<TData
         _data.BuyItem(item);
         _itemManager.AddItem(item);
         UpdateItemsAfterBuying(item);
+        ItemBought?.Invoke(item);
     }
 
     protected virtual void UpdateItemsAfterBuying(TItem buyedItem) {

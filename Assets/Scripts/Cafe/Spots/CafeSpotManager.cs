@@ -35,9 +35,8 @@ public class CafeSpotManager : MonoBehaviour, IBindable<CafeData> {
     }
 
     private void SetupSpotRemoveButton(int i) {
-        Button.ButtonClickedEvent eventHandler = _spots[i].GetOnClick();
-        eventHandler.RemoveAllListeners();
-        eventHandler.AddListener(delegate { RemoveSpot(i); });
+        Button button = _spots[i].RemoveButton;
+        button.OverrideAllListeners(delegate { RemoveSpot(i); });
     }
 
     private void GenerateSpots() {

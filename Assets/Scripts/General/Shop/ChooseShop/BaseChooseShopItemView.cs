@@ -19,23 +19,23 @@ public abstract class BaseChooseShopItemView<TItem> : MonoBehaviour
         _buyButton.onClick.AddListener(action);
     }
 
-    public void ShowItem(TItem item, bool isBuyable) {
+    public void UpdateItem(TItem item, bool isBuyable) {
         _isItemBuyable = isBuyable;
-        if (item == _selectedItem)
+        _selectedItem = item;
+
+        if (_selectedItem == null)
             ResetInfo();
         else
-            SetInfo(item);
+            SetInfo();
     }
 
-    protected virtual void SetInfo(TItem item) {
-        _selectedItem = item;
+    protected virtual void SetInfo() {
         _renderer.SetItemInfo(_selectedItem);
         _renderer.SetPrice(_priceDescription, _selectedItem.Price);
         UpdateButton();
     }
 
     public virtual void ResetInfo() {
-        _selectedItem = null;
         _renderer.ResetInfo();
         UpdateButton();
     }

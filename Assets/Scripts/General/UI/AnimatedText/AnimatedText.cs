@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public class AnimatedText : LocalizedText {
-    [SerializeField] private float _speed;
+    [SerializeField, Min(0)] private float _speed;
 
     private string _targetText;
     private int _lastCharIndex;
@@ -14,12 +14,14 @@ public class AnimatedText : LocalizedText {
         _targetText = _text.text;
     }
 
-    public void StartAnimation(string text) {
-        SetText(text);
+    public override void SetText(string text) {
+        base.SetText(text);
+        if (_isAnimated)
+            ForceStopAnimation();
 
         _isAnimated = true;
         _lastCharIndex = 0;
-        InvokeRepeating(nameof(UpdateTextAnimation), 0, _speed * Time.deltaTime);
+        InvokeRepeating(nameof(UpdateTextAnimation), 0, 1 / _speed * Time.deltaTime);
     }
 
     private void UpdateTextAnimation() {
@@ -35,6 +37,11 @@ public class AnimatedText : LocalizedText {
     public void StopAnimation() {
         _isAnimated = false;
         _text.text = _targetText;
+        CancelInvoke(nameof(UpdateTextAnimation));
+    }
+
+    private void ForceStopAnimation() {
+        _isAnimated = false;
         CancelInvoke(nameof(UpdateTextAnimation));
     }
 }

@@ -19,8 +19,7 @@ public class ClientUI : MonoBehaviour {
     }
 
     public void StartNewCycle(UnityAction action) {
-        _mainButton.onClick.RemoveAllListeners();
-        _mainButton.onClick.AddListener(action);
+        _mainButton.OverrideAllListeners(action);
         _foodImage.color = new Color(1, 1, 1, 0);
     }
 
@@ -41,8 +40,7 @@ public class ClientUI : MonoBehaviour {
     public void SetFood(Food food) {
         _foodImage.color = new Color(1, 1, 1, 1);
         _foodImage.sprite = food.Icon;
-        _mainButton.onClick.RemoveAllListeners();
-        _mainButton.onClick.AddListener(ChangeButtonsBlockVisible);
+        _mainButton.OverrideAllListeners(ChangeButtonsBlockVisible);
     }
 
     public void ActivateYesButton() {

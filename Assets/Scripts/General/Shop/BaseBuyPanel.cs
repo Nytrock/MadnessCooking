@@ -29,8 +29,7 @@ public abstract class BaseBuyPanel : MonoBehaviour {
     }
 
     protected virtual void SetButtonListener() {
-        _buyButton.onClick.RemoveAllListeners();
-        _buyButton.onClick.AddListener(_data.PanelAction);
+        _buyButton.OverrideAllListeners(_data.PanelAction);
     }
 
     public abstract void SetVisual();

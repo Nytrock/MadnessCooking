@@ -9,6 +9,7 @@ public class SpotRemoveButton : MonoBehaviour, IPointerDownHandler {
     private CameraManager _cameraManager;
 
     public bool CanRemove => _canRemove;
+    public Button Button => _button;
 
     private void Awake() {
         _button = GetComponent<Button>();
@@ -25,9 +26,5 @@ public class SpotRemoveButton : MonoBehaviour, IPointerDownHandler {
 
     public void SetCameraManager(CameraManager cameraManager) {
         _cameraManager = cameraManager;
-    }
-
-    public Button.ButtonClickedEvent GetOnClick() {
-        return _button.onClick;
     }
 }

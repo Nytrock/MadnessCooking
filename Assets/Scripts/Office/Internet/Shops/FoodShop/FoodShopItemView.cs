@@ -13,9 +13,9 @@ public class FoodShopItemView : BaseChooseShopItemView<Food> {
         _recipeRenderer.SetUpgradeData(upgradeData);
     }
 
-    protected override void SetInfo(Food item) {
-        base.SetInfo(item);
-        _recipeRenderer.SetupRecipe(item);
+    protected override void SetInfo() {
+        base.SetInfo();
+        _recipeRenderer.SetupRecipe(_selectedItem);
     }
 
     public override void ResetInfo() {

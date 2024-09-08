@@ -11,7 +11,7 @@ public class DialogueRenderer : MonoBehaviour {
     public void RenderDialogue(Dialogue dialogue) {
         _characterIcon.sprite = dialogue.Character.GetEmotionSprite(dialogue.Emotion);
         _characterName.SetText(dialogue.Character.Name);
-        _text.StartAnimation(dialogue.Text);
+        _text.SetText(dialogue.Text);
     }
 
     public void StopTextAnimation() {

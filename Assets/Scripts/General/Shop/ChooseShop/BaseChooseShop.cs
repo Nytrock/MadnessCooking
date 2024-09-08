@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -6,6 +7,8 @@ public abstract class BaseChooseShop<TItem, TData> : SaveableBaseShop<TItem, TDa
 
     [SerializeField] protected BaseChooseShopItemView<TItem> _itemView;
     private TItem _itemToBuy;
+
+    public event Action<TItem> ItemSelected;
 
     protected virtual void Awake() {
         _itemView.SetButtonAction(delegate { BuyItem(_itemToBuy); });
@@ -21,12 +24,17 @@ public abstract class BaseChooseShop<TItem, TData> : SaveableBaseShop<TItem, TDa
     protected override void UpdateItem(TItem newItem, int index) {
         base.UpdateItem(newItem, index);
         _itemToBuy = newItem;
-        _itemView.ShowItem(newItem, IsBuyable(newItem));
+        _itemView.UpdateItem(newItem, IsBuyable(newItem));
     }
 
     private void ChooseItem(TItem item) {
-        _itemToBuy = item;
-        _itemView.ShowItem(_itemToBuy, IsBuyable(_itemToBuy));
+        if (_itemToBuy == item)
+            _itemToBuy = null;
+        else
+            _itemToBuy = item;
+
+        ItemSelected?.Invoke(_itemToBuy);
+        _itemView.UpdateItem(_itemToBuy, IsBuyable(_itemToBuy));
     }
 
     protected override void UpdatePanels() {
