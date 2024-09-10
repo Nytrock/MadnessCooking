@@ -149,7 +149,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: OvenMain
+      name: OvenMainDefault
       rect:
         serializedVersion: 2
         x: 0
@@ -190,6 +190,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: OvenMainCook
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 16
+        width: 41
+        height: 41
+      alignment: 9
+      pivot: {x: 0.48780486, y: 0.48780486}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f540d43a940e9eb479139b19158ade6a
+      internalID: 9909200
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -204,7 +225,8 @@ TextureImporter:
       Background: 1901407923
       Lamp: 1955946697
       OvenGlass: 2108541889
-      OvenMain: 113096476
+      OvenMainCook: 9909200
+      OvenMainDefault: 113096476
       Pot: 470648381
       Window: -805373322
   mipmapLimitGroupName: 

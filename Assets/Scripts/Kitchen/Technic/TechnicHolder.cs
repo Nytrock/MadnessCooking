@@ -24,6 +24,11 @@ public class TechnicHolder : MonoBehaviour {
         Data.Update();
     }
 
+    [ContextMenu("AnimationTest")]
+    private void AnimationTest() {
+        _animator.TestAnimation();
+    }
+
     public virtual void ChangeState(bool newState) {
         _renderer.ChangeState(newState);
     }

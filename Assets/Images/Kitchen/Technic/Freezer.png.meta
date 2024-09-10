@@ -149,10 +149,10 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: FreezerMain
+      name: FreezerMainCook
       rect:
         serializedVersion: 2
-        x: 0
+        x: 24
         y: 0
         width: 23
         height: 33
@@ -173,7 +173,7 @@ TextureImporter:
       name: FreezerLever
       rect:
         serializedVersion: 2
-        x: 24
+        x: 48
         y: 23
         width: 1
         height: 10
@@ -194,7 +194,7 @@ TextureImporter:
       name: FreezerCone
       rect:
         serializedVersion: 2
-        x: 24
+        x: 48
         y: 18
         width: 4
         height: 4
@@ -212,34 +212,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: FreezerIceCream
-      rect:
-        serializedVersion: 2
-        x: 24
-        y: 3
-        width: 1
-        height: 6
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d1279dc07669a4c4cb8c3e0284299d9d
-      internalID: 163875642
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: FreezerLevelBase
       rect:
         serializedVersion: 2
-        x: 24
-        y: 10
+        x: 48
+        y: 11
         width: 11
-        height: 6
+        height: 5
       alignment: 9
       pivot: {x: 0.45454547, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -249,6 +228,258 @@ TextureImporter:
       bones: []
       spriteID: 0199c08842bb2ee468c5a3c3fe1a0080
       internalID: -925310059
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreezerMainDefault
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 23
+        height: 33
+      alignment: 9
+      pivot: {x: 0.47826087, y: 0.4848485}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 688a3b3012dfe0140991abd56a1c7f8c
+      internalID: 1228847537
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreezerButton0
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 32
+        width: 1
+        height: 1
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e0543f56610a2b7469854fe389c60244
+      internalID: 1023335590
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreezerButton1
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 32
+        width: 1
+        height: 1
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a7865c08c928c742805e957c787e0a5
+      internalID: 1861831127
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreezerButton2
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 32
+        width: 1
+        height: 1
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9eea2f1681d20064481ae4987e4f715e
+      internalID: 1079630702
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreezerButton3
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 30
+        width: 1
+        height: 1
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ddb08ff49bd23848b6cd3643d6fd9b3
+      internalID: 1318071734
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreezerButton4
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 30
+        width: 1
+        height: 1
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e3d996aa398147948a5f21225954405a
+      internalID: 663040848
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreezerButton5
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 30
+        width: 1
+        height: 1
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 82e3e0cfd6d5e2148b33d7ae859e82c9
+      internalID: 1174493597
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreezerButton6
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 28
+        width: 1
+        height: 1
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1cb709484355556418daa2167a102793
+      internalID: -204857485
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreezerButtonOff
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 28
+        width: 1
+        height: 1
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a554a913207fc6b4794335fe85c8f3ba
+      internalID: 494164675
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreezerLeverPart
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 32
+        width: 1
+        height: 1
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c26b7d230dfe074e842672f8ff13f48
+      internalID: 1960706039
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreezerIceCream0
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 9
+        width: 1
+        height: 1
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 417679238572c624491930162980e114
+      internalID: 1756781642
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FreezerIceCream1
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 9
+        width: 1
+        height: 1
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6881bace0866a3546bd41a72d6933891
+      internalID: -322973139
       vertices: []
       indices: 
       edges: []
@@ -265,11 +496,22 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       Background: 1901407923
+      FreezerButton0: 1023335590
+      FreezerButton1: 1861831127
+      FreezerButton2: 1079630702
+      FreezerButton3: 1318071734
+      FreezerButton4: 663040848
+      FreezerButton5: 1174493597
+      FreezerButton6: -204857485
+      FreezerButtonOff: 494164675
       FreezerCone: -1095008685
-      FreezerIceCream: 163875642
+      FreezerIceCream0: 1756781642
+      FreezerIceCream1: -322973139
       FreezerLevelBase: -925310059
       FreezerLever: -1293241236
-      FreezerMain: -499648286
+      FreezerLeverPart: 1960706039
+      FreezerMainCook: -499648286
+      FreezerMainDefault: 1228847537
       Lamp: 1955946697
       Pot: 470648381
       Window: -805373322
