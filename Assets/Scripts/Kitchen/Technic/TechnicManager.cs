@@ -15,6 +15,12 @@ public class TechnicManager : SaveableItemManager<Technic, KitchenData>, IUpgrad
 
     public event Action TechnicChanged;
 
+    [ContextMenu("TestAnimations")]
+    private void TestAnimations() {
+        foreach (var holder in _holders)
+            holder.TestAnimation();
+    }
+
     private void ActivateHolders() {
         foreach (var holder in _holders)
             holder.ChangeState(_data.IsItemAvailable(holder.Data.Technic));

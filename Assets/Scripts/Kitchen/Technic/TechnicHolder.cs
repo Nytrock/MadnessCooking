@@ -24,8 +24,8 @@ public class TechnicHolder : MonoBehaviour {
         Data.Update();
     }
 
-    [ContextMenu("AnimationTest")]
-    private void AnimationTest() {
+    [ContextMenu("TestAnimation")]
+    public void TestAnimation() {
         _animator.TestAnimation();
     }
 

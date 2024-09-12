@@ -157,7 +157,7 @@ TextureImporter:
         width: 18
         height: 7
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -178,7 +178,7 @@ TextureImporter:
         width: 20
         height: 13
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -186,6 +186,132 @@ TextureImporter:
       bones: []
       spriteID: 68f23ca754c431449b155e67e7fa69d7
       internalID: 285532352
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PanBroken0
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 19
+        width: 4
+        height: 2
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 432f33822fe91af41a4dfde930b19c7d
+      internalID: -1969123472
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PanBroken1
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 11
+        width: 4
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e316f920334ff38469b08eab50fb67fe
+      internalID: -2120941602
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PanBroken2
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 5
+        width: 5
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d38a08e2dd51504e94b64be2a2bb050
+      internalID: -745076921
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PanDestroyed0
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 18
+        width: 9
+        height: 3
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 62835f0c33b365b40af9f5646faa57ec
+      internalID: -1366515661
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PanDestroyed1
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 10
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 29c92a74fd94ea4459d3daf3233575e8
+      internalID: 1603370726
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PanDestroyed2
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 4
+        width: 6
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb6a2d9a7ee5a4f4ebdb2d725eb396d5
+      internalID: 299933143
       vertices: []
       indices: 
       edges: []
@@ -203,7 +329,13 @@ TextureImporter:
     nameFileIdTable:
       Background: 1901407923
       Lamp: 1955946697
+      PanBroken0: -1969123472
+      PanBroken1: -2120941602
+      PanBroken2: -745076921
       PanCover: -1859478962
+      PanDestroyed0: -1366515661
+      PanDestroyed1: 1603370726
+      PanDestroyed2: 299933143
       PanMain: 285532352
       Pot: 470648381
       Window: -805373322

@@ -153,7 +153,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 16
+        y: 32
         width: 41
         height: 41
       alignment: 9
@@ -174,7 +174,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 16
         width: 33
         height: 15
       alignment: 9
@@ -195,7 +195,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 42
-        y: 16
+        y: 32
         width: 41
         height: 41
       alignment: 9
@@ -207,6 +207,111 @@ TextureImporter:
       bones: []
       spriteID: f540d43a940e9eb479139b19158ade6a
       internalID: 9909200
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OvenHandle
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 21
+        width: 35
+        height: 3
+      alignment: 9
+      pivot: {x: 0, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5af937d85ac261648b0e6eb29f8f6baa
+      internalID: 1202595749
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OvenBroken0
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 28
+        width: 3
+        height: 3
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 61046ec5914556447a9ef30eaf312a96
+      internalID: -1002832202
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OvenBroken1
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 29
+        width: 2
+        height: 2
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3aa97114e618b2745ab582a398e1e886
+      internalID: -849828743
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OvenBroken2
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 25
+        width: 5
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 425a9597c2cf7e34ca34372e8f1bdc5a
+      internalID: -141522340
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OvenDestroyed0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 33
+        height: 15
+      alignment: 9
+      pivot: {x: 0.4848485, y: 0.4666667}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a9cfa254d44a4f4592bc6f29e064d62
+      internalID: -1625438344
       vertices: []
       indices: 
       edges: []
@@ -224,7 +329,12 @@ TextureImporter:
     nameFileIdTable:
       Background: 1901407923
       Lamp: 1955946697
+      OvenBroken0: -1002832202
+      OvenBroken1: -849828743
+      OvenBroken2: -141522340
+      OvenDestroyed0: -1625438344
       OvenGlass: 2108541889
+      OvenHandle: 1202595749
       OvenMainCook: 9909200
       OvenMainDefault: 113096476
       Pot: 470648381

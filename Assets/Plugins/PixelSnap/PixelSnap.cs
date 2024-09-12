@@ -57,6 +57,9 @@ public class PixelSnap : EditorWindow {
     }
 
     private void Update() {
+        if (gridSize <= 0 || pixelsPerUnit <= 0)
+            return;
+
         if (Selection.transforms != trans) {
             int len = trans.Length;
             trans = Selection.transforms;
