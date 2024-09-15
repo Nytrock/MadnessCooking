@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class FoodShopItemView : BaseChooseShopItemView<Food> {
     [SerializeField] private FoodShopRecipe _recipeRenderer;
-    [SerializeField] private HoverText _hoverText;
+    [SerializeField] private HoverItemName _hoverText;
 
     protected override void Start() {
         base.Start();

@@ -3,7 +3,7 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(PopularityXpAdder))]
-public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBindable<CafeData> {
+public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBindable<CafeData>, ITutorialPart {
     [SerializeField] private Transform _spawnPoint;
     [SerializeField] private PopularityCalculator _popularityCalculate;
     [SerializeField] private CafeStateChanger _cafeOpener;
@@ -23,6 +23,8 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
     private CafeSpotManagerData _spotData;
     private CafeUpgradeData _upgradeData;
     private PopularityXpAdder _xpAdder;
+
+    public event Action PartEnded;
 
     public Vector2 SpawnPoint => _spawnPoint.position;
 
@@ -47,7 +49,7 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
         }
     }
 
-    public void Spawn() {
+    private void Spawn() {
         ClientCount clientCount = GetRandomCount();
         int spotIndex = _spotManager.TakeRandomSpot(clientCount);
         if (spotIndex == -1)
@@ -201,16 +203,18 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
             SetupClient(client, spot.Index, i);
         }
         table.ClientsLeaved += ClientsLeave;
-        table.WaitStarted += ClientsStartWait;
+        table.WaitStarted += EndTutorialPart;
         StartCoroutine(table.SpawnGroupOfClients());
         return table;
     }
 
-    private void ClientsStartWait() {
-        if (!_tutorialManager.IsWork)
-            return;
+    private void EndTutorialPart() {
+        PartEnded?.Invoke();
+    }
 
-        _tutorialManager.NextTutorialPart();
+
+    public void StartTutorialPart() {
+        Spawn();
     }
 
     public CafeSpot GetSpot(int SpotIndex) => _spotManager.GetSpotByIndex(SpotIndex);

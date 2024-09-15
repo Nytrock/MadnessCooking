@@ -2,14 +2,14 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class IngredientStorageButton : HoverTextActivator {
+public class IngredientStorageButton : HoverItemNameActivator {
     [SerializeField] private Image _icon;
     [SerializeField] private TextMeshProUGUI _countText;
     private BuyableItemCount<Ingredient> _countRenderer;
 
     public void SetVisual(BuyableItemCount<Ingredient> count) {
         _icon.sprite = count.Item.Icon;
-        _showingMessage = count.Item.Name;
+        _showingItem = count.Item;
         _countRenderer = count;
 
         UpdateCount(count.Count);

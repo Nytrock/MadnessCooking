@@ -5,6 +5,7 @@ using UnityEditor;
 
 [CustomEditor(typeof(DialogueChoicer))]
 public class DialogueSystemInspector : Editor {
+    private SerializedProperty _dialogueManager;
     private SerializedProperty _dialogueContainer;
     private SerializedProperty _dialogueGroup;
     private SerializedProperty _dialogue;
@@ -17,6 +18,7 @@ public class DialogueSystemInspector : Editor {
 
     private void OnEnable() {
         _dialogueContainer = serializedObject.FindProperty(nameof(_dialogueContainer));
+        _dialogueManager = serializedObject.FindProperty(nameof(_dialogueManager));
         _dialogueGroup = serializedObject.FindProperty(nameof(_dialogueGroup));
         _dialogue = serializedObject.FindProperty(nameof(_dialogue));
 
@@ -29,6 +31,8 @@ public class DialogueSystemInspector : Editor {
 
     public override void OnInspectorGUI() {
         serializedObject.Update();
+
+        _dialogueManager.DrawPropertyField();
 
         DrawDialogueContainerArea();
         DialogueContainer dialogueContainer = _dialogueContainer.objectReferenceValue as DialogueContainer;

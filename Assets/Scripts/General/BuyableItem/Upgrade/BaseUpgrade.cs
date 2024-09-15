@@ -9,6 +9,8 @@ public class BaseUpgrade : BuyableItem, IGraphable<BaseUpgrade> {
     [SerializeField] private BaseUpgrade[] _nextUpgrades;
     [SerializeField] private UpgradeType _type;
 
+    protected override string _table => "UpgradeTable";
+
     public IEnumerable<BaseUpgrade> NeedItems => _needUpgrades;
     public IEnumerable<BaseUpgrade> NextItems => _nextUpgrades;
     public virtual UpgradeType Type => _type;

@@ -20,7 +20,7 @@ public abstract class FoodRecipe<TPart> : MonoBehaviour
         SetupTechnic();
     }
 
-    public virtual void SetHoverText(HoverText hoverText) {
+    public virtual void SetHoverText(HoverItemName hoverText) {
         foreach (var recipePart in _recipeParts)
             recipePart.SetHoverText(hoverText);
         _techicIcon.SetHoverText(hoverText);

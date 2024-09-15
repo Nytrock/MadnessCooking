@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(Image))]
 public class ClueHole : MonoBehaviour {
     [SerializeField] private Image _background;
     private Image _image;
@@ -10,8 +11,7 @@ public class ClueHole : MonoBehaviour {
     }
 
     private void Update() {
-        Vector2 localMousePosition = _image.rectTransform.InverseTransformPoint(Input.mousePosition);
-        _background.raycastTarget = !_image.rectTransform.rect.Contains(localMousePosition);
+        _background.raycastTarget = !_image.rectTransform.ContainsCamera();
     }
 
     public void ChangeTransform(ClueTemplate template) {

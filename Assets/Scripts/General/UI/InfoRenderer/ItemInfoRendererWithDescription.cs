@@ -2,16 +2,25 @@ using System;
 using UnityEngine;
 
 [Serializable]
-public class ItemInfoRendererWithDescription : ItemInfoRendererWithName {
-    [SerializeField] private LocalizedText _descriptionText;
+public class ItemInfoRendererWithDescription : BuyableItemRendererWithName {
+    [SerializeField] private BuyableItemText _descriptionText;
 
     public override void SetItemInfo(BuyableItem item) {
         base.SetItemInfo(item);
-        _descriptionText.SetText(item.Description);
+
+        if (_descriptionText == null)
+            return;
+
+        _descriptionText.SetType(BuyableItemTextType.Desctiption);
+        _descriptionText.SetItem(item);
     }
 
     public override void ResetInfo() {
         base.ResetInfo();
-        _descriptionText.SetText("");
+
+        if (_descriptionText == null)
+            return;
+
+        _descriptionText.ResetItem();
     }
 }

@@ -8,7 +8,7 @@ public class CafeSpaceManager : SaveableSpaceManager<CafeData> {
     }
 
     protected override void BindData() {
-        _data.Space ??= new(_defaultSpaceCount);
-        _spaceData = _data.Space;
+        _data.SpaceManager ??= new(_defaultSpaceCount);
+        _spaceData = _data.SpaceManager;
     }
 }

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5205463827948697096}
   - component: {fileID: 7575279988218362827}
   - component: {fileID: 2870716966329631131}
-  - component: {fileID: 7758543985997914464}
+  - component: {fileID: 3104210523141284420}
   m_Layer: 0
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -135,7 +135,7 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &7758543985997914464
+--- !u!114 &3104210523141284420
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -144,10 +144,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 4325771736301203580}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64b8cfe32092a2d4686b80689560f005, type: 3}
+  m_Script: {fileID: 11500000, guid: f6963eaa1aa910144af3d2e4e0924285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _table: FoodAndTechnicTable
 --- !u!1 &4487921525217460569
 GameObject:
   m_ObjectHideFlags: 0
@@ -312,9 +311,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 8238842500316542814}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17115b973a8e15d4694bdfecd0a4d098, type: 3}
+  m_Script: {fileID: 11500000, guid: 5c6a24aa1c58f604198065dd5cbce7dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _panel: {fileID: 3969347597609376092}
   _offset: {x: 10, y: 5}
-  _text: {fileID: 7758543985997914464}
+  _text: {fileID: 3104210523141284420}

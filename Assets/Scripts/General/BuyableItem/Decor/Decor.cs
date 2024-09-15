@@ -8,6 +8,8 @@ public class Decor : BuyableItem, IGraphable<Decor> {
     [SerializeField] private Decor[] _needDecor;
     [SerializeField] private Decor[] _nextDecor;
 
+    protected override string _table => nameof(Decor) + "Table";
+
     public Location Location => _location;
     public float FatigueCoef => _fatigueDecreaseCoef;
     public IEnumerable<Decor> NeedItems => _needDecor;

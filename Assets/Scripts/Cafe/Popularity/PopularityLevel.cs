@@ -16,7 +16,6 @@ public class PopularityLevel : ScriptableObject {
     public int Number => _number;
     public int NeedXp => _needXp;
     public float PopularityMultiplier => _popularityMultiplier;
-    public string Name => "Popularity" + name + ".Name";
     public string Description => "Popularity" + name + ".Description";
     public int SingleChance => _singleChance;
     public int DoubleChance => _doubleChance;

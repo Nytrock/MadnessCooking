@@ -13,9 +13,9 @@ public class ScriptableObjectsDatabase : Singleton<ScriptableObjectsDatabase> {
         foreach (var scriptableObject in _scriptableObjects) {
             if (scriptableObject as BuyableItem != null) {
                 BuyableItem item = scriptableObject as BuyableItem;
-                if (!LocalizationManager.Instance.CheckLocalizationExists(item.Name))
+                if (item.Name.Contains(".Name"))
                     Debug.LogError($"No translation found for {item.Name}");
-                if (!LocalizationManager.Instance.CheckLocalizationExists(item.Description))
+                if (item.Description.Contains(".Description"))
                     Debug.LogError($"No translation found for {item.Description}");
                 break;
             }

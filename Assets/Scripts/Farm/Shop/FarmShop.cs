@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class FarmShop : BaseChooseShop<BaseUpgrade, FarmData> {
     [SerializeField] private ConsumableUpgrade[] _defaultConsumableUpgrades;
+    [SerializeField] private LocationActivator _shopActivator;
 
     private FarmShopData _specialData => _data as FarmShopData;
 
@@ -19,6 +20,13 @@ public class FarmShop : BaseChooseShop<BaseUpgrade, FarmData> {
         } else {
             base.UpdateItemsAfterBuying(upgrade);
         }
+    }
+
+    public void CloseShop() {
+        if (_itemToBuy != null)
+            ChooseItem(_itemToBuy);
+
+        _shopActivator.ChangeLocation();
     }
 
     public override void Bind(FarmData data) {

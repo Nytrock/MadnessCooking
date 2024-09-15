@@ -15,6 +15,8 @@ public class Food : BuyableItem {
     [SerializeField] private Color _color;
     [SerializeField] private bool _isNeedWater;
 
+    protected override string _table => nameof(Food) + "Table";
+
     public FoodType Type => _type;
     public Technic TypeTechnic => _typeTechnic;
     public Sprite MiniSprite => _miniSprite;

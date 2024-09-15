@@ -1,10 +1,10 @@
 using UnityEngine;
 
 public class FoodShopRecipeWater : FoodRecipeAdditionalPart {
-    [SerializeField] private string _waterName;
+    [SerializeField] private Ingredient _water;
 
     public void Setup(bool isNeedWater, bool isWaterAvailable) {
-        _showingMessage = _waterName;
+        _showingItem = _water;
         ChangeState(isNeedWater);
         _icon.SetGrayscaleVisibility(isWaterAvailable);
     }

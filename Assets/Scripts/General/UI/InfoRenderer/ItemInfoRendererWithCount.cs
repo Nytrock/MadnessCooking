@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 [Serializable]
-public class ItemInfoRendererWithCount : ItemInfoRenderer {
+public class ItemInfoRendererWithCount : BuyableItemRenderer {
     [SerializeField] private CountRenderer _count;
 
     public void SetCount(int count) {

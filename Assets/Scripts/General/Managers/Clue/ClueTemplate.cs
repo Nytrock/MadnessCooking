@@ -1,7 +1,9 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(RectTransform))]
-public class ClueTemplate : TutorialPart {
+public class ClueTemplate : MonoBehaviour, ITutorialPart {
+    [SerializeField] private ClueManager _manager;
     [SerializeField] private string _message;
     [SerializeField] private bool _isScreeenBlocked;
     [SerializeField] private bool _isButtonVisible;
@@ -12,7 +14,18 @@ public class ClueTemplate : TutorialPart {
     public bool IsScreeenBlocked => _isScreeenBlocked;
     public bool IsButtonVisible => _isButtonVisible;
 
+    public event Action PartEnded;
+
     private void Awake() {
         _rectTransform = GetComponent<RectTransform>();
+        _manager.ClueHided += EndTutorialPart;
+    }
+
+    public void StartTutorialPart() {
+        _manager.ShowClue(this);
+    }
+
+    private void EndTutorialPart() {
+        PartEnded?.Invoke();
     }
 }

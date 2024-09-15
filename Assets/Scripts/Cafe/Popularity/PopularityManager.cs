@@ -21,7 +21,7 @@ public class PopularityManager : MonoBehaviour, IBindable<GeneralData> {
             int sumChance = level.SingleChance + level.DoubleChance +
                 level.TripleChance + level.QuarterChance;
             if (sumChance != 1000)
-                throw new ArgumentException($"Popularity level {level.Name} has incorrect chances");
+                throw new ArgumentException($"Popularity level number {level.Number} has incorrect chances");
         }
     }
 

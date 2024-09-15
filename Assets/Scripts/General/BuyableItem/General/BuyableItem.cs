@@ -8,8 +8,28 @@ public abstract class BuyableItem : ExtendedScriptableObject {
     [SerializeField] private Sprite _icon;
     [SerializeField, Min(0)] private int _price;
 
-    public string Name => name + ".Name";
-    public string Description => name + ".Description";
+    protected abstract string _table { get; }
+
+    public string Name {
+        get {
+            return GetName();
+        }
+    }
+
+    public string Description {
+        get {
+            return GetDescription();
+        }
+    }
+
     public override Sprite Icon => _icon;
     public int Price => _price;
+
+    protected virtual string GetName() {
+        return LocalizationManager.Instance.GetLocalization(_table, name + ".Name");
+    }
+
+    protected virtual string GetDescription() {
+        return LocalizationManager.Instance.GetLocalization(_table, name + ".Description");
+    }
 }

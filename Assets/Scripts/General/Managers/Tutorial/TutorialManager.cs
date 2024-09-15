@@ -1,7 +1,8 @@
+using AYellowpaper;
 using UnityEngine;
 
 public class TutorialManager : MonoBehaviour, IBindable<GeneralData> {
-    [SerializeField] private TutorialPart[] _parts;
+    [SerializeField] private InterfaceReference<ITutorialPart>[] _parts;
     [SerializeField] private DialogueManager _dialogueManager;
     [SerializeField] private ClueManager _clueManager;
     [SerializeField] private GameSaveManager _saveManager;
@@ -54,15 +55,12 @@ public class TutorialManager : MonoBehaviour, IBindable<GeneralData> {
     }
 
     private void UpdateNowTutorialPart() {
-        TutorialPart tutorialPart = _parts[_currentTutorialPartIndex];
-        if ((tutorialPart as DialogueChoicer) != null) {
-            _dialogueManager.StartDialogue(tutorialPart as DialogueChoicer);
-        } else if ((tutorialPart as ClueTemplate) != null) {
-            _clueManager.ShowClue(tutorialPart as ClueTemplate);
-        } else if ((tutorialPart as TutotialClientSpawn) != null) {
-            TutotialClientSpawn spawner = tutorialPart as TutotialClientSpawn;
-            spawner.SpawnClient();
-        }
+        if (_currentTutorialPartIndex - 1 > 0)
+            _parts[_currentTutorialPartIndex - 1].Value.PartEnded -= NextTutorialPart;
+
+        ITutorialPart currentPart = _parts[_currentTutorialPartIndex].Value;
+        currentPart.StartTutorialPart();
+        currentPart.PartEnded += NextTutorialPart;
     }
 
     public void Bind(GeneralData data) {

@@ -5,9 +5,7 @@ using UnityEngine.UI;
 public class PopularityUI : MonoBehaviour {
     [SerializeField] private PopularityManager _popularityManager;
     [SerializeField] private PopularityUIMore _additionalUI;
-    [SerializeField] private PopularityUIRenderer _renderer;
 
-    [SerializeField] private LocalizedText _nameText;
     [SerializeField] private TextMeshProUGUI _levelText;
     [SerializeField] private Slider _progress;
 
@@ -17,11 +15,8 @@ public class PopularityUI : MonoBehaviour {
     }
 
     private void UpdateLevel(PopularityLevel level) {
-        _nameText.SetText(level.Name);
         _levelText.text = level.Number.ToString();
-
         _additionalUI.UpdateInfo(level);
-        _renderer.UpdateInfo(level);
 
         if (_popularityManager.IsMaxLevel)
             _progress.value = _progress.maxValue;

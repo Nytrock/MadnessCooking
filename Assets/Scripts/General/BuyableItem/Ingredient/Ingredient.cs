@@ -10,6 +10,8 @@ public class Ingredient : BuyableItem {
     [SerializeField, Min(0)] private float _fatigueCoef;
     [SerializeField, Min(0)] private float _wasteAmount;
 
+    protected override string _table => nameof(Ingredient) + "Table";
+
     public Sprite MiniSprite => _miniSprite;
     public IngredientType Type => _typeIngredient;
     public int TimeGrow => _timeGrow;

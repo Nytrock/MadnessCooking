@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 
 public class OrderButton : MonoBehaviour {
-    [SerializeField] private ItemInfoRendererWithName _foodInfo;
+    [SerializeField] private BuyableItemRendererWithName _foodInfo;
     [SerializeField] private TextMeshProUGUI _tableIndexText;
     [SerializeField] private OrderRecipe _recipe;
 
@@ -37,7 +37,7 @@ public class OrderButton : MonoBehaviour {
         _recipe.SetManagers(kitchenStorage, technicManager);
     }
 
-    public void SetHoverText(HoverText hoverText) {
+    public void SetHoverText(HoverItemName hoverText) {
         _recipe.SetHoverText(hoverText);
     }
 

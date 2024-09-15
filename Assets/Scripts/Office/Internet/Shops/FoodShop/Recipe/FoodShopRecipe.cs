@@ -10,7 +10,7 @@ public class FoodShopRecipe : FoodRecipe<FoodShopRecipePart> {
         SetupWater(food);
     }
 
-    public override void SetHoverText(HoverText hoverText) {
+    public override void SetHoverText(HoverItemName hoverText) {
         base.SetHoverText(hoverText);
         _waterIcon.SetHoverText(hoverText);
     }

@@ -6,7 +6,7 @@ public abstract class BaseChooseShop<TItem, TData> : SaveableBaseShop<TItem, TDa
     where TItem : BuyableItem where TData : ISaveable {
 
     [SerializeField] protected BaseChooseShopItemView<TItem> _itemView;
-    private TItem _itemToBuy;
+    protected TItem _itemToBuy;
 
     public event Action<TItem> ItemSelected;
 
@@ -27,7 +27,7 @@ public abstract class BaseChooseShop<TItem, TData> : SaveableBaseShop<TItem, TDa
         _itemView.UpdateItem(newItem, IsBuyable(newItem));
     }
 
-    private void ChooseItem(TItem item) {
+    protected void ChooseItem(TItem item) {
         if (_itemToBuy == item)
             _itemToBuy = null;
         else
