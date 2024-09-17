@@ -6,11 +6,13 @@ public class FarmCarWaitManager : MonoBehaviour, IBindable<FarmData> {
     [SerializeField] private FarmCar _car;
     [SerializeField] private UpgradeManager _upgradeManager;
     [SerializeField] private KitchenStorage _kitchenStorage;
-    [SerializeField, Min(0)] private float _defaultWaitTime;
-    private CarWaitManagerData _data;
+    [SerializeField, Min(0)] private float _defaultWaitMinutes;
 
     [Header("Upgrades")]
-    [SerializeField] private CountUpgrade[] _speedUpgrades;
+    [SerializeField] private CoefficientUpgrade[] _speedUpgrades;
+
+    private CarWaitManagerData _data;
+    private const int SECONDS_IN_MINUTES = 60;
 
     public float NowWaitTime => _data.NowWaitTime;
 
@@ -26,8 +28,8 @@ public class FarmCarWaitManager : MonoBehaviour, IBindable<FarmData> {
 
     public void CheckSpeedChanged(BaseUpgrade upgrade) {
         if (_speedUpgrades.Contains(upgrade)) {
-            var countUpgrade = upgrade as CountUpgrade;
-            _data.UpdateSpeed(countUpgrade);
+            var coefficientUpgrade = upgrade as CoefficientUpgrade;
+            _data.UpdateSpeed(coefficientUpgrade.Coefficient * SECONDS_IN_MINUTES);
         }
     }
 
@@ -57,7 +59,7 @@ public class FarmCarWaitManager : MonoBehaviour, IBindable<FarmData> {
     }
 
     public void Bind(FarmData data) {
-        data.CarWaitManager ??= new(_defaultWaitTime);
+        data.CarWaitManager ??= new(_defaultWaitMinutes * SECONDS_IN_MINUTES);
         _data = data.CarWaitManager;
 
         if (_data.CarState != CarState.Calm)

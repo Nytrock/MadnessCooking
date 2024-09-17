@@ -20,8 +20,8 @@ public class CarWaitManagerData {
         _ingredientsSended = new();
     }
 
-    public void UpdateSpeed(CountUpgrade countUpgrade) {
-        _needWaitTime = countUpgrade.Count;
+    public void UpdateSpeed(float needTime) {
+        _needWaitTime = needTime;
         if (_carState != CarState.Calm) {
             _nowWaitTime = Mathf.Min(_nowWaitTime, _needWaitTime);
         }

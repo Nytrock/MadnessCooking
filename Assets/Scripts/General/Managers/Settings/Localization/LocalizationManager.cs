@@ -5,12 +5,12 @@ using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
 
 public class LocalizationManager : Singleton<LocalizationManager>, IBindable<GameSettingsData>, ISettingableWithOptions {
-    [SerializeField] private Locale[] _locales;
+    [SerializeField] private List<Locale> _locales;
     [SerializeField] private Locale _defaultLocale;
     private SettingsPointData<int> _data;
 
-    public int OptionsCount => _locales.Length;
-    public int DefaultValue => Mathf.Max(Array.IndexOf(_locales, _defaultLocale), 0);
+    public int OptionsCount => _locales.Count;
+    public int DefaultValue => _locales.IndexOf(_defaultLocale);
 
     public event Action LocalizationChanged;
 
