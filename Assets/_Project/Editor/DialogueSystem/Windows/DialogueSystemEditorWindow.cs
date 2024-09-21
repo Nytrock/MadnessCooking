@@ -72,7 +72,7 @@ public class DialogueSystemEditorWindow : EditorWindow {
     }
 
     private void Load() {
-        string filePath = EditorUtility.OpenFilePanel("Dialogue Graphs", "Assets/Editor/DialogueSystem/Graphs", "asset");
+        string filePath = EditorUtility.OpenFilePanel("Dialogue Graphs", "Assets/_Project/Editor/DialogueSystem/Graphs", "asset");
         if (string.IsNullOrEmpty(filePath))
             return;
 

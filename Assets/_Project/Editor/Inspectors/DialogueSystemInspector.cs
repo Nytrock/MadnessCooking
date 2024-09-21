@@ -44,7 +44,7 @@ public class DialogueSystemInspector : Editor {
         DrawFiltersArea();
 
         List<string> dialogueNames;
-        string dialogueFolderPath = $"Assets/ScriptableObjects/Dialogues/{dialogueContainer.FileName}";
+        string dialogueFolderPath = $"Assets/_Project/ScriptableObjects/Dialogues/{dialogueContainer.FileName}";
         string dialogueInfoMessage;
 
         if (_isGroupedDialogues.boolValue) {
@@ -102,7 +102,7 @@ public class DialogueSystemInspector : Editor {
         _selectedDialogueGroupIndex.intValue = InspectorUtility.DrawPopup("Dialogoue Group", _selectedDialogueGroupIndex, groupNames);
 
         string selectedDialogueGroupName = groupNames[_selectedDialogueGroupIndex.intValue];
-        DialogueGroup selectedDialogueGroup = AssetsUtility.LoadAsset<DialogueGroup>($"Assets/ScriptableObjects/Dialogues/{dialogueContainer.FileName}/Groups/{selectedDialogueGroupName}", selectedDialogueGroupName);
+        DialogueGroup selectedDialogueGroup = AssetsUtility.LoadAsset<DialogueGroup>($"Assets/_Project/ScriptableObjects/Dialogues/{dialogueContainer.FileName}/Groups/{selectedDialogueGroupName}", selectedDialogueGroupName);
 
 
         _dialogueGroup.objectReferenceValue = selectedDialogueGroup;

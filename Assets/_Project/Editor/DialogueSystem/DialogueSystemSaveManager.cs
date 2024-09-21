@@ -20,7 +20,7 @@ public static class DialogueSystemSaveManager {
     public static void Initialize(DialogueSystemGraphView graphView, string graphName) {
         _graphView = graphView;
         _graphFileName = graphName;
-        _graphFolderPath = $"Assets/ScriptableObjects/Dialogues/{graphName}";
+        _graphFolderPath = $"Assets/_Project/ScriptableObjects/Dialogues/{graphName}";
 
         _groups = new();
         _nodes = new();
@@ -35,7 +35,7 @@ public static class DialogueSystemSaveManager {
         CreateStaticFolders();
         GetElementsFromGraphView();
 
-        DialogueSystemGraphSaveData graphData = AssetsUtility.CreateAsset<DialogueSystemGraphSaveData>("Assets/Editor/DialogueSystem/Graphs", _graphFileName);
+        DialogueSystemGraphSaveData graphData = AssetsUtility.CreateAsset<DialogueSystemGraphSaveData>("Assets/_Project/Editor/DialogueSystem/Graphs", _graphFileName);
         graphData.Initialize(_graphFileName);
 
         DialogueContainer dialogueContainer = AssetsUtility.CreateAsset<DialogueContainer>(_graphFolderPath, _graphFileName);
@@ -230,7 +230,7 @@ public static class DialogueSystemSaveManager {
 
     #region Load
     public static void Load() {
-        DialogueSystemGraphSaveData graphData = AssetsUtility.LoadAsset<DialogueSystemGraphSaveData>("Assets/Editor/DialogueSystem/Graphs", _graphFileName);
+        DialogueSystemGraphSaveData graphData = AssetsUtility.LoadAsset<DialogueSystemGraphSaveData>("Assets/_Project/Editor/DialogueSystem/Graphs", _graphFileName);
         if (graphData == null) {
             EditorUtility.DisplayDialog(
                 "Cannot load the file!",
@@ -293,10 +293,10 @@ public static class DialogueSystemSaveManager {
     #endregion
 
     private static void CreateStaticFolders() {
-        FoldersUtility.CreateEditorFolder("Assets/Editor/DialogueSystem", "Graphs");
+        FoldersUtility.CreateEditorFolder("Assets/_Project/Editor/DialogueSystem", "Graphs");
         FoldersUtility.CreateEditorFolder("Assets", "ScriptableObjects");
-        FoldersUtility.CreateEditorFolder("Assets/ScriptableObjects", "Dialogues"); ;
-        FoldersUtility.CreateEditorFolder("Assets/ScriptableObjects/Dialogues", _graphFileName); ;
+        FoldersUtility.CreateEditorFolder("Assets/_Project/ScriptableObjects", "Dialogues"); ;
+        FoldersUtility.CreateEditorFolder("Assets/_Project/ScriptableObjects/Dialogues", _graphFileName); ;
 
         FoldersUtility.CreateEditorFolder(_graphFolderPath, "Global");
         FoldersUtility.CreateEditorFolder(_graphFolderPath, "Groups");
