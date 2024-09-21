@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 using UnityEngine;
 
 public abstract class SaveableBaseShop<TItem, TData> : BaseShop, IBindable<TData>
@@ -10,23 +9,27 @@ public abstract class SaveableBaseShop<TItem, TData> : BaseShop, IBindable<TData
     [SerializeField] protected BuyableItemManager<TItem> _itemManager;
     [SerializeField] protected ShopData<TItem> _data;
 
-    public override int ItemsCount => _data.ItemsToBuy.Count();
     public event Action<BuyableItem> ItemBought;
 
     protected override void LateStart() {
-        SortItems();
         base.LateStart();
+        SortItems();
+        GenerateShop();
     }
 
-    public override BuyPanelData GetPanelData(int index) {
-        TItem item = _data.GetItem(index);
+    public void GenerateShop() {
+        foreach (var item in _data.ItemsToBuy)
+            _renderer.AddPanel(GetPanelData(item));
+    }
+
+    private BuyPanelData GetPanelData(TItem item) {
         return new BuyPanelData(item, IsBuyable(item), GetPanelAction(item), GenerateSideInfo(item));
     }
 
     protected virtual void UpdatePanels() {
         int index = 0;
         foreach (var item in _data.ItemsToBuy) {
-            InvokeItemUpdated(index, item);
+            _renderer.UpdatePanel(index, GetPanelData(item));
             index++;
         }
     }
@@ -54,17 +57,17 @@ public abstract class SaveableBaseShop<TItem, TData> : BaseShop, IBindable<TData
 
     protected virtual void RemoveItem(TItem item, int index) {
         _data.RemoveItemByIndex(index);
-        InvokeItemRemoved(index);
+        _renderer.RemovePanel(index);
     }
 
     protected virtual void UpdateItem(TItem newItem, int index) {
         _data.ReplaceItemToBuy(newItem, index);
-        InvokeItemUpdated(index, newItem);
+        _renderer.UpdatePanel(index, GetPanelData(newItem));
     }
 
     protected void AddItem(TItem newItem) {
         _data.AddItemToBuy(newItem);
-        InvokeItemAdded();
+        _renderer.AddPanel(GetPanelData(newItem));
     }
 
     protected virtual void CheckGraph(TItem item, int index) {

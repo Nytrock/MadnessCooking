@@ -12,6 +12,9 @@ public class FoodShop : BaseChooseShop<Food, OfficeData>, IUpgradeable<KitchenUp
     }
 
     protected override bool IsBuyable(Food food) {
+        if (food == null)
+            return false;
+
         if (food.IsNeedWater && !_upgradeData.IsWaterAvailable)
             return false;
 

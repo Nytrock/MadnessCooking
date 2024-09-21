@@ -34,6 +34,7 @@ public abstract class BaseChooseShop<TItem, TData> : SaveableBaseShop<TItem, TDa
             _itemToBuy = item;
 
         ItemSelected?.Invoke(_itemToBuy);
+        _renderer.UpdateSelectedItem(_itemToBuy);
         _itemView.UpdateItem(_itemToBuy, IsBuyable(_itemToBuy));
     }
 

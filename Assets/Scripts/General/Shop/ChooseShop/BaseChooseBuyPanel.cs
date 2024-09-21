@@ -1,26 +1,18 @@
 using UnityEngine;
-using UnityEngine.UI;
 
-[RequireComponent(typeof(Outline))]
 public class BaseChooseBuyPanel : BaseBuyPanel {
     [SerializeField] private BuyableItemRendererWithName _itemInfoRenderer;
-    private Outline _outline;
+    [SerializeField] protected GameObject _outline;
 
-    protected void Awake() {
-        _outline = GetComponent<Outline>();
-        _outline.enabled = false;
+    protected virtual void Awake() {
+        _outline.SetActive(false);
     }
 
     public override void SetVisual() {
         _itemInfoRenderer.SetItemInfo(_data.Item);
     }
 
-    protected override void SetButtonListener() {
-        base.SetButtonListener();
-        _buyButton.onClick.AddListener(OnChooseItem);
-    }
-
-    protected void OnChooseItem() {
-        _outline.enabled = !_outline.enabled;
+    public virtual void UpdateSelectedItem(BuyableItem item) {
+        _outline.SetActive(item == _data.Item);
     }
 }

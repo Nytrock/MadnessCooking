@@ -3,6 +3,11 @@ using UnityEngine;
 public class ShopRendererPageUpper : MonoBehaviour {
     [SerializeField] private GameObject[] _uppers;
 
+    public void DisableAllUppers() {
+        foreach (GameObject upper in _uppers)
+            upper.SetActive(false);
+    }
+
     public void ActivateUpper(int index) {
         if (index < 0 || index >= _uppers.Length)
             return;

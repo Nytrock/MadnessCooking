@@ -24,7 +24,7 @@ public class CafeSpot : MonoBehaviour {
     public Direction GetSeatRotation(int index) => _seats[index].SeatDirection;
 
     public void SetTableFoodSprite(Food food, int index) {
-        _tableFoods[index].SetSprite(food.MiniSprite);
+        _tableFoods[index].ShowSprite(food.MiniSprite);
     }
 
     public void SetCameraManager(CameraManager cameraManager) {
@@ -32,7 +32,7 @@ public class CafeSpot : MonoBehaviour {
     }
 
     public void ResetTableFoodSprite(int index) {
-        _tableFoods[index].ResetSprite();
+        _tableFoods[index].HideSprite();
     }
 
     public void ChangeEditorState(bool state, bool isPreview = false) {

@@ -58,4 +58,16 @@ public class ShopRendererPage : MonoBehaviour {
 
         Destroy(gameObject);
     }
+
+    public void DisableAllUppers() {
+        if (_upper == null)
+            return;
+
+        _upper.DisableAllUppers();
+    }
+
+    public void UpdateSelectedItem(BuyableItem itemToBuy) {
+        foreach (var panel in _buyPanels)
+            (panel as BaseChooseBuyPanel).UpdateSelectedItem(itemToBuy);
+    }
 }
