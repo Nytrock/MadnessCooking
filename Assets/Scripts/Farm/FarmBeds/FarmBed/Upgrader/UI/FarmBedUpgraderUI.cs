@@ -1,23 +1,34 @@
 using System.Linq;
 using UnityEngine;
 
+[RequireComponent(typeof(BedTypeStyleUpdater))]
 public class FarmBedUpgraderUI : ChoiceBuyUI<FarmBedUpgrade> {
     [SerializeField] private FarmBedUpgradeManager _manager;
+
+    private BedTypeStyleUpdater _styleUpdater;
     private FarmBed _changingBed;
+
+    private void Awake() {
+        _styleUpdater = GetComponent<BedTypeStyleUpdater>();
+    }
 
     public void ActivateUpgradePanel(FarmBed groundBed) {
         Activate();
         _changingBed = groundBed;
+        _styleUpdater.UpdateStyle(_changingBed.Data.BedType);
         GenerateChoiceButtons();
     }
 
     protected override void GenerateChoiceButtons() {
+        DestoyOldButtons();
+
         int index = 0;
         foreach (var upgrade in _manager.GetAllUpgrades()) {
             bool isAccessable = CheckUpgradeAccessable(upgrade);
             if (isAccessable) {
-                ChoiceBuyButton<FarmBedUpgrade> button = _choiceButtonPool.GetObject();
+                FarmBedUpgradeButton button = _choiceButtonPool.GetObject() as FarmBedUpgradeButton;
                 button.Setup(upgrade, index, this);
+                button.UpdateStyle(_changingBed.Data.BedType);
                 _choiceButtons.Add(button);
                 index++;
             }

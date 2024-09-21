@@ -11,7 +11,7 @@ public class ShopRenderer : MonoBehaviour {
     [SerializeField] private Button _previousButton;
 
     private readonly List<ShopRendererPage> _pages = new();
-    [SerializeField] private int _nowPage = 0;
+    private int _nowPage = 0;
 
     private void Awake() {
         _shop.ShopLoaded += GenerateShop;

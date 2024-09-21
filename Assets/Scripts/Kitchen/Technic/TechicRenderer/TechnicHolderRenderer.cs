@@ -25,7 +25,7 @@ public class TechnicHolderRenderer : MonoBehaviour {
         float needBrokennessDegree = (1 - _brokennesOffset) / (_brokennessStages.Length + 1);
         for (int i = 0; i <= _brokennessStages.Length - 1; i++) {
             bool isShow = _brokennesOffset + needBrokennessDegree * i <= brokennessDegree;
-            _brokennessStages[i - 1].ChangeState(isShow);
+            _brokennessStages[i].ChangeState(isShow);
         }
 
         _standardVisual.SetActive(brokennessDegree != 1);

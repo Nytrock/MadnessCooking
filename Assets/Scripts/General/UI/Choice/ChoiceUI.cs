@@ -27,6 +27,12 @@ public abstract class ChoiceUI<TItem, TButton> : MonoBehaviour
         _UI.SetActive(false);
     }
 
+    protected void DestoyOldButtons() {
+        foreach (var button in _choiceButtons)
+            _choiceButtonPool.PutObject(button);
+        _choiceButtons.Clear();
+    }
+
     protected abstract void GenerateChoiceButtons();
     protected abstract void SetSelectedState(int index);
     public abstract void SetChoice();

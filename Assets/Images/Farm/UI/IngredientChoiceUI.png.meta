@@ -149,7 +149,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: IngredientChoiceStandardUI
+      name: IngredientChoiceUIStandard
       rect:
         serializedVersion: 2
         x: 0
@@ -170,7 +170,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IngredientChoiceDesertUI
+      name: IngredientChoiceUIDesert
       rect:
         serializedVersion: 2
         x: 33
@@ -191,7 +191,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IngredientChoiceWaterUI
+      name: IngredientChoiceUIWater
       rect:
         serializedVersion: 2
         x: 0
@@ -212,7 +212,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IngredientChoiceMeatUI
+      name: IngredientChoiceUIMeat
       rect:
         serializedVersion: 2
         x: 33
@@ -233,7 +233,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IngredientChoiceGhostUI
+      name: IngredientChoiceUIGhost
       rect:
         serializedVersion: 2
         x: 0
@@ -254,7 +254,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IngredientChoiceStandardCellUI
+      name: IngredientChoiceUICellStandard
       rect:
         serializedVersion: 2
         x: 33
@@ -275,7 +275,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IngredientChoiceDesertCellUI
+      name: IngredientChoiceUICellDesert
       rect:
         serializedVersion: 2
         x: 37
@@ -296,7 +296,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IngredientChoiceWaterCellUI
+      name: IngredientChoiceUICellWater
       rect:
         serializedVersion: 2
         x: 41
@@ -317,7 +317,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IngredientChoiceMeatCellUI
+      name: IngredientChoiceUICellMeat
       rect:
         serializedVersion: 2
         x: 45
@@ -338,7 +338,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IngredientChoiceGhostCellUI
+      name: IngredientChoiceUICellGhost
       rect:
         serializedVersion: 2
         x: 49
@@ -359,7 +359,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IngredientChoiceStandardCloseUI
+      name: IngredientChoiceUICloseStandard
       rect:
         serializedVersion: 2
         x: 33
@@ -380,7 +380,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IngredientChoiceDesertCloseUI
+      name: IngredientChoiceUICloseDesert
       rect:
         serializedVersion: 2
         x: 43
@@ -401,7 +401,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IngredientChoiceWaterCloseUI
+      name: IngredientChoiceUICloseWater
       rect:
         serializedVersion: 2
         x: 53
@@ -422,7 +422,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IngredientChoiceMeatCloseUI
+      name: IngredientChoiceUICloseMeat
       rect:
         serializedVersion: 2
         x: 33
@@ -443,7 +443,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IngredientChoiceGhostCloseUI
+      name: IngredientChoiceUICloseGhost
       rect:
         serializedVersion: 2
         x: 43
@@ -464,7 +464,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IngredientChoiceStandardButtonUI
+      name: IngredientChoiceUIButtonStandard
       rect:
         serializedVersion: 2
         x: 0
@@ -485,7 +485,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IngredientChoiceDesertButtonUI
+      name: IngredientChoiceUIButtonDesert
       rect:
         serializedVersion: 2
         x: 33
@@ -506,7 +506,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IngredientChoiceWaterButtonUI
+      name: IngredientChoiceUIButtonWater
       rect:
         serializedVersion: 2
         x: 0
@@ -527,7 +527,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IngredientChoiceMeatButtonUI
+      name: IngredientChoiceUIButtonMeat
       rect:
         serializedVersion: 2
         x: 33
@@ -535,7 +535,7 @@ TextureImporter:
         width: 32
         height: 14
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 8, y: 0, z: 23, w: 0}
       outline: []
       physicsShape: []
@@ -548,7 +548,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IngredientChoiceGhostButtonUI
+      name: IngredientChoiceUIButtonGhost
       rect:
         serializedVersion: 2
         x: 0
@@ -556,7 +556,7 @@ TextureImporter:
         width: 32
         height: 14
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 8, y: 0, z: 23, w: 0}
       outline: []
       physicsShape: []
@@ -580,29 +580,29 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       Background: 1901407923
-      IngredientChoiceDesertButtonUI: 984160050
-      IngredientChoiceDesertCellUI: 1998815841
-      IngredientChoiceDesertCloseUI: 498055295
-      IngredientChoiceDesertUI: -941250269
-      IngredientChoiceGhostButtonUI: -182885188
-      IngredientChoiceGhostCellUI: 538497868
-      IngredientChoiceGhostCloseUI: 1741367136
-      IngredientChoiceGhostUI: 1365778269
-      IngredientChoiceMeatButtonUI: 852388840
-      IngredientChoiceMeatCellUI: 391144498
-      IngredientChoiceMeatCloseUI: -1291188640
-      IngredientChoiceMeatUI: 1514346298
-      IngredientChoiceStandardButtonUI: 2045737186
-      IngredientChoiceStandardCellUI: 606600961
-      IngredientChoiceStandardCloseUI: -1330127404
-      IngredientChoiceStandardUI: -268749771
-      IngredientChoiceWaterButtonUI: 347342200
-      IngredientChoiceWaterCellUI: 238943496
-      IngredientChoiceWaterCloseUI: -399061102
-      IngredientChoiceWaterUI: -663169148
-      Lamp: 1955946697
-      Pot: 470648381
-      Window: -805373322
+      IngredientChoiceUIButtonDesert: 984160050
+      IngredientChoiceUIButtonGhost: -182885188
+      IngredientChoiceUIButtonMeat: 852388840
+      IngredientChoiceUIButtonStandard: 2045737186
+      IngredientChoiceUIButtonWater: 347342200
+      IngredientChoiceUICellDesert: 1998815841
+      IngredientChoiceUICellGhost: 538497868
+      IngredientChoiceUICellMeat: 391144498
+      IngredientChoiceUICellStandard: 606600961
+      IngredientChoiceUICellWater: 238943496
+      IngredientChoiceUICloseDesert: 498055295
+      IngredientChoiceUICloseGhost: 1741367136
+      IngredientChoiceUICloseMeat: -1291188640
+      IngredientChoiceUICloseStandard: -1330127404
+      IngredientChoiceUICloseWater: -399061102
+      IngredientChoiceUIDesert: 1365778269
+      IngredientChoiceUIGhost: 1514346298
+      IngredientChoiceUIMeat: -268749771
+      IngredientChoiceUIStandard: -663169148
+      IngredientChoiceUIWater: 347342200
+      Lamp: 470648381
+      Pot: -805373322
+      Window: 606600961
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

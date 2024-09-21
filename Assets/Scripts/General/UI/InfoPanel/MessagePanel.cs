@@ -1,9 +1,8 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class MessagePanel : MonoBehaviour {
-    [SerializeField] private ContentSizeFitter[] _sizeFitters;
+    [SerializeField] private RectTransform[] _layoutsToRebuild;
     [SerializeField] private GameObject _panelWithBackground;
     [SerializeField] private GameObject _panel;
 
@@ -25,19 +24,12 @@ public class MessagePanel : MonoBehaviour {
         _buttonSubmit.gameObject.SetActive(info.IsSubmitButton);
         _buttonSubmitText.SetText(info.Submit);
 
-        StartCoroutine(RefleshPanel());
+        ChangeState(true);
+        foreach (var layout in _layoutsToRebuild)
+            LayoutRebuilder.ForceRebuildLayoutImmediate(layout);
     }
 
     private void ChangeState(bool newState) {
         _panelWithBackground.SetActive(newState);
-    }
-
-    private IEnumerator RefleshPanel() {
-        foreach (var panel in _sizeFitters)
-            panel.enabled = false;
-        yield return new WaitForEndOfFrame();
-        foreach (var panel in _sizeFitters)
-            panel.enabled = true;
-        ChangeState(true);
     }
 }

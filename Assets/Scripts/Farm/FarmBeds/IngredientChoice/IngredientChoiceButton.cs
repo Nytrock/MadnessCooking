@@ -1,6 +1,9 @@
 using UnityEngine;
 
+[RequireComponent(typeof(BedTypeImageStyleChanger))]
 public class IngredientChoiceButton : ChoiceSimpleButton<Ingredient> {
+    private BedTypeImageStyleChanger _styleChanger;
+
     public override void Setup(Ingredient item, int index, ChoiceSimpleUI<Ingredient> ui) {
         base.Setup(item, index, ui);
         _icon.sprite = Item.Icon;
@@ -9,7 +12,14 @@ public class IngredientChoiceButton : ChoiceSimpleButton<Ingredient> {
         );
     }
 
-    public void SetButtonImage(Sprite sprite) {
-        _button.image.sprite = sprite;
+    public void UpdateStyle(BedType bedType) {
+        if (_styleChanger == null)
+            GetStyleChanger();
+
+        _styleChanger.UpdateStyle(bedType);
+    }
+
+    private void GetStyleChanger() {
+        _styleChanger = GetComponent<BedTypeImageStyleChanger>();
     }
 }

@@ -18,6 +18,11 @@ public class MoneyManager : Singleton<MoneyManager>, IBindable<GeneralData> {
         MoneyChanged?.Invoke(_data.MoneyCount);
     }
 
+    public void ResetMoney() {
+        _data.ChangeMoneyCount(-_data.MoneyCount);
+        MoneyChanged?.Invoke(0);
+    }
+
     public void Bind(GeneralData data) {
         data.MoneyManager ??= new(_moneyDefault);
         _data = data.MoneyManager;

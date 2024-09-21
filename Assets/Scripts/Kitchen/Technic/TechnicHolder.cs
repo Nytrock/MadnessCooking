@@ -16,8 +16,16 @@ public class TechnicHolder : MonoBehaviour {
 
     private void Awake() {
         _renderer = GetComponent<TechnicHolderRenderer>();
+    }
+
+    private void LateStart() {
+        Data.CookStoped += StopCook;
+        Data.RepairStoped += StopRepair;
+
         _renderer.SetData(Data);
         _animator.SetData(Data);
+
+        _renderer.UpdateVisual();
     }
 
     private void Update() {
@@ -66,8 +74,7 @@ public class TechnicHolder : MonoBehaviour {
         Data = data.TechnicHolders[index];
         _UI.SetData(Data);
 
-        Data.CookStoped += StopCook;
-        Data.RepairStoped += StopRepair;
+        LateStart();
     }
 
     public bool Accessible() {

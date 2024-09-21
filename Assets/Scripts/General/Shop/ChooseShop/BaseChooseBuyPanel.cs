@@ -1,7 +1,15 @@
 using UnityEngine;
+using UnityEngine.UI;
 
+[RequireComponent(typeof(Outline))]
 public class BaseChooseBuyPanel : BaseBuyPanel {
     [SerializeField] private BuyableItemRendererWithName _itemInfoRenderer;
+    private Outline _outline;
+
+    protected void Awake() {
+        _outline = GetComponent<Outline>();
+        _outline.enabled = false;
+    }
 
     public override void SetVisual() {
         _itemInfoRenderer.SetItemInfo(_data.Item);
@@ -13,6 +21,6 @@ public class BaseChooseBuyPanel : BaseBuyPanel {
     }
 
     protected void OnChooseItem() {
-        // Change face
+        _outline.enabled = !_outline.enabled;
     }
 }

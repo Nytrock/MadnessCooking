@@ -1,39 +1,33 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(IngredientChoiceRenderer))]
+[RequireComponent(typeof(BedTypeStyleUpdater))]
 public class IngredientChoiceUI : ChoiceSimpleUI<Ingredient> {
     [SerializeField] private IngredientsManager _ingredientsManager;
 
     private readonly List<Ingredient> _ingredients = new();
-    private IngredientChoiceRenderer _renderer;
+    private BedTypeStyleUpdater _renderer;
     private FarmBed _changingBed;
 
     private void Awake() {
-        _renderer = GetComponent<IngredientChoiceRenderer>();
+        _renderer = GetComponent<BedTypeStyleUpdater>();
     }
 
     public void ActivateIngredientChoice(FarmBed farmBed) {
         _changingBed = farmBed;
-        BedType bedType = _changingBed.Data.BedType;
-        _renderer.UpdateStyle(bedType);
-        DestoyOldButtons();
+        _renderer.UpdateStyle(_changingBed.Data.BedType);
         GenerateChoiceButtons();
         Activate();
     }
 
-    private void DestoyOldButtons() {
-        foreach (var button in _choiceButtons)
-            _choiceButtonPool.PutObject(button);
-        _choiceButtons.Clear();
-    }
-
     protected override void GenerateChoiceButtons() {
+        DestoyOldButtons();
         _ingredients.Clear();
+
         foreach (var ingredient in _ingredientsManager.GetAvailableIngredientsOfBedType(_changingBed.Data.BedType)) {
             IngredientChoiceButton choiceButton = (IngredientChoiceButton)_choiceButtonPool.GetObject();
             choiceButton.Setup(ingredient, _ingredients.Count, this);
-            _renderer.SetButtonStyle(choiceButton);
+            choiceButton.UpdateStyle(_changingBed.Data.BedType);
             _choiceButtons.Add(choiceButton);
             _ingredients.Add(ingredient);
         }
