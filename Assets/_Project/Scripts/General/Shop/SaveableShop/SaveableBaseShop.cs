@@ -5,7 +5,6 @@ public abstract class SaveableBaseShop<TItem, TData> : BaseShop, IBindable<TData
     where TItem : BuyableItem where TData : ISaveable {
 
     [SerializeField] protected TItem[] _defaultItemsToBuy;
-    [SerializeField] private TItem[] _tutorialItems;
     [SerializeField] protected BuyableItemManager<TItem> _itemManager;
     [SerializeField] protected ShopData<TItem> _data;
 
@@ -34,9 +33,11 @@ public abstract class SaveableBaseShop<TItem, TData> : BaseShop, IBindable<TData
         }
     }
 
-    public override void BuyTutorialItems() {
-        foreach (var item in _tutorialItems)
-            BuyItem(item);
+    public override void TryToBuyItem(BuyableItem item) {
+        if (item as TItem == null)
+            return;
+
+        BuyItem(item as TItem);
     }
 
     public virtual void BuyItem(TItem item) {
@@ -76,8 +77,7 @@ public abstract class SaveableBaseShop<TItem, TData> : BaseShop, IBindable<TData
     }
 
     protected void CheckNextItems(TItem item, int index, ref bool isFirstReplaced) {
-        IGraphable<TItem> graphItem = item as IGraphable<TItem>;
-        if (graphItem == null)
+        if (item is not IGraphable<TItem> graphItem)
             return;
 
         foreach (var nextItem in graphItem.NextItems) {
@@ -90,8 +90,7 @@ public abstract class SaveableBaseShop<TItem, TData> : BaseShop, IBindable<TData
             }
 
             bool canAdd = true;
-            IGraphable<TItem> graphNextItem = nextItem as IGraphable<TItem>;
-            if (graphNextItem != null)
+            if (nextItem is IGraphable<TItem> graphNextItem)
                 foreach (var needUpgrade in graphNextItem.NeedItems)
                     canAdd &= _data.IsItemAvailable(needUpgrade);
 

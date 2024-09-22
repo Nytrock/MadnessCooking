@@ -6,7 +6,10 @@ public class TutorialManager : MonoBehaviour, IBindable<GeneralData> {
     [SerializeField] private DialogueManager _dialogueManager;
     [SerializeField] private ClueManager _clueManager;
     [SerializeField] private GameSaveManager _saveManager;
+
+    [Header("Tutorial items")]
     [SerializeField] private BaseShop[] _shops;
+    [SerializeField] private BuyableItem[] _items;
 
     private int _currentTutorialPartIndex;
     private TutorialManagerData _data;
@@ -27,8 +30,9 @@ public class TutorialManager : MonoBehaviour, IBindable<GeneralData> {
             return;
         }
 
-        foreach (var shop in _shops)
-            shop.BuyTutorialItems();
+        foreach (var item in _items)
+            foreach (var shop in _shops)
+                shop.TryToBuyItem(item);
     }
 
     private void StartTutorial() {

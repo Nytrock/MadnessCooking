@@ -12,7 +12,6 @@ public abstract class BaseShop : MonoBehaviour {
         _renderer.ChangeShopState(newState);
     }
 
-
-    public abstract void BuyTutorialItems();
+    public abstract void TryToBuyItem(BuyableItem item);
     protected abstract UnityAction GetPanelAction(BuyableItem item);
 }

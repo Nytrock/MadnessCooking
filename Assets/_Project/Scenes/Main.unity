@@ -2132,6 +2132,7 @@ GameObject:
   m_Component:
   - component: {fileID: 56512987}
   - component: {fileID: 56512988}
+  - component: {fileID: 56512989}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -2206,6 +2207,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &56512989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 56512986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b462f0947924dbf4b80b1db1ef9f5f61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &62391270
 GameObject:
   m_ObjectHideFlags: 0
@@ -2539,7 +2552,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 63561187}
-  - component: {fileID: 63561188}
+  - component: {fileID: 63561190}
+  - component: {fileID: 63561189}
   m_Layer: 0
   m_Name: Wall
   m_TagString: Untagged
@@ -2564,7 +2578,7 @@ Transform:
   - {fileID: 651711389}
   m_Father: {fileID: 1225580233}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &63561188
+--- !u!114 &63561189
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2573,12 +2587,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 63561186}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1722a349257634429b5318bd4db4e57, type: 3}
+  m_Script: {fileID: 11500000, guid: cc7b4f27d3459e84891f31c1d14c12d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _disabledObject: {fileID: 651711388}
+  _activeObject: {fileID: 2133842677}
+--- !u!114 &63561190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 63561186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81fc68df28a21c640b574f2d62a6e5da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _decor: {fileID: 11400000, guid: ff0f722b7624d9847afb70ea623fb4b2, type: 2}
-  _noDecorObject: {fileID: 651711388}
-  _haveDecorObject: {fileID: 2133842677}
+  _changer: {fileID: 63561189}
 --- !u!1 &65556888
 GameObject:
   m_ObjectHideFlags: 0
@@ -3071,6 +3098,7 @@ GameObject:
   - component: {fileID: 81894029}
   - component: {fileID: 81894028}
   - component: {fileID: 81894027}
+  - component: {fileID: 81894030}
   m_Layer: 0
   m_Name: Poster
   m_TagString: Untagged
@@ -3091,6 +3119,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _decor: {fileID: 11400000, guid: f8dd97dddc1dfc249a021bc4c31efdaf, type: 2}
+  _changer: {fileID: 81894030}
 --- !u!212 &81894028
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3158,6 +3187,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2133842678}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &81894030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 81894026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b462f0947924dbf4b80b1db1ef9f5f61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &82455228
 GameObject:
   m_ObjectHideFlags: 0
@@ -6388,6 +6429,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _upgradeables:
   - _underlyingValue: {fileID: 707606093}
+  - _underlyingValue: {fileID: 1154027454}
+  - _underlyingValue: {fileID: 442335474}
 --- !u!1 &126731768
 GameObject:
   m_ObjectHideFlags: 0
@@ -6625,6 +6668,7 @@ GameObject:
   m_Component:
   - component: {fileID: 128655402}
   - component: {fileID: 128655403}
+  - component: {fileID: 128655404}
   m_Layer: 0
   m_Name: Instruments
   m_TagString: Untagged
@@ -6661,6 +6705,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _decor: {fileID: 11400000, guid: 67f8b918da8552b47bf08fd1b9a02c97, type: 2}
+  _changer: {fileID: 128655404}
+--- !u!114 &128655404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 128655401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b462f0947924dbf4b80b1db1ef9f5f61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &136688649
 GameObject:
   m_ObjectHideFlags: 0
@@ -27458,6 +27515,7 @@ GameObject:
   m_Component:
   - component: {fileID: 397481015}
   - component: {fileID: 397481016}
+  - component: {fileID: 397481018}
   - component: {fileID: 397481017}
   m_Layer: 0
   m_Name: KitchenStorage
@@ -27507,12 +27565,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 397481014}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1722a349257634429b5318bd4db4e57, type: 3}
+  m_Script: {fileID: 11500000, guid: cc7b4f27d3459e84891f31c1d14c12d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _disabledObject: {fileID: 122629942}
+  _activeObject: {fileID: 2055364991}
+--- !u!114 &397481018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 397481014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81fc68df28a21c640b574f2d62a6e5da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _decor: {fileID: 11400000, guid: f42d7dff24558264daa25b93e840da08, type: 2}
-  _noDecorObject: {fileID: 122629942}
-  _haveDecorObject: {fileID: 2055364991}
+  _changer: {fileID: 397481017}
 --- !u!1 &399544401
 GameObject:
   m_ObjectHideFlags: 0
@@ -30708,6 +30779,7 @@ GameObject:
   m_Component:
   - component: {fileID: 442335471}
   - component: {fileID: 442335472}
+  - component: {fileID: 442335474}
   - component: {fileID: 442335473}
   m_Layer: 0
   m_Name: Sleep
@@ -30755,14 +30827,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 442335470}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7bc1c097e3d7184e8a79f67e2c9c015, type: 3}
+  m_Script: {fileID: 11500000, guid: cc7b4f27d3459e84891f31c1d14c12d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _decor: {fileID: 11400000, guid: 9e5774e3b26bab846ae64607ab4a16e1, type: 2}
-  _noDecorObject: {fileID: 1260904709}
-  _haveDecorObject: {fileID: 1787368024}
-  _fatigueManager: {fileID: 1154027454}
-  _bedSleepCoef: 1.3333
+  _disabledObject: {fileID: 1260904709}
+  _activeObject: {fileID: 1787368024}
+--- !u!114 &442335474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 442335470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8826b1228c916b444ab6741fcac089ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _upgrade: {fileID: 11400000, guid: 7c63e4bc923165b4c9cce74d9f04ba83, type: 2}
+  _upgradeManager: {fileID: 1299343206}
+  _changer: {fileID: 442335473}
 --- !u!1 &443366265
 GameObject:
   m_ObjectHideFlags: 0
@@ -32082,7 +32166,8 @@ GameObject:
   m_Component:
   - component: {fileID: 462365250}
   - component: {fileID: 462365249}
-  - component: {fileID: 462365248}
+  - component: {fileID: 462365252}
+  - component: {fileID: 462365251}
   m_Layer: 0
   m_Name: Light
   m_TagString: Untagged
@@ -32090,21 +32175,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &462365248
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 462365247}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74f34bd758a851f41b6b86e3f5e9c07f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _decor: {fileID: 11400000, guid: 633050dcb78531143a84d8e5258848b1, type: 2}
-  _noDecorSprite: {fileID: 2110445126, guid: fa7584c0d15bfac4f96684ed03fc8f2d, type: 3}
-  _haveDecorSprite: {fileID: -1610205492, guid: fa7584c0d15bfac4f96684ed03fc8f2d, type: 3}
 --- !u!212 &462365249
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -32172,6 +32242,34 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1543794858}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &462365251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 462365247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6425196cdcb0819498d331f9a5eab4a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _disabledSprite: {fileID: 2110445126, guid: fa7584c0d15bfac4f96684ed03fc8f2d, type: 3}
+  _activeSprite: {fileID: 1643334846, guid: 12c438cd63c0a0b408f531df273f7e65, type: 3}
+--- !u!114 &462365252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 462365247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81fc68df28a21c640b574f2d62a6e5da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _decor: {fileID: 11400000, guid: 633050dcb78531143a84d8e5258848b1, type: 2}
+  _changer: {fileID: 462365251}
 --- !u!1 &462639482
 GameObject:
   m_ObjectHideFlags: 0
@@ -33158,6 +33256,7 @@ GameObject:
   - component: {fileID: 484752354}
   - component: {fileID: 484752353}
   - component: {fileID: 484752352}
+  - component: {fileID: 484752355}
   m_Layer: 0
   m_Name: Lamp
   m_TagString: Untagged
@@ -33178,6 +33277,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _decor: {fileID: 11400000, guid: 76a09b349c6f6774492b739bd715e770, type: 2}
+  _changer: {fileID: 484752355}
 --- !u!212 &484752353
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -33245,6 +33345,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1793732374}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &484752355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 484752351}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b462f0947924dbf4b80b1db1ef9f5f61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &486593512
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -57409,7 +57521,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0abc0cd0e69ad8d4081478ea3d26f762, type: 2}
   - {fileID: 11400000, guid: af45ffd0a860e6c43aad174de4a3fb3f, type: 2}
   - {fileID: 11400000, guid: 8f044adc6f5ded6479fa7c2f858bb937, type: 2}
-  _tutorialItems: []
+  - {fileID: 11400000, guid: 7c63e4bc923165b4c9cce74d9f04ba83, type: 2}
   _itemManager: {fileID: 1299343206}
   _data:
     _itemsToBuy: []
@@ -58780,6 +58892,7 @@ GameObject:
   - component: {fileID: 762595822}
   - component: {fileID: 762595824}
   - component: {fileID: 762595823}
+  - component: {fileID: 762595825}
   m_Layer: 0
   m_Name: Armchair
   m_TagString: Untagged
@@ -58815,6 +58928,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _decor: {fileID: 11400000, guid: e9ea3692d23336a4ea8eecb071c73c17, type: 2}
+  _changer: {fileID: 762595825}
 --- !u!212 &762595824
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -58867,6 +58981,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &762595825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 762595821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b462f0947924dbf4b80b1db1ef9f5f61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &762983545
 GameObject:
   m_ObjectHideFlags: 0
@@ -66288,6 +66414,7 @@ GameObject:
   m_Component:
   - component: {fileID: 825464824}
   - component: {fileID: 825464825}
+  - component: {fileID: 825464826}
   m_Layer: 0
   m_Name: ComputerSit
   m_TagString: Untagged
@@ -66321,12 +66448,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 825464823}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1722a349257634429b5318bd4db4e57, type: 3}
+  m_Script: {fileID: 11500000, guid: 81fc68df28a21c640b574f2d62a6e5da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _decor: {fileID: 11400000, guid: 31c9cd7ecc70eab459815fd14709bd68, type: 2}
-  _noDecorObject: {fileID: 818547561}
-  _haveDecorObject: {fileID: 1449450081}
+  _changer: {fileID: 825464826}
+--- !u!114 &825464826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 825464823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc7b4f27d3459e84891f31c1d14c12d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _disabledObject: {fileID: 818547561}
+  _activeObject: {fileID: 1449450081}
 --- !u!1 &826482494
 GameObject:
   m_ObjectHideFlags: 0
@@ -66987,6 +67127,9 @@ MonoBehaviour:
   _shops:
   - {fileID: 1180912243}
   - {fileID: 2062255002}
+  _items:
+  - {fileID: 11400000, guid: 897523a5d3e8cc843a91257d85a26f6b, type: 2}
+  - {fileID: 11400000, guid: 8fe5a1b5c2c60e04e8303266be891355, type: 2}
 --- !u!1 &842456316
 GameObject:
   m_ObjectHideFlags: 0
@@ -68610,6 +68753,7 @@ GameObject:
   m_Component:
   - component: {fileID: 870816012}
   - component: {fileID: 870816013}
+  - component: {fileID: 870816014}
   m_Layer: 0
   m_Name: Knifes
   m_TagString: Untagged
@@ -68646,6 +68790,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _decor: {fileID: 11400000, guid: fdd625e31206c3849a6476de68db7e3f, type: 2}
+  _changer: {fileID: 870816014}
+--- !u!114 &870816014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 870816011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b462f0947924dbf4b80b1db1ef9f5f61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &872471999
 GameObject:
   m_ObjectHideFlags: 0
@@ -70418,6 +70575,7 @@ GameObject:
   m_Component:
   - component: {fileID: 907968736}
   - component: {fileID: 907968737}
+  - component: {fileID: 907968738}
   m_Layer: 0
   m_Name: Magnets
   m_TagString: Untagged
@@ -70455,6 +70613,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _decor: {fileID: 11400000, guid: 57327cc070677e54b871c7a077ea5136, type: 2}
+  _changer: {fileID: 907968738}
+--- !u!114 &907968738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 907968735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b462f0947924dbf4b80b1db1ef9f5f61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &908150621
 GameObject:
   m_ObjectHideFlags: 0
@@ -71314,6 +71485,7 @@ GameObject:
   - component: {fileID: 918219880}
   - component: {fileID: 918219881}
   - component: {fileID: 918219882}
+  - component: {fileID: 918219883}
   m_Layer: 0
   m_Name: BarShelf
   m_TagString: Untagged
@@ -71402,6 +71574,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _decor: {fileID: 11400000, guid: a228927c2ada28f439ab270179e3d603, type: 2}
+  _changer: {fileID: 918219883}
+--- !u!114 &918219883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 918219879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b462f0947924dbf4b80b1db1ef9f5f61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &921822922
 GameObject:
   m_ObjectHideFlags: 0
@@ -76837,6 +77022,7 @@ GameObject:
   m_Component:
   - component: {fileID: 935049647}
   - component: {fileID: 935049648}
+  - component: {fileID: 935049650}
   - component: {fileID: 935049649}
   m_Layer: 0
   m_Name: TopBoxWithStuff
@@ -76921,12 +77107,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 935049646}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74f34bd758a851f41b6b86e3f5e9c07f, type: 3}
+  m_Script: {fileID: 11500000, guid: 6425196cdcb0819498d331f9a5eab4a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _disabledSprite: {fileID: -1947097635, guid: e02144190878b9f478158a7c7230900a, type: 3}
+  _activeSprite: {fileID: 2042551139, guid: 7504c3c8ce0b64c41a459b7a8acc27b4, type: 3}
+--- !u!114 &935049650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 935049646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81fc68df28a21c640b574f2d62a6e5da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _decor: {fileID: 11400000, guid: 7068bc36337a4784385557d68988e59d, type: 2}
-  _noDecorSprite: {fileID: -1947097635, guid: e02144190878b9f478158a7c7230900a, type: 3}
-  _haveDecorSprite: {fileID: 2042551139, guid: 7504c3c8ce0b64c41a459b7a8acc27b4, type: 3}
+  _changer: {fileID: 935049649}
 --- !u!1001 &935726277
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -86657,6 +86856,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1023935792}
   - component: {fileID: 1023935791}
+  - component: {fileID: 1023935793}
   m_Layer: 0
   m_Name: Window
   m_TagString: Untagged
@@ -86677,6 +86877,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _decor: {fileID: 11400000, guid: a75b23f3f82bc5b44bd4659c61507125, type: 2}
+  _changer: {fileID: 1023935793}
 --- !u!4 &1023935792
 Transform:
   m_ObjectHideFlags: 0
@@ -86694,6 +86895,18 @@ Transform:
   - {fileID: 1911889312}
   m_Father: {fileID: 1225580233}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1023935793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1023935790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b462f0947924dbf4b80b1db1ef9f5f61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1024729527
 GameObject:
   m_ObjectHideFlags: 0
@@ -96783,6 +96996,7 @@ GameObject:
   - component: {fileID: 1099167842}
   - component: {fileID: 1099167841}
   - component: {fileID: 1099167840}
+  - component: {fileID: 1099167843}
   m_Layer: 0
   m_Name: Carpet
   m_TagString: Untagged
@@ -96803,6 +97017,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _decor: {fileID: 11400000, guid: 4ff71b5eb87a5d6418abb40ba0916a65, type: 2}
+  _changer: {fileID: 1099167843}
 --- !u!212 &1099167841
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -96870,6 +97085,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1504005855}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1099167843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1099167839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b462f0947924dbf4b80b1db1ef9f5f61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1103085982
 GameObject:
   m_ObjectHideFlags: 0
@@ -100139,6 +100366,7 @@ GameObject:
   - component: {fileID: 1173169837}
   - component: {fileID: 1173169839}
   - component: {fileID: 1173169838}
+  - component: {fileID: 1173169840}
   m_Layer: 0
   m_Name: Bookshelf
   m_TagString: Untagged
@@ -100174,6 +100402,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _decor: {fileID: 11400000, guid: 4a564f336d265eb47b5daf68bf9921c8, type: 2}
+  _changer: {fileID: 1173169840}
 --- !u!212 &1173169839
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -100226,6 +100455,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1173169840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1173169836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b462f0947924dbf4b80b1db1ef9f5f61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1175871572
 GameObject:
   m_ObjectHideFlags: 0
@@ -105340,6 +105581,7 @@ GameObject:
   - component: {fileID: 1179739270}
   - component: {fileID: 1179739271}
   - component: {fileID: 1179739272}
+  - component: {fileID: 1179739273}
   m_Layer: 0
   m_Name: Bottles
   m_TagString: Untagged
@@ -105427,6 +105669,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _decor: {fileID: 11400000, guid: e8104ce00d5dbc54e86087f8d6e81382, type: 2}
+  _changer: {fileID: 1179739273}
+--- !u!114 &1179739273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1179739269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b462f0947924dbf4b80b1db1ef9f5f61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1180912241
 GameObject:
   m_ObjectHideFlags: 0
@@ -105485,8 +105740,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 72a975fb0e4957047b8160771602c871, type: 2}
   - {fileID: 11400000, guid: 521ee8b0837e79540b0c3208ad1528ad, type: 2}
   - {fileID: 11400000, guid: 7755e9f6a50793a45afe949b36406069, type: 2}
-  _tutorialItems:
-  - {fileID: 11400000, guid: 897523a5d3e8cc843a91257d85a26f6b, type: 2}
   _itemManager: {fileID: 917452951}
   _data:
     _itemsToBuy: []
@@ -115899,7 +116152,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c00caadbdf55c9142affdf6fefb42640, type: 2}
   - {fileID: 11400000, guid: d962533a8198db345b4b5944ebc95faf, type: 2}
   - {fileID: 11400000, guid: 87f6dce480009e647827c7826e4351c7, type: 2}
-  _tutorialItems: []
   _itemManager: {fileID: 1103085983}
   _data:
     _itemsToBuy: []
@@ -117033,9 +117285,9 @@ MonoBehaviour:
   _decorHolders:
   - {fileID: 1548146671}
   - {fileID: 1736457558}
-  - {fileID: 397481017}
+  - {fileID: 397481018}
   - {fileID: 907968737}
-  - {fileID: 935049649}
+  - {fileID: 935049650}
   - {fileID: 1751035610}
   - {fileID: 128655403}
   - {fileID: 870816013}
@@ -119009,6 +119261,7 @@ GameObject:
   - component: {fileID: 1318368310}
   - component: {fileID: 1318368312}
   - component: {fileID: 1318368311}
+  - component: {fileID: 1318368313}
   m_Layer: 0
   m_Name: FloorLamp
   m_TagString: Untagged
@@ -119044,6 +119297,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _decor: {fileID: 11400000, guid: dbc58e48684171e41937e442e256f065, type: 2}
+  _changer: {fileID: 1318368313}
 --- !u!212 &1318368312
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -119096,6 +119350,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1318368313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1318368309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b462f0947924dbf4b80b1db1ef9f5f61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1319052733
 GameObject:
   m_ObjectHideFlags: 0
@@ -122616,6 +122882,7 @@ GameObject:
   - component: {fileID: 1397736759}
   - component: {fileID: 1397736758}
   - component: {fileID: 1397736757}
+  - component: {fileID: 1397736760}
   m_Layer: 0
   m_Name: Cactus
   m_TagString: Untagged
@@ -122636,6 +122903,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _decor: {fileID: 11400000, guid: 5b3ab4e775ef72246a1b7fb949906802, type: 2}
+  _changer: {fileID: 1397736760}
 --- !u!212 &1397736758
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -122703,6 +122971,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 613763051}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1397736760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1397736756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b462f0947924dbf4b80b1db1ef9f5f61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1399046884
 GameObject:
   m_ObjectHideFlags: 0
@@ -122714,6 +122994,7 @@ GameObject:
   - component: {fileID: 1399046885}
   - component: {fileID: 1399046886}
   - component: {fileID: 1399046887}
+  - component: {fileID: 1399046888}
   m_Layer: 0
   m_Name: Alarm
   m_TagString: Untagged
@@ -122801,6 +123082,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _decor: {fileID: 11400000, guid: 46854128bd903734cad5c83311cd3dd3, type: 2}
+  _changer: {fileID: 1399046888}
+--- !u!114 &1399046888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1399046884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b462f0947924dbf4b80b1db1ef9f5f61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1401554206
 GameObject:
   m_ObjectHideFlags: 0
@@ -141033,10 +141327,9 @@ MonoBehaviour:
   - {fileID: 1023935791}
   - {fileID: 1397736757}
   - {fileID: 825464825}
-  - {fileID: 462365248}
-  - {fileID: 63561188}
+  - {fileID: 1793732376}
+  - {fileID: 63561190}
   - {fileID: 81894027}
-  - {fileID: 442335473}
   - {fileID: 1793732376}
   - {fileID: 1399046887}
   - {fileID: 484752352}
@@ -141131,6 +141424,7 @@ GameObject:
   - component: {fileID: 1548146672}
   - component: {fileID: 1548146671}
   - component: {fileID: 1548146673}
+  - component: {fileID: 1548146674}
   m_Layer: 0
   m_Name: Cat
   m_TagString: Untagged
@@ -141168,6 +141462,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _decor: {fileID: 11400000, guid: 686de94c06e4a214eb4c82a9ce6faf64, type: 2}
+  _changer: {fileID: 1548146674}
   _needTime: 60
   _fatigueDecreaseCoef: 500
   _eyes: {fileID: 444150448}
@@ -141241,6 +141536,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1548146674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1548146669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b462f0947924dbf4b80b1db1ef9f5f61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1548543864
 GameObject:
   m_ObjectHideFlags: 0
@@ -148052,7 +148359,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: fefc1b67be3a6d74f8840576d177f83d, type: 2}
   - {fileID: 11400000, guid: 7e3142bdddde499469effe9504e38213, type: 2}
   - {fileID: 11400000, guid: 358141b8914978643a82f6267adf95cb, type: 2}
-  _tutorialItems: []
   _itemManager: {fileID: 1299343206}
   _data:
     _itemsToBuy: []
@@ -148442,6 +148748,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1686274868}
   - component: {fileID: 1686274869}
+  - component: {fileID: 1686274870}
   m_Layer: 0
   m_Name: Candies
   m_TagString: Untagged
@@ -148478,6 +148785,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _decor: {fileID: 11400000, guid: 293e247468f89f34d97abfdc9e934a2c, type: 2}
+  _changer: {fileID: 1686274870}
+--- !u!114 &1686274870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1686274867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b462f0947924dbf4b80b1db1ef9f5f61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1687816177
 GameObject:
   m_ObjectHideFlags: 0
@@ -150590,12 +150910,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: fdd625e31206c3849a6476de68db7e3f, type: 2}
   - {fileID: 11400000, guid: 67f8b918da8552b47bf08fd1b9a02c97, type: 2}
   - {fileID: 11400000, guid: 633050dcb78531143a84d8e5258848b1, type: 2}
-  - {fileID: 11400000, guid: 9e5774e3b26bab846ae64607ab4a16e1, type: 2}
   - {fileID: 11400000, guid: 31c9cd7ecc70eab459815fd14709bd68, type: 2}
   - {fileID: 11400000, guid: ff0f722b7624d9847afb70ea623fb4b2, type: 2}
   - {fileID: 11400000, guid: 4a564f336d265eb47b5daf68bf9921c8, type: 2}
   - {fileID: 11400000, guid: 5b3ab4e775ef72246a1b7fb949906802, type: 2}
-  _tutorialItems: []
+  - {fileID: 11400000, guid: ac857d90f5b58614998581851d1bce75, type: 2}
   _itemManager: {fileID: 403464058}
   _data:
     _itemsToBuy: []
@@ -151571,6 +151890,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1736457557}
   - component: {fileID: 1736457558}
+  - component: {fileID: 1736457559}
   m_Layer: 0
   m_Name: Knife
   m_TagString: Untagged
@@ -151607,6 +151927,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _decor: {fileID: 11400000, guid: b86f25e29e674ce4d9c9dfa69e46ac79, type: 2}
+  _changer: {fileID: 1736457559}
+--- !u!114 &1736457559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1736457556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b462f0947924dbf4b80b1db1ef9f5f61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1737793626
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -157651,6 +157984,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1751035609}
   - component: {fileID: 1751035610}
+  - component: {fileID: 1751035611}
   m_Layer: 0
   m_Name: Hood
   m_TagString: Untagged
@@ -157687,6 +158021,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _decor: {fileID: 11400000, guid: 32ef21b02fccdc04c812c1a7b245d5af, type: 2}
+  _changer: {fileID: 1751035611}
+--- !u!114 &1751035611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1751035608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b462f0947924dbf4b80b1db1ef9f5f61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1751679731
 GameObject:
   m_ObjectHideFlags: 0
@@ -164616,6 +164963,7 @@ GameObject:
   - component: {fileID: 1793732374}
   - component: {fileID: 1793732375}
   - component: {fileID: 1793732376}
+  - component: {fileID: 1793732377}
   m_Layer: 0
   m_Name: BedsideTable
   m_TagString: Untagged
@@ -164705,6 +165053,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _decor: {fileID: 11400000, guid: ac857d90f5b58614998581851d1bce75, type: 2}
+  _changer: {fileID: 1793732377}
+--- !u!114 &1793732377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1793732373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b462f0947924dbf4b80b1db1ef9f5f61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1796948780
 GameObject:
   m_ObjectHideFlags: 0
@@ -180825,8 +181186,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd6fdbd778e21fb4c829cb44b1919eef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _upgrade: {fileID: 0}
+  _upgrade: {fileID: 11400000, guid: 8f044adc6f5ded6479fa7c2f858bb937, type: 2}
   _upgradeManager: {fileID: 1299343206}
+  _changer: {fileID: 56512989}
 --- !u!1 &1894020902
 GameObject:
   m_ObjectHideFlags: 0
@@ -200814,8 +201176,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c20c3d0744f967340882fea91042167a, type: 2}
   - {fileID: 11400000, guid: 2ab180e87c606ae48ba55132f53ee430, type: 2}
   - {fileID: 11400000, guid: d3baf7cdadf53954d801bb39ed04c251, type: 2}
-  _tutorialItems:
-  - {fileID: 11400000, guid: 8fe5a1b5c2c60e04e8303266be891355, type: 2}
   _itemManager: {fileID: 1297580539}
   _data:
     _itemsToBuy: []

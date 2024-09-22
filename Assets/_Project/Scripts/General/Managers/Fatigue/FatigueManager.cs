@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class FatigueManager : Singleton<FatigueManager>, IBindable<GeneralData> {
+public class FatigueManager : Singleton<FatigueManager>, IBindable<GeneralData>, IUpgradeable<OfficeUpgradeData> {
     [SerializeField] private GameTimeManager _timeManager;
 
     [SerializeField, Min(0)] private float _fatigueMax;
@@ -11,7 +11,9 @@ public class FatigueManager : Singleton<FatigueManager>, IBindable<GeneralData> 
     private float _decorBonus = 1;
     private float _sleepBonus;
     private bool _isTired;
+
     private FatigueManagerData _data;
+    private OfficeUpgradeData _upgradeData;
 
     public float FatigueMax => _fatigueMax;
     public float FatigueNow => _data.FatigueNow;
@@ -27,7 +29,7 @@ public class FatigueManager : Singleton<FatigueManager>, IBindable<GeneralData> 
         if (!_timeManager.IsSleep)
             return;
 
-        _data.ChangeFatigue(-_sleepBonus);
+        _data.ChangeFatigue(-_sleepBonus * _upgradeData.SleepCoef);
         if (_data.FatigueNow == 0 && _isTired)
             ChangeTiredState(false);
     }
@@ -55,7 +57,9 @@ public class FatigueManager : Singleton<FatigueManager>, IBindable<GeneralData> 
         LateStart();
     }
 
-    public void MultiplySleepBonus(float coef) {
-        _sleepBonus *= coef;
+    public void BindUpgrade(OfficeUpgradeData upgradeData) {
+        _upgradeData = upgradeData;
     }
+
+    public void CheckAddedUpgrade(BaseUpgrade upgrade) { }
 }
