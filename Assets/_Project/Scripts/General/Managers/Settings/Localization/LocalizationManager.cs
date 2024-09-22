@@ -14,11 +14,6 @@ public class LocalizationManager : Singleton<LocalizationManager>, IBindable<Gam
 
     public event Action LocalizationChanged;
 
-    protected override void Awake() {
-        base.Awake();
-        LocalizationSettings.SelectedLocaleChanged += delegate { UpdateLocalization(); };
-    }
-
     private void UpdateLocalization() {
         if (!Application.isPlaying) return;
 
@@ -46,5 +41,6 @@ public class LocalizationManager : Singleton<LocalizationManager>, IBindable<Gam
 
     public void UpdateValue() {
         LocalizationSettings.SelectedLocale = _locales[_data.LastValue];
+        UpdateLocalization();
     }
 }

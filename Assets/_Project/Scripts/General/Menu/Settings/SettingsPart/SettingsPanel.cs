@@ -9,9 +9,7 @@ public abstract class SettingsPanel : MonoBehaviour {
 
     private void Awake() {
         ChangeState(false);
-    }
 
-    private void Start() {
         GenerateSettingPointsArray();
         foreach (var point in _settingPoints)
             point.ValueChanged += InvokeSettingsChanged;

@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-public class MoneyInternetUI : MoneyBaseUI {
+public class MoneyAnimatedUI : MoneyBaseUI {
     [SerializeField] private TextMeshProUGUI _countText;
     [SerializeField] private Animator _animator;
     [SerializeField, Min(0.0001f)] private float _animationDuration;
@@ -16,7 +16,7 @@ public class MoneyInternetUI : MoneyBaseUI {
 
         _animationNow += Time.deltaTime / _animationDuration;
         _animationCount = (int)Mathf.Lerp(_oldCount, _nowCount, _animationNow);
-        _countText.text = CountConverter.ToCount(_animationCount);
+        _countText.text = "$" + CountConverter.ToCount(_animationCount);
 
         if (_animationNow >= 1)
             StopAnimation();

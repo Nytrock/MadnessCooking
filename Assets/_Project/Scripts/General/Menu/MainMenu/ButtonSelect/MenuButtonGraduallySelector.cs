@@ -15,7 +15,7 @@ public class MenuButtonGraduallySelector : MenuButtonSelector {
     }
 
     private void UpdatePosition() {
-        _moveProgress += _speed * Time.deltaTime;
+        _moveProgress += _speed * Time.unscaledDeltaTime;
         _nowRect.sizeDelta = Vector2.Lerp(_nowRect.sizeDelta, _targetRect.sizeDelta, _moveProgress);
         _nowRect.position = Vector3.Lerp(_nowRect.position, _targetRect.position, _moveProgress);
 

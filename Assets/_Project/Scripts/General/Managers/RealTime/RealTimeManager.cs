@@ -1,9 +1,13 @@
 using UnityEngine;
 
 public class RealTimeManager : MonoBehaviour, IBindable<GeneralData> {
+    [SerializeField] private PauseManager _pauseManager;
     private RealTimeManagerData _data;
 
     private void Update() {
+        if (_pauseManager.IsPause)
+            return;
+
         _data.UpdateRealTime();
     }
 

@@ -16,5 +16,8 @@ public class SettingsPanelButton : MonoBehaviour {
     private void UpdateButton(SettingsPanel panel) {
         _button.interactable = _panel != panel;
         _panel.ChangeState(_panel == panel);
+
+        if (_panel == panel)
+            transform.SetAsLastSibling();
     }
 }

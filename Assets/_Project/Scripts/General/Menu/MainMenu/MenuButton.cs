@@ -23,10 +23,6 @@ public class MenuButton : MonoBehaviour, IPointerEnterHandler {
         ButtonSelected?.Invoke(_index);
     }
 
-    public void SetInteractable(bool interactable) {
-        _button.interactable = interactable;
-    }
-
     public void SetIndex(int newIndex) {
         _index = newIndex;
     }

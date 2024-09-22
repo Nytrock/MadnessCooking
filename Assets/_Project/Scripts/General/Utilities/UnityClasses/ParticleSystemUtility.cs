@@ -8,8 +8,9 @@ public static class ParticleSystemUtility {
             particleSystem.Stop();
     }
 
-    public static void SetPlaybackTime(this ParticleSystem particleSystem, float playbackTime) {
-
+    public static void SetSimulationSpeed(this ParticleSystem particleSystem, float simulationSpeed) {
+        ParticleSystem.MainModule main = particleSystem.main;
+        main.simulationSpeed = simulationSpeed;
     }
 
     public static void SetColor(this ParticleSystem particleSystem, Color color) {

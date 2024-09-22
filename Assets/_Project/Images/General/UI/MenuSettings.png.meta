@@ -237,12 +237,12 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 26
-        y: 20
-        width: 5
+        y: 19
+        width: 9
         height: 8
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 1, y: 3, z: 4, w: 4}
+      border: {x: 4, y: 3, z: 4, w: 4}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -258,12 +258,12 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 26
-        y: 10
-        width: 5
+        y: 0
+        width: 9
         height: 9
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 1, y: 4, z: 4, w: 4}
+      border: {x: 4, y: 4, z: 4, w: 4}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -426,7 +426,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 22
-        y: 25
+        y: 24
         width: 3
         height: 3
       alignment: 0
@@ -443,22 +443,43 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MenuSettingsButtonLeft
+      name: MenuSettingsButtonEnabledEdge
       rect:
         serializedVersion: 2
-        x: 27
-        y: 1
-        width: 4
+        x: 26
+        y: 10
+        width: 9
         height: 8
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 4, z: 0, w: 3}
+      border: {x: 4, y: 3, z: 4, w: 4}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fc59dbfa5380b4b4280a2e49d2289894
-      internalID: -582493151
+      spriteID: 15fc809b9a02222438badf9efecdc5a2
+      internalID: -1042741356
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MenuSettingsBottomButton
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 20
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 3, y: 3, z: 3, w: 3}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d09efd3b90452ce41b9a491d512b76db
+      internalID: 1666061128
       vertices: []
       indices: 
       edges: []
@@ -481,11 +502,13 @@ TextureImporter:
       MenuConfirmYes: 1344682281
       MenuSettings: 599943872
       MenuSettingsActionButton: 1861386363
+      MenuSettingsBottomButton: 1666061128
       MenuSettingsBox: -139419579
       MenuSettingsButton: 1649792442
       MenuSettingsButtonAlternative: 1391299955
       MenuSettingsButtonDisabled: -1211603857
       MenuSettingsButtonEnabled: 1873305639
+      MenuSettingsButtonEnabledEdge: -1042741356
       MenuSettingsButtonLeft: -582493151
       MenuSettingsCheck: 1795003330
       MenuSettingsClose: -1296158882

@@ -25,22 +25,21 @@ public class LocalizedText : MonoBehaviour {
     }
 
     public void SetColor(Color color) {
-        if (_text == null)
-            GetText();
-
+        GetText();
         _text.color = color;
     }
 
     public virtual void UpdateText() {
-        if (_text == null)
-            GetText();
-
+        GetText();
         _text.text = LocalizationManager.Instance.GetLocalization(_table, _key, _arguments);
     }
 
     private void GetText() {
+        if (_text != null)
+            return;
+
         _text = GetComponent<TextMeshProUGUI>();
-        if (_key == "")
+        if (string.IsNullOrEmpty(_key))
             _key = _text.text;
     }
 

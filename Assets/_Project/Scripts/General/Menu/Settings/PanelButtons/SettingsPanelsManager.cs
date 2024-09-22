@@ -5,7 +5,9 @@ public class SettingsPanelsManager : MonoBehaviour {
     [SerializeField] private SettingsActionButtonsManager _actionButtonsManager;
     [SerializeField] private SettingsPanel _defaultPanel;
     [SerializeField] private ConfirmPanel _submitChangesConfirm;
-    [SerializeField] private SettingsPanel _nowPanel;
+    [SerializeField] private string _submitChangesConfirmTitle = "Settings.CancelChangesTitle";
+    [SerializeField] private string _submitChangesConfirmDescription = "Settings.CancelChangesDescription";
+    private SettingsPanel _nowPanel;
 
     public event Action<SettingsPanel> PanelChanged;
 
@@ -15,7 +17,7 @@ public class SettingsPanelsManager : MonoBehaviour {
 
     public void ChangePanel(SettingsPanel panel) {
         if (_nowPanel != null && _nowPanel.IsSettingsChanged()) {
-            _submitChangesConfirm.StartConfirm(SubmitChangesConfirm, "Settings.CancelChangesDescription");
+            _submitChangesConfirm.StartConfirm(SubmitChangesConfirm, _submitChangesConfirmDescription, _submitChangesConfirmTitle);
             _nowPanel = panel;
             return;
         }

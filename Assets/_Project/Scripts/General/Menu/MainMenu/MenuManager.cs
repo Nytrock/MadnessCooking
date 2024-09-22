@@ -3,16 +3,10 @@ using UnityEngine;
 public class MenuManager : MonoBehaviour {
     [SerializeField] private GameObject _panel;
     [SerializeField] private GameSaveManager _saveManager;
-    [SerializeField] private MenuButton _continueButton;
     [SerializeField] private ConfirmPanel _confirmPanel;
     [SerializeField] private SettingsManager _settings;
     [SerializeField] private TutorialManager _tutorial;
     [SerializeField] private MenuButtonSelector _buttonSelector;
-
-    private void Start() {
-        _continueButton.SetInteractable(_saveManager.IsDataExists());
-        ChangeState(true);
-    }
 
     public void NewGameConfirm() {
         _buttonSelector.ChangeState(false);
@@ -57,11 +51,13 @@ public class MenuManager : MonoBehaviour {
     }
 
     private void ChangeState() {
+        Debug.Log(1);
         _panel.SetActive(!_panel.activeSelf);
         _buttonSelector.ChangeState(_panel.activeSelf);
     }
 
-    private void ChangeState(bool newState) {
+    public void ChangeState(bool newState) {
+        Debug.Log(2);
         _panel.SetActive(newState);
         _buttonSelector.ChangeState(newState);
     }
