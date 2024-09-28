@@ -1,11 +1,10 @@
 using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
-[RequireComponent(typeof(Button))]
+[RequireComponent(typeof(ButtonWithAudio))]
 public class MenuButton : MonoBehaviour, IPointerEnterHandler {
-    private Button _button;
+    private ButtonWithAudio _button;
     private RectTransform _rect;
     private int _index;
 
@@ -15,7 +14,7 @@ public class MenuButton : MonoBehaviour, IPointerEnterHandler {
     public RectTransform Rect => _rect;
 
     public void Awake() {
-        _button = GetComponent<Button>();
+        _button = GetComponent<ButtonWithAudio>();
         _rect = GetComponent<RectTransform>();
     }
 

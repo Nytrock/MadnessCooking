@@ -152,8 +152,8 @@ TextureImporter:
       name: Panel
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
+        x: 8
+        y: 2
         width: 5
         height: 5
       alignment: 0
@@ -173,8 +173,8 @@ TextureImporter:
       name: PanelNoBorder
       rect:
         serializedVersion: 2
-        x: 12
-        y: 2
+        x: 20
+        y: 4
         width: 3
         height: 3
       alignment: 0
@@ -194,12 +194,12 @@ TextureImporter:
       name: ActivePanel
       rect:
         serializedVersion: 2
-        x: 6
-        y: 0
+        x: 14
+        y: 2
         width: 5
         height: 5
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 2, y: 2, z: 2, w: 2}
       outline: []
       physicsShape: []
@@ -207,6 +207,27 @@ TextureImporter:
       bones: []
       spriteID: e9ece921de6f6e948816201389714478
       internalID: 1386745251
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PanelBold
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 3, y: 3, z: 3, w: 3}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6669db242984ec941a6ce722bcd10de6
+      internalID: 1402900226
       vertices: []
       indices: 
       edges: []
@@ -226,6 +247,7 @@ TextureImporter:
       Background: 1901407923
       Lamp: 1955946697
       Panel: -698757038
+      PanelBold: 1402900226
       PanelNoBorder: 1112669737
       Pot: 470648381
       Window: -805373322

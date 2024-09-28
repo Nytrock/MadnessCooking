@@ -1,11 +1,11 @@
 using UnityEngine;
-using UnityEngine.UI;
 
-[RequireComponent(typeof(Button))]
+[RequireComponent(typeof(ButtonWithAudio))]
 public class MenuContinueButton : MonoBehaviour {
     [SerializeField] private GameSaveManager _saveManager;
+
     private void Start() {
-        Button button = GetComponent<Button>();
+        ButtonWithAudio button = GetComponent<ButtonWithAudio>();
         button.interactable = _saveManager.IsDataExists();
     }
 }

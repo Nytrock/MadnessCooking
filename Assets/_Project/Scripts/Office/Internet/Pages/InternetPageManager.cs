@@ -19,6 +19,7 @@ public class InternetPageManager : MonoBehaviour {
     }
 
     public void OpenHomePage() {
+        _download.StopDownload();
         ChangePage(_homePage);
     }
 

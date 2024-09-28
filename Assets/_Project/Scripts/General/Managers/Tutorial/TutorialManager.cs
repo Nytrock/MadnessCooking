@@ -22,17 +22,28 @@ public class TutorialManager : MonoBehaviour, IBindable<GeneralData> {
 
         _dialogueManager.DialogueEnded += NextTutorialPart;
         _clueManager.ClueHided += NextTutorialPart;
+        _saveManager.LoadEnded += BuyTutorialItems;
     }
 
-    private void LateStart() {
-        if (SceneUtility.IsGame() && _data.IsWork && _parts.Length > 0) {
-            StartTutorial();
+    private void BuyTutorialItems() {
+        _saveManager.LoadEnded -= BuyTutorialItems;
+        if (!IsTutorial())
             return;
-        }
 
         foreach (var item in _items)
             foreach (var shop in _shops)
                 shop.TryToBuyItem(item);
+    }
+
+    private void LateStart() {
+        if (!IsTutorial())
+            return;
+
+        StartTutorial();
+    }
+
+    private bool IsTutorial() {
+        return SceneUtility.IsGame() && _data.IsWork && _parts.Length > 0;
     }
 
     private void StartTutorial() {

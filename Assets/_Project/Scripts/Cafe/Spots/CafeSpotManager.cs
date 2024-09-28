@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class CafeSpotManager : MonoBehaviour, IBindable<CafeData> {
@@ -35,7 +34,7 @@ public class CafeSpotManager : MonoBehaviour, IBindable<CafeData> {
     }
 
     private void SetupSpotRemoveButton(int i) {
-        Button button = _spots[i].RemoveButton;
+        ButtonWithAudio button = _spots[i].RemoveButton;
         button.OverrideAllListeners(delegate { RemoveSpot(i); });
     }
 

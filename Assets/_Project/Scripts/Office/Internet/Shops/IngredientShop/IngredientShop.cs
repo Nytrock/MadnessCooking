@@ -6,7 +6,8 @@ public class IngredientShop : BaseInstantShop<Ingredient, OfficeData>, IUpgradea
     [SerializeField] private KitchenStorage _ingredientStorage;
     private KitchenUpgradeData _upgradeData;
 
-    private void Awake() {
+    public override void GenerateShop() {
+        base.GenerateShop();
         _bedTypesManager.ItemAdded += delegate { UpdatePanels(); };
     }
 

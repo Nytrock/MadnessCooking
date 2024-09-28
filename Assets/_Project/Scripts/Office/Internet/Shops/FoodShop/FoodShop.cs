@@ -5,8 +5,8 @@ public class FoodShop : BaseChooseShop<Food, OfficeData>, IUpgradeable<KitchenUp
     [SerializeField] private TechnicManager _technicManager;
     private KitchenUpgradeData _upgradeData;
 
-    protected override void Awake() {
-        base.Awake();
+    public override void GenerateShop() {
+        base.GenerateShop();
         _ingredientManager.ItemAdded += delegate { UpdatePanels(); };
         _technicManager.ItemAdded += delegate { UpdatePanels(); };
     }

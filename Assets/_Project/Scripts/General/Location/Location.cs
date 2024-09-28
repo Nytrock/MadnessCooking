@@ -5,5 +5,6 @@ public enum Location {
     Farm,
     Barn,
     FarmShop,
-    Internet
+    Internet,
+    GrayMan
 }

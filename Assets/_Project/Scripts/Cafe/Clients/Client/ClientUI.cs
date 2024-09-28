@@ -6,20 +6,21 @@ public class ClientUI : MonoBehaviour {
     [SerializeField] private Animator _animator;
     [SerializeField] private GameObject _chooseFoodPanel;
     [SerializeField] private GameObject _buttonsBlock;
-    [SerializeField] private Button _mainButton;
+    [SerializeField] private ButtonWithAudio _mainButton;
     [SerializeField] private Image _foodImage;
     [SerializeField] private Button _yesButton;
     [SerializeField] private Slider _eatSlider;
 
     private CafeUpgradeData _data;
     private ClientData _clientData;
+    private UnityAction _startAction;
 
     public void SetData(CafeUpgradeData data) {
         _data = data;
     }
 
-    public void StartNewCycle(UnityAction action) {
-        _mainButton.OverrideAllListeners(action);
+    public void StartNewCycle() {
+        _mainButton.OverrideAllListeners(_startAction);
         _foodImage.color = new Color(1, 1, 1, 0);
     }
 
@@ -52,8 +53,10 @@ public class ClientUI : MonoBehaviour {
         _eatSlider.gameObject.SetActive(newValue && _data.IsEatTimeShow);
     }
 
-    public void Setup(ClientData clientData) {
+    public void Setup(ClientData clientData, UnityAction action) {
         _clientData = clientData;
+        _startAction = action;
+
         _eatSlider.maxValue = _clientData.WaitTime;
         _eatSlider.value = _clientData.NowTime;
 

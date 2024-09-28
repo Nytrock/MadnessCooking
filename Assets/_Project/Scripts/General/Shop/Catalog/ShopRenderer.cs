@@ -1,13 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class ShopRenderer : MonoBehaviour {
     [SerializeField] private Transform _pagesContainer;
     [SerializeField] private ShopRendererPage _pagePrefab;
     [SerializeField] private GameObject _emptyMessage;
-    [SerializeField] private Button _nextButton;
-    [SerializeField] private Button _previousButton;
+    [SerializeField] private ButtonWithAudio _nextButton;
+    [SerializeField] private ButtonWithAudio _previousButton;
 
     private readonly List<ShopRendererPage> _pages = new();
     private int _nowPage = 0;

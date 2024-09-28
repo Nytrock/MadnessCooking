@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class CafeSpot : MonoBehaviour {
     [SerializeField] private CafeSeat[] _seats;
@@ -11,7 +10,7 @@ public class CafeSpot : MonoBehaviour {
 
     public int Index => _index;
     public int SeatsCount => _seats.Length;
-    public Button RemoveButton => _removeButton.Button;
+    public ButtonWithAudio RemoveButton => _removeButton.Button;
     public bool CanRemove => _removeButton.CanRemove;
 
     private void Start() {

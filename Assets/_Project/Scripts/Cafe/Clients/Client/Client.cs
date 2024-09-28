@@ -29,7 +29,7 @@ public class Client : MonoBehaviour {
 
     public void StartNewCycle() {
         _skin.StartNewCycle(Data);
-        ClientUI.StartNewCycle(ActivateOrder);
+        ClientUI.StartNewCycle();
     }
 
     private void ChangeState() {
@@ -85,7 +85,7 @@ public class Client : MonoBehaviour {
         Data.SetWaitTime(_waitTime.RandomValue);
 
         transform.position = Data.Position.GetVector();
-        ClientUI.Setup(Data);
+        ClientUI.Setup(Data, ActivateOrder);
         ChangeState();
 
         if (Data.State != ClientState.Spawn && Data.State != ClientState.Leave)

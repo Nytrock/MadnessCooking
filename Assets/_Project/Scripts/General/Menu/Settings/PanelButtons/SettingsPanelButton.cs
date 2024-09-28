@@ -1,14 +1,14 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(Button))]
+[RequireComponent(typeof(ButtonWithAudio))]
 public class SettingsPanelButton : MonoBehaviour {
     [SerializeField] private SettingsPanelsManager _panelsManager;
     [SerializeField] private SettingsPanel _panel;
     private Button _button;
 
     private void Awake() {
-        _button = GetComponent<Button>();
+        _button = GetComponent<ButtonWithAudio>();
         _button.onClick.AddListener(delegate { _panelsManager.ChangePanel(_panel); });
         _panelsManager.PanelChanged += UpdateButton;
     }

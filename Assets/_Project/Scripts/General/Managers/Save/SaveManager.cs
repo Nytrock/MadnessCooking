@@ -12,6 +12,7 @@ public abstract class SaveManager<TData> : MonoBehaviour
     protected abstract string _fileName { get; }
 
     public event Action SaveEnded;
+    public event Action LoadEnded;
 
     private void Awake() {
         _dataService = new SaveFileManager<TData>(_fileName);
@@ -35,7 +36,9 @@ public abstract class SaveManager<TData> : MonoBehaviour
             _data = new();
         else
             _data = _dataService.Load();
+
         _binder.Bind(_data);
+        LoadEnded?.Invoke();
     }
 
     public void Delete() {

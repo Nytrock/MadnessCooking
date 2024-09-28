@@ -10,7 +10,7 @@ public class LocalizedText : MonoBehaviour {
     private string _key;
     private Dictionary<string, string> _arguments = new();
 
-    private void Awake() {
+    protected virtual void Awake() {
         GetText();
     }
 

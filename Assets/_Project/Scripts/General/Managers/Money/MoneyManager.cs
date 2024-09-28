@@ -13,6 +13,11 @@ public class MoneyManager : Singleton<MoneyManager>, IBindable<GeneralData> {
         MoneyChanged?.Invoke(_moneyDefault);
     }
 
+    [ContextMenu("TestMoney")]
+    private void TestMoney() {
+        ChangeMoney(10);
+    }
+
     public void ChangeMoney(int changeValue) {
         _data.ChangeMoneyCount(changeValue);
         MoneyChanged?.Invoke(_data.MoneyCount);

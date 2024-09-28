@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class AnimatedText : LocalizedText {
@@ -8,6 +9,8 @@ public class AnimatedText : LocalizedText {
     private bool _isAnimated;
 
     public bool IsAnimated => _isAnimated;
+
+    public event Action TextUpdated;
 
     public override void UpdateText() {
         base.UpdateText();
@@ -32,16 +35,19 @@ public class AnimatedText : LocalizedText {
         }
 
         _text.text = _targetText[.._lastCharIndex];
+        TextUpdated?.Invoke();
     }
 
     public void StopAnimation() {
         _isAnimated = false;
         _text.text = _targetText;
+        TextUpdated?.Invoke();
         CancelInvoke(nameof(UpdateTextAnimation));
     }
 
     private void ForceStopAnimation() {
         _isAnimated = false;
+        TextUpdated?.Invoke();
         CancelInvoke(nameof(UpdateTextAnimation));
     }
 }

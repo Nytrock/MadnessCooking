@@ -1,11 +1,10 @@
 using System;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class ConfirmPanel : MonoBehaviour {
     [SerializeField] private GameObject _panel;
-    [SerializeField] private Button _yesButton;
-    [SerializeField] private Button _noButton;
+    [SerializeField] private ButtonWithAudio _yesButton;
+    [SerializeField] private ButtonWithAudio _noButton;
     [SerializeField] private LocalizedText _titleText;
     [SerializeField] private LocalizedText _confirmText;
 

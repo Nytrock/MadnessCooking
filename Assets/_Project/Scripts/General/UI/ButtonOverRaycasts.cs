@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Button), typeof(Image))]
-public class CafeNameUIEditButton : MonoBehaviour {
+public class ButtonOverRaycasts : MonoBehaviour {
     private Button _button;
     private Image _image;
 
@@ -21,5 +21,7 @@ public class CafeNameUIEditButton : MonoBehaviour {
             return;
 
         _button.onClick.Invoke();
+        if (_button.TryGetComponent(out ButtonWithAudio audioButton))
+            audioButton.ForceSoundPlay();
     }
 }

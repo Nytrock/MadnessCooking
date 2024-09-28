@@ -10,18 +10,8 @@ public abstract class BuyableItem : ExtendedScriptableObject {
 
     protected abstract string _table { get; }
 
-    public string Name {
-        get {
-            return GetName();
-        }
-    }
-
-    public string Description {
-        get {
-            return GetDescription();
-        }
-    }
-
+    public string Name => GetName();
+    public string Description => GetDescription();
     public override Sprite Icon => _icon;
     public int Price => _price;
 

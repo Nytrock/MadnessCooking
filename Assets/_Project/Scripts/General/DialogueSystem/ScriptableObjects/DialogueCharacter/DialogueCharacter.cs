@@ -4,9 +4,9 @@ using UnityEngine;
 public class DialogueCharacter : ExtendedScriptableObject {
     [SerializeField] private Sprite _defaultSprite;
     [SerializeField] private DialogueCharacterEmotionSprite[] _emotionSprites;
-    [SerializeField] private AudioClip _voice;
+    [SerializeField] private PitchableAudioInfo _voiceInfo;
 
-    public AudioClip Voice => _voice;
+    public PitchableAudioInfo VoiceInfo => _voiceInfo;
     public string Name => $"{nameof(DialogueCharacter)}.{name}";
     public override Sprite Icon => _defaultSprite;
 

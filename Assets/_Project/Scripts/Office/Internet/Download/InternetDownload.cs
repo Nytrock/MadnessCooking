@@ -1,6 +1,8 @@
+using System;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(InternetDownloadRenderer))]
 public class InternetDownload : MonoBehaviour, IUpgradeable<OfficeUpgradeData> {
@@ -22,6 +24,9 @@ public class InternetDownload : MonoBehaviour, IUpgradeable<OfficeUpgradeData> {
     private InternetPage _openingPage;
     private OfficeUpgradeData _upgradeData;
 
+    public event Action LoadingUpdated;
+    public event Action LoadingEnded;
+
     private void Awake() {
         _renderer = GetComponent<InternetDownloadRenderer>();
     }
@@ -34,11 +39,14 @@ public class InternetDownload : MonoBehaviour, IUpgradeable<OfficeUpgradeData> {
         if (!_isDownloading)
             return;
 
-        if (_nowProgress < _needProgress)
-            _nowProgress += Time.deltaTime * _upgradeData.InternetDownloadSpeed *
-                _possibleProgress[Random.Range(0, _possibleProgress.Length)];
-        else
+        if (_nowProgress < _needProgress) {
+            float progress = _possibleProgress[Random.Range(0, _possibleProgress.Length)];
+            _nowProgress += Time.deltaTime * _upgradeData.InternetDownloadSpeed * progress;
+            if (progress > 0)
+                LoadingUpdated?.Invoke();
+        } else {
             EndDownload();
+        }
         _downloadBar.value = _nowProgress;
     }
 
@@ -67,6 +75,13 @@ public class InternetDownload : MonoBehaviour, IUpgradeable<OfficeUpgradeData> {
         ChangeState(false);
         _isDownloading = false;
         _openingPage.ChangeState(true);
+        _openingPage = null;
+
+        LoadingEnded?.Invoke();
+    }
+
+    public void StopDownload() {
+        _isDownloading = false;
         _openingPage = null;
     }
 
