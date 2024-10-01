@@ -14,6 +14,11 @@ public class WheatManager : MonoBehaviour, IUpgradeable<FarmUpgradeData>, IBinda
         _flourMill.CountChanged += MakeWheatSame;
     }
 
+    [ContextMenu("AddWheat")]
+    private void TestAddWheat() {
+        AddWheat(2);
+    }
+
     private void MakeWheatSame() {
         if (_flourMill.NeedHoldData == null || _cow.NeedHoldData == null)
             return;
@@ -27,8 +32,8 @@ public class WheatManager : MonoBehaviour, IUpgradeable<FarmUpgradeData>, IBinda
             return;
 
         int wheatCount = Mathf.Min(cowWheatCount, flourMillWheatCount);
-        _cow.NeedHoldData.SetMaterial(wheatCount);
-        _flourMill.NeedHoldData.SetMaterial(wheatCount);
+        _cow.SetMaterial(wheatCount);
+        _flourMill.SetMaterial(wheatCount);
     }
 
     public void AddWheat(int count) {

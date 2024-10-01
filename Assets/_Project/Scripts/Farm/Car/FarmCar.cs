@@ -11,6 +11,8 @@ public class FarmCar : SaveableIngredientStorage<FarmData> {
 
     private Animator _animator;
 
+    public event Action<CarState> StateChanged;
+
     private void Awake() {
         _upgradeManager.ItemAdded += CheckSizeChanged;
         _animator = GetComponent<Animator>();
@@ -24,6 +26,7 @@ public class FarmCar : SaveableIngredientStorage<FarmData> {
     public void Leave() {
         Data.ClearList();
         _animator.SetBool("isLeave", true);
+        StateChanged?.Invoke(CarState.Sent);
     }
 
     public void InstantLeave() {
@@ -33,6 +36,7 @@ public class FarmCar : SaveableIngredientStorage<FarmData> {
 
     public void Return() {
         _animator.SetBool("isLeave", false);
+        StateChanged?.Invoke(CarState.Returns);
     }
 
     public override void Bind(FarmData data) {

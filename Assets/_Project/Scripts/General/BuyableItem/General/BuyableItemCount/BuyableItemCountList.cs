@@ -8,10 +8,20 @@ using UnityEngine;
 public class BuyableItemCountList<TItem>
     where TItem : BuyableItem {
 
-    [SerializeField, JsonProperty] private List<BuyableItemCount<TItem>> _itemCounts = new();
-    private List<TItem> _availableItems = new();
+    [SerializeField, JsonProperty] private List<BuyableItemCount<TItem>> _itemCounts;
+    private List<TItem> _availableItems;
 
     public int Size => _itemCounts.Count;
+
+    public BuyableItemCountList() {
+        _itemCounts = new();
+        _availableItems = new();
+    }
+
+    public BuyableItemCountList(BuyableItemCountList<TItem> itemList) : this() {
+        foreach (var item in itemList)
+            _itemCounts.Add(new(item));
+    }
 
     public void Add(BuyableItemCount<TItem> itemCount) {
         if (ContainsItem(itemCount))
@@ -54,13 +64,6 @@ public class BuyableItemCountList<TItem>
 
     public int IndexOf(BuyableItemCount<TItem> itemCount) {
         return _availableItems.IndexOf(itemCount.Item);
-    }
-
-    public BuyableItemCountList<TItem> Copy() {
-        BuyableItemCountList<TItem> copyList = new();
-        foreach (var item in _itemCounts)
-            copyList.Add(item.Copy());
-        return copyList;
     }
 
     public void Clear() {

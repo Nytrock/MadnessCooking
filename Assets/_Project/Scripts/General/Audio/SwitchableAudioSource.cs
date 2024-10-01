@@ -22,7 +22,14 @@ public class SwitchableAudioSource : MonoBehaviour {
             _audioSource.SetAudioInfo(_stateTrueAudio);
         else
             _audioSource.SetAudioInfo(_stateFalseAudio);
+    }
 
+    public void SwitchStateAndPlay(bool newState) {
+        SwitchState(newState);
+        Play();
+    }
+
+    public void Play() {
         _audioSource.Play();
     }
 }

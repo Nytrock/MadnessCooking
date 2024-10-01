@@ -1,11 +1,14 @@
+using System;
 using UnityEngine;
 
-[RequireComponent(typeof(BoxCollider2D), typeof(Animator))]
+[RequireComponent(typeof(Collider2D), typeof(Animator))]
 public class KitchenCat : DecorHolder, IBindable<KitchenData> {
     [SerializeField, Min(0)] private float _needTime;
     [SerializeField, Min(0)] private float _fatigueDecreaseCoef;
     [SerializeField] private KitchenCatEyes _eyes;
     [SerializeField] private KitchenCatData _data;
+
+    public event Action Petted;
 
     private Animator _animator;
 
@@ -17,10 +20,16 @@ public class KitchenCat : DecorHolder, IBindable<KitchenData> {
         if (_data.IsPetted || FatigueManager.Instance.IsTired)
             return;
 
+        Pet();
+    }
+
+    private void Pet() {
         _animator.SetTrigger("isPet");
         _eyes.ChangeState(false);
         FatigueManager.Instance.ChangeFatigue(-_fatigueDecreaseCoef);
         _data.Pet();
+
+        Petted?.Invoke();
     }
 
     private void Update() {

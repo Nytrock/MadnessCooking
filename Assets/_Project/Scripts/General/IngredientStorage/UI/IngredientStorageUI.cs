@@ -15,7 +15,7 @@ public class IngredientStorageUI<TData> : MonoBehaviour, IActivable
         _storage.IngredientCountAdded += CheckChangedIngredient;
     }
 
-    private void Start() {
+    protected virtual void Start() {
         _panel.SetActive(false);
     }
 

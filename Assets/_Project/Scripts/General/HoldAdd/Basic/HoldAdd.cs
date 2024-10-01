@@ -15,6 +15,7 @@ public abstract class HoldAdd : MonoBehaviour, IBindable<FarmData> {
 
     public HoldAddData Data { get; protected set; }
 
+    public event Action<bool> ClickChanged;
     public event Action<bool> WorkChanged;
     public event Action CountChanged;
     public event Action SetupEnded;
@@ -28,7 +29,7 @@ public abstract class HoldAdd : MonoBehaviour, IBindable<FarmData> {
         UpdateUpgrades();
         Data.SetTimeWait(_timeWait);
 
-        WorkChanged?.Invoke(false);
+        InvokeClickChanged(false);
         SetupEnded?.Invoke();
         CountChanged?.Invoke();
     }
@@ -42,14 +43,15 @@ public abstract class HoldAdd : MonoBehaviour, IBindable<FarmData> {
         Data.UpdateUpgrades(_autoWorkUpgrade);
     }
 
-    public virtual void ChangeWorkMode(bool newValue) {
+    public virtual void ChangeClickMode(bool newValue) {
         if (Data.IsAuto) {
-            InvokeWorkChanged(newValue);
+            InvokeClickChanged(newValue);
             return;
         }
 
         Data.ChangeWork(newValue);
-        InvokeWorkChanged(Data.IsWork);
+        InvokeClickChanged(newValue);
+        InvokeWorkChanged(newValue);
     }
 
     protected virtual void Update() {
@@ -85,10 +87,12 @@ public abstract class HoldAdd : MonoBehaviour, IBindable<FarmData> {
     }
 
     public virtual void CheckAddedUpgrade(BaseUpgrade upgrade) {
-        if (upgrade == _unlockUpgrade)
+        if (upgrade == _unlockUpgrade) {
             Data.Unlock();
-        else if (upgrade == _autoWorkUpgrade)
+        } else if (upgrade == _autoWorkUpgrade) {
             Data.MakeAuto();
+            InvokeWorkChanged(true);
+        }
 
         UpdateUpgrades();
     }
@@ -97,7 +101,15 @@ public abstract class HoldAdd : MonoBehaviour, IBindable<FarmData> {
         LateStart();
     }
 
+    protected void InvokeClickChanged(bool isWork) {
+        ClickChanged?.Invoke(isWork);
+    }
+
     protected void InvokeWorkChanged(bool isWork) {
         WorkChanged?.Invoke(isWork);
+    }
+
+    protected void InvokeCountChanged() {
+        CountChanged?.Invoke();
     }
 }

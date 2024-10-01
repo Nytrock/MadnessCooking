@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 
 public class ChickensUI : MonoBehaviour, IActivable {
-    [SerializeField] private Chickens _chickens;
+    [SerializeField] private BarnChickens _chickens;
     [SerializeField] private GameObject _panel;
     [SerializeField] private Button _feedButton;
     [SerializeField] private LocalizedText _feedText;

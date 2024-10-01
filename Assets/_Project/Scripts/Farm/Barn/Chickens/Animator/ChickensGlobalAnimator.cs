@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public class ChickensGlobalAnimator : MonoBehaviour {
-    [SerializeField] private Chickens _chickens;
+    [SerializeField] private BarnChickens _chickens;
     [SerializeField] private ChickenAnimator[] _chickensAnimators;
 
     private void Awake() {

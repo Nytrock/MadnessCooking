@@ -153,11 +153,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 19
+        y: 26
         width: 29
-        height: 33
+        height: 32
       alignment: 9
-      pivot: {x: 0.4827586, y: 0}
+      pivot: {x: 0.4827586, y: -0.03125}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -174,7 +174,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 11
+        y: 15
         width: 11
         height: 7
       alignment: 0
@@ -195,7 +195,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 12
-        y: 6
+        y: 10
         width: 9
         height: 12
       alignment: 9
@@ -216,7 +216,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 22
-        y: 0
+        y: 4
         width: 1
         height: 18
       alignment: 0
@@ -237,7 +237,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 6
+        y: 10
         width: 5
         height: 4
       alignment: 9
@@ -258,7 +258,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 6
+        y: 10
         width: 3
         height: 1
       alignment: 9
@@ -279,7 +279,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 2
-        y: 9
+        y: 13
         width: 3
         height: 1
       alignment: 9
@@ -300,7 +300,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 24
-        y: 2
+        y: 6
         width: 14
         height: 16
       alignment: 0
@@ -321,7 +321,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 30
-        y: 23
+        y: 27
         width: 7
         height: 7
       alignment: 0
@@ -342,7 +342,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 30
-        y: 19
+        y: 23
         width: 3
         height: 3
       alignment: 0
@@ -363,7 +363,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 34
-        y: 19
+        y: 23
         width: 3
         height: 3
       alignment: 0
@@ -375,6 +375,48 @@ TextureImporter:
       bones: []
       spriteID: 0f582521edc95c9449561a02985b6edd
       internalID: -93264621
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WellGrass
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 23
+        width: 23
+        height: 2
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 618ef0d44a665a94b90b38d82abeea1d
+      internalID: 256798455
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WellGrassPart
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 23
+        width: 1
+        height: 1
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a2d548168bc6473448b08ad00fea0a45
+      internalID: -2127901010
       vertices: []
       indices: 
       edges: []
@@ -396,6 +438,8 @@ TextureImporter:
       WaterBucket: -1952700526
       Well: 1347717219
       WellDrum: 235860836
+      WellGrass: 256798455
+      WellGrassPart: -2127901010
       WellHandle: -608424370
       WellHandleSide1: 1630295400
       WellHandleSide2: -1240572486

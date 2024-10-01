@@ -5,6 +5,6 @@ public class LocationActivatorAudio : SwitchableAudioSource {
 
     protected override void Awake() {
         base.Awake();
-        _activator.StateChanged += SwitchState;
+        _activator.StateChanged += SwitchStateAndPlay;
     }
 }

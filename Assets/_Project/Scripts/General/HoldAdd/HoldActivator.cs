@@ -11,7 +11,7 @@ public class HoldActivator : MonoBehaviour {
             return;
 
         _isMouseDown = true;
-        _hold.ChangeWorkMode(true);
+        _hold.ChangeClickMode(true);
     }
 
     private void OnMouseExit() {
@@ -19,7 +19,7 @@ public class HoldActivator : MonoBehaviour {
             return;
 
         _isMouseDown = false;
-        _hold.ChangeWorkMode(false);
+        _hold.ChangeClickMode(false);
     }
 
     private void OnMouseUp() {
@@ -27,6 +27,6 @@ public class HoldActivator : MonoBehaviour {
             return;
 
         _isMouseDown = false;
-        _hold.ChangeWorkMode(false);
+        _hold.ChangeClickMode(false);
     }
 }

@@ -27,4 +27,9 @@ public class Cow : NeedHoldAdd {
         if (Data.IsUnlocked)
             _ingredientsManager.AddItem(ConstIngredients.Instance.Milk);
     }
+
+    public void SetMaterial(int wheatCount) {
+        NeedHoldData.SetMaterial(wheatCount);
+        InvokeCountChanged();
+    }
 }

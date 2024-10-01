@@ -15,6 +15,7 @@ public class BarnStorage : IngredientStorage {
 
     private void Awake() {
         Data = new(_defaultMaxSpace);
+
         _cow.CountChanged += UpdateMilkCount;
         _flourMill.CountChanged += UpdateFlourCount;
     }
@@ -26,6 +27,7 @@ public class BarnStorage : IngredientStorage {
 
     private void UpdateMilkCount() {
         int difference = _cow.Data.ReadyCount - _milkCount;
+
         if (difference > 0)
             PutIngredientWithRemain(_milk, difference);
         else if (difference < 0)

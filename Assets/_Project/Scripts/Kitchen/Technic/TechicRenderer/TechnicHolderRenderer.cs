@@ -14,6 +14,15 @@ public class TechnicHolderRenderer : MonoBehaviour {
         _data = data;
     }
 
+    [ContextMenu("Hide brokennes")]
+    private void HideBrokennes() {
+        foreach (var stage in _brokennessStages)
+            stage.ChangeState(false);
+
+        _standardVisual.SetActive(true);
+        _brokenVisual.SetActive(false);
+    }
+
     public virtual void ChangeState(bool newState) {
         gameObject.SetActive(newState);
         foreach (var visual in _stateVisuals)

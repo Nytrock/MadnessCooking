@@ -14,6 +14,7 @@ public class FarmWell : HoldAdd {
     private Animator _animator;
 
     public event Action WaterChanged;
+    public event Action<float> SpeedChanged;
 
     protected override void Awake() {
         base.Awake();
@@ -37,25 +38,28 @@ public class FarmWell : HoldAdd {
         WaterChanged?.Invoke();
     }
 
-    private void ChangePause(bool newValue) {
-        _isPause = newValue;
+    private void ChangePause(bool newState) {
+        _isPause = newState;
 
-        if (newValue) {
+        if (newState) {
             _pauseNowTime = 0;
             _pauseNeedTime = _pauseTime * Data.NowTime / _timeWait;
         }
 
         float period = _turnCount / _timeWait;
-        _animator.SetBool("isPause", newValue);
-        _animator.SetFloat("speed", newValue ? -period * Data.NowTime / _pauseTime : period);
+        _animator.SetBool("isPause", newState);
+
+        float speed = newState ? -period * Data.NowTime / _pauseTime : period;
+        _animator.SetFloat("speed", speed);
+        SpeedChanged?.Invoke(speed);
     }
 
-    public override void ChangeWorkMode(bool newValue) {
+    public override void ChangeClickMode(bool newValue) {
         if (!newValue && !Data.IsAuto)
             ChangePause(true);
         ChangeAnimationState(newValue || Data.IsAuto);
 
-        base.ChangeWorkMode(newValue);
+        base.ChangeClickMode(newValue);
         _cameraManager.ChangeWorkMode(!newValue);
     }
 

@@ -19,15 +19,16 @@ public class BuyableItemCount<TItem>
         _count = count;
     }
 
+    public BuyableItemCount(BuyableItemCount<TItem> buyableItemCount) {
+        _item = buyableItemCount._item;
+        _count = buyableItemCount._count;
+    }
+
     public void ChangeCount(int count) {
         if (_count + count < 0)
             _count = 0;
         else
             _count += count;
         CountChanged?.Invoke(_count);
-    }
-
-    public BuyableItemCount<TItem> Copy() {
-        return new(_item, _count);
     }
 }

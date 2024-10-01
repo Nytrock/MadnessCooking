@@ -19,13 +19,13 @@ public abstract class NeedHoldAdd : HoldAdd {
         base.UpdateTimer();
     }
 
-    public override void ChangeWorkMode(bool newValue) {
+    public override void ChangeClickMode(bool newValue) {
         if (NeedHoldData.MaterialCount == 0) {
-            InvokeWorkChanged(newValue);
+            InvokeClickChanged(newValue);
             return;
         }
 
-        base.ChangeWorkMode(newValue);
+        base.ChangeClickMode(newValue);
     }
 
     protected override void AddReady() {
@@ -33,7 +33,7 @@ public abstract class NeedHoldAdd : HoldAdd {
         base.AddReady();
 
         if (NeedHoldData.MaterialCount == 0)
-            Data.ChangeWork(false);
+            InvokeWorkChanged(false);
     }
 
     public void AddMaterial(int count) {

@@ -41,5 +41,7 @@ public class FarmShopRobot : MonoBehaviour {
 
         if (state == FarmShopRobotState.Note)
             _noteText.SetText(_note);
+        else
+            _noteText.StopAnimation();
     }
 }

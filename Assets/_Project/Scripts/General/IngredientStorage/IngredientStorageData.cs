@@ -18,7 +18,7 @@ public class IngredientStorageData {
         if (defaultIngredients == null)
             _ingredients = new();
         else
-            _ingredients = defaultIngredients.Copy();
+            _ingredients = new(defaultIngredients);
 
         _maxSpace = maxSize;
         _nowSpace = 0;

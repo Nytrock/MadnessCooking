@@ -9,7 +9,7 @@ public class HoldAddUI : MonoBehaviour {
 
     private void Awake() {
         _holdAdd.CountChanged += UpdateCount;
-        _holdAdd.WorkChanged += ChangeUI;
+        _holdAdd.ClickChanged += ChangeUI;
         _holdAdd.SetupEnded += SetMaxValue;
     }
 

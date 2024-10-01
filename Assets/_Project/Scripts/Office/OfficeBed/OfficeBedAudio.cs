@@ -5,6 +5,6 @@ public class OfficeBedAudio : SwitchableAudioSource {
 
     protected override void Awake() {
         base.Awake();
-        _bed.SleepChanged += SwitchState;
+        _bed.SleepChanged += SwitchStateAndPlay;
     }
 }

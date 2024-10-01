@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Chickens : MonoBehaviour, IBindable<FarmData> {
+public class BarnChickens : MonoBehaviour, IBindable<FarmData> {
     [SerializeField] private FarmCar _car;
     [SerializeField] private UpgradeManager _upgradeManager;
     [SerializeField] private IngredientsManager _ingredientsManager;
