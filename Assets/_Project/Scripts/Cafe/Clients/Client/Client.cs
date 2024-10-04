@@ -9,19 +9,26 @@ public class Client : MonoBehaviour {
     private readonly ClientSitState _sitState = new();
 
     [SerializeField] private ClientSkin _skin;
+    [SerializeField] private ClientGender _gender;
     [SerializeField] private RangeFloat _waitTime;
+
     private ClientsHolder _table;
+    private CafeSpot _spot;
+    private CafeSeat _seat;
 
     public ClientData Data { get; private set; }
     public ClientsSpawner Spawner { get; private set; }
     public ClientUI ClientUI { get; private set; }
     public int SpotIndex { get; private set; }
-    public int TableIndex { get; private set; }
+    public int SeatIndex { get; private set; }
+
+    public ClientGender Gender => _gender;
 
     public event Action<Client> OrderActivated;
     public event Action<Client> ClientLeave;
     public event Action<Client> ClientRejected;
     public event Action<Client> ClientEat;
+    public event Action ClientSetup;
 
     private void Awake() {
         ClientUI = GetComponent<ClientUI>();
@@ -65,21 +72,24 @@ public class Client : MonoBehaviour {
     }
 
     private void RotateSkin() {
-        CafeSpot spot = Spawner.GetSpot(SpotIndex);
-        _skin.RotateSkin(spot.GetSeatRotation(TableIndex));
+        _skin.RotateSkin(_seat.SeatDirection);
     }
 
     public void TakeSeat() {
         RotateSkin();
         _skin.ChangeSortingLayer(false);
         _skin.ChangeWalkState(false);
+        _seat.ChangeSeatState(true);
     }
 
     public void Setup(ClientSettings settings) {
         Spawner = settings.Spawner;
 
-        TableIndex = settings.TableIndex;
         SpotIndex = settings.SpotIndex;
+        SeatIndex = settings.SeatIndex;
+
+        _spot = Spawner.GetSpot(SpotIndex);
+        _seat = _spot.GetSeat(SeatIndex);
 
         Data = settings.Data;
         Data.SetWaitTime(_waitTime.RandomValue);
@@ -94,10 +104,11 @@ public class Client : MonoBehaviour {
         if (Data.State == ClientState.Leave)
             return;
 
-        CafeSpot spot = Spawner.GetSpot(SpotIndex);
-        if (!spot.TryGetComponent(out _table))
+        if (!_spot.TryGetComponent(out _table))
             throw new ArgumentNullException("Spot doesn't have the required class ClientGroupHolder");
         _table.WaitStarted += Sit;
+
+        ClientSetup?.Invoke();
     }
 
     public void ActivateOrder() {
@@ -130,6 +141,7 @@ public class Client : MonoBehaviour {
         ChangeState();
         ClientUI.ChangeSliderState(false);
         ClientUI.ChangeFoodChoiceState(false);
+        _seat.ChangeSeatState(false);
     }
 
     public void FoodRejected() {
@@ -160,13 +172,11 @@ public class Client : MonoBehaviour {
     }
 
     public void SetSpotTableFood() {
-        CafeSpot spot = Spawner.GetSpot(SpotIndex);
-        spot.SetTableFoodSprite(Data.Order.Food, TableIndex);
+        _spot.SetTableFoodSprite(Data.Order.Food, SeatIndex);
     }
 
     public void ResetSpotTableFood() {
-        CafeSpot spot = Spawner.GetSpot(SpotIndex);
-        spot.ResetTableFoodSprite(TableIndex);
+        _spot.ResetTableFoodSprite(SeatIndex);
     }
 
     private void WaitOthers() {

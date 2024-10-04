@@ -2,22 +2,28 @@ using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
 public class TechnicHolderAnimator : MonoBehaviour {
-    protected TechnicHolderData _data;
+    [SerializeField] private TechnicHolder _technicHolder;
+    [SerializeField] private TechnicHolderAnimationAddition[] _additions;
     protected Animator _animator;
 
     private void Awake() {
         _animator = GetComponent<Animator>();
+        _technicHolder.CookChanged += UpdateCookAnimation;
     }
 
-    public void SetData(TechnicHolderData data) {
-        _data = data;
+    public void UpdateCookAnimation() {
+        _animator.SetBool("isCooking", _technicHolder.Data.IsCooking);
+        UpdateAdditions();
     }
 
-    public virtual void UpdateAnimation() {
-        _animator.SetBool("isCooking", _data.IsCooking);
-    }
-
-    public virtual void TestAnimation() {
+    [ContextMenu("TestAnimation")]
+    public void TestCookAnimation() {
         _animator.SetBool("isCooking", !_animator.GetBool("isCooking"));
+        UpdateAdditions(true);
+    }
+
+    private void UpdateAdditions(bool isTest = false) {
+        foreach (var addition in _additions)
+            addition.UpdateAnimation(_technicHolder.Data, isTest);
     }
 }

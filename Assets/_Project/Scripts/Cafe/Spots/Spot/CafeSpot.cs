@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CafeSpot : MonoBehaviour {
     [SerializeField] private CafeSeat[] _seats;
-    [SerializeField] private TableFoodView[] _tableFoods;
+    [SerializeField] private TableFoodRenderer[] _tableFoods;
     [SerializeField] private GameObject _border;
     [SerializeField] private SpotRemoveButton _removeButton;
     private int _index;
@@ -20,10 +20,10 @@ public class CafeSpot : MonoBehaviour {
 
     public Vector2 GetTarget(int index) => _seats[index].transform.position;
 
-    public Direction GetSeatRotation(int index) => _seats[index].SeatDirection;
+    public CafeSeat GetSeat(int index) => _seats[index];
 
     public void SetTableFoodSprite(Food food, int index) {
-        _tableFoods[index].ShowSprite(food.MiniSprite);
+        _tableFoods[index].ShowFood(food);
     }
 
     public void SetCameraManager(CameraManager cameraManager) {
@@ -31,7 +31,7 @@ public class CafeSpot : MonoBehaviour {
     }
 
     public void ResetTableFoodSprite(int index) {
-        _tableFoods[index].HideSprite();
+        _tableFoods[index].HideFood();
     }
 
     public void ChangeEditorState(bool state, bool isPreview = false) {

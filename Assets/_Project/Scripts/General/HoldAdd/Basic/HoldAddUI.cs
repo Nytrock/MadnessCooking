@@ -7,8 +7,8 @@ public class HoldAddUI : MonoBehaviour {
     [SerializeField] private Slider _progressBar;
     [SerializeField] private CountRenderer _readyCount;
 
-    private void Awake() {
-        _holdAdd.CountChanged += UpdateCount;
+    protected virtual void Awake() {
+        _holdAdd.ReadyCountChanged += UpdateReadyCount;
         _holdAdd.ClickChanged += ChangeUI;
         _holdAdd.SetupEnded += SetMaxValue;
     }
@@ -25,7 +25,7 @@ public class HoldAddUI : MonoBehaviour {
         _UI.SetActive(isWork);
     }
 
-    public virtual void UpdateCount() {
+    public void UpdateReadyCount() {
         _readyCount.UpdateCount(_holdAdd.Data.ReadyCount);
     }
 }

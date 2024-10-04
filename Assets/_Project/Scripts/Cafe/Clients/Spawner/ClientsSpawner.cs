@@ -12,7 +12,7 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
     [SerializeField] private OrdersManager _ordersManager;
     [SerializeField] private FoodManager _foodManager;
     [SerializeField] private TutorialManager _tutorialManager;
-    [SerializeField] private ClientsPool _pool;
+    [SerializeField] private ClientsPoolsManager _pool;
     [SerializeField] private RangeFloat _spawnTime;
 
     [Header("Upgrades")]
@@ -131,10 +131,10 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
             _data.AddLeavingClient(spotData.GetClient(i));
     }
 
-    private void SetupClient(Client client, int spotIndex, int tableIndex) {
+    private void SetupClient(Client client, int spotIndex, int seatIndex) {
         client.ClientUI.SetData(_upgradeData);
-        ClientData clientData = _spotData.GetSpot(spotIndex).GetClient(tableIndex);
-        ClientSettings clientSettings = new(clientData, spotIndex, tableIndex, this);
+        ClientData clientData = _spotData.GetSpot(spotIndex).GetClient(seatIndex);
+        ClientSettings clientSettings = new(clientData, spotIndex, seatIndex, this);
         client.Setup(clientSettings);
         _ordersManager.SetNewOrder(client);
         _cafeOpener.CafeChanged += client.Leave;

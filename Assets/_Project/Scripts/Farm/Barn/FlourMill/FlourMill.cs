@@ -40,9 +40,4 @@ public class FlourMill : NeedHoldAdd {
         _animator.SetBool("isHold", newState);
         _flourParticle.ChangeState(newState);
     }
-
-    public void SetMaterial(int wheatCount) {
-        NeedHoldData.SetMaterial(wheatCount);
-        InvokeCountChanged();
-    }
 }

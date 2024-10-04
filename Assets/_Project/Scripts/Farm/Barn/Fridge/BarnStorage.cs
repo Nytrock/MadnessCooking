@@ -16,8 +16,8 @@ public class BarnStorage : IngredientStorage {
     private void Awake() {
         Data = new(_defaultMaxSpace);
 
-        _cow.CountChanged += UpdateMilkCount;
-        _flourMill.CountChanged += UpdateFlourCount;
+        _cow.ReadyCountChanged += UpdateMilkCount;
+        _flourMill.ReadyCountChanged += UpdateFlourCount;
     }
 
     private void Start() {

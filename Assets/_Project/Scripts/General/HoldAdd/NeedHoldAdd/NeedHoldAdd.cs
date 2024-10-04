@@ -6,10 +6,14 @@ public abstract class NeedHoldAdd : HoldAdd {
 
     public NeedHoldAddData NeedHoldData => Data as NeedHoldAddData;
 
+    public event Action MaterialCountChanged;
+
     protected override void LateStart() {
         if (NeedHoldData == null)
             throw new ArgumentNullException("Argument for data or for UI are null");
         base.LateStart();
+
+        MaterialCountChanged?.Invoke();
     }
 
     protected override void UpdateTimer() {
@@ -29,22 +33,30 @@ public abstract class NeedHoldAdd : HoldAdd {
     }
 
     protected override void AddReady() {
-        NeedHoldData.SubstractMaterial();
+        SubstractMaterial();
         base.AddReady();
 
         if (NeedHoldData.MaterialCount == 0)
             InvokeWorkChanged(false);
     }
 
-    public void AddMaterial(int count) {
-        NeedHoldData.AddMaterial(count);
+    public void SubstractMaterial() {
+        NeedHoldData.SubstractMaterial();
+        MaterialCountChanged?.Invoke();
     }
 
-    public void AddMaterial() {
-        NeedHoldData.AddMaterial();
+    public void AddMaterial(int count) {
+        NeedHoldData.AddMaterial(count);
+        MaterialCountChanged?.Invoke();
+    }
+
+    public void SetMaterial(int count) {
+        NeedHoldData.SetMaterial(count);
+        MaterialCountChanged?.Invoke();
     }
 
     public void ClearMaterials() {
         NeedHoldData.SetMaterial(0);
+        MaterialCountChanged?.Invoke();
     }
 }

@@ -17,7 +17,7 @@ public abstract class HoldAdd : MonoBehaviour, IBindable<FarmData> {
 
     public event Action<bool> ClickChanged;
     public event Action<bool> WorkChanged;
-    public event Action CountChanged;
+    public event Action ReadyCountChanged;
     public event Action SetupEnded;
 
     protected virtual void Awake() {
@@ -31,7 +31,7 @@ public abstract class HoldAdd : MonoBehaviour, IBindable<FarmData> {
 
         InvokeClickChanged(false);
         SetupEnded?.Invoke();
-        CountChanged?.Invoke();
+        ReadyCountChanged?.Invoke();
     }
 
     private void ResetAll() {
@@ -73,17 +73,17 @@ public abstract class HoldAdd : MonoBehaviour, IBindable<FarmData> {
 
     protected virtual void AddReady() {
         Data.AddReady();
-        CountChanged?.Invoke();
+        ReadyCountChanged?.Invoke();
     }
 
     public void SetReady(int count) {
         Data.SetReady(count);
-        CountChanged?.Invoke();
+        ReadyCountChanged?.Invoke();
     }
 
     public virtual void SubtractReady() {
         Data.SubtractReady();
-        CountChanged?.Invoke();
+        ReadyCountChanged?.Invoke();
     }
 
     public virtual void CheckAddedUpgrade(BaseUpgrade upgrade) {
@@ -107,9 +107,5 @@ public abstract class HoldAdd : MonoBehaviour, IBindable<FarmData> {
 
     protected void InvokeWorkChanged(bool isWork) {
         WorkChanged?.Invoke(isWork);
-    }
-
-    protected void InvokeCountChanged() {
-        CountChanged?.Invoke();
     }
 }

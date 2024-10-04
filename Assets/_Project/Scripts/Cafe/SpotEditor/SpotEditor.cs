@@ -27,6 +27,9 @@ public class SpotEditor : MonoBehaviour {
     }
 
     public void ChangeWorkMode(bool newState) {
+        if (newState == _isActive)
+            return;
+
         _isActive = newState;
         ChangeEditorState();
     }

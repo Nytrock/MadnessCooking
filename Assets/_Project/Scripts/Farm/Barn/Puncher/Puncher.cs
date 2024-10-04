@@ -22,8 +22,11 @@ public class Puncher : MonoBehaviour, IBindable<FarmData> {
     }
 
     public void AddWaste(float wasteAmount) {
+        int oldCount = Data.FertilizerCount;
         Data.AddWaste(wasteAmount);
-        FertilizerChanged?.Invoke();
+
+        if (oldCount != Data.FertilizerCount)
+            FertilizerChanged?.Invoke();
     }
 
     public void SubtractFertilizer() {

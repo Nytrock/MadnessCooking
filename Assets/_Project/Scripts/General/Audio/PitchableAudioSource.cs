@@ -3,13 +3,13 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class PitchableAudioSource : MonoBehaviour {
     [SerializeField] private RangeFloat _pitch;
-    private AudioSource _audioSource;
+    protected AudioSource _audioSource;
 
     private void Awake() {
         _audioSource = GetComponent<AudioSource>();
     }
 
-    public void Play() {
+    public virtual void Play() {
         _audioSource.pitch = _pitch.RandomValue;
         _audioSource.Play();
     }

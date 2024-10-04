@@ -10,12 +10,15 @@ public class WheatManager : MonoBehaviour, IUpgradeable<FarmUpgradeData>, IBinda
     private FarmUpgradeData _upgradeData;
 
     private void Awake() {
-        _cow.CountChanged += MakeWheatSame;
-        _flourMill.CountChanged += MakeWheatSame;
+        _cow.ReadyCountChanged += MakeWheatSame;
+        _flourMill.ReadyCountChanged += MakeWheatSame;
     }
 
     [ContextMenu("AddWheat")]
     private void TestAddWheat() {
+        if (!Application.isPlaying)
+            return;
+
         AddWheat(2);
     }
 
@@ -48,11 +51,19 @@ public class WheatManager : MonoBehaviour, IUpgradeable<FarmUpgradeData>, IBinda
     public void CheckAddedUpgrade(BaseUpgrade upgrade) {
         if (upgrade == _wheatDistributeUpgrade) {
             _upgradeData.ChangeWheatDistributing();
-            int count = _cow.NeedHoldData.MaterialCount;
-            _cow.ClearMaterials();
-            _flourMill.ClearMaterials();
-            DistributeWheat(count);
+
+            if (!_data.IsWheatDistributed)
+                DistributeWheatAfterUpgrade();
         }
+    }
+
+    private void DistributeWheatAfterUpgrade() {
+        int count = _cow.NeedHoldData.MaterialCount;
+        _cow.ClearMaterials();
+        _flourMill.ClearMaterials();
+        DistributeWheat(count);
+
+        _data.DistributeWheat();
     }
 
     private void DistributeWheat(int count) {

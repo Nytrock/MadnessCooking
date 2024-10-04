@@ -1,70 +1,56 @@
+using System;
 using UnityEngine;
 
-[RequireComponent(typeof(TechnicHolderRenderer))]
 public class TechnicHolder : MonoBehaviour {
     [SerializeField] private Technic _technic;
-    [SerializeField] private TechnicHolderUI _UI;
     [SerializeField] private Transform _UITarget;
-    [SerializeField] private TechnicHolderAnimator _animator;
 
-    [field: SerializeField] public TechnicHolderData Data { get; private set; }
     private KitchenUpgradeData _upgradeData;
-    private TechnicHolderRenderer _renderer;
+
+    public TechnicHolderData Data { get; private set; }
 
     public Transform UITarget => _UITarget;
     public Technic Technic => _technic;
 
-    private void Awake() {
-        _renderer = GetComponent<TechnicHolderRenderer>();
-    }
+    public event Action<bool> StateChanged;
+    public event Action RepairChanged;
+    public event Action CookChanged;
 
     private void LateStart() {
         Data.CookStoped += StopCook;
         Data.RepairStoped += StopRepair;
 
-        _renderer.SetData(Data);
-        _animator.SetData(Data);
-
-        _renderer.UpdateVisual();
+        CookChanged?.Invoke();
+        RepairChanged?.Invoke();
     }
 
     private void Update() {
         Data.Update();
     }
 
-    [ContextMenu("TestAnimation")]
-    public void TestAnimation() {
-        _animator.TestAnimation();
-    }
-
-    public virtual void ChangeState(bool newState) {
-        _renderer.ChangeState(newState);
+    public void ChangeState(bool newState) {
+        StateChanged?.Invoke(newState);
     }
 
     public void StartCook(Order order) {
         Data.StartCook(_upgradeData, order);
-        _UI.StartWork();
-        _renderer.UpdateVisual();
-        _animator.UpdateAnimation();
+        CookChanged?.Invoke();
     }
 
     private void StopCook() {
         if (!Data.IsCooking)
             return;
 
-        _UI.StopWork();
-        _renderer.UpdateVisual();
-        _animator.UpdateAnimation();
+        CookChanged?.Invoke();
     }
 
     public void StartRepair() {
         Data.StartRepair(_upgradeData);
-        _UI.StartWork();
+        RepairChanged?.Invoke();
     }
 
     private void StopRepair() {
-        _UI.StopWork();
-        _renderer.UpdateVisual();
+        RepairChanged?.Invoke();
     }
 
     public void Bind(KitchenData data, int index) {
@@ -72,7 +58,6 @@ public class TechnicHolder : MonoBehaviour {
 
         data.TechnicHolders[index] ??= new(_technic);
         Data = data.TechnicHolders[index];
-        _UI.SetData(Data);
 
         LateStart();
     }

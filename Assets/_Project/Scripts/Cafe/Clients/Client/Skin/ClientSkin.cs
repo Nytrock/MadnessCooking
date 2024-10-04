@@ -9,6 +9,7 @@ public class ClientSkin : MonoBehaviour {
     [SerializeField, Min(0)] private int _foregroundSortingLayer;
     [SerializeField, Min(0)] private int _backgroundSortingLayer;
     [SerializeField] private ClientSkinPart[] _skinParts;
+    [SerializeField] private ClientWalkAudio _walkAudio;
 
     private Transform _skin;
     private SortingGroup _sortingGroup;
@@ -86,5 +87,9 @@ public class ClientSkin : MonoBehaviour {
 
     public void ChangeEnable(bool value) {
         _animator.enabled = value;
+    }
+
+    public void PlayWalkSound() {
+        _walkAudio.Play();
     }
 }

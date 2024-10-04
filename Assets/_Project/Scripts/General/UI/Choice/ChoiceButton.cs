@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(Button), typeof(Animator))]
+[RequireComponent(typeof(ButtonWithAudio), typeof(Animator))]
 public abstract class ChoiceButton<TItem> : MonoBehaviour
     where TItem : BuyableItem {
     [SerializeField] protected Image _icon;
