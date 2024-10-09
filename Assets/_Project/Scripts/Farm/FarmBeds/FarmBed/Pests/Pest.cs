@@ -18,7 +18,7 @@ public class Pest : MonoBehaviour {
         gameObject.SetActive(value);
     }
 
-    public void Randomize(RangeVector position, int prefabIndex) {
+    public void Randomize(RangeVector localPosition, RangeVector globalPosition, int prefabIndex) {
         int spriteIndex = -1;
         if (_isSpriteChanging) {
             spriteIndex = Random.Range(0, _sprites.Length);
@@ -26,12 +26,12 @@ public class Pest : MonoBehaviour {
         }
 
         if (_isMovable)
-            transform.position = position.RandomValue;
+            transform.position = localPosition.RandomValue;
 
         if (_isRotatable)
             transform.rotation = Quaternion.Euler(0, 0, Random.Range(0, 360f));
 
-        Vector2 normalizedPosition = position.InverseLerp(transform.position);
+        Vector2 normalizedPosition = globalPosition.InverseLerp(transform.position);
         Data = new(prefabIndex, spriteIndex, new(transform.rotation),
             new(transform.position), new(normalizedPosition));
     }

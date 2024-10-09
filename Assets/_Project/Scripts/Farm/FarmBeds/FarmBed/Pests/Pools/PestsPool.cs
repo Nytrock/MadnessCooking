@@ -2,7 +2,8 @@ using UnityEngine;
 
 public abstract class PestsPool : Pool<Pest> {
     [Header("Borders")]
-    [SerializeField] private RangeVector _position;
+    [SerializeField] private RangeVector _localPosition;
+    [SerializeField] private RangeVector _globalPosition;
     protected int _lastId;
 
     public Pest GetObject(int id) {
@@ -10,7 +11,7 @@ public abstract class PestsPool : Pool<Pest> {
         Pest pest = base.GetObject();
 
         pest.ChangeState(true);
-        pest.Randomize(_position, id);
+        pest.Randomize(_localPosition, _globalPosition, id);
         return pest;
     }
 
@@ -19,7 +20,7 @@ public abstract class PestsPool : Pool<Pest> {
         Pest pest = base.GetObject();
 
         pest.ChangeState(true);
-        pest.Randomize(_position, _lastId);
+        pest.Randomize(_localPosition, _globalPosition, _lastId);
         return pest;
     }
 

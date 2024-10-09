@@ -56,7 +56,7 @@ public class FarmBed : MonoBehaviour {
         }
 
         if (_upgradeData.IsGrowStatusShow)
-            _growStatusSlider.UpdateSlider(Data.NowTime);
+            _growStatusSlider.SetValue(Data.NowTime);
     }
 
     public void ResetIngredient() {
@@ -98,8 +98,11 @@ public class FarmBed : MonoBehaviour {
     public void SetIngredient(Ingredient ingredient) {
         Data.SetIngredient(ingredient);
         _bedHolder.SetIngredient();
+
         _growTime = ingredient.TimeGrow;
-        _growStatusSlider.SetMaxTime(_growTime);
+        _growStatusSlider.SetMaxValue(_growTime);
+        _growStatusSlider.SetValue(0);
+
         UpdateUpgrades();
     }
 
@@ -153,7 +156,7 @@ public class FarmBed : MonoBehaviour {
     }
 
     private void UpdateUpgrades() {
-        _growStatusSlider.SetActive(_upgradeData.IsGrowStatusShow && Data.PlantedIngredient != null);
+        _growStatusSlider.ChangeState(_upgradeData.IsGrowStatusShow && Data.PlantedIngredient != null);
     }
 
     public bool HaveUpgrade(FarmBedUpgrade upgrade) => _upgrader.HaveUpgrade(upgrade);

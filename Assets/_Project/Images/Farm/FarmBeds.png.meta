@@ -153,11 +153,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 41
+        y: 190
         width: 42
         height: 42
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -170,15 +170,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: FarmBedStandard
+      name: FarmBedStandardFrame
       rect:
         serializedVersion: 2
-        x: 43
-        y: 43
+        x: 0
+        y: 149
         width: 40
         height: 40
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -191,15 +191,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: FarmBedDesert
+      name: FarmBedDesertFrame
       rect:
         serializedVersion: 2
-        x: 84
-        y: 43
+        x: 0
+        y: 108
         width: 40
         height: 40
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -212,15 +212,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: FarmBedWater
+      name: FarmBedWaterFrame
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 40
-        height: 40
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        y: 64
+        width: 44
+        height: 43
+      alignment: 9
+      pivot: {x: 0.5, y: 0.4883721}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -233,15 +233,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: FarmBedMeat
+      name: FarmBedMeatMain
       rect:
         serializedVersion: 2
-        x: 43
-        y: 0
+        x: 0
+        y: 23
         width: 40
         height: 40
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -257,12 +257,12 @@ TextureImporter:
       name: FarmBedGhost
       rect:
         serializedVersion: 2
-        x: 84
+        x: 0
         y: 0
         width: 40
-        height: 40
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        height: 22
+      alignment: 9
+      pivot: {x: 0.5, y: 0.90909094}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -270,6 +270,468 @@ TextureImporter:
       bones: []
       spriteID: a1d20b9e59ee1d84e828ebe3da20a664
       internalID: 1922736956
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FarmBedStandardFertilize
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 163
+        width: 26
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1d9a0d843d637dc45925b2711ee5ea53
+      internalID: 1576505062
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FarmBedStandardWater
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 159
+        width: 30
+        height: 30
+      alignment: 9
+      pivot: {x: 0.53333336, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb7e5c053484c8c42aa2065cf22e7399
+      internalID: 1289590536
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FarmBedDesertFertilize
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 121
+        width: 26
+        height: 27
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5185185}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3b3dd145587617e4abec7c3710fbc08a
+      internalID: -1099231471
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FarmBedDesertWater
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 118
+        width: 30
+        height: 30
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c405ab266ceb75429cc0ed653894130
+      internalID: 2076298669
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FarmBedWaterWater
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 69
+        width: 38
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9971fa126103d764883d6d9df5a48940
+      internalID: -1101444372
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FarmBedWaterFertilize
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 81
+        width: 26
+        height: 26
+      alignment: 9
+      pivot: {x: 0.4615385, y: 0.4615385}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ee07d26cca663e4eb4483b3c32558c4
+      internalID: -295445759
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FarmBedWaterDirt
+      rect:
+        serializedVersion: 2
+        x: 111
+        y: 69
+        width: 38
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e8a4f940288292542bf0a0a00982b068
+      internalID: 1308316174
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FarmBedMeatCover
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 31
+        width: 40
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.625}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ed1e9c491a9eba94faead2d434423827
+      internalID: 126625223
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FarmBedMeatElevator0
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 30
+        width: 3
+        height: 25
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 47daaf70fa6a9b644810d2a4a530a191
+      internalID: 1574180501
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FarmBedMeatElevator1
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 30
+        width: 3
+        height: 25
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 47954b114cd81ee4b9159a9867919ec5
+      internalID: -1116574967
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FarmBedMeatElevator2
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 56
+        width: 34
+        height: 7
+      alignment: 9
+      pivot: {x: 0.5, y: 0.42857146}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d946dc426cbe6a41a07401871b3f5fd
+      internalID: -1235398061
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FarmBedMeatPrinter
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 46
+        width: 5
+        height: 9
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5555556}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a78310849f04a264fb99aa9f3f7b4aab
+      internalID: 1118773315
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FarmBedMeatPodium
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 49
+        width: 16
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b945fff7aa66ca4a9a62cfd794e4954
+      internalID: -287655230
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FarmBedGhostCover0
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 17
+        width: 22
+        height: 5
+      alignment: 9
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea55a4d8ac3029e438b5c400f9104750
+      internalID: 1878238268
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FarmBedGhostCover1
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 11
+        width: 22
+        height: 5
+      alignment: 9
+      pivot: {x: 0.5, y: -0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43361da212b5eb04c9497907bb54d78c
+      internalID: 333445378
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FarmBedGhostCoverPart
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 10
+        width: 22
+        height: 1
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a624216202511c24f864fe7ed2cd5aea
+      internalID: -1510564484
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FarmBedStandardDirt
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 149
+        width: 39
+        height: 40
+      alignment: 9
+      pivot: {x: 0.51282054, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 10ff93f3656e923438fa88d7917de0cc
+      internalID: -1133329803
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FarmBedDesertDirt
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 108
+        width: 40
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b61ec937f30b24c4cb98c7065ae3bc21
+      internalID: 407276441
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FarmBedsSlider
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 212
+        width: 16
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c7ea91fd9c1d9154089b5b031b5b11b7
+      internalID: -818966788
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FarmBedsSliderFill
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 205
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 381be9d3079f25d42ad2e0ad5d5ec848
+      internalID: 1011819232
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FarmBedGhostShadow
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 14
+        width: 41
+        height: 8
+      alignment: 9
+      pivot: {x: 0.48780486, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d841eedcd94e2d84495ecf3054ed3ff3
+      internalID: 1697356597
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FarmBedMeatShadow
+      rect:
+        serializedVersion: 2
+        x: 117
+        y: 31
+        width: 30
+        height: 1
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6faabaff3bb37e447a5d6d4bd35e694d
+      internalID: -1227585077
       vertices: []
       indices: 
       edges: []
@@ -287,11 +749,33 @@ TextureImporter:
     nameFileIdTable:
       Background: 1901407923
       FarmBedAdd: 880365034
-      FarmBedDesert: 405691242
+      FarmBedDesertDirt: 407276441
+      FarmBedDesertFertilize: -1099231471
+      FarmBedDesertFrame: 405691242
+      FarmBedDesertWater: 2076298669
       FarmBedGhost: 1922736956
-      FarmBedMeat: 586268001
-      FarmBedStandard: 1615824930
-      FarmBedWater: 552856992
+      FarmBedGhostCover0: 1878238268
+      FarmBedGhostCover1: 333445378
+      FarmBedGhostCoverPart: -1510564484
+      FarmBedGhostShadow: 1697356597
+      FarmBedMeatCover: 126625223
+      FarmBedMeatElevator0: 1574180501
+      FarmBedMeatElevator1: -1116574967
+      FarmBedMeatElevator2: -1235398061
+      FarmBedMeatMain: 586268001
+      FarmBedMeatPodium: -287655230
+      FarmBedMeatPrinter: 1118773315
+      FarmBedMeatShadow: -1227585077
+      FarmBedStandardDirt: -1133329803
+      FarmBedStandardFertilize: 1576505062
+      FarmBedStandardFrame: 1615824930
+      FarmBedStandardWater: 1289590536
+      FarmBedWaterDirt: 1308316174
+      FarmBedWaterFertilize: -295445759
+      FarmBedWaterFrame: 552856992
+      FarmBedWaterWater: -1101444372
+      FarmBedsSlider: -818966788
+      FarmBedsSliderFill: 1011819232
       Lamp: 1955946697
       Pot: 470648381
       Window: -805373322

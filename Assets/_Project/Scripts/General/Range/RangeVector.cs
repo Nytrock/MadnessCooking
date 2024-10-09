@@ -26,10 +26,4 @@ public class RangeVector {
         float y = Mathf.Lerp(_leftDown.position.y, _rightUp.position.y, value.y);
         return new(x, y);
     }
-
-    public Vector2 Lerp(float value) {
-        float x = Mathf.Lerp(_leftDown.position.x, _rightUp.position.x, value);
-        float y = Mathf.Lerp(_leftDown.position.y, _rightUp.position.y, value);
-        return new(x, y);
-    }
 }
