@@ -514,7 +514,7 @@ TextureImporter:
         width: 5
         height: 9
       alignment: 9
-      pivot: {x: 0.5, y: 0.5555556}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -724,7 +724,7 @@ TextureImporter:
         width: 30
         height: 1
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -732,6 +732,27 @@ TextureImporter:
       bones: []
       spriteID: 6faabaff3bb37e447a5d6d4bd35e694d
       internalID: -1227585077
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FarmBedGhostForward
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 0
+        width: 30
+        height: 11
+      alignment: 9
+      pivot: {x: 0.5, y: 0.45454547}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: be1db15b1ccf6894caf58bb293ea1f57
+      internalID: -1624620021
       vertices: []
       indices: 
       edges: []
@@ -757,6 +778,7 @@ TextureImporter:
       FarmBedGhostCover0: 1878238268
       FarmBedGhostCover1: 333445378
       FarmBedGhostCoverPart: -1510564484
+      FarmBedGhostForward: -1624620021
       FarmBedGhostShadow: 1697356597
       FarmBedMeatCover: 126625223
       FarmBedMeatElevator0: 1574180501

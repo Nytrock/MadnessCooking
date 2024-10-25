@@ -7,14 +7,14 @@ public abstract class ChoiceBuyUI<TItem> : ChoiceUI<TItem, ChoiceBuyButton<TItem
 
     public virtual void Choice(int index, bool isBuyable) {
         if (_chosedIndex == -1)
-            _description.ChangeActive();
+            _description.ChangeState();
         else
             _choiceButtons[_chosedIndex].ChangeChoosedState();
 
         bool isSame = index == _chosedIndex;
         if (isSame) {
             _chosedIndex = -1;
-            _description.ChangeActive();
+            _description.ChangeState();
             return;
         }
 
@@ -29,6 +29,6 @@ public abstract class ChoiceBuyUI<TItem> : ChoiceUI<TItem, ChoiceBuyButton<TItem
 
     protected override void Activate() {
         base.Activate();
-        _description.ChangeActive(false);
+        _description.ChangeState(false);
     }
 }

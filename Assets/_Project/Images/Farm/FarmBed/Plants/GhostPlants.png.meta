@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c43081d6bc7152a40b29e3d1def2d2fb
+guid: ebf55481f57570241a02b3302b7ef695
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -45,7 +45,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 0
+  spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 6.5
@@ -149,127 +149,106 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: FarmBedChoiceUIPanel
+      name: GhostPlantMain0
       rect:
         serializedVersion: 2
         x: 0
-        y: 10
-        width: 26
-        height: 26
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 4, y: 4, z: 21, w: 21}
+        y: 21
+        width: 11
+        height: 19
+      alignment: 9
+      pivot: {x: 0.45454547, y: 0.5263158}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 67f92f838cfd4074cb8ef16b0e14bf2c
-      internalID: 1600096762
+      spriteID: 90aeaca45a4655043bd118973ce19abe
+      internalID: -1597635580
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: FarmBedChoiceUIBuy
+      name: GhostPlantMain1
       rect:
         serializedVersion: 2
-        x: 14
+        x: 0
         y: 1
-        width: 7
-        height: 8
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 3, y: 3, z: 3, w: 4}
+        width: 11
+        height: 19
+      alignment: 9
+      pivot: {x: 0.45454547, y: 0.5263158}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5ef1daf54f9c0a94da964f1a4fe7e9c6
-      internalID: -1111624648
+      spriteID: e29cf5cab9fc97e48b567fc634d46c14
+      internalID: 2014984158
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: FarmBedChoiceUICell
+      name: GhostPlantGreen0
       rect:
         serializedVersion: 2
-        x: 10
-        y: 6
-        width: 3
-        height: 3
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 1, y: 1, z: 1, w: 1}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: bf4f7d2e64f53e348b894b12d7f4b5cb
-      internalID: 1457706628
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FarmBedChoiceUIDescription
-      rect:
-        serializedVersion: 2
-        x: 10
-        y: 2
-        width: 3
-        height: 3
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 1, y: 1, z: 1, w: 1}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3c6cc2ba1f0abc347be9b8741e065c89
-      internalID: 1197498740
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FarmBedChoiceUIClose
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 9
-        height: 9
-      alignment: 0
+        x: 12
+        y: 28
+        width: 10
+        height: 12
+      alignment: 9
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 722420112ddd7b44c8013ed6f2276c86
-      internalID: -1032545174
+      spriteID: d6b0c2c7aa3a04c41aa0d51c5714a2c0
+      internalID: 802224731
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: FarmBedChoiceUICellSelected
+      name: GhostPlantGreen1
       rect:
         serializedVersion: 2
-        x: 22
-        y: 6
-        width: 3
-        height: 3
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 1, y: 1, z: 1, w: 1}
+        x: 12
+        y: 15
+        width: 11
+        height: 12
+      alignment: 9
+      pivot: {x: 0.45454547, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 505ce9070d8838d4d843c994b74250f0
-      internalID: 799390955
+      spriteID: a194cee11f6556d41b420d130fa92fda
+      internalID: 1780024078
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GhostPlantWhite
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 0
+        width: 17
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f550e39655662614c900f57b1d0b42b4
+      internalID: 197627003
       vertices: []
       indices: 
       edges: []
@@ -286,12 +265,11 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       Background: 1901407923
-      FarmBedChoiceUIBuy: -1111624648
-      FarmBedChoiceUICell: 1457706628
-      FarmBedChoiceUICellSelected: 799390955
-      FarmBedChoiceUIClose: -1032545174
-      FarmBedChoiceUIDescription: 1197498740
-      FarmBedChoiceUIPanel: 1600096762
+      GhostPlantGreen0: 802224731
+      GhostPlantGreen1: 1780024078
+      GhostPlantMain0: -1597635580
+      GhostPlantMain1: 2014984158
+      GhostPlantWhite: 197627003
       Lamp: 1955946697
       Pot: 470648381
       Window: -805373322

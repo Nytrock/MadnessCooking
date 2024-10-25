@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c43081d6bc7152a40b29e3d1def2d2fb
+guid: 28ebf6a01612a7a4f9e3760fa7e3f9d9
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -45,7 +45,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 0
+  spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 6.5
@@ -149,97 +149,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: FarmBedChoiceUIPanel
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 10
-        width: 26
-        height: 26
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 4, y: 4, z: 21, w: 21}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 67f92f838cfd4074cb8ef16b0e14bf2c
-      internalID: 1600096762
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FarmBedChoiceUIBuy
-      rect:
-        serializedVersion: 2
-        x: 14
-        y: 1
-        width: 7
-        height: 8
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 3, y: 3, z: 3, w: 4}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5ef1daf54f9c0a94da964f1a4fe7e9c6
-      internalID: -1111624648
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FarmBedChoiceUICell
-      rect:
-        serializedVersion: 2
-        x: 10
-        y: 6
-        width: 3
-        height: 3
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 1, y: 1, z: 1, w: 1}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: bf4f7d2e64f53e348b894b12d7f4b5cb
-      internalID: 1457706628
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FarmBedChoiceUIDescription
-      rect:
-        serializedVersion: 2
-        x: 10
-        y: 2
-        width: 3
-        height: 3
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 1, y: 1, z: 1, w: 1}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3c6cc2ba1f0abc347be9b8741e065c89
-      internalID: 1197498740
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FarmBedChoiceUIClose
+      name: SeafoodPlant0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 9
-        height: 9
+        width: 1
+        height: 1
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -247,29 +163,113 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 722420112ddd7b44c8013ed6f2276c86
-      internalID: -1032545174
+      spriteID: 47855bc2a9c6ac04f89e526ac6e5a125
+      internalID: -1152390599
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: FarmBedChoiceUICellSelected
+      name: SeafoodPlant1
       rect:
         serializedVersion: 2
-        x: 22
-        y: 6
-        width: 3
-        height: 3
+        x: 2
+        y: 0
+        width: 1
+        height: 1
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 1, y: 1, z: 1, w: 1}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 505ce9070d8838d4d843c994b74250f0
-      internalID: 799390955
+      spriteID: 4a64711c4c88d5840bf7e06e67134785
+      internalID: -1618811370
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SeafoodPlant2
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 0
+        width: 1
+        height: 1
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f6e65038d6c2f0e4ca61231cb96a4299
+      internalID: -1761516279
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MeatPlant0
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 0
+        width: 1
+        height: 1
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 59ac0e9d37bd3324c9793cf952d118aa
+      internalID: -1296334581
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MeatPlant1
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 0
+        width: 1
+        height: 1
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 699506a400e52f84e88cc8427c35ca92
+      internalID: 745018671
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MeatPlant2
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 0
+        width: 1
+        height: 1
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd51c67179329934a8d2f307ed82c493
+      internalID: -1299298140
       vertices: []
       indices: 
       edges: []
@@ -286,14 +286,15 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       Background: 1901407923
-      FarmBedChoiceUIBuy: -1111624648
-      FarmBedChoiceUICell: 1457706628
-      FarmBedChoiceUICellSelected: 799390955
-      FarmBedChoiceUIClose: -1032545174
-      FarmBedChoiceUIDescription: 1197498740
-      FarmBedChoiceUIPanel: 1600096762
       Lamp: 1955946697
+      MeatPlant0: -1296334581
+      MeatPlant1: 745018671
+      MeatPlant2: -1299298140
+      MeatPlants_0: 1343104773
       Pot: 470648381
+      SeafoodPlant0: -1152390599
+      SeafoodPlant1: -1618811370
+      SeafoodPlant2: -1761516279
       Window: -805373322
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0

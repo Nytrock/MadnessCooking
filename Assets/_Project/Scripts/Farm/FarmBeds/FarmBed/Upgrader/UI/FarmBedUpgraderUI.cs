@@ -77,7 +77,7 @@ public class FarmBedUpgraderUI : ChoiceBuyUI<FarmBedUpgrade> {
     private void Deselect() {
         _choiceButtons[_chosedIndex].ChangeChoosedState();
         _chosedIndex = -1;
-        _description.ChangeActive();
+        _description.ChangeState();
         _submitButton.interactable = false;
     }
 

@@ -39,6 +39,9 @@ public class AnimatedText : LocalizedText {
     }
 
     public void StopAnimation() {
+        if (string.IsNullOrEmpty(_targetText) || !_isAnimated)
+            return;
+
         _isAnimated = false;
         _text.text = _targetText;
         TextUpdated?.Invoke();
