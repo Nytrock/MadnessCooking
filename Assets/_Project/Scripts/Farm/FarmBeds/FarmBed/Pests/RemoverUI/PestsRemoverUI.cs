@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PestsRemoverUI : MonoBehaviour {
@@ -6,6 +7,8 @@ public class PestsRemoverUI : MonoBehaviour {
     [SerializeField] private PestsUIPool _pool;
     private PestsGenerator _generator;
     private PestsBedTypeUI _nowBed;
+
+    public event Action RemoverActivated;
 
     private void Start() {
         _panel.SetActive(false);
@@ -23,6 +26,7 @@ public class PestsRemoverUI : MonoBehaviour {
         _nowBed.ChangeState(true);
 
         GeneratePests();
+        RemoverActivated?.Invoke();
     }
 
     public void Close() {

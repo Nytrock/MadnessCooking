@@ -13,6 +13,7 @@ public class PestsGenerator : MonoBehaviour {
     private bool _isPause;
 
     public event Action PestsChanged;
+    public event Action PestsCleaned;
 
     private void Update() {
         if (!_data.IsActive || _isPause || _data.IsPestsRemoved)
@@ -49,7 +50,9 @@ public class PestsGenerator : MonoBehaviour {
             _pool.PutObject(pest);
         _pests.Clear();
         _data.CleanPests();
+
         PestsChanged?.Invoke();
+        PestsCleaned?.Invoke();
     }
 
     public IEnumerable<Pest> Pests() {
@@ -58,7 +61,7 @@ public class PestsGenerator : MonoBehaviour {
     }
 
     public void RemovePest(Pest pest) {
-        _pool.PutObject(pest);
+        _pool.RemovePest(pest);
         _data.RemovePest(pest.Data);
         _pests.Remove(pest);
         CheckSlowdown();

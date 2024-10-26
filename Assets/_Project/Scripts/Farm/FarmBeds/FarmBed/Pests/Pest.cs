@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(SpriteRenderer))]
 public class Pest : MonoBehaviour {
@@ -10,12 +12,18 @@ public class Pest : MonoBehaviour {
 
     public PestData Data { get; private set; }
 
+    public event Action PestRemoved;
+
     private void Awake() {
         _renderer = GetComponent<SpriteRenderer>();
     }
 
     public void ChangeState(bool value) {
         gameObject.SetActive(value);
+    }
+
+    public void Remove() {
+        PestRemoved?.Invoke();
     }
 
     public void Randomize(RangeVector localPosition, RangeVector globalPosition, int prefabIndex) {

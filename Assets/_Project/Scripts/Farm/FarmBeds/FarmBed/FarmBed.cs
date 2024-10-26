@@ -22,6 +22,8 @@ public class FarmBed : MonoBehaviour {
     public PestsGenerator PestsGenerator => _bedHolder.PestsGenerator;
 
     public event Action CountChanged;
+    public event Action BedWatered;
+    public event Action BedFertilized;
     public event Action BedReseted;
 
     private void Awake() {
@@ -140,19 +142,29 @@ public class FarmBed : MonoBehaviour {
     public void ChangeEternalWater() {
         _bedHolder.ChangeEternalWater();
         _UI.UpdateSideButtons();
+
+        BedHolderBoosterData waterData = Data.WaterBoost;
+        if (waterData.IsEternal && !waterData.IsBoosting)
+            BedWatered?.Invoke();
     }
 
     public void Water() {
         _bedHolder.Water();
+        BedWatered?.Invoke();
     }
 
     public void ChangeEternalFertilize() {
         _bedHolder.ChangeEternalFertilize();
         _UI.UpdateSideButtons();
+
+        BedHolderBoosterData fertilizeData = Data.FertilizeBoost;
+        if (fertilizeData.IsEternal && !fertilizeData.IsBoosting)
+            BedFertilized?.Invoke();
     }
 
     public void Fertilize() {
         _bedHolder.Fertilize();
+        BedFertilized?.Invoke();
     }
 
     private void UpdateUpgrades() {

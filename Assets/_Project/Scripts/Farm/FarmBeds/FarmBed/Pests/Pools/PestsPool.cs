@@ -28,4 +28,9 @@ public abstract class PestsPool : Pool<Pest> {
         base.PutObject(pest);
         pest.ChangeState(false);
     }
+
+    public void RemovePest(Pest pest) {
+        PutObject(pest);
+        pest.Remove();
+    }
 }
