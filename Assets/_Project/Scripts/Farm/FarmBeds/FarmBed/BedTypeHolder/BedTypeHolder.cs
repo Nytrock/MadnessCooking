@@ -25,7 +25,7 @@ public class BedTypeHolder : MonoBehaviour {
         if (TryGetComponent(out _fertilize))
             _fertilize.BoostEnded += ChangeAnimationSpeed;
         _pestsGenerator.PestsChanged += ChangeAnimationSpeed;
-        gameObject.SetActive(false);
+        SetupBind();
     }
 
     private void Update() {
@@ -38,15 +38,14 @@ public class BedTypeHolder : MonoBehaviour {
 
     public void ChangeMode(bool newMode) {
         gameObject.SetActive(newMode);
-        if (!newMode) {
-            if (_water != null)
-                _water.EndBoost();
-            if (_fertilize != null)
-                _fertilize.EndBoost();
-            _pestsGenerator.ChangeMode(false);
-        } else {
-            SetupBind();
-        }
+        if (newMode)
+            return;
+
+        if (_water != null)
+            _water.EndBoost();
+        if (_fertilize != null)
+            _fertilize.EndBoost();
+        _pestsGenerator.ChangeMode(false);
     }
 
     public void SetIngredient() {

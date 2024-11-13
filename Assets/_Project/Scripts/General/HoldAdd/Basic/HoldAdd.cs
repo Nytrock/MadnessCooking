@@ -12,6 +12,7 @@ public abstract class HoldAdd : MonoBehaviour, IBindable<FarmData> {
     [SerializeField, Min(0)] protected float _timeWait;
     [SerializeField, Min(0)] private float _fatigueCoef;
     [SerializeField, Min(0)] protected int _readyDefaultCount;
+    [SerializeField] protected VisualChanger _unlockVisual;
 
     public HoldAddData Data { get; protected set; }
 
@@ -39,8 +40,7 @@ public abstract class HoldAdd : MonoBehaviour, IBindable<FarmData> {
     }
 
     protected virtual void UpdateUpgrades() {
-        gameObject.SetActive(Data.IsUnlocked);
-        Data.UpdateUpgrades(_autoWorkUpgrade);
+        _unlockVisual.ChangeState(Data.IsUnlocked);
     }
 
     public virtual void ChangeClickMode(bool newValue) {
@@ -90,7 +90,7 @@ public abstract class HoldAdd : MonoBehaviour, IBindable<FarmData> {
         if (upgrade == _unlockUpgrade) {
             Data.Unlock();
         } else if (upgrade == _autoWorkUpgrade) {
-            Data.MakeAuto();
+            Data.MakeAuto(_autoWorkUpgrade);
             InvokeWorkChanged(true);
         }
 

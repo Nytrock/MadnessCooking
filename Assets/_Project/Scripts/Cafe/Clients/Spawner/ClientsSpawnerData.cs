@@ -19,7 +19,6 @@ public class ClientsSpawnerData {
     public ClientsSpawnerData(float spawnTime) {
         _leavingClients = new();
         _isSpawning = true;
-        SetSpawnTime(spawnTime);
     }
 
     public void AddTime() {

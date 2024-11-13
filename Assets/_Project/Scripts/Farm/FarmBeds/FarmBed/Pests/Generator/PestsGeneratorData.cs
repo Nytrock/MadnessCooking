@@ -23,6 +23,7 @@ public class PestsGeneratorData {
 
     public PestsGeneratorData() {
         _pests = new();
+        _pestsSlowdown = 1;
     }
 
     public void UpdateTime() {

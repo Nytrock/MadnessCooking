@@ -6,7 +6,7 @@ public class FarmBed : MonoBehaviour {
     [Header("Upgrades")]
     [SerializeField] private FarmBedGrowSlider _growStatusSlider;
 
-    public FarmBedData Data { get; private set; }
+    [field: SerializeField] public FarmBedData Data { get; private set; }
     private FarmUpgradeData _upgradeData;
 
     private WheatManager _wheatManager;

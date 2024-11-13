@@ -27,7 +27,7 @@ public class IngredientChoiceUI : ChoiceSimpleUI<Ingredient> {
         foreach (var ingredient in _ingredientsManager.GetAvailableIngredientsOfBedType(_changingBed.Data.BedType)) {
             IngredientChoiceButton choiceButton = (IngredientChoiceButton)_choiceButtonPool.GetObject();
             choiceButton.Setup(ingredient, _ingredients.Count, this);
-            choiceButton.UpdateStyle(_changingBed.Data.BedType);
+            choiceButton.SetBedType(_changingBed.Data.BedType);
             _choiceButtons.Add(choiceButton);
             _ingredients.Add(ingredient);
         }

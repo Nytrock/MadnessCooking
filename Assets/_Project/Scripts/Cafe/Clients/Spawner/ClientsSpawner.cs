@@ -34,8 +34,8 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
         _spaceManager.SpaceAdded += MoveSpawnPoint;
     }
 
-    private void MoveSpawnPoint() {
-        _spawnPoint.position += new Vector3(_spaceManager.SpaceSize, 0, 0);
+    private void LateStart() {
+        SetNewTime();
     }
 
     private void Update() {
@@ -43,10 +43,8 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
             return;
 
         _data.AddTime();
-        if (_data.NowSpawnTime > _data.NeedSpawnTime) {
+        if (_data.NowSpawnTime > _data.NeedSpawnTime)
             Spawn();
-            SetNewTime();
-        }
     }
 
     private void Spawn() {
@@ -59,16 +57,17 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
         ClientType clientType = GetRandomType(clientCount);
         CafeSpot spot = _spotManager.GetSpotByIndex(spotIndex);
         SpotData spotData = _spotData.GetSpot(spotIndex);
-        Order order;
+
         for (int i = 0; i < spot.SeatsCount; i++) {
-            order = new(_foodManager.GetRandomFood(), spotIndex + 1);
+            Order order = new(_foodManager.GetRandomFood(), spotIndex + 1);
             ClientData newClient = new(_spawnPoint.position, clientType, waitMultiplier, order);
             spotData.SetClient(i, newClient);
         }
         SpawnGroupOfClients(spot);
 
         if (!_spotManager.CheckHavingSpots())
-            ChangeSpawnMode();
+            _data.ChangeSpawnMode();
+        SetNewTime();
     }
 
     private void SetNewTime() {
@@ -76,13 +75,12 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
         _data.SetSpawnTime(_spawnTime.RandomValue / popular);
     }
 
-    private void ChangeSpawnMode() {
-        _data.ChangeSpawnMode();
+    private void ChangeWorkMode() {
         SetNewTime();
     }
 
-    private void ChangeWorkMode() {
-        SetNewTime();
+    private void MoveSpawnPoint() {
+        _spawnPoint.position += new Vector3(_spaceManager.SpaceSize, 0, 0);
     }
 
     private ClientCount GetRandomCount() {
@@ -183,6 +181,8 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
             client.transform.position = clientData.Position.GetVector();
             client.Setup(new ClientSettings(clientData, -1, -1, this));
         }
+
+        LateStart();
     }
 
     public void PutClient(Client client) {
@@ -202,6 +202,7 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
             table.AddClient(client);
             SetupClient(client, spot.Index, i);
         }
+
         table.ClientsLeaved += ClientsLeave;
         table.WaitStarted += EndTutorialPart;
         StartCoroutine(table.SpawnGroupOfClients());

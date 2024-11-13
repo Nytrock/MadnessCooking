@@ -7,7 +7,7 @@ public class RemoteParticleSystem : MonoBehaviour {
         _particleSystem.Play();
     }
 
-    public void Pause() {
-        _particleSystem.Pause();
+    public void Stop() {
+        _particleSystem.Stop();
     }
 }

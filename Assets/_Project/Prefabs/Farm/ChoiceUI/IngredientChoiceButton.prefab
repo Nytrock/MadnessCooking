@@ -90,6 +90,7 @@ GameObject:
   - component: {fileID: 3750322661501727946}
   - component: {fileID: -8503743494490464809}
   - component: {fileID: 1649272182422342230}
+  - component: {fileID: 2320209548968175679}
   m_Layer: 5
   m_Name: IngredientChoiceButton
   m_TagString: Untagged
@@ -235,6 +236,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _icon: {fileID: 1930625386248107558}
+  _defaultStyleChanger: {fileID: 1649272182422342230}
+  _choosedStyleChanger: {fileID: 2320209548968175679}
 --- !u!114 &1649272182422342230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -258,6 +261,29 @@ MonoBehaviour:
     _style: {fileID: 391144498, guid: 95bc4a35c21fa6a4380211c8e6a93d5a, type: 3}
   - _value: {fileID: 11400000, guid: 7e3fc35901153c8499d08566fb3e07cf, type: 2}
     _style: {fileID: 538497868, guid: 95bc4a35c21fa6a4380211c8e6a93d5a, type: 3}
+--- !u!114 &2320209548968175679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4351334857385142524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 333a250fb860f2c4d9ebfe1df669fa43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _options:
+  - _value: {fileID: 11400000, guid: 80529c8439c585945b072b791ee2a6a4, type: 2}
+    _style: {fileID: -625035908, guid: 95bc4a35c21fa6a4380211c8e6a93d5a, type: 3}
+  - _value: {fileID: 11400000, guid: f9538ea17e1133f4090ea83b5e0827bb, type: 2}
+    _style: {fileID: -1405604194, guid: 95bc4a35c21fa6a4380211c8e6a93d5a, type: 3}
+  - _value: {fileID: 11400000, guid: 2e37d524597e5d2499cc7a496f717a91, type: 2}
+    _style: {fileID: 2127367927, guid: 95bc4a35c21fa6a4380211c8e6a93d5a, type: 3}
+  - _value: {fileID: 11400000, guid: 3627450b9a024af45a0e4f14c3308c09, type: 2}
+    _style: {fileID: 633627344, guid: 95bc4a35c21fa6a4380211c8e6a93d5a, type: 3}
+  - _value: {fileID: 11400000, guid: 7e3fc35901153c8499d08566fb3e07cf, type: 2}
+    _style: {fileID: -1902160088, guid: 95bc4a35c21fa6a4380211c8e6a93d5a, type: 3}
 --- !u!1 &7857274072005403444
 GameObject:
   m_ObjectHideFlags: 0

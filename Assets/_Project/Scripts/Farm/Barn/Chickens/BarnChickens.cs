@@ -7,6 +7,7 @@ public class BarnChickens : MonoBehaviour, IBindable<FarmData> {
     [SerializeField] private UpgradeManager _upgradeManager;
     [SerializeField] private IngredientsManager _ingredientsManager;
     [SerializeField] private Puncher _puncher;
+    [SerializeField] private VisualChanger _unlockVisual;
     [SerializeField, Min(0)] private float _baseWasteAmount;
     [SerializeField, Min(0)] private float _maxFoodWorkTime;
     [SerializeField, Min(0)] private float _eggTime;
@@ -35,7 +36,7 @@ public class BarnChickens : MonoBehaviour, IBindable<FarmData> {
 
     private void LateStart() {
         _egg = ConstIngredients.Instance.Egg;
-        ChangeState();
+        UpdateUnlockState();
 
         InvokeFeedRelatedActions();
         FoodCountChanged?.Invoke();
@@ -95,7 +96,7 @@ public class BarnChickens : MonoBehaviour, IBindable<FarmData> {
     public void CheckUpgrades(BaseUpgrade upgrade) {
         if (upgrade == _unlockUpgrade) {
             Data.Unlock();
-            ChangeState();
+            UpdateUnlockState();
         } else if (upgrade == _food) {
             AddFood();
         } else if (upgrade == _infiniteFood) {
@@ -103,8 +104,8 @@ public class BarnChickens : MonoBehaviour, IBindable<FarmData> {
         }
     }
 
-    private void ChangeState() {
-        gameObject.SetActive(Data.IsUnlocked);
+    private void UpdateUnlockState() {
+        _unlockVisual.ChangeState(Data.IsUnlocked);
         if (Data.IsUnlocked)
             _ingredientsManager.AddItem(_egg);
     }

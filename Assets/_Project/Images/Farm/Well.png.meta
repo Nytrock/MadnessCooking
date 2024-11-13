@@ -149,11 +149,11 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Well
+      name: WellMain
       rect:
         serializedVersion: 2
         x: 0
-        y: 26
+        y: 22
         width: 29
         height: 32
       alignment: 9
@@ -174,7 +174,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 15
+        y: 11
         width: 11
         height: 7
       alignment: 0
@@ -195,7 +195,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 12
-        y: 10
+        y: 6
         width: 9
         height: 12
       alignment: 9
@@ -216,7 +216,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 22
-        y: 4
+        y: 0
         width: 1
         height: 18
       alignment: 0
@@ -237,7 +237,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 10
+        y: 6
         width: 5
         height: 4
       alignment: 9
@@ -258,7 +258,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 10
+        y: 6
         width: 3
         height: 1
       alignment: 9
@@ -279,7 +279,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 2
-        y: 13
+        y: 9
         width: 3
         height: 1
       alignment: 9
@@ -300,7 +300,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 24
-        y: 6
+        y: 2
         width: 14
         height: 16
       alignment: 0
@@ -321,7 +321,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 30
-        y: 27
+        y: 23
         width: 7
         height: 7
       alignment: 0
@@ -342,7 +342,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 30
-        y: 23
+        y: 19
         width: 3
         height: 3
       alignment: 0
@@ -363,7 +363,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 34
-        y: 23
+        y: 19
         width: 3
         height: 3
       alignment: 0
@@ -384,7 +384,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 4
-        y: 23
+        y: 19
         width: 23
         height: 2
       alignment: 0
@@ -405,11 +405,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 4
-        y: 23
+        y: 19
         width: 1
         height: 1
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -417,6 +417,27 @@ TextureImporter:
       bones: []
       spriteID: a2d548168bc6473448b08ad00fea0a45
       internalID: -2127901010
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WellMainDrum
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2
+        width: 21
+        height: 3
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e7b9df2231660c24ab0e6247f35acd7e
+      internalID: -114930960
       vertices: []
       indices: 
       edges: []
@@ -436,7 +457,6 @@ TextureImporter:
       Lamp: 1955946697
       Pot: 470648381
       WaterBucket: -1952700526
-      Well: 1347717219
       WellDrum: 235860836
       WellGrass: 256798455
       WellGrassPart: -2127901010
@@ -444,6 +464,8 @@ TextureImporter:
       WellHandleSide1: 1630295400
       WellHandleSide2: -1240572486
       WellHangingRope: 187057844
+      WellMain: 1347717219
+      WellMainDrum: -114930960
       WellRope: 736848552
       WellUI: 269540002
       WellUICount: 2103296369

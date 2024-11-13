@@ -7,7 +7,7 @@ public abstract class ChoiceButton<TItem> : MonoBehaviour
     [SerializeField] protected Image _icon;
 
     protected Button _button;
-    private bool _isChoosed;
+    protected bool _isChoosed;
     private Animator _animator;
 
     public TItem Item { get; protected set; }
@@ -16,7 +16,7 @@ public abstract class ChoiceButton<TItem> : MonoBehaviour
         _animator = GetComponent<Animator>();
     }
 
-    public void ChangeChoosedState() {
+    public virtual void ChangeChoosedState() {
         _isChoosed = !_isChoosed;
         _animator.SetBool("isChoosed", _isChoosed);
     }

@@ -1,8 +1,9 @@
 using UnityEngine;
 
-[RequireComponent(typeof(BedTypeImageStyleChanger))]
 public class IngredientChoiceButton : ChoiceSimpleButton<Ingredient> {
-    private BedTypeImageStyleChanger _styleChanger;
+    [SerializeField] private BedTypeImageStyleChanger _defaultStyleChanger;
+    [SerializeField] private BedTypeImageStyleChanger _choosedStyleChanger;
+    private BedType _bedType;
 
     public override void Setup(Ingredient item, int index, ChoiceSimpleUI<Ingredient> ui) {
         base.Setup(item, index, ui);
@@ -12,14 +13,20 @@ public class IngredientChoiceButton : ChoiceSimpleButton<Ingredient> {
         );
     }
 
-    public void UpdateStyle(BedType bedType) {
-        if (_styleChanger == null)
-            GetStyleChanger();
-
-        _styleChanger.UpdateStyle(bedType);
+    public void SetBedType(BedType bedType) {
+        _bedType = bedType;
+        UpdatePanelStyle();
     }
 
-    private void GetStyleChanger() {
-        _styleChanger = GetComponent<BedTypeImageStyleChanger>();
+    public override void ChangeChoosedState() {
+        base.ChangeChoosedState();
+        UpdatePanelStyle();
+    }
+
+    private void UpdatePanelStyle() {
+        if (_isChoosed)
+            _choosedStyleChanger.UpdateStyle(_bedType);
+        else
+            _defaultStyleChanger.UpdateStyle(_bedType);
     }
 }

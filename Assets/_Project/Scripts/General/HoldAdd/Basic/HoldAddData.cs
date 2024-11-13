@@ -35,11 +35,6 @@ public class HoldAddData {
         _nowTime = 0;
     }
 
-    public void UpdateUpgrades(CoefficientUpgrade speedUpgrade) {
-        if (_isAuto)
-            _speed = speedUpgrade.Coefficient;
-    }
-
     public void UpdateTime() {
         _nowTime += Time.deltaTime * _speed;
     }
@@ -65,8 +60,9 @@ public class HoldAddData {
         _isUnlocked = true;
     }
 
-    public void MakeAuto() {
+    public void MakeAuto(CoefficientUpgrade speedUpgrade) {
         _isAuto = true;
+        _speed = speedUpgrade.Coefficient;
     }
 
     public void SetTimeWait(float timeWait) {
