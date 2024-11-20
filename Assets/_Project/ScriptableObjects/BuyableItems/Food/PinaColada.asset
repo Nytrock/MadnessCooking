@@ -13,12 +13,11 @@ MonoBehaviour:
   m_Name: PinaColada
   m_EditorClassIdentifier: 
   _icon: {fileID: -1352087095, guid: fcf5fb943f0e2034c91e28b0e7a9498a, type: 3}
-  _name: PinaColada.Name
-  _description: PinaColada.Description
   _price: 450
   _type: 3
   _typeTechnic: {fileID: 11400000, guid: 8fe5a1b5c2c60e04e8303266be891355, type: 2}
-  _miniSprite: {fileID: 0}
+  _miniSprite: {fileID: -1930857682, guid: fda02e08c18070d4b8055f1e25d663c7, type: 3}
+  _cookingSprite: {fileID: 0}
   _timeToCook: 18
   _timeToEat: 0
   _moneyGet: 60
@@ -28,3 +27,5 @@ MonoBehaviour:
       _count: 1
     - _item: {fileID: 11400000, guid: 130ec19d25206d049806ab10bdfe35c5, type: 2}
       _count: 1
+  _color: {r: 0.77647066, g: 0.87843144, b: 0.5137255, a: 1}
+  _isNeedWater: 0

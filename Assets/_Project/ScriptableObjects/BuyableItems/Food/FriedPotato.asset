@@ -13,12 +13,11 @@ MonoBehaviour:
   m_Name: FriedPotato
   m_EditorClassIdentifier: 
   _icon: {fileID: -527835641, guid: fcf5fb943f0e2034c91e28b0e7a9498a, type: 3}
-  _name: FriedPotato.Name
-  _description: FriedPotato.Description
   _price: 600
   _type: 1
   _typeTechnic: {fileID: 11400000, guid: 7a3095255cbd1074dba21111d12d19ae, type: 2}
-  _miniSprite: {fileID: 0}
+  _miniSprite: {fileID: -1503847197, guid: fda02e08c18070d4b8055f1e25d663c7, type: 3}
+  _cookingSprite: {fileID: 0}
   _timeToCook: 24
   _timeToEat: 0
   _moneyGet: 40
@@ -28,3 +27,5 @@ MonoBehaviour:
       _count: 2
     - _item: {fileID: 11400000, guid: ecf0fd20f8efd89418aba1c84c5eae73, type: 2}
       _count: 1
+  _color: {r: 0.8352942, g: 0.56078434, b: 0.08235294, a: 1}
+  _isNeedWater: 0

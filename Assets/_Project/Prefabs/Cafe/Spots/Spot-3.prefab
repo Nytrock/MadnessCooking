@@ -749,6 +749,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  _audioSource: {fileID: 1674731347476590571}
 --- !u!82 &1674731347476590571
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1200,11 +1201,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2432917660641357256, guid: 22400bdf4a7d09448a4211c8cfb78761, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.2307692
+      value: 2.0769231
       objectReference: {fileID: 0}
     - target: {fileID: 2432917660641357256, guid: 22400bdf4a7d09448a4211c8cfb78761, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.384616
+      value: 3.0769234
       objectReference: {fileID: 0}
     - target: {fileID: 2432917660641357256, guid: 22400bdf4a7d09448a4211c8cfb78761, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1238,9 +1239,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2703443161017680742, guid: 22400bdf4a7d09448a4211c8cfb78761, type: 3}
+      propertyPath: m_Size.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2703443161017680742, guid: 22400bdf4a7d09448a4211c8cfb78761, type: 3}
+      propertyPath: m_Size.y
+      value: 1.5384616
+      objectReference: {fileID: 0}
+    - target: {fileID: 2703443161017680742, guid: 22400bdf4a7d09448a4211c8cfb78761, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6006981321065621887, guid: 22400bdf4a7d09448a4211c8cfb78761, type: 3}
       propertyPath: m_Name
       value: MiniFood (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6488726437311858643, guid: 22400bdf4a7d09448a4211c8cfb78761, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.00000047683716
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1346,7 +1363,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2432917660641357256, guid: 22400bdf4a7d09448a4211c8cfb78761, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.0769231
+      value: -2.3846154
       objectReference: {fileID: 0}
     - target: {fileID: 2432917660641357256, guid: 22400bdf4a7d09448a4211c8cfb78761, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1384,6 +1401,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2703443161017680742, guid: 22400bdf4a7d09448a4211c8cfb78761, type: 3}
+      propertyPath: m_Size.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2703443161017680742, guid: 22400bdf4a7d09448a4211c8cfb78761, type: 3}
+      propertyPath: m_Size.y
+      value: 1.5384616
+      objectReference: {fileID: 0}
+    - target: {fileID: 2703443161017680742, guid: 22400bdf4a7d09448a4211c8cfb78761, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6006981321065621887, guid: 22400bdf4a7d09448a4211c8cfb78761, type: 3}
       propertyPath: m_Name
       value: MiniFood
@@ -1419,11 +1448,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2432917660641357256, guid: 22400bdf4a7d09448a4211c8cfb78761, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.23076919
+      value: -0.07692313
       objectReference: {fileID: 0}
     - target: {fileID: 2432917660641357256, guid: 22400bdf4a7d09448a4211c8cfb78761, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.384616
+      value: 3.2307692
       objectReference: {fileID: 0}
     - target: {fileID: 2432917660641357256, guid: 22400bdf4a7d09448a4211c8cfb78761, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1455,6 +1484,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2432917660641357256, guid: 22400bdf4a7d09448a4211c8cfb78761, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2703443161017680742, guid: 22400bdf4a7d09448a4211c8cfb78761, type: 3}
+      propertyPath: m_Size.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2703443161017680742, guid: 22400bdf4a7d09448a4211c8cfb78761, type: 3}
+      propertyPath: m_Size.y
+      value: 1.5384616
+      objectReference: {fileID: 0}
+    - target: {fileID: 2703443161017680742, guid: 22400bdf4a7d09448a4211c8cfb78761, type: 3}
+      propertyPath: m_WasSpriteAssigned
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6006981321065621887, guid: 22400bdf4a7d09448a4211c8cfb78761, type: 3}
@@ -1500,7 +1541,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7335289998871645541, guid: 4bedf438b7b67df4f8b63b410ec0e3c2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.38461542
+      value: 0.15384616
       objectReference: {fileID: 0}
     - target: {fileID: 7335289998871645541, guid: 4bedf438b7b67df4f8b63b410ec0e3c2, type: 3}
       propertyPath: m_LocalPosition.y

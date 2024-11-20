@@ -13,12 +13,11 @@ MonoBehaviour:
   m_Name: BlueBerryJuice
   m_EditorClassIdentifier: 
   _icon: {fileID: -1465240755, guid: fcf5fb943f0e2034c91e28b0e7a9498a, type: 3}
-  _name: BlueBerryJuice.Name
-  _description: BlueBerryJuice.Description
   _price: 75
   _type: 3
   _typeTechnic: {fileID: 11400000, guid: 8fe5a1b5c2c60e04e8303266be891355, type: 2}
-  _miniSprite: {fileID: 0}
+  _miniSprite: {fileID: -842734723, guid: fda02e08c18070d4b8055f1e25d663c7, type: 3}
+  _cookingSprite: {fileID: 0}
   _timeToCook: 7
   _timeToEat: 0
   _moneyGet: 10
@@ -26,3 +25,5 @@ MonoBehaviour:
     _itemCounts:
     - _item: {fileID: 11400000, guid: 6f9766473f0cee440b6ecadbc52a9a0b, type: 2}
       _count: 3
+  _color: {r: 0.08627451, g: 0.30980393, b: 0.882353, a: 1}
+  _isNeedWater: 0

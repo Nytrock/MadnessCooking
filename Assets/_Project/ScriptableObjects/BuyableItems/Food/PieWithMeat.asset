@@ -13,12 +13,11 @@ MonoBehaviour:
   m_Name: PieWithMeat
   m_EditorClassIdentifier: 
   _icon: {fileID: 172813534, guid: fcf5fb943f0e2034c91e28b0e7a9498a, type: 3}
-  _name: PieWithMeat.Name
-  _description: PieWithMeat.Description
   _price: 150
   _type: 2
   _typeTechnic: {fileID: 11400000, guid: 2ab180e87c606ae48ba55132f53ee430, type: 2}
-  _miniSprite: {fileID: 0}
+  _miniSprite: {fileID: 1714239070, guid: fda02e08c18070d4b8055f1e25d663c7, type: 3}
+  _cookingSprite: {fileID: 254406988, guid: b706f4d89395b884f9120daa8e1a6bbf, type: 3}
   _timeToCook: 12
   _timeToEat: 0
   _moneyGet: 25
@@ -32,3 +31,5 @@ MonoBehaviour:
       _count: 2
     - _item: {fileID: 11400000, guid: 6b8daec792815f44b8b8c781a3adfdcd, type: 2}
       _count: 2
+  _color: {r: 0.47450984, g: 0.30588236, b: 0.14901961, a: 1}
+  _isNeedWater: 0

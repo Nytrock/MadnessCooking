@@ -13,12 +13,11 @@ MonoBehaviour:
   m_Name: Tea
   m_EditorClassIdentifier: 
   _icon: {fileID: 1381081108, guid: fcf5fb943f0e2034c91e28b0e7a9498a, type: 3}
-  _name: Tea.Name
-  _description: Tea.Description
   _price: 1500
   _type: 3
   _typeTechnic: {fileID: 11400000, guid: d9b4d4850f3168345b28b87a4126a631, type: 2}
-  _miniSprite: {fileID: 0}
+  _miniSprite: {fileID: -472696657, guid: fda02e08c18070d4b8055f1e25d663c7, type: 3}
+  _cookingSprite: {fileID: 0}
   _timeToCook: 28
   _timeToEat: 0
   _moneyGet: 110
@@ -28,3 +27,5 @@ MonoBehaviour:
       _count: 2
     - _item: {fileID: 11400000, guid: 897523a5d3e8cc843a91257d85a26f6b, type: 2}
       _count: 1
+  _color: {r: 0.4901961, g: 0.34901962, b: 0.21568629, a: 1}
+  _isNeedWater: 0

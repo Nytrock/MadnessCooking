@@ -13,12 +13,11 @@ MonoBehaviour:
   m_Name: Chocolate
   m_EditorClassIdentifier: 
   _icon: {fileID: -1779525283, guid: fcf5fb943f0e2034c91e28b0e7a9498a, type: 3}
-  _name: Chocolate.Name
-  _description: Chocolate.Description
   _price: 250
   _type: 1
   _typeTechnic: {fileID: 11400000, guid: d3baf7cdadf53954d801bb39ed04c251, type: 2}
-  _miniSprite: {fileID: 0}
+  _miniSprite: {fileID: -1104706078, guid: fda02e08c18070d4b8055f1e25d663c7, type: 3}
+  _cookingSprite: {fileID: 0}
   _timeToCook: 12
   _timeToEat: 0
   _moneyGet: 26
@@ -28,3 +27,5 @@ MonoBehaviour:
       _count: 2
     - _item: {fileID: 11400000, guid: 6b8daec792815f44b8b8c781a3adfdcd, type: 2}
       _count: 1
+  _color: {r: 0.3019608, g: 0.19607845, b: 0.1254902, a: 1}
+  _isNeedWater: 0

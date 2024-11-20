@@ -13,12 +13,11 @@ MonoBehaviour:
   m_Name: TomatoJuice
   m_EditorClassIdentifier: 
   _icon: {fileID: 878274627, guid: fcf5fb943f0e2034c91e28b0e7a9498a, type: 3}
-  _name: TomatoJuice.Name
-  _description: TomatoJuice.Description
   _price: 450
   _type: 3
   _typeTechnic: {fileID: 11400000, guid: 8fe5a1b5c2c60e04e8303266be891355, type: 2}
-  _miniSprite: {fileID: 0}
+  _miniSprite: {fileID: -1542291413, guid: fda02e08c18070d4b8055f1e25d663c7, type: 3}
+  _cookingSprite: {fileID: 0}
   _timeToCook: 18
   _timeToEat: 0
   _moneyGet: 44
@@ -26,3 +25,5 @@ MonoBehaviour:
     _itemCounts:
     - _item: {fileID: 11400000, guid: 7755e9f6a50793a45afe949b36406069, type: 2}
       _count: 2
+  _color: {r: 0.69803923, g: 0.121568635, b: 0.14117648, a: 1}
+  _isNeedWater: 0
