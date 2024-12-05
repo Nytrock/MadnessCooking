@@ -45,10 +45,11 @@ public static class UIElementUtility {
         return port;
     }
 
-    public static ObjectField CreateObjectField(string title, Type type, EventCallback<ChangeEvent<UnityEngine.Object>> onValueChanged = null) {
+    public static ObjectField CreateObjectField(string title, Type type, UnityEngine.Object value = null, EventCallback<ChangeEvent<UnityEngine.Object>> onValueChanged = null) {
         ObjectField objectField = new() {
             objectType = type,
             label = title,
+            value = value,
         };
 
         if (onValueChanged != null)

@@ -56,10 +56,17 @@ public class BuyableItemCountList<TItem>
         return _availableItems.Contains(itemCount.Item);
     }
 
-    public bool ContainsCount(BuyableItemCount<TItem> itemCount) {
-        if (!ContainsItem(itemCount))
-            return false;
-        return _itemCounts[IndexOf(itemCount)].Count >= itemCount.Count;
+    public bool ContainsCount(BuyableItemCount<TItem> searchingCount) {
+        foreach (var countItem in _itemCounts) {
+            if (countItem.Item == searchingCount.Item) {
+                if (countItem.Count >= searchingCount.Count)
+                    return true;
+                else
+                    return false;
+            }
+        }
+
+        return false;
     }
 
     public int IndexOf(BuyableItemCount<TItem> itemCount) {

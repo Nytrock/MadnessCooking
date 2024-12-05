@@ -5,14 +5,19 @@ using UnityEngine.UI;
 public class FoodRecipeAdditionalPart : HoverItemNameActivator {
     protected GrayscaleImageRenderer _icon;
 
-    protected void Awake() {
+    protected virtual void Awake() {
+        InitializeIcon();
+    }
+
+    protected void InitializeIcon() {
         _icon = new();
         _icon.SetImage(GetComponent<Image>());
-
-        ChangeState(false);
     }
 
     public void ChangeState(bool newState) {
-        _icon?.SetActive(newState);
+        if (_icon is null)
+            InitializeIcon();
+
+        _icon.SetActive(newState);
     }
 }

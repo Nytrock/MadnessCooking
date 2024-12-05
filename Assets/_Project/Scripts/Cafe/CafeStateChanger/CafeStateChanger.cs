@@ -2,14 +2,14 @@ using System;
 using UnityEngine;
 
 public class CafeStateChanger : MonoBehaviour, IBindable<CafeData> {
-    [SerializeField] private CafeStateChangerData _data;
+    private CafeStateChangerData _data;
 
     public bool IsOpened => _data.IsOpened;
 
-    public event Action CafeChanged;
+    public event Action<bool> CafeChanged;
 
     private void LateStart() {
-        CafeChanged?.Invoke();
+        CafeChanged?.Invoke(_data.IsOpened);
     }
 
     public void Bind(CafeData data) {
@@ -20,6 +20,6 @@ public class CafeStateChanger : MonoBehaviour, IBindable<CafeData> {
 
     public void ChangeCafeState() {
         _data.ChangeCafeState();
-        CafeChanged?.Invoke();
+        CafeChanged?.Invoke(_data.IsOpened);
     }
 }

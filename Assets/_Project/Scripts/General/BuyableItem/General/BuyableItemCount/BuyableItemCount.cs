@@ -14,6 +14,7 @@ public class BuyableItemCount<TItem>
 
     public event Action<int> CountChanged;
 
+    [JsonConstructor]
     public BuyableItemCount(TItem item, int count) {
         _item = item;
         _count = count;

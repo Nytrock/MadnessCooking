@@ -4,6 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(BedTypeStyleUpdater))]
 public class IngredientChoiceUI : ChoiceSimpleUI<Ingredient> {
     [SerializeField] private IngredientsManager _ingredientsManager;
+    [SerializeField] private TutorialManager _tutorialManager;
 
     private readonly List<Ingredient> _ingredients = new();
     private BedTypeStyleUpdater _renderer;
@@ -14,6 +15,9 @@ public class IngredientChoiceUI : ChoiceSimpleUI<Ingredient> {
     }
 
     public void ActivateIngredientChoice(FarmBed farmBed) {
+        if (_tutorialManager.IsWork)
+            _tutorialManager.NextTutorialPart();
+
         _changingBed = farmBed;
         _renderer.UpdateStyle(_changingBed.Data.BedType);
         GenerateChoiceButtons();
@@ -39,6 +43,9 @@ public class IngredientChoiceUI : ChoiceSimpleUI<Ingredient> {
     }
 
     protected override void SetSelectedState(int index) {
+        if (_tutorialManager.IsWork)
+            _tutorialManager.NextTutorialPart();
+
         _choiceButtons[index].ChangeChoosedState();
     }
 

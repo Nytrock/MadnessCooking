@@ -13,4 +13,8 @@ public class OrderUICookState : OrderUIBaseState {
         if (newState == _state)
             _cookSlider.StartCook(_order);
     }
+
+    public void SetTechnicManager(TechnicManager technicManager) {
+        _cookSlider.SetTechnicManager(technicManager);
+    }
 }

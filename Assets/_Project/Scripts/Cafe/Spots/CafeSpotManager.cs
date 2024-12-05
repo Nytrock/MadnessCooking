@@ -12,7 +12,7 @@ public class CafeSpotManager : MonoBehaviour, IBindable<CafeData> {
     private readonly List<CafeSpot> _spots = new();
     private List<List<int>> _freeSpots;
     private float _cellSize;
-    private CafeSpotManagerData _data;
+    [SerializeField] private CafeSpotManagerData _data;
 
     public float CellSize => _cellSize;
 
@@ -60,7 +60,7 @@ public class CafeSpotManager : MonoBehaviour, IBindable<CafeData> {
 
         MoveSpots(spotIndex, offset);
         if (_spots[spotIndex].TryGetComponent(out ClientsHolder clientTable))
-            _opener.CafeChanged -= clientTable.CafeClosed;
+            _opener.CafeChanged -= clientTable.CafeStateChanged;
         _spots[spotIndex].Destroy();
         _spots.RemoveAt(spotIndex);
         _data.RemoveSpotAt(spotIndex);
@@ -86,7 +86,6 @@ public class CafeSpotManager : MonoBehaviour, IBindable<CafeData> {
 
         int randomSpotIndex = _freeSpots[needSeat][Random.Range(0, _freeSpots[needSeat].Count)];
         _freeSpots[needSeat].Remove(randomSpotIndex);
-        Debug.Log($"Get {randomSpotIndex}");
         return randomSpotIndex;
     }
 
@@ -102,7 +101,6 @@ public class CafeSpotManager : MonoBehaviour, IBindable<CafeData> {
     }
 
     public void ReturnSpot(int index) {
-        Debug.Log($"Return {index}");
         _freeSpots[_spots[index].SeatsCount - 1].Add(index);
     }
 
@@ -140,7 +138,7 @@ public class CafeSpotManager : MonoBehaviour, IBindable<CafeData> {
         if (isAddedByEditor)
             _data.AddSpot(newData);
         if (spot.TryGetComponent(out ClientsHolder clientTable)) {
-            _opener.CafeChanged += clientTable.CafeClosed;
+            _opener.CafeChanged += clientTable.CafeStateChanged;
             clientTable.SetData(newData);
         }
 

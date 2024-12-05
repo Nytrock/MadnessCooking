@@ -29,12 +29,7 @@ public class OrderRecipe : FoodRecipe<OrderRecipePart> {
     protected override void SetupTechnic() {
         bool haveTechnic = _technicManager.HaveTechnic(_food.TypeTechnic);
         _canCook &= haveTechnic;
-        _techicIcon.SetTechnic(_food.TypeTechnic, !haveTechnic);
-    }
-
-    public override void DisableParts() {
-        foreach (var part in _recipeParts)
-            part.gameObject.SetActive(false);
+        _techicIcon.SetTechnic(_food.TypeTechnic, haveTechnic);
     }
 
     public void UpdateRecipeIngredients(BuyableItemCount<Ingredient> count) {

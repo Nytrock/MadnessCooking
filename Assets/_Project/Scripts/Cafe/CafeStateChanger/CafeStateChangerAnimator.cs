@@ -11,7 +11,7 @@ public class CafeStateChangerAnimator : MonoBehaviour {
 
     private void Awake() {
         _animator = GetComponent<Animator>();
-        _cafeOpener.CafeChanged += ChangeSignText;
+        _cafeOpener.CafeChanged += SetSignText;
     }
 
     public void ChangeCafeState() {
@@ -19,8 +19,12 @@ public class CafeStateChangerAnimator : MonoBehaviour {
         _animator.SetTrigger("isChanged");
     }
 
+    private void SetSignText(bool isOpened) {
+        _cafeOpener.CafeChanged -= SetSignText;
+        ChangeSignText();
+    }
+
     public void ChangeSignText() {
-        _cafeOpener.CafeChanged -= ChangeSignText;
         if (_cafeOpener.IsOpened)
             _text.SetText(_descriptionOpened);
         else

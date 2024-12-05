@@ -24,7 +24,9 @@ public abstract class ChoiceBuyUI<TItem> : ChoiceUI<TItem, ChoiceBuyButton<TItem
     }
 
     public override void SetChoice() {
-        MoneyManager.Instance.ChangeMoney(-_choiceButtons[_chosedIndex].Item.Price);
+        int price = _choiceButtons[_chosedIndex].Item.Price;
+        if (price > 0)
+            MoneyManager.Instance.ChangeMoney(-price);
     }
 
     protected override void Activate() {

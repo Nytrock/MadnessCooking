@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class IngredientStorage : MonoBehaviour {
     [SerializeField] protected int _defaultMaxSpace = 100;
 
-    public IngredientStorageData Data { get; protected set; }
+    [field: SerializeField] public IngredientStorageData Data { get; protected set; }
 
     public event Action<BuyableItemCount<Ingredient>> IngredientCountAdded;
     public event Action<BuyableItemCount<Ingredient>> IngredientCountRemoved;

@@ -36,7 +36,7 @@ public class SpotData {
         return _clients[index];
     }
 
-    public void ClearClients() {
+    private void ClearClients() {
         _haveClients = false;
         _clients = new ClientData[SeatsCount];
     }
@@ -54,6 +54,7 @@ public class SpotData {
         _groupState = GroupClientState.None;
         _nowTime = 0;
         _waitTime = 0;
+        ClearClients();
     }
 
     public void StartWait(float clientWaitMultiplier) {

@@ -1,7 +1,10 @@
 public class FoodRecipeTechnic : FoodRecipeAdditionalPart {
     public void SetTechnic(Technic technic, bool haveTechnic) {
-        Awake();
+        if (_icon is null)
+            InitializeIcon();
+
         _showingItem = technic;
         _icon.Setup(technic.Icon, !haveTechnic);
+        ChangeState(true);
     }
 }

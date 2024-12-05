@@ -1,5 +1,8 @@
 public enum DialogueCharacterEmotion {
     None,
     Calm,
-    Surprized
+    Sad,
+    Tense,
+    Surprised,
+    Angry
 }

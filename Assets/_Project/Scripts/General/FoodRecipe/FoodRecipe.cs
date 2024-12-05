@@ -26,7 +26,12 @@ public abstract class FoodRecipe<TPart> : MonoBehaviour
         _techicIcon.SetHoverText(hoverText);
     }
 
-    public abstract void DisableParts();
+    public virtual void DisableParts() {
+        foreach (var part in _recipeParts)
+            part.gameObject.SetActive(false);
+        _techicIcon.ChangeState(false);
+    }
+
     protected abstract void SetupIngredients();
     protected abstract void SetupTechnic();
 }

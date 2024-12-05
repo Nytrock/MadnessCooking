@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 [RequireComponent(typeof(Button), typeof(Image))]
 public class ButtonOverRaycasts : MonoBehaviour {
+    [SerializeField] private UIHoverListener _hoverListener;
     private Button _button;
     private Image _image;
 
@@ -17,7 +18,7 @@ public class ButtonOverRaycasts : MonoBehaviour {
     }
 
     private void CheckMousePosition() {
-        if (!_image.rectTransform.ContainsCamera())
+        if (!_image.rectTransform.ContainsCamera() || _hoverListener.IsHover)
             return;
 
         _button.onClick.Invoke();

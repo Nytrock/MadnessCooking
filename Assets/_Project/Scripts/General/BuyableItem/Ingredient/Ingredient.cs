@@ -18,4 +18,10 @@ public class Ingredient : BuyableItem {
     public int MaxCount => _maxCount;
     public float FatigueCoef => _fatigueCoef;
     public float WasteAmount => _wasteAmount;
+
+    public static Ingredient CreateIngredient(string name) {
+        Ingredient item = CreateInstance<Ingredient>();
+        item.name = name;
+        return item;
+    }
 }

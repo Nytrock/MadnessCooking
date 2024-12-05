@@ -95,7 +95,7 @@ public class Client : MonoBehaviour {
         Data.SetWaitTime(_waitTime.RandomValue);
 
         transform.position = Data.Position.GetVector();
-        ClientUI.Setup(Data, ActivateOrder);
+        ClientUI.Setup(Data, ActivateOrder, Spawner.TutorialManager);
         ChangeState();
 
         if (Data.State != ClientState.Spawn && Data.State != ClientState.Leave)
@@ -130,6 +130,13 @@ public class Client : MonoBehaviour {
     public void EndEat() {
         WaitOthers();
         _table.CheckTalk();
+    }
+
+    public void CheckCafe(bool isOpened) {
+        if (isOpened)
+            return;
+
+        Leave();
     }
 
     public void Leave() {

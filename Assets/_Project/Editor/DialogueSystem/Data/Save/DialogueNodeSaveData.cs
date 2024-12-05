@@ -21,6 +21,8 @@ public class DialogueNodeSaveData {
     public string GroupID => _groupID;
     public DialogueType DialogueType => _dialogueType;
     public Vector2 Position => _position;
+    public DialogueCharacter Character => _character;
+    public DialogueCharacterEmotion Emotion => _emotion;
 
     public DialogueNodeSaveData(string id, string name, string text, List<DialogueChoiceSaveData> choices, string groupID, DialogueType dialogueType, Vector2 position, DialogueCharacter character, DialogueCharacterEmotion emotion) {
         _ID = id;

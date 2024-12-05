@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class OrderCookingSlider : MonoBehaviour {
     [SerializeField] private Slider _cookingSlider;
-    [SerializeField] private TechnicManager _technicManager;
+    private TechnicManager _technicManager;
     private bool _isCooking;
 
     private TechnicHolderData _technicData;
@@ -25,5 +25,9 @@ public class OrderCookingSlider : MonoBehaviour {
 
     private void EndCook() {
         _isCooking = false;
+    }
+
+    public void SetTechnicManager(TechnicManager technicManager) {
+        _technicManager = technicManager;
     }
 }

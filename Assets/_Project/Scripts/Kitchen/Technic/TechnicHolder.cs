@@ -4,6 +4,7 @@ using UnityEngine;
 public class TechnicHolder : MonoBehaviour {
     [SerializeField] private Technic _technic;
     [SerializeField] private Transform _UITarget;
+    [SerializeField] private TutorialManager _tutorialManager;
 
     private KitchenUpgradeData _upgradeData;
 
@@ -33,14 +34,16 @@ public class TechnicHolder : MonoBehaviour {
     }
 
     public void StartCook(Order order) {
+        if (_tutorialManager.IsWork)
+            _tutorialManager.NextTutorialPart();
+
         Data.StartCook(_upgradeData, order);
         CookChanged?.Invoke();
     }
 
     private void StopCook() {
-        if (!Data.IsCooking)
-            return;
-
+        if (_tutorialManager.IsWork)
+            _tutorialManager.NextTutorialPart();
         CookChanged?.Invoke();
     }
 

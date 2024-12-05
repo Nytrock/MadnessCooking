@@ -41,8 +41,8 @@ public class SpotEditor : MonoBehaviour {
             DisableEditor();
     }
 
-    private void CheckCafeOpener() {
-        if (_opener.IsOpened && _isActive)
+    private void CheckCafeOpener(bool isOpened) {
+        if (isOpened && _isActive)
             ChangeWorkMode();
     }
 

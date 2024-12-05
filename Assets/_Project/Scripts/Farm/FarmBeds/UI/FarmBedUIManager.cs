@@ -9,6 +9,7 @@ public class FarmBedUIManager : MonoBehaviour {
     [SerializeField] private PestsRemoverUI _pestsRemoverUI;
     [SerializeField] private IngredientChoiceUI _ingredientChoice;
     [SerializeField] private ConfirmPanel _confirmPanel;
+    [SerializeField] private TutorialManager _tutorialManager;
 
     private FarmBed _farmBed;
     private BedTypeUI _nowUI;
@@ -47,6 +48,10 @@ public class FarmBedUIManager : MonoBehaviour {
             _nowUI.ChangeMode();
             return;
         }
+
+
+        if (_tutorialManager.IsWork)
+            _tutorialManager.NextTutorialPart();
 
         if (_nowUI != null) {
             _nowUI.ChangeMode(false);

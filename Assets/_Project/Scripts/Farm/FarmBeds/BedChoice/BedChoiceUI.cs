@@ -3,6 +3,7 @@ using UnityEngine;
 public class BedChoiceUI : ChoiceBuyUI<BedType>, IBindable<FarmData> {
     [SerializeField] private BedTypeManager _bedTypesManager;
     [SerializeField] private BedTypeIngredientsRenderer _ingredientsRenderer;
+    [SerializeField] private TutorialManager _tutorialManager;
     private BedChoice _changingBed;
 
     private void Awake() {
@@ -15,6 +16,9 @@ public class BedChoiceUI : ChoiceBuyUI<BedType>, IBindable<FarmData> {
     }
 
     public void ActivateBedChoice(BedChoice newBed) {
+        if (_tutorialManager.IsWork)
+            _tutorialManager.NextTutorialPart();
+
         _changingBed = newBed;
         Activate();
     }
@@ -45,6 +49,9 @@ public class BedChoiceUI : ChoiceBuyUI<BedType>, IBindable<FarmData> {
         if (_chosedIndex == -1)
             return;
 
+        if (_tutorialManager.IsWork)
+            _tutorialManager.NextTutorialPart();
+
         BedType bedType = _choiceButtons[_chosedIndex].Item;
         _ingredientsRenderer.ShowIngredients(bedType);
         _description.UpdateDescription(bedType);
@@ -54,6 +61,9 @@ public class BedChoiceUI : ChoiceBuyUI<BedType>, IBindable<FarmData> {
 
     public override void SetChoice() {
         base.SetChoice();
+        if (_tutorialManager.IsWork)
+            _tutorialManager.NextTutorialPart();
+
         _changingBed.SetType(_choiceButtons[_chosedIndex].Item);
         _changingBed = null;
         Disable();

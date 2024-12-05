@@ -5,11 +5,6 @@ public class UIHoverTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     [SerializeField] private UIHoverListener _hoverListener;
     [SerializeField] private bool _isReversed = false;
 
-    private void Awake() {
-        if (_hoverListener == null)
-            Debug.Log(name);
-    }
-
     public void OnPointerEnter(PointerEventData eventData) {
         _hoverListener.HoverChange(!_isReversed);
     }

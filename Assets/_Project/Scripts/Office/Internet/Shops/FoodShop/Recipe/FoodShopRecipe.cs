@@ -36,8 +36,7 @@ public class FoodShopRecipe : FoodRecipe<FoodShopRecipePart> {
     }
 
     public override void DisableParts() {
-        foreach (var part in _recipeParts)
-            part.gameObject.SetActive(false);
+        base.DisableParts();
         _waterIcon.ChangeState(false);
         _techicIcon.ChangeState(false);
     }

@@ -14,7 +14,7 @@ public class ClientsHolder : MonoBehaviour {
     [SerializeField, Min(0)] private float _minClientInterval = 0.5f;
     [SerializeField, Min(0)] private float _maxClientInterval = 1.2f;
 
-    [SerializeField] private SpotData _data;
+    private SpotData _data;
     private CafeSpot _spot;
     private readonly List<Client> _clients = new();
     private bool _isTutorial;
@@ -142,13 +142,15 @@ public class ClientsHolder : MonoBehaviour {
         _waitSlider.gameObject.SetActive(newState);
     }
 
-    public void CafeClosed() {
-        if (_clients.Count == 0)
+    public void CafeStateChanged(bool isOpened) {
+        if (_clients.Count == 0 || isOpened)
             return;
+        CafeClosed();
+    }
 
+    private void CafeClosed() {
         EndVisit();
         _clients.Clear();
-        _data.ClearClients();
         StopAllCoroutines();
     }
 

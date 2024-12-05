@@ -8,6 +8,7 @@ public abstract class CameraManager : MonoBehaviour {
     [SerializeField] protected Location _location;
     [SerializeField] protected LocationSlider _locationSlider;
     [SerializeField] protected SpaceManager _spaceManager;
+    [SerializeField] protected TutorialManager _tutorialManager;
     protected float _startPosition;
     protected float _endPosition;
     protected abstract string _cameraAxis { get; }
@@ -38,7 +39,7 @@ public abstract class CameraManager : MonoBehaviour {
     }
 
     private void Update() {
-        if (!_isWorking || _hoverListener.IsHover)
+        if (!_isWorking || _hoverListener.IsHover || _tutorialManager.IsWork)
             return;
 
         float keyAxis = Input.GetAxis(_keyAxis);

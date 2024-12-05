@@ -35,6 +35,7 @@ public abstract class DialogueBaseNode : Node {
         _dialogueName = nodeName;
         _choices = new();
         _text = "Dialogue text.";
+        _emotion = DialogueCharacterEmotion.None;
         _defaultBackgroundColor = new(29f / 255f, 29f / 255f, 30f / 255f);
         _graphView = graphView;
 
@@ -86,12 +87,12 @@ public abstract class DialogueBaseNode : Node {
         customDataContainer.AddToClassList("ds-node__custom-data-container");
         extensionContainer.Add(customDataContainer);
 
-        ObjectField characterField = UIElementUtility.CreateObjectField("Character", typeof(DialogueCharacter), callback => {
+        ObjectField characterField = UIElementUtility.CreateObjectField("Character", typeof(DialogueCharacter), _character, callback => {
             _character = callback.newValue as DialogueCharacter;
         });
         customDataContainer.Add(characterField);
 
-        EnumField emotionField = UIElementUtility.CreateEnumField("Emotion", DialogueCharacterEmotion.None, callback => {
+        EnumField emotionField = UIElementUtility.CreateEnumField("Emotion", _emotion, callback => {
             _emotion = (DialogueCharacterEmotion)callback.newValue;
         });
         customDataContainer.Add(emotionField);
@@ -163,6 +164,8 @@ public abstract class DialogueBaseNode : Node {
         _id = data.ID;
         _choices = choices;
         _text = data.Text;
+        _character = data.Character;
+        _emotion = data.Emotion;
     }
 
     protected abstract Port CreateChoicePort(object userData);

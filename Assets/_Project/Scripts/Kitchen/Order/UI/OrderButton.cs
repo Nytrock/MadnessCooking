@@ -35,6 +35,7 @@ public class OrderButton : MonoBehaviour {
         kitchenStorage.IngredientCountAdded += UpdateRecipeIngredients;
         technicManager.TechnicChanged += UpdateRecipeTechnic;
         _recipe.SetManagers(kitchenStorage, technicManager);
+        _cookState.SetTechnicManager(technicManager);
     }
 
     public void SetHoverText(HoverItemName hoverText) {

@@ -7,6 +7,7 @@ public class OrdersManager : MonoBehaviour {
     [SerializeField] private KitchenStorage _kitchenStorage;
     [SerializeField] private TechnicManager _technicManager;
     [SerializeField] private GameSaveManager _saveManager;
+    [SerializeField] private TutorialManager _tutorialManager;
     private readonly List<Order> _orders = new();
     private readonly ClientState[] _suitableStates = { ClientState.Spawn, ClientState.Sit };
 
@@ -34,12 +35,16 @@ public class OrdersManager : MonoBehaviour {
             Application.Quit();
         }
 
+        if (_tutorialManager.IsWork)
+            _tutorialManager.NextTutorialPart();
         _orders.Add(client.Data.Order);
         OrderAdded?.Invoke(client.Data.Order);
     }
 
     private void RemoveOrder(Client client) {
         Order order = client.Data.Order;
+        if (_tutorialManager.IsWork)
+            _tutorialManager.NextTutorialPart();
 
         client.OrderActivated -= AddOrder;
         client.ClientLeave -= RemoveOrder;

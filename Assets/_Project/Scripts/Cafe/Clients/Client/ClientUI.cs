@@ -14,6 +14,7 @@ public class ClientUI : MonoBehaviour {
     private CafeUpgradeData _data;
     private ClientData _clientData;
     private UnityAction _startAction;
+    private TutorialManager _tutorialManager;
 
     public void SetData(CafeUpgradeData data) {
         _data = data;
@@ -35,6 +36,8 @@ public class ClientUI : MonoBehaviour {
     }
 
     private void ChangeButtonsBlockVisible() {
+        if (_tutorialManager.IsWork)
+            _tutorialManager.NextTutorialPart();
         _buttonsBlock.SetActive(!_buttonsBlock.activeSelf);
     }
 
@@ -53,9 +56,10 @@ public class ClientUI : MonoBehaviour {
         _eatSlider.gameObject.SetActive(newValue && _data.IsEatTimeShow);
     }
 
-    public void Setup(ClientData clientData, UnityAction action) {
+    public void Setup(ClientData clientData, UnityAction action, TutorialManager tutorialManager) {
         _clientData = clientData;
         _startAction = action;
+        _tutorialManager = tutorialManager;
 
         _eatSlider.maxValue = _clientData.WaitTime;
         _eatSlider.value = _clientData.NowTime;

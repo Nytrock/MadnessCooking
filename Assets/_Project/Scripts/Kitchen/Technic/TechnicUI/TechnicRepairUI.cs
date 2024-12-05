@@ -6,6 +6,7 @@ public class TechnicRepairUI : MonoBehaviour, IUpgradeable<KitchenUpgradeData>, 
     [SerializeField] private GameObject _panel;
     [SerializeField] private Camera _camera;
     [SerializeField] private Button _repairButton;
+    [SerializeField] private TutorialManager _tutorialManager;
     private TechnicHolder _nowTechnicHolder;
 
     [Header("Upgrades")]
@@ -28,8 +29,14 @@ public class TechnicRepairUI : MonoBehaviour, IUpgradeable<KitchenUpgradeData>, 
     }
 
     public void StartRepair() {
-        _nowTechnicHolder.StartRepair();
         ChangeState(false);
+
+        if (_tutorialManager.IsWork) {
+            _tutorialManager.NextTutorialPart();
+            return;
+        }
+
+        _nowTechnicHolder.StartRepair();
     }
 
     public void ChangeState(bool newState) {
@@ -54,7 +61,7 @@ public class TechnicRepairUI : MonoBehaviour, IUpgradeable<KitchenUpgradeData>, 
         float maxStrength = _nowTechnicHolder.Data.Technic.Strength;
         float nowStrength = _nowTechnicHolder.Data.NowStrength;
 
-        _repairButton.interactable = _nowTechnicHolder.Repairable();
+        _repairButton.interactable = _nowTechnicHolder.Repairable() || _tutorialManager.IsWork;
         _strengthSlider.maxValue = maxStrength;
         _strengthSlider.value = nowStrength;
     }

@@ -18,7 +18,7 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
     [Header("Upgrades")]
     [SerializeField] private BaseUpgrade _eatTimeShowUpgrade;
 
-    private ClientsSpawnerData _data;
+    [SerializeField] private ClientsSpawnerData _data;
     private CriticSpawnerData _criticData;
     private CafeSpotManagerData _spotData;
     private CafeUpgradeData _upgradeData;
@@ -27,10 +27,11 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
     public event Action PartEnded;
 
     public Vector2 SpawnPoint => _spawnPoint.position;
+    public TutorialManager TutorialManager => _tutorialManager;
 
     private void Awake() {
         _xpAdder = GetComponent<PopularityXpAdder>();
-        _cafeOpener.CafeChanged += ChangeWorkMode;
+        _cafeOpener.CafeChanged += delegate { ChangeWorkMode(); };
         _spaceManager.SpaceAdded += MoveSpawnPoint;
     }
 
@@ -135,7 +136,7 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
         ClientSettings clientSettings = new(clientData, spotIndex, seatIndex, this);
         client.Setup(clientSettings);
         _ordersManager.SetNewOrder(client);
-        _cafeOpener.CafeChanged += client.Leave;
+        _cafeOpener.CafeChanged += client.CheckCafe;
     }
 
     public void CheckAddedUpgrade(BaseUpgrade upgrade) {
@@ -203,19 +204,17 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
             SetupClient(client, spot.Index, i);
         }
 
+        if (_tutorialManager.IsWork)
+            table.WaitStarted += _tutorialManager.NextTutorialPart;
         table.ClientsLeaved += ClientsLeave;
-        table.WaitStarted += EndTutorialPart;
         StartCoroutine(table.SpawnGroupOfClients());
         return table;
-    }
-
-    private void EndTutorialPart() {
-        PartEnded?.Invoke();
     }
 
 
     public void StartTutorialPart() {
         Spawn();
+        PartEnded?.Invoke();
     }
 
     public CafeSpot GetSpot(int SpotIndex) => _spotManager.GetSpotByIndex(SpotIndex);
