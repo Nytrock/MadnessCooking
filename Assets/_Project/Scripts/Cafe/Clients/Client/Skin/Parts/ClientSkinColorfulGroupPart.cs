@@ -7,7 +7,10 @@ public class ClientSkinColorfulGroupPart : ClientSkinGroupPart {
 
     public override void SetRandomSprite(int spriteIndex) {
         base.SetRandomSprite(spriteIndex);
+
         int colorIndex = Random.Range(0, _randomColors.Length);
+        _renderer.color = _randomColors[colorIndex];
+
         foreach (var part in _relatedParts) {
             if (part.TryGetComponent(out ClientSkinColorfulPart colorfulPart))
                 colorfulPart.SetRandomSprite(spriteIndex, colorIndex);

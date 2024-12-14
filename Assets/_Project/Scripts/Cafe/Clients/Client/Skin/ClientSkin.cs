@@ -8,6 +8,7 @@ using Random = UnityEngine.Random;
 public class ClientSkin : MonoBehaviour {
     [SerializeField, Min(0)] private int _foregroundSortingLayer;
     [SerializeField, Min(0)] private int _backgroundSortingLayer;
+    [SerializeField] private ClientSkinType[] _possibleSpecialSkins;
     [SerializeField] private ClientSkinPart[] _skinParts;
     [SerializeField] private ClientWalkAudio _walkAudio;
 
@@ -59,8 +60,8 @@ public class ClientSkin : MonoBehaviour {
         } else {
             int skinChance = Random.Range(0, 100);
             if (skinChance == 42) {
-                int skinCount = Enum.GetNames(typeof(ClientSkinType)).Length;
-                return (ClientSkinType)Random.Range(3, skinCount);
+                int randomIndex = Random.Range(0, _possibleSpecialSkins.Length);
+                return _possibleSpecialSkins[randomIndex];
             } else {
                 return ClientSkinType.Random;
             }
@@ -91,5 +92,20 @@ public class ClientSkin : MonoBehaviour {
 
     public void PlayWalkSound() {
         _walkAudio.Play();
+    }
+
+
+    [ContextMenu("SetDefaultSkin")]
+    private void SetDefaultSkin() {
+        CheckSkinParts();
+        foreach (var skinPart in _skinParts)
+            skinPart.SetDefalult();
+    }
+
+    [ContextMenu("GenerateRandomSkin")]
+    private void GenerateRandomSkin() {
+        CheckSkinParts();
+        foreach (var skinPart in _skinParts)
+            skinPart.SetSprite(ClientSkinType.Random);
     }
 }

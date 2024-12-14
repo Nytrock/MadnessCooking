@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: bd34ed82589dde94b8531051c8c76b52
+guid: 0ecec860effa5974bb6ae4dc8086b41a
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -81,33 +81,20 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: Standalone
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Server
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
     buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -145,78 +132,49 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: AlbertHead
+      name: GrayManHat
       rect:
         serializedVersion: 2
         x: 0
-        y: 19
-        width: 16
-        height: 16
+        y: 18
+        width: 23
+        height: 13
       alignment: 9
-      pivot: {x: 0.53125, y: 0}
+      pivot: {x: 0.5, y: -0.6923077}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3e546f30ee19c18429b737a549d73282
-      internalID: 2085672016
+      spriteID: 634065abb15234141aa36c7cc4ef85ad
+      internalID: 1155200012
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AlbertEye
+      name: GrayManBody
       rect:
         serializedVersion: 2
-        x: 17
-        y: 29
-        width: 4
-        height: 4
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2e7ef36fc1aede3478c1482c270ee771
-      internalID: 263306087
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: AlbertLeg
-      rect:
-        serializedVersion: 2
-        x: 21
+        x: 24
         y: 14
-        width: 7
-        height: 10
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f7548d578ca559642b5c359478045ad6
-      internalID: -207206543
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: AlbertBody
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
         width: 13
         height: 17
       alignment: 0
@@ -226,17 +184,38 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8e6be99eadab3df429cd9d208314888c
-      internalID: 1014328585
+      spriteID: 13d6d604a72a4364eaa4a4323901fea5
+      internalID: -289919902
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AlbertArm
+      name: GrayManHead
       rect:
         serializedVersion: 2
-        x: 14
+        x: 0
+        y: 1
+        width: 19
+        height: 16
+      alignment: 9
+      pivot: {x: 0.55263156, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c59a177ae9768449a7b72abd9bb5989
+      internalID: 36503064
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GrayManArm
+      rect:
+        serializedVersion: 2
+        x: 20
         y: 6
         width: 5
         height: 7
@@ -247,17 +226,59 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2f33d4a0a988c324dbd16f0d7b8d7680
-      internalID: 378812030
+      spriteID: dbf209920421e7544b5ec3287119b27e
+      internalID: 368240234
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AlbertShin
+      name: GrayManPalm
       rect:
         serializedVersion: 2
-        x: 21
+        x: 20
+        y: 0
+        width: 5
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c4ced38e6e07063439619b5545ee9128
+      internalID: 707536953
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GrayManLeg
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 3
+        width: 7
+        height: 10
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1ddd52950c14fc84789e4cf0af25bf28
+      internalID: 2012954076
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GrayManShin
+      rect:
+        serializedVersion: 2
+        x: 34
         y: 4
         width: 7
         height: 9
@@ -268,80 +289,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bbf622ca2ddd373429ef3eb18ef960ee
-      internalID: 1488313665
+      spriteID: 169cb386ea0e60449a2a2e345cf8dbe2
+      internalID: 546323891
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AlbertPalm
+      name: GrayManSole
       rect:
         serializedVersion: 2
-        x: 14
-        y: 0
-        width: 5
-        height: 5
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f17d6b40b2ead044c99cf066790b6e8e
-      internalID: -960827421
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: AlbertBrown
-      rect:
-        serializedVersion: 2
-        x: 17
-        y: 34
-        width: 5
-        height: 1
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 543a4c302ee197c4d8d3b3bab7bf2767
-      internalID: 510294137
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: AlbertPupil
-      rect:
-        serializedVersion: 2
-        x: 17
-        y: 24
-        width: 2
-        height: 4
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2589ff92735154545812456c541d6268
-      internalID: 2130283017
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: AlbertSole
-      rect:
-        serializedVersion: 2
-        x: 20
+        x: 34
         y: 0
         width: 8
         height: 3
@@ -352,113 +310,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 40c954c363741f846bafdf0e2a423800
-      internalID: 245740890
+      spriteID: eefdb8d8f3f0e844584dcf3879f36743
+      internalID: 1931056455
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AlbertArm (sit)
+      name: GrayManBandage
       rect:
         serializedVersion: 2
-        x: 23
-        y: 25
-        width: 5
-        height: 7
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3af434ea33992a44790ecc1b45a06c94
-      internalID: 568306307
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: AlbertCloak
-      rect:
-        serializedVersion: 2
-        x: 29
-        y: 0
-        width: 6
-        height: 25
-      alignment: 1
-      pivot: {x: 0, y: 1}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 38cf5998c0199c14e987fc5ab5cf6586
-      internalID: -395579482
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: AlbertHair
-      rect:
-        serializedVersion: 2
-        x: 36
-        y: 15
-        width: 22
-        height: 20
-      alignment: 9
-      pivot: {x: 0.47727272, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2d090ae51a4ecf34ba319ca08db1baca
-      internalID: -1255134068
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: AlbertBandage
-      rect:
-        serializedVersion: 2
-        x: 36
-        y: 9
+        x: 38
+        y: 22
         width: 13
-        height: 5
+        height: 9
       alignment: 9
-      pivot: {x: 0.5, y: -0.3}
+      pivot: {x: 0.5, y: 0.055555556}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6ea9bb752b76a9b4eb115ad5227814dc
-      internalID: 920735112
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: AlbertArmBand
-      rect:
-        serializedVersion: 2
-        x: 14
-        y: 14
-        width: 5
-        height: 2
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5b4978613b0dd7c47bb31ca0eee84e9c
-      internalID: -1572458841
+      spriteID: c318410dca0f93341b67cebc8e7ab193
+      internalID: -1814312139
       vertices: []
       indices: 
       edges: []
@@ -474,21 +348,19 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      AlbertArm: 378812030
-      AlbertArm (sit): 568306307
-      AlbertArmBand: -1572458841
-      AlbertBandage: 920735112
-      AlbertBody: 1014328585
-      AlbertBrown: 510294137
-      AlbertCloak: -395579482
-      AlbertEye: 263306087
-      AlbertHair: -1255134068
-      AlbertHead: 2085672016
-      AlbertLeg: -207206543
-      AlbertPalm: -960827421
-      AlbertPupil: 2130283017
-      AlbertShin: 1488313665
-      AlbertSole: 245740890
+      Background: 1901407923
+      GrayManArm: 368240234
+      GrayManBandage: -1814312139
+      GrayManBody: -289919902
+      GrayManHat: 1155200012
+      GrayManHead: 36503064
+      GrayManLeg: 2012954076
+      GrayManPalm: 707536953
+      GrayManShin: 546323891
+      GrayManSole: 1931056455
+      Lamp: 1955946697
+      Pot: 470648381
+      Window: -805373322
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -24,12 +24,17 @@ public class ClientSkinGroupPart : ClientSkinPart {
 
     public override void SetSpecialSprite(ClientSkinType skinType) {
         base.SetSpecialSprite(skinType);
-        foreach (var part in _relatedParts) {
+        foreach (var part in _relatedParts)
             part.SetSpecialSprite(skinType);
-        }
     }
 
     public bool IsPartInGroup(ClientSkinPart part) {
         return _relatedParts.Contains(part);
+    }
+
+    public override void SetDefalult() {
+        base.SetDefalult();
+        foreach (var part in _relatedParts)
+            part.SetDefalult();
     }
 }

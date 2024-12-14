@@ -5,9 +5,17 @@ using Random = UnityEngine.Random;
 public class ClientsPoolsManager : MonoBehaviour {
     [SerializeField] private ClientsPool[] _pools;
 
-    public Client GetObject() {
-        ClientsPool pool = _pools[Random.Range(0, _pools.Length)];
-        return pool.GetObject();
+    public Client GetObject(ClientData data) {
+        if (data.Type == ClientType.GrayMan) {
+            foreach (var pool in _pools) {
+                if (pool.ClientsGender == ClientGender.Male) {
+                    return pool.GetObject();
+                }
+            }
+        }
+
+        ClientsPool randomPool = _pools[Random.Range(0, _pools.Length)];
+        return randomPool.GetObject();
     }
 
     public void PutObject(Client client) {

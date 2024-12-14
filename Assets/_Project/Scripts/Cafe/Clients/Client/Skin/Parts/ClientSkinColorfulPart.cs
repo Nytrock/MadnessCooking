@@ -2,6 +2,7 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class ClientSkinColorfulPart : ClientSkinPart {
+    [SerializeField] private Color _defaultColor;
     [SerializeField] private Color[] _randomColors;
 
     public int RandomColorsCount => _randomColors.Length;
@@ -33,5 +34,10 @@ public class ClientSkinColorfulPart : ClientSkinPart {
             return false;
 
         return true;
+    }
+
+    public override void SetDefalult() {
+        base.SetDefalult();
+        _renderer.color = _defaultColor;
     }
 }

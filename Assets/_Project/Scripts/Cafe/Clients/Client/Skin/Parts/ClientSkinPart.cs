@@ -4,13 +4,22 @@ using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(SpriteRenderer))]
 public class ClientSkinPart : MonoBehaviour {
+    [SerializeField] protected Sprite _defaultSprite;
     [SerializeField] private Sprite[] _randomSprites;
     [SerializeField] protected SpecialClientSprite[] _specialSprites;
+
     protected SpriteRenderer _renderer;
 
     public int RandomSpritesCount => _randomSprites.Length;
 
     protected virtual void Awake() {
+        GetRenderer();
+    }
+
+    private void GetRenderer() {
+        if (_renderer)
+            return;
+
         _renderer = GetComponent<SpriteRenderer>();
     }
 
@@ -25,8 +34,9 @@ public class ClientSkinPart : MonoBehaviour {
     }
 
     public virtual void SetRandomSprite(int spriteIndex) {
+        GetRenderer();
         if (RandomSpritesCount == 0) {
-            _renderer.sprite = null;
+            _renderer.sprite = _defaultSprite;
             return;
         }
 
@@ -34,6 +44,7 @@ public class ClientSkinPart : MonoBehaviour {
     }
 
     public virtual void SetSpecialSprite(ClientSkinType skinType) {
+        GetRenderer();
         foreach (var specialSprite in _specialSprites) {
             if (specialSprite.SkinType == skinType) {
                 _renderer.sprite = specialSprite.Sprite;
@@ -41,7 +52,7 @@ public class ClientSkinPart : MonoBehaviour {
             }
         }
 
-        _renderer.sprite = null;
+        _renderer.sprite = _defaultSprite;
     }
 
     public virtual bool CheckRelationToGroup(ClientSkinGroupPart groupPart) {
@@ -53,5 +64,10 @@ public class ClientSkinPart : MonoBehaviour {
     public IEnumerable<SpecialClientSprite> GetSpecialSprites() {
         foreach (var specialSprite in _specialSprites)
             yield return specialSprite;
+    }
+
+    public virtual void SetDefalult() {
+        GetRenderer();
+        _renderer.sprite = _defaultSprite;
     }
 }

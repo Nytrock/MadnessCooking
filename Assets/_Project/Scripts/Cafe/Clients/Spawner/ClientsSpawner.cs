@@ -178,7 +178,7 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
         }
 
         foreach (var clientData in _data.LeavingClients) {
-            Client client = _pool.GetObject();
+            Client client = _pool.GetObject(clientData);
             client.transform.position = clientData.Position.GetVector();
             client.Setup(new ClientSettings(clientData, -1, -1, this));
         }
@@ -196,8 +196,10 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
             throw new ArgumentNullException("Spot doesn't have the required class ClientGroupHolder");
 
         table.SetTutorialState(_tutorialManager.IsWork);
+        SpotData spotData = _spotData.GetSpot(spot.Index);
+
         for (int i = 0; i < spot.SeatsCount; i++) {
-            Client client = _pool.GetObject();
+            Client client = _pool.GetObject(spotData.GetClient(i));
             client.ClientEat += ClientEat;
             client.ClientRejected += ClientRejected;
             table.AddClient(client);
