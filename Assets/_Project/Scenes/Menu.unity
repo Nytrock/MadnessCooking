@@ -3829,7 +3829,6 @@ GameObject:
   - component: {fileID: 588813656}
   - component: {fileID: 588813655}
   - component: {fileID: 588813658}
-  - component: {fileID: 588813659}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -3955,30 +3954,6 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
---- !u!114 &588813659
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 588813654}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c88f5cead0c0b2a4eb05b5900433f8d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ComponentVersion: 1
-  m_AssetsPPU: 27
-  m_RefResolutionX: 928
-  m_RefResolutionY: 520
-  m_CropFrame: 0
-  m_GridSnapping: 0
-  m_FilterMode: 0
-  m_UpscaleRT: 0
-  m_PixelSnapping: 0
-  m_CropFrameX: 0
-  m_CropFrameY: 0
-  m_StretchFill: 0
 --- !u!1 &609872487
 GameObject:
   m_ObjectHideFlags: 0
@@ -15068,11 +15043,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _parts: []
-  _dialogueManager: {fileID: 0}
-  _clueManager: {fileID: 0}
   _saveManager: {fileID: 0}
-  _shops: []
-  _items: []
 --- !u!1 &1517522375
 GameObject:
   m_ObjectHideFlags: 0
@@ -18052,8 +18023,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -153.52}
-  m_SizeDelta: {x: 400, y: 200}
+  m_AnchoredPosition: {x: 0, y: -228.1}
+  m_SizeDelta: {x: 833, y: 252}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2003396043
 MonoBehaviour:
@@ -18075,7 +18046,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 4a2abf808fad8e74783ac473c83a7fe0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
