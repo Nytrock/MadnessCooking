@@ -8,7 +8,7 @@ public class TechnicHolder : MonoBehaviour {
 
     private KitchenUpgradeData _upgradeData;
 
-    public TechnicHolderData Data { get; private set; }
+    [field: SerializeField] public TechnicHolderData Data { get; private set; }
 
     public Transform UITarget => _UITarget;
     public Technic Technic => _technic;

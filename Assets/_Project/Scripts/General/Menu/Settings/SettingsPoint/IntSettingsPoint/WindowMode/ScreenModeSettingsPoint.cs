@@ -21,8 +21,11 @@ public class ScreenModeSettingsPoint : IntSettingsPoint, IBindable<VideoSettings
         _text.SetText(modeName);
     }
 
+    public void LateStart() {
+        UpdateState();
+    }
+
     public void Bind(VideoSettingsData data) {
         _data = data.ScreenMode;
-        UpdateState();
     }
 }

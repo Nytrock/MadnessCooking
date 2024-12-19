@@ -6,6 +6,5 @@ public class KitchenStorage : SaveableIngredientStorage<KitchenData> {
     public override void Bind(KitchenData data) {
         data.KitchenStorage ??= new(_defaultMaxSpace, _defaultIngredients);
         Data = data.KitchenStorage;
-        base.Bind(data);
     }
 }

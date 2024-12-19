@@ -6,16 +6,21 @@ public class ClientsPoolsManager : MonoBehaviour {
     [SerializeField] private ClientsPool[] _pools;
 
     public Client GetObject(ClientData data) {
-        if (data.Type == ClientType.GrayMan) {
-            foreach (var pool in _pools) {
-                if (pool.ClientsGender == ClientGender.Male) {
-                    return pool.GetObject();
-                }
-            }
-        }
+        if (data.Type == ClientType.GrayMan)
+            return GetClientByGender(ClientGender.Male);
 
         ClientsPool randomPool = _pools[Random.Range(0, _pools.Length)];
         return randomPool.GetObject();
+    }
+
+    public Client GetClientByGender(ClientGender gender) {
+        foreach (var pool in _pools) {
+            if (pool.ClientsGender == gender) {
+                return pool.GetObject();
+            }
+        }
+
+        return null;
     }
 
     public void PutObject(Client client) {

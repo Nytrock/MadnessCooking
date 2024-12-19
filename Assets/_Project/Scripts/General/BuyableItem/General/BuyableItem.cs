@@ -22,4 +22,12 @@ public abstract class BuyableItem : ExtendedScriptableObject {
     protected virtual string GetDescription() {
         return LocalizationManager.Instance.GetLocalization(_table, name + ".Description");
     }
+
+    public static TItem CreateTemporaryItem<TItem>(string name)
+        where TItem : BuyableItem {
+
+        TItem item = CreateInstance<TItem>();
+        item.name = name;
+        return item;
+    }
 }

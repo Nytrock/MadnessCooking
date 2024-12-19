@@ -8,10 +8,13 @@ public class AudioManager : MonoBehaviour, IBindable<AudioSettingsData>, ISettin
 
     public float DefaultValue => _defaultVolumeCoef;
 
+    public void LateStart() {
+        UpdateValue();
+    }
+
     public void Bind(AudioSettingsData data) {
         data.VolumeSettings ??= new(DefaultValue);
         _data = data.VolumeSettings;
-        UpdateValue();
     }
 
     public void UpdateValue() {

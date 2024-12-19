@@ -34,7 +34,7 @@ public class BarnChickens : MonoBehaviour, IBindable<FarmData> {
         _upgradeManager.ItemAdded += CheckUpgrades;
     }
 
-    private void LateStart() {
+    public void LateStart() {
         _egg = ConstIngredients.Instance.Egg;
         UpdateUnlockState();
 
@@ -123,7 +123,6 @@ public class BarnChickens : MonoBehaviour, IBindable<FarmData> {
     public void Bind(FarmData data) {
         data.Chickens ??= new(_defaultFoodCount);
         Data = data.Chickens;
-        LateStart();
     }
 
     private void InvokeFeedRelatedActions() {

@@ -25,7 +25,7 @@ public class PopularityManager : MonoBehaviour, IBindable<GeneralData> {
         }
     }
 
-    private void LateStart() {
+    public void LateStart() {
         LevelChanged?.Invoke(_nowLevel);
         XpChanged?.Invoke(_data.Xp);
     }
@@ -89,7 +89,6 @@ public class PopularityManager : MonoBehaviour, IBindable<GeneralData> {
     public void Bind(GeneralData data) {
         data.PopularityManager ??= new();
         _data = data.PopularityManager;
-        LateStart();
     }
 
     public bool CheckLevelWaitCritic() {

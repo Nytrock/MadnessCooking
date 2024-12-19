@@ -21,7 +21,7 @@ public class FatigueManager : Singleton<FatigueManager>, IBindable<GeneralData>,
 
     public event Action<bool> TiredChanged;
 
-    private void LateStart() {
+    public void LateStart() {
         _sleepBonus = _timeManager.GetSleepBonus(_needHoursToRecovery, _fatigueMax);
     }
 
@@ -54,7 +54,6 @@ public class FatigueManager : Singleton<FatigueManager>, IBindable<GeneralData>,
     public void Bind(GeneralData data) {
         data.FatigueManager ??= new(_fatigueMax, _fatigueDefault);
         _data = data.FatigueManager;
-        LateStart();
     }
 
     public void BindUpgrade(OfficeUpgradeData upgradeData) {

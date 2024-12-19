@@ -42,6 +42,5 @@ public class FarmCar : SaveableIngredientStorage<FarmData> {
     public override void Bind(FarmData data) {
         data.Car ??= new(_defaultMaxSpace, _defaultIngredients);
         Data = data.Car;
-        base.Bind(data);
     }
 }

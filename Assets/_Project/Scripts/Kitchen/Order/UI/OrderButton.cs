@@ -29,11 +29,18 @@ public class OrderButton : MonoBehaviour {
 
         _recipe.SetupRecipe(Order.Food, data);
         UpdateCookSlider();
+
+        if (order.IsCooking)
+            Cook();
+        else if (order.IsFinished)
+            FinishCook();
     }
 
     public void SetManagers(TechnicManager technicManager, KitchenStorage kitchenStorage) {
         kitchenStorage.IngredientCountAdded += UpdateRecipeIngredients;
         technicManager.TechnicChanged += UpdateRecipeTechnic;
+        MoneyManager.Instance.MoneyChanged += UpdateAutoSpices;
+
         _recipe.SetManagers(kitchenStorage, technicManager);
         _cookState.SetTechnicManager(technicManager);
     }
@@ -42,11 +49,19 @@ public class OrderButton : MonoBehaviour {
         _recipe.SetHoverText(hoverText);
     }
 
-    public void UpdateRecipeIngredients(BuyableItemCount<Ingredient> count) {
+    private void UpdateRecipeIngredients(BuyableItemCount<Ingredient> count) {
         if (CheckOrderStarted())
             return;
 
         _recipe.UpdateRecipeIngredients(count);
+        UpdateCookSlider();
+    }
+
+    private void UpdateAutoSpices(int count) {
+        if (CheckOrderStarted())
+            return;
+
+        _recipe.UpdateAutoSpices(count);
         UpdateCookSlider();
     }
 

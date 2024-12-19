@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 public abstract class FoodRecipe<TPart> : MonoBehaviour
@@ -6,14 +7,17 @@ public abstract class FoodRecipe<TPart> : MonoBehaviour
     [SerializeField] protected FoodRecipeTechnic _techicIcon;
     [SerializeField] protected KitchenStorage _kitchenStorage;
     [SerializeField] protected TechnicManager _technicManager;
-    protected bool _canCook;
     protected Food _food;
 
-    public bool CanCook => _canCook;
+    public bool CanCook {
+        get {
+            return _recipeParts.All(part => part.IsAvailable)
+                && _techicIcon.IsAvailable;
+        }
+    }
 
     public virtual void SetupRecipe(Food food) {
         DisableParts();
-        _canCook = true;
         _food = food;
 
         SetupIngredients();
@@ -28,7 +32,7 @@ public abstract class FoodRecipe<TPart> : MonoBehaviour
 
     public virtual void DisableParts() {
         foreach (var part in _recipeParts)
-            part.gameObject.SetActive(false);
+            part.Disable();
         _techicIcon.ChangeState(false);
     }
 

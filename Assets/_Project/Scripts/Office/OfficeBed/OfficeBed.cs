@@ -10,7 +10,9 @@ public class OfficeBed : MonoBehaviour, IBindable<OfficeData> {
     public void Bind(OfficeData data) {
         data.OfficeBed ??= new();
         _data = data.OfficeBed;
+    }
 
+    public void LateStart() {
         if (_data.IsSleep)
             UpdateSleepState();
     }

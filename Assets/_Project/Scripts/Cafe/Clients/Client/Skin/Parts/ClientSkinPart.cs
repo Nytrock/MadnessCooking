@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -59,11 +58,6 @@ public class ClientSkinPart : MonoBehaviour {
         if (groupPart.RandomSpritesCount != RandomSpritesCount && RandomSpritesCount != 0)
             return false;
         return true;
-    }
-
-    public IEnumerable<SpecialClientSprite> GetSpecialSprites() {
-        foreach (var specialSprite in _specialSprites)
-            yield return specialSprite;
     }
 
     public virtual void SetDefalult() {

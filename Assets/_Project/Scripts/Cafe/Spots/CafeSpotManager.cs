@@ -23,7 +23,7 @@ public class CafeSpotManager : MonoBehaviour, IBindable<CafeData> {
         _cellSize = _spaceManager.SpaceSize / 2f;
     }
 
-    private void LateStart() {
+    public void LateStart() {
         GenerateSpots();
         GenerateFreeSpotsList();
     }
@@ -158,7 +158,6 @@ public class CafeSpotManager : MonoBehaviour, IBindable<CafeData> {
     public void Bind(CafeData data) {
         data.SpotManager ??= new();
         _data = data.SpotManager;
-        LateStart();
     }
 
     public CafeSpot GetSpotByIndex(int spotIndex) => _spots[spotIndex];

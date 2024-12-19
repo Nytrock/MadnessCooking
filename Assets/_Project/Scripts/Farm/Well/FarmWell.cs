@@ -82,6 +82,5 @@ public class FarmWell : HoldAdd {
     public override void Bind(FarmData data) {
         data.FarmWell ??= new(_readyDefaultCount);
         Data = data.FarmWell;
-        base.Bind(data);
     }
 }

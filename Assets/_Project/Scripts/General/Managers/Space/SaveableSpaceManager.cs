@@ -17,7 +17,7 @@ public abstract class SaveableSpaceManager<TData> : SpaceManager, IBindable<TDat
         _upgradeManager.ItemAdded += CheckSpaceAdded;
     }
 
-    protected void LateStart() {
+    public void LateStart() {
         GenerateSpaces();
     }
 
@@ -36,7 +36,6 @@ public abstract class SaveableSpaceManager<TData> : SpaceManager, IBindable<TDat
     public virtual void Bind(TData data) {
         _data = data;
         BindData();
-        LateStart();
     }
 
     public override float GetSpacesSize() {

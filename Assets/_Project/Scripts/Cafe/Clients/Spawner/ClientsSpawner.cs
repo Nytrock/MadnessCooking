@@ -35,8 +35,36 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
         _spaceManager.SpaceAdded += MoveSpawnPoint;
     }
 
-    private void LateStart() {
+    public void LateStart() {
+        GenerateClientsFromData();
         SetNewTime();
+    }
+
+    private void GenerateClientsFromData() {
+        int spotIndex = 0;
+        foreach (var spotData in _spotData.Spots) {
+            if (!spotData.HaveClients || spotData.ContainsGrayMan()) {
+                spotIndex++;
+                continue;
+            }
+
+            _spotManager.TakeSpot(spotIndex);
+            CafeSpot spot = _spotManager.GetSpotByIndex(spotIndex);
+            ClientsHolder table = SpawnGroupOfClients(spot);
+            if (spotData.GroupState == GroupClientState.Wait ||
+                spotData.GroupState == GroupClientState.EndlessWait)
+                table.CheckWait();
+            else if (spotData.GroupState == GroupClientState.Talk)
+                table.CheckTalk();
+
+            spotIndex++;
+        }
+
+        foreach (var clientData in _data.LeavingClients) {
+            Client client = _pool.GetObject(clientData);
+            client.transform.position = clientData.Position.GetVector();
+            client.Setup(new ClientSettings(clientData, -1, -1, this));
+        }
     }
 
     private void Update() {
@@ -157,33 +185,6 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
         _data = data.ClientsSpawner;
         _spotData = data.SpotManager;
         _criticData = data.CriticSpawner;
-
-        int spotIndex = 0;
-        foreach (var spotData in _spotData.Spots) {
-            if (!spotData.HaveClients || spotData.ContainsGrayMan()) {
-                spotIndex++;
-                continue;
-            }
-
-            _spotManager.TakeSpot(spotIndex);
-            CafeSpot spot = _spotManager.GetSpotByIndex(spotIndex);
-            ClientsHolder table = SpawnGroupOfClients(spot);
-            if (spotData.GroupState == GroupClientState.Wait ||
-                spotData.GroupState == GroupClientState.EndlessWait)
-                table.CheckWait();
-            else if (spotData.GroupState == GroupClientState.Talk)
-                table.CheckTalk();
-
-            spotIndex++;
-        }
-
-        foreach (var clientData in _data.LeavingClients) {
-            Client client = _pool.GetObject(clientData);
-            client.transform.position = clientData.Position.GetVector();
-            client.Setup(new ClientSettings(clientData, -1, -1, this));
-        }
-
-        LateStart();
     }
 
     public void PutClient(Client client) {
@@ -197,9 +198,10 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
 
         table.SetTutorialState(_tutorialManager.IsWork);
         SpotData spotData = _spotData.GetSpot(spot.Index);
+        table.SetData(spotData);
 
         for (int i = 0; i < spot.SeatsCount; i++) {
-            Client client = _pool.GetObject(spotData.GetClient(i));
+            Client client = _pool.GetClientByGender(spotData.GetClient(i).Gender);
             client.ClientEat += ClientEat;
             client.ClientRejected += ClientRejected;
             table.AddClient(client);

@@ -7,6 +7,11 @@ public abstract class LocalDataBinder<TMainData, TData> : MonoBehaviour, IBindab
     [SerializeField] protected InterfaceReference<IBindable<TData>>[] _bindables;
     protected TData _data;
 
+    public void LateStart() {
+        foreach (var bindable in _bindables)
+            bindable.Value.LateStart();
+    }
+
     public void Bind(TMainData data) {
         SetData(data);
         foreach (var bindable in _bindables)

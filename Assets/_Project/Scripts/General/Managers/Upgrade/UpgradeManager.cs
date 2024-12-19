@@ -14,7 +14,6 @@ public class UpgradeManager : SaveableItemManager<BaseUpgrade, GameData>, IBinda
         _data = data.UpgradeManager;
 
         BindUpgradeData();
-        base.Bind(data);
     }
 
     private void BindUpgradeData() {

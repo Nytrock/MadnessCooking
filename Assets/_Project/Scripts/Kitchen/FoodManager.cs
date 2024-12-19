@@ -10,6 +10,5 @@ public class FoodManager : SaveableItemManager<Food, KitchenData> {
     public override void Bind(KitchenData data) {
         data.FoodManager ??= new();
         _data = data.FoodManager;
-        base.Bind(data);
     }
 }

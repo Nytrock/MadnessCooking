@@ -33,6 +33,8 @@ public class LightManager : MonoBehaviour, IBindable<GeneralData> {
         _skyManager.SetNewLight(newDaytime);
     }
 
+    public void LateStart() { }
+
     public void Bind(GeneralData data) {
         data.LightManager ??= new();
         _data = data.LightManager;

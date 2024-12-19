@@ -13,6 +13,9 @@ public class CursorSettingsPoint : IntSettingsPoint, IBindable<GameSettingsData>
 
     public void Bind(GameSettingsData data) {
         _data = data.CursorManager;
+    }
+
+    public void LateStart() {
         UpdateState();
     }
 

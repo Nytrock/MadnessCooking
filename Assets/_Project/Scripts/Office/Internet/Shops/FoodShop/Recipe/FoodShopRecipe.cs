@@ -19,7 +19,6 @@ public class FoodShopRecipe : FoodRecipe<FoodShopRecipePart> {
         int index = 0;
         foreach (var ingredientCount in _food.Ingredients) {
             bool haveCount = _ingredientManager.HaveIngredient(ingredientCount.Item);
-            _canCook &= haveCount;
             _recipeParts[index].Setup(ingredientCount, haveCount);
             index++;
         }
@@ -27,7 +26,6 @@ public class FoodShopRecipe : FoodRecipe<FoodShopRecipePart> {
 
     protected override void SetupTechnic() {
         bool haveTechnic = _technicManager.HaveTechnic(_food.TypeTechnic);
-        _canCook &= haveTechnic;
         _techicIcon.SetTechnic(_food.TypeTechnic, haveTechnic);
     }
 

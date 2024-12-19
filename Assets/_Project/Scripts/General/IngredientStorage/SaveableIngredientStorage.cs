@@ -5,8 +5,10 @@ public abstract class SaveableIngredientStorage<TData> : IngredientStorage, IBin
 
     [SerializeField] protected BuyableItemCountList<Ingredient> _defaultIngredients;
 
-    public virtual void Bind(TData data) {
+    public void LateStart() {
         foreach (var ingredientCount in Data.Ingredients)
             InvokeIngredientCountAdded(ingredientCount);
     }
+
+    public abstract void Bind(TData data);
 }

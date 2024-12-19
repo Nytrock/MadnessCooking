@@ -13,6 +13,9 @@ public class CursorManager : MonoBehaviour, IBindable<GameSettingsData>, ISettin
     public void Bind(GameSettingsData data) {
         data.CursorManager ??= new(DefaultValue);
         _data = data.CursorManager;
+    }
+
+    public void LateStart() {
         UpdateValue();
     }
 

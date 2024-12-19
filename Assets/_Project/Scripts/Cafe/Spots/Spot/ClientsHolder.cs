@@ -73,7 +73,10 @@ public class ClientsHolder : MonoBehaviour {
     }
 
     public void CheckWait() {
-        bool allClientsHere = _data.Clients.All(x => x.State == ClientState.Wait);
+        bool allClientsHere = _data.Clients.All(
+            client => client.State == ClientState.Wait
+        );
+
         if (allClientsHere)
             StartWait();
     }

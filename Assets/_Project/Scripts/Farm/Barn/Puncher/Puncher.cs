@@ -16,7 +16,7 @@ public class Puncher : MonoBehaviour, IBindable<FarmData> {
         _upgradeManager.ItemAdded += CheckSpeedChanged;
     }
 
-    private void LateStart() {
+    public void LateStart() {
         Data.SetNeedWaste(_needWaste);
         FertilizerChanged?.Invoke();
     }
@@ -42,6 +42,5 @@ public class Puncher : MonoBehaviour, IBindable<FarmData> {
     public void Bind(FarmData data) {
         data.Puncher ??= new();
         Data = data.Puncher;
-        LateStart();
     }
 }

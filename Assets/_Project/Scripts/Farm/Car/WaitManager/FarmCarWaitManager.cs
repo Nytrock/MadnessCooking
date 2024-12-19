@@ -22,7 +22,9 @@ public class FarmCarWaitManager : MonoBehaviour, IBindable<FarmData> {
         _upgradeManager.ItemAdded += CheckSpeedChanged;
     }
 
-    private void LateStart() {
+    public void LateStart() {
+        if (_data.CarState != CarState.Calm)
+            _car.InstantLeave();
         StateChanged?.Invoke(_data.CarState);
     }
 
@@ -61,9 +63,5 @@ public class FarmCarWaitManager : MonoBehaviour, IBindable<FarmData> {
     public void Bind(FarmData data) {
         data.CarWaitManager ??= new(_defaultWaitMinutes * SECONDS_IN_MINUTES);
         _data = data.CarWaitManager;
-
-        if (_data.CarState != CarState.Calm)
-            _car.InstantLeave();
-        LateStart();
     }
 }

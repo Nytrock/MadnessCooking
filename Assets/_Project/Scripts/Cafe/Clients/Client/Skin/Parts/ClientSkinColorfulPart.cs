@@ -2,8 +2,8 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class ClientSkinColorfulPart : ClientSkinPart {
-    [SerializeField] private Color _defaultColor;
-    [SerializeField] private Color[] _randomColors;
+    [SerializeField] protected Color _defaultColor;
+    [SerializeField] protected Color[] _randomColors;
 
     public int RandomColorsCount => _randomColors.Length;
 

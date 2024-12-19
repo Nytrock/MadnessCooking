@@ -79,6 +79,8 @@ public class WheatManager : MonoBehaviour, IUpgradeable<FarmUpgradeData>, IBinda
         }
     }
 
+    public void LateStart() { }
+
     public void Bind(FarmData data) {
         data.WheatManager ??= new();
         _data = data.WheatManager;

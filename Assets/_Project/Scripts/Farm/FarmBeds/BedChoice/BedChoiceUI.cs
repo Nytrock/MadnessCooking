@@ -10,7 +10,7 @@ public class BedChoiceUI : ChoiceBuyUI<BedType>, IBindable<FarmData> {
         _bedTypesManager.ItemAdded += AddType;
     }
 
-    private void LateStart() {
+    public void LateStart() {
         GenerateChoiceButtons();
         base.Start();
     }
@@ -78,7 +78,5 @@ public class BedChoiceUI : ChoiceBuyUI<BedType>, IBindable<FarmData> {
         _changingBed = null;
     }
 
-    public void Bind(FarmData data) {
-        LateStart();
-    }
+    public void Bind(FarmData data) { }
 }

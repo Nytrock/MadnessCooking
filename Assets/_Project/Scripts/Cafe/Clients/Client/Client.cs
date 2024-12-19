@@ -92,9 +92,12 @@ public class Client : MonoBehaviour {
         _seat = _spot.GetSeat(SeatIndex);
 
         Data = settings.Data;
+        Data.SetGender(_gender);
         Data.SetWaitTime(_waitTime.RandomValue);
 
         transform.position = Data.Position.GetVector();
+        _skin.StartNewCycle(Data);
+
         ClientUI.Setup(Data, ActivateOrder, Spawner.TutorialManager);
         ChangeState();
 
@@ -157,7 +160,7 @@ public class Client : MonoBehaviour {
         ClientRejected?.Invoke(this);
     }
 
-    public virtual void Eat() {
+    public void Eat() {
         int payingMoney = Data.Order.Food.MoneyGet;
         if (Data.Type == ClientType.Rich)
             payingMoney *= 100;

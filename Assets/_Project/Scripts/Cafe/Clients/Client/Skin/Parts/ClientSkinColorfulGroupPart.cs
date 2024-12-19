@@ -1,6 +1,7 @@
 using UnityEngine;
 
 public class ClientSkinColorfulGroupPart : ClientSkinGroupPart {
+    [SerializeField] protected Color _defaultColor;
     [SerializeField] private Color[] _randomColors;
 
     public int RandomColorsCount => _randomColors.Length;

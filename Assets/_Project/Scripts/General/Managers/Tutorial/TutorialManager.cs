@@ -10,7 +10,7 @@ public class TutorialManager : MonoBehaviour, IBindable<GeneralData> {
 
     public bool IsWork => _data.IsWork;
 
-    private void LateStart() {
+    public void LateStart() {
         if (!IsTutorial())
             return;
 
@@ -56,7 +56,6 @@ public class TutorialManager : MonoBehaviour, IBindable<GeneralData> {
     public void Bind(GeneralData data) {
         data.TutorialManager ??= new();
         _data = data.TutorialManager;
-        LateStart();
     }
 
     public void ChangeWorkState(bool isWork) {

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OrdersUI : MonoBehaviour, IUpgradeable<KitchenUpgradeData>, IBindable<KitchenData>, IActivable {
+public class OrdersUI : MonoBehaviour, IUpgradeable<KitchenUpgradeData>, IActivable {
     [SerializeField] private OrdersManager _ordersManager;
     [SerializeField] private OrderButtonsPool _pool;
     [SerializeField] private GameObject _panel;
@@ -60,15 +60,6 @@ public class OrdersUI : MonoBehaviour, IUpgradeable<KitchenUpgradeData>, IBindab
     private void UpdateRecipes() {
         foreach (var button in _orderButtons)
             button.UpdateRecipeTechnic();
-    }
-
-    public void Bind(KitchenData data) {
-        foreach (var button in _orderButtons) {
-            if (button.Order.IsCooking)
-                button.Cook();
-            else if (button.Order.IsFinished)
-                button.Order.FinishCook();
-        }
     }
 
     public void BindUpgrade(KitchenUpgradeData upgradeData) {

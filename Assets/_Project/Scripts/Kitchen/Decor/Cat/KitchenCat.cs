@@ -41,6 +41,9 @@ public class KitchenCat : DecorHolder, IBindable<KitchenData> {
     public void Bind(KitchenData data) {
         data.Cat ??= new(_needTime);
         _data = data.Cat;
+    }
+
+    public void LateStart() {
         UpdateEyes();
     }
 

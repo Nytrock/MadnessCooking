@@ -8,14 +8,13 @@ public class CafeStateChanger : MonoBehaviour, IBindable<CafeData> {
 
     public event Action<bool> CafeChanged;
 
-    private void LateStart() {
+    public void LateStart() {
         CafeChanged?.Invoke(_data.IsOpened);
     }
 
     public void Bind(CafeData data) {
         data.CafeOpener ??= new();
         _data = data.CafeOpener;
-        LateStart();
     }
 
     public void ChangeCafeState() {

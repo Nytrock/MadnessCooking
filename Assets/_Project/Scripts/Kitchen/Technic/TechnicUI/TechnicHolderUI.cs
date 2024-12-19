@@ -7,7 +7,6 @@ public class TechnicHolderUI : MonoBehaviour {
     [SerializeField] private Image _icon;
     [SerializeField] private Sprite _repairIcon;
     [SerializeField] private CircleSlider _progressBar;
-    private TechnicHolderData _data;
 
     private void Awake() {
         _technicHolder.CookChanged += UpdateWorkState;
@@ -22,24 +21,17 @@ public class TechnicHolderUI : MonoBehaviour {
     }
 
     private void Update() {
-        if (_data == null)
+        if (!_technicHolder.Data.IsCooking && !_technicHolder.Data.IsRepairing)
             return;
 
-        if (!_data.IsCooking && !_data.IsRepairing)
-            return;
-
-        _progressBar.SetValue(_data.NowWaitTime);
-    }
-
-    public void SetData(TechnicHolderData data) {
-        _data = data;
+        _progressBar.SetValue(_technicHolder.Data.NowWaitTime);
     }
 
     public void StartWork() {
-        _progressBar.SetMaxValue(_data.NeedWaitTime);
-        if (_data.IsCooking)
-            _icon.sprite = _data.NowOrder.Food.Icon;
-        else if (_data.IsRepairing)
+        _progressBar.SetMaxValue(_technicHolder.Data.NeedWaitTime);
+        if (_technicHolder.Data.IsCooking)
+            _icon.sprite = _technicHolder.Data.NowOrder.Food.Icon;
+        else if (_technicHolder.Data.IsRepairing)
             _icon.sprite = _repairIcon;
 
         ChangeState(true);

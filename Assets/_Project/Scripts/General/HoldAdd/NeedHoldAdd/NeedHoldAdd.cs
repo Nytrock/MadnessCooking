@@ -8,7 +8,7 @@ public abstract class NeedHoldAdd : HoldAdd {
 
     public event Action MaterialCountChanged;
 
-    protected override void LateStart() {
+    public override void LateStart() {
         if (NeedHoldData == null)
             throw new ArgumentNullException("Argument for data or for UI are null");
         base.LateStart();

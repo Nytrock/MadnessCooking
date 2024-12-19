@@ -21,6 +21,9 @@ public class FpsUI : MonoBehaviour, IBindable<GameSettingsData>, ISettingable<bo
     public void Bind(GameSettingsData data) {
         data.FpsManager ??= new(DefaultValue);
         _data = data.FpsManager;
+    }
+
+    public void LateStart() {
         UpdateValue();
     }
 

@@ -4,6 +4,8 @@ public class VideoSettings : SettingsPanel, IBindable<VideoSettingsData> {
     [SerializeField] private ScreenModeSettingsPoint _screenMode;
     [SerializeField] private ScreenSizeSettingsPoint _screenSize;
 
+    public void LateStart() { }
+
     public void Bind(VideoSettingsData data) {
         _screenMode.Bind(data);
         _screenSize.Bind(data);

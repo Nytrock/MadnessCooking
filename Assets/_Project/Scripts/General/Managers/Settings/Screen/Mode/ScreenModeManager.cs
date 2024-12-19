@@ -9,6 +9,8 @@ public class ScreenModeManager : MonoBehaviour, IBindable<VideoSettingsData>, IS
     public int DefaultValue => Mathf.Max(Array.IndexOf(_modes, _defaultMode), 0);
     public int OptionsCount => _modes.Length;
 
+    public void LateStart() { }
+
     public void Bind(VideoSettingsData data) {
         data.ScreenMode ??= new(DefaultValue);
         _data = data;

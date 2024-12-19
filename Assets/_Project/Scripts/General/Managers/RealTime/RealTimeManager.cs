@@ -11,6 +11,8 @@ public class RealTimeManager : MonoBehaviour, IBindable<GeneralData> {
         _data.UpdateRealTime();
     }
 
+    public void LateStart() { }
+
     public void Bind(GeneralData data) {
         data.RealTimeManager ??= new();
         _data = data.RealTimeManager;

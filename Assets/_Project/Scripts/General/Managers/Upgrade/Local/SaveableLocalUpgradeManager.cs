@@ -8,6 +8,8 @@ public abstract class SaveableLocalUpgradeManager<TUpgradeData, TData> : LocalUp
 
     protected TUpgradeData _data;
 
+    public void LateStart() { }
+
     public override void BindUpgradeData() {
         foreach (var upgradeable in _upgradeables)
             upgradeable.Value.BindUpgrade(_data);

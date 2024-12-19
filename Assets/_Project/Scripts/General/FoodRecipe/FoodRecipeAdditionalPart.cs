@@ -4,6 +4,9 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Image))]
 public class FoodRecipeAdditionalPart : HoverItemNameActivator {
     protected GrayscaleImageRenderer _icon;
+    protected bool _isAvailable;
+
+    public bool IsAvailable => _isAvailable;
 
     protected virtual void Awake() {
         InitializeIcon();

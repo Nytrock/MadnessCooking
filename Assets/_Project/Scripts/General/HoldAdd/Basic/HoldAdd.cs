@@ -25,7 +25,7 @@ public abstract class HoldAdd : MonoBehaviour, IBindable<FarmData> {
         _upgradeManager.ItemAdded += CheckAddedUpgrade;
     }
 
-    protected virtual void LateStart() {
+    public virtual void LateStart() {
         ResetAll();
         UpdateUpgrades();
         Data.SetTimeWait(_timeWait);
@@ -97,9 +97,7 @@ public abstract class HoldAdd : MonoBehaviour, IBindable<FarmData> {
         UpdateUpgrades();
     }
 
-    public virtual void Bind(FarmData data) {
-        LateStart();
-    }
+    public abstract void Bind(FarmData data);
 
     protected void InvokeClickChanged(bool isWork) {
         ClickChanged?.Invoke(isWork);

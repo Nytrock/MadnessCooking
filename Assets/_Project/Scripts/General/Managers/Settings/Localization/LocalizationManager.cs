@@ -36,6 +36,9 @@ public class LocalizationManager : Singleton<LocalizationManager>, IBindable<Gam
     public void Bind(GameSettingsData data) {
         data.LocalizationManager ??= new(DefaultValue);
         _data = data.LocalizationManager;
+    }
+
+    public void LateStart() {
         UpdateValue();
     }
 

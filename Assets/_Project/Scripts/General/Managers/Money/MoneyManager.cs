@@ -9,7 +9,7 @@ public class MoneyManager : Singleton<MoneyManager>, IBindable<GeneralData> {
 
     public event Action<int> MoneyChanged;
 
-    private void LateStart() {
+    public void LateStart() {
         MoneyChanged?.Invoke(_moneyDefault);
     }
 
@@ -19,6 +19,9 @@ public class MoneyManager : Singleton<MoneyManager>, IBindable<GeneralData> {
     }
 
     public void ChangeMoney(int changeValue) {
+        if (changeValue == 0)
+            return;
+
         _data.ChangeMoneyCount(changeValue);
         MoneyChanged?.Invoke(_data.MoneyCount);
     }
@@ -31,6 +34,5 @@ public class MoneyManager : Singleton<MoneyManager>, IBindable<GeneralData> {
     public void Bind(GeneralData data) {
         data.MoneyManager ??= new(_moneyDefault);
         _data = data.MoneyManager;
-        LateStart();
     }
 }

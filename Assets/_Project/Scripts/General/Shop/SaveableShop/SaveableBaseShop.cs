@@ -11,8 +11,8 @@ public abstract class SaveableBaseShop<TItem, TData> : BaseShop, IBindable<TData
 
     public event Action<BuyableItem> ItemBought;
 
-    protected override void LateStart() {
-        base.LateStart();
+    public void LateStart() {
+        ChangeShopState(false);
         SortItems();
 
         _saveManager.LoadEnded += GenerateShop;
@@ -126,6 +126,5 @@ public abstract class SaveableBaseShop<TItem, TData> : BaseShop, IBindable<TData
 
     public virtual void Bind(TData data) {
         _data.CheckDefaultItems(_defaultItemsToBuy);
-        LateStart();
     }
 }

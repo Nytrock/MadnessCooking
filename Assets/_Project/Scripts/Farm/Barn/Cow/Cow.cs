@@ -19,7 +19,6 @@ public class Cow : NeedHoldAdd {
     public override void Bind(FarmData data) {
         data.Cow ??= new(_readyDefaultCount, _materialDefaultCount);
         Data = data.Cow;
-        base.Bind(data);
     }
 
     protected override void UpdateUpgrades() {

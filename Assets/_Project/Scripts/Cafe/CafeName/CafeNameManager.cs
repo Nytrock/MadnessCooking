@@ -8,15 +8,13 @@ public class CafeNameManager : MonoBehaviour, IBindable<CafeData> {
 
     public string CafeName => _data.CafeName;
 
-    private void LateStart() {
+    public void LateStart() {
         NameChanged?.Invoke(_data.CafeName);
     }
 
     public void Bind(CafeData data) {
         data.CafeNameManager ??= new();
         _data = data.CafeNameManager;
-
-        LateStart();
     }
 
     public void ChangeName(string name) {

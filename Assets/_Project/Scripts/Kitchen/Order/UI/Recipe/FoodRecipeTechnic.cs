@@ -4,6 +4,7 @@ public class FoodRecipeTechnic : FoodRecipeAdditionalPart {
             InitializeIcon();
 
         _showingItem = technic;
+        _isAvailable = haveTechnic;
         _icon.Setup(technic.Icon, !haveTechnic);
         ChangeState(true);
     }

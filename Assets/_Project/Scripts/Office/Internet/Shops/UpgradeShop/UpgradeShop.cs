@@ -12,7 +12,6 @@ public class UpgradeShop : BaseInstantShop<BaseUpgrade, OfficeData> {
     public override void Bind(OfficeData data) {
         data.UpgradesShop ??= new(_defaultItemsToBuy);
         _data = data.UpgradesShop;
-        LateStart();
     }
 
     protected override GrayscaleImageData GenerateSideInfo(BaseUpgrade upgrade) {

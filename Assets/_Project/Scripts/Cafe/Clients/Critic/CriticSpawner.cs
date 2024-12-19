@@ -59,6 +59,8 @@ public class CriticSpawner : MonoBehaviour, IBindable<CafeData> {
         _criticUI.SetMessage(CriticMessageType.Failure);
     }
 
+    public void LateStart() { }
+
     public void Bind(CafeData data) {
         data.CriticSpawner ??= new();
         _data = data.CriticSpawner;

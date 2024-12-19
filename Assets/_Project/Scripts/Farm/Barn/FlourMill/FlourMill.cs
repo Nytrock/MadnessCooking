@@ -27,7 +27,6 @@ public class FlourMill : NeedHoldAdd {
     public override void Bind(FarmData data) {
         data.FlourMill ??= new(_readyDefaultCount, _materialDefaultCount);
         Data = data.FlourMill;
-        base.Bind(data);
     }
 
     protected override void UpdateUpgrades() {

@@ -38,6 +38,5 @@ public class IngredientsManager : SaveableItemManager<Ingredient, FarmData> {
     public override void Bind(FarmData data) {
         data.IngredientManager ??= new();
         _data = data.IngredientManager;
-        base.Bind(data);
     }
 }

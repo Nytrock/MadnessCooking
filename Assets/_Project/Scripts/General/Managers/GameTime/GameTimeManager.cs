@@ -28,7 +28,7 @@ public class GameTimeManager : MonoBehaviour, IBindable<GeneralData> {
         _pauseManager.PauseChanged += ChangePauseState;
     }
 
-    private void LateStart() {
+    public void LateStart() {
         DaytimeChanged?.Invoke(_data.Daytime);
         _nowTimeSpeed = _defaultTimeSpeed;
         _previousTimeSpeed = _nowTimeSpeed;
@@ -84,6 +84,5 @@ public class GameTimeManager : MonoBehaviour, IBindable<GeneralData> {
         }
 
         _data = data.GameTimeManager;
-        LateStart();
     }
 }

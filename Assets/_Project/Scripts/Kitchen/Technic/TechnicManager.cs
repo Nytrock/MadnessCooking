@@ -64,7 +64,6 @@ public class TechnicManager : SaveableItemManager<Technic, KitchenData>, IUpgrad
 
         BindHolders(data);
         ActivateHolders();
-        base.Bind(data);
     }
 
     private void BindHolders(KitchenData data) {

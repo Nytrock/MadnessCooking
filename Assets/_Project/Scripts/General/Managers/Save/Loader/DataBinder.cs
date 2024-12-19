@@ -9,5 +9,8 @@ public abstract class DataBinder<TData> : MonoBehaviour
     public virtual void Bind(TData data) {
         foreach (var bindable in _bindables)
             bindable.Value.Bind(data);
+
+        foreach (var bindable in _bindables)
+            bindable.Value.LateStart();
     }
 }

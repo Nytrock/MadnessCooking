@@ -25,6 +25,8 @@ public class SettingsManager : MonoBehaviour, IBindable<SettingsData> {
             _panelsManager.SetDefaultPanel();
     }
 
+    public void LateStart() { }
+
     public void Bind(SettingsData data) {
         _gameSettings.Bind(data.GameSettings);
         _audioSettings.Bind(data.AudioSettings);
