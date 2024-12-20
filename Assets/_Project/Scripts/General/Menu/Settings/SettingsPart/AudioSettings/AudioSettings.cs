@@ -6,7 +6,12 @@ public class AudioSettings : SettingsPanel, IBindable<AudioSettingsData> {
     [SerializeField] private AudioSettingsPoint _sfxAudio;
     [SerializeField] private AudioSettingsPoint _musicAudio;
 
-    public void LateStart() { }
+    public void LateStart() {
+        _masterAudio.LateStart();
+        _UIAudio.LateStart();
+        _sfxAudio.LateStart();
+        _musicAudio.LateStart();
+    }
 
     public void Bind(AudioSettingsData data) {
         _masterAudio.Bind(data.VolumeSettings.MasterVolume);

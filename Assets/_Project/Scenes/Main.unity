@@ -4888,7 +4888,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.6000366, y: -197.616}
+  m_AnchoredPosition: {x: -0.6000366, y: -205.916}
   m_SizeDelta: {x: -49.8, y: 31.2388}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &91737658
@@ -12118,7 +12118,7 @@ Transform:
   m_GameObject: {fileID: 206361364}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -100, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -12657,9 +12657,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -8832868593846528382, guid: c2232c781fb4fe6458c8d53a2e082d03, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 32c535cd1d129c748908a782d57d2955, type: 3}
+  m_audioClip: {fileID: 8300000, guid: dc1e0318726229d4792fa98b0f542f74, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.6
+  m_Volume: 0.85
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -37109,6 +37109,14 @@ PrefabInstance:
       propertyPath: m_fontColor.r
       value: 0.3137255
       objectReference: {fileID: 0}
+    - target: {fileID: 3969347597609376092, guid: 06d6d2615b3ba50428d06131d7cd8219, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 124.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3969347597609376092, guid: 06d6d2615b3ba50428d06131d7cd8219, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 41.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5669856591346228477, guid: 06d6d2615b3ba50428d06131d7cd8219, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -43928,7 +43936,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.6000366, y: -166.376}
+  m_AnchoredPosition: {x: -0.6000366, y: -174.676}
   m_SizeDelta: {x: -49.8, y: 31.2388}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &515402872
@@ -79830,7 +79838,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.6000366, y: -135.136}
+  m_AnchoredPosition: {x: -0.6000366, y: -143.436}
   m_SizeDelta: {x: -49.8, y: 31.2388}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &863326230
@@ -110636,7 +110644,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -138773,7 +138781,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e51722e66efd73e49b3516636528d361, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moneyDefault: 40
+  _moneyDefault: 0
 --- !u!4 &1412654021
 Transform:
   m_ObjectHideFlags: 0
@@ -155912,7 +155920,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.6000061, y: -103.9}
+  m_AnchoredPosition: {x: -0.6000061, y: -112.2}
   m_SizeDelta: {x: -49.8, y: 31.2388}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1532211912
@@ -161383,7 +161391,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u041A\u0430\u0444\u0435 \"\u0424\u0430\u043D\u0442\u0430\u0441\u0442\u0438\u043A\u0430\"\u200B"
+  m_text: Cafe "KYS"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1528e4081f4f5e342bab2676099abda8, type: 2}
   m_sharedMaterial: {fileID: 9146103655038203910, guid: 1528e4081f4f5e342bab2676099abda8, type: 2}
@@ -161410,7 +161418,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 45.95
+  m_fontSize: 50
   m_fontSizeBase: 59.8
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -164422,7 +164430,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 806685565534041565, guid: a4eafeffb2ec0104cb391da09e02b2c0, type: 3}
       propertyPath: m_Volume
-      value: 0.6
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 806685565534041565, guid: a4eafeffb2ec0104cb391da09e02b2c0, type: 3}
       propertyPath: m_audioClip
@@ -196416,8 +196424,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -19.1066}
-  m_SizeDelta: {x: -49.8, y: 38.2141}
+  m_AnchoredPosition: {x: 0, y: -27.4066}
+  m_SizeDelta: {x: -49.8, y: 54.8141}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1852575583
 MonoBehaviour:
@@ -196466,12 +196474,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 25.35
+  m_fontSize: 30
   m_fontSizeBase: 25.35
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 0
+  m_fontSizeMax: 30
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
@@ -209125,7 +209133,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -65.7}
+  m_AnchoredPosition: {x: 0, y: -74}
   m_SizeDelta: {x: -49.8, y: 36.7385}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1961705733
@@ -218616,8 +218624,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 141.1}
-  m_SizeDelta: {x: 494, y: 282.2}
+  m_AnchoredPosition: {x: 0, y: 132.8}
+  m_SizeDelta: {x: 494, y: 298.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2025182290
 MonoBehaviour:
@@ -225842,10 +225850,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 2025182289}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -237.18576}
-  m_SizeDelta: {x: -49.8, y: 39.058}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 0, y: 44.42899}
+  m_SizeDelta: {x: 444.2, y: 39.057983}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &7071136067956422775
 PrefabInstance:
