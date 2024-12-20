@@ -5,8 +5,8 @@ using Random = UnityEngine.Random;
 public class ClientsPoolsManager : MonoBehaviour {
     [SerializeField] private ClientsPool[] _pools;
 
-    public Client GetObject(ClientData data) {
-        if (data.Type == ClientType.GrayMan)
+    public Client GetClientByType(ClientType clientType) {
+        if (clientType == ClientType.GrayMan)
             return GetClientByGender(ClientGender.Male);
 
         ClientsPool randomPool = _pools[Random.Range(0, _pools.Length)];

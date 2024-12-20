@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 
 public class OrderButton : MonoBehaviour {
-    [SerializeField] private BuyableItemRendererWithName _foodInfo;
+    [SerializeField] private HoverItemNameActivator _foodInfo;
     [SerializeField] private TextMeshProUGUI _tableIndexText;
     [SerializeField] private OrderRecipe _recipe;
 
@@ -24,7 +24,7 @@ public class OrderButton : MonoBehaviour {
         Order.OrderFinished += FinishCook;
         _cookState.SetOrder(order);
 
-        _foodInfo.SetItemInfo(Order.Food);
+        _foodInfo.SetItem(Order.Food);
         _tableIndexText.text = Order.TableIndex.ToString();
 
         _recipe.SetupRecipe(Order.Food, data);
@@ -46,6 +46,7 @@ public class OrderButton : MonoBehaviour {
     }
 
     public void SetHoverText(HoverItemName hoverText) {
+        _foodInfo.SetHoverText(hoverText);
         _recipe.SetHoverText(hoverText);
     }
 

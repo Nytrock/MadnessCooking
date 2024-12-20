@@ -14,6 +14,7 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
     [SerializeField] private TutorialManager _tutorialManager;
     [SerializeField] private ClientsPoolsManager _pool;
     [SerializeField] private RangeFloat _spawnTime;
+    [SerializeField] private float _noClientsMultiplier;
 
     [Header("Upgrades")]
     [SerializeField] private BaseUpgrade _eatTimeShowUpgrade;
@@ -61,7 +62,7 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
         }
 
         foreach (var clientData in _data.LeavingClients) {
-            Client client = _pool.GetObject(clientData);
+            Client client = _pool.GetClientByGender(clientData.Gender);
             client.transform.position = clientData.Position.GetVector();
             client.Setup(new ClientSettings(clientData, -1, -1, this));
         }
@@ -101,7 +102,12 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
 
     private void SetNewTime() {
         float popular = _popularityCalculate.GetPopularity();
-        _data.SetSpawnTime(_spawnTime.RandomValue / popular);
+        float spawnTime = _spawnTime.RandomValue / popular;
+
+        if (_data.NowClientsCount == 0)
+            spawnTime *= _noClientsMultiplier;
+
+        _data.SetSpawnTime(spawnTime);
     }
 
     private void ChangeWorkMode() {
@@ -177,12 +183,9 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
     }
 
     public void Bind(CafeData data) {
-        if (data.ClientsSpawner == null) {
-            float popular = _popularityCalculate.GetPopularity();
-            data.ClientsSpawner = new(_spawnTime.RandomValue / popular);
-        }
-
+        data.ClientsSpawner ??= new();
         _data = data.ClientsSpawner;
+
         _spotData = data.SpotManager;
         _criticData = data.CriticSpawner;
     }
@@ -201,7 +204,15 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
         table.SetData(spotData);
 
         for (int i = 0; i < spot.SeatsCount; i++) {
-            Client client = _pool.GetClientByGender(spotData.GetClient(i).Gender);
+            _data.AddNowClient();
+            Client client;
+            ClientData clientData = spotData.GetClient(i);
+
+            if (clientData.Gender == ClientGender.None)
+                client = _pool.GetClientByType(clientData.Type);
+            else
+                client = _pool.GetClientByGender(clientData.Gender);
+
             client.ClientEat += ClientEat;
             client.ClientRejected += ClientRejected;
             table.AddClient(client);

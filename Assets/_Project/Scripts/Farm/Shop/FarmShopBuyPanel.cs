@@ -12,4 +12,6 @@ public class FarmShopBuyPanel : BaseChooseBuyPanel {
         base.SetVisual();
         _outlineImage.sprite = _data.Item.Icon;
     }
+
+    public override void SetSideInfo() { }
 }

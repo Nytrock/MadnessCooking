@@ -1,9 +1,8 @@
 using UnityEngine;
-using UnityEngine.UI;
 
-[RequireComponent(typeof(Image))]
+[RequireComponent(typeof(GrayscaleImage))]
 public class FoodRecipeAdditionalPart : HoverItemNameActivator {
-    protected GrayscaleImageRenderer _icon;
+    protected GrayscaleImage _grayscaleIcon;
     protected bool _isAvailable;
 
     public bool IsAvailable => _isAvailable;
@@ -13,14 +12,13 @@ public class FoodRecipeAdditionalPart : HoverItemNameActivator {
     }
 
     protected void InitializeIcon() {
-        _icon = new();
-        _icon.SetImage(GetComponent<Image>());
+        _grayscaleIcon = GetComponent<GrayscaleImage>();
     }
 
     public void ChangeState(bool newState) {
-        if (_icon is null)
+        if (_grayscaleIcon == null)
             InitializeIcon();
 
-        _icon.SetActive(newState);
+        _grayscaleIcon.SetActive(newState);
     }
 }

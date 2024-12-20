@@ -27,7 +27,7 @@ public class OrderRecipePart : FoodRecipePart {
         _isAvailable = isMoneyEnough;
 
         _countText.text = price.ToString() + "x";
-        _icon.Setup(_moneySprite, !isMoneyEnough);
+        _grayscaleIcon.Setup(_moneySprite, !isMoneyEnough);
         _countTextRenderer.UpdateAvailable(isMoneyEnough);
     }
 

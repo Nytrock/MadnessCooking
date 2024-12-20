@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public class BedTypeIngredientsRenderer : MonoBehaviour {
-    [SerializeField] private GrayscaleImageRenderer[] _ingredientImages;
+    [SerializeField] private GrayscaleImage[] _ingredientImages;
     [SerializeField] private IngredientsManager _ingredientsManager;
 
     public void ShowIngredients(BedType bedType) {

@@ -35,8 +35,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 12.449995, y: 0}
-  m_SizeDelta: {x: 24.9, y: 0}
+  m_AnchoredPosition: {x: 16.6, y: 0}
+  m_SizeDelta: {x: 33.6, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2080446041960720718
 CanvasRenderer:
@@ -93,12 +93,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 19.54
+  m_fontSize: 26.01
   m_fontSizeBase: 19.54
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 0
-  m_fontSizeMax: 19.54
+  m_fontSizeMax: 26.01
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
@@ -183,8 +183,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -16.6, y: 0}
-  m_SizeDelta: {x: 33.2, y: 33.2}
+  m_AnchoredPosition: {x: -24.9, y: 0}
+  m_SizeDelta: {x: 50.4, y: 50.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8743313648403001881
 CanvasRenderer:
@@ -203,7 +203,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2722965668896469282}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Script: {fileID: 11500000, guid: 13912497d79c13a418a40a73849a68a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
@@ -262,7 +262,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 58.1, y: 33.2}
+  m_SizeDelta: {x: 84, y: 50.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &678191551998079905
 CanvasRenderer:
@@ -281,7 +281,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7348740036019757012}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Script: {fileID: 11500000, guid: 13912497d79c13a418a40a73849a68a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
@@ -314,8 +314,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df76fcb143309164e879d5dc6d87bbc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _icon:
-    _image: {fileID: 6019703926745685223}
+  _icon: {fileID: 6019703926745685223}
   _countText: {fileID: 8500185215054019579}
-  _moneySprite: {fileID: 634479496, guid: 963387b56758d7c45925aba832c2754f, type: 3}
   _countTextRenderer: {fileID: 2503593929836659842}
+  _moneySprite: {fileID: 634479496, guid: 963387b56758d7c45925aba832c2754f, type: 3}

@@ -1,10 +1,8 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-[Serializable]
-public class GrayscaleImageRenderer {
-    [SerializeField] private Image _image;
+
+public class GrayscaleImage : Image {
     private Material _grayscaleMaterial;
 
     public void Setup(GrayscaleImageData data) {
@@ -23,26 +21,16 @@ public class GrayscaleImageRenderer {
             _grayscaleMaterial = MaterialManager.Instance.GrayscaleMaterial;
 
         if (isGrayscale)
-            _image.material = _grayscaleMaterial;
+            material = _grayscaleMaterial;
         else
-            _image.material = null;
+            material = null;
     }
 
-    public void SetImage(Image image) {
-        _image = image;
-    }
-
-    private void SetSprite(Sprite sprite) {
-        if (_image == null)
-            return;
-
-        _image.sprite = sprite;
+    private void SetSprite(Sprite _sprite) {
+        sprite = _sprite;
     }
 
     public void SetActive(bool value) {
-        if (_image == null)
-            return;
-
-        _image.gameObject.SetActive(value);
+        gameObject.SetActive(value);
     }
 }

@@ -10,8 +10,9 @@ public class PopularityLevelStyleUpdater : MonoBehaviour {
     }
 
     public void UpdateInfo(PopularityLevel level) {
-        _perStageUpdater.UpdateStyle(level.Number / 5);
-        _perLevelUpdater.UpdateStyle(level.Number % 5);
+        int index = level.Number - 1;
+        _perStageUpdater.UpdateStyle(index / 5);
+        _perLevelUpdater.UpdateStyle(index % 5);
     }
 }
 

@@ -1,9 +1,7 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class IngredientStorageButton : HoverItemNameActivator {
-    [SerializeField] private Image _icon;
     [SerializeField] private TextMeshProUGUI _countText;
     private BuyableItemCount<Ingredient> _countRenderer;
 

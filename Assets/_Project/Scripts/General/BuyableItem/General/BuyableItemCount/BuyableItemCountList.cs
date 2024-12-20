@@ -33,13 +33,14 @@ public class BuyableItemCountList<TItem>
     }
 
     public void Remove(BuyableItemCount<TItem> itemCount) {
-        if (!ContainsItem(itemCount))
-            return;
-
-        int index = IndexOf(itemCount);
-        _itemCounts[index].ChangeCount(-itemCount.Count);
-        if (_itemCounts[index].Count <= 0)
-            _itemCounts.RemoveAt(index);
+        for (int i = 0; i < _itemCounts.Count; i++) {
+            if (_itemCounts[i].Item == itemCount.Item) {
+                _itemCounts[i].ChangeCount(-itemCount.Count);
+                if (_itemCounts[i].Count <= 0)
+                    _itemCounts.RemoveAt(i);
+                break;
+            }
+        }
 
         UpdateAvailableItems();
     }

@@ -11,6 +11,7 @@ public abstract class SaveableSpaceManager<TData> : SpaceManager, IBindable<TDat
     protected SpaceManagerData _spaceData;
 
     public int SpaceCount => _spaceData.Count;
+    public int NoDefaultSpaceCount => Mathf.Max(0, SpaceCount - _defaultSpaceCount);
 
     protected override void Awake() {
         base.Awake();

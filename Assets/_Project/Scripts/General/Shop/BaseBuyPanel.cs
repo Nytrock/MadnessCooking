@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public abstract class BaseBuyPanel : MonoBehaviour {
-    [SerializeField] protected GrayscaleImageRenderer _sideInfo;
+    [SerializeField] protected GrayscaleImage _sideInfo;
     [SerializeField] protected ButtonWithAudio _buyButton;
     protected BuyPanelData _data;
 

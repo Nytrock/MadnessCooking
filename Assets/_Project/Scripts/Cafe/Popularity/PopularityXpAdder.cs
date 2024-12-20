@@ -4,19 +4,20 @@ public class PopularityXpAdder : MonoBehaviour {
     [SerializeField] private PopularityManager _popularityManager;
     [SerializeField] private CriticSpawner _criticSpawner;
     [SerializeField] private RangeFloat _givingXp;
-    [SerializeField, Min(0)] private float _minWaitCoef;
+    [SerializeField, Min(0)] private float _savedTimeCoef;
     [SerializeField, Min(0)] private float _richClientMultiplier = 20f;
 
     public void AddXp(ClientType clientType, float waitCoef) {
-        if (waitCoef > _minWaitCoef)
-            waitCoef = 1;
+        float savedTimeCoef = 1 - waitCoef;
+        if (savedTimeCoef > _savedTimeCoef)
+            savedTimeCoef = 1;
 
         if (clientType == ClientType.Rich) {
-            _popularityManager.AddXp(_givingXp.RandomValue * _richClientMultiplier * waitCoef);
+            _popularityManager.AddXp(_givingXp.RandomValue * _richClientMultiplier * savedTimeCoef);
         } else if (clientType == ClientType.Critic) {
             _criticSpawner.WaitSuccess();
         } else {
-            _popularityManager.AddXp(_givingXp.RandomValue * waitCoef);
+            _popularityManager.AddXp(_givingXp.RandomValue * savedTimeCoef);
         }
     }
 

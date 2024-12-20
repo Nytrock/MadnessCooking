@@ -16,7 +16,7 @@ public class Client : MonoBehaviour {
     private CafeSpot _spot;
     private CafeSeat _seat;
 
-    public ClientData Data { get; private set; }
+    [field: SerializeField] public ClientData Data { get; private set; }
     public ClientsSpawner Spawner { get; private set; }
     public ClientUI ClientUI { get; private set; }
     public int SpotIndex { get; private set; }

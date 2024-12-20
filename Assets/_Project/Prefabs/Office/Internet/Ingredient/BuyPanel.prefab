@@ -54,7 +54,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 637223280728951054}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Script: {fileID: 11500000, guid: 13912497d79c13a418a40a73849a68a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
@@ -423,6 +423,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  _audioSource: {fileID: 6544228545138631011}
 --- !u!82 &6544228545138631011
 AudioSource:
   m_ObjectHideFlags: 0
@@ -758,8 +759,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea36b1e6ec98683498c30b4666c3f306, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sideInfo:
-    _image: {fileID: 6802634213888386621}
+  _sideInfo: {fileID: 6802634213888386621}
   _buyButton: {fileID: 2768460996245989049}
   _itemInfoRenderer:
     _icon: {fileID: 2320696172845768531}
