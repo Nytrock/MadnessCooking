@@ -8,5 +8,8 @@ public class MenuBackgroundManager : MonoBehaviour {
         GeneralData stubData = new();
         _lightManager.Bind(stubData);
         _timeManager.Bind(stubData);
+
+        _lightManager.LateStart();
+        _timeManager.LateStart();
     }
 }

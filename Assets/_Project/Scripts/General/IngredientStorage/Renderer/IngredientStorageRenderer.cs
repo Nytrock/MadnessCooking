@@ -8,7 +8,7 @@ public abstract class IngredientStorageRenderer : MonoBehaviour {
     [SerializeField] private IngredientRenderer[] _ingredientsRenderers;
 
     protected List<IngredientRenderer> _availableIngredientRenderers;
-    private BuyableItemCountList<Ingredient> _ingredients;
+    private BuyableItemCountList<Ingredient> _ingredients = new();
 
     private void Awake() {
         _ingredientStorage.IngredientCountAdded += CheckAddedIngredient;

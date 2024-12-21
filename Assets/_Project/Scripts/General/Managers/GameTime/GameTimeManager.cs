@@ -9,7 +9,7 @@ public class GameTimeManager : MonoBehaviour, IBindable<GeneralData> {
     [SerializeField] private Daytime _defaultDaytime;
 
     private int _daytimeCount;
-    [SerializeField] private int _nowTimeSpeed;
+    private int _nowTimeSpeed;
     private int _previousTimeSpeed;
     private GameTimeManagerData _data;
 

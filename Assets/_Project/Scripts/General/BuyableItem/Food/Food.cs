@@ -23,10 +23,22 @@ public class Food : BuyableItem {
     public Sprite CookingSprite => _cookingSprite;
     public float TimeToCook => _timeToCook;
     public float TimeToEat => _timeToEat;
-    public int MoneyGet => _moneyGet;
+    public int MoneyGet => _moneyGet + SpicesPrice;
     public Color Color => _color;
     public bool IsNeedWater => _isNeedWater;
 
     public IEnumerable<BuyableItemCount<Ingredient>> Ingredients => _ingredients.GetItems();
     public int CountIngredients => _ingredients.Size;
+
+    public int SpicesPrice {
+        get {
+            int price = 0;
+            foreach (var ingredient in _ingredients) {
+                if (ingredient.Item == ConstIngredients.Instance.Spice) {
+                    price += ingredient.Count * ingredient.Item.Price;
+                }
+            }
+            return price;
+        }
+    }
 }
