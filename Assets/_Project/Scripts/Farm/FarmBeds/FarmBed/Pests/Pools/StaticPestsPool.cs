@@ -11,9 +11,9 @@ public class StaticPestsPool : PestsPool {
     }
 
     protected override Pest CreateObject() {
-        if (_lastId == -1)
-            _lastId = Random.Range(0, _freePests.Count);
-        _freePests.RemoveAt(_lastId);
-        return _freePests[_lastId];
+        if (_prefabIndex == -1)
+            _prefabIndex = Random.Range(0, _freePests.Count);
+        _freePests.RemoveAt(_prefabIndex);
+        return _freePests[_prefabIndex];
     }
 }

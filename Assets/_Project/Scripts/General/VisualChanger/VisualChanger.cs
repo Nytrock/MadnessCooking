@@ -3,6 +3,10 @@ using UnityEngine;
 public abstract class VisualChanger : MonoBehaviour {
     protected bool _isActive;
 
+    protected void Start() {
+        UpdateVisual();
+    }
+
     public void ChangeState() {
         _isActive = !_isActive;
         UpdateVisual();

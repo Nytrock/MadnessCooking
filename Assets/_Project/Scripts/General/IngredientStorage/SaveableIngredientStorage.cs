@@ -7,7 +7,7 @@ public abstract class SaveableIngredientStorage<TData> : IngredientStorage, IBin
 
     public void LateStart() {
         foreach (var ingredientCount in Data.Ingredients)
-            InvokeIngredientCountAdded(ingredientCount);
+            InvokeIngredientAdded(ingredientCount);
     }
 
     public abstract void Bind(TData data);

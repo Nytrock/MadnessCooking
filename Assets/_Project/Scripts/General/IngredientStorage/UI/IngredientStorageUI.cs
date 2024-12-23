@@ -12,7 +12,8 @@ public class IngredientStorageUI<TData> : MonoBehaviour, IActivable
     protected List<IngredientStorageButton> _buttons = new();
 
     protected virtual void Awake() {
-        _storage.IngredientCountAdded += CheckChangedIngredient;
+        _storage.IngredientAdded += AddIngredient;
+        _storage.IngredientRemoved += RemoveIngredient;
     }
 
     protected virtual void Start() {
@@ -31,9 +32,19 @@ public class IngredientStorageUI<TData> : MonoBehaviour, IActivable
         _panel.SetActive(newState);
     }
 
-    private void CheckChangedIngredient(BuyableItemCount<Ingredient> count) {
+    private void AddIngredient(BuyableItemCount<Ingredient> count) {
         IngredientStorageButton button = _buttonPool.GetObject(count);
         _buttons.Add(button);
+    }
+
+    private void RemoveIngredient(Ingredient ingredient) {
+        foreach (var button in _buttons) {
+            if (button.Ingredient == ingredient) {
+                _buttons.Remove(button);
+                _buttonPool.PutObject(button);
+                break;
+            }
+        }
     }
 
     protected void UpdateSizeRenderer() {

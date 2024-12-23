@@ -15,8 +15,10 @@ public class ClientWalkState : ClientBaseState {
     }
 
     public override void ExitState(Client client) {
-        if (client.Data.State == ClientState.Leave)
+        if (client.Data.State == ClientState.Leave) {
+            client.ResetState();
             return;
+        }
 
         client.TakeSeat();
     }

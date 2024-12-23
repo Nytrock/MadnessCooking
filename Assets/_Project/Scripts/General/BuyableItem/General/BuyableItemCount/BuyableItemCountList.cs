@@ -21,21 +21,26 @@ public class BuyableItemCountList<TItem>
     public BuyableItemCountList(BuyableItemCountList<TItem> itemList) : this() {
         foreach (var item in itemList)
             _itemCounts.Add(new(item));
+        UpdateAvailableItems();
     }
 
-    public void Add(BuyableItemCount<TItem> itemCount) {
-        if (ContainsItem(itemCount))
-            _itemCounts[IndexOf(itemCount)].ChangeCount(itemCount.Count);
-        else
-            _itemCounts.Add(itemCount);
+    public void Add(BuyableItemCount<TItem> newItemCount) {
+        foreach (var itemCount in _itemCounts) {
+            if (itemCount.Item == newItemCount.Item) {
+                itemCount.AddToCount(itemCount.Count);
+                UpdateAvailableItems();
+                return;
+            }
+        }
 
+        _itemCounts.Add(newItemCount);
         UpdateAvailableItems();
     }
 
     public void Remove(BuyableItemCount<TItem> itemCount) {
         for (int i = 0; i < _itemCounts.Count; i++) {
             if (_itemCounts[i].Item == itemCount.Item) {
-                _itemCounts[i].ChangeCount(-itemCount.Count);
+                _itemCounts[i].AddToCount(-itemCount.Count);
                 if (_itemCounts[i].Count <= 0)
                     _itemCounts.RemoveAt(i);
                 break;
@@ -53,8 +58,9 @@ public class BuyableItemCountList<TItem>
         _availableItems = _itemCounts.Select(count => count.Item).ToList();
     }
 
-    public bool ContainsItem(BuyableItemCount<TItem> itemCount) {
-        return _availableItems.Contains(itemCount.Item);
+    public bool ContainsItem(TItem item) {
+        UpdateAvailableItems();
+        return _availableItems.Contains(item);
     }
 
     public bool ContainsCount(BuyableItemCount<TItem> searchingCount) {

@@ -16,6 +16,10 @@ public class HoverItemName : MonoBehaviour {
         if (!_isHovered)
             return;
 
+        UpdatePosition();
+    }
+
+    protected virtual void UpdatePosition() {
         transform.position = Input.mousePosition;
     }
 

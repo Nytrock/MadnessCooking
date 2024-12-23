@@ -5,6 +5,8 @@ public class IngredientStorageButton : HoverItemNameActivator {
     [SerializeField] private TextMeshProUGUI _countText;
     private BuyableItemCount<Ingredient> _countRenderer;
 
+    public Ingredient Ingredient => _countRenderer.Item;
+
     public void SetVisual(BuyableItemCount<Ingredient> count) {
         _icon.sprite = count.Item.Icon;
         _showingItem = count.Item;

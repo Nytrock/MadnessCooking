@@ -36,14 +36,6 @@ public class TechnicManager : SaveableItemManager<Technic, KitchenData>, IUpgrad
         technic.StartCook(order);
     }
 
-    public void DisableTechnic(Technic typeTechnic) {
-        TechnicHolder technic = FindHolderByTechic(typeTechnic);
-        if (technic == null)
-            return;
-
-        technic.Data.DisableTechnic();
-    }
-
     public TechnicHolder FindHolderByTechic(Technic technic) {
         for (int i = 0; i < _holders.Length; i++)
             if (_holders[i].Technic == technic)

@@ -4,10 +4,10 @@ public abstract class PestsPool : Pool<Pest> {
     [Header("Borders")]
     [SerializeField] private RangeVector _localPosition;
     [SerializeField] private RangeVector _globalPosition;
-    protected int _lastId;
+    protected int _prefabIndex;
 
     public Pest GetObject(int id) {
-        _lastId = id;
+        _prefabIndex = id;
         Pest pest = base.GetObject();
 
         pest.ChangeState(true);
@@ -16,21 +16,16 @@ public abstract class PestsPool : Pool<Pest> {
     }
 
     public override Pest GetObject() {
-        _lastId = -1;
+        _prefabIndex = -1;
         Pest pest = base.GetObject();
 
         pest.ChangeState(true);
-        pest.Randomize(_localPosition, _globalPosition, _lastId);
+        pest.Randomize(_localPosition, _globalPosition, _prefabIndex);
         return pest;
     }
 
-    public override void PutObject(Pest pest) {
-        base.PutObject(pest);
-        pest.ChangeState(false);
-    }
-
     public void RemovePest(Pest pest) {
-        PutObject(pest);
         pest.Remove();
+        PutObject(pest);
     }
 }

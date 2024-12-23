@@ -12,11 +12,9 @@ public class TableFoodAudio : MonoBehaviour {
     }
 
     private void ChangeAudio(bool newState) {
-        if (!newState)
-            return;
-
-        UpdateAudioInfo();
-        _audioSource.Play();
+        if (newState)
+            UpdateAudioInfo();
+        _audioSource.ForceChangeState(newState);
     }
 
     private void UpdateAudioInfo() {

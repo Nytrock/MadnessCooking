@@ -10,7 +10,7 @@ public class Pest : MonoBehaviour {
     [SerializeField] private bool _isMovable;
     private SpriteRenderer _renderer;
 
-    public PestData Data { get; private set; }
+    [field: SerializeField] public PestData Data { get; private set; }
 
     public event Action PestRemoved;
 
@@ -23,6 +23,7 @@ public class Pest : MonoBehaviour {
     }
 
     public void Remove() {
+        _renderer.sprite = null;
         PestRemoved?.Invoke();
     }
 
@@ -32,6 +33,9 @@ public class Pest : MonoBehaviour {
             spriteIndex = Random.Range(0, _sprites.Length);
             _renderer.sprite = _sprites[spriteIndex];
         }
+
+        if (Data is not null)
+            prefabIndex = Data.PrefabIndex;
 
         if (_isMovable)
             transform.position = localPosition.RandomValue;

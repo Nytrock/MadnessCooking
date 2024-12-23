@@ -12,7 +12,7 @@ public class FatigueManager : Singleton<FatigueManager>, IBindable<GeneralData>,
     private float _sleepBonus;
     private bool _isTired;
 
-    private FatigueManagerData _data;
+    [SerializeField] private FatigueManagerData _data;
     private OfficeUpgradeData _upgradeData;
 
     public float FatigueMax => _fatigueMax;

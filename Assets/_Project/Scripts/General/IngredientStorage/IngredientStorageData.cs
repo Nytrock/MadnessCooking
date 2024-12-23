@@ -57,4 +57,12 @@ public class IngredientStorageData {
     public void RemoveIngredient(BuyableItemCount<Ingredient> count) {
         _ingredients.Remove(count);
     }
+
+    public int GetIngredientCount(Ingredient ingredient) {
+        return _ingredients.GetItemCount(ingredient);
+    }
+
+    public bool ContainsIngredient(Ingredient item) {
+        return _ingredients.ContainsItem(item);
+    }
 }

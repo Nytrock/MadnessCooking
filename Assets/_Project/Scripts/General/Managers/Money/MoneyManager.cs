@@ -10,10 +10,10 @@ public class MoneyManager : Singleton<MoneyManager>, IBindable<GeneralData> {
     public event Action<int> MoneyChanged;
 
     public void LateStart() {
-        MoneyChanged?.Invoke(_moneyDefault);
+        MoneyChanged?.Invoke(_data.MoneyCount);
     }
 
-    [ContextMenu("TestMoney")]
+    [ContextMenu("AddTenMoney")]
     private void TestMoney() {
         ChangeMoney(10);
     }

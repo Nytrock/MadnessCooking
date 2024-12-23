@@ -25,7 +25,7 @@ public class BuyableItemCount<TItem>
         _count = buyableItemCount._count;
     }
 
-    public void ChangeCount(int count) {
+    public void AddToCount(int count) {
         if (_count + count < 0)
             _count = 0;
         else

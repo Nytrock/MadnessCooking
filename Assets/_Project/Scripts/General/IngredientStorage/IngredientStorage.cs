@@ -7,6 +7,9 @@ public abstract class IngredientStorage : MonoBehaviour {
 
     [field: SerializeField] public IngredientStorageData Data { get; protected set; }
 
+    public event Action<BuyableItemCount<Ingredient>> IngredientAdded;
+    public event Action<Ingredient> IngredientRemoved;
+
     public event Action<BuyableItemCount<Ingredient>> IngredientCountAdded;
     public event Action<BuyableItemCount<Ingredient>> IngredientCountRemoved;
 
@@ -24,9 +27,13 @@ public abstract class IngredientStorage : MonoBehaviour {
             puttingCount = new(ingredient, Data.LeftSpace);
         }
 
+        if (!Data.ContainsIngredient(puttingCount.Item))
+            InvokeIngredientAdded(puttingCount);
+        else
+            IngredientCountAdded?.Invoke(puttingCount);
+
         Data.AddIngredient(puttingCount);
         Data.AddCount(puttingCount.Count);
-        InvokeIngredientCountAdded(puttingCount);
         return remainCount;
     }
 
@@ -43,13 +50,17 @@ public abstract class IngredientStorage : MonoBehaviour {
     public void RemoveIngredient(BuyableItemCount<Ingredient> removingCount) {
         Data.RemoveIngredient(removingCount);
         IngredientCountRemoved?.Invoke(removingCount);
+
+        if (Data.GetIngredientCount(removingCount.Item) == 0)
+            IngredientRemoved?.Invoke(removingCount.Item);
     }
 
     public bool HaveCount(BuyableItemCount<Ingredient> count) {
         return Data.ContainsCount(count);
     }
 
-    protected void InvokeIngredientCountAdded(BuyableItemCount<Ingredient> count) {
+    protected void InvokeIngredientAdded(BuyableItemCount<Ingredient> count) {
+        IngredientAdded?.Invoke(count);
         IngredientCountAdded?.Invoke(count);
     }
 }

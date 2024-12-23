@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PestsRemoverUI : MonoBehaviour {
@@ -7,6 +8,7 @@ public class PestsRemoverUI : MonoBehaviour {
     [SerializeField] private PestsUIPool _pool;
     private PestsGenerator _generator;
     private PestsBedTypeUI _nowBed;
+    private List<PestUI> _pests;
 
     public event Action RemoverActivated;
 
@@ -34,6 +36,7 @@ public class PestsRemoverUI : MonoBehaviour {
         _generator.ChangePause(false);
         _panel.SetActive(false);
         _nowBed = null;
+        HidePests();
     }
 
     private PestsBedTypeUI GetBedType(BedType bedType) {
@@ -49,7 +52,14 @@ public class PestsRemoverUI : MonoBehaviour {
         foreach (var pest in _generator.Pests()) {
             PestUI pestUI = _pool.GetObject(pest);
             pestUI.SetupRemoveButton();
+            _pests.Add(pestUI);
         }
+    }
+
+    private void HidePests() {
+        foreach (var pest in _pests)
+            _pool.PutObject(pest);
+        _pests.Clear();
     }
 
     public void RemovePest(PestUI pestUI) {

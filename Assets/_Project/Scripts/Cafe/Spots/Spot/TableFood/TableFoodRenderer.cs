@@ -15,6 +15,7 @@ public class TableFoodRenderer : MonoBehaviour {
 
     private void Awake() {
         _animator = GetComponent<Animator>();
+        HideFood();
     }
 
     public void ShowFood(Food food) {

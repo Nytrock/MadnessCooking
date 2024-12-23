@@ -6,11 +6,8 @@ public class FarmCarUI : IngredientStorageUI<FarmData> {
     [SerializeField] private Button _sendButton;
 
     protected override void Awake() {
-        if (_sendButton != null) {
+        if (_sendButton != null)
             _sendButton.onClick.AddListener(_waitManager.StartWait);
-            _sendButton.onClick.AddListener(CarLeave);
-        }
-
         _waitManager.StateChanged += UpdateState;
         base.Awake();
     }
@@ -18,6 +15,9 @@ public class FarmCarUI : IngredientStorageUI<FarmData> {
     private void UpdateState(CarState newState) {
         if (newState != CarState.Returns)
             ChangeState(false);
+
+        if (newState == CarState.Sent)
+            CarLeave();
 
         if (_sendButton != null)
             _sendButton.interactable = newState == CarState.Calm;

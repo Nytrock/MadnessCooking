@@ -26,6 +26,8 @@ public class OrdersManager : MonoBehaviour {
 
         if (order.IsActivated)
             client.ActivateOrder();
+        if (order.IsFinished)
+            client.CheckOrder();
     }
 
     private void AddOrder(Client client) {
@@ -54,7 +56,6 @@ public class OrdersManager : MonoBehaviour {
             return;
 
         OrderRemoved?.Invoke(order);
-        _technicManager.DisableTechnic(order.Food.TypeTechnic);
         _orders.Remove(order);
     }
 

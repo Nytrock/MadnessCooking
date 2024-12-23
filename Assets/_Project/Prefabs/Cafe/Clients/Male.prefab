@@ -2151,6 +2151,8 @@ MonoBehaviour:
   _specialSprites:
   - _sprite: {fileID: 0}
     _client: 2
+  - _sprite: {fileID: 510294137, guid: bd34ed82589dde94b8531051c8c76b52, type: 3}
+    _client: 3
   _defaultColor: {r: 0, g: 0, b: 0, a: 0}
   _randomColors:
   - {r: 0.45882353, g: 0.23137255, b: 0.13333334, a: 1}
@@ -5132,9 +5134,29 @@ MonoBehaviour:
   _skin: {fileID: 3703463240899266760}
   _gender: 1
   _waitTime:
-    _min: 50
-    _max: 75
+    _min: 40
+    _max: 60
     _isGreaterZero: 1
+  <Data>k__BackingField:
+    _type: 0
+    _skinType: 0
+    _state: 0
+    _gender: 0
+    _position:
+      _x: 0
+      _y: 0
+      _z: 0
+    _waitTime: 0
+    _nowTime: 0
+    _waitMultiplier: 0
+    _isEated: 0
+    _order:
+      _isActivated: 0
+      _isFinished: 0
+      _isCooking: 0
+      _food: {fileID: 0}
+      _tableIndex: 0
+    _waitCoef: 0
 --- !u!114 &7984458469416964061
 MonoBehaviour:
   m_ObjectHideFlags: 0

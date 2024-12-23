@@ -11,6 +11,7 @@ public class Client : MonoBehaviour {
     [SerializeField] private ClientSkin _skin;
     [SerializeField] private ClientGender _gender;
     [SerializeField] private RangeFloat _waitTime;
+    [SerializeField] private int _richClientMoneyMultiplier = 2;
 
     private ClientsHolder _table;
     private CafeSpot _spot;
@@ -19,8 +20,8 @@ public class Client : MonoBehaviour {
     [field: SerializeField] public ClientData Data { get; private set; }
     public ClientsSpawner Spawner { get; private set; }
     public ClientUI ClientUI { get; private set; }
-    public int SpotIndex { get; private set; }
-    public int SeatIndex { get; private set; }
+    [field: SerializeField] public int SpotIndex { get; private set; }
+    [field: SerializeField] public int SeatIndex { get; private set; }
 
     public ClientGender Gender => _gender;
 
@@ -88,9 +89,6 @@ public class Client : MonoBehaviour {
         SpotIndex = settings.SpotIndex;
         SeatIndex = settings.SeatIndex;
 
-        _spot = Spawner.GetSpot(SpotIndex);
-        _seat = _spot.GetSeat(SeatIndex);
-
         Data = settings.Data;
         Data.SetGender(_gender);
         Data.SetWaitTime(_waitTime.RandomValue);
@@ -99,13 +97,20 @@ public class Client : MonoBehaviour {
         _skin.StartNewCycle(Data);
 
         ClientUI.Setup(Data, ActivateOrder, Spawner.TutorialManager);
+        ClientUI.StartNewCycle();
+
+        if (Data.State == ClientState.Leave) {
+            ChangeState();
+            ChangeEnable(true);
+            return;
+        }
+
+        _spot = Spawner.GetSpot(SpotIndex);
+        _seat = _spot.GetSeat(SeatIndex);
         ChangeState();
 
-        if (Data.State != ClientState.Spawn && Data.State != ClientState.Leave)
+        if (Data.State != ClientState.Spawn)
             TakeSeat();
-
-        if (Data.State == ClientState.Leave)
-            return;
 
         if (!_spot.TryGetComponent(out _table))
             throw new ArgumentNullException("Spot doesn't have the required class ClientGroupHolder");
@@ -163,7 +168,7 @@ public class Client : MonoBehaviour {
     public void Eat() {
         int payingMoney = Data.Order.Food.MoneyGet;
         if (Data.Type == ClientType.Rich)
-            payingMoney *= 100;
+            payingMoney *= _richClientMoneyMultiplier;
         _table.AddMoney(payingMoney);
 
         _table.StartEndlessWait();
@@ -197,5 +202,9 @@ public class Client : MonoBehaviour {
     public void ChangeEnable(bool value) {
         enabled = value;
         _skin.ChangeEnable(value);
+    }
+
+    public void ResetState() {
+        _nowState = null;
     }
 }

@@ -1,14 +1,16 @@
+using System;
 using UnityEngine;
 
 public class AutoSaveManager : MonoBehaviour {
     [SerializeField, Min(1)] private int _needAutoSaveMinutes;
-    [SerializeField] private AutoSaveUI _UI;
     [SerializeField] private GameSaveManager _saveManager;
     [SerializeField] private TutorialManager _tutorialManager;
-    private float _nowTime;
 
+    private float _nowTime;
     private float _needAutoSaveTime;
     private bool _isSaving;
+
+    public event Action<bool> SaveChanged;
 
     private void Awake() {
         _saveManager.SaveEnded += EndAutoSave;
@@ -29,18 +31,14 @@ public class AutoSaveManager : MonoBehaviour {
     }
 
     private void StartAutoSave() {
-        _saveManager.Save();
         _isSaving = true;
-
-        if (_UI != null)
-            _UI.PlaySaveAnimation();
+        SaveChanged?.Invoke(_isSaving);
+        _saveManager.Save();
     }
 
     private void EndAutoSave() {
-        _nowTime = 0;
         _isSaving = false;
-
-        if (_UI != null)
-            _UI.StopSaveAnimation();
+        SaveChanged?.Invoke(_isSaving);
+        _nowTime = 0;
     }
 }

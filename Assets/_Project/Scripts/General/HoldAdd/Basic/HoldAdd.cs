@@ -16,6 +16,8 @@ public abstract class HoldAdd : MonoBehaviour, IBindable<FarmData> {
 
     public HoldAddData Data { get; protected set; }
 
+    public bool IsUnlocked => Data.IsUnlocked;
+
     public event Action<bool> ClickChanged;
     public event Action<bool> WorkChanged;
     public event Action ReadyCountChanged;
