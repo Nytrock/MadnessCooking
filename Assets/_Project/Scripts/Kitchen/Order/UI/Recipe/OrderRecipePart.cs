@@ -37,6 +37,8 @@ public class OrderRecipePart : FoodRecipePart {
     }
 
     public void UpdateAvailable(bool isAvailable) {
+        _isAvailable = isAvailable;
         _countTextRenderer.UpdateAvailable(isAvailable);
+        _grayscaleIcon.SetGrayscaleVisibility(!isAvailable);
     }
 }

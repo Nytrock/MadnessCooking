@@ -22,6 +22,7 @@ public class ScriptableObjectsDatabase : Singleton<ScriptableObjectsDatabase> {
         }
     }
 
+#if UNITY_EDITOR
     [ContextMenu("AddMissingObjects")]
     private void AddMissingObjects() {
         List<ExtendedScriptableObject> assets = AssetsUtility.GetAssets<ExtendedScriptableObject>(_objectsFolder);
@@ -29,6 +30,7 @@ public class ScriptableObjectsDatabase : Singleton<ScriptableObjectsDatabase> {
             if (!_scriptableObjects.Contains(asset))
                 _scriptableObjects.Add(asset);
     }
+#endif
 
     public int GetId(ExtendedScriptableObject scriptableObject) {
         return _scriptableObjects.IndexOf(scriptableObject);

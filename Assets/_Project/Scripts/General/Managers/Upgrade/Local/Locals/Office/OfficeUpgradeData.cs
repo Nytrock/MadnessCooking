@@ -14,6 +14,7 @@ public class OfficeUpgradeData : ISaveable {
 
     public OfficeUpgradeData() {
         _internetDownloadSpeed = 1;
+        _sleepCoef = 1;
     }
 
     public void ChangeInternetDownloadSpeed(CoefficientUpgrade coefficientUpgrade) {

@@ -16,7 +16,7 @@ public class SaveFileManager<TData>
         if (_fileName.Contains("/"))
             FractionFileName();
 
-        _filePath = Path.Combine(_dataPath, string.Concat(_fileName, ".", _fileExtension));
+        _filePath = _dataPath + "/" + string.Concat(_fileName, ".", _fileExtension);
     }
 
     private void FractionFileName() {
@@ -40,7 +40,10 @@ public class SaveFileManager<TData>
     }
 
     public void Delete() {
-        FoldersUtility.DeleteFolder(_filePath);
+        if (!IsFileExists())
+            return;
+
+        File.Delete(_filePath);
     }
 
     public bool IsFileExists() {

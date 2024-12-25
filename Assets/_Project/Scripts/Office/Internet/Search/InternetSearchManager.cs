@@ -34,6 +34,7 @@ public class InternetSearchManager : MonoBehaviour {
     }
 
     public void Search(string query) {
+        HideAllResults();
         _inputField.text = "";
         if (query.Replace(" ", "") == "" || _nowQuery == query)
             return;
@@ -44,8 +45,6 @@ public class InternetSearchManager : MonoBehaviour {
     }
 
     private void CheckResults() {
-        HideAllResults();
-
         foreach (var result in _results) {
             if (result.QueryContainKeywords(_nowQuery)) {
                 result.ChangeState(true);

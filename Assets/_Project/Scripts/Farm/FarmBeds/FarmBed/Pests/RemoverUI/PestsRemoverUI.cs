@@ -8,7 +8,7 @@ public class PestsRemoverUI : MonoBehaviour {
     [SerializeField] private PestsUIPool _pool;
     private PestsGenerator _generator;
     private PestsBedTypeUI _nowBed;
-    private List<PestUI> _pests;
+    private readonly List<PestUI> _pests = new();
 
     public event Action RemoverActivated;
 

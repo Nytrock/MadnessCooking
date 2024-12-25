@@ -11,7 +11,7 @@ public class FarmCarWaitManager : MonoBehaviour, IBindable<FarmData> {
     [Header("Upgrades")]
     [SerializeField] private CoefficientUpgrade[] _speedUpgrades;
 
-    private CarWaitManagerData _data;
+    [SerializeField] private CarWaitManagerData _data;
     private const int SECONDS_IN_MINUTES = 60;
 
     public float NowWaitTime => _data.NowWaitTime;

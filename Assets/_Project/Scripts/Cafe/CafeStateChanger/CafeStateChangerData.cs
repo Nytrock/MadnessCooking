@@ -8,6 +8,10 @@ public class CafeStateChangerData {
 
     public bool IsOpened => _isOpened;
 
+    public CafeStateChangerData(bool isOpened) {
+        _isOpened = isOpened;
+    }
+
     public void ChangeCafeState() {
         _isOpened = !_isOpened;
     }

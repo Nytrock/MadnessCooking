@@ -44,7 +44,7 @@ public class BarnChickens : MonoBehaviour, IBindable<FarmData> {
     }
 
     private void Update() {
-        if (!Data.IsFeed)
+        if (!Data.IsFeed || !Data.IsUnlocked)
             return;
 
         UpdateFoods();

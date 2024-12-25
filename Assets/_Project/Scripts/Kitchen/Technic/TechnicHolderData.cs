@@ -34,6 +34,7 @@ public class TechnicHolderData {
 
     public void StartRepair(KitchenUpgradeData upgradeData) {
         _isRepairing = true;
+        _nowWaitTime = 0f;
 
         float brokenCoef = 1 - (_nowStrength / _technic.Strength);
         if (brokenCoef == 1)
@@ -41,7 +42,7 @@ public class TechnicHolderData {
 
         int priceRepair = (int)(_technic.PriceRepair * brokenCoef);
         MoneyManager.Instance.ChangeMoney(-priceRepair);
-        _needWaitTime = _technic.TimeRepair / upgradeData.TechnicRepairSpeed * brokenCoef;
+        _needWaitTime = _technic.TimeRepair * upgradeData.TechnicRepairSpeed * brokenCoef;
     }
 
     public void StartCook(KitchenUpgradeData upgradeData, Order order) {

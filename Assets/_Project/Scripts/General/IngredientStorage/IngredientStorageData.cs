@@ -28,15 +28,6 @@ public class IngredientStorageData {
         return _nowSpace + count <= _maxSpace || _maxSpace == -1;
     }
 
-    public void AddCount(int count) {
-        if (!CanAddCount(count)) {
-            _nowSpace = _maxSpace;
-            return;
-        }
-
-        _nowSpace += count;
-    }
-
     public void ClearList() {
         _ingredients.Clear();
         _nowSpace = 0;
@@ -46,8 +37,13 @@ public class IngredientStorageData {
         _maxSpace = upgrade.Count;
     }
 
-    public void AddIngredient(BuyableItemCount<Ingredient> puttingCount) {
+    public void AddIngredientCount(BuyableItemCount<Ingredient> puttingCount) {
         _ingredients.Add(puttingCount);
+
+        if (CanAddCount(puttingCount.Count))
+            _nowSpace += puttingCount.Count;
+        else
+            _nowSpace = _maxSpace;
     }
 
     public bool ContainsCount(BuyableItemCount<Ingredient> count) {

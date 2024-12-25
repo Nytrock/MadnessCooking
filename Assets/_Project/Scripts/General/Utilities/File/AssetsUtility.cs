@@ -3,6 +3,7 @@ using System.IO;
 using UnityEditor;
 using UnityEngine;
 
+#if UNITY_EDITOR
 public static class AssetsUtility {
     public static TAsset CreateAsset<TAsset>(string path, string assetName) where TAsset : ScriptableObject {
         TAsset asset = LoadAsset<TAsset>(path, assetName);
@@ -45,3 +46,4 @@ public static class AssetsUtility {
         AssetDatabase.DeleteAsset($"{path}/{asset}.asset");
     }
 }
+#endif

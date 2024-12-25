@@ -60,6 +60,9 @@ public class BarnStorage : IngredientStorage {
             changingHoldAdd = _flourMill;
 
         int oldCount = changingHoldAdd.Data.ReadyCount;
+        if (oldCount == 0)
+            return;
+
         int remainCount = _car.PutIngredientWithRemain(ingredient, changingHoldAdd.Data.ReadyCount);
         FatigueManager.Instance.ChangeFatigue(ingredient.FatigueCoef * (changingHoldAdd.Data.ReadyCount - remainCount));
         changingHoldAdd.SetReady(remainCount);

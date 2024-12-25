@@ -2,6 +2,8 @@ using System;
 using UnityEngine;
 
 public class CafeStateChanger : MonoBehaviour, IBindable<CafeData> {
+    [SerializeField] private bool _defaultState;
+
     private CafeStateChangerData _data;
 
     public bool IsOpened => _data.IsOpened;
@@ -13,7 +15,7 @@ public class CafeStateChanger : MonoBehaviour, IBindable<CafeData> {
     }
 
     public void Bind(CafeData data) {
-        data.CafeOpener ??= new();
+        data.CafeOpener ??= new(_defaultState);
         _data = data.CafeOpener;
     }
 

@@ -29,14 +29,13 @@ public class TechnicRepairUI : MonoBehaviour, IUpgradeable<KitchenUpgradeData>, 
     }
 
     public void StartRepair() {
-        ChangeState(false);
-
         if (_tutorialManager.IsWork) {
             _tutorialManager.NextTutorialPart();
             return;
         }
 
         _nowTechnicHolder.StartRepair();
+        ChangeState(false);
     }
 
     public void ChangeState(bool newState) {

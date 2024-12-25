@@ -2,23 +2,23 @@ using System;
 using UnityEngine;
 
 public class GameTimeManager : MonoBehaviour, IBindable<GeneralData> {
-    [SerializeField, Min(0)] private int _defaultTimeSpeed;
-    [SerializeField, Min(0)] private int _sleepTimeSpeed;
+    [SerializeField, Min(0)] private float _defaultTimeSpeed;
+    [SerializeField, Min(0)] private float _sleepTimeSpeed;
     [SerializeField] private PauseManager _pauseManager;
     [SerializeField] private DaytimeStart[] _daytimeStarts;
     [SerializeField] private Daytime _defaultDaytime;
 
     private int _daytimeCount;
-    private int _nowTimeSpeed;
-    private int _previousTimeSpeed;
+    private float _nowTimeSpeed;
+    private float _previousTimeSpeed;
     private GameTimeManagerData _data;
 
     public TimeSpan GlobalTime => _data.GlobalTime;
     public int DaysCount => _data.GlobalTime.Days;
     public bool IsSleep => _sleepTimeSpeed == _nowTimeSpeed;
 
-    public int NormalizedNowTimeSpeed => _nowTimeSpeed / _defaultTimeSpeed;
-    public int NowTimeSpeed => _nowTimeSpeed;
+    public float NormalizedNowTimeSpeed => _nowTimeSpeed / _defaultTimeSpeed;
+    public float NowTimeSpeed => _nowTimeSpeed;
 
     public event Action<Daytime> DaytimeChanged;
     public event Action TimeSpeedUpdated;

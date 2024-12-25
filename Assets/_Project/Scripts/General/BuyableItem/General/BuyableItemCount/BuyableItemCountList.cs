@@ -27,7 +27,7 @@ public class BuyableItemCountList<TItem>
     public void Add(BuyableItemCount<TItem> newItemCount) {
         foreach (var itemCount in _itemCounts) {
             if (itemCount.Item == newItemCount.Item) {
-                itemCount.AddToCount(itemCount.Count);
+                itemCount.AddToCount(newItemCount.Count);
                 UpdateAvailableItems();
                 return;
             }
@@ -37,10 +37,10 @@ public class BuyableItemCountList<TItem>
         UpdateAvailableItems();
     }
 
-    public void Remove(BuyableItemCount<TItem> itemCount) {
+    public void Remove(BuyableItemCount<TItem> removingItemCount) {
         for (int i = 0; i < _itemCounts.Count; i++) {
-            if (_itemCounts[i].Item == itemCount.Item) {
-                _itemCounts[i].AddToCount(-itemCount.Count);
+            if (_itemCounts[i].Item == removingItemCount.Item) {
+                _itemCounts[i].AddToCount(-removingItemCount.Count);
                 if (_itemCounts[i].Count <= 0)
                     _itemCounts.RemoveAt(i);
                 break;

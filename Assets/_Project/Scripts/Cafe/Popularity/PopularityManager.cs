@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class PopularityManager : MonoBehaviour, IBindable<GeneralData> {
     [SerializeField] private PopularityLevel[] _levels;
+    [SerializeField] private PopularityLevel _defaultLevel;
     [SerializeField] private PopularityManagerData _data;
 
     private PopularityLevel _nowLevel => _levels[_data.Level];
@@ -87,7 +88,7 @@ public class PopularityManager : MonoBehaviour, IBindable<GeneralData> {
     }
 
     public void Bind(GeneralData data) {
-        data.PopularityManager ??= new();
+        data.PopularityManager ??= new(_defaultLevel);
         _data = data.PopularityManager;
     }
 

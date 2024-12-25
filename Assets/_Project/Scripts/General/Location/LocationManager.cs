@@ -1,9 +1,11 @@
 using System;
+using System.Linq;
 using UnityEngine;
 
 public class LocationManager : MonoBehaviour, IBindable<GeneralData> {
     [SerializeField] private Camera _mainCamera;
     [SerializeField] private LocationPoint[] _locations;
+    [SerializeField] private Location[] _saveableLocations;
     [SerializeField] private GameObject _generalUI;
     private LocationManagerData _data;
 
@@ -21,12 +23,13 @@ public class LocationManager : MonoBehaviour, IBindable<GeneralData> {
         if (locationPoint == null)
             throw new ArgumentNullException($"There is no point for {location} location");
 
-        _data.ChangeLocation(locationPoint.Location);
+        if (_saveableLocations.Contains(location))
+            _data.ChangeLocation(location);
         _mainCamera.transform.position = new Vector3(locationPoint.Point.x, locationPoint.Point.y, -10);
         _generalUI.SetActive(!locationPoint.IsHideUI);
         FatigueManager.Instance.ChangeFatigue(locationPoint.FatigueCoef);
 
-        LocationChanged?.Invoke(locationPoint.Location);
+        LocationChanged?.Invoke(location);
     }
 
     public void Bind(GeneralData data) {

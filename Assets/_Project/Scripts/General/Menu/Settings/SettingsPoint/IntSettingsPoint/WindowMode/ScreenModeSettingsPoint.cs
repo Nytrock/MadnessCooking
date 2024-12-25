@@ -2,7 +2,6 @@ using System;
 using UnityEngine;
 
 public class ScreenModeSettingsPoint : IntSettingsPoint, IBindable<VideoSettingsData> {
-    [SerializeField] private ScreenSizeSettingsPoint _windowSizeSettings;
     [SerializeField] private LocalizedText _text;
     [SerializeField] private string _textExtension;
 
@@ -15,7 +14,6 @@ public class ScreenModeSettingsPoint : IntSettingsPoint, IBindable<VideoSettings
     protected override void UpdateState() {
         base.UpdateState();
         ScreenMode nowScreenMode = (_settingable.Value as ScreenModeManager).GetNowScreenMode();
-        _windowSizeSettings.ChangeState(nowScreenMode == ScreenMode.Windowed);
 
         string modeName = _textExtension + nowScreenMode.ToString();
         _text.SetText(modeName);

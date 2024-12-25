@@ -124,7 +124,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _technicHolder: {fileID: 7106958589563700767}
-  _repairAudio: {fileID: 7141213556589008446}
   _cookAudio: {fileID: 806685565534041565}
 --- !u!1 &1785415411994811533
 GameObject:
@@ -136,6 +135,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4818928209602230168}
   - component: {fileID: 7141213556589008446}
+  - component: {fileID: 451647908068669306}
   m_Layer: 0
   m_Name: RepairAudio
   m_TagString: Untagged
@@ -263,6 +263,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &451647908068669306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1785415411994811533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fca96691f1d91144db4b782b4ae53298, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2778601055119529538
 GameObject:
   m_ObjectHideFlags: 0
@@ -273,6 +285,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3368464648854826227}
   - component: {fileID: 806685565534041565}
+  - component: {fileID: 2513430632696575981}
   m_Layer: 0
   m_Name: CookAudio
   m_TagString: Untagged
@@ -400,6 +413,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2513430632696575981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2778601055119529538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fca96691f1d91144db4b782b4ae53298, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3397518800810593296
 GameObject:
   m_ObjectHideFlags: 0
@@ -739,6 +764,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _technic: {fileID: 0}
   _UITarget: {fileID: 2387483117354747208}
+  _tutorialManager: {fileID: 0}
+  <Data>k__BackingField:
+    _technic: {fileID: 0}
+    _isCooking: 0
+    _isRepairing: 0
+    _nowStrength: 0
+    _nowWaitTime: 0
+    _needWaitTime: 0
+    _nowOrder:
+      _isActivated: 0
+      _isFinished: 0
+      _isCooking: 0
+      _food: {fileID: 0}
+      _tableIndex: 0
 --- !u!114 &7799278233860721202
 MonoBehaviour:
   m_ObjectHideFlags: 0

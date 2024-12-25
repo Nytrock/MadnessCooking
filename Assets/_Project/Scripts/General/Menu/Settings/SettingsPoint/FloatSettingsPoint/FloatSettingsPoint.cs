@@ -11,7 +11,7 @@ public abstract class FloatSettingsPoint : SettingsPoint<float> {
 
     private void Awake() {
         _slider.onValueChanged.AddListener(ChangeValue);
-        _slider.minValue = 0;
+        _slider.minValue = 0.001f;
         _slider.maxValue = 1;
     }
 }

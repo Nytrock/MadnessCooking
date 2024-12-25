@@ -6,7 +6,6 @@ public abstract class SaveableBaseShop<TItem, TData> : BaseShop, IBindable<TData
 
     [SerializeField] protected TItem[] _defaultItemsToBuy;
     [SerializeField] protected BuyableItemManager<TItem> _itemManager;
-    [SerializeField] protected GameSaveManager _saveManager;
     protected ShopData<TItem> _data;
 
     public event Action<BuyableItem> ItemBought;
@@ -14,14 +13,12 @@ public abstract class SaveableBaseShop<TItem, TData> : BaseShop, IBindable<TData
     public void LateStart() {
         ChangeShopState(false);
         SortItems();
-
-        _saveManager.LoadEnded += GenerateShop;
+        GenerateShop();
     }
 
     public virtual void GenerateShop() {
         foreach (var item in _data.ItemsToBuy)
             _renderer.AddPanel(GetPanelData(item));
-        _saveManager.LoadEnded -= GenerateShop;
     }
 
     private BuyPanelData GetPanelData(TItem item) {

@@ -7,10 +7,10 @@ public class AutoSaveUI : MonoBehaviour {
 
     private void Awake() {
         _animator = GetComponent<Animator>();
-        _manager.SaveChanged += ChangeSaveAnimation;
+        _manager.SaveStarted += StartSaveAnimation;
     }
 
-    public void ChangeSaveAnimation(bool isSaving) {
-        _animator.SetBool("isSaving", isSaving);
+    public void StartSaveAnimation() {
+        _animator.SetTrigger("isSaving");
     }
 }

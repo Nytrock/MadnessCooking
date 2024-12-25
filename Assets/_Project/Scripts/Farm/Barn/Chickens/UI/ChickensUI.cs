@@ -32,7 +32,8 @@ public class ChickensUI : MonoBehaviour, IActivable {
     }
 
     private void UpdateFoodCount() {
-        _feedButton.interactable = _chickens.Data.FoodCount > 0 || _chickens.Data.IsInfiniteFood;
+        ChickensData data = _chickens.Data;
+        _feedButton.interactable = (data.FoodCount > 0 || data.IsInfiniteFood) && data.IsUnlocked;
 
         string foodCount = _chickens.Data.FoodCount.ToString();
         if (_chickens.Data.IsInfiniteFood)

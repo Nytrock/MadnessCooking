@@ -17,9 +17,12 @@ public class GameTimeManagerData {
         _daytime = daytimeStart.Daytime;
     }
 
-    public void AddTime(int timeSpeed) {
+    public void AddTime(float timeSpeed) {
         int oldDayCount = _globalTime.Days;
-        _globalTime = _globalTime.Add(new TimeSpan(0, 0, timeSpeed));
+        int seconds = Mathf.FloorToInt(timeSpeed);
+        int milliseconds = Mathf.FloorToInt(timeSpeed % 1 * 1000);
+
+        _globalTime = _globalTime.Add(new TimeSpan(0, 0, 0, seconds, milliseconds));
         if (_isWaitingNextDay && oldDayCount < _globalTime.Days)
             _isWaitingNextDay = false;
     }

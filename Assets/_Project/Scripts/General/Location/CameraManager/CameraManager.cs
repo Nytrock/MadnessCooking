@@ -57,11 +57,15 @@ public abstract class CameraManager : MonoBehaviour {
             _isKeyPressed = false;
         } else if (Input.GetMouseButton(0)) {
             _cameraVelocity = cameraAxis;
-        } else if (Mathf.Abs(_cameraVelocity) >= 0.01) {
-            _cameraVelocity -= Time.deltaTime * Mathf.Sign(_cameraVelocity) * _speedFading;
+        } else {
+            float fadingVelocity = Time.deltaTime * _speedFading;
+            if (Mathf.Abs(_cameraVelocity) <= fadingVelocity)
+                _cameraVelocity = 0;
+            else
+                _cameraVelocity -= Mathf.Sign(_cameraVelocity) * fadingVelocity;
         }
 
-        if (Mathf.Abs(_cameraVelocity) >= 0.01) {
+        if (Mathf.Abs(_cameraVelocity) >= 0.01f) {
             CameraMoved?.Invoke();
             MoveCamera();
         }

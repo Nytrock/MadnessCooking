@@ -26,9 +26,6 @@ public class ScreenModeManager : MonoBehaviour, IBindable<VideoSettingsData>, IS
 
         FullScreenMode nowFullScreenMode;
         switch (nowScreenMode) {
-            case ScreenMode.Borderless:
-                nowFullScreenMode = FullScreenMode.ExclusiveFullScreen;
-                break;
             case ScreenMode.Windowed:
                 nowFullScreenMode = FullScreenMode.Windowed;
                 break;
@@ -36,7 +33,7 @@ public class ScreenModeManager : MonoBehaviour, IBindable<VideoSettingsData>, IS
                 nowFullScreenMode = FullScreenMode.FullScreenWindow;
                 break;
             default:
-                nowFullScreenMode = FullScreenMode.ExclusiveFullScreen;
+                nowFullScreenMode = FullScreenMode.FullScreenWindow;
                 break;
         }
 

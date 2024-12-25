@@ -8,19 +8,14 @@ public class AutoSaveManager : MonoBehaviour {
 
     private float _nowTime;
     private float _needAutoSaveTime;
-    private bool _isSaving;
 
-    public event Action<bool> SaveChanged;
+    public event Action SaveStarted;
 
     private void Awake() {
-        _saveManager.SaveEnded += EndAutoSave;
         _needAutoSaveTime = 60 * _needAutoSaveMinutes;
     }
 
     private void Update() {
-        if (_isSaving)
-            return;
-
         if (_tutorialManager.IsWork)
             return;
 
@@ -31,14 +26,8 @@ public class AutoSaveManager : MonoBehaviour {
     }
 
     private void StartAutoSave() {
-        _isSaving = true;
-        SaveChanged?.Invoke(_isSaving);
+        SaveStarted?.Invoke();
         _saveManager.Save();
-    }
-
-    private void EndAutoSave() {
-        _isSaving = false;
-        SaveChanged?.Invoke(_isSaving);
         _nowTime = 0;
     }
 }

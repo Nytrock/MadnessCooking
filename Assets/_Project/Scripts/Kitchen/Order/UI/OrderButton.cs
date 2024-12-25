@@ -37,7 +37,7 @@ public class OrderButton : MonoBehaviour {
     }
 
     public void SetManagers(TechnicManager technicManager, KitchenStorage kitchenStorage) {
-        kitchenStorage.IngredientAdded += UpdateRecipeIngredients;
+        kitchenStorage.IngredientCountAdded += UpdateRecipeIngredients;
         technicManager.TechnicChanged += UpdateRecipeTechnic;
         MoneyManager.Instance.MoneyChanged += UpdateAutoSpices;
 

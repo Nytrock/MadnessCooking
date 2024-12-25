@@ -2,6 +2,8 @@ using System;
 using UnityEngine;
 
 public class CafeNameManager : MonoBehaviour, IBindable<CafeData> {
+    [SerializeField] private GameSaveManager _saveManager;
+
     private CafeNameManagerData _data;
 
     public event Action<string> NameChanged;
@@ -20,5 +22,6 @@ public class CafeNameManager : MonoBehaviour, IBindable<CafeData> {
     public void ChangeName(string name) {
         _data.ChangeCafeName(name);
         NameChanged?.Invoke(name);
+        // _saveManager.Save();
     }
 }

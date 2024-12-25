@@ -19,8 +19,8 @@ public class PestsUIPool : Pool<PestUI> {
     }
 
     public override void PutObject(PestUI pest) {
-        _pool.Enqueue(pest);
         pest.ResetPest();
+        base.PutObject(pest);
     }
 
     public void SetRemover(PestsRemoverUI pestsRemoverUI) {

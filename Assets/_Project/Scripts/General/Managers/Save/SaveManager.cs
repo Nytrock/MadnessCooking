@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public abstract class SaveManager<TData> : MonoBehaviour
@@ -11,9 +10,6 @@ public abstract class SaveManager<TData> : MonoBehaviour
 
     protected abstract string _fileName { get; }
 
-    public event Action SaveEnded;
-    public event Action LoadEnded;
-
     private void Awake() {
         _dataService = new SaveFileManager<TData>(_fileName);
     }
@@ -24,7 +20,6 @@ public abstract class SaveManager<TData> : MonoBehaviour
 
     public void Save() {
         _dataService.Save(_data);
-        SaveEnded?.Invoke();
     }
 
     private void Load() {
@@ -38,11 +33,12 @@ public abstract class SaveManager<TData> : MonoBehaviour
             _data = _dataService.Load();
 
         _binder.Bind(_data);
-        LoadEnded?.Invoke();
     }
 
     public void Delete() {
         _dataService.Delete();
+        _data = new();
+        _binder.Bind(_data);
     }
 
     public bool IsDataExists() {

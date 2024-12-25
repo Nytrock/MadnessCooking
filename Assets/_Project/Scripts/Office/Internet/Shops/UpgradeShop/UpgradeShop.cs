@@ -1,13 +1,7 @@
-using System;
 using UnityEngine;
 
 public class UpgradeShop : BaseInstantShop<BaseUpgrade, OfficeData> {
     [SerializeField] private UpgradeTypeSprite[] _upgradeTypes;
-
-    protected override void SortItems() {
-        Func<BaseUpgrade, int> sortMethod = (upgrade) => upgrade.Price + ((int)upgrade.Type * 10000);
-        _data.OrderItems(sortMethod);
-    }
 
     public override void Bind(OfficeData data) {
         data.UpgradesShop ??= new(_defaultItemsToBuy);

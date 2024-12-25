@@ -17,10 +17,6 @@ public class ScreenSizeSettingsPoint : IntSettingsPoint, IBindable<VideoSettings
         _text.text = nowScreenSize.ToString();
     }
 
-    public void ChangeState(bool newState) {
-        gameObject.SetActive(newState);
-    }
-
     public void LateStart() {
         UpdateState();
     }

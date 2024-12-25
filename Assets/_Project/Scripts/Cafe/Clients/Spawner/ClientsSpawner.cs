@@ -80,8 +80,10 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
     private void Spawn() {
         ClientCount clientCount = GetRandomCount();
         int spotIndex = _spotManager.TakeRandomSpot(clientCount);
-        if (spotIndex == -1)
+        if (spotIndex == -1) {
+            SetNewTime();
             return;
+        }
 
         float waitMultiplier = _popularityCalculate.GetSpaceMultiplier();
         ClientType clientType = GetRandomType(clientCount);

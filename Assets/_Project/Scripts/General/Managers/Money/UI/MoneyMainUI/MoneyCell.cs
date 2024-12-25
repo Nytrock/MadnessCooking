@@ -20,6 +20,11 @@ public class MoneyCell : MonoBehaviour {
         foreach (var newText in _newTexts)
             newText.text = symbol;
 
+        if (!gameObject.activeInHierarchy) {
+            UpdateSymbol();
+            return;
+        }
+
         if (isAdded)
             _animator.SetTrigger("isAdded");
         else

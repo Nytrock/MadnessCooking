@@ -2092,7 +2092,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 21
+  m_SortingOrder: 22
   m_Sprite: {fileID: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 0}
   m_FlipX: 0
@@ -5334,7 +5334,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _foregroundSortingLayer: 9
   _backgroundSortingLayer: 5
-  _possibleSpecialSkins: 
+  _possibleSpecialSkins: 01000000
   _skinParts:
   - {fileID: 8771929009317262816}
   - {fileID: 5227006220333470522}
@@ -5398,6 +5398,7 @@ MonoBehaviour:
     _min: 40
     _max: 60
     _isGreaterZero: 1
+  _richClientMoneyMultiplier: 2
   <Data>k__BackingField:
     _type: 0
     _skinType: 0
@@ -5418,6 +5419,8 @@ MonoBehaviour:
       _food: {fileID: 0}
       _tableIndex: 0
     _waitCoef: 0
+  <SpotIndex>k__BackingField: 0
+  <SeatIndex>k__BackingField: 0
 --- !u!114 &7984458469416964061
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6407,7 +6410,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 22
+  m_SortingOrder: 29
   m_Sprite: {fileID: 0}
   m_Color: {r: 0.45882353, g: 0.23137255, b: 0.13333334, a: 1}
   m_FlipX: 0

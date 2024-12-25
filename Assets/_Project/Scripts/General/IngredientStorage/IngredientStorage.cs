@@ -27,13 +27,13 @@ public abstract class IngredientStorage : MonoBehaviour {
             puttingCount = new(ingredient, Data.LeftSpace);
         }
 
-        if (!Data.ContainsIngredient(puttingCount.Item))
+        bool containsIngredient = Data.ContainsIngredient(puttingCount.Item);
+        Data.AddIngredientCount(puttingCount);
+        if (!containsIngredient)
             InvokeIngredientAdded(puttingCount);
         else
             IngredientCountAdded?.Invoke(puttingCount);
 
-        Data.AddIngredient(puttingCount);
-        Data.AddCount(puttingCount.Count);
         return remainCount;
     }
 

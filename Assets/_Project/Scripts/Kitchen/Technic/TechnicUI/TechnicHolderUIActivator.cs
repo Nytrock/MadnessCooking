@@ -2,11 +2,13 @@ using UnityEngine;
 
 public class TechnicHolderUIActivator : UIActivator {
     [SerializeField] private TechnicHolder _technicHolder;
+    [SerializeField] private UIActivator _orderActivator;
     private TechnicRepairUI _repairUI;
 
     protected override void Awake() {
         base.Awake();
         _activableObject.TryGetComponent(out _repairUI);
+        _orderActivator.StateChanged += delegate { CloseUI(); };
     }
 
     protected override void Press() {
@@ -17,9 +19,5 @@ public class TechnicHolderUIActivator : UIActivator {
             return;
 
         _repairUI.OpenTechnic(_technicHolder);
-    }
-
-    public void SetHolder(TechnicHolder technicHolder) {
-        _technicHolder = technicHolder;
     }
 }

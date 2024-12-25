@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class PauseManager : MonoBehaviour {
+public class PauseManager : Singleton<PauseManager> {
     private bool _isPause = false;
 
     public bool IsPause => _isPause;
@@ -20,7 +20,7 @@ public class PauseManager : MonoBehaviour {
             ChangePauseState();
     }
 
-    public void ChangePauseState() {
+    private void ChangePauseState() {
         ChangePauseState(!_isPause);
     }
 

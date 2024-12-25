@@ -440,6 +440,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _targetFrameRate: 60
+  _defaultShow: 0
 --- !u!4 &134833169
 Transform:
   m_ObjectHideFlags: 0
@@ -453,7 +454,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 2047788852}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &144588021
 GameObject:
@@ -11175,7 +11176,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db21be8f78402cb47828fd3a842be0ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _modes: 000000000100000002000000
+  _modes: 0000000001000000
   _defaultMode: 0
 --- !u!1 &869847714
 GameObject:
@@ -13507,7 +13508,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _settingable:
-    _underlyingValue: {fileID: 1699524143}
+    _underlyingValue: {fileID: 134833168}
   _data:
     _nowValue: 0
     _lastValue: 0
@@ -14978,17 +14979,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _sizes:
-  - _heigth: 2560
-    _width: 1440
-  - _heigth: 1920
-    _width: 1080
-  - _heigth: 1280
-    _width: 720
-  - _heigth: 1366
-    _width: 768
+  - _width: 3840
+    _heigth: 2160
+  - _width: 2560
+    _heigth: 1440
+  - _width: 1920
+    _heigth: 1080
+  - _width: 1366
+    _heigth: 768
+  - _width: 1280
+    _heigth: 720
+  - _width: 1080
+    _heigth: 608
+  - _width: 720
+    _heigth: 405
   _defaultSize:
-    _heigth: 1920
-    _width: 1080
+    _width: 1920
+    _heigth: 1080
+  _screenModeManager: {fileID: 846734629}
 --- !u!1 &1515867897
 GameObject:
   m_ObjectHideFlags: 0
@@ -15356,8 +15364,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _panel: {fileID: 733006999}
-  _screenMode: {fileID: 1864297216}
   _screenSize: {fileID: 661491308}
+  _screenMode: {fileID: 1864297216}
 --- !u!1 &1539100583
 GameObject:
   m_ObjectHideFlags: 0
@@ -16715,7 +16723,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _manager: {fileID: 134833168}
-  _defaultShow: 0
 --- !u!114 &1699524144
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18424,6 +18431,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 134833169}
   - {fileID: 1170333506}
   - {fileID: 1674438281}
   m_Father: {fileID: 888605955}
@@ -18443,7 +18451,7 @@ MonoBehaviour:
   _bindables:
   - _underlyingValue: {fileID: 1674438282}
   - _underlyingValue: {fileID: 1170333507}
-  - _underlyingValue: {fileID: 1699524143}
+  - _underlyingValue: {fileID: 134833168}
 --- !u!1 &2061652715
 GameObject:
   m_ObjectHideFlags: 0
@@ -19327,7 +19335,6 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 588813657}
-  - {fileID: 134833169}
   - {fileID: 661956818}
   - {fileID: 911848800}
   - {fileID: 177466149}

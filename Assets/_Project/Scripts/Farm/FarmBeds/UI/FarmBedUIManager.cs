@@ -57,6 +57,7 @@ public class FarmBedUIManager : MonoBehaviour {
             _nowUI.ChangeMode(false);
             if (_farmBed != null) {
                 _farmBed.CountChanged -= _nowUI.UpdateCount;
+                _farmBed.BedReseted -= ResetFarmBed;
                 UpdateSideButtons();
             }
         }
@@ -68,7 +69,15 @@ public class FarmBedUIManager : MonoBehaviour {
         transform.position = farmBed.transform.position;
         _farmBed = farmBed;
         _farmBed.CountChanged += _nowUI.UpdateCount;
+        _farmBed.BedReseted += ResetFarmBed;
         UpdateSideButtons();
+    }
+
+    private void ResetFarmBed() {
+        _farmBed.BedReseted -= ResetFarmBed;
+        _farmBed.CountChanged -= _nowUI.UpdateCount;
+        _farmBed = null;
+        _nowUI = null;
     }
 
     private BedTypeUI FindUI(BedType bedType) {

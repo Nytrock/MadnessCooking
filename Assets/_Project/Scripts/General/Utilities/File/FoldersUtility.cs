@@ -10,18 +10,19 @@ public static class FoldersUtility {
         Directory.CreateDirectory(fullPath);
     }
 
-    public static void CreateEditorFolder(string path, string folderName) {
-        if (AssetDatabase.IsValidFolder($"{path}/{folderName}"))
-            return;
-
-        AssetDatabase.CreateFolder(path, folderName);
-    }
-
     public static void DeleteFolder(string path) {
         if (!Directory.Exists(path))
             return;
 
         Directory.Delete(path);
+    }
+
+#if UNITY_EDITOR
+    public static void CreateEditorFolder(string path, string folderName) {
+        if (AssetDatabase.IsValidFolder($"{path}/{folderName}"))
+            return;
+
+        AssetDatabase.CreateFolder(path, folderName);
     }
 
     public static void DeleteEditorFolder(string path) {
@@ -31,4 +32,5 @@ public static class FoldersUtility {
         FileUtil.DeleteFileOrDirectory($"{path}.meta");
         FileUtil.DeleteFileOrDirectory(path);
     }
+#endif
 }

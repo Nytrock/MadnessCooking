@@ -21,6 +21,10 @@ public abstract class MenuButtonSelector : MonoBehaviour {
     }
 
     private void Start() {
+        Invoke(nameof(LateStart), Time.deltaTime);
+    }
+
+    private void LateStart() {
         SelectButton(0);
     }
 

@@ -14,6 +14,9 @@ public abstract class Pool<TObject> : MonoBehaviour
     }
 
     public virtual void PutObject(TObject obj) {
+        if (_pool.Contains(obj))
+            return;
+
         _pool.Enqueue(obj);
     }
 
