@@ -4,6 +4,8 @@ public class BaseChooseBuyPanel : BaseBuyPanel {
     [SerializeField] private BuyableItemRendererWithName _itemInfoRenderer;
     [SerializeField] protected GameObject _outline;
 
+    public BuyableItem Item => _data.Item;
+
     protected virtual void Awake() {
         _outline.SetActive(false);
     }
@@ -12,7 +14,7 @@ public class BaseChooseBuyPanel : BaseBuyPanel {
         _itemInfoRenderer.SetItemInfo(_data.Item);
     }
 
-    public virtual void UpdateSelectedItem(BuyableItem item) {
-        _outline.SetActive(item == _data.Item);
+    public virtual void UpdateSelection(bool isSelected) {
+        _outline.SetActive(isSelected);
     }
 }

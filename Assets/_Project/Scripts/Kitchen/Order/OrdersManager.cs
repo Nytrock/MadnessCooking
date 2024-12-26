@@ -26,6 +26,7 @@ public class OrdersManager : MonoBehaviour {
 
         if (order.IsActivated)
             client.ActivateOrder();
+
         if (order.IsFinished)
             client.CheckOrder();
     }
@@ -36,6 +37,8 @@ public class OrdersManager : MonoBehaviour {
             _saveManager.Save();
             Application.Quit();
         }
+
+        client.OrderActivated -= AddOrder;
 
         if (_tutorialManager.IsWork)
             _tutorialManager.NextTutorialPart();
@@ -48,9 +51,9 @@ public class OrdersManager : MonoBehaviour {
         if (_tutorialManager.IsWork)
             _tutorialManager.NextTutorialPart();
 
-        client.OrderActivated -= AddOrder;
         client.ClientLeave -= RemoveOrder;
         client.ClientEat -= RemoveOrder;
+        order.OrderFinished -= client.CheckOrder;
 
         if (GetOrderIndex(order) == -1)
             return;

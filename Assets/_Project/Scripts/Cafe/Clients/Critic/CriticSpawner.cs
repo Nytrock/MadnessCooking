@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -16,8 +14,12 @@ public class CriticSpawner : MonoBehaviour, IBindable<CafeData> {
         _timeManager.DaytimeChanged += CheckDaytime;
     }
 
+    private void Update() {
+        _data.Update();
+    }
+
     private void CheckDaytime(Daytime daytime) {
-        if (daytime == Daytime.Night && _data.IsWaitingCritic)
+        if (daytime == Daytime.Night && _data.IsCriticCanSpawn)
             WaitFailure();
 
         if (daytime == Daytime.Morning)
@@ -29,32 +31,24 @@ public class CriticSpawner : MonoBehaviour, IBindable<CafeData> {
         DaytimeStart morging = _timeManager.GetDaytimeStartInfo(Daytime.Morning);
         DaytimeStart night = _timeManager.GetDaytimeStartInfo(Daytime.Night);
 
-        int hour = Random.Range(morging.Hour, night.Hour);
-        int minute = Random.Range(morging.Minute, night.Minute);
-        TimeSpan timeCritic = new(hour, minute, 0);
-        StartCoroutine(WaitCriticTime(timeCritic));
+        int minutes = Random.Range(morging.Hour * 60 + morging.Minute, night.Hour * 60 + night.Minute);
+        _data.StartWait(minutes * 60);
 
         _criticUI.SetMessage(CriticMessageType.Start);
     }
 
-    private IEnumerator WaitCriticTime(TimeSpan timeCritic) {
-        yield return new WaitUntil(() => timeCritic >= _timeManager.GlobalTime);
-        _data.ChangeCriticWait(true);
+    private void DisableCriticSpawn() {
+        _data.ChangeCriticSpawn(false);
     }
-
-    private void DisableCriticWait() {
-        _data.ChangeCriticWait(false);
-    }
-
 
     public void WaitSuccess() {
-        DisableCriticWait();
+        DisableCriticSpawn();
         _popularityManager.NextLevel();
         _criticUI.SetMessage(CriticMessageType.Success);
     }
 
     public void WaitFailure() {
-        DisableCriticWait();
+        DisableCriticSpawn();
         _popularityManager.CriticFailure();
         _criticUI.SetMessage(CriticMessageType.Failure);
     }

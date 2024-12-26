@@ -51,9 +51,9 @@ public class ClientsHolder : MonoBehaviour {
 
     private void ActivateAllOrders(Client activatedClient) {
         foreach (var client in _clients) {
+            client.OrderActivated -= ActivateAllOrders;
             if (activatedClient != client)
                 client.ActivateOrder();
-            client.OrderActivated -= ActivateAllOrders;
         }
     }
 

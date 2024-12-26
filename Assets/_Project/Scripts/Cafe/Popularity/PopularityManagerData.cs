@@ -10,6 +10,11 @@ public class PopularityManagerData {
     public int Level => _level;
     public int Xp => _xp;
 
+    public PopularityManagerData() {
+        _level = 0;
+        _xp = 0;
+    }
+
     public PopularityManagerData(PopularityLevel defaultLevel) {
         _level = defaultLevel.Number - 1;
         _xp = 0;

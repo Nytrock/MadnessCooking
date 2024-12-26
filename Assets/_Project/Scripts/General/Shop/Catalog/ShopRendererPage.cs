@@ -48,6 +48,10 @@ public class ShopRendererPage : MonoBehaviour {
         RemovePanelByIndex(index);
     }
 
+    public BaseBuyPanel GetPanelByIndex(int index) {
+        return _buyPanels[index];
+    }
+
     public void UpdatePanelDataByIndex(int index, BuyPanelData updatedData) {
         _buyPanels[index].Setup(updatedData);
     }
@@ -64,10 +68,5 @@ public class ShopRendererPage : MonoBehaviour {
             return;
 
         _upper.DisableAllUppers();
-    }
-
-    public void UpdateSelectedItem(BuyableItem itemToBuy) {
-        foreach (var panel in _buyPanels)
-            (panel as BaseChooseBuyPanel).UpdateSelectedItem(itemToBuy);
     }
 }

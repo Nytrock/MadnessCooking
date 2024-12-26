@@ -206,5 +206,9 @@ public class Client : MonoBehaviour {
 
     public void ResetState() {
         _nowState = null;
+        OrderActivated = null;
+        ClientLeave = null;
+        ClientRejected = null;
+        ClientEat = null;
     }
 }

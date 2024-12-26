@@ -1,16 +1,13 @@
+using UnityEngine;
 using UnityEngine.UI;
 
 public class FarmShopBuyPanel : BaseChooseBuyPanel {
-    private Image _outlineImage;
-
-    protected override void Awake() {
-        base.Awake();
-        _outlineImage = _outline.GetComponent<Image>();
-    }
+    [SerializeField] private Image[] _outlines;
 
     public override void SetVisual() {
         base.SetVisual();
-        _outlineImage.sprite = _data.Item.Icon;
+        foreach (var outline in _outlines)
+            outline.sprite = _data.Item.Icon;
     }
 
     public override void SetSideInfo() { }

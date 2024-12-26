@@ -32,6 +32,11 @@ public class ShopRenderer : MonoBehaviour {
         UpdateEmptyState();
     }
 
+    public BaseBuyPanel GetPanelByIndex(int index) {
+        CalculateIndexes(index, out int startPageIndex, out int panelIndex);
+        return _pages[startPageIndex].GetPanelByIndex(panelIndex);
+    }
+
     private void GeneratePage() {
         ShopRendererPage page = Instantiate(_pagePrefab, _pagesContainer);
         _pages.Add(page);
@@ -111,9 +116,5 @@ public class ShopRenderer : MonoBehaviour {
 
         bool isEmpty = _pages.Count == 1 && _pages[_nowPage].ItemCount == 0;
         _emptyMessage.SetActive(isEmpty);
-    }
-
-    public void UpdateSelectedItem(BuyableItem itemToBuy) {
-        _pages[_nowPage].UpdateSelectedItem(itemToBuy);
     }
 }

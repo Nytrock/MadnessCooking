@@ -7,6 +7,7 @@ public abstract class BaseChooseShop<TItem, TData> : SaveableBaseShop<TItem, TDa
 
     [SerializeField] protected BaseChooseShopItemView<TItem> _itemView;
     protected TItem _itemToBuy;
+    protected BaseChooseBuyPanel _choosedPanel;
 
     public event Action<TItem> ItemSelected;
 
@@ -28,14 +29,23 @@ public abstract class BaseChooseShop<TItem, TData> : SaveableBaseShop<TItem, TDa
     }
 
     protected void ChooseItem(TItem item) {
-        if (_itemToBuy == item)
-            _itemToBuy = null;
-        else
-            _itemToBuy = item;
+        int itemIndex = _data.IndexOfItem(item);
+        BaseChooseBuyPanel buyPanel = _renderer.GetPanelByIndex(itemIndex) as BaseChooseBuyPanel;
 
-        ItemSelected?.Invoke(_itemToBuy);
-        _renderer.UpdateSelectedItem(_itemToBuy);
+        if (_itemToBuy == item) {
+            _itemToBuy = null;
+            _choosedPanel.UpdateSelection(false);
+            _choosedPanel = null;
+        } else {
+            _itemToBuy = item;
+            if (_choosedPanel != null)
+                _choosedPanel.UpdateSelection(false);
+            _choosedPanel = buyPanel;
+            _choosedPanel.UpdateSelection(true);
+        }
+
         _itemView.UpdateItem(_itemToBuy, IsBuyable(_itemToBuy));
+        ItemSelected?.Invoke(_itemToBuy);
     }
 
     protected override void UpdatePanels() {

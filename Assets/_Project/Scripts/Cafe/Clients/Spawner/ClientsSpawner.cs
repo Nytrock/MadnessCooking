@@ -121,7 +121,7 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
     }
 
     private ClientCount GetRandomCount() {
-        if (_criticData.IsWaitingCritic || _tutorialManager.IsWork)
+        if (_criticData.IsCriticCanSpawn || _tutorialManager.IsWork)
             return ClientCount.One;
 
         _popularityCalculate.GetClientChances(out int singleChance, out int doubleChance, out int tripleChance, out int quarterChance);
@@ -136,7 +136,7 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
     }
 
     private ClientType GetRandomType(ClientCount clientCount) {
-        if (_criticData.IsWaitingCritic)
+        if (_criticData.IsCriticCanSpawn)
             return ClientType.Critic;
 
         int number = Random.Range(1, 1001);
