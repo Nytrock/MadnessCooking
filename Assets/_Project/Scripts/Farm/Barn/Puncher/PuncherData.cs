@@ -15,7 +15,7 @@ public class PuncherData {
 
     public PuncherData() {
         _nowWaste = 0;
-        _speed = 0;
+        _speed = 1;
         _fertilizerCount = 0;
     }
 

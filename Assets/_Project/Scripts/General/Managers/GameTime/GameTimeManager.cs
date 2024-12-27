@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class GameTimeManager : MonoBehaviour, IBindable<GeneralData> {
     [SerializeField, Min(0)] private float _defaultTimeSpeed;
-    [SerializeField, Min(0)] private float _sleepTimeSpeed;
     [SerializeField] private PauseManager _pauseManager;
     [SerializeField] private DaytimeStart[] _daytimeStarts;
     [SerializeField] private Daytime _defaultDaytime;
@@ -13,10 +12,9 @@ public class GameTimeManager : MonoBehaviour, IBindable<GeneralData> {
     private float _previousTimeSpeed;
     private GameTimeManagerData _data;
 
+    public float DefaultTimeSpeed => _defaultTimeSpeed;
     public TimeSpan GlobalTime => _data.GlobalTime;
     public int DaysCount => _data.GlobalTime.Days;
-    public bool IsSleep => _sleepTimeSpeed == _nowTimeSpeed;
-
     public float NormalizedNowTimeSpeed => _nowTimeSpeed / _defaultTimeSpeed;
     public float NowTimeSpeed => _nowTimeSpeed;
 
@@ -54,8 +52,8 @@ public class GameTimeManager : MonoBehaviour, IBindable<GeneralData> {
         DaytimeChanged?.Invoke(_data.Daytime);
     }
 
-    public void ChangeSleepState(bool isSleep) {
-        _nowTimeSpeed = isSleep ? _sleepTimeSpeed : _defaultTimeSpeed;
+    public void ChangeTimeSpeed(float newTimeSpeed) {
+        _nowTimeSpeed = newTimeSpeed;
         TimeSpeedUpdated?.Invoke();
     }
 
@@ -71,10 +69,6 @@ public class GameTimeManager : MonoBehaviour, IBindable<GeneralData> {
             if (daytimeStart.Daytime == daytime)
                 return daytimeStart;
         throw new NullReferenceException($"No info about {daytime}");
-    }
-
-    public float GetSleepBonus(float needHours, float maxFatigue) {
-        return maxFatigue / (needHours * 3600 / _sleepTimeSpeed);
     }
 
     public void Bind(GeneralData data) {

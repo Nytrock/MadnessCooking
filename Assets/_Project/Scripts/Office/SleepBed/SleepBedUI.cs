@@ -1,7 +1,7 @@
 using UnityEngine;
 
-public class OfficeBedUI : MonoBehaviour, IActivable {
-    [SerializeField] private OfficeBed _officeBed;
+public class SleepBedUI : MonoBehaviour, IActivable {
+    [SerializeField] private SleepBed _sleepBed;
     [SerializeField] private GameObject _panel;
     [SerializeField] private GameObject _blockPanel;
     [SerializeField] private LocalizedText _sleepButtonText;
@@ -9,7 +9,7 @@ public class OfficeBedUI : MonoBehaviour, IActivable {
     [SerializeField] private string _notSleepingNote;
 
     private void Awake() {
-        _officeBed.SleepChanged += UpdateSleepState;
+        _sleepBed.SleepChanged += UpdateSleepState;
     }
 
     public void ChangeState(bool newState) {

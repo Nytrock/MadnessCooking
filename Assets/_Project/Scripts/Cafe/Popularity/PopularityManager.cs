@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class PopularityManager : MonoBehaviour, IBindable<GeneralData> {
+public class PopularityManager : MonoBehaviour, IBindable<CafeData> {
     [SerializeField] private PopularityLevel[] _levels;
     [SerializeField] private PopularityLevel _defaultLevel;
     [SerializeField] private PopularityManagerData _data;
@@ -33,14 +33,18 @@ public class PopularityManager : MonoBehaviour, IBindable<GeneralData> {
 
     [ContextMenu("AddXp")]
     void TestAddXp() {
+        if (!Application.isPlaying)
+            return;
+
         AddXp(100);
-        Debug.Log(_data.Xp);
     }
 
     [ContextMenu("RemoveXp")]
     private void TestRemoveXp() {
+        if (!Application.isPlaying)
+            return;
+
         RemoveXp(100);
-        Debug.Log(_data.Xp);
     }
 
     public void AddXp(float xp) {
@@ -87,7 +91,7 @@ public class PopularityManager : MonoBehaviour, IBindable<GeneralData> {
             _data.RemoveXp(_data.Xp - _nowLevel.NeedXp + 1);
     }
 
-    public void Bind(GeneralData data) {
+    public void Bind(CafeData data) {
         data.PopularityManager ??= new(_defaultLevel);
         _data = data.PopularityManager;
     }

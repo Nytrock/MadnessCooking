@@ -5,7 +5,6 @@ public class GeneralData : ISaveable {
     public GeneralUpgradeData UpgradeData { get; set; }
     public BuyableItemManagerData<Decor> DecorManager { get; set; }
     public MoneyManagerData MoneyManager { get; set; }
-    public PopularityManagerData PopularityManager { get; set; }
     public GameTimeManagerData GameTimeManager { get; set; }
     public RealTimeManagerData RealTimeManager { get; set; }
     public LightManagerData LightManager { get; set; }

@@ -1,7 +1,7 @@
 using UnityEngine;
 
-public class OfficeBedAudio : SwitchableAudioSource {
-    [SerializeField] private OfficeBed _bed;
+public class SleepBedAudio : SwitchableAudioSource {
+    [SerializeField] private SleepBed _bed;
 
     protected override void Awake() {
         base.Awake();

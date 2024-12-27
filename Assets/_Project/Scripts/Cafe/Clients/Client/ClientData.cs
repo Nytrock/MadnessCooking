@@ -13,7 +13,7 @@ public class ClientData {
     [SerializeField, JsonProperty] private float _waitTime;
     [SerializeField, JsonProperty] private float _nowTime;
     [SerializeField, JsonProperty] private float _waitMultiplier;
-    [SerializeField, JsonProperty] private bool _isEated;
+    [SerializeField, JsonProperty] private bool _isServiced;
     [SerializeField, JsonProperty] private Order _order;
     [SerializeField] private float _waitCoef;
 
@@ -25,7 +25,7 @@ public class ClientData {
     public float WaitTime => _waitTime;
     public float NowTime => _nowTime;
     public float WaitCoef => _waitCoef;
-    public bool IsEated => _isEated;
+    public bool IsServiced => _isServiced;
     public Order Order => _order;
 
     public ClientData(Vector3 position, ClientType clientType, float waitMultiplier, Order order) {
@@ -47,7 +47,7 @@ public class ClientData {
 
     public void ChangeState(ClientState newState) {
         if (_state == ClientState.Eat)
-            _isEated = true;
+            Service();
         _state = newState;
 
         if (newState == ClientState.Eat) {
@@ -67,5 +67,9 @@ public class ClientData {
 
     public void SetGender(ClientGender gender) {
         _gender = gender;
+    }
+
+    public void Service() {
+        _isServiced = true;
     }
 }

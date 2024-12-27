@@ -1,4 +1,4 @@
-public class OfficeBedUpgradeRenderer : UpgradeRenderer, IUpgradeable<OfficeUpgradeData> {
+public class SleepBedUpgradeRenderer : UpgradeRenderer, IUpgradeable<OfficeUpgradeData> {
     private OfficeUpgradeData _upgradeData;
 
     public void BindUpgrade(OfficeUpgradeData upgradeData) {

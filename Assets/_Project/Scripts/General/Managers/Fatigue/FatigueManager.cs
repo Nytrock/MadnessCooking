@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class FatigueManager : Singleton<FatigueManager>, IBindable<GeneralData>, IUpgradeable<OfficeUpgradeData> {
     [SerializeField] private GameTimeManager _timeManager;
+    [SerializeField] private SleepBed _bed;
 
     [SerializeField, Min(0)] private float _fatigueMax;
     [SerializeField, Min(0)] private float _fatigueDefault;
@@ -22,13 +23,17 @@ public class FatigueManager : Singleton<FatigueManager>, IBindable<GeneralData>,
     public event Action<bool> TiredChanged;
 
     public void LateStart() {
-        _sleepBonus = _timeManager.GetSleepBonus(_needHoursToRecovery, _fatigueMax);
+        _sleepBonus = _bed.GetSleepBonus(_needHoursToRecovery, _fatigueMax);
     }
 
     private void Update() {
-        if (!_timeManager.IsSleep)
+        if (!_bed.IsSleep)
             return;
 
+        UpdateSleepState();
+    }
+
+    private void UpdateSleepState() {
         _data.ChangeFatigue(-_sleepBonus * _upgradeData.SleepCoef);
         if (_data.FatigueNow == 0 && _isTired)
             ChangeTiredState(false);
@@ -44,7 +49,7 @@ public class FatigueManager : Singleton<FatigueManager>, IBindable<GeneralData>,
         _isTired = isTired;
         TiredChanged?.Invoke(_isTired);
         if (!_isTired)
-            _timeManager.ChangeSleepState(false);
+            _timeManager.ChangeTimeSpeed(_timeManager.DefaultTimeSpeed);
     }
 
     public void AddDecorBonus(Decor decor) {

@@ -5,6 +5,13 @@ public class PausableAudio : MonoBehaviour {
     private AudioSource _audioSource;
 
     private void Awake() {
+        CheckAudio();
+    }
+
+    private void CheckAudio() {
+        if (_audioSource != null)
+            return;
+
         _audioSource = GetComponent<AudioSource>();
     }
 
@@ -13,6 +20,7 @@ public class PausableAudio : MonoBehaviour {
     }
 
     private void ChangeState(bool isPause) {
+        CheckAudio();
         _audioSource.ChangeState(!isPause);
     }
 }

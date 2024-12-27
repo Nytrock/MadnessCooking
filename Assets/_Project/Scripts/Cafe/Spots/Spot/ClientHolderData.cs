@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable, JsonObject(MemberSerialization.OptIn)]
-public class SpotData {
+public class ClientHolderData {
     [SerializeField, JsonProperty] private bool _haveClients;
     [SerializeField, JsonProperty] private GroupClientState _groupState;
     [SerializeField, JsonProperty] private float _waitTime;
@@ -22,7 +22,7 @@ public class SpotData {
     public int SeatsCount => _seatsCount;
     public IEnumerable<ClientData> Clients => _clients;
 
-    public SpotData(int seatsCount) {
+    public ClientHolderData(int seatsCount) {
         _seatsCount = seatsCount;
         _clients = new ClientData[SeatsCount];
         _groupState = GroupClientState.None;
@@ -68,8 +68,9 @@ public class SpotData {
         _moneyCount += money;
     }
 
-    public void PayToPlayer() {
-        MoneyManager.Instance.ChangeMoney(_moneyCount);
+    public void PayToPlayer(float coeficient) {
+        int payingMoney = Mathf.FloorToInt(_moneyCount * coeficient);
+        MoneyManager.Instance.ChangeMoney(payingMoney);
         _moneyCount = 0;
     }
 

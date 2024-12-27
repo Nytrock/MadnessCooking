@@ -2,27 +2,22 @@ using UnityEngine;
 
 public class ClientTimeMultiplier : MonoBehaviour {
     [SerializeField] private GameTimeManager _timeManager;
+    [SerializeField] private DaytimeMultiplier[] _multipliers;
 
-    [Header("Multiplier")]
-    [SerializeField, Min(0)] private float _morning = 1;
-    [SerializeField, Min(0)] private float _day = 1;
-    [SerializeField, Min(0)] private float _evening = 1;
-    [SerializeField, Min(0)] private float _night = 1;
+    private float _nowDaytimeMultiplier = 1;
 
-    private float _daytimeMultiplier = 1;
-
-    public float DaytimeMultiplier => _daytimeMultiplier;
+    public float NowDaytimeMultiplier => _nowDaytimeMultiplier;
 
     private void Awake() {
-        _timeManager.DaytimeChanged += ChangeMultiply;
+        _timeManager.DaytimeChanged += UpdateMultiplier;
     }
 
-    private void ChangeMultiply(Daytime daytime) {
-        switch (daytime) {
-            case Daytime.Morning: _daytimeMultiplier = _morning; break;
-            case Daytime.Day: _daytimeMultiplier = _day; break;
-            case Daytime.Evening: _daytimeMultiplier = _evening; break;
-            case Daytime.Night: _daytimeMultiplier = _night; break;
+    private void UpdateMultiplier(Daytime daytime) {
+        foreach (var daytimeMultiplier in _multipliers) {
+            if (daytimeMultiplier.Daytime == daytime) {
+                _nowDaytimeMultiplier = daytimeMultiplier.Multiplier;
+                return;
+            }
         }
     }
 }

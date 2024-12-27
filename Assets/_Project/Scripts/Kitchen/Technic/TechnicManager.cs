@@ -31,9 +31,14 @@ public class TechnicManager : SaveableItemManager<Technic, KitchenData>, IUpgrad
         return holder.Accessible();
     }
 
-    public void ActivateTechnic(Order order) {
+    public void StartCooking(Order order) {
         TechnicHolder technic = FindHolderByTechic(order.Food.TypeTechnic);
         technic.StartCook(order);
+    }
+
+    public void EmergencyStopCooking(Order order) {
+        TechnicHolder technic = FindHolderByTechic(order.Food.TypeTechnic);
+        technic.Data.EmergencyStopCook();
     }
 
     public TechnicHolder FindHolderByTechic(Technic technic) {

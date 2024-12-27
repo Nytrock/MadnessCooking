@@ -1,8 +1,9 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public abstract class BaseBuyPanel : MonoBehaviour {
     [SerializeField] protected GrayscaleImage _sideInfo;
-    [SerializeField] protected ButtonWithAudio _buyButton;
+    [SerializeField] protected Button _buyButton;
     protected BuyPanelData _data;
 
     public virtual void Destroy() {

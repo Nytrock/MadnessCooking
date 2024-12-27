@@ -3,7 +3,7 @@ using System;
 using UnityEngine;
 
 [Serializable, JsonObject(MemberSerialization.OptIn)]
-public class OfficeBedData {
+public class SleepBedData {
     [SerializeField, JsonProperty] private bool _isSleep;
 
     public bool IsSleep => _isSleep;

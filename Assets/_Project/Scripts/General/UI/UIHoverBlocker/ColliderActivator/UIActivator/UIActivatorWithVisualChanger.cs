@@ -1,7 +1,7 @@
 using UnityEngine;
 
-public class UIActivatorWithSpriteChanger : UIActivator {
-    [SerializeField] private SpriteChanger _changer;
+public class UIActivatorWithVisualChanger : UIActivator {
+    [SerializeField] private VisualChanger _changer;
 
     private void Start() {
         _changer.ChangeState(false);

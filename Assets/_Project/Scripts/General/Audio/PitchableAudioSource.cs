@@ -14,6 +14,11 @@ public class PitchableAudioSource : MonoBehaviour {
         _audioSource.Play();
     }
 
+    public virtual void Play(float pitch) {
+        _audioSource.pitch = pitch;
+        _audioSource.Play();
+    }
+
     public void ChangeState(bool newState) {
         _audioSource.pitch = _pitch.RandomValue;
         _audioSource.ChangeState(newState);

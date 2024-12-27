@@ -28,9 +28,9 @@ public class HoverItemName : MonoBehaviour {
         ChangeState(true);
 
         float mousePosition = Input.mousePosition.x;
-        Direction panelDirection = Direction.Right;
+        Direction panelDirection = Direction.Left;
         if (mousePosition < Screen.width / 2)
-            panelDirection = Direction.Left;
+            panelDirection = Direction.Right;
 
         LayoutRebuilder.ForceRebuildLayoutImmediate(_panel);
         _panel.localPosition = panelDirection.ToFloat() * (_offset + new Vector2(_panel.sizeDelta.x / 2, 0));

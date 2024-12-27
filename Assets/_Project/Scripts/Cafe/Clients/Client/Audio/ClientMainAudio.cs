@@ -14,7 +14,5 @@ public class ClientMainAudio : MonoBehaviour {
         _client.OrderActivated += delegate { _orderAudio.Play(); };
         _client.ClientRejected += delegate { _rejectAudio.Play(); };
         _client.ClientEat += delegate { _eatAudio.Play(); };
-
-        _client.ClientSetup -= SetupAudioSources;
     }
 }

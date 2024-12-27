@@ -629,9 +629,12 @@ MonoBehaviour:
     _min: 2
     _max: 5
     _isGreaterZero: 1
+  "_\u0441lientInterval":
+    _min: 1
+    _max: 1.8
+    _isGreaterZero: 1
   _clientWaitMultiplier: 0.75
-  _minClientInterval: 0.5
-  _maxClientInterval: 1.2
+  _notFullServicePenalty: 0.5
 --- !u!1 &6046200884695634029
 GameObject:
   m_ObjectHideFlags: 0

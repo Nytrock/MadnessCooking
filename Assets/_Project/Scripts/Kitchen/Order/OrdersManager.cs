@@ -20,7 +20,7 @@ public class OrdersManager : MonoBehaviour {
 
         Order order = client.Data.Order;
         client.OrderActivated += AddOrder;
-        client.ClientLeave += RemoveOrder;
+        client.ClientRejected += RemoveOrder;
         client.ClientEat += RemoveOrder;
         order.OrderFinished += client.CheckOrder;
 
@@ -51,13 +51,15 @@ public class OrdersManager : MonoBehaviour {
         if (_tutorialManager.IsWork)
             _tutorialManager.NextTutorialPart();
 
-        client.ClientLeave -= RemoveOrder;
+        client.ClientRejected -= RemoveOrder;
         client.ClientEat -= RemoveOrder;
         order.OrderFinished -= client.CheckOrder;
 
         if (GetOrderIndex(order) == -1)
             return;
 
+        if (order.IsCooking)
+            _technicManager.EmergencyStopCooking(order);
         OrderRemoved?.Invoke(order);
         _orders.Remove(order);
     }
@@ -68,6 +70,6 @@ public class OrdersManager : MonoBehaviour {
 
     public void StartCook(Order order) {
         _kitchenStorage.RemoveIngredients(order.Food.Ingredients);
-        _technicManager.ActivateTechnic(order);
+        _technicManager.StartCooking(order);
     }
 }

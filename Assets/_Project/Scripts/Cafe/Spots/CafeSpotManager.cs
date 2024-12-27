@@ -12,7 +12,7 @@ public class CafeSpotManager : MonoBehaviour, IBindable<CafeData> {
     private readonly List<CafeSpot> _spots = new();
     private List<List<int>> _freeSpots;
     private float _cellSize;
-    [SerializeField] private CafeSpotManagerData _data;
+    [SerializeField] private ClientHolderManagerData _data;
 
     public float CellSize => _cellSize;
 
@@ -39,7 +39,7 @@ public class CafeSpotManager : MonoBehaviour, IBindable<CafeData> {
     }
 
     private void GenerateSpots() {
-        foreach (var spotData in _data.Spots)
+        foreach (var spotData in _data.ClientHolders)
             AddNewSpot(spotData.SeatsCount - 1, false);
     }
 
@@ -63,7 +63,7 @@ public class CafeSpotManager : MonoBehaviour, IBindable<CafeData> {
             _opener.CafeChanged -= clientTable.CafeStateChanged;
         _spots[spotIndex].Destroy();
         _spots.RemoveAt(spotIndex);
-        _data.RemoveSpotAt(spotIndex);
+        _data.RemoveClientHolderAt(spotIndex);
         SetupSpotsRemoveButtons();
     }
 
@@ -134,9 +134,9 @@ public class CafeSpotManager : MonoBehaviour, IBindable<CafeData> {
         spot.SetIndex(_spots.Count);
         spot.SetCameraManager(_cameraManager);
 
-        SpotData newData = new(spot.SeatsCount);
+        ClientHolderData newData = new(spot.SeatsCount);
         if (isAddedByEditor)
-            _data.AddSpot(newData);
+            _data.AddClientHolder(newData);
         if (spot.TryGetComponent(out ClientsHolder clientTable)) {
             _opener.CafeChanged += clientTable.CafeStateChanged;
             clientTable.SetData(newData);
@@ -156,8 +156,8 @@ public class CafeSpotManager : MonoBehaviour, IBindable<CafeData> {
     }
 
     public void Bind(CafeData data) {
-        data.SpotManager ??= new();
-        _data = data.SpotManager;
+        data.ClientHolderManager ??= new();
+        _data = data.ClientHolderManager;
     }
 
     public CafeSpot GetSpotByIndex(int spotIndex) => _spots[spotIndex];

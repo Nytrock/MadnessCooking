@@ -21,7 +21,7 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
 
     [SerializeField] private ClientsSpawnerData _data;
     private CriticSpawnerData _criticData;
-    private CafeSpotManagerData _spotData;
+    private ClientHolderManagerData _clientHolderData;
     private CafeUpgradeData _upgradeData;
     private PopularityXpAdder _xpAdder;
 
@@ -43,7 +43,7 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
 
     private void GenerateClientsFromData() {
         int spotIndex = 0;
-        foreach (var spotData in _spotData.Spots) {
+        foreach (var spotData in _clientHolderData.ClientHolders) {
             if (!spotData.HaveClients || spotData.ContainsGrayMan()) {
                 spotIndex++;
                 continue;
@@ -88,7 +88,7 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
         float waitMultiplier = _popularityCalculate.GetSpaceMultiplier();
         ClientType clientType = GetRandomType(clientCount);
         CafeSpot spot = _spotManager.GetSpotByIndex(spotIndex);
-        SpotData spotData = _spotData.GetSpot(spotIndex);
+        ClientHolderData spotData = _clientHolderData.GetClientHolder(spotIndex);
 
         for (int i = 0; i < spot.SeatsCount; i++) {
             Order order = new(_foodManager.GetRandomFood(), spotIndex + 1);
@@ -161,18 +161,17 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
     private void ClientsLeave(CafeSpot spot) {
         _spotManager.ReturnSpot(spot.Index);
 
-        SpotData spotData = _spotData.GetSpot(spot.Index);
+        ClientHolderData spotData = _clientHolderData.GetClientHolder(spot.Index);
         for (int i = 0; i < spot.SeatsCount; i++)
             _data.AddLeavingClient(spotData.GetClient(i));
     }
 
     private void SetupClient(Client client, int spotIndex, int seatIndex) {
         client.ClientUI.SetData(_upgradeData);
-        ClientData clientData = _spotData.GetSpot(spotIndex).GetClient(seatIndex);
+        ClientData clientData = _clientHolderData.GetClientHolder(spotIndex).GetClient(seatIndex);
         ClientSettings clientSettings = new(clientData, spotIndex, seatIndex, this);
         client.Setup(clientSettings);
         _ordersManager.SetNewOrder(client);
-        _cafeOpener.CafeChanged += client.CheckCafe;
     }
 
     public void CheckAddedUpgrade(BaseUpgrade upgrade) {
@@ -188,7 +187,7 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
         data.ClientsSpawner ??= new();
         _data = data.ClientsSpawner;
 
-        _spotData = data.SpotManager;
+        _clientHolderData = data.ClientHolderManager;
         _criticData = data.CriticSpawner;
     }
 
@@ -202,13 +201,13 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
             throw new ArgumentNullException("Spot doesn't have the required class ClientGroupHolder");
 
         table.SetTutorialState(_tutorialManager.IsWork);
-        SpotData spotData = _spotData.GetSpot(spot.Index);
-        table.SetData(spotData);
+        ClientHolderData tableData = _clientHolderData.GetClientHolder(spot.Index);
+        table.SetData(tableData);
 
         for (int i = 0; i < spot.SeatsCount; i++) {
             _data.AddNowClient();
             Client client;
-            ClientData clientData = spotData.GetClient(i);
+            ClientData clientData = tableData.GetClient(i);
 
             if (clientData.Gender == ClientGender.None)
                 client = _pool.GetClientByType(clientData.Type);

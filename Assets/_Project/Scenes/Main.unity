@@ -6701,7 +6701,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: OfficeBed.Sleep
+  m_text: SleepBed.Sleep
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1528e4081f4f5e342bab2676099abda8, type: 2}
   m_sharedMaterial: {fileID: 9146103655038203910, guid: 1528e4081f4f5e342bab2676099abda8, type: 2}
@@ -7921,7 +7921,7 @@ GameObject:
   m_Component:
   - component: {fileID: 122629943}
   - component: {fileID: 122629945}
-  - component: {fileID: 122629944}
+  - component: {fileID: 122629946}
   m_Layer: 0
   m_Name: Box
   m_TagString: Untagged
@@ -7946,21 +7946,6 @@ Transform:
   - {fileID: 1046665617}
   m_Father: {fileID: 397481015}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &122629944
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 122629942}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29bf27c91b3282c48829250a61d0c589, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _hoverListener: {fileID: 1234881540}
-  _activableObject: {fileID: 810907697}
-  _locationManager: {fileID: 1560551276}
 --- !u!61 &122629945
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -8006,6 +7991,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 5.8549347, y: 5.035369}
   m_EdgeRadius: 0
+--- !u!114 &122629946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 122629942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a5b71c61c5e1e74690b84ddcd87b602, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hoverListener: {fileID: 1234881540}
+  _activableObject: {fileID: 810907697}
+  _locationManager: {fileID: 1560551276}
 --- !u!1 &125818468
 GameObject:
   m_ObjectHideFlags: 0
@@ -29409,7 +29409,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: OfficeBed.Sleep
+  m_text: SleepBed.Sleep
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1528e4081f4f5e342bab2676099abda8, type: 2}
   m_sharedMaterial: {fileID: 9146103655038203910, guid: 1528e4081f4f5e342bab2676099abda8, type: 2}
@@ -30851,6 +30851,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _timeManager: {fileID: 1095035881}
+  _bed: {fileID: 442335472}
 --- !u!1 &405365383
 GameObject:
   m_ObjectHideFlags: 0
@@ -33695,6 +33696,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _timeManager: {fileID: 1095035881}
+  _sleepTimeSpeed: 70
 --- !u!114 &442335473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45715,15 +45717,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 568093277}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2949cc04c340c48439a10b74c01b948e, type: 3}
+  m_Script: {fileID: 11500000, guid: d5814caad5bbd4642b312464267a1aa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _officeBed: {fileID: 442335472}
+  _sleepBed: {fileID: 442335472}
   _panel: {fileID: 1475402429}
   _blockPanel: {fileID: 1045531717}
   _sleepButtonText: {fileID: 387653113}
-  _sleepingNote: OfficeBed.WakeUp
-  _notSleepingNote: OfficeBed.Sleep
+  _sleepingNote: SleepBed.WakeUp
+  _notSleepingNote: SleepBed.Sleep
 --- !u!114 &568093280
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46510,7 +46512,7 @@ GameObject:
   m_Component:
   - component: {fileID: 578872988}
   - component: {fileID: 578872990}
-  - component: {fileID: 578872989}
+  - component: {fileID: 578872991}
   m_Layer: 0
   m_Name: Activator
   m_TagString: Untagged
@@ -46533,21 +46535,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1787368026}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &578872989
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 578872987}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a5b71c61c5e1e74690b84ddcd87b602, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _hoverListener: {fileID: 1569875507}
-  _activableObject: {fileID: 1881828147}
-  _locationManager: {fileID: 1560551276}
 --- !u!61 &578872990
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -46593,6 +46580,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 9.703934, y: 4.01426}
   m_EdgeRadius: 0
+--- !u!114 &578872991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 578872987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a5b71c61c5e1e74690b84ddcd87b602, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hoverListener: {fileID: 1569875507}
+  _activableObject: {fileID: 1881828147}
+  _locationManager: {fileID: 1560551276}
 --- !u!1 &581257320
 GameObject:
   m_ObjectHideFlags: 0
@@ -63286,7 +63288,7 @@ MonoBehaviour:
   - {fileID: 6073225795250859655, guid: 0b9c7c08259366e4688ffd0395a12143, type: 3}
   - {fileID: 7781789862733694359, guid: 925ddadf44c0daa409655d1d3c5ff111, type: 3}
   _data:
-    _spots: []
+    _clientHolders: []
 --- !u!1 &682274035
 GameObject:
   m_ObjectHideFlags: 0
@@ -76940,7 +76942,6 @@ Transform:
   - {fileID: 584015177}
   - {fileID: 403464059}
   - {fileID: 1412654021}
-  - {fileID: 1251689377}
   - {fileID: 1095035882}
   - {fileID: 1541743752}
   - {fileID: 1154027455}
@@ -101431,6 +101432,7 @@ GameObject:
   - component: {fileID: 1045531718}
   - component: {fileID: 1045531720}
   - component: {fileID: 1045531719}
+  - component: {fileID: 1045531721}
   m_Layer: 0
   m_Name: BlockPanel
   m_TagString: Untagged
@@ -101495,6 +101497,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1045531717}
   m_CullTransparentMesh: 1
+--- !u!114 &1045531721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1045531717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31f00c2292cb140419170a40e94d07bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hoverListener: {fileID: 1569875507}
+  _isReversed: 0
 --- !u!1 &1046665616
 GameObject:
   m_ObjectHideFlags: 0
@@ -109579,7 +109595,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _defaultTimeSpeed: 1.5
-  _sleepTimeSpeed: 70
   _pauseManager: {fileID: 1267245106}
   _daytimeStarts:
   - _daytime: 0
@@ -109623,10 +109638,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _timeManager: {fileID: 1095035881}
-  _morning: 0.5
-  _day: 1
-  _evening: 1.4
-  _night: 0.1
+  _multipliers:
+  - _daytime: 0
+    _multiplier: 0.5
+  - _daytime: 1
+    _multiplier: 1
+  - _daytime: 2
+    _multiplier: 1.4
+  - _daytime: 3
+    _multiplier: 0.1
 --- !u!114 &1095035884
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -112631,6 +112651,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _timeManager: {fileID: 1095035881}
+  _bed: {fileID: 442335472}
   _fatigueMax: 300
   _fatigueDefault: 0
   _needHoursToRecovery: 8
@@ -127215,7 +127236,7 @@ MonoBehaviour:
   _upgradeManager: {fileID: 1299343206}
   _unlockUpgrade: {fileID: 11400000, guid: bebb1ae5cf63e694688e7240c564f0cf, type: 2}
   _autoWorkUpgrade: {fileID: 11400000, guid: 981060421751812419bfa20190c9f957, type: 2}
-  _timeWait: 4
+  _timeWait: 3.33
   _fatigueCoef: 0.01
   _readyDefaultCount: 0
   _unlockVisual: {fileID: 1617218465}
@@ -128664,7 +128685,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 816356321}
+  m_Father: {fileID: 1832416031}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1251689378
 MonoBehaviour:
@@ -157780,7 +157801,6 @@ MonoBehaviour:
   _bindables:
   - _underlyingValue: {fileID: 1119929040}
   - _underlyingValue: {fileID: 1412654020}
-  - _underlyingValue: {fileID: 1251689376}
   - _underlyingValue: {fileID: 2059865003}
   - _underlyingValue: {fileID: 1095035881}
   - _underlyingValue: {fileID: 1541743753}
@@ -159872,7 +159892,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!1 &1588975211
 GameObject:
@@ -195304,6 +195324,7 @@ Transform:
   - {fileID: 405365384}
   - {fileID: 13597738}
   - {fileID: 1436171021}
+  - {fileID: 1251689377}
   - {fileID: 739148730}
   - {fileID: 681891815}
   - {fileID: 2125806883}
@@ -197240,6 +197261,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bindables:
+  - _underlyingValue: {fileID: 1251689376}
   - _underlyingValue: {fileID: 1005973284}
   - _underlyingValue: {fileID: 1436171022}
   - _underlyingValue: {fileID: 681891816}
@@ -199079,15 +199101,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1881828145}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2949cc04c340c48439a10b74c01b948e, type: 3}
+  m_Script: {fileID: 11500000, guid: d5814caad5bbd4642b312464267a1aa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _officeBed: {fileID: 442335472}
+  _sleepBed: {fileID: 442335472}
   _panel: {fileID: 1886071806}
   _blockPanel: {fileID: 1045531717}
   _sleepButtonText: {fileID: 108560347}
-  _sleepingNote: OfficeBed.WakeUp
-  _notSleepingNote: OfficeBed.Sleep
+  _sleepingNote: SleepBed.WakeUp
+  _notSleepingNote: SleepBed.Sleep
 --- !u!114 &1881828148
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -199273,7 +199295,7 @@ MonoBehaviour:
   _stateFalseAudio:
     _audio: {fileID: 8300000, guid: c45fdcc6a62709149acefa50d92e6ba6, type: 3}
     _volume: 0.7
-  _activator: {fileID: 122629944}
+  _activator: {fileID: 122629946}
 --- !u!1 &1883755064
 GameObject:
   m_ObjectHideFlags: 0
@@ -220665,6 +220687,7 @@ MonoBehaviour:
   _hoverListener: {fileID: 1234881540}
   _activableObject: {fileID: 163875801}
   _locationManager: {fileID: 1560551276}
+  _animationName: isOpen
 --- !u!61 &2055364995
 BoxCollider2D:
   m_ObjectHideFlags: 0

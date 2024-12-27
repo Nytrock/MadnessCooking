@@ -81,7 +81,7 @@ public class TechnicHolderData {
         _nowOrder = null;
     }
 
-    public void DisableTechnic() {
+    public void EmergencyStopCook() {
         if (!_isCooking)
             return;
 

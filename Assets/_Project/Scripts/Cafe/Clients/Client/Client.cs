@@ -140,17 +140,8 @@ public class Client : MonoBehaviour {
         _table.CheckTalk();
     }
 
-    public void CheckCafe(bool isOpened) {
-        if (isOpened)
-            return;
-
-        Leave();
-    }
-
     public void Leave() {
         ClientLeave?.Invoke(this);
-        if (!Data.IsEated)
-            ClientRejected?.Invoke(this);
         Data.ChangeState(ClientState.Leave);
 
         ChangeState();
@@ -161,8 +152,14 @@ public class Client : MonoBehaviour {
 
     public void FoodRejected() {
         WaitOthers();
+        Data.Service();
         _table.DecreaseTalk();
         ClientRejected?.Invoke(this);
+    }
+
+    public void CheckIsServiced() {
+        if (!Data.IsServiced)
+            ClientRejected?.Invoke(this);
     }
 
     public void Eat() {
@@ -206,6 +203,7 @@ public class Client : MonoBehaviour {
 
     public void ResetState() {
         _nowState = null;
+
         OrderActivated = null;
         ClientLeave = null;
         ClientRejected = null;

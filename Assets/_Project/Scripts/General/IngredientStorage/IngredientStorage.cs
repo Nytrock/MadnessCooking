@@ -19,6 +19,9 @@ public abstract class IngredientStorage : MonoBehaviour {
     }
 
     public virtual int PutIngredientWithRemain(Ingredient ingredient, int count) {
+        if (count == 0)
+            return count;
+
         int remainCount = 0;
         BuyableItemCount<Ingredient> puttingCount = new(ingredient, count);
 
@@ -43,6 +46,9 @@ public abstract class IngredientStorage : MonoBehaviour {
     }
 
     public void RemoveIngredient(Ingredient ingredient, int count) {
+        if (count == 0)
+            return;
+
         BuyableItemCount<Ingredient> removingCount = new(ingredient, count);
         RemoveIngredient(removingCount);
     }
