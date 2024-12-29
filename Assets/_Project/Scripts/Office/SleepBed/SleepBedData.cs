@@ -11,4 +11,8 @@ public class SleepBedData {
     public void ChangeSleepState() {
         _isSleep = !_isSleep;
     }
+
+    public void ChangeSleepState(bool newState) {
+        _isSleep = newState;
+    }
 }

@@ -28,8 +28,6 @@ public class LocalizationManager : Singleton<LocalizationManager>, IBindable<Gam
         }
 
         string result = LocalizationSettings.StringDatabase.GetLocalizedString(table, key, arguments: arguments);
-        if (result.StartsWith("No translation found"))
-            return key;
         return result;
     }
 

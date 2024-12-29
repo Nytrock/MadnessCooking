@@ -9,10 +9,10 @@ public class CriticUI : MonoBehaviour {
     public void SetMessage(CriticMessageType messageType) {
         switch (messageType) {
             case CriticMessageType.Start:
-                _messagePanel.SetInfo(_successMessageInfo);
+                _messagePanel.SetInfo(_startMessageInfo);
                 break;
             case CriticMessageType.Success:
-                _messagePanel.SetInfo(_startMessageInfo);
+                _messagePanel.SetInfo(_successMessageInfo);
                 break;
             case CriticMessageType.Failure:
                 _messagePanel.SetInfo(_failureMessageInfo);

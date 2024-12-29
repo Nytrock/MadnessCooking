@@ -6,11 +6,11 @@ public abstract class SaveableBaseShop<TItem, TData> : BaseShop, IBindable<TData
 
     [SerializeField] protected TItem[] _defaultItemsToBuy;
     [SerializeField] protected BuyableItemManager<TItem> _itemManager;
-    protected ShopData<TItem> _data;
+    [SerializeField] protected ShopData<TItem> _data;
 
     public event Action<BuyableItem> ItemBought;
 
-    public void LateStart() {
+    public virtual void LateStart() {
         ChangeShopState(false);
         SortItems();
         GenerateShop();

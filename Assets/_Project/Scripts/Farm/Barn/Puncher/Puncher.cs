@@ -8,7 +8,7 @@ public class Puncher : MonoBehaviour, IBindable<FarmData> {
     [SerializeField] private UpgradeManager _upgradeManager;
     [SerializeField] private CoefficientUpgrade _puncherSpeedUp;
 
-    public PuncherData Data { get; private set; }
+    [field: SerializeField] public PuncherData Data { get; private set; }
 
     public event Action FertilizerChanged;
 

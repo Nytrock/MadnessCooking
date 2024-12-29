@@ -3,6 +3,7 @@ using Random = UnityEngine.Random;
 
 public class CriticSpawner : MonoBehaviour, IBindable<CafeData> {
     [SerializeField] private GameTimeManager _timeManager;
+    [SerializeField] private SleepBed _bed;
     [SerializeField] private PopularityManager _popularityManager;
     [SerializeField] private ClientsSpawner _clientSpawner;
     [SerializeField] private CriticUI _criticUI;
@@ -34,6 +35,8 @@ public class CriticSpawner : MonoBehaviour, IBindable<CafeData> {
         int minutes = Random.Range(morging.Hour * 60 + morging.Minute, night.Hour * 60 + night.Minute);
         _data.StartWait(minutes * 60);
 
+        if (_bed.IsSleep)
+            _bed.ChangeSleepState(false);
         _criticUI.SetMessage(CriticMessageType.Start);
     }
 

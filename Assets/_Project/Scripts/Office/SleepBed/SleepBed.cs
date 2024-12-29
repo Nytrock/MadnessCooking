@@ -26,6 +26,11 @@ public class SleepBed : MonoBehaviour, IBindable<OfficeData> {
         UpdateSleepState();
     }
 
+    public void ChangeSleepState(bool newState) {
+        _data.ChangeSleepState(newState);
+        UpdateSleepState();
+    }
+
     private void UpdateSleepState() {
         _timeManager.ChangeTimeSpeed(_data.IsSleep ? _sleepTimeSpeed : _timeManager.DefaultTimeSpeed);
         SleepChanged?.Invoke(_data.IsSleep);

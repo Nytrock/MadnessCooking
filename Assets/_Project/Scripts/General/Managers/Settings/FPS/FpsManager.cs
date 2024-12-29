@@ -16,6 +16,7 @@ public class FpsManager : MonoBehaviour, IBindable<GameSettingsData>, ISettingab
 
     private void Awake() {
         Application.targetFrameRate = _targetFrameRate;
+        QualitySettings.vSyncCount = 0;
         _frameDeltaTimeArray = new float[_targetFrameRate];
     }
 

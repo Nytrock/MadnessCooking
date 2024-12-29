@@ -6,7 +6,8 @@ public class FarmShop : BaseChooseShop<BaseUpgrade, FarmData> {
 
     private FarmShopData _specialData => _data as FarmShopData;
 
-    private void Start() {
+    public override void LateStart() {
+        base.LateStart();
         ChangeShopState(true);
     }
 

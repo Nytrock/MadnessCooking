@@ -26,8 +26,9 @@ public class ShopData<TItem>
 
     public void CheckDefaultItems(IEnumerable<TItem> defaultItems) {
         foreach (var item in defaultItems)
-            if (!_availableItems.Contains(item) && !_itemsToBuy.Contains(item))
+            if (!IsItemAvailable(item) && !IsItemBuyable(item))
                 _itemsToBuy.Add(item);
+
         CheckAllItems();
     }
 
@@ -44,18 +45,21 @@ public class ShopData<TItem>
             return;
 
         foreach (var nextItem in graphable.NextItems) {
+            if (IsItemBuyable(nextItem))
+                continue;
+
             if (IsItemAvailable(nextItem)) {
                 CheckItemGraph(nextItem);
                 continue;
             }
 
             bool canAdd = true;
-            IGraphable<TItem> graphNextItem = nextItem as IGraphable<TItem>;
-            if (graphNextItem != null)
+            if (nextItem is IGraphable<TItem> graphNextItem)
                 foreach (var needUpgrade in graphNextItem.NeedItems)
                     canAdd &= IsItemAvailable(needUpgrade);
+
             if (canAdd)
-                _itemsToBuy.Add(item);
+                _itemsToBuy.Add(nextItem);
         }
     }
 

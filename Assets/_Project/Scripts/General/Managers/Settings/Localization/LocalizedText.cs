@@ -8,13 +8,13 @@ public class LocalizedText : MonoBehaviour {
     protected TextMeshProUGUI _text;
 
     private string _key;
-    private Dictionary<string, string> _arguments = new();
+    private readonly Dictionary<string, string> _arguments = new();
 
-    protected virtual void Awake() {
+    protected void Awake() {
         GetText();
     }
 
-    private void Start() {
+    protected void Start() {
         UpdateText();
         LocalizationManager.Instance.LocalizationChanged += UpdateText;
     }

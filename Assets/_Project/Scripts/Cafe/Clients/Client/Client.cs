@@ -208,5 +208,8 @@ public class Client : MonoBehaviour {
         ClientLeave = null;
         ClientRejected = null;
         ClientEat = null;
+
+        _seat = null;
+        _spot = null;
     }
 }

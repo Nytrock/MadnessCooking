@@ -10,7 +10,7 @@ using Random = UnityEngine.Random;
 public class ClientsHolder : MonoBehaviour {
     [SerializeField] private Slider _waitSlider;
     [SerializeField] private RangeFloat _talkTime;
-    [SerializeField] private RangeFloat _ñlientInterval;
+    [SerializeField] private RangeFloat _clientInterval;
     [SerializeField, Min(0)] private float _clientWaitMultiplier = 0.75f;
     [SerializeField, Min(0)] private float _notFullServicePenalty = 0.5f;
 
@@ -67,7 +67,7 @@ public class ClientsHolder : MonoBehaviour {
             client.ChangeEnable(true);
             if (client.transform.position.x == spawn) {
                 client.StartNewCycle();
-                yield return new WaitForSeconds(_ñlientInterval.RandomValue);
+                yield return new WaitForSeconds(_clientInterval.RandomValue);
             }
         }
     }
@@ -107,7 +107,7 @@ public class ClientsHolder : MonoBehaviour {
             if (noDelay)
                 yield return new WaitForSeconds(0);
             else
-                yield return new WaitForSeconds(_ñlientInterval.RandomValue);
+                yield return new WaitForSeconds(_clientInterval.RandomValue);
         }
     }
 
@@ -156,6 +156,10 @@ public class ClientsHolder : MonoBehaviour {
     public void CafeStateChanged(bool isOpened) {
         if (_clients.Count == 0 || isOpened)
             return;
+
+        if (_data.GroupState == GroupClientState.None)
+            return;
+
         CafeClosed();
     }
 

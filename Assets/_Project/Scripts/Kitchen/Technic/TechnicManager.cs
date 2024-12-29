@@ -39,6 +39,7 @@ public class TechnicManager : SaveableItemManager<Technic, KitchenData>, IUpgrad
     public void EmergencyStopCooking(Order order) {
         TechnicHolder technic = FindHolderByTechic(order.Food.TypeTechnic);
         technic.Data.EmergencyStopCook();
+        TechnicChanged?.Invoke();
     }
 
     public TechnicHolder FindHolderByTechic(Technic technic) {

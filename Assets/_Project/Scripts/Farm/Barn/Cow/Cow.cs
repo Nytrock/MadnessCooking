@@ -8,6 +8,9 @@ public class Cow : NeedHoldAdd {
 
     protected override void Update() {
         base.Update();
+        if (!Data.IsUnlocked)
+            return;
+
         _puncher.AddWaste(_wastePassiveAmount);
     }
 

@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class MessagePanel : MonoBehaviour {
     [SerializeField] private RectTransform[] _layoutsToRebuild;
     [SerializeField] private GameObject _panelWithBackground;
-    [SerializeField] private GameObject _panel;
+    [SerializeField] private RectTransform _panel;
 
     [SerializeField] private LocalizedText _titleText;
     [SerializeField] private LocalizedText _descriptionText;
@@ -20,7 +20,7 @@ public class MessagePanel : MonoBehaviour {
     public void SetInfo(MessagePanelInfo info) {
         _titleText.SetText(info.Title);
         _descriptionText.SetText(info.Description);
-        _panel.transform.position = info.Position;
+        _panel.localPosition = info.Position;
         _buttonSubmit.gameObject.SetActive(info.IsSubmitButton);
         _buttonSubmitText.SetText(info.Submit);
 

@@ -18,6 +18,7 @@ public class OrderRenderer : MonoBehaviour {
         _sprite.gameObject.SetActive(true);
     }
 
+    [ContextMenu("RandomizePosition")]
     private void RandomizePosition() {
         _sprite.SetPositionAndRotation(_position.RandomValue, Quaternion.Euler(0, 0, _angle.RandomValue));
     }

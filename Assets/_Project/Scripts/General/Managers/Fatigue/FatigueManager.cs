@@ -40,6 +40,9 @@ public class FatigueManager : Singleton<FatigueManager>, IBindable<GeneralData>,
     }
 
     public void ChangeFatigue(float fatigueValue) {
+        if (_isTired)
+            return;
+
         _data.ChangeFatigue(fatigueValue / _decorBonus);
         if (_data.FatigueNow >= _fatigueMax)
             ChangeTiredState(true);
