@@ -29,14 +29,14 @@ public class SaveFileManager<TData>
     }
 
     public void Save(TData data) {
-        File.WriteAllText(_filePath, _serializer.Serialize(data));
+        File.WriteAllText(_filePath, _serializer.SerializeCoded(data));
     }
 
     public TData Load() {
         if (!IsFileExists())
             throw new NullReferenceException($"File {_fileName} not exist.");
 
-        return _serializer.Deserialize<TData>(File.ReadAllText(_filePath));
+        return _serializer.DeserializeCoded<TData>(File.ReadAllText(_filePath));
     }
 
     public void Delete() {

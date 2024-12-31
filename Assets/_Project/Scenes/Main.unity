@@ -1203,6 +1203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e169070a6bc82e49919126f73388d8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _decorManager: {fileID: 403464058}
   _location: 0
   _decorHolders:
   - {fileID: 918219882}
@@ -30801,10 +30802,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _defaultItems: []
-  _localDecorManagers:
-  - {fileID: 13597739}
-  - {fileID: 1280892845}
-  - {fileID: 1543794859}
+  _data:
+    _availableItems: []
   _fatigueManager: {fileID: 1154027454}
 --- !u!4 &403464059
 Transform:
@@ -47575,6 +47574,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _defaultItems:
   - {fileID: 11400000, guid: 80529c8439c585945b072b791ee2a6a4, type: 2}
+  _data:
+    _availableItems: []
   _allBeds:
   - {fileID: 11400000, guid: 80529c8439c585945b072b791ee2a6a4, type: 2}
   - {fileID: 11400000, guid: f9538ea17e1133f4090ea83b5e0827bb, type: 2}
@@ -49967,7 +49968,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c104ebce88c37384fa19fb0bba3f9ef2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _needAutoSaveMinutes: 1
+  _needAutoSaveMinutes: 5
   _saveManager: {fileID: 597507963}
   _tutorialManager: {fileID: 841634105}
 --- !u!1 &621244850
@@ -83529,6 +83530,8 @@ MonoBehaviour:
   _defaultItems:
   - {fileID: 11400000, guid: 552016a33cc72bb44b4eb6addf12b2f4, type: 2}
   - {fileID: 11400000, guid: 897523a5d3e8cc843a91257d85a26f6b, type: 2}
+  _data:
+    _availableItems: []
   _allIngredients:
   - {fileID: 11400000, guid: 552016a33cc72bb44b4eb6addf12b2f4, type: 2}
   - {fileID: 11400000, guid: 897523a5d3e8cc843a91257d85a26f6b, type: 2}
@@ -110561,6 +110564,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _defaultItems:
   - {fileID: 11400000, guid: 6eeb62fd94072e542bf940359b8cbca0, type: 2}
+  _data:
+    _availableItems: []
 --- !u!4 &1103085984
 Transform:
   m_ObjectHideFlags: 0
@@ -131751,6 +131756,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e169070a6bc82e49919126f73388d8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _decorManager: {fileID: 403464058}
   _location: 1
   _decorHolders:
   - {fileID: 1548146671}
@@ -132857,6 +132863,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _defaultItems:
   - {fileID: 11400000, guid: 8fe5a1b5c2c60e04e8303266be891355, type: 2}
+  _data:
+    _availableItems: []
   _UI: {fileID: 750651162}
   _holders:
   - {fileID: 1667349450}
@@ -133135,6 +133143,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _defaultItems: []
+  _data:
+    _availableItems: []
   _localUpgradeManagers:
   - {fileID: 1119929040}
   - {fileID: 1005973284}
@@ -134176,6 +134186,11 @@ MonoBehaviour:
   _popularityManager: {fileID: 1251689376}
   _clientSpawner: {fileID: 2125806884}
   _criticUI: {fileID: 1319052736}
+  _data:
+    _isWaitingCritic: 0
+    _isCriticCanSpawn: 0
+    _nowTime: 0
+    _needTime: 0
 --- !u!114 &1319052736
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -157649,6 +157664,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e169070a6bc82e49919126f73388d8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _decorManager: {fileID: 403464058}
   _location: 2
   _decorHolders:
   - {fileID: 1023935791}
@@ -157919,7 +157935,7 @@ MonoBehaviour:
   _decor: {fileID: 11400000, guid: 686de94c06e4a214eb4c82a9ce6faf64, type: 2}
   _changer: {fileID: 1548146674}
   _needTime: 60
-  _fatigueDecreaseCoef: 500
+  _fatigueDecreaseCoef: 100
   _eyes: {fileID: 444150448}
   _data:
     _nowTime: 0

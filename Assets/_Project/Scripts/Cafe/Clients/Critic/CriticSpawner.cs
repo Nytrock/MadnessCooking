@@ -8,7 +8,7 @@ public class CriticSpawner : MonoBehaviour, IBindable<CafeData> {
     [SerializeField] private ClientsSpawner _clientSpawner;
     [SerializeField] private CriticUI _criticUI;
 
-    private CriticSpawnerData _data;
+    [SerializeField] private CriticSpawnerData _data;
 
 
     private void Awake() {
@@ -32,7 +32,8 @@ public class CriticSpawner : MonoBehaviour, IBindable<CafeData> {
         DaytimeStart morging = _timeManager.GetDaytimeStartInfo(Daytime.Morning);
         DaytimeStart night = _timeManager.GetDaytimeStartInfo(Daytime.Night);
 
-        int minutes = Random.Range(morging.Hour * 60 + morging.Minute, night.Hour * 60 + night.Minute);
+        int maxWaitTime = (night.Hour - 2) * 60 + night.Minute - morging.Hour * 60 - morging.Minute;
+        int minutes = Random.Range(0, maxWaitTime);
         _data.StartWait(minutes * 60);
 
         if (_bed.IsSleep)
@@ -46,7 +47,7 @@ public class CriticSpawner : MonoBehaviour, IBindable<CafeData> {
 
     public void WaitSuccess() {
         DisableCriticSpawn();
-        _popularityManager.NextLevel();
+        _popularityManager.CriticSuccess();
         _criticUI.SetMessage(CriticMessageType.Success);
     }
 

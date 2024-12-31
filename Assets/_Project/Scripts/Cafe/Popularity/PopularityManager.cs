@@ -100,6 +100,11 @@ public class PopularityManager : MonoBehaviour, IBindable<CafeData> {
         return (_data.Level + 1) % 5 == 0 && _data.Xp == _nowLevel.NeedXp;
     }
 
+    public void CriticSuccess() {
+        NextLevel();
+        RemoveXp(_data.Xp);
+    }
+
     public void CriticFailure() {
         RemoveXp(_nowLevel.NeedXp / 2);
     }

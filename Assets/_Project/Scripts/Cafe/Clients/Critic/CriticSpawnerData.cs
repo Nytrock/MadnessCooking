@@ -25,7 +25,7 @@ public class CriticSpawnerData {
         if (!_isWaitingCritic)
             return;
 
-        _nowTime += InGameTime.Instance.NormalizedTime;
+        _nowTime += InGameTime.Instance.RawTime;
         if (_nowTime > _needTime) {
             _isCriticCanSpawn = true;
             _isWaitingCritic = false;

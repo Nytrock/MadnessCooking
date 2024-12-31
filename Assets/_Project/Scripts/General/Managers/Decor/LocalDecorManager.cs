@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 
 public class LocalDecorManager : MonoBehaviour {
+    [SerializeField] private DecorManager _decorManager;
     [SerializeField] private Location _location;
     [SerializeField] protected DecorHolder[] _decorHolders;
 
@@ -16,6 +17,8 @@ public class LocalDecorManager : MonoBehaviour {
 
         foreach (var holder in _decorHolders)
             holder.ChangeState(false);
+
+        _decorManager.ItemAdded += AddDecor;
     }
 
     public void AddDecor(Decor decor) {
