@@ -7,7 +7,9 @@ public class LocationManager : MonoBehaviour, IBindable<GeneralData> {
     [SerializeField] private LocationPoint[] _locations;
     [SerializeField] private Location[] _saveableLocations;
     [SerializeField] private GameObject _generalUI;
+
     private LocationManagerData _data;
+    private bool _isLateStart = true;
 
     public event Action<Location> LocationChanged;
 
@@ -15,19 +17,25 @@ public class LocationManager : MonoBehaviour, IBindable<GeneralData> {
         ChangeLocation(_data.Location);
     }
 
-    public void ChangeLocation(Location location) {
-        LocationPoint locationPoint = null;
+    public LocationPoint GetLocationData(Location location) {
         foreach (var point in _locations)
             if (point.Location == location)
-                locationPoint = point;
-        if (locationPoint == null)
-            throw new ArgumentNullException($"There is no point for {location} location");
+                return point;
+        throw new ArgumentNullException($"There is no point for {location} location");
+    }
+
+    public void ChangeLocation(Location location) {
+        LocationPoint locationPoint = GetLocationData(location);
 
         if (_saveableLocations.Contains(location))
             _data.ChangeLocation(location);
-        _mainCamera.transform.position = new Vector3(locationPoint.Point.x, locationPoint.Point.y, -10);
+        _mainCamera.transform.position = locationPoint.Point;
         _generalUI.SetActive(!locationPoint.IsHideUI);
-        FatigueManager.Instance.ChangeFatigue(locationPoint.FatigueCoef);
+
+        if (_isLateStart)
+            _isLateStart = false;
+        else
+            FatigueManager.Instance.ChangeFatigue(locationPoint.FatigueCoef);
 
         LocationChanged?.Invoke(location);
     }

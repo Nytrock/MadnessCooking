@@ -5,6 +5,7 @@ using Random = UnityEngine.Random;
 [RequireComponent(typeof(PopularityXpAdder))]
 public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBindable<CafeData>, ITutorialPart {
     [SerializeField] private Transform _spawnPoint;
+    [SerializeField] private GameTimeManager _timeManager;
     [SerializeField] private PopularityCalculator _popularityCalculate;
     [SerializeField] private CafeStateChanger _cafeOpener;
     [SerializeField] private CafeSpaceManager _spaceManager;
@@ -39,6 +40,13 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
     public void LateStart() {
         GenerateClientsFromData();
         SetNewTime();
+
+        _timeManager.DaytimeChanged += CheckDaytime;
+    }
+
+    private void CheckDaytime(Daytime daytime) {
+        if (daytime == Daytime.Morning)
+            SetNewTime();
     }
 
     private void GenerateClientsFromData() {

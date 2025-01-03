@@ -18,7 +18,9 @@ public abstract class CameraManager : MonoBehaviour {
     [SerializeField] protected float _keyVelocity = 1;
     [SerializeField] protected float _mouseVelocity = 1;
     [SerializeField] protected float _speedFading = 1;
-    protected Transform _mainCameraPos;
+
+    protected Transform _cameraTransform;
+    protected Vector3 _cameraPosition;
     protected float _cameraVelocity;
     protected bool _isWorking = true;
     private bool _isKeyPressed = true;
@@ -28,13 +30,14 @@ public abstract class CameraManager : MonoBehaviour {
 
     public float StartPosition => _startPosition;
     public float EndPosition => _endPosition;
-    public Transform MainCameraPos => _mainCameraPos;
+    public Transform CameraTransform => _cameraTransform;
     public bool IsMouseMoving => Mathf.Abs(_cameraVelocity) >= 0.01f && !_isKeyPressed;
 
     protected virtual void Awake() {
         _locationManager.LocationChanged += ChangeWorkMode;
         _spaceManager.SpaceAdded += CalculateBorderPositions;
-        _mainCameraPos = _mainCamera.transform;
+        _cameraTransform = _mainCamera.transform;
+        _cameraPosition = _locationManager.GetLocationData(_location).Point;
         _locationSlider.Bootup(this);
     }
 
@@ -73,6 +76,8 @@ public abstract class CameraManager : MonoBehaviour {
 
     private void ChangeWorkMode(Location newLocation) {
         _isWorking = newLocation == _location;
+        if (_isWorking)
+            _cameraTransform.position = _cameraPosition;
         CameraMoved?.Invoke();
     }
 

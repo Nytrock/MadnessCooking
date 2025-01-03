@@ -28,6 +28,14 @@ public abstract class BaseChooseShop<TItem, TData> : SaveableBaseShop<TItem, TDa
         _itemView.UpdateItem(newItem, IsBuyable(newItem));
     }
 
+    public override void BuyItem(TItem item) {
+        TItem tempItem = _itemToBuy;
+        base.BuyItem(item);
+
+        if (tempItem == _itemToBuy)
+            _itemToBuy = null;
+    }
+
     protected void ChooseItem(TItem item) {
         int itemIndex = _data.IndexOfItem(item);
         BaseChooseBuyPanel buyPanel = _renderer.GetPanelByIndex(itemIndex) as BaseChooseBuyPanel;

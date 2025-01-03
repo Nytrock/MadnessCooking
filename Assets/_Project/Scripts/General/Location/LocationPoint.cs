@@ -9,7 +9,7 @@ public class LocationPoint {
     [SerializeField] private bool _isHideUI;
 
     public Location Location => _location;
-    public Vector2 Point => _point.position;
+    public Vector3 Point => new(_point.position.x, _point.position.y, -10);
     public float FatigueCoef => _fatigueCoef;
     public bool IsHideUI => _isHideUI;
 }

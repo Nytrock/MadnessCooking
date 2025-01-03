@@ -29,7 +29,7 @@ public class LightManagerData {
     }
 
     public void Update() {
-        _nowTime += _timeStep * InGameTime.Instance.DeltaTime;
+        _nowTime += _timeStep * InGameTime.Instance.NormalizedDeltaTime;
         if (_nowTime >= 1)
             _isChanging = false;
         _skyData.UpdateMaterial(_nowTime);

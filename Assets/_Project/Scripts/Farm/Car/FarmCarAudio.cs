@@ -18,6 +18,10 @@ public class FarmCarAudio : MonoBehaviour {
         _carAudioSource.SwitchStateAndPlay(state == CarState.Sent);
     }
 
+    public void StopAudio() {
+        _carAudioSource.Stop();
+    }
+
     public void PlayGrassAudio() {
         _grassAudioSource.Play();
     }

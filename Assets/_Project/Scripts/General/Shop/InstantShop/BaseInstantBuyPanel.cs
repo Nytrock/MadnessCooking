@@ -6,6 +6,8 @@ public class BaseInstantBuyPanel : BaseBuyPanel {
     [SerializeField] protected string _priceDescription;
 
     public override void Setup(BuyPanelData data) {
+        if (_data != null)
+            MoneyManager.Instance.MoneyChanged -= UpdateButton;
         base.Setup(data);
         MoneyManager.Instance.MoneyChanged += UpdateButton;
     }

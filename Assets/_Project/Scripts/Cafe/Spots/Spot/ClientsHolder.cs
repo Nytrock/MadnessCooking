@@ -63,11 +63,12 @@ public class ClientsHolder : MonoBehaviour {
         float spawn = _clients[0].Spawner.SpawnPoint.x;
         RandomizeClients();
 
-        foreach (var client in _clients) {
-            client.ChangeEnable(true);
-            if (client.transform.position.x == spawn) {
-                client.StartNewCycle();
-                yield return new WaitForSeconds(_clientInterval.RandomValue);
+        for (int i = 0; i < _clients.Count; i++) {
+            _clients[i].ChangeEnable(true);
+            if (_clients[i].transform.position.x == spawn) {
+                _clients[i].StartNewCycle();
+                if (i != _clients.Count - 1)
+                    yield return new WaitForSeconds(_clientInterval.RandomValue);
             }
         }
     }

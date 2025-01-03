@@ -51,7 +51,8 @@ public abstract class MenuButtonSelector : MonoBehaviour {
         if (_buttons[index] == _nowButton)
             return;
 
-        _audioSource.Play();
+        if (_audioSource.isActiveAndEnabled)
+            _audioSource.Play();
         _nowButton = _buttons[index];
         _targetRect = _nowButton.Rect;
         ChangePosition();

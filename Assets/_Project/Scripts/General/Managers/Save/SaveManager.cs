@@ -6,7 +6,7 @@ public abstract class SaveManager<TData> : MonoBehaviour
     [SerializeField] private DataBinder<TData> _binder;
 
     private TData _data;
-    private SaveFileManager<TData> _dataService;
+    protected SaveFileManager<TData> _dataService;
 
     protected abstract string _fileName { get; }
 

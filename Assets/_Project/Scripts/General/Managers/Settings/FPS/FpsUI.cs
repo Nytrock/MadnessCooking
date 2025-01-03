@@ -10,7 +10,7 @@ public class FpsUI : MonoBehaviour {
     }
 
     private void ChangeState(bool newState) {
-        _text.gameObject.SetActive(newState);
+        gameObject.SetActive(newState);
     }
 
     private void Update() {

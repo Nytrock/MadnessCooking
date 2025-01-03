@@ -10,8 +10,11 @@ public class FatigueManagerData {
     public float FatigueNow => _fatigueNow;
 
     public FatigueManagerData(float fatigueMax, float fatigueDefault) {
-        _fatigueMax = fatigueMax;
         _fatigueNow = Mathf.Clamp(fatigueDefault, 0, fatigueMax);
+    }
+
+    public void SetFatigueMax(float fatigueMax) {
+        _fatigueMax = fatigueMax;
     }
 
     public void ChangeFatigue(float count) {

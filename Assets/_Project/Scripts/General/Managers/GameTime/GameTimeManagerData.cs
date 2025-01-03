@@ -18,6 +18,8 @@ public class GameTimeManagerData {
     }
 
     public void AddTime(float timeSpeed) {
+        timeSpeed *= FpsManager.NORMALIZED_DELTA_TIME;
+
         int oldDayCount = _globalTime.Days;
         int seconds = Mathf.FloorToInt(timeSpeed);
         int milliseconds = Mathf.FloorToInt(timeSpeed % 1 * 1000);

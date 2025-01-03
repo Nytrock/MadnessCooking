@@ -3,10 +3,14 @@ using System.Linq;
 using UnityEngine;
 
 public class FpsManager : MonoBehaviour, IBindable<GameSettingsData>, ISettingable<bool> {
-    [SerializeField] private int _targetFrameRate = 60;
+    public const int REFERENCE_FPS = 60;
+    public static float NORMALIZED_DELTA_TIME => REFERENCE_FPS * Time.deltaTime;
+    public static float REFERENCE_DELTA_TIME => 1f / REFERENCE_FPS;
+
+    [SerializeField] private int _frameRatePrecision = 60;
     [SerializeField] private bool _defaultShow;
 
-    private int _lastFrameIndex;
+    private int _lastFrameIndex = 0;
     private float[] _frameDeltaTimeArray;
     private SettingsPointData<bool> _data;
 
@@ -15,9 +19,8 @@ public class FpsManager : MonoBehaviour, IBindable<GameSettingsData>, ISettingab
     public event Action<bool> FpsShowChanged;
 
     private void Awake() {
-        Application.targetFrameRate = _targetFrameRate;
-        QualitySettings.vSyncCount = 0;
-        _frameDeltaTimeArray = new float[_targetFrameRate];
+        QualitySettings.vSyncCount = 1;
+        _frameDeltaTimeArray = new float[_frameRatePrecision];
     }
 
     private void Update() {
@@ -25,11 +28,11 @@ public class FpsManager : MonoBehaviour, IBindable<GameSettingsData>, ISettingab
             return;
 
         _frameDeltaTimeArray[_lastFrameIndex] = Time.deltaTime;
-        _lastFrameIndex = (_lastFrameIndex + 1) % _targetFrameRate;
+        _lastFrameIndex = (_lastFrameIndex + 1) % REFERENCE_FPS;
     }
 
     public float GetFPS() {
-        return 1 / (_frameDeltaTimeArray.Sum() / _targetFrameRate);
+        return 1 / (_frameDeltaTimeArray.Sum() / _frameDeltaTimeArray.Where(fps => fps != 0).Count());
     }
 
     public void Bind(GameSettingsData data) {

@@ -20,7 +20,7 @@ public class RangeFloat {
     }
 
     public float Lerp(float value) {
-        return Mathf.InverseLerp(_min, _max, value);
+        return Mathf.Lerp(_min, _max, value);
     }
 
     private void CheckValues() {

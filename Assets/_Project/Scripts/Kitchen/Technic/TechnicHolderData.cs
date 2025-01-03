@@ -30,11 +30,11 @@ public class TechnicHolderData {
 
         _technic = technic;
         _nowStrength = _technic.Strength;
+        _nowWaitTime = 0f;
     }
 
     public void StartRepair(KitchenUpgradeData upgradeData) {
         _isRepairing = true;
-        _nowWaitTime = 0f;
 
         float brokenCoef = 1 - (_nowStrength / _technic.Strength);
         if (brokenCoef == 1)
@@ -48,7 +48,6 @@ public class TechnicHolderData {
     public void StartCook(KitchenUpgradeData upgradeData, Order order) {
         _isCooking = true;
         _nowOrder = order;
-        _nowWaitTime = 0f;
         _needWaitTime = _nowOrder.Food.TimeToCook / upgradeData.TechnicCookSpeed;
 
         int strengthDecrease = (int)(Random.Range(1f, 2f) / upgradeData.TechnicStrengthMultiplier);
@@ -72,6 +71,7 @@ public class TechnicHolderData {
         _isRepairing = false;
         RepairStoped?.Invoke();
         _nowStrength = _technic.Strength;
+        _nowWaitTime = 0f;
     }
 
     private void StopCook() {
@@ -79,6 +79,7 @@ public class TechnicHolderData {
         CookStoped?.Invoke();
         _nowOrder.FinishCook();
         _nowOrder = null;
+        _nowWaitTime = 0f;
     }
 
     public void EmergencyStopCook() {
@@ -88,5 +89,6 @@ public class TechnicHolderData {
         _isCooking = false;
         CookStoped?.Invoke();
         _nowOrder = null;
+        _nowWaitTime = 0f;
     }
 }

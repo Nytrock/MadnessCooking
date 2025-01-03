@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class FarmCar : SaveableIngredientStorage<FarmData> {
     [SerializeField] private UpgradeManager _upgradeManager;
+    [SerializeField] private GameTimeManager _timeManager;
 
     [Header("Upgrades")]
     [SerializeField] private CountUpgrade[] _sizeUpgrades;
@@ -14,8 +15,13 @@ public class FarmCar : SaveableIngredientStorage<FarmData> {
     public event Action<CarState> StateChanged;
 
     private void Awake() {
+        _timeManager.TimeSpeedUpdated += UpdateAnimationSpeed;
         _upgradeManager.ItemAdded += CheckSizeChanged;
         _animator = GetComponent<Animator>();
+    }
+
+    private void UpdateAnimationSpeed() {
+        _animator.SetFloat("animationSpeed", InGameTime.Instance.NormalizedTime);
     }
 
     public void CheckSizeChanged(BaseUpgrade upgrade) {

@@ -32,4 +32,8 @@ public class SwitchableAudioSource : MonoBehaviour {
     public void Play() {
         _audioSource.Play();
     }
+
+    public void Stop() {
+        _audioSource.Stop();
+    }
 }

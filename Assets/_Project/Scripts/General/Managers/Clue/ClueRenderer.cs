@@ -23,7 +23,7 @@ public class ClueRenderer : MonoBehaviour {
     }
 
     private void UpdatePosition() {
-        Vector2 startPosition = _template.RectTransform.position;
+        Vector2 startPosition = _template.RectTransform.localPosition;
         CluePositionMode positionMode = _template.PositionMode;
         Vector2 holeSize = _template.RectTransform.sizeDelta;
         holeSize = new Vector2(holeSize.x / 2, holeSize.y / 2);
@@ -77,6 +77,6 @@ public class ClueRenderer : MonoBehaviour {
                 break;
         }
 
-        _panel.position = startPosition;
+        _panel.localPosition = startPosition;
     }
 }

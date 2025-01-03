@@ -123,10 +123,11 @@ public class FarmBed : MonoBehaviour {
             return;
 
         int remainCount = _car.PutIngredientWithRemain(Data.PlantedIngredient, Data.Count);
-        FatigueManager.Instance.ChangeFatigue(Data.PlantedIngredient.FatigueCoef
-            * (Data.Count - remainCount));
+        int puttedCount = Data.Count - remainCount;
+
+        FatigueManager.Instance.ChangeFatigue(Data.PlantedIngredient.FatigueCoef * puttedCount);
+        _puncher.AddWaste(puttedCount * Data.PlantedIngredient.WasteAmount);
         Data.SetCount(remainCount);
-        _puncher.AddWaste(remainCount * Data.PlantedIngredient.WasteAmount);
 
         UnfullBed();
     }

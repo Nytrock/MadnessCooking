@@ -39,10 +39,12 @@ public class MenuManager : MonoBehaviour {
     }
 
     public void ExitGame() {
+        _saveManager.Save();
         Application.Quit();
     }
 
     public void ExitToMenu() {
+        _saveManager.Save();
         SceneUtility.LoadMenu();
     }
 

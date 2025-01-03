@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,7 +19,6 @@ public class InternetDownload : MonoBehaviour, IUpgradeable<OfficeUpgradeData> {
 
     private float _nowProgress;
     private float _needProgress;
-    private bool _isDownloading;
 
     private InternetDownloadRenderer _renderer;
     private InternetPage _openingPage;
@@ -36,18 +36,22 @@ public class InternetDownload : MonoBehaviour, IUpgradeable<OfficeUpgradeData> {
     }
 
     private void Update() {
-        if (!_isDownloading)
-            return;
+        _downloadBar.value = _nowProgress;
+    }
 
-        if (_nowProgress < _needProgress) {
+    private IEnumerator Download() {
+        float deltaTime = FpsManager.REFERENCE_DELTA_TIME;
+        WaitForSeconds waitTime = new(deltaTime);
+
+        while (_nowProgress < _needProgress) {
             float progress = _possibleProgress[Random.Range(0, _possibleProgress.Length)];
-            _nowProgress += Time.deltaTime * _upgradeData.InternetDownloadSpeed * progress;
+            _nowProgress += deltaTime * _upgradeData.InternetDownloadSpeed * progress;
             if (progress > 0)
                 LoadingUpdated?.Invoke();
-        } else {
-            EndDownload();
+            yield return waitTime;
         }
-        _downloadBar.value = _nowProgress;
+
+        EndDownload();
     }
 
     private void ChangeState(bool newValue) {
@@ -60,7 +64,6 @@ public class InternetDownload : MonoBehaviour, IUpgradeable<OfficeUpgradeData> {
             return;
         }
 
-        _isDownloading = true;
         _openingPage = openingPage;
 
         ChangeState(true);
@@ -69,11 +72,13 @@ public class InternetDownload : MonoBehaviour, IUpgradeable<OfficeUpgradeData> {
         _nowProgress = 0;
         _needProgress = _waitTime.RandomValue;
         _downloadBar.maxValue = _needProgress;
+
+        StartCoroutine(nameof(Download));
     }
 
     private void EndDownload() {
+        StopCoroutine(nameof(Download));
         ChangeState(false);
-        _isDownloading = false;
         _openingPage.ChangeState(true);
         _openingPage = null;
 
@@ -81,7 +86,7 @@ public class InternetDownload : MonoBehaviour, IUpgradeable<OfficeUpgradeData> {
     }
 
     public void StopDownload() {
-        _isDownloading = false;
+        StopCoroutine(nameof(Download));
         _openingPage = null;
     }
 

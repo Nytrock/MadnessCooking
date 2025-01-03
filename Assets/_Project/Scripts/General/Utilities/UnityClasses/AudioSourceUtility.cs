@@ -35,4 +35,11 @@ public static class AudioSourceUtility {
 
         audioSource.outputAudioMixerGroup = info.MixerGroup;
     }
+
+    public static void PlayIfNot(this AudioSource audioSource) {
+        if (audioSource.isPlaying)
+            return;
+
+        audioSource.Play();
+    }
 }

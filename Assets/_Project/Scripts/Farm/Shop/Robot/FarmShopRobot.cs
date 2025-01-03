@@ -3,6 +3,8 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class FarmShopRobot : MonoBehaviour {
     [SerializeField] private FarmShop _shop;
+    [SerializeField] private GameObject _face;
+    [SerializeField] private GameObject _canvas;
 
     [SerializeField] private AnimatedText _noteText;
     [SerializeField] private string _noteStart = "FarmShopRobot.";
@@ -35,7 +37,9 @@ public class FarmShopRobot : MonoBehaviour {
     }
 
     private void ChangeState(FarmShopRobotState state) {
-        _animator.SetBool("isNote", state == FarmShopRobotState.Note);
+        _face.SetActive(state != FarmShopRobotState.Note);
+        _canvas.SetActive(state == FarmShopRobotState.Note);
+
         if (state == FarmShopRobotState.Money)
             _animator.SetTrigger("isMoney");
 

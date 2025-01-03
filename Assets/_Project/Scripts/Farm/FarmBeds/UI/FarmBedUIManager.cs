@@ -74,6 +74,7 @@ public class FarmBedUIManager : MonoBehaviour {
     }
 
     private void ResetFarmBed() {
+        Debug.Log(_farmBed);
         _farmBed.BedReseted -= ResetFarmBed;
         _farmBed.CountChanged -= _nowUI.UpdateCount;
         _farmBed = null;

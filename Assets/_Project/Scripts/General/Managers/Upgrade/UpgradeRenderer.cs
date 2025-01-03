@@ -11,7 +11,8 @@ public class UpgradeRenderer : MonoBehaviour {
     }
 
     public void CheckAddedUpgrade(BaseUpgrade upgrade) {
-        ChangeState(upgrade == _upgrade);
+        if (upgrade == _upgrade)
+            ChangeState(true);
     }
 
     protected virtual void ChangeState(bool newState) {

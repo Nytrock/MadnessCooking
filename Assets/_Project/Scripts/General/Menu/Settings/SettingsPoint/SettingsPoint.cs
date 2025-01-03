@@ -4,7 +4,7 @@ using UnityEngine;
 public abstract class SettingsPoint<TValue> : BaseSettingsPoint {
     [SerializeField] protected InterfaceReference<ISettingable<TValue>> _settingable;
 
-    [SerializeField] protected SettingsPointData<TValue> _data;
+    protected SettingsPointData<TValue> _data;
 
     public override bool IsValueChanged => _data.IsValueChanged;
 

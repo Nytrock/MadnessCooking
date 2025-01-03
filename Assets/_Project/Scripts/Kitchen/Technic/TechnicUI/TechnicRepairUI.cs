@@ -22,7 +22,7 @@ public class TechnicRepairUI : MonoBehaviour, IUpgradeable<KitchenUpgradeData>, 
         if (technicHolder == _nowTechnicHolder) {
             ChangeState(false);
         } else {
-            _targetPoint.position = _camera.WorldToScreenPoint(technicHolder.UITarget.position);
+            _targetPoint.position = technicHolder.UITarget.position;
             _nowTechnicHolder = technicHolder;
             ChangeState(true);
         }

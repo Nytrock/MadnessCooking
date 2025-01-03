@@ -62,7 +62,7 @@ public class Client : MonoBehaviour {
     }
 
     private void Update() {
-        _nowState.UpdateState(this);
+        _nowState?.UpdateState(this);
     }
 
     public void StartWalk(Direction direction) {
@@ -180,6 +180,7 @@ public class Client : MonoBehaviour {
     }
 
     public void Destroy() {
+        ResetState();
         Spawner.PutClient(this);
     }
 

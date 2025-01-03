@@ -11,12 +11,13 @@ public class VerticalCameraManager : CameraManager {
     }
 
     protected override void MoveCamera() {
-        float newPosition = _mainCameraPos.position.y - (_cameraVelocity * Time.deltaTime * _cameraSpeed);
+        float newPosition = _cameraTransform.position.y - (_cameraVelocity * Time.deltaTime * _cameraSpeed);
         newPosition = Mathf.Clamp(newPosition, _startPosition, _endPosition);
         SetCameraPosition(newPosition);
     }
 
     public override void SetCameraPosition(float newPosition) {
-        _mainCameraPos.position = new Vector3(_mainCameraPos.position.x, newPosition, _mainCameraPos.position.z);
+        _cameraPosition = new Vector3(_cameraTransform.position.x, newPosition, _cameraTransform.position.z);
+        _cameraTransform.position = _cameraPosition;
     }
 }

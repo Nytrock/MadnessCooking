@@ -7,9 +7,9 @@ public class InGameTime : Singleton<InGameTime> {
 
     public event Action TimeSpeedUpdated;
 
-    public float NormalizedDeltaTime => _timeManager.NowTimeSpeed / _timeManager.DefaultTimeSpeed * Time.deltaTime;
+    public float NormalizedTime => _timeManager.NowTimeSpeed / _timeManager.DefaultTimeSpeed;
+    public float NormalizedDeltaTime => NormalizedTime * Time.deltaTime;
     public float RawTime => _timeManager.NowTimeSpeed;
-    public float DeltaTime => _timeManager.NowTimeSpeed * Time.deltaTime;
 
     protected override void Awake() {
         base.Awake();

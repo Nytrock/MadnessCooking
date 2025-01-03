@@ -34,7 +34,7 @@ public class FatigueManager : Singleton<FatigueManager>, IBindable<GeneralData>,
     }
 
     private void UpdateSleepState() {
-        _data.ChangeFatigue(-_sleepBonus * _upgradeData.SleepCoef);
+        _data.ChangeFatigue(-_sleepBonus * _upgradeData.SleepCoef * FpsManager.NORMALIZED_DELTA_TIME);
         if (_data.FatigueNow == 0 && _isTired)
             ChangeTiredState(false);
     }
@@ -62,6 +62,7 @@ public class FatigueManager : Singleton<FatigueManager>, IBindable<GeneralData>,
     public void Bind(GeneralData data) {
         data.FatigueManager ??= new(_fatigueMax, _fatigueDefault);
         _data = data.FatigueManager;
+        _data.SetFatigueMax(_fatigueMax);
     }
 
     public void BindUpgrade(OfficeUpgradeData upgradeData) {

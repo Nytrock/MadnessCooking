@@ -21,7 +21,7 @@ public class InternetDownloadRenderer : MonoBehaviour {
                     return;
                 }
             }
-            throw new ArgumentNullException($"No download style for {nameof(page)}");
+            throw new ArgumentNullException($"No download style for {page.name}");
         }
     }
 

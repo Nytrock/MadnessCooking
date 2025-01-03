@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class AnimatedText : LocalizedText {
@@ -24,18 +25,18 @@ public class AnimatedText : LocalizedText {
 
         _isAnimated = true;
         _lastCharIndex = 0;
-        InvokeRepeating(nameof(UpdateTextAnimation), 0, 1 / _speed * Time.deltaTime);
+        StartCoroutine(nameof(TextAnimation));
     }
 
-    private void UpdateTextAnimation() {
-        _lastCharIndex++;
-        if (_lastCharIndex >= _targetText.Length) {
-            StopAnimation();
-            return;
+    private IEnumerator TextAnimation() {
+        while (_lastCharIndex < _targetText.Length) {
+            _lastCharIndex++;
+            _text.text = _targetText[.._lastCharIndex];
+            TextUpdated?.Invoke();
+            yield return new WaitForSeconds(1 / _speed * FpsManager.REFERENCE_FPS * Time.deltaTime);
         }
 
-        _text.text = _targetText[.._lastCharIndex];
-        TextUpdated?.Invoke();
+        StopAnimation();
     }
 
     public void StopAnimation() {
@@ -45,12 +46,12 @@ public class AnimatedText : LocalizedText {
         _isAnimated = false;
         _text.text = _targetText;
         TextUpdated?.Invoke();
-        CancelInvoke(nameof(UpdateTextAnimation));
+        StopCoroutine(nameof(TextAnimation));
     }
 
     private void ForceStopAnimation() {
         _isAnimated = false;
         TextUpdated?.Invoke();
-        CancelInvoke(nameof(UpdateTextAnimation));
+        StopCoroutine(nameof(TextAnimation));
     }
 }
