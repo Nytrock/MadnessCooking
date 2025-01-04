@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class FpsUI : MonoBehaviour {
     [SerializeField] private FpsManager _manager;
+    [SerializeField] private GameObject _panel;
     [SerializeField] private TextMeshProUGUI _text;
 
     private void Awake() {
@@ -10,7 +11,7 @@ public class FpsUI : MonoBehaviour {
     }
 
     private void ChangeState(bool newState) {
-        gameObject.SetActive(newState);
+        _panel.SetActive(newState);
     }
 
     private void Update() {
