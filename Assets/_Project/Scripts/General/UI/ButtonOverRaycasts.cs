@@ -18,7 +18,7 @@ public class ButtonOverRaycasts : MonoBehaviour {
     }
 
     private void CheckMousePosition() {
-        if (!_image.rectTransform.ContainsCamera() || _hoverListener.IsHover)
+        if (!_image.rectTransform.ContainsLocalCamera() || _hoverListener.IsHover)
             return;
 
         _button.onClick.Invoke();
