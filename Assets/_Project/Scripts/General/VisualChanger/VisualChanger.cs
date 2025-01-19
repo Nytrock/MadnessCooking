@@ -7,6 +7,7 @@ public abstract class VisualChanger : MonoBehaviour {
         UpdateVisual();
     }
 
+    [ContextMenu("ChangeState")]
     public void ChangeState() {
         _isActive = !_isActive;
         UpdateVisual();

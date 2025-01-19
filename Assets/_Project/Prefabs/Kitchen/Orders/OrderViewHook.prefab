@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8519229485393375743}
   - component: {fileID: 1228374122364012949}
+  - component: {fileID: 8755317170568234891}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -49,6 +50,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -84,6 +88,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8755317170568234891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 371066543517299861}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6425196cdcb0819498d331f9a5eab4a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _disabledSprite: {fileID: -291461345, guid: bd649e932f23d88419308a3c20b1b1cc, type: 3}
+  _activeSprite: {fileID: -291461345, guid: c6bb57a3e449e2c47b263c5f156dbf2d, type: 3}
 --- !u!1 &895878445183974624
 GameObject:
   m_ObjectHideFlags: 0
@@ -95,6 +113,7 @@ GameObject:
   - component: {fileID: 7244273743977305397}
   - component: {fileID: 7459537118173253840}
   - component: {fileID: 7596272105886550345}
+  - component: {fileID: 8977542237711595649}
   m_Layer: 0
   m_Name: OrderViewHook
   m_TagString: Untagged
@@ -137,6 +156,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -192,6 +214,20 @@ MonoBehaviour:
     _min: -25
     _max: 25
     _isGreaterZero: 0
+--- !u!114 &8977542237711595649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 895878445183974624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6425196cdcb0819498d331f9a5eab4a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _disabledSprite: {fileID: -1316697330, guid: bd649e932f23d88419308a3c20b1b1cc, type: 3}
+  _activeSprite: {fileID: -1316697330, guid: c6bb57a3e449e2c47b263c5f156dbf2d, type: 3}
 --- !u!1 &5259801189009133693
 GameObject:
   m_ObjectHideFlags: 0

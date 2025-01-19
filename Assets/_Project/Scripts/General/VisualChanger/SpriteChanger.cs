@@ -7,10 +7,17 @@ public class SpriteChanger : VisualChanger {
     private SpriteRenderer _spriteRenderer;
 
     private void Awake() {
-        _spriteRenderer = GetComponent<SpriteRenderer>();
+        CheckSpriteRenderer();
     }
 
     protected override void UpdateVisual() {
+        CheckSpriteRenderer();
         _spriteRenderer.sprite = _isActive ? _activeSprite : _disabledSprite;
+    }
+
+    private void CheckSpriteRenderer() {
+        if (_spriteRenderer != null) return;
+
+        _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 }

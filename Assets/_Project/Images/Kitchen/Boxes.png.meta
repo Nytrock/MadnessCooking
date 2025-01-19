@@ -3,7 +3,7 @@ guid: e02144190878b9f478158a7c7230900a
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
-  serializedVersion: 12
+  serializedVersion: 13
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -67,7 +67,7 @@ TextureImporter:
   swizzle: 50462976
   cookieLightType: 0
   platformSettings:
-  - serializedVersion: 3
+  - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -80,7 +80,7 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
+  - serializedVersion: 4
     buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -93,7 +93,7 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
+  - serializedVersion: 4
     buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -106,8 +106,8 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: iPhone
+  - serializedVersion: 4
+    buildTarget: iOS
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -119,7 +119,7 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
+  - serializedVersion: 4
     buildTarget: Android
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -132,7 +132,7 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
+  - serializedVersion: 4
     buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -149,16 +149,17 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: BottomBoxes
+      name: BottomBoxes0
       rect:
         serializedVersion: 2
         x: 0
         y: 42
-        width: 191
+        width: 75
         height: 43
       alignment: 9
-      pivot: {x: 0.4973822, y: 0.4883721}
+      pivot: {x: 0.49333334, y: 0.4883721}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -180,6 +181,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.5, y: 0.4878049}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -191,37 +193,17 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: OpenedBox
-      rect:
-        serializedVersion: 2
-        x: 78
-        y: 0
-        width: 41
-        height: 41
-      alignment: 9
-      pivot: {x: 0.5365854, y: 0.4878049}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ff770162ae4aed14aa745c569d64a3e1
-      internalID: -961469318
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: OpenedDoubleBoxLeft
       rect:
         serializedVersion: 2
-        x: 120
+        x: 78
         y: 0
         width: 40
         height: 41
       alignment: 9
       pivot: {x: 0.5625, y: 0.4878049}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -236,13 +218,14 @@ TextureImporter:
       name: OpenedDoubleBoxRight
       rect:
         serializedVersion: 2
-        x: 161
+        x: 119
         y: 0
         width: 40
         height: 41
       alignment: 9
       pivot: {x: 0.45, y: 0.4878049}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -264,6 +247,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.5, y: 0.4878049}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -278,13 +262,14 @@ TextureImporter:
       name: OpenedDoubleBoxMiddle
       rect:
         serializedVersion: 2
-        x: 160
+        x: 118
         y: 0
         width: 1
         height: 41
       alignment: 9
       pivot: {x: 0, y: 0.4878049}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -295,7 +280,74 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: BottomBoxes1
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 42
+        width: 43
+        height: 43
+      alignment: 9
+      pivot: {x: 0.4883721, y: 0.4883721}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dbd3561e7a333cc4ca60ef9e6c83141c
+      internalID: 696450116
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BottomBoxes2
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 42
+        width: 75
+        height: 43
+      alignment: 9
+      pivot: {x: 0.49333334, y: 0.4883721}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 665efd325df7d314b8453065b1f39cd7
+      internalID: -1505146049
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OpenedPartBoxRight
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 40
+        height: 41
+      alignment: 9
+      pivot: {x: 0.475, y: 0.4878049}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5793220e874ee8043908d0aba0c6f516
+      internalID: -2102748892
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
+    customData: 
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
@@ -305,14 +357,19 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
     nameFileIdTable:
       Background: 1901407923
-      BottomBoxes: 1322261977
+      BottomBoxes0: 1322261977
+      BottomBoxes1: 696450116
+      BottomBoxes2: -1505146049
       Lamp: 1955946697
       OpenedBox: -961469318
       OpenedDoubleBoxLeft: 1247766025
       OpenedDoubleBoxMiddle: 1070270315
       OpenedDoubleBoxRight: -2122880412
+      OpenedPartBoxRight: -2102748892
       Pot: 470648381
       TopBox: -1947097635
       TopBoxReflect: 1052227171

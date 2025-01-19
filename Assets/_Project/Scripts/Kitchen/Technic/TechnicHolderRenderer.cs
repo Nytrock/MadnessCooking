@@ -25,6 +25,15 @@ public class TechnicHolderRenderer : MonoBehaviour {
         _brokenVisual.SetActive(false);
     }
 
+    [ContextMenu("Show brokennes")]
+    private void ShowBrokennes() {
+        foreach (var stage in _brokennessStages)
+            stage.ChangeState(true);
+
+        _standardVisual.SetActive(true);
+        _brokenVisual.SetActive(false);
+    }
+
     public virtual void ChangeState(bool newState) {
         gameObject.SetActive(newState);
         foreach (var visual in _stateVisuals)
@@ -34,9 +43,9 @@ public class TechnicHolderRenderer : MonoBehaviour {
     public void UpdateVisual() {
         float brokennessDegree = 1 - (_technicHolder.Data.NowStrength / _technicHolder.Technic.Strength);
         float needBrokennessDegree = (1 - _brokennesOffset) / (_brokennessStages.Length + 1);
-        for (int i = 0; i <= _brokennessStages.Length - 1; i++) {
+        for (int i = 1; i <= _brokennessStages.Length; i++) {
             bool isShow = _brokennesOffset + needBrokennessDegree * i <= brokennessDegree;
-            _brokennessStages[i].ChangeState(isShow);
+            _brokennessStages[i - 1].ChangeState(isShow);
         }
 
         _standardVisual.SetActive(brokennessDegree != 1);

@@ -10,7 +10,7 @@ public class InternetSearchResult : MonoBehaviour {
     public bool QueryContainKeywords(string query) {
         query = query.ToLower();
         foreach (var keyword in _keywords)
-            if (query == keyword)
+            if (query == keyword.ToLower())
                 return true;
         return false;
     }

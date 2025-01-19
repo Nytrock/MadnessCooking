@@ -1,10 +1,9 @@
-using TMPro;
+using System;
 using UnityEngine;
 
 public class InternetSearchManager : MonoBehaviour {
     [SerializeField] private InternetPageManager _pageManager;
     [SerializeField] private InternetSearchPage _searchPage;
-    [SerializeField] private TMP_InputField _inputField;
 
     [Header("Results")]
     [SerializeField] private InternetSearchResult _defaultResult;
@@ -12,9 +11,12 @@ public class InternetSearchManager : MonoBehaviour {
 
     private string _nowQuery;
 
+    public event Action<string> NewSearch;
+
+    public string NowQuery => _nowQuery;
+
     private void Awake() {
         _pageManager.PageChanged += CheckOpenedPage;
-        _inputField.onSubmit.AddListener(Search);
         _searchPage.PageLoaded += CheckResults;
     }
 
@@ -29,19 +31,15 @@ public class InternetSearchManager : MonoBehaviour {
         HideAllResults();
     }
 
-    public void Searh() {
-        Search(_inputField.text);
-    }
-
     public void Search(string query) {
         HideAllResults();
-        _inputField.text = "";
         if (query.Replace(" ", "") == "" || _nowQuery == query)
             return;
         _nowQuery = query;
 
         _searchPage.UpdateName(query);
         _pageManager.ChangePage(_searchPage);
+        NewSearch?.Invoke(query);
     }
 
     private void CheckResults() {
