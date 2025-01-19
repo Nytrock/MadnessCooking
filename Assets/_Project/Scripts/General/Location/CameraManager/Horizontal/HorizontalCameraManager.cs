@@ -14,7 +14,7 @@ public class HorizontalCameraManager : CameraManager {
 
     protected override void CalculateBorderPositions() {
         _startPosition = transform.position.x;
-        _endPosition = _startPosition + _spaceManager.GetSpacesSize()
+        _endPosition = _startPosition + _spaceManager.GetSpacesSize() * 1.5f
             + (_spaceManager.SpaceSize / 2) - _horizontalExtention;
         InvokeBordersFound();
     }
@@ -26,7 +26,8 @@ public class HorizontalCameraManager : CameraManager {
     }
 
     public override void SetCameraPosition(float newPosition) {
-        _cameraPosition = new Vector3(newPosition, _cameraTransform.position.y, _cameraTransform.position.z);
-        _cameraTransform.position = _cameraPosition;
+        Vector3 cameraPosition = new(newPosition, _cameraTransform.position.y, _cameraTransform.position.z);
+        _data.UpdateCameraPosition(cameraPosition);
+        _cameraTransform.position = cameraPosition;
     }
 }

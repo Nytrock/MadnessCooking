@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,12 +8,15 @@ public class TechnicRepairUI : MonoBehaviour, IUpgradeable<KitchenUpgradeData>, 
     [SerializeField] private Camera _camera;
     [SerializeField] private Button _repairButton;
     [SerializeField] private TutorialManager _tutorialManager;
-    private TechnicHolder _nowTechnicHolder;
 
     [Header("Upgrades")]
     [SerializeField] private BaseUpgrade _technicStrengthShow;
     [SerializeField] private Slider _strengthSlider;
+
+    private TechnicHolder _nowTechnicHolder;
     private KitchenUpgradeData _upgradeData;
+
+    public event Action<bool> StateChanged;
 
     private void Start() {
         ChangeState(false);
@@ -39,7 +43,11 @@ public class TechnicRepairUI : MonoBehaviour, IUpgradeable<KitchenUpgradeData>, 
     }
 
     public void ChangeState(bool newState) {
+        if (_panel.activeSelf == newState)
+            return;
+
         _panel.SetActive(newState);
+        StateChanged?.Invoke(newState);
 
         if (newState)
             UpdateInfo();

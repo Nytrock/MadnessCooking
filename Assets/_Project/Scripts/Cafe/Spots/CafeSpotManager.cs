@@ -57,8 +57,8 @@ public class CafeSpotManager : MonoBehaviour, IBindable<CafeData> {
 
         float offset = _cellSize * _spots[spotIndex].SeatsCount;
         SpotsPositionChanged?.Invoke(-offset);
-
         MoveSpots(spotIndex, offset);
+
         if (_spots[spotIndex].TryGetComponent(out ClientsHolder clientTable))
             _opener.CafeChanged -= clientTable.CafeStateChanged;
         _spots[spotIndex].Destroy();

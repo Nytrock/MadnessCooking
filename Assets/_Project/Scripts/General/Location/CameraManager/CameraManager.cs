@@ -20,10 +20,10 @@ public abstract class CameraManager : MonoBehaviour {
     [SerializeField] protected float _speedFading = 1;
 
     protected Transform _cameraTransform;
-    protected Vector3 _cameraPosition;
     protected float _cameraVelocity;
     protected bool _isWorking = true;
     private bool _isKeyPressed = true;
+    protected CameraManagerData _data;
 
     public event Action CameraMoved;
     public event Action BordersFound;
@@ -37,7 +37,6 @@ public abstract class CameraManager : MonoBehaviour {
         _locationManager.LocationChanged += ChangeWorkMode;
         _spaceManager.SpaceAdded += CalculateBorderPositions;
         _cameraTransform = _mainCamera.transform;
-        _cameraPosition = _locationManager.GetLocationData(_location).Point;
         _locationSlider.Bootup(this);
     }
 
@@ -69,7 +68,7 @@ public abstract class CameraManager : MonoBehaviour {
         }
 
         if (Mathf.Abs(_cameraVelocity) >= 0.01f) {
-            CameraMoved?.Invoke();
+            InvokeCameraMoved();
             MoveCamera();
         }
     }
@@ -77,8 +76,8 @@ public abstract class CameraManager : MonoBehaviour {
     private void ChangeWorkMode(Location newLocation) {
         _isWorking = newLocation == _location;
         if (_isWorking)
-            _cameraTransform.position = _cameraPosition;
-        CameraMoved?.Invoke();
+            _cameraTransform.position = _data.CameraPosition;
+        InvokeCameraMoved();
     }
 
     public void ChangeWorkMode(bool newState) {
@@ -88,6 +87,10 @@ public abstract class CameraManager : MonoBehaviour {
 
     protected void InvokeBordersFound() {
         BordersFound?.Invoke();
+    }
+
+    protected void InvokeCameraMoved() {
+        CameraMoved?.Invoke();
     }
 
     public abstract void SetCameraPosition(float newPosition);

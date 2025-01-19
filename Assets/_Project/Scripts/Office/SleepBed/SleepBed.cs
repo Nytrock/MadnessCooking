@@ -7,7 +7,6 @@ public class SleepBed : MonoBehaviour, IBindable<OfficeData> {
     private SleepBedData _data;
 
     public bool IsSleep => _data.IsSleep;
-    public float SleepTimeSpeed => _sleepTimeSpeed;
 
     public event Action<bool> SleepChanged;
 

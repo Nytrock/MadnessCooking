@@ -17,7 +17,8 @@ public class VerticalCameraManager : CameraManager {
     }
 
     public override void SetCameraPosition(float newPosition) {
-        _cameraPosition = new Vector3(_cameraTransform.position.x, newPosition, _cameraTransform.position.z);
-        _cameraTransform.position = _cameraPosition;
+        Vector3 cameraPosition = new(_cameraTransform.position.x, newPosition, _cameraTransform.position.z);
+        _data.UpdateCameraPosition(cameraPosition);
+        _cameraTransform.position = cameraPosition;
     }
 }

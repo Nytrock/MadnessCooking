@@ -10,4 +10,5 @@ public class CafeData : ISaveable {
     public ClientHolderManagerData ClientHolderManager { get; set; }
     public ClientsSpawnerData ClientsSpawner { get; set; }
     public CriticSpawnerData CriticSpawner { get; set; }
+    public CameraManagerData CameraManager { get; set; }
 }

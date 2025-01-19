@@ -10,7 +10,13 @@ public class SpotEditorUI : MonoBehaviour {
     private void Awake() {
         _editor.EditorActivated += delegate { ChangeCanvasState(true); SetCanvasPosition(_editor.SpotManager.GetLengthOfAllSpots()); };
         _editor.EditorDisabled += delegate { ChangeCanvasState(false); SetCanvasPosition(0); };
-        _editor.SpotManager.SpotsPositionChanged += MoveCanvas;
+        _editor.SpotManager.SpotsPositionChanged += UpdatePosition;
+    }
+
+    private void UpdatePosition(float offset) {
+        MoveCanvas(offset);
+        if (_editor.SpotManager.GetFreeSpace() == 0)
+            _buttonAdd.SetActive(true);
     }
 
     private void Start() {
@@ -39,11 +45,12 @@ public class SpotEditorUI : MonoBehaviour {
     }
 
     public void ChangeChoiceState(bool newState) {
+        int freeSpace = _editor.SpotManager.GetFreeSpace();
         _buttonsContainer.gameObject.SetActive(newState);
-        _buttonAdd.SetActive(!newState);
+        _buttonAdd.SetActive(!newState && freeSpace != 0);
 
         if (newState) {
-            _buttonsContainer.SetButtonsNumber(_editor.SpotManager.GetFreeSpace());
+            _buttonsContainer.SetButtonsNumber(freeSpace);
             _editor.SetPreviewIndex(0);
         }
     }
@@ -61,8 +68,8 @@ public class SpotEditorUI : MonoBehaviour {
     }
 
     public void AddSpot() {
-        ChangeChoiceState(false);
         _editor.AddNewSpot();
+        ChangeChoiceState(false);
         ResizeCanvas(0);
     }
 }
