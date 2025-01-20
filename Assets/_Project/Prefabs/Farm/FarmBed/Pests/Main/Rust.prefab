@@ -52,10 +52,13 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31af9167f1cb94f479cf87629622f8c3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -103,6 +106,21 @@ MonoBehaviour:
   _isSpriteChanging: 0
   _isRotatable: 0
   _isMovable: 0
+  <Data>k__BackingField:
+    _prefabIndex: 0
+    _spriteIndex: 0
+    _rotationDegree:
+      _x: 0
+      _y: 0
+      _z: 0
+    _position:
+      _x: 0
+      _y: 0
+      _z: 0
+    _normalizedPosition:
+      _x: 0
+      _y: 0
+      _z: 0
 --- !u!114 &9165248421875743616
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -159,6 +177,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 950278738884242801, guid: c2232c781fb4fe6458c8d53a2e082d03, type: 2}
   m_audioClip: {fileID: 8300000, guid: 4db876fdcc181134399be6e816139bba, type: 3}
+  m_Resource: {fileID: 8300000, guid: 4db876fdcc181134399be6e816139bba, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.33
   m_Pitch: 1

@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +9,7 @@ public class TechnicRepairUI : MonoBehaviour, IUpgradeable<KitchenUpgradeData>, 
     [SerializeField] private Camera _camera;
     [SerializeField] private Button _repairButton;
     [SerializeField] private TutorialManager _tutorialManager;
+    [SerializeField] private TextMeshProUGUI _priceText;
 
     [Header("Upgrades")]
     [SerializeField] private BaseUpgrade _technicStrengthShow;
@@ -19,7 +21,7 @@ public class TechnicRepairUI : MonoBehaviour, IUpgradeable<KitchenUpgradeData>, 
     public event Action<bool> StateChanged;
 
     private void Start() {
-        ChangeState(false);
+        _panel.SetActive(false);
     }
 
     public void OpenTechnic(TechnicHolder technicHolder) {
@@ -43,9 +45,6 @@ public class TechnicRepairUI : MonoBehaviour, IUpgradeable<KitchenUpgradeData>, 
     }
 
     public void ChangeState(bool newState) {
-        if (_panel.activeSelf == newState)
-            return;
-
         _panel.SetActive(newState);
         StateChanged?.Invoke(newState);
 
@@ -71,6 +70,9 @@ public class TechnicRepairUI : MonoBehaviour, IUpgradeable<KitchenUpgradeData>, 
         _repairButton.interactable = _nowTechnicHolder.Repairable() || _tutorialManager.IsWork;
         _strengthSlider.maxValue = maxStrength;
         _strengthSlider.value = nowStrength;
+
+        int repairPrice = _nowTechnicHolder.Data.GetRepairPrice();
+        _priceText.text = repairPrice.ToString() + "$";
     }
 
     public void BindUpgrade(KitchenUpgradeData upgradeData) {

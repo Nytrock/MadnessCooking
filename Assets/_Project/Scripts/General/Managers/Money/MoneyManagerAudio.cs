@@ -7,6 +7,7 @@ public class MoneyManagerAudio : MonoBehaviour {
     [SerializeField] private AudioSource _audioSource;
 
     private MoneyManager _manager;
+    private bool _isLateStart = true;
 
     private void Awake() {
         _manager = GetComponent<MoneyManager>();
@@ -30,6 +31,11 @@ public class MoneyManagerAudio : MonoBehaviour {
     }
 
     private void PlaySound(int count) {
+        if (_isLateStart) {
+            _isLateStart = false;
+            return;
+        }
+
         _audioSource.Play();
     }
 }

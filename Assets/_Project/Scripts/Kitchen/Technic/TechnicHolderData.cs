@@ -35,14 +35,21 @@ public class TechnicHolderData {
 
     public void StartRepair(KitchenUpgradeData upgradeData) {
         _isRepairing = true;
+        MoneyManager.Instance.ChangeMoney(-GetRepairPrice());
+        _needWaitTime = _technic.TimeRepair * upgradeData.TechnicRepairSpeed * GetBrokenCoef();
+    }
 
+    public int GetRepairPrice() {
+        float brokenCoef = GetBrokenCoef();
+        int priceRepair = (int)(_technic.PriceRepair * brokenCoef);
+        return priceRepair;
+    }
+
+    private float GetBrokenCoef() {
         float brokenCoef = 1 - (_nowStrength / _technic.Strength);
         if (brokenCoef == 1)
             brokenCoef = 1.2f;
-
-        int priceRepair = (int)(_technic.PriceRepair * brokenCoef);
-        MoneyManager.Instance.ChangeMoney(-priceRepair);
-        _needWaitTime = _technic.TimeRepair * upgradeData.TechnicRepairSpeed * brokenCoef;
+        return brokenCoef;
     }
 
     public void StartCook(KitchenUpgradeData upgradeData, Order order) {

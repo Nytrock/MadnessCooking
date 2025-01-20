@@ -4,7 +4,8 @@ using UnityEngine;
 public class CursorManager : MonoBehaviour, IBindable<GameSettingsData>, ISettingableWithOptions {
     [SerializeField] private CursorTexture[] _cursors;
     [SerializeField] private CursorTexture _defaultCursor;
-    [SerializeField] private Vector2 _offset; private SettingsPointData<int> _data;
+
+    private SettingsPointData<int> _data;
     private CursorTexture _nowCursor;
 
     public int OptionsCount => _cursors.Length;
@@ -37,6 +38,6 @@ public class CursorManager : MonoBehaviour, IBindable<GameSettingsData>, ISettin
 
     private void SetCursorTexture(CursorState state) {
         Texture2D texture = _nowCursor.GetCursor(state);
-        Cursor.SetCursor(texture, _offset, CursorMode.ForceSoftware);
+        Cursor.SetCursor(texture, _nowCursor.Offset, CursorMode.ForceSoftware);
     }
 }

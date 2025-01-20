@@ -22,5 +22,6 @@ public class CursorSettingsPoint : IntSettingsPoint, IBindable<GameSettingsData>
     protected override void UpdateState() {
         base.UpdateState();
         _cursorImage.sprite = (_settingable.Value as CursorManager).GetNowCursor();
+        _cursorImage.SetNativeSize();
     }
 }
