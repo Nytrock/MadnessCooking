@@ -24,11 +24,11 @@ public class BedChoiceUI : ChoiceBuyUI<BedType>, IBindable<FarmData> {
     }
 
     protected override void GenerateChoiceButtons() {
-        for (int i = 0; i < _bedTypesManager.BedsCount; i++) {
+        int index = 0;
+        foreach (var bed in _bedTypesManager.GetAllItems()) {
             var choiceButton = _choiceButtonPool.GetObject() as BedChoiceButton;
-            BedType bed = _bedTypesManager.GetBed(i);
-            choiceButton.Setup(bed, i, this);
-            choiceButton.SetBlockedState(!_bedTypesManager.HaveBed(bed));
+            choiceButton.Setup(bed, index++, this);
+            choiceButton.SetBlockedState(!_bedTypesManager.IsItemAvailable(bed));
             _choiceButtons.Add(choiceButton);
         }
     }

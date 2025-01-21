@@ -8,16 +8,17 @@ public class TextAvailableRenderer : MonoBehaviour {
     private TextMeshProUGUI _text;
 
     private void Awake() {
-        GetTextMesh();
+        CheckTextMesh();
     }
 
-    private void GetTextMesh() {
+    private void CheckTextMesh() {
+        if (_text != null) return;
+
         _text = GetComponent<TextMeshProUGUI>();
     }
 
     public void UpdateAvailable(bool isAvailable) {
-        if (_text == null)
-            GetTextMesh();
+        CheckTextMesh();
 
         if (isAvailable)
             _text.color = _availableColor;

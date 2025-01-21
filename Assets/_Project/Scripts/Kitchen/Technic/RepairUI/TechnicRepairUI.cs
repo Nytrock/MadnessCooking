@@ -1,5 +1,4 @@
 using System;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,7 +8,7 @@ public class TechnicRepairUI : MonoBehaviour, IUpgradeable<KitchenUpgradeData>, 
     [SerializeField] private Camera _camera;
     [SerializeField] private Button _repairButton;
     [SerializeField] private TutorialManager _tutorialManager;
-    [SerializeField] private TextMeshProUGUI _priceText;
+    [SerializeField] private TechnicRepairUIText _priceText;
 
     [Header("Upgrades")]
     [SerializeField] private BaseUpgrade _technicStrengthShow;
@@ -72,7 +71,7 @@ public class TechnicRepairUI : MonoBehaviour, IUpgradeable<KitchenUpgradeData>, 
         _strengthSlider.value = nowStrength;
 
         int repairPrice = _nowTechnicHolder.Data.GetRepairPrice();
-        _priceText.text = repairPrice.ToString() + "$";
+        _priceText.SetPrice(repairPrice);
     }
 
     public void BindUpgrade(KitchenUpgradeData upgradeData) {

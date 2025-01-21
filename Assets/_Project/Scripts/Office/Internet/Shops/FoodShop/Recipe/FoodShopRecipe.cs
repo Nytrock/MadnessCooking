@@ -18,7 +18,7 @@ public class FoodShopRecipe : FoodRecipe<FoodShopRecipePart> {
     protected override void SetupIngredients() {
         int index = 0;
         foreach (var ingredientCount in _food.Ingredients) {
-            bool haveCount = _ingredientManager.HaveIngredient(ingredientCount.Item);
+            bool haveCount = _ingredientManager.IsItemAvailable(ingredientCount.Item);
             _recipeParts[index].Setup(ingredientCount, haveCount);
             index++;
         }

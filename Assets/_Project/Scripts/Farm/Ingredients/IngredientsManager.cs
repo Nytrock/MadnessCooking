@@ -1,14 +1,11 @@
 using System.Collections.Generic;
-using UnityEngine;
 
 public class IngredientsManager : SaveableItemManager<Ingredient, FarmData> {
-    [SerializeField] private Ingredient[] _allIngredients;
-
-    public bool HaveIngredient(Ingredient ingredient) {
+    public override bool IsItemAvailable(Ingredient ingredient) {
         if (ingredient.Type == IngredientType.Buyable)
             return true;
 
-        return _data.IsItemAvailable(ingredient);
+        return base.IsItemAvailable(ingredient);
     }
 
     public bool HaveIngredientsOfBedType(BedType bedType) {
@@ -25,7 +22,7 @@ public class IngredientsManager : SaveableItemManager<Ingredient, FarmData> {
     }
 
     public IEnumerable<Ingredient> GetAllIngredientsOfBedType(BedType bedType) {
-        foreach (var ingredient in _allIngredients)
+        foreach (var ingredient in _allItems)
             if (ingredient.Type == bedType.AcceptableType)
                 yield return ingredient;
     }

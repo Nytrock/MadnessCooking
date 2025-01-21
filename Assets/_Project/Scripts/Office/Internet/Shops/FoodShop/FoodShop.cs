@@ -22,7 +22,7 @@ public class FoodShop : BaseChooseShop<Food, OfficeData>, IUpgradeable<KitchenUp
             return false;
 
         foreach (var ingredientCount in food.Ingredients)
-            if (!_ingredientManager.HaveIngredient(ingredientCount.Item))
+            if (!_ingredientManager.IsItemAvailable(ingredientCount.Item))
                 return false;
 
         return true;

@@ -14,8 +14,8 @@ public class HorizontalCameraManager : CameraManager {
 
     protected override void CalculateBorderPositions() {
         _startPosition = transform.position.x;
-        _endPosition = _startPosition + _spaceManager.GetSpacesSize() * 1.5f
-            + (_spaceManager.SpaceSize / 2) - _horizontalExtention;
+        _endPosition = _startPosition + _spaceManager.GetSpacesSize()
+            + _spaceManager.SpaceSize - _horizontalExtention;
         InvokeBordersFound();
     }
 

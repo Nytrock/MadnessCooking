@@ -3,14 +3,11 @@ using System.Linq;
 using UnityEngine;
 
 public class BedTypeManager : SaveableItemManager<BedType, FarmData> {
-    [SerializeField] private BedType[] _allBeds;
     [SerializeField] private UpgradeManager _upgradeManager;
     [SerializeField] private IngredientsManager _ingredientsManager;
 
     [Header("Upgrades")]
     [SerializeField] private BedTypeUpgrade[] _bedsUpgrades;
-
-    public int BedsCount => _allBeds.Length;
 
     private void Awake() {
         _upgradeManager.ItemAdded += CheckBedTypeAdded;
@@ -22,22 +19,11 @@ public class BedTypeManager : SaveableItemManager<BedType, FarmData> {
             _ingredientsManager.AddItem(ConstIngredients.Instance.Ectoplasm);
     }
 
-    public BedType GetBed(int index) {
-        return _allBeds[index];
-    }
-
-    public BedType GetBedWithIngredientType(IngredientType type) {
-        foreach (var bed in _allBeds)
+    public BedType GetBedByIngredientType(IngredientType type) {
+        foreach (var bed in _allItems)
             if (bed.AcceptableType == type)
                 return bed;
         return null;
-    }
-
-    public bool HaveBed(BedType bedType) {
-        foreach (var bed in _data.AvailableItems)
-            if (bed == bedType)
-                return true;
-        return false;
     }
 
     public bool HaveBedForIngredient(Ingredient ingredient) {
