@@ -9,13 +9,13 @@ public class OrdersManager : MonoBehaviour {
     [SerializeField] private GameSaveManager _saveManager;
     [SerializeField] private TutorialManager _tutorialManager;
     private readonly List<Order> _orders = new();
-    private readonly ClientState[] _suitableStates = { ClientState.Spawn, ClientState.Sit };
+    private readonly ClientState[] _suitableStates = { ClientState.Spawn, ClientState.Sit, ClientState.Wait };
 
     public event Action<Order> OrderAdded;
     public event Action<Order> OrderRemoved;
 
     public void SetNewOrder(Client client) {
-        if (!_suitableStates.Contains(client.Data.State))
+        if (!_suitableStates.Contains(client.Data.State) || client.Data.IsServiced)
             return;
 
         Order order = client.Data.Order;
@@ -33,7 +33,6 @@ public class OrdersManager : MonoBehaviour {
 
     private void AddOrder(Client client) {
         if (client.Data.Type == ClientType.GrayMan) {
-            _kitchenStorage.RemoveAll();
             _saveManager.Save();
             Application.Quit();
         }

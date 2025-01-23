@@ -87,6 +87,7 @@ GameObject:
   - component: {fileID: 4580200717461862086}
   - component: {fileID: 3173329868025288006}
   - component: {fileID: 7683851715886926455}
+  - component: {fileID: 6851353136507735493}
   m_Layer: 5
   m_Name: Name
   m_TagString: Untagged
@@ -184,15 +185,17 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -223,6 +226,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UpgradeTable
+--- !u!114 &6851353136507735493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1716163030827850518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b761566995ed914caa1472862c0f937, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _options:
+  - _value: {fileID: 11400000, guid: 80529c8439c585945b072b791ee2a6a4, type: 2}
+    _style: {r: 0.23921569, g: 0.1882353, b: 0.105882354, a: 1}
+  - _value: {fileID: 11400000, guid: f9538ea17e1133f4090ea83b5e0827bb, type: 2}
+    _style: {r: 0.627451, g: 0.27058825, b: 0.17254902, a: 1}
+  - _value: {fileID: 11400000, guid: 2e37d524597e5d2499cc7a496f717a91, type: 2}
+    _style: {r: 0.16470589, g: 0.11372549, b: 0.68235296, a: 1}
+  - _value: {fileID: 11400000, guid: 3627450b9a024af45a0e4f14c3308c09, type: 2}
+    _style: {r: 0.05490196, g: 0.05490196, b: 0.05490196, a: 1}
+  - _value: {fileID: 11400000, guid: 7e3fc35901153c8499d08566fb3e07cf, type: 2}
+    _style: {r: 0.13333334, g: 0.13333334, b: 0.13333334, a: 1}
 --- !u!1 &2608827884499195106
 GameObject:
   m_ObjectHideFlags: 0
@@ -275,6 +301,7 @@ GameObject:
   - component: {fileID: 1782396518238056263}
   - component: {fileID: 1026530814793835952}
   - component: {fileID: 4140216338765106188}
+  - component: {fileID: 6109660443995834556}
   m_Layer: 5
   m_Name: FarmUpgradeRenderer
   m_TagString: Untagged
@@ -388,7 +415,7 @@ MonoBehaviour:
   _audioSource: {fileID: 7715255697338444603}
 --- !u!95 &1782396518238056263
 Animator:
-  serializedVersion: 5
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -402,6 +429,7 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -433,8 +461,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57106a38f6ad54547b52ea30d01d4d05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _imageChangers: []
-  _textChangers: []
+  _imageChangers:
+  - {fileID: 6109660443995834556}
+  _textChangers:
+  - {fileID: 6851353136507735493}
+--- !u!114 &6109660443995834556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4216396775684742403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 333a250fb860f2c4d9ebfe1df669fa43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _options:
+  - _value: {fileID: 11400000, guid: 80529c8439c585945b072b791ee2a6a4, type: 2}
+    _style: {fileID: 45567440, guid: b82043f28397bef4fac6112566002cd0, type: 3}
+  - _value: {fileID: 11400000, guid: f9538ea17e1133f4090ea83b5e0827bb, type: 2}
+    _style: {fileID: -958719880, guid: b82043f28397bef4fac6112566002cd0, type: 3}
+  - _value: {fileID: 11400000, guid: 2e37d524597e5d2499cc7a496f717a91, type: 2}
+    _style: {fileID: 45567440, guid: b82043f28397bef4fac6112566002cd0, type: 3}
+  - _value: {fileID: 11400000, guid: 3627450b9a024af45a0e4f14c3308c09, type: 2}
+    _style: {fileID: 817439710, guid: b82043f28397bef4fac6112566002cd0, type: 3}
+  - _value: {fileID: 11400000, guid: 7e3fc35901153c8499d08566fb3e07cf, type: 2}
+    _style: {fileID: -967515091, guid: b82043f28397bef4fac6112566002cd0, type: 3}
 --- !u!1 &6567957787504503406
 GameObject:
   m_ObjectHideFlags: 0
@@ -478,6 +531,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 5629952297557018515, guid: c2232c781fb4fe6458c8d53a2e082d03, type: 2}
   m_audioClip: {fileID: 8300000, guid: 2bd50fd96b9090a43859c427d00e6913, type: 3}
+  m_Resource: {fileID: 8300000, guid: 2bd50fd96b9090a43859c427d00e6913, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.35
   m_Pitch: 1

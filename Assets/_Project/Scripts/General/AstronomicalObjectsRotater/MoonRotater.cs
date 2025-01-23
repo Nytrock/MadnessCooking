@@ -13,6 +13,6 @@ public class MoonRotater : AstronomicalObjectsRotater {
 
     private void CheckNigthStart(Daytime daytime) {
         if (daytime == _startDaytime)
-            _moon.sprite = _moonPhases[_timeManager.DaysCount % _moonPhases.Length];
+            _moon.sprite = _moonPhases[Mathf.Max(0, _timeManager.LocalDays - 1) % _moonPhases.Length];
     }
 }

@@ -2,7 +2,7 @@ using UnityEngine.UI;
 public abstract class ChoiceBuyButton<TItem> : ChoiceButton<TItem>
     where TItem : BuyableItem {
 
-    private int _price;
+    protected int _price;
     protected bool _isBuyable;
 
     protected override void Awake() {

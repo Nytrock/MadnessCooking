@@ -7,7 +7,7 @@ public class ClientMainAudio : MonoBehaviour {
     [SerializeField] private AudioSource _eatAudio;
 
     private void Awake() {
-        _client.ClientSetup += SetupAudioSources;
+        _client.SetupEnded += SetupAudioSources;
     }
 
     private void SetupAudioSources() {

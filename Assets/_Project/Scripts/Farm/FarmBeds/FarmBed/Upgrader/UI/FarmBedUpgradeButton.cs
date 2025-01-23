@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(BedTypeStyleUpdater))]
 public class FarmBedUpgradeButton : ChoiceBuyButton<FarmBedUpgrade> {
@@ -6,7 +7,16 @@ public class FarmBedUpgradeButton : ChoiceBuyButton<FarmBedUpgrade> {
     private BedTypeStyleUpdater _renderer;
 
     public override void Setup(FarmBedUpgrade item, int index, ChoiceBuyUI<FarmBedUpgrade> ui) {
-        base.Setup(item, index, ui);
+        _button = GetComponent<Button>();
+        gameObject.SetActive(true);
+
+        Item = item;
+        _price = item.PriceToAdd;
+        _icon.sprite = Item.Icon;
+        CheckBuyable(MoneyManager.Instance.MoneyCount);
+        _button.onClick.AddListener(
+            delegate { ui.Choice(index, _isBuyable); }
+        );
         _nameText.SetText(item.Name);
     }
 

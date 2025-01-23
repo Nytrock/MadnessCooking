@@ -42,8 +42,11 @@ public class ClientHolderData {
     }
 
     public void SetupOnSpawn() {
-        _talkIndex = _clients.Length;
-        _haveClients = true;
+        if (_groupState == GroupClientState.Leave || _groupState == GroupClientState.None) {
+            _groupState = GroupClientState.Enter;
+            _talkIndex = _clients.Length;
+            _haveClients = true;
+        }
     }
 
     public void UpdateTime() {
@@ -51,7 +54,7 @@ public class ClientHolderData {
     }
 
     public void EndVisit() {
-        _groupState = GroupClientState.None;
+        _groupState = GroupClientState.Leave;
         _nowTime = 0;
         _waitTime = 0;
         ClearClients();

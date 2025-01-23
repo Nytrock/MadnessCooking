@@ -19,11 +19,13 @@ public class Pest : MonoBehaviour {
     }
 
     public void ChangeState(bool value) {
-        gameObject.SetActive(value);
+        if (value)
+            gameObject.SetActive(value);
+        else
+            _renderer.sprite = null;
     }
 
     public void Remove() {
-        _renderer.sprite = null;
         PestRemoved?.Invoke();
     }
 

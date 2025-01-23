@@ -17,7 +17,7 @@ public class TechnicHolder : MonoBehaviour {
     public event Action RepairChanged;
     public event Action CookChanged;
 
-    private void LateStart() {
+    public void LateStart() {
         Data.CookStoped += StopCook;
         Data.RepairStoped += StopRepair;
 
@@ -61,8 +61,6 @@ public class TechnicHolder : MonoBehaviour {
 
         data.TechnicHolders[index] ??= new(_technic);
         Data = data.TechnicHolders[index];
-
-        LateStart();
     }
 
     public bool Accessible() {
@@ -72,6 +70,6 @@ public class TechnicHolder : MonoBehaviour {
 
     public bool Repairable() {
         return Data.NowStrength != _technic.Strength &&
-            MoneyManager.Instance.MoneyCount >= _technic.PriceRepair;
+            MoneyManager.Instance.MoneyCount >= Data.GetRepairPrice();
     }
 }

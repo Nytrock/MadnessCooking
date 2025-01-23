@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class ClientWalkState : ClientBaseState {
     private Vector2 _nowTarget;
-    private const float _speed = 3f;
+    private const float _speed = 3.5f;
 
     public override void EnterState(Client client) {
         bool isLeaving = client.Data.State == ClientState.Leave;

@@ -11,7 +11,7 @@ public class Cow : NeedHoldAdd {
         if (!Data.IsUnlocked)
             return;
 
-        _puncher.AddWaste(_wastePassiveAmount);
+        _puncher.AddWaste(_wastePassiveAmount * FpsManager.NORMALIZED_DELTA_TIME);
     }
 
     protected override void AddReady() {

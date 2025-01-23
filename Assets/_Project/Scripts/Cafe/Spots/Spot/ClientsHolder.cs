@@ -84,10 +84,17 @@ public class ClientsHolder : MonoBehaviour {
     }
 
     private void StartWait() {
-        _data.StartWait(_clientWaitMultiplier);
-        _waitSlider.maxValue = _data.WaitTime;
+        if (_data.GroupState == GroupClientState.EndlessWait)
+            return;
 
         ChangeSliderState(true);
+        if (_data.GroupState == GroupClientState.Wait) {
+            _waitSlider.maxValue = _data.WaitTime;
+            return;
+        }
+
+        _data.StartWait(_clientWaitMultiplier);
+        _waitSlider.maxValue = _data.WaitTime;
         WaitStarted?.Invoke();
     }
 
@@ -158,7 +165,7 @@ public class ClientsHolder : MonoBehaviour {
         if (_clients.Count == 0 || isOpened)
             return;
 
-        if (_data.GroupState == GroupClientState.None)
+        if (_data.GroupState == GroupClientState.Leave)
             return;
 
         CafeClosed();

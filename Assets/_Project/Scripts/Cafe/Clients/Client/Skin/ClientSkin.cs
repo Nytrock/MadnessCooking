@@ -46,8 +46,7 @@ public class ClientSkin : MonoBehaviour {
     }
 
     public void StartNewCycle(ClientData data) {
-        if (data.SkinType == ClientSkinType.None)
-            data.SetSkinType(GetRandomSkinType(data.Type));
+        data.SetSkinType(GetRandomSkinType(data.Type));
 
         foreach (var skinPart in _skinParts)
             skinPart.SetSprite(data.SkinType);
@@ -95,17 +94,24 @@ public class ClientSkin : MonoBehaviour {
     }
 
 
-    [ContextMenu("SetDefaultSkin")]
+    [ContextMenu(nameof(SetDefaultSkin))]
     private void SetDefaultSkin() {
         CheckSkinParts();
         foreach (var skinPart in _skinParts)
             skinPart.SetDefalult();
     }
 
-    [ContextMenu("GenerateRandomSkin")]
+    [ContextMenu(nameof(GenerateRandomSkin))]
     private void GenerateRandomSkin() {
         CheckSkinParts();
         foreach (var skinPart in _skinParts)
             skinPart.SetSprite(ClientSkinType.Random);
+    }
+
+    [ContextMenu(nameof(GenerateAlbert))]
+    private void GenerateAlbert() {
+        CheckSkinParts();
+        foreach (var skinPart in _skinParts)
+            skinPart.SetSprite(ClientSkinType.Albert);
     }
 }

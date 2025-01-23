@@ -45,14 +45,20 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
     }
 
     private void CheckDaytime(Daytime daytime) {
-        if (daytime == Daytime.Morning)
+        if (daytime == Daytime.Morning || daytime == Daytime.Night)
             SetNewTime();
     }
 
     private void GenerateClientsFromData() {
         int spotIndex = 0;
         foreach (var spotData in _clientHolderData.ClientHolders) {
-            if (!spotData.HaveClients || spotData.ContainsGrayMan()) {
+            if (!spotData.HaveClients) {
+                spotIndex++;
+                continue;
+            }
+
+            if (spotData.ContainsGrayMan()) {
+                spotData.EndVisit();
                 spotIndex++;
                 continue;
             }
@@ -60,6 +66,7 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
             _spotManager.TakeSpot(spotIndex);
             CafeSpot spot = _spotManager.GetSpotByIndex(spotIndex);
             ClientsHolder table = SpawnGroupOfClients(spot);
+
             if (spotData.GroupState == GroupClientState.Wait ||
                 spotData.GroupState == GroupClientState.EndlessWait)
                 table.CheckWait();
@@ -144,8 +151,10 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
     }
 
     private ClientType GetRandomType(ClientCount clientCount) {
-        if (_criticData.IsCriticCanSpawn)
+        if (_criticData.IsCriticCanSpawn) {
+            _criticData.ChangeCriticSpawn(false);
             return ClientType.Critic;
+        }
 
         int number = Random.Range(1, 1001);
         if (number == 1 && clientCount == ClientCount.One)
@@ -180,6 +189,7 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
         ClientSettings clientSettings = new(clientData, spotIndex, seatIndex, this);
         client.Setup(clientSettings);
         _ordersManager.SetNewOrder(client);
+        client.EndSetup();
     }
 
     public void CheckAddedUpgrade(BaseUpgrade upgrade) {

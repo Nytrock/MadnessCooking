@@ -52,6 +52,10 @@ public class BedChoice : MonoBehaviour {
         _farmBed.Setup(settings);
     }
 
+    public void UpdateUpgrades() {
+        _farmBed.UpdateUpgrades();
+    }
+
     private BedTypeHolder FindBedHolder(BedType bedType) {
         if (bedType == null)
             return null;

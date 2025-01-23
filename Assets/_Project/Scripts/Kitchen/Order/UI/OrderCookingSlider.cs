@@ -19,8 +19,8 @@ public class OrderCookingSlider : MonoBehaviour {
         order.OrderFinished += EndCook;
         _isCooking = true;
 
-        _cookingSlider.maxValue = order.Food.TimeToCook;
         _technicData = _technicManager.FindHolderByTechic(order.Food.TypeTechnic).Data;
+        _cookingSlider.maxValue = _technicData.NeedWaitTime;
     }
 
     private void EndCook() {

@@ -41,18 +41,12 @@ public class CriticSpawner : MonoBehaviour, IBindable<CafeData> {
         _criticUI.SetMessage(CriticMessageType.Start);
     }
 
-    private void DisableCriticSpawn() {
-        _data.ChangeCriticSpawn(false);
-    }
-
     public void WaitSuccess() {
-        DisableCriticSpawn();
         _popularityManager.CriticSuccess();
         _criticUI.SetMessage(CriticMessageType.Success);
     }
 
     public void WaitFailure() {
-        DisableCriticSpawn();
         _popularityManager.CriticFailure();
         _criticUI.SetMessage(CriticMessageType.Failure);
     }

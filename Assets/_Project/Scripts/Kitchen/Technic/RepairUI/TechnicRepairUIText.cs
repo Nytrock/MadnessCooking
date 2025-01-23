@@ -4,6 +4,7 @@ using UnityEngine;
 public class TechnicRepairUIText : MonoBehaviour {
     [SerializeField] private Color _defaultColor;
     [SerializeField] private string _fullStrengthMessage;
+    [SerializeField] private string _tutorialMessage;
 
     private LocalizedText _localizedText;
     private TextAvailableRenderer _textAvailableRenderer;
@@ -13,14 +14,19 @@ public class TechnicRepairUIText : MonoBehaviour {
         _textAvailableRenderer = GetComponent<TextAvailableRenderer>();
     }
 
-    private void SetFullStrengthMessage() {
+    private void SetDefaultMessage(string message) {
         _localizedText.SetColor(_defaultColor);
-        _localizedText.SetText(_fullStrengthMessage);
+        _localizedText.SetText(message);
     }
 
-    public void SetPrice(int price) {
+    public void SetPrice(int price, bool isTutorial) {
+        if (isTutorial) {
+            SetDefaultMessage(_tutorialMessage);
+            return;
+        }
+
         if (price == 0) {
-            SetFullStrengthMessage();
+            SetDefaultMessage(_fullStrengthMessage);
             return;
         }
 

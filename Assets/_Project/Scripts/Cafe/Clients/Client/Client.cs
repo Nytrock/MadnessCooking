@@ -29,7 +29,7 @@ public class Client : MonoBehaviour {
     public event Action<Client> ClientLeave;
     public event Action<Client> ClientRejected;
     public event Action<Client> ClientEat;
-    public event Action ClientSetup;
+    public event Action SetupEnded;
 
     private void Awake() {
         ClientUI = GetComponent<ClientUI>();
@@ -115,8 +115,10 @@ public class Client : MonoBehaviour {
         if (!_spot.TryGetComponent(out _table))
             throw new ArgumentNullException("Spot doesn't have the required class ClientGroupHolder");
         _table.WaitStarted += Sit;
+    }
 
-        ClientSetup?.Invoke();
+    public void EndSetup() {
+        SetupEnded?.Invoke();
     }
 
     public void ActivateOrder() {

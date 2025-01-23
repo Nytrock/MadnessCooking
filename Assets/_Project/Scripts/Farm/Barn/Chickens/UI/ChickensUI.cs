@@ -5,7 +5,7 @@ public class ChickensUI : MonoBehaviour, IActivable {
     [SerializeField] private BarnChickens _chickens;
     [SerializeField] private GameObject _panel;
     [SerializeField] private Button _feedButton;
-    [SerializeField] private LocalizedText _feedText;
+    [SerializeField] private ChickensUIText _buttonText;
     [SerializeField] private Slider _eggSlider;
     [SerializeField] private ItemInfoRendererWithCount _eggRenderer;
 
@@ -35,11 +35,10 @@ public class ChickensUI : MonoBehaviour, IActivable {
         ChickensData data = _chickens.Data;
         _feedButton.interactable = (data.FoodCount > 0 || data.IsInfiniteFood) && data.IsUnlocked;
 
-        string foodCount = _chickens.Data.FoodCount.ToString();
         if (_chickens.Data.IsInfiniteFood)
-            foodCount = "∞";
-        _feedText.AddArguments("count", foodCount);
-        _feedText.UpdateText();
+            _buttonText.SetInfiniteText();
+        else
+            _buttonText.SetNormalText(_chickens.Data.FoodCount);
     }
 
     private void UpdateEggCount() {

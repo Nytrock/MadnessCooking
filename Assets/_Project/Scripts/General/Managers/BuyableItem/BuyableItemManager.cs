@@ -8,7 +8,7 @@ public abstract class BuyableItemManager<TItem> : MonoBehaviour
     [SerializeField] protected List<TItem> _defaultItems;
     [SerializeField] protected List<TItem> _allItems;
 
-    protected BuyableItemManagerData<TItem> _data = new();
+    [SerializeField] protected BuyableItemManagerData<TItem> _data = new();
 
     public int AllItemsCount => _allItems.Count;
     public int AvailableItemsCount => _data.ItemsCount;
@@ -16,6 +16,9 @@ public abstract class BuyableItemManager<TItem> : MonoBehaviour
     public event Action<TItem> ItemAdded;
 
     public virtual void AddItem(TItem item) {
+        if (_data.IsItemAvailable(item))
+            return;
+
         _data.AddItem(item);
         InvokeItemAdded(item);
     }

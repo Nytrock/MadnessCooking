@@ -8,12 +8,13 @@ public class FatigueManager : Singleton<FatigueManager>, IBindable<GeneralData>,
     [SerializeField, Min(0)] private float _fatigueMax;
     [SerializeField, Min(0)] private float _fatigueDefault;
     [SerializeField, Min(1)] private float _needHoursToRecovery;
+    [SerializeField] private DecorManager _decorManager;
 
-    private float _decorBonus = 1;
+    [SerializeField] private float _decorBonus = 1;
     private float _sleepBonus;
     private bool _isTired;
 
-    [SerializeField] private FatigueManagerData _data;
+    private FatigueManagerData _data;
     private OfficeUpgradeData _upgradeData;
 
     public float FatigueMax => _fatigueMax;
@@ -21,6 +22,11 @@ public class FatigueManager : Singleton<FatigueManager>, IBindable<GeneralData>,
     public bool IsTired => _isTired;
 
     public event Action<bool> TiredChanged;
+
+    protected override void Awake() {
+        base.Awake();
+        _decorManager.ItemAdded += AddDecorBonus;
+    }
 
     public void LateStart() {
         _sleepBonus = _bed.GetSleepBonus(_needHoursToRecovery, _fatigueMax);

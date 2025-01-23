@@ -51,9 +51,14 @@ public class BedTypeHolder : MonoBehaviour {
     public void SetIngredient() {
         Ingredient ingredient = _bedData.PlantedIngredient;
         _name = ingredient.name;
-        _animator.Play(_name, -1, _bedData.AnimationTime);
-        StartCoroutine(SetAnimationSpeed(ingredient.TimeGrow));
+
         _pestsGenerator.ChangeMode(true);
+        StartCoroutine(SetAnimationSpeed(ingredient.TimeGrow));
+
+        if (_bedData.IsFull)
+            return;
+
+        _animator.Play(_name, -1, _bedData.AnimationTime);
     }
 
     public void UpdateAnimation() {
@@ -113,6 +118,6 @@ public class BedTypeHolder : MonoBehaviour {
             _water.SetData(_bedData.WaterBoost);
         if (_fertilize != null)
             _fertilize.SetData(_bedData.FertilizeBoost);
-        _pestsGenerator.SetData(_bedData.PestsGenerator);
+        _pestsGenerator.Bind(_bedData.PestsGenerator);
     }
 }

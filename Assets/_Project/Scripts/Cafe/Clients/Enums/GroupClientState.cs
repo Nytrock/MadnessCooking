@@ -2,5 +2,7 @@ public enum GroupClientState {
     None,
     Wait,
     EndlessWait,
-    Talk
+    Talk,
+    Enter,
+    Leave
 }

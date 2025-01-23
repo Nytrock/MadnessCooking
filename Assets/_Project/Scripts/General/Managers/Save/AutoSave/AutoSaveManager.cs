@@ -27,9 +27,6 @@ public class AutoSaveManager : MonoBehaviour {
 
     private void StartAutoSave() {
         _nowTime = 0;
-        if (Application.isEditor)
-            return;
-
         SaveStarted?.Invoke();
         _saveManager.Save();
     }

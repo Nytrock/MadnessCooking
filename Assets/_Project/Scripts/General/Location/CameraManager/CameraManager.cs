@@ -41,19 +41,21 @@ public abstract class CameraManager : MonoBehaviour {
     }
 
     private void Update() {
-        if (!_isWorking || _hoverListener.IsHover || _tutorialManager.IsWork)
+        if (!_isWorking || _tutorialManager.IsWork)
             return;
 
-        float keyAxis = Input.GetAxis(_keyAxis);
-        float mouseAxis = Input.GetAxis("Mouse ScrollWheel");
-        float cameraAxis = Input.GetAxis(_cameraAxis);
-        float deltaTime = FpsManager.NORMALIZED_DELTA_TIME;
+        float keyAxis = 0, mouseAxis = 0, cameraAxis = 0;
+        if (!_hoverListener.IsHover) {
+            keyAxis = Input.GetAxis(_keyAxis);
+            mouseAxis = Input.GetAxis("Mouse ScrollWheel");
+            cameraAxis = Input.GetAxis(_cameraAxis);
+        }
 
         if (keyAxis != 0 || mouseAxis != 0) {
             if (keyAxis != 0)
-                _cameraVelocity = _keyVelocity * -Mathf.Sign(keyAxis) * deltaTime;
+                _cameraVelocity = _keyVelocity * -Mathf.Sign(keyAxis);
             else
-                _cameraVelocity = _mouseVelocity * -Mathf.Sign(mouseAxis) * deltaTime;
+                _cameraVelocity = _mouseVelocity * -Mathf.Sign(mouseAxis);
             _isKeyPressed = true;
         } else if (_isKeyPressed) {
             _cameraVelocity = 0;

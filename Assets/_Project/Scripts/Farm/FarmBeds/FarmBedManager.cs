@@ -30,7 +30,14 @@ public class FarmBedManager : SaveableSpaceManager<FarmData>, IUpgradeable<FarmU
     }
 
     public void CheckAddedUpgrade(BaseUpgrade upgrade) {
-        if (upgrade == _growStatusShowUpgrade)
+        if (upgrade == _growStatusShowUpgrade) {
             _upgradeData.ChangeGrowStatusShow();
+            UpdateUpgrades();
+        }
+    }
+
+    private void UpdateUpgrades() {
+        foreach (var bedGroup in _beds)
+            bedGroup.UpdateUpgrades();
     }
 }

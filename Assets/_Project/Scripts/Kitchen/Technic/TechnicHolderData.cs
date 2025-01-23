@@ -41,7 +41,7 @@ public class TechnicHolderData {
 
     public int GetRepairPrice() {
         float brokenCoef = GetBrokenCoef();
-        int priceRepair = (int)(_technic.PriceRepair * brokenCoef);
+        int priceRepair = Mathf.CeilToInt(_technic.PriceRepair * brokenCoef);
         return priceRepair;
     }
 
@@ -57,7 +57,7 @@ public class TechnicHolderData {
         _nowOrder = order;
         _needWaitTime = _nowOrder.Food.TimeToCook / upgradeData.TechnicCookSpeed;
 
-        int strengthDecrease = (int)(Random.Range(1f, 2f) / upgradeData.TechnicStrengthMultiplier);
+        float strengthDecrease = Random.Range(1f, 2f) / upgradeData.TechnicStrengthMultiplier;
         _nowStrength = Mathf.Max(_nowStrength - strengthDecrease, 0);
     }
 
@@ -76,9 +76,9 @@ public class TechnicHolderData {
 
     private void StopRepair() {
         _isRepairing = false;
-        RepairStoped?.Invoke();
         _nowStrength = _technic.Strength;
         _nowWaitTime = 0f;
+        RepairStoped?.Invoke();
     }
 
     private void StopCook() {

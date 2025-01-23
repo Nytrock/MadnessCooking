@@ -24,6 +24,11 @@ public abstract class PestsPool : Pool<Pest> {
         return pest;
     }
 
+    public override void PutObject(Pest pest) {
+        pest.ChangeState(false);
+        base.PutObject(pest);
+    }
+
     public void RemovePest(Pest pest) {
         pest.Remove();
         PutObject(pest);

@@ -77,6 +77,7 @@ public class FarmBedData {
         _count = 0;
         _nowTime = 0;
         _isFull = false;
+        _animationTime = 0;
     }
 
     public void SetIngredient(Ingredient ingredient) {

@@ -76,8 +76,10 @@ public class PestsGenerator : MonoBehaviour {
         PestsChanged?.Invoke();
     }
 
-    public void SetData(PestsGeneratorData data) {
+    public void Bind(PestsGeneratorData data) {
         _data = data;
+        _data.SetMaxPestsCount(_maxPests);
+
         foreach (var pestData in _data.Pests) {
             Pest pest = _pool.GetObject(pestData.PrefabIndex);
             _pests.Add(pest);

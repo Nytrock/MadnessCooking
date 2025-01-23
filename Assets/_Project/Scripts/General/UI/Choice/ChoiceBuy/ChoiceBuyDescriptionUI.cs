@@ -7,8 +7,13 @@ public class ChoiceBuyDescriptionUI : MonoBehaviour {
 
     public void UpdateDescription(BuyableItem item) {
         _renderer.SetItemInfo(item);
-        if (item.Price > 0)
-            _renderer.SetPrice(_buyDescription, item.Price);
+
+        int price = item.Price;
+        if (item as FarmBedUpgrade != null)
+            price = (item as FarmBedUpgrade).PriceToAdd;
+
+        if (price > 0)
+            _renderer.SetPrice(_buyDescription, price);
         else
             _renderer.SetPrice(_freeDescription);
     }

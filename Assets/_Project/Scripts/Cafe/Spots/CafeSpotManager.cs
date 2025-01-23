@@ -45,6 +45,8 @@ public class CafeSpotManager : MonoBehaviour, IBindable<CafeData> {
 
     public void GenerateFreeSpotsList() {
         _freeSpots.Clear();
+        UpdateIndexes();
+
         for (int i = 0; i < _spotPrefabs.Length; i++)
             _freeSpots.Add(new());
         for (int i = 0; i < _spots.Count; i++)
@@ -161,4 +163,9 @@ public class CafeSpotManager : MonoBehaviour, IBindable<CafeData> {
     }
 
     public CafeSpot GetSpotByIndex(int spotIndex) => _spots[spotIndex];
+
+    public void UpdateIndexes() {
+        for (int i = 0; i < _spots.Count; i++)
+            _spots[i].SetIndex(i);
+    }
 }

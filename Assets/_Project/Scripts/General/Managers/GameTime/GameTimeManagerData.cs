@@ -7,10 +7,12 @@ public class GameTimeManagerData {
     [SerializeField, JsonProperty] private JsonTimeSpan _globalTime;
     [SerializeField, JsonProperty] private Daytime _daytime;
     [SerializeField, JsonProperty] private bool _isWaitingNextDay;
+    [SerializeField, JsonProperty] private int _localDays = 0;
 
     public TimeSpan GlobalTime => _globalTime.GetTimeSpan();
     public Daytime Daytime => _daytime;
     public bool IsWaitingNextDay => _isWaitingNextDay;
+    public int LocalDays => _localDays;
 
     public GameTimeManagerData(DaytimeStart daytimeStart) {
         _globalTime = new JsonTimeSpan(daytimeStart.Hour, daytimeStart.Minute);
@@ -31,6 +33,9 @@ public class GameTimeManagerData {
 
     public void ChangeDaytime(int newDaytimeIndex, int daytimeCount) {
         _daytime = (Daytime)newDaytimeIndex;
+        if (_daytime == Daytime.Night)
+            _localDays++;
+
         if (newDaytimeIndex == daytimeCount - 1)
             _isWaitingNextDay = true;
     }

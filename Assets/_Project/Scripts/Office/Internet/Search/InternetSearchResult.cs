@@ -8,9 +8,8 @@ public class InternetSearchResult : MonoBehaviour {
     }
 
     public bool QueryContainKeywords(string query) {
-        query = query.ToLower();
         foreach (var keyword in _keywords)
-            if (query == keyword.ToLower())
+            if (query.ToLower() == keyword.ToLower())
                 return true;
         return false;
     }

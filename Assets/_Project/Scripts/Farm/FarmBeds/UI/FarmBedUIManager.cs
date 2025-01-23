@@ -49,7 +49,6 @@ public class FarmBedUIManager : MonoBehaviour {
             return;
         }
 
-
         if (_tutorialManager.IsWork)
             _tutorialManager.NextTutorialPart();
 
@@ -74,7 +73,6 @@ public class FarmBedUIManager : MonoBehaviour {
     }
 
     private void ResetFarmBed() {
-        Debug.Log(_farmBed);
         _farmBed.BedReseted -= ResetFarmBed;
         _farmBed.CountChanged -= _nowUI.UpdateCount;
         _farmBed = null;
@@ -121,8 +119,7 @@ public class FarmBedUIManager : MonoBehaviour {
         ChangeMode();
         _farmBed.ResetIngredient();
         _ingredientChoice.ActivateIngredientChoice(_farmBed);
-        _farmBed.CountChanged -= _nowUI.UpdateCount;
-        _farmBed = null;
+        ResetFarmBed();
     }
 
     public void OpenUpgradesPanel() {

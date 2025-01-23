@@ -5,6 +5,7 @@ public abstract class BedHolderBooster : MonoBehaviour {
     [SerializeField] private SpriteRenderer _boostSprite;
     [SerializeField] protected float _boostMultiplier;
     [SerializeField] protected float _boostLength;
+    [SerializeField] protected float _spriteShowLength;
     [SerializeField] protected float _defaultSpeed;
 
     protected BedHolderBoosterData _data;
@@ -21,7 +22,8 @@ public abstract class BedHolderBooster : MonoBehaviour {
 
         if (_data.NowTime < _boostLength) {
             _data.UpdateTime();
-            ChangeSpriteAlpha(1 - (_data.NowTime / _boostLength));
+            if (_data.NowTime >= _spriteShowLength)
+                ChangeSpriteAlpha(1 - ((_data.NowTime - _spriteShowLength) / (_boostLength - _spriteShowLength)));
         } else {
             EndBoost();
         }

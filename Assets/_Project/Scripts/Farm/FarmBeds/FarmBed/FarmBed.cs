@@ -8,6 +8,7 @@ public class FarmBed : MonoBehaviour {
 
     [field: SerializeField] public FarmBedData Data { get; private set; }
     private FarmUpgradeData _upgradeData;
+    private FarmBedManagerData _managerData;
 
     private WheatManager _wheatManager;
     private Ingredient _wheat;
@@ -114,6 +115,7 @@ public class FarmBed : MonoBehaviour {
 
         if (Data.PlantedIngredient == _wheat) {
             _wheatManager.AddWheat(Data.Count);
+            _managerData.AddToPlantCount(Data.Count);
             Data.SetCount(0);
             UnfullBed();
             return;
@@ -125,6 +127,7 @@ public class FarmBed : MonoBehaviour {
         int remainCount = _car.PutIngredientWithRemain(Data.PlantedIngredient, Data.Count);
         int puttedCount = Data.Count - remainCount;
 
+        _managerData.AddToPlantCount(puttedCount);
         FatigueManager.Instance.ChangeFatigue(Data.PlantedIngredient.FatigueCoef * puttedCount);
         _puncher.AddWaste(puttedCount * Data.PlantedIngredient.WasteAmount);
         Data.SetCount(remainCount);
@@ -168,7 +171,7 @@ public class FarmBed : MonoBehaviour {
         BedFertilized?.Invoke();
     }
 
-    private void UpdateUpgrades() {
+    public void UpdateUpgrades() {
         _growStatusSlider.ChangeState(_upgradeData.IsGrowStatusShow && Data.PlantedIngredient != null);
     }
 
@@ -196,6 +199,7 @@ public class FarmBed : MonoBehaviour {
 
     public void Bind(FarmData data, FarmBedData bedData, BedTypeHolder holder) {
         _upgradeData = data.UpgradeData;
+        _managerData = data.FarmBedGroups;
         Data = bedData;
 
         if (Data.BedType != null) {

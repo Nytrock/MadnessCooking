@@ -36,6 +36,7 @@ public class TechnicRepairUI : MonoBehaviour, IUpgradeable<KitchenUpgradeData>, 
     public void StartRepair() {
         if (_tutorialManager.IsWork) {
             _tutorialManager.NextTutorialPart();
+            ChangeState(false);
             return;
         }
 
@@ -44,6 +45,9 @@ public class TechnicRepairUI : MonoBehaviour, IUpgradeable<KitchenUpgradeData>, 
     }
 
     public void ChangeState(bool newState) {
+        if (newState == _panel.activeSelf && _panel.activeSelf == false)
+            return;
+
         _panel.SetActive(newState);
         StateChanged?.Invoke(newState);
 
@@ -71,7 +75,7 @@ public class TechnicRepairUI : MonoBehaviour, IUpgradeable<KitchenUpgradeData>, 
         _strengthSlider.value = nowStrength;
 
         int repairPrice = _nowTechnicHolder.Data.GetRepairPrice();
-        _priceText.SetPrice(repairPrice);
+        _priceText.SetPrice(repairPrice, _tutorialManager.IsWork);
     }
 
     public void BindUpgrade(KitchenUpgradeData upgradeData) {

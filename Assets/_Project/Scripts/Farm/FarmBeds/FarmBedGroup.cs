@@ -13,4 +13,9 @@ public class FarmBedGroup : SpacePrefab {
         for (int i = 0; i < FARM_BEDS_COUNT; i++)
             _farmBeds[i].Bind(data, data.FarmBedGroups.GetBedData((groupIndex * 3) + i));
     }
+
+    public void UpdateUpgrades() {
+        foreach (var bed in _farmBeds)
+            bed.UpdateUpgrades();
+    }
 }

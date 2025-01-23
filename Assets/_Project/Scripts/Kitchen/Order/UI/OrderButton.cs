@@ -38,6 +38,7 @@ public class OrderButton : MonoBehaviour {
 
     public void SetManagers(TechnicManager technicManager, KitchenStorage kitchenStorage) {
         kitchenStorage.IngredientCountAdded += UpdateRecipeIngredients;
+        kitchenStorage.IngredientCountRemoved += UpdateRecipeIngredients;
         technicManager.TechnicChanged += UpdateRecipeTechnic;
         MoneyManager.Instance.MoneyChanged += UpdateAutoSpices;
 
@@ -54,7 +55,7 @@ public class OrderButton : MonoBehaviour {
         if (CheckOrderStarted())
             return;
 
-        _recipe.UpdateRecipeIngredients(count);
+        _recipe.UpdateRecipeIngredients();
         UpdateCookSlider();
     }
 
@@ -81,9 +82,9 @@ public class OrderButton : MonoBehaviour {
     }
 
     public void Cook() {
+        Order.StartCook();
         ChangeState(OrderUIState.Cook);
         _recipe.DisableParts();
-        Order.StartCook();
     }
 
     public void FinishCook() {

@@ -16,8 +16,11 @@ public class TechnicManager : SaveableItemManager<Technic, KitchenData>, IUpgrad
     public event Action TechnicChanged;
 
     private void ActivateHolders() {
-        foreach (var holder in _holders)
+        foreach (var holder in _holders) {
             holder.ChangeState(_data.IsItemAvailable(holder.Data.Technic));
+            holder.RepairChanged += delegate { TechnicChanged?.Invoke(); };
+            holder.CookChanged += delegate { TechnicChanged?.Invoke(); };
+        }
         TechnicChanged?.Invoke();
     }
 
@@ -39,7 +42,6 @@ public class TechnicManager : SaveableItemManager<Technic, KitchenData>, IUpgrad
     public void EmergencyStopCooking(Order order) {
         TechnicHolder technic = FindHolderByTechic(order.Food.TypeTechnic);
         technic.Data.EmergencyStopCook();
-        TechnicChanged?.Invoke();
     }
 
     public TechnicHolder FindHolderByTechic(Technic technic) {
@@ -54,6 +56,12 @@ public class TechnicManager : SaveableItemManager<Technic, KitchenData>, IUpgrad
         TechnicHolder holder = FindHolderByTechic(technic);
         holder.ChangeState(true);
         TechnicChanged?.Invoke();
+    }
+
+    public override void LateStart() {
+        base.LateStart();
+        foreach (var holder in _holders)
+            holder.LateStart();
     }
 
     public override void Bind(KitchenData data) {

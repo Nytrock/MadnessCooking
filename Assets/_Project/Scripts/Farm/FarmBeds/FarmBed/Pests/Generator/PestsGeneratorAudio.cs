@@ -5,6 +5,13 @@ public class PestsGeneratorAudio : MonoBehaviour {
     [SerializeField] private AudioSource _cleanAudio;
 
     private void Awake() {
-        _generator.PestsCleaned += _cleanAudio.Play;
+        _generator.PestsCleaned += Play;
+    }
+
+    private void Play() {
+        if (!gameObject.activeInHierarchy)
+            return;
+
+        _cleanAudio.Play();
     }
 }

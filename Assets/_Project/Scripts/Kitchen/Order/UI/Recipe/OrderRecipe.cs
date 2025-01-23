@@ -29,15 +29,13 @@ public class OrderRecipe : FoodRecipe<OrderRecipePart> {
         _techicIcon.SetTechnic(_food.TypeTechnic, haveTechnic);
     }
 
-    public void UpdateRecipeIngredients(BuyableItemCount<Ingredient> count) {
+    public void UpdateRecipeIngredients() {
         foreach (var part in _recipeParts) {
             if (part.IngredientCount is null)
                 continue;
 
-            if (part.IngredientCount.Item == count.Item) {
-                bool haveCount = _kitchenStorage.HaveCount(part.IngredientCount);
-                part.UpdateAvailable(haveCount);
-            }
+            bool haveCount = _kitchenStorage.HaveCount(part.IngredientCount);
+            part.UpdateAvailable(haveCount);
         }
     }
 
