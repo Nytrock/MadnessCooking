@@ -4,13 +4,13 @@ using UnityEngine;
 public class PixelSnap : EditorWindow {
     [MenuItem("Window/Pixel Snap")]
     public static void ShowWindow() {
-        EditorWindow ew = EditorWindow.GetWindow(typeof(PixelSnap));
+        EditorWindow ew = GetWindow(typeof(PixelSnap));
         ew.minSize = new Vector2(200, 116);
         ew.maxSize = new Vector2(200, 116);
     }
 
     private float pixelsPerUnit = 6.5f;
-    private float gridSize = 1;
+    private float gridSize = 0.5f;
 
     private bool autoSnap = false;
     private float unitScale;

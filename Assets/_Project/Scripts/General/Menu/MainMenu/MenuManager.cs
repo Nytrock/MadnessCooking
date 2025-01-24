@@ -7,6 +7,10 @@ public class MenuManager : MonoBehaviour {
     [SerializeField] private SettingsManager _settings;
     [SerializeField] private TutorialManager _tutorial;
 
+    private void Awake() {
+        _settings.SettingsClosed += ChangeSettingsState;
+    }
+
     public void NewGameConfirm() {
         if (_saveManager.IsDataExists())
             _confirmPanel.StartConfirm(TutorialConfirm, "Menu.NewGameConfirm");

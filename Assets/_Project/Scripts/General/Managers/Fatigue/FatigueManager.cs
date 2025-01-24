@@ -40,13 +40,20 @@ public class FatigueManager : Singleton<FatigueManager>, IBindable<GeneralData>,
     }
 
     private void UpdateSleepState() {
-        _data.ChangeFatigue(-_sleepBonus * _upgradeData.SleepCoef * FpsManager.NORMALIZED_DELTA_TIME);
+        RemoveFatigue(_sleepBonus * _upgradeData.SleepCoef * FpsManager.NORMALIZED_DELTA_TIME);
         if (_data.FatigueNow == 0 && _isTired)
             ChangeTiredState(false);
     }
 
-    public void ChangeFatigue(float fatigueValue) {
-        if (_isTired)
+    public void RemoveFatigue(float cheerfullValue) {
+        if (cheerfullValue < 0)
+            return;
+
+        _data.ChangeFatigue(-cheerfullValue);
+    }
+
+    public void AddFatigue(float fatigueValue) {
+        if (_isTired || fatigueValue <= 0)
             return;
 
         _data.ChangeFatigue(fatigueValue / _decorBonus);

@@ -1,19 +1,13 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class AnisManager : MonoBehaviour, IBindable<OfficeData> {
     [SerializeField] private SpriteChanger[] _sprites;
-    [SerializeField] private Toggle _toggle;
     private JokesData _data;
+
+    public bool IsAnis => _data.IsAnis;
 
     public void LateStart() {
         UpdateAnisState();
-        SetupToggle();
-    }
-
-    private void SetupToggle() {
-        _toggle.isOn = _data.IsAnis;
-        _toggle.onValueChanged.AddListener(ChangeAnisState);
     }
 
     public void Bind(OfficeData data) {
@@ -21,7 +15,7 @@ public class AnisManager : MonoBehaviour, IBindable<OfficeData> {
         _data = data.InternetJokesData;
     }
 
-    private void ChangeAnisState(bool isAnis) {
+    public void ChangeAnisState(bool isAnis) {
         _data.ChangeAnisState(isAnis);
         UpdateAnisState();
     }

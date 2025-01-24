@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class OrdersUI : MonoBehaviour, IUpgradeable<KitchenUpgradeData>, IActivable {
@@ -6,7 +7,7 @@ public class OrdersUI : MonoBehaviour, IUpgradeable<KitchenUpgradeData>, IActiva
     [SerializeField] private OrderButtonsPool _pool;
     [SerializeField] private GameObject _panel;
 
-    private readonly List<OrderButton> _orderButtons = new();
+    private List<OrderButton> _orderButtons;
     private KitchenUpgradeData _upgradeData;
 
     [Header("Upgrades")]
@@ -17,6 +18,7 @@ public class OrdersUI : MonoBehaviour, IUpgradeable<KitchenUpgradeData>, IActiva
         _ordersManager.OrderAdded += AddOrder;
         _ordersManager.OrderRemoved += RemoveOrder;
         _panel.SetActive(false);
+        _orderButtons = new();
     }
 
     private void Start() {
@@ -37,6 +39,13 @@ public class OrdersUI : MonoBehaviour, IUpgradeable<KitchenUpgradeData>, IActiva
         OrderButton button = _pool.GetObject();
         button.SetOrder(order, _upgradeData);
         _orderButtons.Add(button);
+        SortOrderButtons();
+    }
+
+    private void SortOrderButtons() {
+        _orderButtons = _orderButtons.OrderBy(button => button.Order.TableIndex).ToList();
+        for (int i = 0; i < _orderButtons.Count; i++)
+            _orderButtons[i].transform.SetSiblingIndex(i);
     }
 
     private void RemoveOrder(Order order) {

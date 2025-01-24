@@ -15,6 +15,10 @@ public class SettingsPanelsManager : MonoBehaviour {
         SetDefaultPanel();
     }
 
+    public void ClosePanels() {
+        ChangePanel(null);
+    }
+
     public void ChangePanel(SettingsPanel panel) {
         if (_nowPanel != null && _nowPanel.IsSettingsChanged()) {
             _submitChangesConfirm.StartConfirm(SubmitChangesConfirm, _submitChangesConfirmDescription, _submitChangesConfirmTitle);

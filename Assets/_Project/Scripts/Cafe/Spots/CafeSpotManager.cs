@@ -7,6 +7,7 @@ public class CafeSpotManager : MonoBehaviour, IBindable<CafeData> {
     [SerializeField] private CafeSpaceManager _spaceManager;
     [SerializeField] private HorizontalCameraManager _cameraManager;
     [SerializeField] private CafeStateChanger _opener;
+    [SerializeField] private AudioSource _removeButtonAudio;
     [SerializeField] private CafeSpot[] _spotPrefabs;
 
     private readonly List<CafeSpot> _spots = new();
@@ -34,8 +35,7 @@ public class CafeSpotManager : MonoBehaviour, IBindable<CafeData> {
     }
 
     private void SetupSpotRemoveButton(int i) {
-        ButtonWithAudio button = _spots[i].RemoveButton;
-        button.OverrideAllListeners(delegate { RemoveSpot(i); });
+        _spots[i].SetupRemoveButton(delegate { RemoveSpot(i); }, _removeButtonAudio);
     }
 
     private void GenerateSpots() {

@@ -128,7 +128,7 @@ public class FarmBed : MonoBehaviour {
         int puttedCount = Data.Count - remainCount;
 
         _managerData.AddToPlantCount(puttedCount);
-        FatigueManager.Instance.ChangeFatigue(Data.PlantedIngredient.FatigueCoef * puttedCount);
+        FatigueManager.Instance.AddFatigue(Data.PlantedIngredient.FatigueCoef * puttedCount);
         _puncher.AddWaste(puttedCount * Data.PlantedIngredient.WasteAmount);
         Data.SetCount(remainCount);
 

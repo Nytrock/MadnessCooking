@@ -1,6 +1,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [Serializable, JsonObject(MemberSerialization.OptIn)]
@@ -28,6 +29,7 @@ public class FarmUpgradeData : ISaveable {
 
     public void AddFarmBedUpgrade(FarmBedUpgrade farmBedUpgrade) {
         _availableFarmBedUpgrades.Add(farmBedUpgrade);
+        _availableFarmBedUpgrades = _availableFarmBedUpgrades.OrderBy(upgrade => upgrade.ID).ToList();
     }
 
     public void ChangePuncherProgressShow() {

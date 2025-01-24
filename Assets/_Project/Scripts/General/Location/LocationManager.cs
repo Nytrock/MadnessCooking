@@ -35,7 +35,7 @@ public class LocationManager : MonoBehaviour, IBindable<GeneralData> {
         if (_isLateStart)
             _isLateStart = false;
         else
-            FatigueManager.Instance.ChangeFatigue(locationPoint.FatigueCoef);
+            FatigueManager.Instance.AddFatigue(locationPoint.FatigueCoef);
 
         LocationChanged?.Invoke(location);
     }

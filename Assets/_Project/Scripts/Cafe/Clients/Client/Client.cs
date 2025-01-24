@@ -20,10 +20,11 @@ public class Client : MonoBehaviour {
     [field: SerializeField] public ClientData Data { get; private set; }
     public ClientsSpawner Spawner { get; private set; }
     public ClientUI ClientUI { get; private set; }
-    [field: SerializeField] public int SpotIndex { get; private set; }
-    [field: SerializeField] public int SeatIndex { get; private set; }
+    public int SpotIndex { get; private set; }
+    public int SeatIndex { get; private set; }
 
     public ClientGender Gender => _gender;
+    public ClientsHolder Table => _table;
 
     public event Action<Client> OrderActivated;
     public event Action<Client> ClientLeave;

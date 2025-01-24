@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class SettingsManager : MonoBehaviour, IBindable<SettingsData> {
@@ -9,19 +10,21 @@ public class SettingsManager : MonoBehaviour, IBindable<SettingsData> {
     [SerializeField] private AudioSettings _audioSettings;
     [SerializeField] private VideoSettings _videoSettings;
 
+    public event Action SettingsClosed;
+
     private void Awake() {
-        ChangeState(false);
+        _panel.SetActive(false);
+        _panelsManager.PanelChanged += CheckPanel;
+    }
+
+    private void CheckPanel(SettingsPanel panel) {
+        if (panel == null)
+            SettingsClosed?.Invoke();
     }
 
     public void ChangeState() {
         _panel.SetActive(!_panel.activeSelf);
         if (_panel.activeSelf)
-            _panelsManager.SetDefaultPanel();
-    }
-
-    private void ChangeState(bool newState) {
-        _panel.SetActive(newState);
-        if (newState)
             _panelsManager.SetDefaultPanel();
     }
 

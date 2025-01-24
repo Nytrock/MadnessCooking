@@ -19,7 +19,10 @@ public class ClientsHolder : MonoBehaviour {
     private readonly List<Client> _clients = new();
     private bool _isTutorial;
 
+    public int ClientsCount => _clients.Count;
+
     public event Action WaitStarted;
+    public event Action TalkStarted;
     public event Action<CafeSpot> ClientsLeaved;
 
     private void Awake() {
@@ -155,6 +158,7 @@ public class ClientsHolder : MonoBehaviour {
 
         _waitSlider.maxValue = _data.WaitTime;
         ChangeSliderState(true);
+        TalkStarted?.Invoke();
     }
 
     private void ChangeSliderState(bool newState) {

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class CafeSpot : MonoBehaviour {
     [SerializeField] private CafeSeat[] _seats;
@@ -10,7 +11,6 @@ public class CafeSpot : MonoBehaviour {
 
     public int Index => _index;
     public int SeatsCount => _seats.Length;
-    public ButtonWithAudio RemoveButton => _removeButton.Button;
     public bool CanRemove => _removeButton.CanRemove;
 
     private void Start() {
@@ -42,6 +42,10 @@ public class CafeSpot : MonoBehaviour {
 
     public void SetIndex(int index) {
         _index = index;
+    }
+
+    public void SetupRemoveButton(UnityAction buttonAction, AudioSource buttonAudio) {
+        _removeButton.Setup(buttonAction, buttonAudio);
     }
 
     public void Destroy() {

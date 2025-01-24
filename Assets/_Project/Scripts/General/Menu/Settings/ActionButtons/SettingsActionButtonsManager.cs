@@ -13,6 +13,8 @@ public class SettingsActionButtonsManager : MonoBehaviour {
     }
 
     private void UpdateNowPanel(SettingsPanel panel) {
+        if (panel == null) return;
+
         if (_nowPanel != null)
             _nowPanel.SettingsChanged -= UpdateButtons;
         _nowPanel = panel;

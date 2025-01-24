@@ -38,7 +38,7 @@ public class FarmBedUpgraderUI : ChoiceBuyUI<FarmBedUpgrade> {
     public override void SetChoice() {
         FarmBedUpgrade upgrade = _choiceButtons[_chosedIndex].Item;
         MoneyManager.Instance.ChangeMoney(-upgrade.PriceToAdd);
-        FatigueManager.Instance.ChangeFatigue(upgrade.FatigueCoef);
+        FatigueManager.Instance.AddFatigue(upgrade.FatigueCoef);
         _changingBed.AddUpgrade(upgrade);
 
         int index = 0;

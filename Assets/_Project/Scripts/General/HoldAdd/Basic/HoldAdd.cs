@@ -65,7 +65,7 @@ public abstract class HoldAdd : MonoBehaviour, IBindable<FarmData> {
 
     protected virtual void UpdateTimer() {
         if (!Data.IsAuto)
-            FatigueManager.Instance.ChangeFatigue(_fatigueCoef * FpsManager.NORMALIZED_DELTA_TIME);
+            FatigueManager.Instance.AddFatigue(_fatigueCoef * FpsManager.NORMALIZED_DELTA_TIME);
 
         if (Data.NowTime < _timeWait)
             Data.UpdateTime();

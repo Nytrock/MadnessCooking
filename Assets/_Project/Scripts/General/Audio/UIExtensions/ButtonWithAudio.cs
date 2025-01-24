@@ -21,4 +21,8 @@ public class ButtonWithAudio : Button {
     public void ForceSoundPlay() {
         _audioSource.Play();
     }
+
+    public void SetAudio(AudioSource audioSource) {
+        _audioSource = audioSource;
+    }
 }

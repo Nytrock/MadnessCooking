@@ -4,9 +4,9 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D), typeof(Animator))]
 public class KitchenCat : DecorHolder, IBindable<KitchenData> {
     [SerializeField, Min(0)] private float _needTime;
-    [SerializeField, Min(0)] private float _fatigueDecreaseCoef;
+    [SerializeField, Min(0)] private float _cheerfullCoef;
     [SerializeField] private KitchenCatEyes _eyes;
-    [SerializeField] private KitchenCatData _data;
+    private KitchenCatData _data;
 
     public event Action Petted;
 
@@ -26,7 +26,7 @@ public class KitchenCat : DecorHolder, IBindable<KitchenData> {
     private void Pet() {
         _animator.SetTrigger("isPet");
         _eyes.ChangeState(false);
-        FatigueManager.Instance.ChangeFatigue(-_fatigueDecreaseCoef);
+        FatigueManager.Instance.RemoveFatigue(_cheerfullCoef);
         _data.Pet();
 
         Petted?.Invoke();

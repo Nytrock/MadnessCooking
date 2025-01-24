@@ -88,7 +88,7 @@ public class BarnChickens : MonoBehaviour, IBindable<FarmData> {
 
     public void EggsToCar() {
         int remainCount = _car.PutIngredientWithRemain(_egg, Data.EggCount);
-        FatigueManager.Instance.ChangeFatigue(_egg.FatigueCoef * (Data.EggCount - remainCount));
+        FatigueManager.Instance.AddFatigue(_egg.FatigueCoef * (Data.EggCount - remainCount));
         Data.SetEggCount(remainCount);
         EggCountChanged?.Invoke();
     }

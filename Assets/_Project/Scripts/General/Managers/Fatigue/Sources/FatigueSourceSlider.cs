@@ -18,6 +18,6 @@ public class FatigueSourceSlider : MonoBehaviour {
         if (fatigue == 0)
             return;
 
-        FatigueManager.Instance.ChangeFatigue(fatigue);
+        FatigueManager.Instance.AddFatigue(fatigue);
     }
 }

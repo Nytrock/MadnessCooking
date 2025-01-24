@@ -1,6 +1,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [Serializable, JsonObject(MemberSerialization.OptIn)]
@@ -21,6 +22,7 @@ public class BuyableItemManagerData<TItem>
             return;
 
         _availableItems.Add(item);
+        _availableItems = _availableItems.OrderBy(item => item.ID).ToList();
     }
 
     public TItem GetItem(int index) {
