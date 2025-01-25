@@ -14,13 +14,11 @@ public class IngredientStorageData {
     public int MaxSpace => _maxSpace;
     public int LeftSpace => _maxSpace - _nowSpace;
 
-    public IngredientStorageData(int maxSize, BuyableItemCountList<Ingredient> defaultIngredients = null) {
+    public IngredientStorageData(BuyableItemCountList<Ingredient> defaultIngredients = null) {
         if (defaultIngredients == null)
             _ingredients = new();
         else
             _ingredients = new(defaultIngredients);
-
-        _maxSpace = maxSize;
         _nowSpace = 0;
     }
 
@@ -60,5 +58,9 @@ public class IngredientStorageData {
 
     public bool ContainsIngredient(Ingredient item) {
         return _ingredients.ContainsItem(item);
+    }
+
+    public void SetMaxSpace(int defaultMaxSpace) {
+        _maxSpace = defaultMaxSpace;
     }
 }

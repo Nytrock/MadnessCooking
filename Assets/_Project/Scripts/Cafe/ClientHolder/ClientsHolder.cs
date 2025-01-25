@@ -71,7 +71,7 @@ public class ClientsHolder : MonoBehaviour {
             if (_clients[i].transform.position.x == spawn) {
                 _clients[i].StartNewCycle();
                 if (i != _clients.Count - 1)
-                    yield return new WaitForSeconds(_clientInterval.RandomValue);
+                    yield return new WaitForSeconds(_clientInterval.RandomValue / InGameTime.Instance.NormalizedTime);
             }
         }
     }

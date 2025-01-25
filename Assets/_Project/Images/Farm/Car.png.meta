@@ -153,7 +153,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 31
+        y: 36
         width: 75
         height: 28
       alignment: 9
@@ -175,7 +175,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 55
-        y: 17
+        y: 22
         width: 13
         height: 13
       alignment: 0
@@ -197,7 +197,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 10
+        y: 15
         width: 28
         height: 20
       alignment: 0
@@ -219,7 +219,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 30
-        y: 4
+        y: 9
         width: 24
         height: 26
       alignment: 0
@@ -241,7 +241,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 70
-        y: 24
+        y: 29
         width: 5
         height: 5
       alignment: 0
@@ -263,7 +263,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 70
-        y: 20
+        y: 25
         width: 3
         height: 3
       alignment: 0
@@ -285,7 +285,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 5
         width: 72
         height: 3
       alignment: 0
@@ -298,6 +298,72 @@ TextureImporter:
       bones: []
       spriteID: ab4c5a04941933b4fb01739ee0d0ce00
       internalID: -371570482
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CarBoxShadow
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 32
+        height: 4
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bfe409303b7a94340aa73ad120683ba5
+      internalID: 868192398
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CarWaitShadow
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 0
+        width: 26
+        height: 4
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 82e768a457be2a04387def7a289ce4c1
+      internalID: 1915636496
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CarShadowSupport
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 0
+        width: 1
+        height: 1
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ed387809ac5c609408c8373aa7669d92
+      internalID: -166204778
       vertices: []
       indices: 
       edges: []
@@ -318,9 +384,12 @@ TextureImporter:
     nameFileIdTable:
       Background: -1613235379
       CarBox: -1169313381
+      CarBoxShadow: 868192398
+      CarShadowSupport: -166204778
       CarUI: 1186304576
       CarUIIngredient: 698145135
       CarWait: -1848823731
+      CarWaitShadow: 1915636496
       FarmCar: -188697464
       FarmCarShadow: -371570482
       FarmCarWheel: 1839512235

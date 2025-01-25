@@ -22,7 +22,7 @@ public class BuyableItemManagerData<TItem>
             return;
 
         _availableItems.Add(item);
-        _availableItems = _availableItems.OrderBy(item => item.ID).ToList();
+        _availableItems = _availableItems.OrderBy(item => item.Price).ToList();
     }
 
     public TItem GetItem(int index) {

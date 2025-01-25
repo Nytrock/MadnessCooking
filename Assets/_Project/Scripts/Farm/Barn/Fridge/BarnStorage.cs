@@ -14,7 +14,8 @@ public class BarnStorage : IngredientStorage {
     public event Action<int> FlourCountUpdated;
 
     private void Awake() {
-        Data = new(_defaultMaxSpace);
+        Data = new();
+        Data.SetMaxSpace(-1);
 
         _cow.ReadyCountChanged += UpdateMilkCount;
         _flourMill.ReadyCountChanged += UpdateFlourCount;

@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class IngredientStorageRenderer : MonoBehaviour {
     [SerializeField, Min(1)] private int _needCount;
     [SerializeField] private IngredientStorage _ingredientStorage;
-    [SerializeField] private IngredientRenderer[] _ingredientsRenderers;
+    [SerializeField] protected IngredientRenderer[] _ingredientsRenderers;
 
     protected List<IngredientRenderer> _availableIngredientRenderers;
     private readonly BuyableItemCountList<Ingredient> _ingredients = new();
@@ -13,7 +13,10 @@ public abstract class IngredientStorageRenderer : MonoBehaviour {
     private void Awake() {
         _ingredientStorage.IngredientCountAdded += CheckAddedIngredient;
         _ingredientStorage.IngredientCountRemoved += CheckRemovedIngredient;
+
         _availableIngredientRenderers = _ingredientsRenderers.ToList();
+        foreach (var renderer in _availableIngredientRenderers)
+            renderer.Setup();
     }
 
     private void CheckRemovedIngredient(BuyableItemCount<Ingredient> removedCount) {
@@ -23,12 +26,12 @@ public abstract class IngredientStorageRenderer : MonoBehaviour {
         if (removedRenderersCount == 0)
             return;
 
-        foreach (var ingredientRenderer in _ingredientsRenderers) {
+        for (int i = 0; i < _ingredientsRenderers.Length; i++) {
             if (removedRenderersCount == 0)
                 break;
 
-            if (ingredientRenderer.Ingredient == removedCount.Item) {
-                DisableIngredientRenderer(ingredientRenderer);
+            if (_ingredientsRenderers[i].Ingredient == removedCount.Item) {
+                DisableIngredientRenderer(i);
                 removedRenderersCount--;
             }
         }
@@ -57,9 +60,10 @@ public abstract class IngredientStorageRenderer : MonoBehaviour {
         renderer.SetSprite(ingredient);
     }
 
-    private void DisableIngredientRenderer(IngredientRenderer ingredientRenderer) {
-        ingredientRenderer.Disable();
-        _availableIngredientRenderers.Add(ingredientRenderer);
+    protected virtual void DisableIngredientRenderer(int index) {
+        IngredientRenderer renderer = _ingredientsRenderers[index];
+        renderer.Disable();
+        _availableIngredientRenderers.Add(renderer);
     }
 
     protected abstract int GetIngredientIndex();

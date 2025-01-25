@@ -29,7 +29,7 @@ public class FarmUpgradeData : ISaveable {
 
     public void AddFarmBedUpgrade(FarmBedUpgrade farmBedUpgrade) {
         _availableFarmBedUpgrades.Add(farmBedUpgrade);
-        _availableFarmBedUpgrades = _availableFarmBedUpgrades.OrderBy(upgrade => upgrade.ID).ToList();
+        _availableFarmBedUpgrades = _availableFarmBedUpgrades.OrderBy(upgrade => upgrade.Price).ToList();
     }
 
     public void ChangePuncherProgressShow() {

@@ -7,7 +7,7 @@ public class IngredientRenderer : MonoBehaviour {
 
     public Ingredient Ingredient => _ingredient;
 
-    private void Awake() {
+    public void Setup() {
         _renderer = GetComponent<SpriteRenderer>();
         Disable();
     }

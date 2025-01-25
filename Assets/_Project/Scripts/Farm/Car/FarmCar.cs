@@ -30,7 +30,7 @@ public class FarmCar : SaveableIngredientStorage<FarmData> {
     }
 
     public void Leave() {
-        Data.ClearList();
+        RemoveIngredients(Data.Ingredients);
         _animator.SetBool("isLeave", true);
         StateChanged?.Invoke(CarState.Sent);
     }
@@ -46,7 +46,7 @@ public class FarmCar : SaveableIngredientStorage<FarmData> {
     }
 
     public override void Bind(FarmData data) {
-        data.Car ??= new(_defaultMaxSpace, _defaultIngredients);
+        data.Car ??= new(_defaultIngredients);
         Data = data.Car;
     }
 }
