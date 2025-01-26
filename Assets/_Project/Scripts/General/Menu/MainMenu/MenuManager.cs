@@ -55,8 +55,4 @@ public class MenuManager : MonoBehaviour {
     private void ChangeState() {
         _panel.SetActive(!_panel.activeSelf);
     }
-
-    public void ChangeState(bool newState) {
-        _panel.SetActive(newState);
-    }
 }

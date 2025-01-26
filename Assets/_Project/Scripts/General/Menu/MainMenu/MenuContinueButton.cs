@@ -1,11 +1,9 @@
 using UnityEngine;
 
-[RequireComponent(typeof(ButtonWithAudio))]
-public class MenuContinueButton : MonoBehaviour {
+public class MenuContinueButton : MenuButton {
     [SerializeField] private GameSaveManager _saveManager;
 
-    private void Start() {
-        ButtonWithAudio button = GetComponent<ButtonWithAudio>();
-        button.interactable = _saveManager.IsDataExists();
+    public override void ChangeSelectVisual(bool newState) {
+        _button.interactable = newState && _saveManager.IsDataExists();
     }
 }

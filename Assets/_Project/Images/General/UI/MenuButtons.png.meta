@@ -1,7 +1,22 @@
 fileFormatVersion: 2
-guid: bc22c1d4f8f0987478ce369b2684098f
+guid: 5c9743e5863c4fd439252e8e7b9e66d5
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: -4331849829665928538
+    second: MenuButtons_0
+  - first:
+      213: -3172522754301639175
+    second: MenuButtons_1
+  - first:
+      213: 9060215553278879933
+    second: MenuButtons_2
+  - first:
+      213: -3341821493477967250
+    second: MenuButtons_3
+  - first:
+      213: 6477783469407055815
+    second: MenuButtons_4
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -149,35 +164,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: VkLink
+      name: MenuButtonResume
       rect:
         serializedVersion: 2
         x: 0
-        y: 3
-        width: 34
-        height: 23
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2f9db9f878dddf14eb727503468785c3
-      internalID: -1914595441
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TgLink
-      rect:
-        serializedVersion: 2
-        x: 36
         y: 0
-        width: 16
-        height: 16
+        width: 9
+        height: 9
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -186,20 +179,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 98b4f98a27046cc4da48ae9f9ad53a85
-      internalID: 1642142295
+      spriteID: 4f362a4a13befd24a86060bf26c9ae9a
+      internalID: -287078275
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TgLinkHat
+      name: MenuButtonSettings
       rect:
         serializedVersion: 2
-        x: 37
-        y: 17
-        width: 14
-        height: 5
+        x: 20
+        y: 0
+        width: 9
+        height: 9
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -208,20 +201,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4558277ecb2bacd42abc04e8f0e9f546
-      internalID: 1305922045
+      spriteID: 8eb32eb16bdcac940b71b2a1c906acfe
+      internalID: -1315206078
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TgLinkPropeller
+      name: MenuButtonMenu
       rect:
         serializedVersion: 2
-        x: 35
-        y: 23
-        width: 18
-        height: 3
+        x: 30
+        y: 0
+        width: 9
+        height: 9
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -230,20 +223,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 76a627007c4202d48ac5389ad6106b70
-      internalID: 73350137
+      spriteID: d510f0d575c4fff43b930b16bf74a3dd
+      internalID: 1396299930
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TgLinkPropellerPart
+      name: MenuButtonExit
       rect:
         serializedVersion: 2
-        x: 35
-        y: 25
-        width: 1
-        height: 1
+        x: 40
+        y: 0
+        width: 9
+        height: 9
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -252,8 +245,52 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0aa332464850f8b4eb327219682a63b3
-      internalID: -556292508
+      spriteID: 91c4eb6720f843042bda6298d06a4708
+      internalID: 274352536
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MenuButtonContinue
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 0
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9f547647d65ec164c8560869be444e7c
+      internalID: -753038529
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MenuButtonNewGame
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 0
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f6550bea98d46a9428a550218d71abfe
+      internalID: -2033193608
       vertices: []
       indices: 
       edges: []
@@ -274,12 +311,13 @@ TextureImporter:
     nameFileIdTable:
       Background: 1901407923
       Lamp: 1955946697
+      MenuButtonContinue: -753038529
+      MenuButtonExit: 274352536
+      MenuButtonMenu: 1396299930
+      MenuButtonNewGame: -2033193608
+      MenuButtonResume: -287078275
+      MenuButtonSettings: -1315206078
       Pot: 470648381
-      TgLink: 1642142295
-      TgLinkHat: 1305922045
-      TgLinkPropeller: 73350137
-      TgLinkPropellerPart: -556292508
-      VkLink: -1914595441
       Window: -805373322
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0

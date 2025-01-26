@@ -12,7 +12,7 @@ public abstract class MenuButtonSelector : MonoBehaviour {
 
     protected void Awake() {
         for (int i = 0; i < _buttons.Length; i++) {
-            _buttons[i].SetIndex(i);
+            _buttons[i].Setup(i);
             _buttons[i].ButtonSelected += SelectButton;
         }
 
@@ -53,7 +53,12 @@ public abstract class MenuButtonSelector : MonoBehaviour {
 
         if (_audioSource.isActiveAndEnabled)
             _audioSource.Play();
+
+        if (_nowButton != null)
+            _nowButton.ChangeSelectVisual(false);
         _nowButton = _buttons[index];
+        _nowButton.ChangeSelectVisual(true);
+
         _targetRect = _nowButton.Rect;
         ChangePosition();
     }

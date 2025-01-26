@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(ButtonWithAudio))]
 public class MenuButton : MonoBehaviour, IPointerEnterHandler {
-    private ButtonWithAudio _button;
+    protected ButtonWithAudio _button;
     private RectTransform _rect;
     private int _index;
 
@@ -16,14 +16,19 @@ public class MenuButton : MonoBehaviour, IPointerEnterHandler {
     public void Awake() {
         _button = GetComponent<ButtonWithAudio>();
         _rect = GetComponent<RectTransform>();
+        ChangeSelectVisual(false);
     }
 
     public void OnPointerEnter(PointerEventData eventData) {
         ButtonSelected?.Invoke(_index);
     }
 
-    public void SetIndex(int newIndex) {
-        _index = newIndex;
+    public void Setup(int index) {
+        _index = index;
+    }
+
+    public virtual void ChangeSelectVisual(bool newState) {
+        _button.interactable = newState;
     }
 
     public void Press() {
