@@ -6,8 +6,11 @@ public class StaticPestsPool : PestsPool {
     private readonly List<Pest> _freePests = new();
 
     private void Awake() {
-        foreach (var pest in _pests)
+        foreach (var pest in _pests) {
+            pest.Awake();
+            pest.ChangeState(false);
             _freePests.Add(pest);
+        }
     }
 
     protected override Pest CreateObject() {

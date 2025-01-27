@@ -1,15 +1,19 @@
 using System;
 using UnityEngine;
 
-public class WheatManager : MonoBehaviour, IUpgradeable<FarmUpgradeData>, IBindable<FarmData> {
+public class WheatManager : MonoBehaviour, IBindable<FarmData> {
     [SerializeField] private Cow _cow;
     [SerializeField] private FlourMill _flourMill;
+
+    [Header("Upgrades")]
+    [SerializeField] private UpgradeManager _upgradeManager;
     [SerializeField] private BaseUpgrade _wheatDistributeUpgrade;
+    private bool _isWheatDistributing = false;
 
     private WheatManagerData _data;
-    private FarmUpgradeData _upgradeData;
 
     private void Awake() {
+        _upgradeManager.ItemAdded += CheckAddedUpgrade;
         _cow.ReadyCountChanged += MakeWheatSame;
         _flourMill.ReadyCountChanged += MakeWheatSame;
     }
@@ -26,7 +30,7 @@ public class WheatManager : MonoBehaviour, IUpgradeable<FarmUpgradeData>, IBinda
         if (_flourMill.NeedHoldData == null || _cow.NeedHoldData == null)
             return;
 
-        if (_upgradeData == null || _upgradeData.IsWheatDistributing)
+        if (_isWheatDistributing)
             return;
 
         int cowWheatCount = _cow.NeedHoldData.MaterialCount;
@@ -40,7 +44,7 @@ public class WheatManager : MonoBehaviour, IUpgradeable<FarmUpgradeData>, IBinda
     }
 
     public void AddWheat(int count) {
-        if (_upgradeData.IsWheatDistributing) {
+        if (_isWheatDistributing) {
             DistributeWheat(count);
         } else {
             _cow.AddMaterial(count);
@@ -50,7 +54,7 @@ public class WheatManager : MonoBehaviour, IUpgradeable<FarmUpgradeData>, IBinda
 
     public void CheckAddedUpgrade(BaseUpgrade upgrade) {
         if (upgrade == _wheatDistributeUpgrade) {
-            _upgradeData.ChangeWheatDistributing();
+            _isWheatDistributing = true;
 
             if (!_data.IsWheatDistributed)
                 DistributeWheatAfterUpgrade();
@@ -84,9 +88,5 @@ public class WheatManager : MonoBehaviour, IUpgradeable<FarmUpgradeData>, IBinda
     public void Bind(FarmData data) {
         data.WheatManager ??= new();
         _data = data.WheatManager;
-    }
-
-    public void BindUpgrade(FarmUpgradeData upgradeData) {
-        _upgradeData = upgradeData;
     }
 }

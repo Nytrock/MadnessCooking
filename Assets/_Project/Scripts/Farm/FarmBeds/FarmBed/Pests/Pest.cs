@@ -14,7 +14,7 @@ public class Pest : MonoBehaviour {
 
     public event Action PestRemoved;
 
-    private void Awake() {
+    public void Awake() {
         _renderer = GetComponent<SpriteRenderer>();
     }
 

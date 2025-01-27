@@ -12,6 +12,10 @@ public class WatchDaytimeRenderer : MonoBehaviour {
         _timeManager.DaytimeChanged += UpdateDaytime;
     }
 
+    private void Start() {
+        UpdateDaytime(_timeManager.NowDaytime);
+    }
+
     public void UpdateDaytime(Daytime daytime) {
         DaytimeRenderInfo newDaytime = FindDaytime(daytime);
 

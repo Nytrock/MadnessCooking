@@ -306,6 +306,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 5629952297557018515, guid: c2232c781fb4fe6458c8d53a2e082d03, type: 2}
   m_audioClip: {fileID: 8300000, guid: ed1c1b4a1d6db4748840eeab377231f1, type: 3}
+  m_Resource: {fileID: 8300000, guid: ed1c1b4a1d6db4748840eeab377231f1, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.35
   m_Pitch: 1
@@ -426,8 +427,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -24.9}
-  m_SizeDelta: {x: -16.599995, y: 66.4}
+  m_AnchoredPosition: {x: 0, y: -58.1}
+  m_SizeDelta: {x: -16.599995, y: 132.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1766599378022082175
 CanvasRenderer:
@@ -492,7 +493,7 @@ MonoBehaviour:
   m_fontSizeMax: 56
   m_fontStyle: 0
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
+  m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -500,15 +501,17 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0

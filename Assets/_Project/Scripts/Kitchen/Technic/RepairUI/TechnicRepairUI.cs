@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TechnicRepairUI : MonoBehaviour, IUpgradeable<KitchenUpgradeData>, IActivable {
+public class TechnicRepairUI : MonoBehaviour, IActivable {
     [SerializeField] private Transform _targetPoint;
     [SerializeField] private GameObject _panel;
     [SerializeField] private Camera _camera;
@@ -12,12 +12,18 @@ public class TechnicRepairUI : MonoBehaviour, IUpgradeable<KitchenUpgradeData>, 
 
     [Header("Upgrades")]
     [SerializeField] private BaseUpgrade _technicStrengthShow;
+    [SerializeField] private UpgradeManager _upgradeManager;
     [SerializeField] private Slider _strengthSlider;
 
     private TechnicHolder _nowTechnicHolder;
-    private KitchenUpgradeData _upgradeData;
+    private bool _isStrengthShow;
 
     public event Action<bool> StateChanged;
+
+    private void Awake() {
+        _upgradeManager.ItemAdded += CheckAddedUpgrade;
+        UpdateStrengthShowState();
+    }
 
     private void Start() {
         _panel.SetActive(false);
@@ -78,19 +84,14 @@ public class TechnicRepairUI : MonoBehaviour, IUpgradeable<KitchenUpgradeData>, 
         _priceText.SetPrice(repairPrice, _tutorialManager.IsWork);
     }
 
-    public void BindUpgrade(KitchenUpgradeData upgradeData) {
-        _upgradeData = upgradeData;
-        ChangeStrengthShowState();
-    }
-
     public void CheckAddedUpgrade(BaseUpgrade upgrade) {
         if (upgrade == _technicStrengthShow) {
-            _upgradeData.ChangeStrengthShow();
-            ChangeStrengthShowState();
+            _isStrengthShow = true;
+            UpdateStrengthShowState();
         }
     }
 
-    private void ChangeStrengthShowState() {
-        _strengthSlider.gameObject.SetActive(_upgradeData.IsStrengthShow);
+    private void UpdateStrengthShowState() {
+        _strengthSlider.gameObject.SetActive(_isStrengthShow);
     }
 }

@@ -6,11 +6,17 @@ public class ShopRendererPage : MonoBehaviour {
     [SerializeField] private ShopRendererPageUpper _upper;
     [SerializeField] private Transform _container;
 
-    [SerializeField, Min(1)] private int _maxItemCount;
+    [SerializeField] private int _maxItemCount;
 
     [SerializeField] protected List<BaseBuyPanel> _buyPanels = new();
 
-    public int MaxItemCount => _maxItemCount;
+    public int MaxItemCount {
+        get {
+            if (_maxItemCount == -1)
+                return int.MaxValue;
+            return _maxItemCount;
+        }
+    }
     public int ItemCount => _buyPanels.Count;
 
     public void GeneratePanel(BuyPanelData panelData) {

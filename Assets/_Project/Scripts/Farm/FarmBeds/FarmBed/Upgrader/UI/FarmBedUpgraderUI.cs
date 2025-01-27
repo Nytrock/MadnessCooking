@@ -23,7 +23,7 @@ public class FarmBedUpgraderUI : ChoiceBuyUI<FarmBedUpgrade> {
         DestoyOldButtons();
 
         int index = 0;
-        foreach (var upgrade in _manager.GetAllUpgrades()) {
+        foreach (var upgrade in _manager.GetAvailableUpgrades()) {
             bool isAccessable = CheckUpgradeAccessable(upgrade);
             if (isAccessable) {
                 FarmBedUpgradeButton button = _choiceButtonPool.GetObject() as FarmBedUpgradeButton;
@@ -60,7 +60,6 @@ public class FarmBedUpgraderUI : ChoiceBuyUI<FarmBedUpgrade> {
         BedType bedType = _changingBed.Data.BedType;
         bool isAccessable = true;
 
-        isAccessable &= _manager.ContainsUpgrade(upgrade);
         isAccessable &= upgrade.SuitableBedTypes.Contains(bedType);
         isAccessable &= !_changingBed.HaveUpgrade(upgrade);
         foreach (var needUpgrade in upgrade.NeedItems) {

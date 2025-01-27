@@ -16,6 +16,7 @@ public class GameTimeManager : MonoBehaviour, IBindable<GeneralData> {
     public float DefaultTimeSpeed => _defaultTimeSpeed;
     public TimeSpan GlobalTime => _data.GlobalTime;
     public int LocalDays => _data.LocalDays;
+    public Daytime NowDaytime => _data.Daytime;
 
     public event Action<Daytime> DaytimeChanged;
     public event Action TimeSpeedUpdated;
