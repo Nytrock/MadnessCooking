@@ -84,6 +84,9 @@ public class ShopData<TItem>
     }
 
     public void BuyItem(TItem item) {
+        if (_availableItems.Contains(item))
+            return;
+
         _availableItems.Add(item);
     }
 

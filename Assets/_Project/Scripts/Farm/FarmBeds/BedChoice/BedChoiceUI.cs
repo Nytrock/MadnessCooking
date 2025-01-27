@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BedChoiceUI : ChoiceBuyUI<BedType>, IBindable<FarmData> {
+public class BedChoiceUI : ChoiceBuyUI<BedType> {
     [SerializeField] private BedTypeManager _bedTypesManager;
     [SerializeField] private BedTypeIngredientsRenderer _ingredientsRenderer;
     [SerializeField] private TutorialManager _tutorialManager;
@@ -10,16 +10,12 @@ public class BedChoiceUI : ChoiceBuyUI<BedType>, IBindable<FarmData> {
         _bedTypesManager.ItemAdded += AddType;
     }
 
-    public void LateStart() {
-        GenerateChoiceButtons();
-        base.Start();
-    }
-
     public void ActivateBedChoice(BedChoice newBed) {
         if (_tutorialManager.IsWork)
             _tutorialManager.NextTutorialPart();
 
         _changingBed = newBed;
+        GenerateChoiceButtons();
         Activate();
     }
 
@@ -76,7 +72,8 @@ public class BedChoiceUI : ChoiceBuyUI<BedType>, IBindable<FarmData> {
     public override void Disable() {
         base.Disable();
         _changingBed = null;
+        foreach (var button in _choiceButtons)
+            _choiceButtonPool.PutObject(button);
+        _choiceButtons.Clear();
     }
-
-    public void Bind(FarmData data) { }
 }
