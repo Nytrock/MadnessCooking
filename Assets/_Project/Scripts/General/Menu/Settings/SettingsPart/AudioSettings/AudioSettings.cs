@@ -1,17 +1,10 @@
 using UnityEngine;
 
 public class AudioSettings : SettingsPanel, IBindable<AudioSettingsData> {
-    [SerializeField] private AudioSettingsPoint _masterAudio;
-    [SerializeField] private AudioSettingsPoint _UIAudio;
-    [SerializeField] private AudioSettingsPoint _sfxAudio;
-    [SerializeField] private AudioSettingsPoint _musicAudio;
-
-    public void LateStart() {
-        _masterAudio.LateStart();
-        _UIAudio.LateStart();
-        _sfxAudio.LateStart();
-        _musicAudio.LateStart();
-    }
+    [SerializeField] private FloatSettingsPoint _masterAudio;
+    [SerializeField] private FloatSettingsPoint _UIAudio;
+    [SerializeField] private FloatSettingsPoint _sfxAudio;
+    [SerializeField] private FloatSettingsPoint _musicAudio;
 
     public void Bind(AudioSettingsData data) {
         _masterAudio.Bind(data.VolumeSettings.MasterVolume);
