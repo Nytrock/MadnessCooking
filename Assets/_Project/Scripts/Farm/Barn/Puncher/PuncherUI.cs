@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,17 +14,12 @@ public class PuncherUI : MonoBehaviour, IActivable {
 
     private bool _isProgressShow = false;
 
+    public event Action<bool> StateChanged;
+
     private void Awake() {
         _puncher.FertilizerChanged += UpdateCount;
         _upgradeManager.ItemAdded += CheckAddedUpgrade;
         UpdateProgressShow();
-    }
-
-    public void ChangeState() {
-        _panel.SetActive(!_panel.activeSelf);
-
-        if (_panel.activeSelf)
-            UpdateProgress();
     }
 
     public void ChangeState(bool newState) {
@@ -31,6 +27,7 @@ public class PuncherUI : MonoBehaviour, IActivable {
 
         if (newState)
             UpdateProgress();
+        StateChanged?.Invoke(newState);
     }
 
     private void UpdateProgress() {

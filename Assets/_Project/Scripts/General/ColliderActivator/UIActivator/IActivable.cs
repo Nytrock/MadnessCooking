@@ -1,4 +1,6 @@
+using System;
+
 public interface IActivable {
     void ChangeState(bool newState);
-    void ChangeState();
+    event Action<bool> StateChanged;
 }

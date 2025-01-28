@@ -3,13 +3,18 @@ using UnityEngine;
 public class ClientWalkState : ClientBaseState {
     private Vector2 _nowTarget;
     private const float _speed = 3.5f;
+    private ClientsSpawner _spawner;
+
+    public void SetupSpawner(ClientsSpawner spawner) {
+        _spawner = spawner;
+    }
 
     public override void EnterState(Client client) {
         bool isLeaving = client.Data.State == ClientState.Leave;
         if (isLeaving)
-            _nowTarget = client.Spawner.SpawnPoint;
+            _nowTarget = _spawner.SpawnPoint;
         else
-            _nowTarget = client.Spawner.GetSpot(client.SpotIndex).GetTarget(client.SeatIndex);
+            _nowTarget = _spawner.GetSpot(client.SpotIndex).GetTarget(client.SeatIndex);
         _nowTarget = new Vector2(_nowTarget.x, client.transform.position.y);
         client.StartWalk(isLeaving.ToDirection());
     }

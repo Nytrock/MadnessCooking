@@ -5,8 +5,7 @@ public class UIActivatorAnimated : UIActivator {
     [SerializeField] private string _animationName = "isOpen";
     private Animator _animator;
 
-    protected override void Awake() {
-        base.Awake();
+    protected void Awake() {
         _animator = GetComponent<Animator>();
     }
 

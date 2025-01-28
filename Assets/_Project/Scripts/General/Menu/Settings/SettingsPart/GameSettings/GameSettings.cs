@@ -1,23 +1,16 @@
 using UnityEngine;
 
 public class GameSettings : SettingsPanel, IBindable<GameSettingsData> {
-    [SerializeField] private LocalizationSettingsPoint _localization;
+    [SerializeField] private IntSettingsPoint _localization;
     [SerializeField] private CursorSettingsPoint _cursor;
-    [SerializeField] private FpsShowSettingsPoint _fpsShow;
-    [SerializeField] private BackgroundRunSettingsPoint _backgroundRun;
-
-    public void LateStart() {
-        _localization.LateStart();
-        _cursor.LateStart();
-        _fpsShow.LateStart();
-        _backgroundRun.LateStart();
-    }
+    [SerializeField] private BoolSettingsPoint _fpsShow;
+    [SerializeField] private BoolSettingsPoint _backgroundRun;
 
     public void Bind(GameSettingsData data) {
-        _localization.Bind(data);
-        _cursor.Bind(data);
-        _fpsShow.Bind(data);
-        _backgroundRun.Bind(data);
+        _localization.Bind(data.LocalizationManager);
+        _cursor.Bind(data.CursorManager);
+        _fpsShow.Bind(data.FpsManager);
+        _backgroundRun.Bind(data.BackgroundRunManager);
     }
 
     protected override void GenerateSettingPointsArray() {

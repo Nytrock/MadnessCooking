@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class SleepBedUI : MonoBehaviour, IActivable {
@@ -8,16 +9,15 @@ public class SleepBedUI : MonoBehaviour, IActivable {
     [SerializeField] private string _sleepingNote;
     [SerializeField] private string _notSleepingNote;
 
+    public event Action<bool> StateChanged;
+
     private void Awake() {
         _sleepBed.SleepChanged += UpdateSleepState;
     }
 
     public void ChangeState(bool newState) {
         _panel.SetActive(newState);
-    }
-
-    public void ChangeState() {
-        _panel.SetActive(!_panel.activeSelf);
+        StateChanged?.Invoke(newState);
     }
 
     public void UpdateSleepState(bool isSleep) {

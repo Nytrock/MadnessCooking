@@ -29,14 +29,12 @@ public class TechnicRepairUI : MonoBehaviour, IActivable {
         _panel.SetActive(false);
     }
 
-    public void OpenTechnic(TechnicHolder technicHolder) {
-        if (technicHolder == _nowTechnicHolder) {
-            ChangeState(false);
-        } else {
-            _targetPoint.position = technicHolder.UITarget.position;
-            _nowTechnicHolder = technicHolder;
-            ChangeState(true);
-        }
+    public void SetTechnic(TechnicHolder technicHolder) {
+        if (technicHolder == _nowTechnicHolder)
+            return;
+
+        _targetPoint.position = technicHolder.UITarget.position;
+        _nowTechnicHolder = technicHolder;
     }
 
     public void StartRepair() {
@@ -58,15 +56,6 @@ public class TechnicRepairUI : MonoBehaviour, IActivable {
         StateChanged?.Invoke(newState);
 
         if (newState)
-            UpdateInfo();
-        else
-            _nowTechnicHolder = null;
-    }
-
-    public void ChangeState() {
-        _panel.SetActive(!_panel.activeSelf);
-
-        if (_panel.activeSelf)
             UpdateInfo();
         else
             _nowTechnicHolder = null;

@@ -1,12 +1,10 @@
 using UnityEngine;
 
-[RequireComponent(typeof(AudioSource))]
 public abstract class MenuButtonSelector : MonoBehaviour {
     [SerializeField] private MenuButton[] _buttons;
+    [SerializeField] private AudioSource _audioSource;
 
-    private AudioSource _audioSource;
     private MenuButton _nowButton;
-
     protected RectTransform _nowRect;
     protected RectTransform _targetRect;
 
@@ -17,7 +15,6 @@ public abstract class MenuButtonSelector : MonoBehaviour {
         }
 
         _nowRect = GetComponent<RectTransform>();
-        _audioSource = GetComponent<AudioSource>();
     }
 
     private void Start() {

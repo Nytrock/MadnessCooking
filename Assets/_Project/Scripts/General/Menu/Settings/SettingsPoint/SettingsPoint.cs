@@ -28,7 +28,11 @@ public abstract class SettingsPoint<TValue> : BaseSettingsPoint {
         _data.SubmitChanginng();
     }
 
-    protected virtual void UpdateState() {
+    protected override void UpdateState() {
         _settingable.Value.UpdateValue();
+    }
+
+    public void Bind(SettingsPointData<TValue> data) {
+        _data = data;
     }
 }

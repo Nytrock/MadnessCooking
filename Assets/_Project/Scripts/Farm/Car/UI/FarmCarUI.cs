@@ -14,7 +14,7 @@ public class FarmCarUI : IngredientStorageUI<FarmData> {
 
     private void UpdateState(CarState newState) {
         if (newState != CarState.Returns)
-            ChangeState(false);
+            _panel.SetActive(false);
 
         if (newState == CarState.Sent)
             CarLeave();

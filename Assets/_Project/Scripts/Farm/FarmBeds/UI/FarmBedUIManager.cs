@@ -1,7 +1,8 @@
+using System;
 using UnityEngine;
 
-public class FarmBedUIManager : MonoBehaviour {
-    [SerializeField] private LocationManager _locationManager;
+public class FarmBedUIManager : MonoBehaviour, IActivable {
+    [SerializeField] private UIActivatorsManager _activatorsManager;
     [SerializeField] private BedTypeUI[] _bedsUI;
     [SerializeField] private FarmBedUpgraderUI _upgrade;
     [SerializeField] private FarmWell _farmWell;
@@ -11,24 +12,24 @@ public class FarmBedUIManager : MonoBehaviour {
     [SerializeField] private ConfirmPanel _confirmPanel;
     [SerializeField] private TutorialManager _tutorialManager;
 
-    private FarmBed _farmBed;
-    private BedTypeUI _nowUI;
+    [SerializeField] private FarmBed _farmBed;
+    [SerializeField] private BedTypeUI _nowUI;
+
+    public event Action<bool> StateChanged;
 
     private void Awake() {
         _farmWell.WaterChanged += CheckWater;
         _puncher.FertilizerChanged += CheckFertilize;
-        _locationManager.LocationChanged += delegate { ChangeMode(false); };
     }
 
-    public void ChangeMode() {
-        _nowUI.ChangeMode();
-    }
-
-    private void ChangeMode(bool newState) {
+    public void ChangeState(bool newState) {
         if (_nowUI == null)
             return;
 
-        _nowUI.ChangeMode(newState);
+        if (!newState)
+            _farmBed = null;
+        _nowUI.ChangeState(newState);
+        StateChanged?.Invoke(newState);
     }
 
     private void CheckWater() {
@@ -43,9 +44,10 @@ public class FarmBedUIManager : MonoBehaviour {
         _nowUI.CheckFertilize();
     }
 
-    public void ChangeState(FarmBed farmBed) {
+    public void SetFarmBed(FarmBed farmBed) {
         if (_farmBed == farmBed) {
-            _nowUI.ChangeMode();
+            _activatorsManager.CloseNowActivable();
+            _farmBed = null;
             return;
         }
 
@@ -53,7 +55,7 @@ public class FarmBedUIManager : MonoBehaviour {
             _tutorialManager.NextTutorialPart();
 
         if (_nowUI != null) {
-            _nowUI.ChangeMode(false);
+            _activatorsManager.CloseNowActivable();
             if (_farmBed != null) {
                 _farmBed.CountChanged -= _nowUI.UpdateCount;
                 _farmBed.BedReseted -= ResetFarmBed;
@@ -63,7 +65,7 @@ public class FarmBedUIManager : MonoBehaviour {
 
         _nowUI = FindUI(farmBed.Data.BedType);
         _nowUI.UpdateInfo(farmBed);
-        _nowUI.ChangeMode(true);
+        _activatorsManager.SetActivable(this);
 
         transform.position = farmBed.transform.position;
         _farmBed = farmBed;
@@ -104,7 +106,7 @@ public class FarmBedUIManager : MonoBehaviour {
         if (!confirmed)
             return;
 
-        ChangeMode();
+        _activatorsManager.CloseNowActivable();
         _farmBed.ResetBedType();
     }
 
@@ -116,7 +118,7 @@ public class FarmBedUIManager : MonoBehaviour {
         if (!confirmed)
             return;
 
-        ChangeMode();
+        _activatorsManager.CloseNowActivable();
         _farmBed.ResetIngredient();
         _ingredientChoice.ActivateIngredientChoice(_farmBed);
         ResetFarmBed();

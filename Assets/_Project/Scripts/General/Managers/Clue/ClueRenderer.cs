@@ -6,10 +6,12 @@ public class ClueRenderer : MonoBehaviour {
     [SerializeField] private LocalizedText _messageText;
     [SerializeField] private Button _button;
     [SerializeField] private LocalizedText _buttonText;
+
     private ClueTemplate _template;
+    private RectTransform _buttonRect;
 
     private void Awake() {
-        LayoutRebuilder.MarkLayoutForRebuild(_panel);
+        _buttonRect = _button.GetComponent<RectTransform>();
     }
 
     public void StartRenderClue(ClueTemplate clue) {
@@ -23,6 +25,8 @@ public class ClueRenderer : MonoBehaviour {
     }
 
     private void UpdatePosition() {
+        LayoutRebuilder.ForceRebuildLayoutImmediate(_panel);
+
         Vector2 startPosition = _template.RectTransform.localPosition;
         CluePositionMode positionMode = _template.PositionMode;
         Vector2 holeSize = _template.RectTransform.sizeDelta;
@@ -31,6 +35,8 @@ public class ClueRenderer : MonoBehaviour {
         float offset = _template.PositionOffset;
         float panelWidth = _panel.sizeDelta.x / 2;
         float panelHeight = _panel.sizeDelta.y / 2;
+        if (_template.IsButtonVisible)
+            panelHeight += _buttonRect.sizeDelta.y / 2;
 
         switch (positionMode) {
             case CluePositionMode.UpperLeft:
@@ -78,5 +84,10 @@ public class ClueRenderer : MonoBehaviour {
         }
 
         _panel.localPosition = startPosition;
+        if (_template.IsButtonVisible) {
+            Vector2 buttonPosition = startPosition;
+            buttonPosition -= new Vector2(0, panelHeight - 8.3f);
+            _buttonRect.localPosition = buttonPosition;
+        }
     }
 }

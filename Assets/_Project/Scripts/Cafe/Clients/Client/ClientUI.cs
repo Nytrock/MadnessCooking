@@ -1,8 +1,9 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-public class ClientUI : MonoBehaviour {
+public class ClientUI : MonoBehaviour, IActivable {
     [SerializeField] private Animator _animator;
     [SerializeField] private GameObject _chooseFoodPanel;
     [SerializeField] private GameObject _buttonsBlock;
@@ -15,6 +16,9 @@ public class ClientUI : MonoBehaviour {
     private ClientData _clientData;
     private UnityAction _startAction;
     private TutorialManager _tutorialManager;
+    private UIActivatorsManager _UIManager;
+
+    public event Action<bool> StateChanged;
 
     public void SetData(CafeUpgradeData data) {
         _data = data;
@@ -35,10 +39,16 @@ public class ClientUI : MonoBehaviour {
         _chooseFoodPanel.SetActive(newValue);
     }
 
-    private void ChangeButtonsBlockVisible() {
+    public void ChangeState(bool newState) {
         if (_tutorialManager.IsWork)
             _tutorialManager.NextTutorialPart();
-        _buttonsBlock.SetActive(!_buttonsBlock.activeSelf);
+
+        _buttonsBlock.SetActive(newState);
+        StateChanged?.Invoke(newState);
+    }
+
+    private void ChangeButtonsBlockVisible() {
+        _UIManager.SetActivable(this);
     }
 
     public void SetFood(Food food) {
@@ -56,10 +66,9 @@ public class ClientUI : MonoBehaviour {
         _eatSlider.gameObject.SetActive(newValue && _data.IsEatTimeShow);
     }
 
-    public void Setup(ClientData clientData, UnityAction action, TutorialManager tutorialManager) {
+    public void Setup(ClientData clientData, UnityAction action) {
         _clientData = clientData;
         _startAction = action;
-        _tutorialManager = tutorialManager;
 
         _eatSlider.maxValue = _clientData.WaitTime;
         _eatSlider.value = _clientData.NowTime;
@@ -69,6 +78,11 @@ public class ClientUI : MonoBehaviour {
         _animator.SetBool("isFinished", false);
         ChangeSliderState(false);
         ChangeFoodChoiceState(false);
+    }
+
+    public void SetupOnCreate(TutorialManager tutorialManager, UIActivatorsManager UIManager) {
+        _tutorialManager = tutorialManager;
+        _UIManager = UIManager;
     }
 
     public void UpdateSlider() {

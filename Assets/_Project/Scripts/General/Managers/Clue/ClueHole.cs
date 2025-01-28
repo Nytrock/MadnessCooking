@@ -12,7 +12,7 @@ public class ClueHole : MonoBehaviour {
     }
 
     private void Update() {
-        _raycastBlocker.raycastTarget = !_image.rectTransform.ContainsCamera();
+        _raycastBlocker.raycastTarget = !_image.rectTransform.ContainsMouse();
     }
 
     public void ChangeTransform(ClueTemplate template) {

@@ -14,6 +14,7 @@ public class ClientsHolder : MonoBehaviour {
     [SerializeField, Min(0)] private float _clientWaitMultiplier = 0.75f;
     [SerializeField, Min(0)] private float _notFullServicePenalty = 0.5f;
 
+    private ClientsSpawner _spawner;
     private ClientHolderData _data;
     private CafeSpot _spot;
     private readonly List<Client> _clients = new();
@@ -63,7 +64,7 @@ public class ClientsHolder : MonoBehaviour {
     public IEnumerator SpawnGroupOfClients() {
         _data.SetupOnSpawn();
 
-        float spawn = _clients[0].Spawner.SpawnPoint.x;
+        float spawn = _spawner.SpawnPoint.x;
         RandomizeClients();
 
         for (int i = 0; i < _clients.Count; i++) {
@@ -201,5 +202,9 @@ public class ClientsHolder : MonoBehaviour {
 
     public void SetTutorialState(bool isTutorial) {
         _isTutorial = isTutorial;
+    }
+
+    public void SetSpawner(ClientsSpawner spawner) {
+        _spawner = spawner;
     }
 }

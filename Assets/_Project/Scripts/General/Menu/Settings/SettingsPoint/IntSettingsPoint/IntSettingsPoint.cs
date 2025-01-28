@@ -1,6 +1,6 @@
 using System;
 
-public abstract class IntSettingsPoint : SettingsPoint<int> {
+public class IntSettingsPoint : SettingsPoint<int> {
     private int _optionsCount;
 
     protected virtual void Awake() {

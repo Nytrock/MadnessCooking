@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -10,6 +11,8 @@ public class IngredientStorageUI<TData> : MonoBehaviour, IActivable
     [SerializeField] protected IngredientStorageButtonPool _buttonPool;
     [SerializeField] private TextMeshProUGUI _sizeText;
     protected List<IngredientStorageButton> _buttons = new();
+
+    public event Action<bool> StateChanged;
 
     protected virtual void Awake() {
         _storage.IngredientAdded += AddIngredient;
@@ -24,12 +27,9 @@ public class IngredientStorageUI<TData> : MonoBehaviour, IActivable
         UpdateSizeRenderer();
     }
 
-    public void ChangeState() {
-        _panel.SetActive(!_panel.activeSelf);
-    }
-
     public void ChangeState(bool newState) {
         _panel.SetActive(newState);
+        StateChanged?.Invoke(newState);
     }
 
     private void AddIngredient(BuyableItemCount<Ingredient> count) {

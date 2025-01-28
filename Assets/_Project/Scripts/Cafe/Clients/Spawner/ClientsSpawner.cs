@@ -79,7 +79,7 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
         foreach (var clientData in _data.LeavingClients) {
             Client client = _pool.GetClientByGender(clientData.Gender);
             client.transform.position = clientData.Position.GetVector();
-            client.Setup(new ClientSettings(clientData, -1, -1, this));
+            client.Setup(new ClientSettings(clientData, -1, -1));
         }
     }
 
@@ -186,7 +186,7 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
     private void SetupClient(Client client, int spotIndex, int seatIndex) {
         client.ClientUI.SetData(_upgradeData);
         ClientData clientData = _clientHolderData.GetClientHolder(spotIndex).GetClient(seatIndex);
-        ClientSettings clientSettings = new(clientData, spotIndex, seatIndex, this);
+        ClientSettings clientSettings = new(clientData, spotIndex, seatIndex);
         client.Setup(clientSettings);
         _ordersManager.SetNewOrder(client);
         client.EndSetup();

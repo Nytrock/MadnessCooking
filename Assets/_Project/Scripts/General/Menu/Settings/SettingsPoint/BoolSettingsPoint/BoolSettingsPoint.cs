@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public abstract class BoolSettingsPoint : SettingsPoint<bool> {
+public class BoolSettingsPoint : SettingsPoint<bool> {
     [SerializeField] private Toggle _toggle;
 
     protected override void UpdateState() {

@@ -21,11 +21,11 @@ public class BedTypeUI : MonoBehaviour {
         _UI.SetActive(false);
     }
 
-    public void ChangeMode() {
+    public void ChangeState() {
         _UI.SetActive(!_UI.activeSelf);
     }
 
-    public void ChangeMode(bool newValue) {
+    public void ChangeState(bool newValue) {
         _UI.SetActive(newValue);
     }
 
