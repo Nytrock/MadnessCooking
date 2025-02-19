@@ -15,7 +15,6 @@ public class OrderRecipePart : FoodRecipePart {
 
     public void SetupAutoSpice(BuyableItemCount<Ingredient> ingredientCount) {
         gameObject.SetActive(true);
-
         _ingredientCount = ingredientCount;
         _showingItem = ConstIngredients.Instance.Money;
         UpdateAutoSpiceStatus(MoneyManager.Instance.MoneyCount);
@@ -26,8 +25,9 @@ public class OrderRecipePart : FoodRecipePart {
         bool isMoneyEnough = moneyCount >= price;
         _isAvailable = isMoneyEnough;
 
-        _countText.text = price.ToString() + "x";
+        CheckGrayscaleIcon();
         _grayscaleIcon.Setup(_moneySprite, !isMoneyEnough);
+        _countText.text = price.ToString() + "x";
         _countTextRenderer.UpdateAvailable(isMoneyEnough);
     }
 

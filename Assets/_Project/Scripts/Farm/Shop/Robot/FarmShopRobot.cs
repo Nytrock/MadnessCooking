@@ -37,9 +37,6 @@ public class FarmShopRobot : MonoBehaviour {
     }
 
     private void ChangeState(FarmShopRobotState state) {
-        _face.SetActive(state != FarmShopRobotState.Note);
-        _canvas.SetActive(state == FarmShopRobotState.Note);
-
         if (state == FarmShopRobotState.Money)
             _animator.SetTrigger("isMoney");
 
@@ -47,5 +44,8 @@ public class FarmShopRobot : MonoBehaviour {
             _noteText.SetText(_note);
         else
             _noteText.StopAnimation();
+
+        _face.SetActive(state != FarmShopRobotState.Note);
+        _canvas.SetActive(state == FarmShopRobotState.Note);
     }
 }

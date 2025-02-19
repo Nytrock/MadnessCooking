@@ -7,6 +7,7 @@ public class BarnChickens : MonoBehaviour, IBindable<FarmData> {
     [SerializeField] private UpgradeManager _upgradeManager;
     [SerializeField] private IngredientsManager _ingredientsManager;
     [SerializeField] private Puncher _puncher;
+    [SerializeField] private FarmShop _farmShop;
     [SerializeField] private VisualChanger _unlockVisual;
     [SerializeField, Min(0)] private float _baseWasteAmount;
     [SerializeField, Min(0)] private float _maxFoodWorkTime;
@@ -15,7 +16,7 @@ public class BarnChickens : MonoBehaviour, IBindable<FarmData> {
 
     [Header("Upgrades")]
     [SerializeField] private BaseUpgrade _unlockUpgrade;
-    [SerializeField] private BaseUpgrade _food;
+    [SerializeField] private ConsumableUpgrade _food;
     [SerializeField] private BaseUpgrade _infiniteFood;
     [SerializeField, Min(1)] private float _foodSpeedCoef;
 
@@ -31,7 +32,13 @@ public class BarnChickens : MonoBehaviour, IBindable<FarmData> {
     public event Action FeedStateChanged;
 
     private void Awake() {
+        _farmShop.ConsumableUpgradeBuyed += CheckConsumableUpgrade;
         _upgradeManager.ItemAdded += CheckUpgrades;
+    }
+
+    private void CheckConsumableUpgrade(ConsumableUpgrade upgrade) {
+        if (upgrade != _food) return;
+        AddFood();
     }
 
     public void LateStart() {
@@ -97,8 +104,6 @@ public class BarnChickens : MonoBehaviour, IBindable<FarmData> {
         if (upgrade == _unlockUpgrade) {
             Data.Unlock();
             UpdateUnlockState();
-        } else if (upgrade == _food) {
-            AddFood();
         } else if (upgrade == _infiniteFood) {
             SetInfiniteFood();
         }

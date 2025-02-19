@@ -14,7 +14,7 @@ public abstract class HoldAdd : MonoBehaviour, IBindable<FarmData> {
     [SerializeField, Min(0)] protected int _readyDefaultCount;
     [SerializeField] protected VisualChanger _unlockVisual;
 
-    public HoldAddData Data { get; protected set; }
+    [field: SerializeField] public HoldAddData Data { get; protected set; }
 
     public bool IsUnlocked => Data.IsUnlocked;
 

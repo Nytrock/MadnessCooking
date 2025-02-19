@@ -5,7 +5,6 @@ public class FarmWellAudio : MonoBehaviour {
     [SerializeField] private SwitchableAudioSource _audioSource;
 
     private FarmWell _well;
-    private bool _isWork;
 
     private void Awake() {
         _well = GetComponent<FarmWell>();

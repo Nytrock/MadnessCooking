@@ -10,7 +10,7 @@ public class FarmBedUpgrader : MonoBehaviour {
     [SerializeField] private FarmBedUpgrade[] _pestsRemove;
     [SerializeField] private FarmBedUpgrade _autoCollect;
 
-    private readonly List<FarmBedUpgrade> _availableUpgrades = new();
+    [SerializeField] private List<FarmBedUpgrade> _availableUpgrades = new();
     private FarmBedData _bedData;
 
     public void AddUpgrade(FarmBedUpgrade upgrade) {
@@ -41,5 +41,27 @@ public class FarmBedUpgrader : MonoBehaviour {
 
     public void Bind(FarmBedData bedData) {
         _bedData = bedData;
+
+        if (_bedData.WaterBoost.IsEternal)
+            _availableUpgrades.Add(_eternalWater);
+
+        if (_bedData.FertilizeBoost.IsEternal)
+            _availableUpgrades.Add(_eternalFertilize);
+
+        if (_bedData.IndependentBoost == _technicSpeedUp.Coefficient)
+            _availableUpgrades.Add(_technicSpeedUp);
+
+        if (_bedData.IsAutoCollect)
+            _availableUpgrades.Add(_autoCollect);
+
+        if (_bedData.PestsGenerator.IsPestsInstant)
+            foreach (var upgrade in _instantPests)
+                if (upgrade.SuitableBedTypes.Contains(_bedData.BedType))
+                    _availableUpgrades.Add(upgrade);
+
+        if (_bedData.PestsGenerator.IsPestsRemoved)
+            foreach (var upgrade in _pestsRemove)
+                if (upgrade.SuitableBedTypes.Contains(_bedData.BedType))
+                    _availableUpgrades.Add(upgrade);
     }
 }

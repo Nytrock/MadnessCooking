@@ -6,8 +6,8 @@ public class AutoSaveManager : MonoBehaviour {
     [SerializeField] private GameSaveManager _saveManager;
     [SerializeField] private TutorialManager _tutorialManager;
 
-    private float _nowTime;
-    private float _needAutoSaveTime;
+    [SerializeField] private float _nowTime;
+    [SerializeField] private float _needAutoSaveTime;
 
     public event Action SaveStarted;
 

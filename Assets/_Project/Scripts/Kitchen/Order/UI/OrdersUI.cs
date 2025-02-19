@@ -16,7 +16,7 @@ public class OrdersUI : MonoBehaviour, IUpgradeable<KitchenUpgradeData>, IActiva
 
     private void Awake() {
         _ordersManager.OrderAdded += AddOrder;
-        _ordersManager.OrderRemoved += RemoveOrder;
+        _ordersManager.OrderRemoved += RemoveOrderButton;
         _panel.SetActive(false);
         _orderButtons = new();
     }
@@ -48,20 +48,20 @@ public class OrdersUI : MonoBehaviour, IUpgradeable<KitchenUpgradeData>, IActiva
             _orderButtons[i].transform.SetSiblingIndex(i);
     }
 
-    private void RemoveOrder(Order order) {
-        int index = _ordersManager.GetOrderIndex(order);
-        _pool.PutObject(_orderButtons[index]);
-        _orderButtons.RemoveAt(index);
+    private void RemoveOrderButton(Order order) {
+        foreach (var button in _orderButtons) {
+            if (button.Order == order) {
+                _pool.PutObject(button);
+                _orderButtons.Remove(button);
+                break;
+            }
+        }
     }
 
     public void StartCook(Order order) {
         _ordersManager.StartCook(order);
-        foreach (var count in order.Food.Ingredients) {
-            if (count.Item && _upgradeData.IsAutoSpice) {
-                MoneyManager.Instance.ChangeMoney(-_spice.Price * count.Count);
-                break;
-            }
-        }
+        if (_upgradeData.IsAutoSpice)
+            MoneyManager.Instance.ChangeMoney(-order.Food.SpicesPrice);
 
         UpdateRecipes();
     }

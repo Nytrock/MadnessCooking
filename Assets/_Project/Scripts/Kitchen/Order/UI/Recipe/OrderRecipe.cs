@@ -40,6 +40,9 @@ public class OrderRecipe : FoodRecipe<OrderRecipePart> {
     }
 
     public void UpdateAutoSpices(int count) {
+        if (!_upgradeData.IsAutoSpice)
+            return;
+
         foreach (var part in _recipeParts) {
             if (part.IngredientCount is null)
                 continue;

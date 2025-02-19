@@ -4,6 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class FarmWell : HoldAdd {
     [SerializeField] private VerticalCameraManager _cameraManager;
+    [SerializeField] private GameTimeManager _timeManager;
     [SerializeField, Min(0)] private float _pauseTime;
     [SerializeField, Min(1)] private int _turnCount;
 
@@ -19,11 +20,16 @@ public class FarmWell : HoldAdd {
     protected override void Awake() {
         base.Awake();
         _animator = GetComponent<Animator>();
+        _timeManager.TimeSpeedUpdated += UpdateAnimationSpeed;
+    }
+
+    public override void LateStart() {
+        base.LateStart();
     }
 
     protected override void Update() {
         if (_isPause) {
-            _pauseNowTime += Time.deltaTime;
+            _pauseNowTime += InGameTime.Instance.NormalizedDeltaTime;
             if (_pauseNowTime > _pauseNeedTime)
                 ChangePause(false);
             return;
@@ -45,13 +51,17 @@ public class FarmWell : HoldAdd {
             _pauseNowTime = 0;
             _pauseNeedTime = _pauseTime * Data.NowTime / _timeWait;
         }
-
-        float period = _turnCount / _timeWait;
+;
         _animator.SetBool("isPause", newState);
+        UpdateAnimationSpeed();
+    }
 
-        float speed = newState ? -period * Data.NowTime / _pauseTime : period;
-        _animator.SetFloat("speed", speed);
-        SpeedChanged?.Invoke(speed);
+    private void UpdateAnimationSpeed() {
+        float period = _turnCount / _timeWait;
+        float animationSpeed = _isPause ? -period * Data.NowTime / _pauseTime : period;
+
+        _animator.SetFloat("speed", animationSpeed * InGameTime.Instance.NormalizedTime);
+        SpeedChanged?.Invoke(animationSpeed);
     }
 
     public override void ChangeClickMode(bool newValue) {
@@ -70,7 +80,7 @@ public class FarmWell : HoldAdd {
 
     private void ChangeAnimationState(bool newValue) {
         _animator.SetBool("isHold", newValue);
-        _animator.SetFloat("waitTime", 1 / _timeWait * Data.Speed);
+        _animator.SetFloat("waitTime", 1 / _timeWait * Data.Speed * InGameTime.Instance.NormalizedTime);
     }
 
     protected override void UpdateUpgrades() {

@@ -17,9 +17,9 @@ public class ShopRenderer : MonoBehaviour {
     }
 
     public void ChangeShopState(bool newState) {
-        UpdateEmptyState();
         if (newState)
             ActivateFirstPage();
+        UpdateEmptyState();
     }
 
     public void AddPanel(BuyPanelData data) {
@@ -45,6 +45,9 @@ public class ShopRenderer : MonoBehaviour {
     }
 
     private void ActivateFirstPage() {
+        if (_pages.Count == 0)
+            GeneratePage();
+
         _pages[_nowPage].ChangeState(false);
         _nowPage = 0;
         _pages[_nowPage].ChangeState(true);

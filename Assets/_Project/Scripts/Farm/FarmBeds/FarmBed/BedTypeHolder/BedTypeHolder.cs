@@ -33,7 +33,7 @@ public class BedTypeHolder : MonoBehaviour {
             return;
 
         float animationTime = _animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
-        _bedData.SetAnimationTime(animationTime);
+        _bedData.SetAnimationTime(Mathf.Max(animationTime, 0.02f));
     }
 
     public void ChangeMode(bool newMode) {
@@ -54,16 +54,11 @@ public class BedTypeHolder : MonoBehaviour {
 
         _pestsGenerator.ChangeMode(true);
         StartCoroutine(SetAnimationSpeed(ingredient.TimeGrow));
-
-        if (_bedData.IsFull)
-            return;
-
         _animator.Play(_name, -1, _bedData.AnimationTime);
     }
 
     public void UpdateAnimation() {
-        if (!_bedData.IsFull)
-            _animator.Play(_name, -1, 0);
+        _animator.Play(_name, -1, 0);
     }
 
     public void StopAnimation() {
@@ -86,11 +81,11 @@ public class BedTypeHolder : MonoBehaviour {
         ChangeAnimationSpeed();
     }
 
-    public void ChangeEternalWater() {
+    public void UpdateEternalWater() {
         if (_water == null)
             return;
 
-        _water.ChangeEternal();
+        _water.UpdateEternal();
     }
 
     public void Fertilize() {
@@ -101,11 +96,11 @@ public class BedTypeHolder : MonoBehaviour {
         ChangeAnimationSpeed();
     }
 
-    public void ChangeEternalFertilize() {
+    public void UpdateEternalFertilize() {
         if (_fertilize == null)
             return;
 
-        _fertilize.ChangeEternal();
+        _fertilize.UpdateEternal();
     }
 
     public void ChangeAnimationSpeed() {

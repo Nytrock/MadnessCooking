@@ -10,7 +10,7 @@ public class Pest : MonoBehaviour {
     [SerializeField] private bool _isMovable;
     private SpriteRenderer _renderer;
 
-    [field: SerializeField] public PestData Data { get; private set; }
+    public PestData Data { get; private set; }
 
     public event Action PestRemoved;
 
@@ -19,10 +19,7 @@ public class Pest : MonoBehaviour {
     }
 
     public void ChangeState(bool value) {
-        if (value)
-            gameObject.SetActive(value);
-        else
-            _renderer.sprite = null;
+        _renderer.enabled = value;
     }
 
     public void Remove() {

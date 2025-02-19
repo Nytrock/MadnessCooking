@@ -102,7 +102,7 @@ Transform:
   m_GameObject: {fileID: 101173030450887635}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -5.846154, z: 0}
+  m_LocalPosition: {x: 0, y: -5.806154, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -129,10 +129,10 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 27
+  MinDistance: 0
+  MaxDistance: 25
   Pan2D: 0
-  rolloffMode: 2
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -219,17 +219,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _audios:
   - _audio: {fileID: 8300000, guid: bb56c30217318a942873178d861c95b6, type: 3}
-    _volume: 1
+    _volume: 0.6
   - _audio: {fileID: 8300000, guid: 059b15a6756c528488c1ba824af7d3e3, type: 3}
-    _volume: 1
+    _volume: 0.6
   - _audio: {fileID: 8300000, guid: 3a55f058f57210a40b7e1d2b8041c522, type: 3}
-    _volume: 1
+    _volume: 0.6
   - _audio: {fileID: 8300000, guid: 361b00c83ee3d894a823d0410577861d, type: 3}
-    _volume: 1
+    _volume: 0.6
   - _audio: {fileID: 8300000, guid: 0a4adf5bf5502fd4c9a5c07786df5430, type: 3}
-    _volume: 1
+    _volume: 0.6
   - _audio: {fileID: 8300000, guid: 5f72e02ae2aa2764090ae07076553ff2, type: 3}
-    _volume: 1
+    _volume: 0.6
 --- !u!1 &128161179964295078
 GameObject:
   m_ObjectHideFlags: 0
@@ -748,13 +748,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _waitSlider: {fileID: 1939017865290435205}
   _talkTime:
-    _min: 1.5
-    _max: 4
+    _min: 1
+    _max: 2
     _isGreaterZero: 1
   _clientInterval:
     _min: 1
     _max: 1.8
     _isGreaterZero: 1
+  _clientServicedTimeBonus: 10
   _clientWaitMultiplier: 0.75
   _notFullServicePenalty: 0.5
 --- !u!1 &6046200884695634029
@@ -1626,15 +1627,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2703443161017680742, guid: 22400bdf4a7d09448a4211c8cfb78761, type: 3}
       propertyPath: m_Size.x
-      value: 2
+      value: 1.8461539
       objectReference: {fileID: 0}
     - target: {fileID: 2703443161017680742, guid: 22400bdf4a7d09448a4211c8cfb78761, type: 3}
       propertyPath: m_Size.y
-      value: 1.5384616
+      value: 1.6923077
       objectReference: {fileID: 0}
     - target: {fileID: 2703443161017680742, guid: 22400bdf4a7d09448a4211c8cfb78761, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1458106549, guid: fda02e08c18070d4b8055f1e25d663c7, type: 3}
+    - target: {fileID: 2703443161017680742, guid: 22400bdf4a7d09448a4211c8cfb78761, type: 3}
       propertyPath: m_WasSpriteAssigned
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6006981321065621887, guid: 22400bdf4a7d09448a4211c8cfb78761, type: 3}
       propertyPath: m_Name

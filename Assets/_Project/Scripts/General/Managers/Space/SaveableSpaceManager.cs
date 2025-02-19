@@ -28,6 +28,9 @@ public abstract class SaveableSpaceManager<TData> : SpaceManager, IBindable<TDat
     }
 
     public virtual void CheckSpaceAdded(BaseUpgrade upgrade) {
+        if (_spaceData.Count - _defaultSpaceCount >= _spaceAddUpgrades.Length)
+            return;
+
         if (upgrade == _spaceAddUpgrades[_spaceData.Count - _defaultSpaceCount]) {
             _spaceData.SetCount(upgrade as CountUpgrade);
             AddSpace(_spaceData.Count - 1);

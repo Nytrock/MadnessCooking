@@ -8,14 +8,13 @@ public class FoodRecipePart : HoverItemNameActivator {
 
     public bool IsAvailable => _isAvailable || !gameObject.activeSelf;
 
-    private void GetGrayscaleIcon() {
+    protected void CheckGrayscaleIcon() {
+        if (_grayscaleIcon != null) return;
         _grayscaleIcon = _icon as GrayscaleImage;
     }
 
     public virtual void Setup(BuyableItemCount<Ingredient> count, bool isAvailable) {
-        if (_grayscaleIcon == null)
-            GetGrayscaleIcon();
-
+        CheckGrayscaleIcon();
         gameObject.SetActive(true);
         _isAvailable = isAvailable;
 
@@ -25,9 +24,7 @@ public class FoodRecipePart : HoverItemNameActivator {
     }
 
     public virtual void Setup(Technic technic, bool isAvailable) {
-        if (_grayscaleIcon == null)
-            GetGrayscaleIcon();
-
+        CheckGrayscaleIcon();
         gameObject.SetActive(true);
         _grayscaleIcon.Setup(technic.Icon, !isAvailable);
         _countText.text = "1x";

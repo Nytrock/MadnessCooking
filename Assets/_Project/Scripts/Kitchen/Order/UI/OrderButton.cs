@@ -11,7 +11,7 @@ public class OrderButton : MonoBehaviour {
     [SerializeField] private OrderUICookState _cookState;
     [SerializeField] private OrderUIBaseState _finishState;
 
-    public Order Order { get; private set; }
+    [field: SerializeField] public Order Order { get; private set; }
 
     public void StartNewCycle() {
         ChangeState(OrderUIState.Start);
@@ -90,7 +90,6 @@ public class OrderButton : MonoBehaviour {
     public void FinishCook() {
         ChangeState(OrderUIState.Finish);
         _recipe.DisableParts();
-        Order = null;
     }
 
     private void UpdateCookSlider() {

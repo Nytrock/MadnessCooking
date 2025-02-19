@@ -11,6 +11,12 @@ public class FoodShop : BaseChooseShop<Food, OfficeData>, IUpgradeable<KitchenUp
         _technicManager.ItemAdded += delegate { UpdatePanels(); };
     }
 
+    public override void ChangeShopState(bool newState) {
+        base.ChangeShopState(newState);
+        if (!newState && _itemToBuy != null)
+            ChooseItem(_itemToBuy);
+    }
+
     protected override bool IsBuyable(Food food) {
         if (food == null)
             return false;

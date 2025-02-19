@@ -3,12 +3,9 @@ using UnityEngine;
 
 public class FarmCarWaitUI : MonoBehaviour {
     [SerializeField] private FarmCarWaitManager _manager;
-    [SerializeField] private GameObject _panel;
-
     [SerializeField] private LocalizedText _infoText;
     [SerializeField] private string _sentMessage;
     [SerializeField] private string _returnsMessage;
-
     [SerializeField] private TextMeshProUGUI _timeText;
 
     private bool _isWait;
@@ -17,13 +14,8 @@ public class FarmCarWaitUI : MonoBehaviour {
         _manager.StateChanged += UpdateState;
     }
 
-    private void Start() {
-        _panel.SetActive(false);
-    }
-
     private void UpdateState(CarState newState) {
         _isWait = newState != CarState.Calm;
-        _panel.SetActive(_isWait);
 
         if (newState == CarState.Sent)
             _infoText.SetText(_sentMessage);

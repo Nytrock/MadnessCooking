@@ -10,6 +10,7 @@ public class ClientEatState : ClientBaseState {
     }
 
     public override void ExitState(Client client) {
+        client.ClientUI.ChangeEatSliderState(false);
         client.ResetSpotTableFood();
     }
 

@@ -38,7 +38,7 @@ public class FarmCarWaitManager : MonoBehaviour, IBindable<FarmData> {
     public void StartWait() {
         _data.SetIngredientsSended(_car.Data.Ingredients);
         _data.StartWait();
-        _car.Leave();
+        _car.Leave(_data.IngredientsSended);
         StateChanged?.Invoke(_data.CarState);
     }
 

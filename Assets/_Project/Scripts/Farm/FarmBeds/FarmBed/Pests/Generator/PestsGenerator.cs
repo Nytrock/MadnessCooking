@@ -80,6 +80,9 @@ public class PestsGenerator : MonoBehaviour {
         _data = data;
         _data.SetMaxPestsCount(_maxPests);
 
+        if (_pool as StaticPestsPool)
+            (_pool as StaticPestsPool).SetupFreePestsList();
+
         foreach (var pestData in _data.Pests) {
             Pest pest = _pool.GetObject(pestData.PrefabIndex);
             _pests.Add(pest);

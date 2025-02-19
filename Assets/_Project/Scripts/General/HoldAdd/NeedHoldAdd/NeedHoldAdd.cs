@@ -26,6 +26,7 @@ public abstract class NeedHoldAdd : HoldAdd {
     public override void ChangeClickMode(bool newValue) {
         if (NeedHoldData.MaterialCount == 0) {
             InvokeClickChanged(newValue);
+            Data.ChangeWork(newValue);
             return;
         }
 

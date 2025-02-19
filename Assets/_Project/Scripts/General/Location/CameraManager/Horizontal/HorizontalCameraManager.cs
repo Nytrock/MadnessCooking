@@ -4,7 +4,7 @@ using UnityEngine;
 public class HorizontalCameraManager : CameraManager {
     private float _horizontalExtention;
 
-    protected override string _cameraAxis => "Mouse X";
+    protected override string _mouseAxis => "Mouse X";
     protected override string _keyAxis => "Horizontal";
 
     protected override void Awake() {

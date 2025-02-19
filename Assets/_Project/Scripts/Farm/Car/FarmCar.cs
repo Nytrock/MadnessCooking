@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -29,8 +30,8 @@ public class FarmCar : SaveableIngredientStorage<FarmData> {
             Data.UpdateMaxSpace(upgrade as CountUpgrade);
     }
 
-    public void Leave() {
-        RemoveIngredients(Data.Ingredients);
+    public void Leave(IEnumerable<BuyableItemCount<Ingredient>> ingredientsToDelete) {
+        RemoveIngredients(ingredientsToDelete);
         _animator.SetBool("isLeave", true);
         StateChanged?.Invoke(CarState.Sent);
     }

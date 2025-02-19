@@ -17,7 +17,7 @@ public class FarmShopData : ShopData<BaseUpgrade> {
             _upgradeHolders.Add(new(upgrade));
     }
 
-    public bool AddCountAndCheckMax(ConsumableUpgrade addedUpgrade) {
+    public bool AddConsumableAndCheckMax(ConsumableUpgrade addedUpgrade) {
         foreach (var holder in _upgradeHolders) {
             if (holder.ConsumableUpgrade == addedUpgrade) {
                 holder.AddCount();
@@ -28,5 +28,18 @@ public class FarmShopData : ShopData<BaseUpgrade> {
         }
 
         throw new ArgumentNullException($"No holder for consumable upgrade {addedUpgrade.name}");
+    }
+
+    public bool IsConsumableMax(ConsumableUpgrade upgrade) {
+        foreach (var holder in _upgradeHolders)
+            if (holder.ConsumableUpgrade == upgrade)
+                return holder.IsMax;
+        return true;
+    }
+
+    protected override void CheckItemGraph(BaseUpgrade item) {
+        if (item as ConsumableUpgrade)
+            return;
+        base.CheckItemGraph(item);
     }
 }

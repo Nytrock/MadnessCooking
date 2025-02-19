@@ -93,7 +93,7 @@ public class FarmBedUIManager : MonoBehaviour {
     }
 
     public void CollectIngredients() {
-        _farmBed.SendIngredients();
+        _farmBed.CollectIngredients();
     }
 
     public void ChangeBedTypeRequest() {

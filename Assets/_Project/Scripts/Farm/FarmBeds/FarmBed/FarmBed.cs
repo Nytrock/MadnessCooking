@@ -50,7 +50,7 @@ public class FarmBed : MonoBehaviour {
         if (Data.NowTime > _growTime) {
             Data.AddIngredient();
             if (Data.IsAutoCollect) {
-                SendIngredients();
+                CollectIngredients();
                 return;
             }
 
@@ -109,7 +109,7 @@ public class FarmBed : MonoBehaviour {
         UpdateUpgrades();
     }
 
-    public void SendIngredients() {
+    public void CollectIngredients() {
         if (Data.Count == 0)
             return;
 
@@ -143,8 +143,8 @@ public class FarmBed : MonoBehaviour {
         }
     }
 
-    public void ChangeEternalWater() {
-        _bedHolder.ChangeEternalWater();
+    public void UpdateEternalWater() {
+        _bedHolder.UpdateEternalWater();
         _UI.UpdateSideButtons();
 
         BedHolderBoosterData waterData = Data.WaterBoost;
@@ -157,8 +157,8 @@ public class FarmBed : MonoBehaviour {
         BedWatered?.Invoke();
     }
 
-    public void ChangeEternalFertilize() {
-        _bedHolder.ChangeEternalFertilize();
+    public void UpdateEternalFertilize() {
+        _bedHolder.UpdateEternalFertilize();
         _UI.UpdateSideButtons();
 
         BedHolderBoosterData fertilizeData = Data.FertilizeBoost;
@@ -179,17 +179,19 @@ public class FarmBed : MonoBehaviour {
 
     private void DisableUpgrades() {
         _upgrader.DisableUpgrades();
-        ChangeEternalWater();
-        ChangeEternalFertilize();
+        UpdateEternalWater();
+        UpdateEternalFertilize();
     }
 
     public void AddUpgrade(FarmBedUpgrade upgrade) {
         _upgrader.AddUpgrade(upgrade);
-        ChangeEternalWater();
-        ChangeEternalFertilize();
+        UpdateEternalWater();
+        UpdateEternalFertilize();
 
         if (Data.PestsGenerator.IsPestsRemoved)
             RemovePests();
+        if (Data.IsAutoCollect)
+            CollectIngredients();
     }
 
     private void RemovePests() {

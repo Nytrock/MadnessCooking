@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public class VerticalCameraManager : CameraManager {
-    protected override string _cameraAxis => "Mouse Y";
+    protected override string _mouseAxis => "Mouse Y";
     protected override string _keyAxis => "Vertical";
 
     protected override void CalculateBorderPositions() {

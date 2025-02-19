@@ -7,7 +7,6 @@ public class BedTypeUI : MonoBehaviour {
     [SerializeField] private ItemInfoRendererWithCount _renderer;
 
     [Header("Side buttons")]
-    [SerializeField] private bool _isSideButtonsWork;
     [SerializeField] private Button _pestsButton;
     [SerializeField] private Button _waterButton;
     [SerializeField] private Button _fertilizeButton;
@@ -35,11 +34,15 @@ public class BedTypeUI : MonoBehaviour {
     }
 
     public void CheckWater() {
+        if (_waterButton == null) return;
+
         _waterButton.interactable = _data.FarmWell.ReadyCount > 0
             && !_bedData.WaterBoost.IsEternal;
     }
 
     public void CheckFertilize() {
+        if (_fertilizeButton == null) return;
+
         _fertilizeButton.interactable = _data.Puncher.FertilizerCount > 0 &&
             !_bedData.FertilizeBoost.IsEternal;
     }
@@ -51,8 +54,6 @@ public class BedTypeUI : MonoBehaviour {
     public void UpdateSideButtons(FarmBed farmBed) {
         _bedData = farmBed.Data;
         _pestsButton.interactable = !_bedData.PestsGenerator.IsPestsRemoved;
-        if (!_isSideButtonsWork)
-            return;
 
         CheckWater();
         CheckFertilize();

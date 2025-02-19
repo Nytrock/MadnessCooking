@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -8,8 +7,7 @@ public class OrdersManager : MonoBehaviour {
     [SerializeField] private TechnicManager _technicManager;
     [SerializeField] private GameSaveManager _saveManager;
     [SerializeField] private TutorialManager _tutorialManager;
-    private readonly List<Order> _orders = new();
-    private readonly ClientState[] _suitableStates = { ClientState.Spawn, ClientState.Sit, ClientState.Wait };
+    private readonly ClientState[] _suitableStates = { ClientState.Spawn, ClientState.WaitOthers, ClientState.WaitOrder };
 
     public event Action<Order> OrderAdded;
     public event Action<Order> OrderRemoved;
@@ -41,7 +39,6 @@ public class OrdersManager : MonoBehaviour {
 
         if (_tutorialManager.IsWork)
             _tutorialManager.NextTutorialPart();
-        _orders.Add(client.Data.Order);
         OrderAdded?.Invoke(client.Data.Order);
     }
 
@@ -54,17 +51,9 @@ public class OrdersManager : MonoBehaviour {
         client.ClientEat -= RemoveOrder;
         order.OrderFinished -= client.CheckOrder;
 
-        if (GetOrderIndex(order) == -1)
-            return;
-
         if (order.IsCooking)
             _technicManager.EmergencyStopCooking(order);
         OrderRemoved?.Invoke(order);
-        _orders.Remove(order);
-    }
-
-    public int GetOrderIndex(Order order) {
-        return _orders.IndexOf(order);
     }
 
     public void StartCook(Order order) {

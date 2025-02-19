@@ -41,6 +41,10 @@ public class ClientHolderData {
         _clients = new ClientData[SeatsCount];
     }
 
+    public void StopWait() {
+        _groupState = GroupClientState.Serviced;
+    }
+
     public void SetupOnSpawn() {
         if (_groupState == GroupClientState.Leave || _groupState == GroupClientState.None) {
             _groupState = GroupClientState.Enter;
@@ -77,12 +81,8 @@ public class ClientHolderData {
         _moneyCount = 0;
     }
 
-    public void StartEndlessWait() {
-        _groupState = GroupClientState.EndlessWait;
-        _nowTime = 0;
-    }
-
     public void StartTalk(float talkTime) {
+        _nowTime = 0;
         _groupState = GroupClientState.Talk;
         _waitTime = _talkIndex * talkTime;
     }
@@ -93,5 +93,9 @@ public class ClientHolderData {
 
     public bool ContainsGrayMan() {
         return _clients.Length == 1 && _clients[0].Type == ClientType.GrayMan;
+    }
+
+    public void AddWaitTime(float time) {
+        _nowTime = Mathf.Max(_nowTime - time, 0);
     }
 }

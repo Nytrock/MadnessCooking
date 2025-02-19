@@ -36,7 +36,7 @@ public class HoldAddData {
     }
 
     public void UpdateTime() {
-        _nowTime += Time.deltaTime * _speed;
+        _nowTime += InGameTime.Instance.NormalizedDeltaTime * _speed;
     }
 
     public void AddReady() {

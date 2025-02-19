@@ -54,8 +54,8 @@ public abstract class IngredientStorage : MonoBehaviour {
     }
 
     public void RemoveIngredient(BuyableItemCount<Ingredient> removingCount) {
-        Data.RemoveIngredient(removingCount);
         IngredientCountRemoved?.Invoke(removingCount);
+        Data.RemoveIngredient(removingCount);
 
         if (Data.GetIngredientCount(removingCount.Item) == 0)
             IngredientRemoved?.Invoke(removingCount.Item);

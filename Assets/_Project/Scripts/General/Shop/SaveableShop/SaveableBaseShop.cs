@@ -74,6 +74,9 @@ public abstract class SaveableBaseShop<TItem, TData> : BaseShop, IBindable<TData
     protected virtual void CheckGraph(TItem item, int index) {
         bool isFirstReplaced = false;
         CheckNextItems(item, index, ref isFirstReplaced);
+
+        if (!isFirstReplaced)
+            RemoveItem(item, index);
     }
 
     protected void CheckNextItems(TItem item, int index, ref bool isFirstReplaced) {
@@ -103,9 +106,6 @@ public abstract class SaveableBaseShop<TItem, TData> : BaseShop, IBindable<TData
                 }
             }
         }
-
-        if (!isFirstReplaced)
-            RemoveItem(item, index);
     }
 
     protected virtual GrayscaleImageData GenerateSideInfo(TItem item) {

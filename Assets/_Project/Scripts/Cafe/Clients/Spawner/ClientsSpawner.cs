@@ -67,8 +67,7 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
             CafeSpot spot = _spotManager.GetSpotByIndex(spotIndex);
             ClientsHolder table = SpawnGroupOfClients(spot);
 
-            if (spotData.GroupState == GroupClientState.Wait ||
-                spotData.GroupState == GroupClientState.EndlessWait)
+            if (spotData.GroupState == GroupClientState.Wait)
                 table.CheckWait();
             else if (spotData.GroupState == GroupClientState.Talk)
                 table.CheckTalk();
@@ -175,11 +174,12 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
         _xpAdder.RemoveXp(client.Data.Type);
     }
 
-    private void ClientsLeave(CafeSpot spot) {
-        _spotManager.ReturnSpot(spot.Index);
+    private void ClientsLeave(ClientsHolder table) {
+        _spotManager.ReturnSpot(table.SpotIndex);
+        table.ClientsLeaved -= ClientsLeave;
 
-        ClientHolderData spotData = _clientHolderData.GetClientHolder(spot.Index);
-        for (int i = 0; i < spot.SeatsCount; i++)
+        ClientHolderData spotData = _clientHolderData.GetClientHolder(table.SpotIndex);
+        for (int i = 0; i < table.ClientsCount; i++)
             _data.AddLeavingClient(spotData.GetClient(i));
     }
 

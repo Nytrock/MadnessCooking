@@ -28,7 +28,6 @@ public class Food : BuyableItem {
     public bool IsNeedWater => _isNeedWater;
 
     public IEnumerable<BuyableItemCount<Ingredient>> Ingredients => _ingredients.GetItems();
-    public int CountIngredients => _ingredients.Size;
 
     public int SpicesPrice {
         get {

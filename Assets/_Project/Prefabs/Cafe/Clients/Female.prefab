@@ -3853,7 +3853,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 5229853863423063793}
+  m_TargetGraphic: {fileID: 619782310708024337}
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
@@ -4718,7 +4718,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 0
-  MaxDistance: 20
+  MaxDistance: 25
   Pan2D: 0
   rolloffMode: 2
   BypassEffects: 0
@@ -5549,8 +5549,8 @@ MonoBehaviour:
   _skin: {fileID: 3703463240899266760}
   _gender: 2
   _waitTime:
-    _min: 40
-    _max: 60
+    _min: 30
+    _max: 50
     _isGreaterZero: 1
   _richClientMoneyMultiplier: 2
   <Data>k__BackingField:
@@ -5573,8 +5573,6 @@ MonoBehaviour:
       _food: {fileID: 0}
       _tableIndex: 0
     _waitCoef: 0
-  <SpotIndex>k__BackingField: 0
-  <SeatIndex>k__BackingField: 0
 --- !u!114 &7984458469416964061
 MonoBehaviour:
   m_ObjectHideFlags: 0

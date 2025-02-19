@@ -22,16 +22,10 @@ public class FarmBedUpgraderUI : ChoiceBuyUI<FarmBedUpgrade> {
     protected override void GenerateChoiceButtons() {
         DestoyOldButtons();
 
-        int index = 0;
         foreach (var upgrade in _manager.GetAllUpgrades()) {
             bool isAccessable = CheckUpgradeAccessable(upgrade);
-            if (isAccessable) {
-                FarmBedUpgradeButton button = _choiceButtonPool.GetObject() as FarmBedUpgradeButton;
-                button.Setup(upgrade, index, this);
-                button.UpdateStyle(_changingBed.Data.BedType);
-                _choiceButtons.Add(button);
-                index++;
-            }
+            if (isAccessable)
+                CreateButton(upgrade);
         }
     }
 
@@ -41,19 +35,22 @@ public class FarmBedUpgraderUI : ChoiceBuyUI<FarmBedUpgrade> {
         FatigueManager.Instance.AddFatigue(upgrade.FatigueCoef);
         _changingBed.AddUpgrade(upgrade);
 
-        int index = 0;
         foreach (var nextUpgrade in upgrade.NextItems) {
             var farmBedNextUpgrade = nextUpgrade as FarmBedUpgrade;
             bool isAccessable = CheckUpgradeAccessable(farmBedNextUpgrade);
-            if (isAccessable) {
-                var button = _choiceButtonPool.GetObject();
-                button.Setup(farmBedNextUpgrade, index, this);
-                _choiceButtons.Add(button);
-            }
+            if (isAccessable)
+                CreateButton(farmBedNextUpgrade);
         }
 
         _choiceButtons[_chosedIndex].Disable();
         Deselect();
+    }
+
+    private void CreateButton(FarmBedUpgrade farmBedNextUpgrade) {
+        FarmBedUpgradeButton button = _choiceButtonPool.GetObject() as FarmBedUpgradeButton;
+        button.Setup(farmBedNextUpgrade, _choiceButtons.Count, this);
+        button.UpdateStyle(_changingBed.Data.BedType);
+        _choiceButtons.Add(button);
     }
 
     private bool CheckUpgradeAccessable(FarmBedUpgrade upgrade) {

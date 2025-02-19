@@ -2,6 +2,6 @@ public enum ClientState {
     Spawn,
     Leave,
     Eat,
-    Sit,
-    Wait
+    WaitOthers,
+    WaitOrder
 }

@@ -395,11 +395,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b387920e0f16c9f43b465c5182ce53f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxPests: 10
+  _maxPests: 8
   _pool: {fileID: 1979318883052758845}
-  _onePestSlowdown: 0.05
+  _onePestSlowdown: 0.0625
   _spawnTime:
-    _min: 25
+    _min: 40
     _max: 60
     _isGreaterZero: 1
 --- !u!1 &350731645448454974
@@ -18083,11 +18083,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b387920e0f16c9f43b465c5182ce53f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxPests: 10
+  _maxPests: 7
   _pool: {fileID: 2363392315758504381}
-  _onePestSlowdown: 0.05
+  _onePestSlowdown: 0.07
   _spawnTime:
-    _min: 40
+    _min: 50
     _max: 80
     _isGreaterZero: 1
 --- !u!1 &3403884073587960962
@@ -20933,11 +20933,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b387920e0f16c9f43b465c5182ce53f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxPests: 10
+  _maxPests: 7
   _pool: {fileID: 3914156333124551444}
-  _onePestSlowdown: 0.05
+  _onePestSlowdown: 0.07
   _spawnTime:
-    _min: 40
+    _min: 50
     _max: 80
     _isGreaterZero: 1
 --- !u!1 &4644127298939782066
@@ -26423,11 +26423,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b387920e0f16c9f43b465c5182ce53f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxPests: 10
+  _maxPests: 8
   _pool: {fileID: 2067615603938320234}
-  _onePestSlowdown: 0.05
+  _onePestSlowdown: 0.0625
   _spawnTime:
-    _min: 25
+    _min: 40
     _max: 60
     _isGreaterZero: 1
 --- !u!1 &7286749640202576851
@@ -28911,7 +28911,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 31af9167f1cb94f479cf87629622f8c3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -29201,11 +29201,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b387920e0f16c9f43b465c5182ce53f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxPests: 10
+  _maxPests: 8
   _pool: {fileID: 2600007182148234775}
-  _onePestSlowdown: 0.05
+  _onePestSlowdown: 0.0625
   _spawnTime:
-    _min: 25
+    _min: 40
     _max: 60
     _isGreaterZero: 1
 --- !u!1 &9030607281017617259
@@ -30232,6 +30232,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: -1929784057, guid: 4ed06c92001d66b4686e17f7beeaeaf2, type: 3}
     - target: {fileID: 3774912789719522901, guid: cc08061840c59b148a2a188605d012f0, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3774912789719522901, guid: cc08061840c59b148a2a188605d012f0, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
@@ -30316,6 +30320,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -2120100233, guid: 4ed06c92001d66b4686e17f7beeaeaf2, type: 3}
+    - target: {fileID: 3774912789719522901, guid: cc08061840c59b148a2a188605d012f0, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4232358728151072330, guid: cc08061840c59b148a2a188605d012f0, type: 3}
       propertyPath: m_Name
       value: Rust (2)
@@ -30405,6 +30413,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -1643175513, guid: 4ed06c92001d66b4686e17f7beeaeaf2, type: 3}
+    - target: {fileID: 3774912789719522901, guid: cc08061840c59b148a2a188605d012f0, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 3774912789719522901, guid: cc08061840c59b148a2a188605d012f0, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
@@ -30672,6 +30684,14 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 56303037, guid: 4ed06c92001d66b4686e17f7beeaeaf2, type: 3}
+    - target: {fileID: 3774912789719522901, guid: cc08061840c59b148a2a188605d012f0, type: 3}
+      propertyPath: m_SortingLayer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3774912789719522901, guid: cc08061840c59b148a2a188605d012f0, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4232358728151072330, guid: cc08061840c59b148a2a188605d012f0, type: 3}
       propertyPath: m_Name
       value: Rust (3)
@@ -30757,6 +30777,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 32883076, guid: 4ed06c92001d66b4686e17f7beeaeaf2, type: 3}
+    - target: {fileID: 3774912789719522901, guid: cc08061840c59b148a2a188605d012f0, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 3774912789719522901, guid: cc08061840c59b148a2a188605d012f0, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1

@@ -30,7 +30,7 @@ public abstract class IngredientStorageRenderer : MonoBehaviour {
             if (removedRenderersCount == 0)
                 break;
 
-            if (_ingredientsRenderers[i].Ingredient == removedCount.Item) {
+            while (_ingredientsRenderers[i].Ingredient == removedCount.Item) {
                 DisableIngredientRenderer(i);
                 removedRenderersCount--;
             }

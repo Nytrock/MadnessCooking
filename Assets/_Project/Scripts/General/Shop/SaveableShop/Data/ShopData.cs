@@ -39,7 +39,7 @@ public class ShopData<TItem>
         }
     }
 
-    private void CheckItemGraph(TItem item) {
+    protected virtual void CheckItemGraph(TItem item) {
         IGraphable<TItem> graphable = item as IGraphable<TItem>;
         if (graphable == null)
             return;

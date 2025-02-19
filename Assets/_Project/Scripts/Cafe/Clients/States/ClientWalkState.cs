@@ -28,7 +28,7 @@ public class ClientWalkState : ClientBaseState {
             if (client.Data.State == ClientState.Leave)
                 client.Destroy();
             else
-                client.Wait();
+                client.SitAndWait();
         }
     }
 }

@@ -11,11 +11,12 @@ public abstract class CameraManager : MonoBehaviour {
     [SerializeField] protected TutorialManager _tutorialManager;
     protected float _startPosition;
     protected float _endPosition;
-    protected abstract string _cameraAxis { get; }
+    protected abstract string _mouseAxis { get; }
     protected abstract string _keyAxis { get; }
 
     [SerializeField] protected float _cameraSpeed = 1;
     [SerializeField] protected float _keyVelocity = 1;
+    [SerializeField] protected float _scrollVelocity = 1;
     [SerializeField] protected float _mouseVelocity = 1;
     [SerializeField] protected float _speedFading = 1;
 
@@ -44,24 +45,24 @@ public abstract class CameraManager : MonoBehaviour {
         if (!_isWorking || _tutorialManager.IsWork)
             return;
 
-        float keyAxis = 0, mouseAxis = 0, cameraAxis = 0;
+        float keyAxis = 0, scrollAxis = 0, mouseAxis = 0;
         if (!_hoverListener.IsHover) {
-            keyAxis = Input.GetAxis(_keyAxis);
-            mouseAxis = Input.GetAxis("Mouse ScrollWheel");
-            cameraAxis = Input.GetAxis(_cameraAxis);
+            keyAxis = Input.GetAxis(_keyAxis) / FpsManager.NORMALIZED_DELTA_TIME;
+            scrollAxis = Input.GetAxis("Mouse ScrollWheel") / FpsManager.NORMALIZED_DELTA_TIME;
+            mouseAxis = Input.GetAxis(_mouseAxis) / FpsManager.NORMALIZED_DELTA_TIME;
         }
 
-        if (keyAxis != 0 || mouseAxis != 0) {
+        if (keyAxis != 0 || scrollAxis != 0) {
             if (keyAxis != 0)
                 _cameraVelocity = _keyVelocity * -Mathf.Sign(keyAxis);
             else
-                _cameraVelocity = _mouseVelocity * -Mathf.Sign(mouseAxis);
+                _cameraVelocity = _scrollVelocity * -Mathf.Sign(scrollAxis);
             _isKeyPressed = true;
         } else if (_isKeyPressed) {
             _cameraVelocity = 0;
             _isKeyPressed = false;
         } else if (Input.GetMouseButton(0)) {
-            _cameraVelocity = cameraAxis;
+            _cameraVelocity = _mouseVelocity * mouseAxis;
         } else {
             float fadingVelocity = Time.deltaTime * _speedFading;
             if (Mathf.Abs(_cameraVelocity) <= fadingVelocity)

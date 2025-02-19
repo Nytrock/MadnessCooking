@@ -28,7 +28,7 @@ public class ClientUI : MonoBehaviour {
     public void StartEat() {
         _eatSlider.maxValue = _clientData.WaitTime;
         ChangeFoodChoiceState(false);
-        ChangeSliderState(true);
+        ChangeEatSliderState(true);
     }
 
     public void ChangeFoodChoiceState(bool newValue) {
@@ -52,7 +52,7 @@ public class ClientUI : MonoBehaviour {
         _yesButton.interactable = true;
     }
 
-    public void ChangeSliderState(bool newValue) {
+    public void ChangeEatSliderState(bool newValue) {
         _eatSlider.gameObject.SetActive(newValue && _data.IsEatTimeShow);
     }
 
@@ -67,7 +67,7 @@ public class ClientUI : MonoBehaviour {
         _buttonsBlock.SetActive(false);
         _yesButton.interactable = false;
         _animator.SetBool("isFinished", false);
-        ChangeSliderState(false);
+        ChangeEatSliderState(false);
         ChangeFoodChoiceState(false);
     }
 

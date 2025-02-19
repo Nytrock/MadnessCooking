@@ -8,7 +8,7 @@ public class ConsistentIngredientStorageRenderer : IngredientStorageRenderer {
         }
 
         _ingredientsRenderers[i].Disable();
-        _availableIngredientRenderers.Add(_ingredientsRenderers[i]);
+        _availableIngredientRenderers.Insert(0, _ingredientsRenderers[i]);
     }
 
     protected override int GetIngredientIndex() {

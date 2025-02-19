@@ -28,7 +28,7 @@ public class CarWaitManagerData {
     }
 
     public void UpdateTime() {
-        _nowWaitTime -= InGameTime.Instance.NormalizedDeltaTime;
+        _nowWaitTime -= InGameTime.Instance.RawDeltaTime;
     }
 
     public void StartWait() {
@@ -40,7 +40,7 @@ public class CarWaitManagerData {
         _ingredientsSended.Clear();
 
         foreach (var ingredient in ingredients)
-            _ingredientsSended.Add(ingredient);
+            _ingredientsSended.Add(new(ingredient));
     }
 
     public void StartReturn() {

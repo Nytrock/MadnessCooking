@@ -26,11 +26,6 @@ public class IngredientStorageData {
         return _nowSpace + count <= _maxSpace || _maxSpace == -1;
     }
 
-    public void ClearList() {
-        _ingredients.Clear();
-        _nowSpace = 0;
-    }
-
     public void UpdateMaxSpace(CountUpgrade upgrade) {
         _maxSpace = upgrade.Count;
     }
@@ -49,6 +44,7 @@ public class IngredientStorageData {
     }
 
     public void RemoveIngredient(BuyableItemCount<Ingredient> count) {
+        _nowSpace = Mathf.Max(0, _nowSpace - count.Count);
         _ingredients.Remove(count);
     }
 

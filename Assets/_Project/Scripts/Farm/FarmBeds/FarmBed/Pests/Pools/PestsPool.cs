@@ -2,8 +2,8 @@ using UnityEngine;
 
 public abstract class PestsPool : Pool<Pest> {
     [Header("Borders")]
-    [SerializeField] private RangeVector _localPosition;
-    [SerializeField] private RangeVector _globalPosition;
+    [SerializeField] protected RangeVector _localPosition;
+    [SerializeField] protected RangeVector _globalPosition;
     protected int _prefabIndex;
 
     public Pest GetObject(int id) {

@@ -29,6 +29,7 @@ public class FarmBedData {
     public BedHolderBoosterData WaterBoost => _waterBoost;
     public BedHolderBoosterData FertilizeBoost => _fertilizeBoost;
     public PestsGeneratorData PestsGenerator => _pestsGenerator;
+    public float IndependentBoost => _independentBoost;
     public float SummarizedBoost => _waterBoost.Boost * _fertilizeBoost.Boost
         * _independentBoost * _pestsGenerator.PestsSlowdown;
     public bool IsAutoCollect => _isAutoCollect;

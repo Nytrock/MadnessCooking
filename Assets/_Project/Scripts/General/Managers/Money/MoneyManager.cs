@@ -13,9 +13,9 @@ public class MoneyManager : Singleton<MoneyManager>, IBindable<GeneralData> {
         MoneyChanged?.Invoke(_data.MoneyCount);
     }
 
-    [ContextMenu("AddTenMoney")]
-    private void TestMoney() {
-        ChangeMoney(10);
+    [ContextMenu(nameof(AddThousandMoney))]
+    private void AddThousandMoney() {
+        ChangeMoney(1000);
     }
 
     public void ChangeMoney(int changeValue) {

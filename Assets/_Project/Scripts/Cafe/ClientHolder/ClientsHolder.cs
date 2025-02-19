@@ -11,6 +11,7 @@ public class ClientsHolder : MonoBehaviour {
     [SerializeField] private Slider _waitSlider;
     [SerializeField] private RangeFloat _talkTime;
     [SerializeField] private RangeFloat _clientInterval;
+    [SerializeField, Min(0)] private float _clientServicedTimeBonus;
     [SerializeField, Min(0)] private float _clientWaitMultiplier = 0.75f;
     [SerializeField, Min(0)] private float _notFullServicePenalty = 0.5f;
 
@@ -19,11 +20,12 @@ public class ClientsHolder : MonoBehaviour {
     private readonly List<Client> _clients = new();
     private bool _isTutorial;
 
-    public int ClientsCount => _clients.Count;
+    public int ClientsCount => _spot.SeatsCount;
+    public int SpotIndex => _spot.Index;
 
     public event Action WaitStarted;
     public event Action TalkStarted;
-    public event Action<CafeSpot> ClientsLeaved;
+    public event Action<ClientsHolder> ClientsLeaved;
 
     private void Awake() {
         _spot = GetComponent<CafeSpot>();
@@ -78,8 +80,8 @@ public class ClientsHolder : MonoBehaviour {
 
     public void CheckWait() {
         bool allClientsHere = _data.Clients.All(
-            client => client.State == ClientState.Wait
-            || client.State == ClientState.Sit
+            client => client.State != ClientState.Spawn
+            && client.State != ClientState.Leave
         );
 
         if (allClientsHere)
@@ -87,7 +89,7 @@ public class ClientsHolder : MonoBehaviour {
     }
 
     private void StartWait() {
-        if (_data.GroupState == GroupClientState.EndlessWait)
+        if (_data.GroupState == GroupClientState.Serviced)
             return;
 
         ChangeSliderState(true);
@@ -118,10 +120,9 @@ public class ClientsHolder : MonoBehaviour {
             if (noDelay)
                 yield return new WaitForSeconds(0);
             else
-                yield return new WaitForSeconds(_clientInterval.RandomValue);
+                yield return new WaitForSeconds(_clientInterval.RandomValue / InGameTime.Instance.NormalizedTime);
         }
     }
-
 
     private void RandomizeClients() {
         for (int i = 0; i < _clients.Count - 1; i++) {
@@ -130,21 +131,30 @@ public class ClientsHolder : MonoBehaviour {
         }
     }
 
-    public void StartEndlessWait() {
-        ChangeSliderState(false);
-        _data.StartEndlessWait();
+    public void ClientEat(int money) {
+        _data.AddMoney(money);
+        _data.AddWaitTime(_clientServicedTimeBonus);
+        CheckWaitEnded();
     }
 
-    public void AddMoney(int money) => _data.AddMoney(money);
+    private void CheckWaitEnded() {
+        bool allClientsServed = _data.Clients.All(x => x.State != ClientState.WaitOrder);
+        if (!allClientsServed)
+            return;
+
+        ChangeSliderState(false);
+        _data.StopWait();
+    }
 
     public void CheckTalk() {
-        bool allClientsWait = _data.Clients.All(x => x.State == ClientState.Wait);
-        if (allClientsWait)
+        bool allClientsServised = _data.Clients.All(x => x.State == ClientState.WaitOthers);
+        if (allClientsServised)
             StartTalk();
     }
 
-    public void DecreaseTalk() {
+    public void FoodRejected() {
         _data.DecreaseTalk();
+        CheckWaitEnded();
         CheckTalk();
     }
 
@@ -182,8 +192,7 @@ public class ClientsHolder : MonoBehaviour {
 
     private void EndVisit() {
         ChangeSliderState(false);
-        ClientsLeaved?.Invoke(_spot);
-        ClientsLeaved = null;
+        ClientsLeaved?.Invoke(this);
         WaitStarted = null;
         _waitSlider.value = 0;
 

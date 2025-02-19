@@ -12,10 +12,6 @@ public abstract class BedHolderBooster : MonoBehaviour {
 
     public event Action BoostEnded;
 
-    protected virtual void Awake() {
-        ChangeSpriteAlpha(0);
-    }
-
     private void Update() {
         if (!_data.IsBoosting || _data.IsEternal)
             return;
@@ -31,8 +27,7 @@ public abstract class BedHolderBooster : MonoBehaviour {
 
     public virtual void SetData(BedHolderBoosterData data) {
         _data = data;
-        if (_data.IsEternal)
-            ChangeSpriteAlpha(1);
+        ChangeSpriteAlpha(Convert.ToInt16(_data.IsEternal));
     }
 
     public virtual void StartBoost() {
@@ -52,10 +47,10 @@ public abstract class BedHolderBooster : MonoBehaviour {
         _boostSprite.color = color;
     }
 
-    public void ChangeEternal() {
+    public void UpdateEternal() {
         if (_data.IsEternal && !_data.IsBoosting)
             StartBoost();
-        else if (_data.IsBoosting)
+        else if (_data.IsBoosting && !_data.IsEternal)
             EndBoost();
     }
 }

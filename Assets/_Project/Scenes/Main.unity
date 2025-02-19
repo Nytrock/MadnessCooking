@@ -2479,7 +2479,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _manager: {fileID: 1766492819}
-  _panel: {fileID: 69371718}
   _infoText: {fileID: 1249637431}
   _sentMessage: FarmCarWait.Sent
   _returnsMessage: FarmCarWait.Returns
@@ -4612,7 +4611,6 @@ MonoBehaviour:
   _renderer:
     _icon: {fileID: 1199479261}
     _count: {fileID: 1237836441}
-  _isSideButtonsWork: 1
   _pestsButton: {fileID: 1248893638}
   _waterButton: {fileID: 1926296936}
   _fertilizeButton: {fileID: 1566495209}
@@ -5816,7 +5814,6 @@ MonoBehaviour:
   _renderer:
     _icon: {fileID: 1379899857}
     _count: {fileID: 1946070240}
-  _isSideButtonsWork: 1
   _pestsButton: {fileID: 834925450}
   _waterButton: {fileID: 1577098747}
   _fertilizeButton: {fileID: 184058491}
@@ -9990,7 +9987,6 @@ MonoBehaviour:
   _renderer:
     _icon: {fileID: 1912075755}
     _count: {fileID: 1512318331}
-  _isSideButtonsWork: 0
   _pestsButton: {fileID: 85733933}
   _waterButton: {fileID: 0}
   _fertilizeButton: {fileID: 0}
@@ -10008,7 +10004,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 806685565534041565, guid: a4eafeffb2ec0104cb391da09e02b2c0, type: 3}
       propertyPath: m_Volume
-      value: 0.9
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 806685565534041565, guid: a4eafeffb2ec0104cb391da09e02b2c0, type: 3}
       propertyPath: m_Resource
@@ -21188,6 +21184,7 @@ GameObject:
   - component: {fileID: 260212159}
   - component: {fileID: 260212158}
   - component: {fileID: 260212157}
+  - component: {fileID: 260212160}
   m_Layer: 0
   m_Name: EmptyMessage
   m_TagString: Untagged
@@ -21313,6 +21310,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &260212160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 260212156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64b8cfe32092a2d4686b80689560f005, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _table: UITable
 --- !u!1 &262283717
 GameObject:
   m_ObjectHideFlags: 0
@@ -21347,9 +21357,9 @@ RectTransform:
   - {fileID: 1099220216}
   m_Father: {fileID: 594315330}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -33.2}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: 0, y: 182.6}
   m_SizeDelta: {x: 0, y: 365.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &262283719
@@ -26090,6 +26100,7 @@ GameObject:
   - component: {fileID: 326430819}
   - component: {fileID: 326430821}
   - component: {fileID: 326430820}
+  - component: {fileID: 326430822}
   m_Layer: 0
   m_Name: EmptyMessage
   m_TagString: Untagged
@@ -26215,6 +26226,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 326430818}
   m_CullTransparentMesh: 1
+--- !u!114 &326430822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 326430818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64b8cfe32092a2d4686b80689560f005, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _table: UITable
 --- !u!1 &326983459
 GameObject:
   m_ObjectHideFlags: 0
@@ -48907,7 +48931,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: TutorialTable
-  _speed: 0.5
+  _pauseTime: 0
 --- !u!114 &581669954
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50396,7 +50420,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 33.2, y: 33.2}
   m_SizeDelta: {x: 664, y: 664}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &594315332
@@ -52590,6 +52614,8 @@ MonoBehaviour:
   _needAutoSaveMinutes: 5
   _saveManager: {fileID: 597507963}
   _tutorialManager: {fileID: 841634105}
+  _nowTime: 0
+  _needAutoSaveTime: 0
 --- !u!1 &621244850
 GameObject:
   m_ObjectHideFlags: 0
@@ -66310,7 +66336,6 @@ MonoBehaviour:
   _renderer:
     _icon: {fileID: 111288718}
     _count: {fileID: 413902356}
-  _isSideButtonsWork: 0
   _pestsButton: {fileID: 1735361501}
   _waterButton: {fileID: 0}
   _fertilizeButton: {fileID: 0}
@@ -68931,9 +68956,10 @@ MonoBehaviour:
   _locationSlider: {fileID: 269459661}
   _spaceManager: {fileID: 197975456}
   _tutorialManager: {fileID: 841634105}
-  _cameraSpeed: 20
-  _keyVelocity: 1
-  _mouseVelocity: 10
+  _cameraSpeed: 10
+  _keyVelocity: 2
+  _scrollVelocity: 20
+  _mouseVelocity: 1
   _speedFading: 1
 --- !u!1 &713905768
 GameObject:
@@ -71489,7 +71515,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: EnviromentTable
-  _speed: 4.5
+  _pauseTime: 2
 --- !u!1 &754222384
 GameObject:
   m_ObjectHideFlags: 0
@@ -82826,7 +82852,16 @@ MonoBehaviour:
   _fatigueCoef: 0.01
   _readyDefaultCount: 0
   _unlockVisual: {fileID: 323975054}
+  <Data>k__BackingField:
+    _nowTime: 0
+    _isUnlocked: 0
+    _isAuto: 0
+    _speed: 0
+    _readyCount: 0
+    _waitTime: 0
+    _isWork: 0
   _cameraManager: {fileID: 713062802}
+  _timeManager: {fileID: 1095035881}
   _pauseTime: 0.5
   _turnCount: 4
 --- !u!95 &852812874
@@ -96078,6 +96113,7 @@ GameObject:
   - component: {fileID: 992487753}
   - component: {fileID: 992487756}
   - component: {fileID: 992487755}
+  - component: {fileID: 992487757}
   m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
@@ -96143,6 +96179,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 992487752}
   m_CullTransparentMesh: 1
+--- !u!114 &992487757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 992487752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31f00c2292cb140419170a40e94d07bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hoverListener: {fileID: 1850722862}
+  _isReversed: 0
 --- !u!1 &993082760
 GameObject:
   m_ObjectHideFlags: 0
@@ -103531,6 +103581,7 @@ GameObject:
   - component: {fileID: 1021542096}
   - component: {fileID: 1021542098}
   - component: {fileID: 1021542097}
+  - component: {fileID: 1021542099}
   m_Layer: 0
   m_Name: EmptyMessage
   m_TagString: Untagged
@@ -103656,6 +103707,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1021542095}
   m_CullTransparentMesh: 1
+--- !u!114 &1021542099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1021542095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64b8cfe32092a2d4686b80689560f005, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _table: UITable
 --- !u!1 &1023401557
 GameObject:
   m_ObjectHideFlags: 0
@@ -118320,6 +118384,9 @@ MonoBehaviour:
   _needHoursToRecovery: 10
   _decorManager: {fileID: 403464058}
   _decorBonus: 1
+  _data:
+    _fatigueNow: 0
+    _fatigueMax: 0
 --- !u!4 &1154027455
 Transform:
   m_ObjectHideFlags: 0
@@ -133468,10 +133535,18 @@ MonoBehaviour:
   _upgradeManager: {fileID: 1299343206}
   _unlockUpgrade: {fileID: 11400000, guid: bebb1ae5cf63e694688e7240c564f0cf, type: 2}
   _autoWorkUpgrade: {fileID: 11400000, guid: 981060421751812419bfa20190c9f957, type: 2}
-  _timeWait: 1.2
+  _timeWait: 1
   _fatigueCoef: 0.01
   _readyDefaultCount: 0
   _unlockVisual: {fileID: 1617218465}
+  <Data>k__BackingField:
+    _nowTime: 0
+    _isUnlocked: 0
+    _isAuto: 0
+    _speed: 0
+    _readyCount: 0
+    _waitTime: 0
+    _isWork: 0
   _materialDefaultCount: 0
   _ingredientsManager: {fileID: 917452951}
   _puncher: {fileID: 1276766701}
@@ -135622,10 +135697,18 @@ MonoBehaviour:
   _upgradeManager: {fileID: 1299343206}
   _unlockUpgrade: {fileID: 11400000, guid: bae9bd0101a850e4ca04d532187fb708, type: 2}
   _autoWorkUpgrade: {fileID: 11400000, guid: c4baee8a713bb5349a33f46e43abe446, type: 2}
-  _timeWait: 1.8
+  _timeWait: 0.5
   _fatigueCoef: 0.01
   _readyDefaultCount: 0
   _unlockVisual: {fileID: 1285024240}
+  <Data>k__BackingField:
+    _nowTime: 0
+    _isUnlocked: 0
+    _isAuto: 0
+    _speed: 0
+    _readyCount: 0
+    _waitTime: 0
+    _isWork: 0
   _materialDefaultCount: 0
   _ingredientsManager: {fileID: 917452951}
   _flourParticle: {fileID: 237236514}
@@ -138053,7 +138136,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77ebd59b3bab9b341b8da5eeb63297be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _needWaste: 9
+  _needWaste: 12
   _upgradeManager: {fileID: 1299343206}
   _puncherSpeedUp: {fileID: 11400000, guid: c58fc0bef6717204d9d241cdc148e118, type: 2}
   <Data>k__BackingField:
@@ -141965,6 +142048,7 @@ MonoBehaviour:
   _upgradeManager: {fileID: 1299343206}
   _ingredientsManager: {fileID: 917452951}
   _puncher: {fileID: 1276766701}
+  _farmShop: {fileID: 1671263195}
   _unlockVisual: {fileID: 1107603198}
   _baseWasteAmount: 0.01
   _maxFoodWorkTime: 10
@@ -159572,6 +159656,7 @@ GameObject:
   - component: {fileID: 1455903091}
   - component: {fileID: 1455903093}
   - component: {fileID: 1455903092}
+  - component: {fileID: 1455903094}
   m_Layer: 0
   m_Name: EmptyMessage
   m_TagString: Untagged
@@ -159697,6 +159782,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1455903090}
   m_CullTransparentMesh: 1
+--- !u!114 &1455903094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1455903090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64b8cfe32092a2d4686b80689560f005, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _table: UITable
 --- !u!1 &1456379069
 GameObject:
   m_ObjectHideFlags: 0
@@ -174976,7 +175074,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1679409384
 RectTransform:
   m_ObjectHideFlags: 0
@@ -179577,6 +179675,7 @@ GameObject:
   - component: {fileID: 1738719323}
   - component: {fileID: 1738719322}
   - component: {fileID: 1738719321}
+  - component: {fileID: 1738719324}
   m_Layer: 0
   m_Name: EmptyMessage
   m_TagString: Untagged
@@ -179702,6 +179801,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1738719324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1738719320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64b8cfe32092a2d4686b80689560f005, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _table: UITable
 --- !u!1 &1739330156
 GameObject:
   m_ObjectHideFlags: 0
@@ -205760,9 +205872,10 @@ MonoBehaviour:
   _locationSlider: {fileID: 1463500062}
   _spaceManager: {fileID: 1436171022}
   _tutorialManager: {fileID: 841634105}
-  _cameraSpeed: 20
-  _keyVelocity: 1
-  _mouseVelocity: 10
+  _cameraSpeed: 10
+  _keyVelocity: 2
+  _scrollVelocity: 20
+  _mouseVelocity: 1
   _speedFading: 1
 --- !u!1 &1835607834
 GameObject:
@@ -223676,7 +223789,6 @@ MonoBehaviour:
   _renderer:
     _icon: {fileID: 819326170}
     _count: {fileID: 2036298829}
-  _isSideButtonsWork: 1
   _pestsButton: {fileID: 2134825558}
   _waterButton: {fileID: 1854690175}
   _fertilizeButton: {fileID: 2088568845}
@@ -230886,8 +230998,8 @@ MonoBehaviour:
   _tutorialManager: {fileID: 841634105}
   _pool: {fileID: 1508871257}
   _spawnTime:
-    _min: 15
-    _max: 25
+    _min: 10
+    _max: 20
     _isGreaterZero: 1
   _noClientsMultiplier: 0.5
   _eatTimeShowUpgrade: {fileID: 11400000, guid: 62639c93432a4664993c9cc144d7ac01, type: 2}
@@ -231711,7 +231823,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 80
+  MaxDistance: 20
   Pan2D: 0
   rolloffMode: 2
   BypassEffects: 0

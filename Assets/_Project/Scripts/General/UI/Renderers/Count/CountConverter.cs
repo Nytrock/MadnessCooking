@@ -36,11 +36,11 @@ public static class CountConverter {
         else if (index == _prefixes.Length)
             return _overflowMessage;
 
-        string resCountFormatted = $"{resCount:F2}";
-        if (resCountFormatted.Length > MoneyMainUI.MONEY_CELLS_COUNT)
-            return $"{Mathf.Floor(resCount)}{_prefixes[index]}";
-        else if (resCountFormatted.Length == MoneyMainUI.MONEY_CELLS_COUNT)
+        string resCountFormatted = $"{resCount:F2}{_prefixes[index]}";
+        if (resCountFormatted.Length <= MoneyMainUI.MONEY_CELLS_COUNT)
+            return resCountFormatted;
+        else if (resCountFormatted.Length == MoneyMainUI.MONEY_CELLS_COUNT + 1)
             return $"{resCount:F1}{_prefixes[index]}";
-        return $"{resCountFormatted}{_prefixes[index]}";
+        return $"{Mathf.Floor(resCount)}{_prefixes[index]}";
     }
 }

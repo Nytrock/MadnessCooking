@@ -50,10 +50,10 @@ public class IngredientShop : BaseInstantShop<Ingredient, OfficeData>, IUpgradea
     }
 
     public void CheckAddedUpgrade(BaseUpgrade upgrade) {
-        if (_upgradeData.IsAutoSpice) {
-            Ingredient spice = ConstIngredients.Instance.Spice;
+        Ingredient spice = ConstIngredients.Instance.Spice;
+        if (_upgradeData.IsAutoSpice && _data.IsItemBuyable(spice)) {
             int index = _data.IndexOfItem(spice);
-            RemoveItem(spice, index);
+            base.RemoveItem(spice, index);
         }
     }
 }

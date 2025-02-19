@@ -7,8 +7,8 @@ public class LocalizedText : MonoBehaviour {
     [SerializeField] private string _table;
     protected TextMeshProUGUI _text;
 
-    private string _key;
-    private readonly Dictionary<string, string> _arguments = new();
+    protected string _key;
+    protected readonly Dictionary<string, string> _arguments = new();
 
     protected void Awake() {
         GetText();
@@ -34,9 +34,8 @@ public class LocalizedText : MonoBehaviour {
         _text.text = LocalizationManager.Instance.GetLocalization(_table, _key, _arguments);
     }
 
-    private void GetText() {
-        if (_text != null)
-            return;
+    protected void GetText() {
+        if (_text != null) return;
 
         _text = GetComponent<TextMeshProUGUI>();
         if (string.IsNullOrEmpty(_key))
