@@ -26,11 +26,11 @@ public abstract class MenuButtonSelector : MonoBehaviour {
     }
 
     protected virtual void Update() {
-        if (Input.GetKeyDown(KeyCode.DownArrow))
+        if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
             SelectButton(_nowButton.Index + 1);
-        else if (Input.GetKeyDown(KeyCode.UpArrow))
+        else if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
             SelectButton(_nowButton.Index - 1);
-        else if (Input.GetKeyDown(KeyCode.Return))
+        else if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space))
             PressNowButton();
     }
 
@@ -42,8 +42,10 @@ public abstract class MenuButtonSelector : MonoBehaviour {
     }
 
     private void SelectButton(int index) {
-        if (index < 0 || index >= _buttons.Length)
-            return;
+        if (index < 0)
+            index = _buttons.Length - 1;
+        else if (index >= _buttons.Length)
+            index = 0;
 
         if (_buttons[index] == _nowButton)
             return;

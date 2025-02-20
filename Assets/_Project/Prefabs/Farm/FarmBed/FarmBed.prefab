@@ -20914,7 +20914,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 5570387400796138128}
   - {fileID: 926345695542062854}
@@ -23346,7 +23346,7 @@ Transform:
   m_GameObject: {fileID: 5741335291844794320}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.5384616, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -23497,6 +23497,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9d724893fc0f3074f8338d2c964755f5, type: 2}
   - {fileID: 11400000, guid: f956ba5d670fcc347bc4dcd0eebd86c9, type: 2}
   _autoCollect: {fileID: 11400000, guid: 006a49cc70b09f447b406b964b806669, type: 2}
+  _availableUpgrades: []
 --- !u!114 &3074750115968164318
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26311,7 +26312,7 @@ Transform:
   m_GameObject: {fileID: 7229158699986356071}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.30769232, y: 0.30769232, z: 0}
+  m_LocalPosition: {x: 0.30769232, y: 0.3076923, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -28867,7 +28868,7 @@ GameObject:
   - component: {fileID: 1208588012480233895}
   - component: {fileID: 6237270532057559305}
   m_Layer: 0
-  m_Name: FarmBedMeatShadow
+  m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30524,7 +30525,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4248309230424391012, guid: cc08061840c59b148a2a188605d012f0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.2307694
+      value: 2.3846154
       objectReference: {fileID: 0}
     - target: {fileID: 4248309230424391012, guid: cc08061840c59b148a2a188605d012f0, type: 3}
       propertyPath: m_LocalPosition.y
@@ -30795,7 +30796,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4248309230424391012, guid: cc08061840c59b148a2a188605d012f0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.3846154
+      value: -0.30769232
       objectReference: {fileID: 0}
     - target: {fileID: 4248309230424391012, guid: cc08061840c59b148a2a188605d012f0, type: 3}
       propertyPath: m_LocalPosition.y
