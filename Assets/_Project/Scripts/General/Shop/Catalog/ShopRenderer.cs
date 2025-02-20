@@ -7,8 +7,8 @@ public class ShopRenderer : MonoBehaviour {
     [SerializeField] private GameObject _emptyMessage;
     [SerializeField] private ButtonWithAudio _nextButton;
     [SerializeField] private ButtonWithAudio _previousButton;
+    [SerializeField] private List<ShopRendererPage> _pages;
 
-    private readonly List<ShopRendererPage> _pages = new();
     private int _nowPage = 0;
 
     private void Awake() {

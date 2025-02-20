@@ -2,25 +2,24 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class FarmBedUpgradeManager : MonoBehaviour, IUpgradeable<FarmUpgradeData> {
-    [SerializeField] private FarmBedUpgrade[] _allUpgrades;
-    private FarmUpgradeData _upgradeData;
+public class FarmBedUpgradeManager : MonoBehaviour {
+    [SerializeField] private UpgradeManager _upgradeManager;
+    private List<FarmBedUpgrade> _availableUpgrades;
 
-    public IEnumerable<FarmBedUpgrade> GetAllUpgrades() {
-        foreach (var upgrade in _allUpgrades)
+    private void Awake() {
+        _availableUpgrades = new();
+        _upgradeManager.ItemAdded += CheckAddedUpgrade;
+    }
+
+    public IEnumerable<FarmBedUpgrade> GetAvailableUpgrades() {
+        foreach (var upgrade in _availableUpgrades)
             yield return upgrade;
     }
 
-    public bool ContainsUpgrade(FarmBedUpgrade upgrade) {
-        return _upgradeData.ContainsFarmBedUpgrade(upgrade);
-    }
-
-    public void BindUpgrade(FarmUpgradeData upgradeData) {
-        _upgradeData = upgradeData;
-    }
-
     public void CheckAddedUpgrade(BaseUpgrade upgrade) {
-        if (_allUpgrades.Contains(upgrade))
-            _upgradeData.AddFarmBedUpgrade(upgrade as FarmBedUpgrade);
+        if (upgrade as FarmBedUpgrade != null) {
+            _availableUpgrades.Add(upgrade as FarmBedUpgrade);
+            _availableUpgrades = _availableUpgrades.OrderBy(upgrade => upgrade.Price).ToList();
+        }
     }
 }

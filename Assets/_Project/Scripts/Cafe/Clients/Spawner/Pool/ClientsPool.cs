@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class ClientsPool : Pool<Client> {
     [SerializeField] private Client _clientPrefab;
+    [SerializeField] private ClientsSpawner _spawner;
+    [SerializeField] private TutorialManager _tutorialManager;
+    [SerializeField] private UIActivatorsManager _UIManager;
     private ClientGender _clientsGender;
 
     public ClientGender ClientsGender => _clientsGender;
@@ -23,6 +26,8 @@ public class ClientsPool : Pool<Client> {
     }
 
     protected override Client CreateObject() {
-        return Instantiate(_clientPrefab, _container);
+        Client client = Instantiate(_clientPrefab, _container);
+        client.SetupOnCreate(_spawner, _tutorialManager, _UIManager);
+        return client;
     }
 }

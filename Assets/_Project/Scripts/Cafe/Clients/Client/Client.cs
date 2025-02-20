@@ -13,12 +13,12 @@ public class Client : MonoBehaviour {
     [SerializeField] private RangeFloat _waitTime;
     [SerializeField] private int _richClientMoneyMultiplier = 2;
 
+    private ClientsSpawner _spawner;
     private ClientsHolder _table;
     private CafeSpot _spot;
     private CafeSeat _seat;
 
     [field: SerializeField] public ClientData Data { get; private set; }
-    public ClientsSpawner Spawner { get; private set; }
     public ClientUI ClientUI { get; private set; }
     public int SpotIndex { get; private set; }
     public int SeatIndex { get; private set; }
@@ -85,8 +85,6 @@ public class Client : MonoBehaviour {
     }
 
     public void Setup(ClientSettings settings) {
-        Spawner = settings.Spawner;
-
         SpotIndex = settings.SpotIndex;
         SeatIndex = settings.SeatIndex;
 
@@ -97,7 +95,7 @@ public class Client : MonoBehaviour {
         transform.position = Data.Position.GetVector();
         _skin.StartNewCycle(Data);
 
-        ClientUI.Setup(Data, ActivateOrder, Spawner.TutorialManager);
+        ClientUI.Setup(Data, ActivateOrder);
         ClientUI.StartNewCycle();
 
         if (Data.State == ClientState.Leave) {
@@ -106,7 +104,7 @@ public class Client : MonoBehaviour {
             return;
         }
 
-        _spot = Spawner.GetSpot(SpotIndex);
+        _spot = _spawner.GetSpot(SpotIndex);
         _seat = _spot.GetSeat(SeatIndex);
         ChangeState();
 
@@ -183,7 +181,7 @@ public class Client : MonoBehaviour {
 
     public void Destroy() {
         ResetState();
-        Spawner.PutClient(this);
+        _spawner.PutClient(this);
     }
 
     public void SetSpotTableFood() {
@@ -214,5 +212,11 @@ public class Client : MonoBehaviour {
 
         _seat = null;
         _spot = null;
+    }
+
+    public void SetupOnCreate(ClientsSpawner spawner, TutorialManager tutorialManager, UIActivatorsManager UIManager) {
+        _spawner = spawner;
+        ClientUI.SetupOnCreate(tutorialManager, UIManager);
+        _walkState.SetupSpawner(spawner);
     }
 }

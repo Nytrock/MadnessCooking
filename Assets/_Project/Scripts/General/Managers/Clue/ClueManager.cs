@@ -13,9 +13,9 @@ public class ClueManager : MonoBehaviour {
     }
 
     public void ShowClue(ClueTemplate template) {
+        _panel.SetActive(true);
         _hole.ChangeTransform(template);
         _renderer.StartRenderClue(template);
-        _panel.SetActive(true);
     }
 
     public void HideClue() {

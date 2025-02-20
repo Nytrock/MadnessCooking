@@ -1,23 +1,20 @@
 using UnityEngine;
 
-[RequireComponent(typeof(AudioSource))]
 public abstract class MenuButtonSelector : MonoBehaviour {
     [SerializeField] private MenuButton[] _buttons;
+    [SerializeField] private AudioSource _audioSource;
 
-    private AudioSource _audioSource;
     private MenuButton _nowButton;
-
     protected RectTransform _nowRect;
     protected RectTransform _targetRect;
 
     protected void Awake() {
         for (int i = 0; i < _buttons.Length; i++) {
-            _buttons[i].SetIndex(i);
+            _buttons[i].Setup(i);
             _buttons[i].ButtonSelected += SelectButton;
         }
 
         _nowRect = GetComponent<RectTransform>();
-        _audioSource = GetComponent<AudioSource>();
     }
 
     private void Start() {
@@ -53,7 +50,12 @@ public abstract class MenuButtonSelector : MonoBehaviour {
 
         if (_audioSource.isActiveAndEnabled)
             _audioSource.Play();
+
+        if (_nowButton != null)
+            _nowButton.ChangeSelectVisual(false);
         _nowButton = _buttons[index];
+        _nowButton.ChangeSelectVisual(true);
+
         _targetRect = _nowButton.Rect;
         ChangePosition();
     }

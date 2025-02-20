@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public abstract class FloatSettingsPoint : SettingsPoint<float> {
+public class FloatSettingsPoint : SettingsPoint<float> {
     [SerializeField] private Slider _slider;
 
     protected override void UpdateState() {

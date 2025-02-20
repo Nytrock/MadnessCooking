@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class ChickensUI : MonoBehaviour, IActivable {
@@ -8,6 +9,8 @@ public class ChickensUI : MonoBehaviour, IActivable {
     [SerializeField] private ChickensUIText _buttonText;
     [SerializeField] private Slider _eggSlider;
     [SerializeField] private ItemInfoRendererWithCount _eggRenderer;
+
+    public event Action<bool> StateChanged;
 
     private void Awake() {
         _chickens.FoodCountChanged += UpdateFoodCount;
@@ -45,12 +48,9 @@ public class ChickensUI : MonoBehaviour, IActivable {
         _eggRenderer.SetCount(_chickens.Data.EggCount);
     }
 
-    public void ChangeState() {
-        _panel.SetActive(!_panel.activeSelf);
-    }
-
     public void ChangeState(bool newState) {
         _panel.SetActive(newState);
+        StateChanged?.Invoke(newState);
     }
 
     public void EggsToCar() => _chickens.EggsToCar();

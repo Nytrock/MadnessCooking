@@ -6,6 +6,7 @@ public class CafeSpot : MonoBehaviour {
     [SerializeField] private TableFoodRenderer[] _tableFoods;
     [SerializeField] private GameObject _border;
     [SerializeField] private SpotRemoveButton _removeButton;
+
     private int _index;
     private bool _isEditor;
 
@@ -26,7 +27,7 @@ public class CafeSpot : MonoBehaviour {
         _tableFoods[index].ShowFood(food);
     }
 
-    public void SetCameraManager(CameraManager cameraManager) {
+    public void SetupOnCreate(CameraManager cameraManager) {
         _removeButton.SetCameraManager(cameraManager);
     }
 

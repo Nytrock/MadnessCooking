@@ -10,6 +10,11 @@ public abstract class BaseSettingsPoint : MonoBehaviour {
         ValueChanged?.Invoke();
     }
 
+    public void LateStart() {
+        UpdateState();
+    }
+
+    protected abstract void UpdateState();
     public abstract void SetDefaultValue();
     public abstract void Cancel();
     public abstract void Submit();

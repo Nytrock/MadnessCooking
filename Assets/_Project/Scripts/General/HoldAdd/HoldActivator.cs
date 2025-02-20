@@ -3,6 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider2D))]
 public class HoldActivator : MonoBehaviour {
     [SerializeField] private UIHoverListener _hoverListener;
+    [SerializeField] private UIActivatorsManager _UIManager;
     [SerializeField] private HoldAdd _hold;
     private bool _isMouseDown;
 
@@ -12,6 +13,7 @@ public class HoldActivator : MonoBehaviour {
 
         _isMouseDown = true;
         _hold.ChangeClickMode(true);
+        _UIManager.CloseNowActivable();
     }
 
     private void OnMouseExit() {

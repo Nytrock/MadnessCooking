@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class IngredientShop : BaseInstantShop<Ingredient, OfficeData>, IUpgradeable<KitchenUpgradeData> {
@@ -12,15 +11,17 @@ public class IngredientShop : BaseInstantShop<Ingredient, OfficeData>, IUpgradea
     }
 
     protected override void SortItems() {
-        Func<Ingredient, int> sortMethod = (ingredient) => ingredient.Type == IngredientType.Buyable ? 0 : ingredient.Price;
+        static int sortMethod(Ingredient ingredient) => ingredient.Type == IngredientType.Buyable ? 0 : ingredient.Price;
         _data.OrderItems(sortMethod);
     }
 
     protected override void RemoveItem(Ingredient item, int index) {
-        if (item.Type == IngredientType.Buyable)
+        if (item.Type == IngredientType.Buyable) {
             _ingredientStorage.PutIngredientWithRemain(item, 1);
-        else
+            _itemManager.AddItem(item);
+        } else {
             base.RemoveItem(item, index);
+        }
     }
 
     protected override bool IsBuyable(Ingredient ingredient) {

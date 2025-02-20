@@ -156,11 +156,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 6
+        y: 14
         width: 17
         height: 12
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 7, y: 0, z: 9, w: 0}
       customData: 
       outline: []
@@ -177,12 +177,12 @@ TextureImporter:
       name: FPSBarnUI
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
+        x: 18
+        y: 21
         width: 5
         height: 5
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 2, y: 2, z: 2, w: 2}
       customData: 
       outline: []
@@ -199,12 +199,12 @@ TextureImporter:
       name: FPSFarmShopUI
       rect:
         serializedVersion: 2
-        x: 6
-        y: 0
+        x: 18
+        y: 15
         width: 5
         height: 5
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 2, y: 2, z: 2, w: 2}
       customData: 
       outline: []
@@ -213,6 +213,50 @@ TextureImporter:
       bones: []
       spriteID: 13fb7d6b74bbeaa4c910a20604485e3b
       internalID: 889394518
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FPSMenu
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 16
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 7, y: 6, z: 8, w: 6}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cad248e724e4b2848add1d202237dc52
+      internalID: -2062796588
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FPSMenuEngine
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 11
+        width: 6
+        height: 2
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e5d3d617cc4d3314c9484940ccd22563
+      internalID: 820594250
       vertices: []
       indices: 
       edges: []
@@ -235,6 +279,8 @@ TextureImporter:
       FPSBarnUI: -901297720
       FPSFarmShopUI: 889394518
       FPSGeneralUI: -1693163232
+      FPSMenu: -2062796588
+      FPSMenuEngine: 820594250
       Lamp: 1955946697
       Pot: 470648381
       Window: -805373322

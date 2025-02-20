@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -7,12 +8,14 @@ public class OrdersUI : MonoBehaviour, IUpgradeable<KitchenUpgradeData>, IActiva
     [SerializeField] private OrderButtonsPool _pool;
     [SerializeField] private GameObject _panel;
 
-    private List<OrderButton> _orderButtons;
-    private KitchenUpgradeData _upgradeData;
-
     [Header("Upgrades")]
     [SerializeField] private BaseUpgrade _autoSpice;
+
+    private List<OrderButton> _orderButtons;
+    private KitchenUpgradeData _upgradeData;
     private Ingredient _spice;
+
+    public event Action<bool> StateChanged;
 
     private void Awake() {
         _ordersManager.OrderAdded += AddOrder;
@@ -25,12 +28,9 @@ public class OrdersUI : MonoBehaviour, IUpgradeable<KitchenUpgradeData>, IActiva
         _spice = ConstIngredients.Instance.Spice;
     }
 
-    public void ChangeState() {
-        _panel.SetActive(!_panel.activeSelf);
-    }
-
     public void ChangeState(bool newState) {
         _panel.SetActive(newState);
+        StateChanged?.Invoke(newState);
     }
 
     private void AddOrder(Order order) {

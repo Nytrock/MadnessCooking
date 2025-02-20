@@ -1,25 +1,25 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PuncherUI : MonoBehaviour, IActivable, IUpgradeable<FarmUpgradeData> {
+public class PuncherUI : MonoBehaviour, IActivable {
     [SerializeField] private Puncher _puncher;
     [SerializeField] private GameObject _panel;
     [SerializeField] private CountRenderer _count;
 
     [Header("Upgrades")]
+    [SerializeField] private UpgradeManager _upgradeManager;
     [SerializeField] private BaseUpgrade _sliderShow;
     [SerializeField] private Slider _progressSlider;
-    private FarmUpgradeData _upgradeData;
+
+    private bool _isProgressShow = false;
+
+    public event Action<bool> StateChanged;
 
     private void Awake() {
         _puncher.FertilizerChanged += UpdateCount;
-    }
-
-    public void ChangeState() {
-        _panel.SetActive(!_panel.activeSelf);
-
-        if (_panel.activeSelf)
-            UpdateProgress();
+        _upgradeManager.ItemAdded += CheckAddedUpgrade;
+        UpdateProgressShow();
     }
 
     public void ChangeState(bool newState) {
@@ -27,10 +27,11 @@ public class PuncherUI : MonoBehaviour, IActivable, IUpgradeable<FarmUpgradeData
 
         if (newState)
             UpdateProgress();
+        StateChanged?.Invoke(newState);
     }
 
     private void UpdateProgress() {
-        if (!_upgradeData.IsPuncherProgressShow)
+        if (!_isProgressShow)
             return;
 
         _progressSlider.maxValue = _puncher.Data.NeedWaste;
@@ -38,7 +39,7 @@ public class PuncherUI : MonoBehaviour, IActivable, IUpgradeable<FarmUpgradeData
     }
 
     private void UpdateProgressShow() {
-        _progressSlider.gameObject.SetActive(_upgradeData.IsPuncherProgressShow);
+        _progressSlider.gameObject.SetActive(_isProgressShow);
     }
 
     private void UpdateCount() {
@@ -47,13 +48,8 @@ public class PuncherUI : MonoBehaviour, IActivable, IUpgradeable<FarmUpgradeData
 
     public void CheckAddedUpgrade(BaseUpgrade upgrade) {
         if (upgrade == _sliderShow) {
-            _upgradeData.ChangePuncherProgressShow();
+            _isProgressShow = true;
             UpdateProgressShow();
         }
-    }
-
-    public void BindUpgrade(FarmUpgradeData upgradeData) {
-        _upgradeData = upgradeData;
-        UpdateProgressShow();
     }
 }

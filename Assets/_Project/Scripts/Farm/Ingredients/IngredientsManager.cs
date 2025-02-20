@@ -27,11 +27,6 @@ public class IngredientsManager : SaveableItemManager<Ingredient, FarmData> {
                 yield return ingredient;
     }
 
-    public override void AddItem(Ingredient item) {
-        if (item.Type != IngredientType.Buyable)
-            base.AddItem(item);
-    }
-
     public override void Bind(FarmData data) {
         data.IngredientManager ??= new();
         _data = data.IngredientManager;

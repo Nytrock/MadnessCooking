@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class BarnStorageUI : MonoBehaviour, IActivable {
@@ -5,6 +6,8 @@ public class BarnStorageUI : MonoBehaviour, IActivable {
     [SerializeField] private BarnStorage _barnStorage;
     [SerializeField] private ItemInfoRendererWithCount _milkRenderer;
     [SerializeField] private ItemInfoRendererWithCount _flourRenderer;
+
+    public event Action<bool> StateChanged;
 
     private void Awake() {
         _barnStorage.MilkCountUpdated += UpdateMilkCount;
@@ -20,16 +23,13 @@ public class BarnStorageUI : MonoBehaviour, IActivable {
     }
 
     private void Start() {
-        ChangeState(false);
+        _panel.SetActive(false);
         _milkRenderer.SetItemInfo(ConstIngredients.Instance.Milk);
         _flourRenderer.SetItemInfo(ConstIngredients.Instance.Flour);
     }
 
-    public void ChangeState() {
-        _panel.SetActive(!_panel.activeSelf);
-    }
-
     public void ChangeState(bool newState) {
         _panel.SetActive(newState);
+        StateChanged?.Invoke(newState);
     }
 }

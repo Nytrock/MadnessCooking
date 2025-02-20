@@ -5,7 +5,6 @@ using UnityEngine;
 [Serializable, JsonObject(MemberSerialization.OptIn)]
 public class KitchenUpgradeData : ISaveable {
     [SerializeField, JsonProperty] private bool _isAutoSpice;
-    [SerializeField, JsonProperty] private bool _isStrengthShow;
     [SerializeField, JsonProperty] private bool _isWaterAvailable;
     [SerializeField, JsonProperty] private float _technicCookSpeed;
     [SerializeField, JsonProperty] private float _technicRepairSpeed;
@@ -13,7 +12,6 @@ public class KitchenUpgradeData : ISaveable {
 
     public bool IsAutoSpice => _isAutoSpice;
     public bool IsWaterAvailable => _isWaterAvailable;
-    public bool IsStrengthShow => _isStrengthShow;
     public float TechnicCookSpeed => _technicCookSpeed;
     public float TechnicRepairSpeed => _technicRepairSpeed;
     public float TechnicStrengthMultiplier => _technicStrength;
@@ -26,10 +24,6 @@ public class KitchenUpgradeData : ISaveable {
 
     public void SetAutoSpice() {
         _isAutoSpice = true;
-    }
-
-    public void ChangeStrengthShow() {
-        _isStrengthShow = true;
     }
 
     public void ChangeWaterAvailable() {

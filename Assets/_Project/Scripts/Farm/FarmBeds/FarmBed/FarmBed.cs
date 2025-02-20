@@ -35,7 +35,7 @@ public class FarmBed : MonoBehaviour {
         if (Data.PlantedIngredient == null)
             _UI.ActivateIngredientChoice(this);
         else
-            _UI.ChangeState(this);
+            _UI.SetFarmBed(this);
     }
 
     private void LateStart() {
