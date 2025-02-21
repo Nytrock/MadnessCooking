@@ -25,10 +25,11 @@ public class PopularityUI : MonoBehaviour {
     }
 
     private void UpdateProgress(int xp) {
+        _additionalUI.ChangeCriticWaitText(_popularityManager.CheckLevelWaitCritic());
+
         if (_popularityManager.IsMaxLevel)
             return;
 
         _progress.value = xp;
-        _additionalUI.ChangeCriticWaitText(_popularityManager.CheckLevelWaitCritic());
     }
 }

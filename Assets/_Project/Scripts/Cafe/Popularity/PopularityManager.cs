@@ -97,7 +97,7 @@ public class PopularityManager : MonoBehaviour, IBindable<CafeData> {
     }
 
     public bool CheckLevelWaitCritic() {
-        return (_data.Level + 1) % 5 == 0 && _data.Xp == _nowLevel.NeedXp;
+        return !IsMaxLevel && (_data.Level + 1) % 5 == 0 && _data.Xp == _nowLevel.NeedXp;
     }
 
     public void CriticSuccess() {

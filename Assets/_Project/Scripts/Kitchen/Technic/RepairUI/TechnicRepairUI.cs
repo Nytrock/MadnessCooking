@@ -26,7 +26,15 @@ public class TechnicRepairUI : MonoBehaviour, IActivable {
     }
 
     private void Start() {
+        MoneyManager.Instance.MoneyChanged += CheckMoney;
         _panel.SetActive(false);
+    }
+
+    private void CheckMoney(int newMoney) {
+        if (_nowTechnicHolder == null)
+            return;
+
+        _priceText.UpdatePrice(newMoney);
     }
 
     public void SetTechnic(TechnicHolder technicHolder) {

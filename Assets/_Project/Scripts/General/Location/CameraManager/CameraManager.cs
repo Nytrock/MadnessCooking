@@ -48,9 +48,11 @@ public abstract class CameraManager : MonoBehaviour {
         float keyAxis = 0, scrollAxis = 0, mouseAxis = 0;
         if (!_hoverListener.IsHover) {
             keyAxis = Input.GetAxis(_keyAxis) / FpsManager.NORMALIZED_DELTA_TIME;
-            scrollAxis = Input.GetAxis("Mouse ScrollWheel") / FpsManager.NORMALIZED_DELTA_TIME;
             mouseAxis = Input.GetAxis(_mouseAxis) / FpsManager.NORMALIZED_DELTA_TIME;
         }
+
+        if (!_hoverListener.IsScrollBlocked)
+            scrollAxis = Input.GetAxis("Mouse ScrollWheel") / FpsManager.NORMALIZED_DELTA_TIME;
 
         if (keyAxis != 0 || scrollAxis != 0) {
             if (keyAxis != 0)

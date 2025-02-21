@@ -17,11 +17,8 @@ public class MoneyCell : MonoBehaviour {
 
     public void SetNewSymbol(string symbol, bool isAdded) {
         _newSymbol = symbol;
-        foreach (var newText in _newTexts)
-            newText.text = symbol;
-
         if (!gameObject.activeInHierarchy) {
-            UpdateSymbol();
+            UpdateMainSymbol();
             return;
         }
 
@@ -31,7 +28,12 @@ public class MoneyCell : MonoBehaviour {
             _animator.SetTrigger("isSubtracted");
     }
 
-    public void UpdateSymbol() {
-        _nowText.text = _newSymbol;
+    public void UpdateSideSymbols() {
+        foreach (var newText in _newTexts)
+            newText.text = _newSymbol;
+    }
+
+    public void UpdateMainSymbol() {
+        _nowText.text = _newTexts[0].text;
     }
 }

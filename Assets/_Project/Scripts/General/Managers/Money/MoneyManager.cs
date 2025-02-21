@@ -18,6 +18,11 @@ public class MoneyManager : Singleton<MoneyManager>, IBindable<GeneralData> {
         ChangeMoney(1000);
     }
 
+    [ContextMenu(nameof(RemoveThousandMoney))]
+    private void RemoveThousandMoney() {
+        ChangeMoney(-1000);
+    }
+
     public void ChangeMoney(int changeValue) {
         if (changeValue == 0)
             return;

@@ -8,6 +8,7 @@ public class TechnicRepairUIText : MonoBehaviour {
 
     private LocalizedText _localizedText;
     private TextAvailableRenderer _textAvailableRenderer;
+    private int _repairPrice;
 
     private void Awake() {
         _localizedText = GetComponent<LocalizedText>();
@@ -30,7 +31,12 @@ public class TechnicRepairUIText : MonoBehaviour {
             return;
         }
 
-        _textAvailableRenderer.UpdateAvailable(price <= MoneyManager.Instance.MoneyCount);
+        _repairPrice = price;
+        UpdatePrice(MoneyManager.Instance.MoneyCount);
         _localizedText.SetText(price.ToString() + '$');
+    }
+
+    public void UpdatePrice(int moneyCount) {
+        _textAvailableRenderer.UpdateAvailable(_repairPrice <= moneyCount);
     }
 }

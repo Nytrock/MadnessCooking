@@ -14,7 +14,7 @@ public abstract class MoneyBaseUI : MonoBehaviour {
     }
 
     private void UpdateCount(int newCount) {
-        _isCountAdded = newCount > _oldCount;
+        _isCountAdded = newCount > _nowCount;
 
         _oldCount = _nowCount;
         if (_oldCount == -1)

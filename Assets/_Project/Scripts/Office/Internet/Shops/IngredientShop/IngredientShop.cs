@@ -55,6 +55,7 @@ public class IngredientShop : BaseInstantShop<Ingredient, OfficeData>, IUpgradea
         if (_upgradeData.IsAutoSpice && _data.IsItemBuyable(spice)) {
             int index = _data.IndexOfItem(spice);
             base.RemoveItem(spice, index);
+            _ingredientStorage.RemoveAllSpices();
         }
     }
 }

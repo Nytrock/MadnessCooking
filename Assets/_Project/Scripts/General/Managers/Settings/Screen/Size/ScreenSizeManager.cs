@@ -2,18 +2,14 @@ using UnityEngine;
 
 public class ScreenSizeManager : MonoBehaviour, IBindable<VideoSettingsData>, ISettingableWithOptions {
     [SerializeField] private ScreenSize[] _sizes;
-    [SerializeField] private ScreenSize _defaultSize;
     [SerializeField] private ScreenModeManager _screenModeManager;
     private VideoSettingsData _data;
 
     public int DefaultValue {
         get {
-            for (int i = 0; i < _sizes.Length; i++) {
-                if (_sizes[i].Width == _defaultSize.Width) {
+            for (int i = 0; i < _sizes.Length; i++)
+                if (_sizes[i].Height >= Screen.height)
                     return i;
-                }
-            }
-
             return 0;
         }
     }

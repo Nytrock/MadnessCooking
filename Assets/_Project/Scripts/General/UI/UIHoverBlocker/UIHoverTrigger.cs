@@ -4,8 +4,9 @@ using UnityEngine.EventSystems;
 [RequireComponent(typeof(RectTransform))]
 public class UIHoverTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
     [SerializeField] private UIHoverListener _hoverListener;
-    [SerializeField] private bool _isReversed = false;
-    [SerializeField] private bool _isDebug = false;
+    [SerializeField] private bool _isScrollBlocked;
+    [SerializeField] private bool _isHoverReversed;
+    [SerializeField] private bool _isDebug;
 
     private RectTransform _rect;
 
@@ -14,28 +15,37 @@ public class UIHoverTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     }
 
     public void OnPointerEnter(PointerEventData eventData) {
-        _hoverListener.HoverChange(!_isReversed);
-        if (_isDebug)
-            Debug.Log("Poiner enter");
+        Enter();
     }
 
     public void OnPointerExit(PointerEventData eventData) {
-        _hoverListener.HoverChange(_isReversed);
-        if (_isDebug)
-            Debug.Log("Poiner exit");
+        Leave();
     }
 
     public void OnDisable() {
-        _hoverListener.HoverChange(_isReversed);
-        if (_isDebug)
-            Debug.Log("Disabled");
+        Leave();
     }
 
     public void OnEnable() {
         if (_rect.ContainsMouse())
-            _hoverListener.HoverChange(!_isReversed);
+            Enter();
+    }
 
-        if (_isDebug)
-            Debug.Log("Enabled");
+    private void Enter() {
+        ChangeStates(!_isHoverReversed, _isScrollBlocked);
+    }
+
+    private void Leave() {
+        ChangeStates(_isHoverReversed, false);
+    }
+
+    private void ChangeStates(bool isHover, bool isScrollBlocked) {
+        _hoverListener.ChangeHoverState(isHover);
+        _hoverListener.ChangeScrollBlockState(isScrollBlocked);
+
+        if (_isDebug) {
+            Debug.Log($"{name} change hover to {isHover}");
+            Debug.Log($"{name} change scroll block to {isScrollBlocked}");
+        }
     }
 }
