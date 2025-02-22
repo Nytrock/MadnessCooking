@@ -1,7 +1,34 @@
 fileFormatVersion: 2
-guid: d8509b07899e0c44bad26eb12185540e
+guid: 3c28dc44ecad9c04694288f45a7b761d
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: -2061959030413228360
+    second: TechnicMini_0
+  - first:
+      213: -2586100875174388415
+    second: TechnicMini_1
+  - first:
+      213: -3429617921449480131
+    second: TechnicMini_2
+  - first:
+      213: -6272537435586257013
+    second: TechnicMini_3
+  - first:
+      213: -4314647479837438975
+    second: TechnicMini_4
+  - first:
+      213: -4901813763211710759
+    second: TechnicMini_5
+  - first:
+      213: 2492942684558678720
+    second: TechnicMini_6
+  - first:
+      213: -4539610923672443569
+    second: TechnicMini_7
+  - first:
+      213: 5566236381901183447
+    second: TechnicMini_8
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -34,7 +61,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -48,7 +75,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 6.5
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -69,19 +96,6 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -107,19 +121,6 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
-    buildTarget: iOS
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
     buildTarget: Android
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -133,7 +134,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
-    buildTarget: Server
+    buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -149,265 +150,199 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: TechnicCookSpeedUp1
+      name: TechnicMini_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 51
-        width: 16
-        height: 16
+        x: 2
+        y: 16
+        width: 15
+        height: 17
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 5d62842b0c4dd434d86f9c9b6702b387
-      internalID: -885473690
+      spriteID: 8b68fc2cf237263e0800000000000000
+      internalID: -2061959030413228360
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TechnicCookSpeedUp2
-      rect:
-        serializedVersion: 2
-        x: 17
-        y: 51
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6c83e5cd4c767d24ba4296950cf0a055
-      internalID: -544454251
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TechnicCookSpeedUp3
-      rect:
-        serializedVersion: 2
-        x: 34
-        y: 51
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0604102934b5899429afb2b6e464b5a4
-      internalID: 365937311
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TechnicCookSpeedUp4
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 34
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 120bf6c46a0aa724b90d547f009a5b8e
-      internalID: 391044100
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TechnicRepairPriceDecrease1
+      name: TechnicMini_1
       rect:
         serializedVersion: 2
         x: 17
-        y: 34
+        y: 16
         width: 16
-        height: 16
+        height: 17
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 8fa61ef11d8f6bb4ba203b6a91383db0
-      internalID: 1081917727
+      spriteID: 14d57eda4f25c1cd0800000000000000
+      internalID: -2586100875174388415
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TechnicRepairSpeedUp1
-      rect:
-        serializedVersion: 2
-        x: 34
-        y: 34
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ce5985d23e178df42bfe402f03106c0e
-      internalID: -634919779
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TechnicRepairPriceDecrease2
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 17
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0785bd9833c115945ac35e0956d7a67f
-      internalID: -1348986625
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TechnicRepairSpeedUp2
-      rect:
-        serializedVersion: 2
-        x: 17
-        y: 17
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 69d9d7017b04a5d45a12836f09582f0d
-      internalID: 1029125856
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TechnicStrengthAdd1
-      rect:
-        serializedVersion: 2
-        x: 34
-        y: 17
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 429846a7b8010a549b81cd147a459710
-      internalID: -593161915
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TechnicStrengthAdd2
+      name: TechnicMini_2
       rect:
         serializedVersion: 2
         x: 17
         y: 0
         width: 16
-        height: 16
+        height: 17
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 2bf63cab77555f542af45617b0f6af20
-      internalID: -568242764
+      spriteID: d30b0bcdbac8760d0800000000000000
+      internalID: -3429617921449480131
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SpiceAutoBuy
+      name: TechnicMini_3
       rect:
         serializedVersion: 2
-        x: 34
-        y: 0
-        width: 16
-        height: 16
+        x: 33
+        y: 16
+        width: 18
+        height: 17
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 715ba7341f6e0df429de0a9ef58234b8
-      internalID: 725856351
+      spriteID: b8f9a878f6873f8a0800000000000000
+      internalID: -6272537435586257013
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TechnicStrengthShow
+      name: TechnicMini_4
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 0
+        width: 18
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 10c41412afa4f14c0800000000000000
+      internalID: -4314647479837438975
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TechnicMini_5
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 0
+        width: 18
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9de25a07a5249fbb0800000000000000
+      internalID: -4901813763211710759
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TechnicMini_6
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 16
+        width: 15
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0ca5786d926b89220800000000000000
+      internalID: 2492942684558678720
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TechnicMini_7
+      rect:
+        serializedVersion: 2
+        x: 67
+        y: 16
+        width: 17
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f456504baef0001c0800000000000000
+      internalID: -4539610923672443569
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TechnicMini_8
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 16
-        height: 16
+        height: 13
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: f37847d01d293234daea6999e46e63ca
-      internalID: -1853256795
+      spriteID: 7d953178f7e3f3d40800000000000000
+      internalID: 5566236381901183447
       vertices: []
       indices: 
       edges: []
@@ -416,7 +351,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -425,20 +360,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      Sink: -1210787060
-      SpiceAutoBuy: 725856351
-      TechnicCookSpeedUp1: -885473690
-      TechnicCookSpeedUp2: -544454251
-      TechnicCookSpeedUp3: 365937311
-      TechnicCookSpeedUp4: 391044100
-      TechnicRepairPriceDecrease1: 1081917727
-      TechnicRepairPriceDecrease2: -1348986625
-      TechnicRepairSpeedUp1: -634919779
-      TechnicRepairSpeedUp2: 1029125856
-      TechnicStrengthAdd1: -593161915
-      TechnicStrengthAdd2: -568242764
-      TechnicStrengthShow: -1853256795
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

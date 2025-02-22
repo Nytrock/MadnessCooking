@@ -13,7 +13,6 @@ public class Food : BuyableItem {
     [SerializeField, Min(0)] private int _moneyGet;
     [SerializeField] private BuyableItemCountList<Ingredient> _ingredients;
     [SerializeField] private Color _color;
-    [SerializeField] private bool _isNeedWater;
 
     protected override string _table => nameof(Food) + "Table";
 
@@ -25,7 +24,6 @@ public class Food : BuyableItem {
     public float TimeToEat => _timeToEat;
     public int MoneyGet => _moneyGet + SpicesPrice;
     public Color Color => _color;
-    public bool IsNeedWater => _isNeedWater;
 
     public IEnumerable<BuyableItemCount<Ingredient>> Ingredients => _ingredients.GetItems();
 

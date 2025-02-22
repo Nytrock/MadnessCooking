@@ -23,7 +23,7 @@ public class CarWaitManagerData {
     public void UpdateSpeed(float needTime) {
         _needWaitTime = needTime;
         if (_carState != CarState.Calm) {
-            _nowWaitTime = Mathf.Min(_nowWaitTime, _needWaitTime);
+            _nowWaitTime = Mathf.Min(_nowWaitTime, _needWaitTime / 2f);
         }
     }
 
@@ -32,7 +32,7 @@ public class CarWaitManagerData {
     }
 
     public void StartWait() {
-        _nowWaitTime = _needWaitTime;
+        _nowWaitTime = _needWaitTime / 2f;
         _carState = CarState.Sent;
     }
 
@@ -46,7 +46,7 @@ public class CarWaitManagerData {
     public void StartReturn() {
         _carState = CarState.Returns;
         _ingredientsSended.Clear();
-        _nowWaitTime = _needWaitTime;
+        _nowWaitTime = _needWaitTime / 2f;
     }
 
     public void StartCalm() {

@@ -6,7 +6,7 @@ public abstract class SaveableBaseShop<TItem, TData> : BaseShop, IBindable<TData
 
     [SerializeField] protected TItem[] _defaultItemsToBuy;
     [SerializeField] protected BuyableItemManager<TItem> _itemManager;
-    [SerializeField] protected ShopData<TItem> _data;
+    protected ShopData<TItem> _data;
 
     public event Action<BuyableItem> ItemBought;
 

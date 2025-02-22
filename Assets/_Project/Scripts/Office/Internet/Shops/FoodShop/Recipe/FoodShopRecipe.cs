@@ -1,19 +1,8 @@
 using UnityEngine;
 
 public class FoodShopRecipe : FoodRecipe<FoodShopRecipePart> {
-    [SerializeField] private FoodShopRecipeWater _waterIcon;
     [SerializeField] protected IngredientsManager _ingredientManager;
     private KitchenUpgradeData _upgradeData;
-
-    public override void SetupRecipe(Food food) {
-        base.SetupRecipe(food);
-        SetupWater(food);
-    }
-
-    public override void SetHoverText(HoverItemName hoverText) {
-        base.SetHoverText(hoverText);
-        _waterIcon.SetHoverText(hoverText);
-    }
 
     protected override void SetupIngredients() {
         int index = 0;
@@ -29,13 +18,8 @@ public class FoodShopRecipe : FoodRecipe<FoodShopRecipePart> {
         _techicIcon.SetTechnic(_food.TypeTechnic, haveTechnic);
     }
 
-    private void SetupWater(Food food) {
-        _waterIcon.Setup(food.IsNeedWater, _upgradeData.IsWaterAvailable);
-    }
-
     public override void DisableParts() {
         base.DisableParts();
-        _waterIcon.ChangeState(false);
         _techicIcon.ChangeState(false);
     }
 

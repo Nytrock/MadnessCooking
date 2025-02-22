@@ -3,13 +3,13 @@ using System.Linq;
 using UnityEngine;
 
 public class TechnicManager : SaveableItemManager<Technic, KitchenData>, IUpgradeable<KitchenUpgradeData> {
-    [SerializeField] private TechnicRepairUI _UI;
     [SerializeField] private TechnicHolder[] _holders;
 
     [Header("Upgrades")]
-    [SerializeField] private CoefficientUpgrade[] _technicCookSpeedUps;
-    [SerializeField] private CoefficientUpgrade[] _technicRepairSpeedUps;
-    [SerializeField] private CoefficientUpgrade[] _technicStrengthAdds;
+    [SerializeField] private CoefficientUpgrade[] _technicCookSpeedUpgrades;
+    [SerializeField] private CoefficientUpgrade[] _technicRepairSpeedUpgrades;
+    [SerializeField] private CoefficientUpgrade[] _technicRepairPriceUpgrades;
+    [SerializeField] private CoefficientUpgrade[] _technicStrengthUpgrades;
 
     private KitchenUpgradeData _upgradeData;
 
@@ -84,11 +84,13 @@ public class TechnicManager : SaveableItemManager<Technic, KitchenData>, IUpgrad
     }
 
     public void CheckAddedUpgrade(BaseUpgrade upgrade) {
-        if (_technicCookSpeedUps.Contains(upgrade))
+        if (_technicCookSpeedUpgrades.Contains(upgrade))
             _upgradeData.ChangeTechnicCookSpeed(upgrade as CoefficientUpgrade);
-        else if (_technicStrengthAdds.Contains(upgrade))
+        else if (_technicStrengthUpgrades.Contains(upgrade))
             _upgradeData.ChangeTechnicStrength(upgrade as CoefficientUpgrade);
-        else if (_technicRepairSpeedUps.Contains(upgrade))
+        else if (_technicRepairSpeedUpgrades.Contains(upgrade))
             _upgradeData.ChangeTechnicRepairSpeed(upgrade as CoefficientUpgrade);
+        else if (_technicRepairPriceUpgrades.Contains(upgrade))
+            _upgradeData.ChangeTechnicRepairPrice(upgrade as CoefficientUpgrade);
     }
 }

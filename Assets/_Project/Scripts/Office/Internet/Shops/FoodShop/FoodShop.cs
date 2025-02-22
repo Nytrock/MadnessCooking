@@ -21,9 +21,6 @@ public class FoodShop : BaseChooseShop<Food, OfficeData>, IUpgradeable<KitchenUp
         if (food == null)
             return false;
 
-        if (food.IsNeedWater && !_upgradeData.IsWaterAvailable)
-            return false;
-
         if (!_technicManager.HaveTechnic(food.TypeTechnic))
             return false;
 

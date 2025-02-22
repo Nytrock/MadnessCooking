@@ -6,7 +6,7 @@ public class FarmCarWaitManager : MonoBehaviour, IBindable<FarmData> {
     [SerializeField] private FarmCar _car;
     [SerializeField] private UpgradeManager _upgradeManager;
     [SerializeField] private KitchenStorage _kitchenStorage;
-    [SerializeField, Min(0)] private float _defaultWaitMinutes;
+    [SerializeField, Min(0)] private float _defaultWaitHours;
 
     [Header("Upgrades")]
     [SerializeField] private CoefficientUpgrade[] _speedUpgrades;
@@ -61,7 +61,7 @@ public class FarmCarWaitManager : MonoBehaviour, IBindable<FarmData> {
     }
 
     public void Bind(FarmData data) {
-        data.CarWaitManager ??= new(_defaultWaitMinutes * SECONDS_IN_MINUTES);
+        data.CarWaitManager ??= new(_defaultWaitHours * SECONDS_IN_MINUTES);
         _data = data.CarWaitManager;
     }
 }
