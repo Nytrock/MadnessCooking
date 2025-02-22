@@ -10,7 +10,6 @@ public class Client : MonoBehaviour {
 
     [SerializeField] private ClientSkin _skin;
     [SerializeField] private ClientGender _gender;
-    [SerializeField] private RangeFloat _waitTime;
     [SerializeField] private int _richClientMoneyMultiplier = 2;
 
     private ClientsSpawner _spawner;
@@ -18,7 +17,7 @@ public class Client : MonoBehaviour {
     private CafeSpot _spot;
     private CafeSeat _seat;
 
-    [field: SerializeField] public ClientData Data { get; private set; }
+    public ClientData Data { get; private set; }
     public ClientUI ClientUI { get; private set; }
     public int SpotIndex { get; private set; }
     public int SeatIndex { get; private set; }
@@ -90,12 +89,9 @@ public class Client : MonoBehaviour {
 
         Data = settings.Data;
         Data.SetGender(_gender);
-        Data.SetWaitTime(_waitTime.RandomValue);
 
         transform.position = Data.Position.GetVector();
         _skin.StartNewCycle(Data);
-
-        ClientUI.Setup(Data, ActivateOrder);
         ClientUI.StartNewCycle();
 
         if (Data.State == ClientState.Leave) {
@@ -126,9 +122,8 @@ public class Client : MonoBehaviour {
         Data.Order.Activate();
     }
 
-    public void CheckOrder() {
-        if (Data.Order.IsFinished)
-            ClientUI.ActivateYesButton();
+    public void FinishOrder() {
+        ClientUI.FinishOrder();
     }
 
     public void SitAndWait() {
@@ -138,7 +133,7 @@ public class Client : MonoBehaviour {
 
     public void EndEat() {
         WaitOthers();
-        _table.CheckTalk();
+        _table.CheckVisitEnded();
     }
 
     public void Leave() {
@@ -146,8 +141,6 @@ public class Client : MonoBehaviour {
         Data.ChangeState(ClientState.Leave);
 
         ChangeState();
-        ClientUI.ChangeEatSliderState(false);
-        ClientUI.ChangeFoodChoiceState(false);
         _seat.ChangeSeatState(false);
     }
 
@@ -188,7 +181,8 @@ public class Client : MonoBehaviour {
         _spot.SetTableFoodSprite(Data.Order.Food, SeatIndex);
     }
 
-    public void ResetSpotTableFood() {
+    public void StopEat() {
+        ClientUI.ChangeEatSliderState(false);
         _spot.ResetTableFoodSprite(SeatIndex);
     }
 
@@ -214,9 +208,10 @@ public class Client : MonoBehaviour {
         _spot = null;
     }
 
-    public void SetupOnCreate(ClientsSpawner spawner, TutorialManager tutorialManager, UIActivatorsManager UIManager) {
+    public void SetupOnCreate(ClientsSpawner spawner, TutorialManager tutorialManager,
+        UIActivatorsManager UIManager, CafeUpgradeData upgradeData) {
         _spawner = spawner;
-        ClientUI.SetupOnCreate(tutorialManager, UIManager);
+        ClientUI.SetupOnCreate(this, tutorialManager, UIManager, upgradeData);
         _walkState.SetupSpawner(spawner);
     }
 }

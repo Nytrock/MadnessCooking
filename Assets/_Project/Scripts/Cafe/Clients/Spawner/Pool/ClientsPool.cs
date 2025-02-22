@@ -5,7 +5,9 @@ public class ClientsPool : Pool<Client> {
     [SerializeField] private ClientsSpawner _spawner;
     [SerializeField] private TutorialManager _tutorialManager;
     [SerializeField] private UIActivatorsManager _UIManager;
+
     private ClientGender _clientsGender;
+    private CafeUpgradeData _upgradeData;
 
     public ClientGender ClientsGender => _clientsGender;
 
@@ -27,7 +29,11 @@ public class ClientsPool : Pool<Client> {
 
     protected override Client CreateObject() {
         Client client = Instantiate(_clientPrefab, _container);
-        client.SetupOnCreate(_spawner, _tutorialManager, _UIManager);
+        client.SetupOnCreate(_spawner, _tutorialManager, _UIManager, _upgradeData);
         return client;
+    }
+
+    public void BindUpgrade(CafeUpgradeData upgradeData) {
+        _upgradeData = upgradeData;
     }
 }

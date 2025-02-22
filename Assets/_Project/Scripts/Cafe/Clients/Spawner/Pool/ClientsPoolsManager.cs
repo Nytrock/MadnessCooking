@@ -33,4 +33,9 @@ public class ClientsPoolsManager : MonoBehaviour {
 
         throw new NullReferenceException($"There's no client pool for gender {client.Gender}");
     }
+
+    public void BindUpgrade(CafeUpgradeData upgradeData) {
+        foreach (var pool in _pools)
+            pool.BindUpgrade(upgradeData);
+    }
 }

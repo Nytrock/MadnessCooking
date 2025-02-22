@@ -10,11 +10,14 @@ public class Order {
     [SerializeField, JsonProperty] private Food _food;
     [SerializeField, JsonProperty] private int _tableIndex;
 
+    private float _cookProgress = 0;
+
     public bool IsActivated => _isActivated;
     public bool IsFinished => _isFinished;
     public bool IsCooking => _isCooking;
     public Food Food => _food;
     public int TableIndex => _tableIndex;
+    public float CookProgress => _cookProgress;
 
     public event Action OrderStarted;
 
@@ -38,5 +41,9 @@ public class Order {
 
     public void Activate() {
         _isActivated = true;
+    }
+
+    public void UpdateProgress(float progress) {
+        _cookProgress = progress;
     }
 }

@@ -3,9 +3,9 @@ using UnityEngine.UI;
 
 [RequireComponent(typeof(Image))]
 public class CircleSlider : MonoBehaviour {
+    [SerializeField] private float _maxValue = 1;
     protected Image _slider;
     protected float _nowCoef;
-    private float _maxValue = 1;
     private float _value = 0;
 
     private void Awake() {

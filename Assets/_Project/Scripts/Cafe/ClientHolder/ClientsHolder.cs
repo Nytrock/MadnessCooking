@@ -9,10 +9,9 @@ using Random = UnityEngine.Random;
 [RequireComponent(typeof(CafeSpot))]
 public class ClientsHolder : MonoBehaviour {
     [SerializeField] private Slider _waitSlider;
-    [SerializeField] private RangeFloat _talkTime;
+    [SerializeField] private RangeFloat _waitTime;
     [SerializeField] private RangeFloat _clientInterval;
     [SerializeField, Min(0)] private float _clientServicedTimeBonus;
-    [SerializeField, Min(0)] private float _clientWaitMultiplier = 0.75f;
     [SerializeField, Min(0)] private float _notFullServicePenalty = 0.5f;
 
     private ClientsSpawner _spawner;
@@ -25,7 +24,6 @@ public class ClientsHolder : MonoBehaviour {
     public int SpotIndex => _spot.Index;
 
     public event Action WaitStarted;
-    public event Action TalkStarted;
     public event Action<ClientsHolder> ClientsLeaved;
 
     private void Awake() {
@@ -34,8 +32,7 @@ public class ClientsHolder : MonoBehaviour {
     }
 
     private void Update() {
-        if (_data.GroupState != GroupClientState.Wait &&
-            _data.GroupState != GroupClientState.Talk)
+        if (_data.GroupState != GroupClientState.Wait)
             return;
 
         if (_isTutorial)
@@ -44,10 +41,8 @@ public class ClientsHolder : MonoBehaviour {
         _data.UpdateTime();
         _waitSlider.value = _data.WaitTime - _data.NowTime;
 
-        if (_data.NowTime > _data.WaitTime) {
+        if (_data.NowTime > _data.WaitTime)
             EndVisit();
-            StartCoroutine(ClientsLeave());
-        }
     }
 
     public void AddClient(Client newClient) {
@@ -99,12 +94,12 @@ public class ClientsHolder : MonoBehaviour {
             return;
         }
 
-        _data.StartWait(_clientWaitMultiplier);
+        _data.StartWait(_waitTime.RandomValue);
         _waitSlider.maxValue = _data.WaitTime;
         WaitStarted?.Invoke();
     }
 
-    public IEnumerator ClientsLeave(bool noDelay = false) {
+    private IEnumerator ClientsLeave(bool noDelay = false) {
         RandomizeClients();
 
         Client[] leaveClients = _clients.ToArray();
@@ -115,8 +110,7 @@ public class ClientsHolder : MonoBehaviour {
 
         for (int i = 0; i < leaveClients.Length; i++) {
             leaveClients[i].Leave();
-            if (_data.GroupState != GroupClientState.Talk)
-                leaveClients[i].CheckIsServiced();
+            leaveClients[i].CheckIsServiced();
 
             if (noDelay)
                 yield return new WaitForSeconds(0);
@@ -147,29 +141,18 @@ public class ClientsHolder : MonoBehaviour {
         _data.StopWait();
     }
 
-    public void CheckTalk() {
-        bool allClientsServised = _data.Clients.All(x => x.State == ClientState.WaitOthers);
-        if (allClientsServised)
-            StartTalk();
+    public void CheckVisitEnded() {
+        bool allClientsFinish = _data.Clients.All(x => x.State == ClientState.WaitOthers);
+        if (!allClientsFinish)
+            return;
+
+        EndVisit(true);
     }
 
     public void FoodRejected() {
         _data.DecreaseTalk();
         CheckWaitEnded();
-        CheckTalk();
-    }
-
-    private void StartTalk() {
-        _data.StartTalk(_talkTime.RandomValue);
-        if (_data.TalkIndex == 0 || _clients.Count == 1) {
-            EndVisit();
-            StartCoroutine(ClientsLeave());
-            return;
-        }
-
-        _waitSlider.maxValue = _data.WaitTime;
-        ChangeSliderState(true);
-        TalkStarted?.Invoke();
+        CheckVisitEnded();
     }
 
     private void ChangeSliderState(bool newState) {
@@ -183,26 +166,22 @@ public class ClientsHolder : MonoBehaviour {
         if (_data.GroupState == GroupClientState.Leave)
             return;
 
-        CafeClosed();
+        EndVisit(true);
     }
 
-    private void CafeClosed() {
-        EndVisit();
-        StartCoroutine(ClientsLeave(true));
-    }
-
-    private void EndVisit() {
+    private void EndVisit(bool instantLeave = false) {
         ChangeSliderState(false);
         ClientsLeaved?.Invoke(this);
         WaitStarted = null;
         _waitSlider.value = 0;
 
-        if (_data.GroupState == GroupClientState.Talk)
+        if (_data.GroupState == GroupClientState.Serviced)
             _data.PayToPlayer(1);
         else
             _data.PayToPlayer(_notFullServicePenalty);
 
         _data.EndVisit();
+        StartCoroutine(ClientsLeave(instantLeave));
     }
 
     public void SetData(ClientHolderData spot) {

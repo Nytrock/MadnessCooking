@@ -12,7 +12,6 @@ public class CafeSpot : MonoBehaviour {
 
     public int Index => _index;
     public int SeatsCount => _seats.Length;
-    public bool CanRemove => _removeButton.CanRemove;
 
     private void Start() {
         _border.SetActive(_isEditor);
@@ -25,10 +24,6 @@ public class CafeSpot : MonoBehaviour {
 
     public void SetTableFoodSprite(Food food, int index) {
         _tableFoods[index].ShowFood(food);
-    }
-
-    public void SetupOnCreate(CameraManager cameraManager) {
-        _removeButton.SetCameraManager(cameraManager);
     }
 
     public void ResetTableFoodSprite(int index) {

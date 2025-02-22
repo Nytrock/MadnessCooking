@@ -4,7 +4,7 @@ public class ClientWaitState : ClientBaseState {
     }
 
     public override void ExitState(Client client) {
-
+        client.ClientUI.ChangeFoodChoiceState(false);
     }
 
     public override void UpdateState(Client client) {

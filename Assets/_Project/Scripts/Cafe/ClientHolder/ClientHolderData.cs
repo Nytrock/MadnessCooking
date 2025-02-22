@@ -64,11 +64,10 @@ public class ClientHolderData {
         ClearClients();
     }
 
-    public void StartWait(float clientWaitMultiplier) {
+    public void StartWait(float waitTime) {
         _groupState = GroupClientState.Wait;
         if (_waitTime == 0)
-            _waitTime = _clients[0].WaitTime;
-        _waitTime *= Mathf.Max(1, _clients.Length * clientWaitMultiplier);
+            _waitTime = waitTime;
     }
 
     public void AddMoney(int money) {
@@ -79,12 +78,6 @@ public class ClientHolderData {
         int payingMoney = Mathf.FloorToInt(_moneyCount * coeficient);
         MoneyManager.Instance.ChangeMoney(payingMoney);
         _moneyCount = 0;
-    }
-
-    public void StartTalk(float talkTime) {
-        _nowTime = 0;
-        _groupState = GroupClientState.Talk;
-        _waitTime = _talkIndex * talkTime;
     }
 
     public void DecreaseTalk() {

@@ -43,7 +43,6 @@ public class OrderButton : MonoBehaviour {
         MoneyManager.Instance.MoneyChanged += UpdateAutoSpices;
 
         _recipe.SetManagers(kitchenStorage, technicManager);
-        _cookState.SetTechnicManager(technicManager);
     }
 
     public void SetHoverText(HoverItemName hoverText) {

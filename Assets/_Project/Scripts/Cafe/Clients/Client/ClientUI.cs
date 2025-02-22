@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class ClientUI : MonoBehaviour, IActivable {
@@ -9,30 +8,34 @@ public class ClientUI : MonoBehaviour, IActivable {
     [SerializeField] private GameObject _buttonsBlock;
     [SerializeField] private ButtonWithAudio _mainButton;
     [SerializeField] private Image _foodImage;
-    [SerializeField] private Button _yesButton;
+    [SerializeField] private Sprite _questionSprite;
+    [SerializeField] private CircleSlider _orderSlider;
     [SerializeField] private Slider _eatSlider;
 
-    private CafeUpgradeData _data;
-    private ClientData _clientData;
-    private UnityAction _startAction;
+    private Client _client;
+    private CafeUpgradeData _upgradeData;
     private TutorialManager _tutorialManager;
     private UIActivatorsManager _UIManager;
 
     public event Action<bool> StateChanged;
 
-    public void SetData(CafeUpgradeData data) {
-        _data = data;
-    }
-
     public void StartNewCycle() {
-        _mainButton.OverrideAllListeners(_startAction);
-        _foodImage.color = new Color(1, 1, 1, 0);
+        _mainButton.OverrideAllListeners(_client.ActivateOrder);
+        _foodImage.sprite = _questionSprite;
+        ChangeFoodChoiceState(false);
     }
 
     public void StartEat() {
-        _eatSlider.maxValue = _clientData.WaitTime;
+        _eatSlider.maxValue = _client.Data.WaitTime;
         ChangeFoodChoiceState(false);
         ChangeEatSliderState(true);
+    }
+
+    private void Update() {
+        if (_client.Data.State == ClientState.Eat)
+            _eatSlider.value = _client.Data.NowTime;
+        else if (_client.Data.Order.IsCooking)
+            _orderSlider.SetValue(_client.Data.Order.CookProgress);
     }
 
     public void ChangeFoodChoiceState(bool newValue) {
@@ -52,40 +55,29 @@ public class ClientUI : MonoBehaviour, IActivable {
     }
 
     public void SetFood(Food food) {
-        _foodImage.color = new Color(1, 1, 1, 1);
         _foodImage.sprite = food.Icon;
         _mainButton.OverrideAllListeners(ChangeButtonsBlockVisible);
     }
 
-    public void ActivateYesButton() {
+    public void FinishOrder() {
         _animator.SetBool("isFinished", true);
-        _yesButton.interactable = true;
+        _buttonsBlock.SetActive(false);
+        _orderSlider.SetValue(0);
+        _mainButton.OverrideAllListeners(_client.Eat);
     }
 
     public void ChangeEatSliderState(bool newValue) {
-        _eatSlider.gameObject.SetActive(newValue && _data.IsEatTimeShow);
+        _eatSlider.gameObject.SetActive(newValue && _upgradeData.IsEatTimeShow);
     }
 
-    public void Setup(ClientData clientData, UnityAction action) {
-        _clientData = clientData;
-        _startAction = action;
-
-        _eatSlider.maxValue = _clientData.WaitTime;
-        _eatSlider.value = _clientData.NowTime;
-
-        _buttonsBlock.SetActive(false);
-        _yesButton.interactable = false;
-        _animator.SetBool("isFinished", false);
-        ChangeEatSliderState(false);
-        ChangeFoodChoiceState(false);
-    }
-
-    public void SetupOnCreate(TutorialManager tutorialManager, UIActivatorsManager UIManager) {
+    public void SetupOnCreate(Client client, TutorialManager tutorialManager, UIActivatorsManager UIManager, CafeUpgradeData upgradeData) {
+        _client = client;
         _tutorialManager = tutorialManager;
         _UIManager = UIManager;
-    }
+        _upgradeData = upgradeData;
 
-    public void UpdateSlider() {
-        _eatSlider.value = _clientData.NowTime;
+        _buttonsBlock.SetActive(false);
+        _animator.SetBool("isFinished", false);
+        ChangeEatSliderState(false);
     }
 }

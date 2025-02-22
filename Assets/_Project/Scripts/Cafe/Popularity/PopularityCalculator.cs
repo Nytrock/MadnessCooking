@@ -9,7 +9,6 @@ public class PopularityCalculator : MonoBehaviour {
     [Header("Multipliers")]
     [SerializeField, Min(0)] private float _oneCafeSpaceMultiplier;
     [SerializeField, Min(0)] private float _oneFoodMultiplier;
-    [SerializeField, Min(0)] private float _waitAddForOneSpaceMultiplier = 0.375f;
 
     private PopularityLevel _nowLevel;
     private PopularityManager _popularityManager;
@@ -35,9 +34,5 @@ public class PopularityCalculator : MonoBehaviour {
         doubleChance = _nowLevel.DoubleChance + singleChance;
         tripleChance = _nowLevel.TripleChance + doubleChance;
         quarterChance = _nowLevel.QuarterChance + tripleChance;
-    }
-
-    public float GetSpaceMultiplier() {
-        return Mathf.Max(1, _spaceManager.SpaceCount * _waitAddForOneSpaceMultiplier);
     }
 }

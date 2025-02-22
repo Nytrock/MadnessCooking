@@ -69,9 +69,6 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
 
             if (spotData.GroupState == GroupClientState.Wait)
                 table.CheckWait();
-            else if (spotData.GroupState == GroupClientState.Talk)
-                table.CheckTalk();
-
             spotIndex++;
         }
 
@@ -99,14 +96,13 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
             return;
         }
 
-        float waitMultiplier = _popularityCalculate.GetSpaceMultiplier();
         ClientType clientType = GetRandomType(clientCount);
         CafeSpot spot = _spotManager.GetSpotByIndex(spotIndex);
         ClientHolderData spotData = _clientHolderData.GetClientHolder(spotIndex);
 
         for (int i = 0; i < spot.SeatsCount; i++) {
             Order order = new(_foodManager.GetRandomFood(), spotIndex + 1);
-            ClientData newClient = new(_spawnPoint.position, clientType, waitMultiplier, order);
+            ClientData newClient = new(_spawnPoint.position, clientType, order);
             spotData.SetClient(i, newClient);
         }
         SpawnGroupOfClients(spot);
@@ -165,7 +161,7 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
 
     private void ClientEat(Client client) {
         client.ClientEat -= ClientEat;
-        _xpAdder.AddXp(client.Data.Type, client.Data.WaitCoef);
+        _xpAdder.AddXp(client.Data.Type);
         _data.AddServicedClient();
     }
 
@@ -184,7 +180,6 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
     }
 
     private void SetupClient(Client client, int spotIndex, int seatIndex) {
-        client.ClientUI.SetData(_upgradeData);
         ClientData clientData = _clientHolderData.GetClientHolder(spotIndex).GetClient(seatIndex);
         ClientSettings clientSettings = new(clientData, spotIndex, seatIndex);
         client.Setup(clientSettings);
@@ -199,6 +194,7 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
 
     public void BindUpgrade(CafeUpgradeData upgradeData) {
         _upgradeData = upgradeData;
+        _pool.BindUpgrade(upgradeData);
     }
 
     public void Bind(CafeData data) {

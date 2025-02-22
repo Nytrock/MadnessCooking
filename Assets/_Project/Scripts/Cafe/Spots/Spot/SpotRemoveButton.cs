@@ -3,32 +3,36 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(ButtonWithAudio))]
-public class SpotRemoveButton : MonoBehaviour, IPointerDownHandler {
+public class SpotRemoveButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler {
     private ButtonWithAudio _button;
-    private bool _canRemove;
-    private CameraManager _cameraManager;
+    private UnityAction _action;
 
-    public bool CanRemove => _canRemove;
+    private bool _isPressed;
+    private float _mouseOffset;
 
     private void Awake() {
         _button = GetComponent<ButtonWithAudio>();
     }
 
     private void Update() {
-        if (_canRemove)
-            _canRemove &= !_cameraManager.IsMouseMoving;
+        if (_isPressed)
+            _mouseOffset = Mathf.Max(Mathf.Abs(Input.GetAxis("Mouse X")), _mouseOffset);
     }
 
     public void OnPointerDown(PointerEventData eventData) {
-        _canRemove = true;
+        _isPressed = true;
+        _mouseOffset = 0;
     }
 
-    public void SetCameraManager(CameraManager cameraManager) {
-        _cameraManager = cameraManager;
+    public void OnPointerUp(PointerEventData eventData) {
+        if (_mouseOffset > 0.1f)
+            return;
+
+        _action.Invoke();
     }
 
     public void Setup(UnityAction buttonAction, AudioSource buttonAudio) {
-        _button.OverrideAllListeners(buttonAction);
+        _action = buttonAction;
         _button.SetAudio(buttonAudio);
     }
 }

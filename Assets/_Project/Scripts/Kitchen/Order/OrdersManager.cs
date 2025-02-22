@@ -20,13 +20,13 @@ public class OrdersManager : MonoBehaviour {
         client.OrderActivated += AddOrder;
         client.ClientRejected += RemoveOrder;
         client.ClientEat += RemoveOrder;
-        order.OrderFinished += client.CheckOrder;
+        order.OrderFinished += client.FinishOrder;
 
         if (order.IsActivated)
             client.ActivateOrder();
 
         if (order.IsFinished)
-            client.CheckOrder();
+            client.FinishOrder();
     }
 
     private void AddOrder(Client client) {
@@ -49,7 +49,7 @@ public class OrdersManager : MonoBehaviour {
 
         client.ClientRejected -= RemoveOrder;
         client.ClientEat -= RemoveOrder;
-        order.OrderFinished -= client.CheckOrder;
+        order.OrderFinished -= client.FinishOrder;
 
         if (order.IsCooking)
             _technicManager.EmergencyStopCooking(order);

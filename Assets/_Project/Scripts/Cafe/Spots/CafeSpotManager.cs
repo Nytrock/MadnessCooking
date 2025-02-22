@@ -5,7 +5,6 @@ using Random = UnityEngine.Random;
 
 public class CafeSpotManager : MonoBehaviour, IBindable<CafeData> {
     [SerializeField] private CafeSpaceManager _spaceManager;
-    [SerializeField] private HorizontalCameraManager _cameraManager;
     [SerializeField] private ClientsSpawner _spawner;
     [SerializeField] private CafeStateChanger _opener;
     [SerializeField] private AudioSource _removeButtonAudio;
@@ -55,9 +54,6 @@ public class CafeSpotManager : MonoBehaviour, IBindable<CafeData> {
     }
 
     private void RemoveSpot(int spotIndex) {
-        if (!_spots[spotIndex].CanRemove)
-            return;
-
         float offset = _cellSize * _spots[spotIndex].SeatsCount;
         SpotsPositionChanged?.Invoke(-offset);
         MoveSpots(spotIndex, offset);
@@ -135,7 +131,6 @@ public class CafeSpotManager : MonoBehaviour, IBindable<CafeData> {
         CafeSpot spot = Instantiate(_spotPrefabs[index], transform);
         spot.ChangeEditorState(isAddedByEditor);
         spot.SetIndex(_spots.Count);
-        spot.SetupOnCreate(_cameraManager);
 
         ClientHolderData newData = new(spot.SeatsCount);
         if (isAddedByEditor)

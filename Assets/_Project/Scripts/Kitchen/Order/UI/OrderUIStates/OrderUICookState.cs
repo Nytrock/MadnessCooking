@@ -1,20 +1,25 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class OrderUICookState : OrderUIBaseState {
-    [SerializeField] private OrderCookingSlider _cookSlider;
+    [SerializeField] private Slider _cookSlider;
+
     private Order _order;
+    private bool _isCook;
 
     public void SetOrder(Order order) {
         _order = order;
     }
 
-    public override void UpdateState(OrderUIState newState) {
-        base.UpdateState(newState);
-        if (newState == _state)
-            _cookSlider.StartCook(_order);
+    private void Update() {
+        if (!_isCook)
+            return;
+
+        _cookSlider.value = _order.CookProgress;
     }
 
-    public void SetTechnicManager(TechnicManager technicManager) {
-        _cookSlider.SetTechnicManager(technicManager);
+    public override void UpdateState(OrderUIState newState) {
+        base.UpdateState(newState);
+        _isCook = newState == _state;
     }
 }
