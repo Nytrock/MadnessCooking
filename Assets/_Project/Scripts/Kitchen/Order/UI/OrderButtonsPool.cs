@@ -4,7 +4,7 @@ public class OrderButtonsPool : Pool<OrderButton> {
     [SerializeField] private OrderButton _prefab;
     [SerializeField] private TechnicManager _technicManager;
     [SerializeField] private KitchenStorage _kitchenStorage;
-    [SerializeField] private HoverItemName _hoverText;
+    [SerializeField] private HoverTextPanel _hoverText;
 
     protected override OrderButton CreateObject() {
         OrderButton button = Instantiate(_prefab, _container);

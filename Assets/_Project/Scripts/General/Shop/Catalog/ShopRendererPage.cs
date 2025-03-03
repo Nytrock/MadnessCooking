@@ -3,12 +3,11 @@ using UnityEngine;
 
 public class ShopRendererPage : MonoBehaviour {
     [SerializeField] private BaseBuyPanel _buyPanelPrefab;
-    [SerializeField] private ShopRendererPageUpper _upper;
+    [SerializeField] private HoverTextPanel _sideInfoHoverPanel;
     [SerializeField] private Transform _container;
-
     [SerializeField] private int _maxItemCount;
 
-    [SerializeField] protected List<BaseBuyPanel> _buyPanels = new();
+    protected readonly List<BaseBuyPanel> _buyPanels = new();
 
     public int MaxItemCount {
         get {
@@ -21,6 +20,7 @@ public class ShopRendererPage : MonoBehaviour {
 
     public void GeneratePanel(BuyPanelData panelData) {
         BaseBuyPanel buyPanel = Instantiate(_buyPanelPrefab);
+        buyPanel.SetSideInfoHoverPanel(_sideInfoHoverPanel);
         buyPanel.Setup(panelData);
         AddPanel(buyPanel);
     }
@@ -36,17 +36,12 @@ public class ShopRendererPage : MonoBehaviour {
     }
 
     public void AddPanel(BaseBuyPanel panel) {
-        if (_upper != null)
-            _upper.ActivateUpper(_buyPanels.Count);
-
         panel.transform.SetParent(_container, false);
         _buyPanels.Add(panel);
     }
 
     private void RemovePanelByIndex(int index) {
         _buyPanels.RemoveAt(index);
-        if (_upper != null)
-            _upper.DisableUpper(_buyPanels.Count);
     }
 
     public void DestroyPanelByIndex(int index) {
@@ -67,12 +62,5 @@ public class ShopRendererPage : MonoBehaviour {
             panel.Destroy();
 
         Destroy(gameObject);
-    }
-
-    public void DisableAllUppers() {
-        if (_upper == null)
-            return;
-
-        _upper.DisableAllUppers();
     }
 }

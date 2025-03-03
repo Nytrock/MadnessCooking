@@ -12,6 +12,9 @@ public class ShopRenderer : MonoBehaviour {
     private int _nowPage = 0;
 
     private void Awake() {
+        if (_nextButton == null || _previousButton == null)
+            return;
+
         _nextButton.OverrideAllListeners(NextPage);
         _previousButton.OverrideAllListeners(PreviousPage);
     }
@@ -40,7 +43,6 @@ public class ShopRenderer : MonoBehaviour {
     private void GeneratePage() {
         ShopRendererPage page = Instantiate(_pagePrefab, _pagesContainer);
         _pages.Add(page);
-        page.DisableAllUppers();
         page.ChangeState(false);
     }
 
@@ -69,6 +71,9 @@ public class ShopRenderer : MonoBehaviour {
     }
 
     private void UpdateButtons() {
+        if (_nextButton == null || _previousButton == null)
+            return;
+
         _nextButton.gameObject.SetActive(_nowPage < _pages.Count - 1);
         _previousButton.gameObject.SetActive(_nowPage > 0);
     }

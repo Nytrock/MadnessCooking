@@ -2,9 +2,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class HoverItemNameActivator : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
+public class HoverItemNameActivator : HoverTextActivator {
     [SerializeField] protected Image _icon;
-    private HoverItemName _hoverText;
     protected BuyableItem _showingItem;
 
     public void SetItem(BuyableItem item) {
@@ -12,15 +11,7 @@ public class HoverItemNameActivator : MonoBehaviour, IPointerEnterHandler, IPoin
         _showingItem = item;
     }
 
-    public void OnPointerEnter(PointerEventData eventData) {
-        _hoverText.ShowItemName(_showingItem);
-    }
-
-    public void OnPointerExit(PointerEventData eventData) {
-        _hoverText.ChangeState(false);
-    }
-
-    public void SetHoverText(HoverItemName hoverText) {
-        _hoverText = hoverText;
+    public override void OnPointerEnter(PointerEventData eventData) {
+        _hoverPanel.ShowText(_showingItem.Name);
     }
 }

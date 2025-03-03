@@ -31,13 +31,13 @@ public class IngredientShop : BaseInstantShop<Ingredient, OfficeData>, IUpgradea
         return _bedTypesManager.HaveBedForIngredient(ingredient);
     }
 
-    protected override GrayscaleImageData GenerateSideInfo(Ingredient ingredient) {
+    protected override BuyPanelSideInfoData GenerateSideInfo(Ingredient ingredient) {
         if (ingredient.Type == IngredientType.Buyable)
             return null;
 
         BedType bedType = _bedTypesManager.GetBedByIngredientType(ingredient.Type);
         bool isBedAvailable = _bedTypesManager.IsItemAvailable(bedType);
-        return new GrayscaleImageData(bedType.Icon, !isBedAvailable);
+        return new BuyPanelSideInfoData(bedType.Icon, !isBedAvailable, bedType.RawName);
     }
 
     public override void Bind(OfficeData data) {

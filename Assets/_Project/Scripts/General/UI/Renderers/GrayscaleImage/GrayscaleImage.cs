@@ -6,8 +6,7 @@ public class GrayscaleImage : Image {
     private Material _grayscaleMaterial;
 
     public void Setup(GrayscaleImageData data) {
-        SetGrayscaleVisibility(data.IsGrayscale);
-        SetSprite(data.Sprite);
+        Setup(data.Sprite, data.IsGrayscale);
     }
 
     public void Setup(Sprite sprite, bool isGrayscale) {

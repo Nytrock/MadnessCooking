@@ -11,16 +11,18 @@ public abstract class BuyableItem : ExtendedScriptableObject {
     protected abstract string _table { get; }
 
     public string Name => GetName();
+    public string RawName => name + ".Name";
     public string Description => GetDescription();
+    public string RawDescription => name + ".Description";
     public override Sprite Icon => _icon;
     public int Price => _price;
 
     protected virtual string GetName() {
-        return LocalizationManager.Instance.GetLocalization(_table, name + ".Name");
+        return LocalizationManager.Instance.GetLocalization(_table, RawName);
     }
 
     protected virtual string GetDescription() {
-        return LocalizationManager.Instance.GetLocalization(_table, name + ".Description");
+        return LocalizationManager.Instance.GetLocalization(_table, RawDescription);
     }
 
     public static TItem CreateTemporaryItem<TItem>(string name)

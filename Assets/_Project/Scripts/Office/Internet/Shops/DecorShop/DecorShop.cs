@@ -2,17 +2,17 @@ using System;
 using UnityEngine;
 
 public class DecorShop : BaseInstantShop<Decor, OfficeData> {
-    [SerializeField] private LocationSprite[] _decorLocations;
+    [SerializeField] private LocationData[] _decorLocations;
 
     protected override void SortItems() {
         Func<Decor, int> sortMethod = (decor) => decor.Price + ((int)decor.Location * 10000);
         _data.OrderItems(sortMethod);
     }
 
-    protected override GrayscaleImageData GenerateSideInfo(Decor decor) {
+    protected override BuyPanelSideInfoData GenerateSideInfo(Decor decor) {
         foreach (var location in _decorLocations)
             if (location.Location == decor.Location)
-                return new(location.Sprite, false);
+                return new(location.Sprite, false, location.Name);
         return null;
     }
 

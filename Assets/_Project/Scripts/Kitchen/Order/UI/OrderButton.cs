@@ -45,8 +45,8 @@ public class OrderButton : MonoBehaviour {
         _recipe.SetManagers(kitchenStorage, technicManager);
     }
 
-    public void SetHoverText(HoverItemName hoverText) {
-        _foodInfo.SetHoverText(hoverText);
+    public void SetHoverText(HoverTextPanel hoverText) {
+        _foodInfo.SetHoverPanel(hoverText);
         _recipe.SetHoverText(hoverText);
     }
 

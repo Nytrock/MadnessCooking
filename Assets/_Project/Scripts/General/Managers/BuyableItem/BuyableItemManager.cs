@@ -8,7 +8,7 @@ public abstract class BuyableItemManager<TItem> : MonoBehaviour
     [SerializeField] protected List<TItem> _defaultItems;
     [SerializeField] protected List<TItem> _allItems;
 
-    [SerializeField] protected BuyableItemManagerData<TItem> _data = new();
+    protected BuyableItemManagerData<TItem> _data;
 
     public int AllItemsCount => _allItems.Count;
     public int AvailableItemsCount => _data.ItemsCount;

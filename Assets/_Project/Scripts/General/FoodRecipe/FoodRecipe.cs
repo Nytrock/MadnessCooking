@@ -24,10 +24,10 @@ public abstract class FoodRecipe<TPart> : MonoBehaviour
         SetupTechnic();
     }
 
-    public virtual void SetHoverText(HoverItemName hoverText) {
+    public virtual void SetHoverText(HoverTextPanel hoverText) {
         foreach (var recipePart in _recipeParts)
-            recipePart.SetHoverText(hoverText);
-        _techicIcon.SetHoverText(hoverText);
+            recipePart.SetHoverPanel(hoverText);
+        _techicIcon.SetHoverPanel(hoverText);
     }
 
     public virtual void DisableParts() {

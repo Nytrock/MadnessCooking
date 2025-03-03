@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class LocalHoverItemName : HoverItemName {
+public class LocalHoverTextPanel : HoverTextPanel {
 
     [SerializeField] private Camera _camera;
 

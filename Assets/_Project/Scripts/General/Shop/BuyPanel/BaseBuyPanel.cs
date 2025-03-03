@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public abstract class BaseBuyPanel : MonoBehaviour {
-    [SerializeField] protected GrayscaleImage _sideInfo;
+    [SerializeField] protected BuyPanelSideInfo _sideInfo;
     [SerializeField] protected Button _buyButton;
     protected BuyPanelData _data;
 
@@ -19,13 +19,11 @@ public abstract class BaseBuyPanel : MonoBehaviour {
     }
 
     public virtual void SetSideInfo() {
-        if (_data.SideImageData == null) {
-            _sideInfo.SetActive(false);
-            return;
-        }
+        _sideInfo.SetData(_data.SideImageData);
+    }
 
-        _sideInfo.SetActive(true);
-        _sideInfo.Setup(_data.SideImageData);
+    public virtual void SetSideInfoHoverPanel(HoverTextPanel hoverPanel) {
+        _sideInfo.SetHoverPanel(hoverPanel);
     }
 
     protected virtual void SetButtonListener() {

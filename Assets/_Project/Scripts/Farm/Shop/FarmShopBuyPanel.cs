@@ -11,4 +11,5 @@ public class FarmShopBuyPanel : BaseChooseBuyPanel {
     }
 
     public override void SetSideInfo() { }
+    public override void SetSideInfoHoverPanel(HoverTextPanel hoverPanel) { }
 }

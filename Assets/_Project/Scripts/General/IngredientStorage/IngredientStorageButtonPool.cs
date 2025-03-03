@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class IngredientStorageButtonPool : Pool<IngredientStorageButton> {
     [SerializeField] private IngredientStorageButton _prefab;
-    [SerializeField] private HoverItemName _hoverText;
+    [SerializeField] private HoverTextPanel _hoverText;
 
     private void Awake() {
         _prefab.gameObject.SetActive(false);
@@ -11,7 +11,7 @@ public class IngredientStorageButtonPool : Pool<IngredientStorageButton> {
     public IngredientStorageButton GetObject(BuyableItemCount<Ingredient> count) {
         IngredientStorageButton button = GetObject();
         button.SetVisual(count);
-        button.SetHoverText(_hoverText);
+        button.SetHoverPanel(_hoverText);
         button.gameObject.SetActive(true);
         return button;
     }

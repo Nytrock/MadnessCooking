@@ -1,14 +1,13 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HoverItemName : MonoBehaviour {
+public class HoverTextPanel : MonoBehaviour {
     [SerializeField] private RectTransform _panel;
     [SerializeField] private Vector2 _offset;
-    [SerializeField] private BuyableItemText _text;
+    [SerializeField] private LocalizedText _text;
     private bool _isHovered = false;
 
     private void Awake() {
-        _text.SetType(BuyableItemTextType.Name);
         ChangeState(false);
     }
 
@@ -23,8 +22,8 @@ public class HoverItemName : MonoBehaviour {
         transform.position = Input.mousePosition;
     }
 
-    public void ShowItemName(BuyableItem item) {
-        _text.SetItem(item);
+    public void ShowText(string text) {
+        _text.SetText(text);
         ChangeState(true);
 
         float mousePosition = Input.mousePosition.x;

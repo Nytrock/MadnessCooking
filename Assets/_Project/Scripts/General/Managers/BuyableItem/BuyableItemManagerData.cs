@@ -8,14 +8,10 @@ using UnityEngine;
 public class BuyableItemManagerData<TItem>
     where TItem : BuyableItem {
 
-    [SerializeField, JsonProperty] private List<TItem> _availableItems;
+    [SerializeField, JsonProperty] private List<TItem> _availableItems = new();
 
     public IEnumerable<TItem> AvailableItems => _availableItems;
     public int ItemsCount => _availableItems.Count;
-
-    public BuyableItemManagerData() {
-        _availableItems = new();
-    }
 
     public void AddItem(TItem item) {
         if (_availableItems.Contains(item))

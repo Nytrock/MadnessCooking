@@ -108,7 +108,7 @@ public abstract class SaveableBaseShop<TItem, TData> : BaseShop, IBindable<TData
         }
     }
 
-    protected virtual GrayscaleImageData GenerateSideInfo(TItem item) {
+    protected virtual BuyPanelSideInfoData GenerateSideInfo(TItem item) {
         return null;
     }
 
