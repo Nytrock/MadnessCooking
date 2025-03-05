@@ -32,7 +32,7 @@ public class BedChoice : MonoBehaviour {
     }
 
     public void SetType(BedType bedType) {
-        BedTypeHolder bed = FindBedHolder(bedType);
+        BedTypeHolder bed = FindBedTypeHolder(bedType);
 
         _bedData.SetActive(true);
         _farmBed.SetBedType(bed);
@@ -43,7 +43,15 @@ public class BedChoice : MonoBehaviour {
     public void Bind(FarmData data, FarmBedData bedData) {
         _bedData = bedData;
 
-        _farmBed.Bind(data, _bedData, FindBedHolder(_bedData.BedType));
+        BedTypeHolder nowBedTypeHolder = null;
+        foreach (var bedTypeHolder in _beds) {
+            if (_bedData.BedType == bedTypeHolder.Type)
+                nowBedTypeHolder = bedTypeHolder;
+            bedTypeHolder.Bind(bedData);
+            bedTypeHolder.ChangeState(false);
+        }
+        _farmBed.Bind(data, _bedData, nowBedTypeHolder);
+
         LateStart();
     }
 
@@ -56,7 +64,7 @@ public class BedChoice : MonoBehaviour {
         _farmBed.UpdateUpgrades();
     }
 
-    private BedTypeHolder FindBedHolder(BedType bedType) {
+    private BedTypeHolder FindBedTypeHolder(BedType bedType) {
         if (bedType == null)
             return null;
 

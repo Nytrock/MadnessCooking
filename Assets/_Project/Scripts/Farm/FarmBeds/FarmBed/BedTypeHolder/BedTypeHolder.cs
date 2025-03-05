@@ -25,7 +25,6 @@ public class BedTypeHolder : MonoBehaviour {
         if (TryGetComponent(out _fertilize))
             _fertilize.BoostEnded += ChangeAnimationSpeed;
         _pestsGenerator.PestsChanged += ChangeAnimationSpeed;
-        SetupBind();
     }
 
     private void Update() {
@@ -36,7 +35,7 @@ public class BedTypeHolder : MonoBehaviour {
         _bedData.SetAnimationTime(Mathf.Max(animationTime, 0.02f));
     }
 
-    public void ChangeMode(bool newMode) {
+    public void ChangeState(bool newMode) {
         gameObject.SetActive(newMode);
         if (newMode)
             return;
@@ -107,8 +106,8 @@ public class BedTypeHolder : MonoBehaviour {
         _animator.SetFloat("growTime", _animationSpeed * _bedData.SummarizedBoost);
     }
 
-    public void SetupBind() {
-        _bedData = _farmBed.Data;
+    public void Bind(FarmBedData bedData) {
+        _bedData = bedData;
         if (_water != null)
             _water.SetData(_bedData.WaterBoost);
         if (_fertilize != null)

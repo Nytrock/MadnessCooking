@@ -11,7 +11,7 @@ public class OrderButton : MonoBehaviour {
     [SerializeField] private OrderUICookState _cookState;
     [SerializeField] private OrderUIBaseState _finishState;
 
-    [field: SerializeField] public Order Order { get; private set; }
+    public Order Order { get; private set; }
 
     public void StartNewCycle() {
         ChangeState(OrderUIState.Start);

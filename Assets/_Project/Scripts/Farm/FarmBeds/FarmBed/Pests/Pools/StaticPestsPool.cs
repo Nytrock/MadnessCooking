@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 public class StaticPestsPool : PestsPool {
     [SerializeField] private Pest[] _pests;
@@ -27,8 +26,7 @@ public class StaticPestsPool : PestsPool {
     protected override Pest CreateObject() {
         Pest pest;
         if (_prefabIndex == -1) {
-            int randomIndex = Random.Range(0, _freePests.Count);
-            pest = _freePests[randomIndex];
+            pest = _freePests.GetRandom();
             _prefabIndex = Array.IndexOf(_pests, pest);
         } else {
             pest = _pests[_prefabIndex];

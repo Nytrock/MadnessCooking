@@ -3,7 +3,7 @@ guid: b82043f28397bef4fac6112566002cd0
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
-  serializedVersion: 12
+  serializedVersion: 13
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -67,7 +67,7 @@ TextureImporter:
   swizzle: 50462976
   cookieLightType: 0
   platformSettings:
-  - serializedVersion: 3
+  - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -80,7 +80,7 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
+  - serializedVersion: 4
     buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -93,7 +93,7 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
+  - serializedVersion: 4
     buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -106,8 +106,8 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: iPhone
+  - serializedVersion: 4
+    buildTarget: iOS
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -119,7 +119,7 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
+  - serializedVersion: 4
     buildTarget: Android
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -132,7 +132,7 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
+  - serializedVersion: 4
     buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -153,12 +153,13 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 52
+        y: 40
         width: 65
-        height: 25
+        height: 9
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 4, y: 4, z: 60, w: 20}
+      border: {x: 4, y: 4, z: 60, w: 4}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -173,13 +174,14 @@ TextureImporter:
       name: FarmBedUpgradesUIPanelDesert
       rect:
         serializedVersion: 2
-        x: 76
-        y: 52
+        x: 0
+        y: 30
         width: 65
-        height: 25
+        height: 9
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 4, y: 4, z: 60, w: 20}
+      border: {x: 4, y: 4, z: 60, w: 4}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -195,12 +197,13 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 66
-        y: 68
+        y: 40
         width: 9
         height: 9
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -215,13 +218,14 @@ TextureImporter:
       name: FarmBedUpgradesUISubmitStandard
       rect:
         serializedVersion: 2
-        x: 66
-        y: 59
+        x: 76
+        y: 41
         width: 7
         height: 8
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 3, y: 3, z: 3, w: 4}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -236,13 +240,14 @@ TextureImporter:
       name: FarmBedUpgradesUIHandleStandard
       rect:
         serializedVersion: 2
-        x: 70
-        y: 57
+        x: 84
+        y: 44
         width: 1
         height: 1
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -257,13 +262,14 @@ TextureImporter:
       name: FarmBedUpgradesUIButtonStandard
       rect:
         serializedVersion: 2
-        x: 66
-        y: 55
+        x: 84
+        y: 46
         width: 3
         height: 3
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 1, y: 1, z: 1, w: 1}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -279,12 +285,13 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 26
+        y: 20
         width: 65
-        height: 25
+        height: 9
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 4, y: 4, z: 60, w: 20}
+      border: {x: 4, y: 4, z: 60, w: 4}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -299,13 +306,14 @@ TextureImporter:
       name: FarmBedUpgradesUIPanelMeat
       rect:
         serializedVersion: 2
-        x: 76
-        y: 26
+        x: 0
+        y: 10
         width: 65
-        height: 25
+        height: 9
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 4, y: 4, z: 60, w: 20}
+      border: {x: 4, y: 4, z: 60, w: 4}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -323,10 +331,11 @@ TextureImporter:
         x: 0
         y: 0
         width: 65
-        height: 25
+        height: 9
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 4, y: 4, z: 60, w: 20}
+      border: {x: 4, y: 4, z: 60, w: 4}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -341,13 +350,14 @@ TextureImporter:
       name: FarmBedUpgradesUICloseDesert
       rect:
         serializedVersion: 2
-        x: 142
-        y: 68
+        x: 66
+        y: 30
         width: 9
         height: 9
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -363,12 +373,13 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 66
-        y: 42
+        y: 20
         width: 9
         height: 9
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -383,13 +394,14 @@ TextureImporter:
       name: FarmBedUpgradesUICloseMeat
       rect:
         serializedVersion: 2
-        x: 142
-        y: 42
+        x: 66
+        y: 10
         width: 9
         height: 9
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -405,12 +417,13 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 66
-        y: 16
+        y: 0
         width: 9
         height: 9
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -425,13 +438,14 @@ TextureImporter:
       name: FarmBedUpgradesUISubmitDesert
       rect:
         serializedVersion: 2
-        x: 142
-        y: 59
+        x: 76
+        y: 31
         width: 7
         height: 8
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 3, y: 3, z: 3, w: 4}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -446,13 +460,14 @@ TextureImporter:
       name: FarmBedUpgradesUISubmitWater
       rect:
         serializedVersion: 2
-        x: 66
-        y: 33
+        x: 76
+        y: 21
         width: 7
         height: 8
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 3, y: 3, z: 3, w: 4}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -467,13 +482,14 @@ TextureImporter:
       name: FarmBedUpgradesUISubmitMeat
       rect:
         serializedVersion: 2
-        x: 142
-        y: 33
+        x: 76
+        y: 11
         width: 7
         height: 8
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 3, y: 3, z: 3, w: 4}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -488,13 +504,14 @@ TextureImporter:
       name: FarmBedUpgradesUISubmitGhost
       rect:
         serializedVersion: 2
-        x: 66
-        y: 7
+        x: 76
+        y: 1
         width: 7
         height: 8
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 3, y: 3, z: 3, w: 4}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -509,13 +526,14 @@ TextureImporter:
       name: FarmBedUpgradesUIButtonWater
       rect:
         serializedVersion: 2
-        x: 66
-        y: 29
+        x: 84
+        y: 26
         width: 3
         height: 3
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 1, y: 1, z: 1, w: 1}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -530,13 +548,14 @@ TextureImporter:
       name: FarmBedUpgradesUIButtonDesert
       rect:
         serializedVersion: 2
-        x: 142
-        y: 55
+        x: 84
+        y: 36
         width: 3
         height: 3
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 1, y: 1, z: 1, w: 1}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -551,13 +570,14 @@ TextureImporter:
       name: FarmBedUpgradesUIButtonMeat
       rect:
         serializedVersion: 2
-        x: 142
-        y: 29
+        x: 84
+        y: 16
         width: 3
         height: 3
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 1, y: 1, z: 1, w: 1}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -572,13 +592,14 @@ TextureImporter:
       name: FarmBedUpgradesUIButtonGhost
       rect:
         serializedVersion: 2
-        x: 66
-        y: 3
+        x: 84
+        y: 6
         width: 3
         height: 3
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 1, y: 1, z: 1, w: 1}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -593,13 +614,14 @@ TextureImporter:
       name: FarmBedUpgradesUIHandleDesert
       rect:
         serializedVersion: 2
-        x: 146
-        y: 57
+        x: 84
+        y: 34
         width: 1
         height: 1
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -614,13 +636,14 @@ TextureImporter:
       name: FarmBedUpgradesUIHandleWater
       rect:
         serializedVersion: 2
-        x: 70
-        y: 31
+        x: 84
+        y: 24
         width: 1
         height: 1
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -635,13 +658,14 @@ TextureImporter:
       name: FarmBedUpgradesUIHandleMeat
       rect:
         serializedVersion: 2
-        x: 146
-        y: 31
+        x: 84
+        y: 14
         width: 1
         height: 1
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -656,13 +680,14 @@ TextureImporter:
       name: FarmBedUpgradesUIHandleGhost
       rect:
         serializedVersion: 2
-        x: 70
-        y: 5
+        x: 84
+        y: 4
         width: 1
         height: 1
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -674,6 +699,7 @@ TextureImporter:
       edges: []
       weights: []
     outline: []
+    customData: 
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
@@ -683,6 +709,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
     nameFileIdTable:
       Background: 1901407923
       FarmBedUpgradesUIButtonDesert: -958719880
@@ -710,6 +738,7 @@ TextureImporter:
       FarmBedUpgradesUISubmitMeat: 1735587609
       FarmBedUpgradesUISubmitStandard: -1623807590
       FarmBedUpgradesUISubmitWater: -668210625
+      FarmBedUpgradesUI_0: 446512322
       Lamp: 1955946697
       Pot: 470648381
       Window: -805373322

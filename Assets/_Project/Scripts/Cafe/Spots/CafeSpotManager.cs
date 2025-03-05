@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 public class CafeSpotManager : MonoBehaviour, IBindable<CafeData> {
     [SerializeField] private CafeSpaceManager _spaceManager;
@@ -83,7 +82,7 @@ public class CafeSpotManager : MonoBehaviour, IBindable<CafeData> {
         if (_freeSpots[needSeat].Count == 0)
             return -1;
 
-        int randomSpotIndex = _freeSpots[needSeat][Random.Range(0, _freeSpots[needSeat].Count)];
+        int randomSpotIndex = _freeSpots[needSeat].GetRandom();
         _freeSpots[needSeat].Remove(randomSpotIndex);
         return randomSpotIndex;
     }

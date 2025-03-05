@@ -16,7 +16,6 @@ public class RandomAudioSource : MonoBehaviour {
     }
 
     private void RandomizeAudio() {
-        int choice = Random.Range(0, _audios.Length);
-        _audioSource.SetAudioInfo(_audios[choice]);
+        _audioSource.SetAudioInfo(_audios.GetRandom());
     }
 }

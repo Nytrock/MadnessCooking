@@ -7,11 +7,8 @@ public class BuyableItemText : MonoBehaviour {
     private BuyableItem _nowItem;
     private TextMeshProUGUI _text;
 
-    private void Awake() {
-        GetText();
-    }
-
     private void Start() {
+        UpdateText();
         LocalizationManager.Instance.LocalizationChanged += UpdateText;
     }
 
@@ -30,9 +27,7 @@ public class BuyableItemText : MonoBehaviour {
     }
 
     private void UpdateText() {
-        if (_text == null)
-            GetText();
-
+        CheckText();
         if (_nowItem == null) {
             _text.text = "";
             return;
@@ -44,7 +39,9 @@ public class BuyableItemText : MonoBehaviour {
             _text.text = _nowItem.Description;
     }
 
-    private void GetText() {
+    private void CheckText() {
+        if (_text != null) return;
+
         _text = GetComponent<TextMeshProUGUI>();
     }
 }

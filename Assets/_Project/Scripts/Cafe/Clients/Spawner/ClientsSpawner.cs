@@ -101,7 +101,7 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
         ClientHolderData spotData = _clientHolderData.GetClientHolder(spotIndex);
 
         for (int i = 0; i < spot.SeatsCount; i++) {
-            Order order = new(_foodManager.GetRandomFood(), spotIndex + 1);
+            Order order = new(_foodManager.GetFoodForOrder(), spotIndex + 1);
             ClientData newClient = new(_spawnPoint.position, clientType, order);
             spotData.SetClient(i, newClient);
         }

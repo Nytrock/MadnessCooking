@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
-using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(CafeSpot))]
 public class ClientsHolder : MonoBehaviour {
@@ -62,7 +61,7 @@ public class ClientsHolder : MonoBehaviour {
         _data.SetupOnSpawn();
 
         float spawn = _spawner.SpawnPoint.x;
-        RandomizeClients();
+        _clients.Randomize();
 
         for (int i = 0; i < _clients.Count; i++) {
             _clients[i].ChangeEnable(true);
@@ -100,8 +99,7 @@ public class ClientsHolder : MonoBehaviour {
     }
 
     private IEnumerator ClientsLeave(bool noDelay = false) {
-        RandomizeClients();
-
+        _clients.Randomize();
         Client[] leaveClients = _clients.ToArray();
         _clients.Clear();
 
@@ -116,13 +114,6 @@ public class ClientsHolder : MonoBehaviour {
                 yield return new WaitForSeconds(0);
             else
                 yield return new WaitForSeconds(_clientInterval.RandomValue / InGameTime.Instance.NormalizedTime);
-        }
-    }
-
-    private void RandomizeClients() {
-        for (int i = 0; i < _clients.Count - 1; i++) {
-            int r = Random.Range(0, _clients.Count);
-            (_clients[r], _clients[i]) = (_clients[i], _clients[r]);
         }
     }
 

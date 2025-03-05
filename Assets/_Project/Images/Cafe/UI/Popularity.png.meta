@@ -3,7 +3,7 @@ guid: e6993b798bafc8844adfead1889f8fad
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
-  serializedVersion: 12
+  serializedVersion: 13
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -67,7 +67,7 @@ TextureImporter:
   swizzle: 50462976
   cookieLightType: 0
   platformSettings:
-  - serializedVersion: 3
+  - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -80,7 +80,7 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
+  - serializedVersion: 4
     buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -93,7 +93,7 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
+  - serializedVersion: 4
     buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -106,8 +106,8 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: iPhone
+  - serializedVersion: 4
+    buildTarget: iOS
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -119,7 +119,7 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
+  - serializedVersion: 4
     buildTarget: Android
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -132,7 +132,7 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
+  - serializedVersion: 4
     buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -154,11 +154,12 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 116
-        width: 39
+        width: 24
         height: 28
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 25, y: 0, z: 13, w: 0}
+      border: {x: 20, y: 0, z: 3, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -175,11 +176,12 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 87
-        width: 39
+        width: 24
         height: 28
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 25, y: 0, z: 13, w: 0}
+      border: {x: 20, y: 0, z: 3, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -196,11 +198,12 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 58
-        width: 39
+        width: 24
         height: 28
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 25, y: 0, z: 13, w: 0}
+      border: {x: 20, y: 0, z: 3, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -217,11 +220,12 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 29
-        width: 39
+        width: 24
         height: 28
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 25, y: 0, z: 13, w: 0}
+      border: {x: 20, y: 0, z: 3, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -238,11 +242,12 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 39
+        width: 24
         height: 28
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 25, y: 0, z: 13, w: 0}
+      border: {x: 20, y: 0, z: 3, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -257,13 +262,14 @@ TextureImporter:
       name: PopularityCrystalls0
       rect:
         serializedVersion: 2
-        x: 40
+        x: 25
         y: 124
         width: 20
         height: 20
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -278,13 +284,14 @@ TextureImporter:
       name: PopularityCrystalls1
       rect:
         serializedVersion: 2
-        x: 40
+        x: 25
         y: 103
         width: 20
         height: 20
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -299,13 +306,14 @@ TextureImporter:
       name: PopularityCrystalls2
       rect:
         serializedVersion: 2
-        x: 40
+        x: 25
         y: 82
         width: 20
         height: 20
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -320,13 +328,14 @@ TextureImporter:
       name: PopularityCrystalls3
       rect:
         serializedVersion: 2
-        x: 40
+        x: 25
         y: 61
         width: 20
         height: 20
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -341,13 +350,14 @@ TextureImporter:
       name: PopularityCrystalls4
       rect:
         serializedVersion: 2
-        x: 40
+        x: 25
         y: 40
         width: 20
         height: 20
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -362,13 +372,14 @@ TextureImporter:
       name: PopularityMore0
       rect:
         serializedVersion: 2
-        x: 40
+        x: 25
         y: 35
         width: 7
         height: 4
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 3, y: 3, z: 3, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -383,13 +394,14 @@ TextureImporter:
       name: PopularityMore1
       rect:
         serializedVersion: 2
-        x: 40
+        x: 25
         y: 30
         width: 7
         height: 4
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 3, y: 3, z: 3, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -404,13 +416,14 @@ TextureImporter:
       name: PopularityMore2
       rect:
         serializedVersion: 2
-        x: 40
+        x: 25
         y: 25
         width: 7
         height: 4
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 3, y: 3, z: 3, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -425,13 +438,14 @@ TextureImporter:
       name: PopularityMore3
       rect:
         serializedVersion: 2
-        x: 40
+        x: 25
         y: 20
         width: 7
         height: 4
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 3, y: 3, z: 3, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -446,13 +460,14 @@ TextureImporter:
       name: PopularityMore4
       rect:
         serializedVersion: 2
-        x: 40
+        x: 25
         y: 15
         width: 7
         height: 4
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 3, y: 3, z: 3, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -464,6 +479,7 @@ TextureImporter:
       edges: []
       weights: []
     outline: []
+    customData: 
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
@@ -473,6 +489,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
     nameFileIdTable:
       Background: 1901407923
       Lamp: 1955946697

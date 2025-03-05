@@ -7,7 +7,6 @@ public class UpgradeRenderer : MonoBehaviour {
 
     private void Awake() {
         _upgradeManager.ItemAdded += CheckAddedUpgrade;
-        ChangeState(_upgradeManager.IsItemAvailable(_upgrade));
     }
 
     public void CheckAddedUpgrade(BaseUpgrade upgrade) {

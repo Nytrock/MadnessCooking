@@ -3,7 +3,6 @@ using System.Collections;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
-using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(InternetDownloadRenderer))]
 public class InternetDownload : MonoBehaviour, IUpgradeable<OfficeUpgradeData> {
@@ -44,7 +43,7 @@ public class InternetDownload : MonoBehaviour, IUpgradeable<OfficeUpgradeData> {
         WaitForSeconds waitTime = new(deltaTime);
 
         while (_nowProgress < _needProgress) {
-            float progress = _possibleProgress[Random.Range(0, _possibleProgress.Length)];
+            float progress = _possibleProgress.GetRandom();
             _nowProgress += deltaTime * _upgradeData.InternetDownloadSpeed * progress;
             if (progress > 0)
                 LoadingUpdated?.Invoke();

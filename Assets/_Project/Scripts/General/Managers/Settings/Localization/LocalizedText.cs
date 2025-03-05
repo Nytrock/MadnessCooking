@@ -10,10 +10,6 @@ public class LocalizedText : MonoBehaviour {
     protected string _key;
     protected readonly Dictionary<string, string> _arguments = new();
 
-    protected void Awake() {
-        GetText();
-    }
-
     protected void Start() {
         UpdateText();
         LocalizationManager.Instance.LocalizationChanged += UpdateText;
@@ -25,16 +21,16 @@ public class LocalizedText : MonoBehaviour {
     }
 
     public void SetColor(Color color) {
-        GetText();
+        CheckText();
         _text.color = color;
     }
 
     public virtual void UpdateText() {
-        GetText();
+        CheckText();
         _text.text = LocalizationManager.Instance.GetLocalization(_table, _key, _arguments);
     }
 
-    protected void GetText() {
+    protected void CheckText() {
         if (_text != null) return;
 
         _text = GetComponent<TextMeshProUGUI>();

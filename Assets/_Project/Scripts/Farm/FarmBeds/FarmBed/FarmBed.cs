@@ -6,7 +6,7 @@ public class FarmBed : MonoBehaviour {
     [Header("Upgrades")]
     [SerializeField] private FarmBedGrowSlider _growStatusSlider;
 
-    [field: SerializeField] public FarmBedData Data { get; private set; }
+    public FarmBedData Data { get; private set; }
     private FarmUpgradeData _upgradeData;
     private FarmBedManagerData _managerData;
 
@@ -70,7 +70,7 @@ public class FarmBed : MonoBehaviour {
 
     public void SetBedType(BedTypeHolder bedType) {
         _bedHolder = bedType;
-        _bedHolder.ChangeMode(true);
+        _bedHolder.ChangeState(true);
         Data.SetBedType(_bedHolder.Type);
 
         if (bedType.Type.AcceptableType == IngredientType.Ghost)
@@ -82,7 +82,7 @@ public class FarmBed : MonoBehaviour {
             MoneyManager.Instance.ChangeMoney(Data.BedType.Price);
 
         ResetIngredient();
-        _bedHolder.ChangeMode(false);
+        _bedHolder.ChangeState(false);
         DisableUpgrades();
 
         _bedHolder = null;

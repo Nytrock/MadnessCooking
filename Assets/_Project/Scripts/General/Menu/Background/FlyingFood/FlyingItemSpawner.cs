@@ -26,7 +26,7 @@ public class FlyingItemSpawner : MonoBehaviour {
     }
 
     private void Spawn() {
-        BuyableItem item = _items[Random.Range(0, _items.Length)];
+        BuyableItem item = _items.GetRandom();
         FlyingItem flyingItem = _pool.GetItem(item);
         flyingItem.BottomReached += PutItem;
         _moveController.SetRandomMove(flyingItem);

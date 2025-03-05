@@ -21640,6 +21640,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 867c09b2b9a3f78498e3df4c5bba80ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _maxValue: 1
   _gradient:
     serializedVersion: 2
     key0: {r: 0.92941177, g: 0.08235294, b: 0.08235294, a: 1}
@@ -23447,34 +23448,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _growStatusSlider: {fileID: 5359901451888193382}
-  <Data>k__BackingField:
-    _bedType: {fileID: 0}
-    _plantedIngredient: {fileID: 0}
-    _isActive: 0
-    _nowTime: 0
-    _count: 0
-    _isFull: 0
-    _animationTime: 0
-    _waterBoost:
-      _boost: 1
-      _isBoosting: 0
-      _isEternal: 0
-      _nowTime: 0
-    _fertilizeBoost:
-      _boost: 1
-      _isBoosting: 0
-      _isEternal: 0
-      _nowTime: 0
-    _pestsGenerator:
-      _pests: []
-      _pestsSlowdown: 1
-      _nowTime: 0
-      _needTime: 0
-      _isActive: 0
-      _isPestsInstant: 0
-      _isPestsRemoved: 0
-    _independentBoost: 1
-    _isAutoCollect: 0
 --- !u!114 &4793016037927127210
 MonoBehaviour:
   m_ObjectHideFlags: 0

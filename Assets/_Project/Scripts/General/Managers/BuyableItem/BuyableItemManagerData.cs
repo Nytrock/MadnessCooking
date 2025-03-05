@@ -8,7 +8,7 @@ using UnityEngine;
 public class BuyableItemManagerData<TItem>
     where TItem : BuyableItem {
 
-    [SerializeField, JsonProperty] private List<TItem> _availableItems = new();
+    [SerializeField, JsonProperty] protected List<TItem> _availableItems = new();
 
     public IEnumerable<TItem> AvailableItems => _availableItems;
     public int ItemsCount => _availableItems.Count;
