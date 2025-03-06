@@ -1,7 +1,7 @@
 using Newtonsoft.Json;
 using UnityEngine;
 
-[JsonConverter(typeof(ScriptableObjectConverter))]
+[JsonConverter(typeof(ScriptableObjectJsonConverter))]
 public abstract class BuyableItem : ExtendedScriptableObject {
     public const string AssetMenuName = nameof(BuyableItem) + "/";
 

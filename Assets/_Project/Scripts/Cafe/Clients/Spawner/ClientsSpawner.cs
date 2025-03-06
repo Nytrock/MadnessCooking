@@ -74,7 +74,7 @@ public class ClientsSpawner : MonoBehaviour, IUpgradeable<CafeUpgradeData>, IBin
 
         foreach (var clientData in _data.LeavingClients) {
             Client client = _pool.GetClientByGender(clientData.Gender);
-            client.transform.position = clientData.Position.GetVector();
+            client.transform.position = clientData.Position;
             client.Setup(new ClientSettings(clientData, -1, -1));
         }
     }

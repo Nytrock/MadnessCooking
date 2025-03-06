@@ -4,18 +4,18 @@ using UnityEngine;
 
 [Serializable, JsonObject(MemberSerialization.OptIn)]
 public class GameTimeManagerData {
-    [SerializeField, JsonProperty] private JsonTimeSpan _globalTime;
+    [SerializeField, JsonProperty] private TimeSpan _globalTime;
     [SerializeField, JsonProperty] private Daytime _daytime;
     [SerializeField, JsonProperty] private bool _isWaitingNextDay;
     [SerializeField, JsonProperty] private int _localDays = 0;
 
-    public TimeSpan GlobalTime => _globalTime.GetTimeSpan();
+    public TimeSpan GlobalTime => _globalTime;
     public Daytime Daytime => _daytime;
     public bool IsWaitingNextDay => _isWaitingNextDay;
     public int LocalDays => _localDays;
 
     public GameTimeManagerData(DaytimeStart daytimeStart) {
-        _globalTime = new JsonTimeSpan(daytimeStart.Hour, daytimeStart.Minute);
+        _globalTime = new TimeSpan(daytimeStart.Hour, daytimeStart.Minute, 0);
         _daytime = daytimeStart.Daytime;
     }
 

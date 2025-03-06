@@ -3,7 +3,8 @@ using UnityEngine;
 public class SpritesManager : SubLightManager {
     [SerializeField] private Material _textMaterial;
     [SerializeField] private DaytimeSprites[] _lights;
-    [SerializeField] protected SpritesManagerData _specialData;
+
+    protected SpritesManagerData _specialData;
 
     public override void UpdateMaterial() {
         _material.SetColor("_LightColor", _specialData.NowLight);

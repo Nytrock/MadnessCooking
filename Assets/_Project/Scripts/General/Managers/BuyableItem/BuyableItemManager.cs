@@ -33,6 +33,8 @@ public abstract class BuyableItemManager<TItem> : MonoBehaviour
     }
 
     public virtual bool IsItemAvailable(TItem item) {
+        if (_data == null)
+            return false;
         return _data.IsItemAvailable(item);
     }
 }

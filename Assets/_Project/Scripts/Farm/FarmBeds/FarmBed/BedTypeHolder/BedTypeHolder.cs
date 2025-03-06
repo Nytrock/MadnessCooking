@@ -20,11 +20,20 @@ public class BedTypeHolder : MonoBehaviour {
 
     private void Awake() {
         _animator = GetComponent<Animator>();
-        if (TryGetComponent(out _water))
+        CheckBoosts();
+
+        if (_water != null)
             _water.BoostEnded += ChangeAnimationSpeed;
-        if (TryGetComponent(out _fertilize))
+        if (_fertilize != null)
             _fertilize.BoostEnded += ChangeAnimationSpeed;
         _pestsGenerator.PestsChanged += ChangeAnimationSpeed;
+    }
+
+    private void CheckBoosts() {
+        if (_water == null)
+            TryGetComponent(out _water);
+        if (_fertilize == null)
+            TryGetComponent(out _fertilize);
     }
 
     private void Update() {
@@ -108,10 +117,12 @@ public class BedTypeHolder : MonoBehaviour {
 
     public void Bind(FarmBedData bedData) {
         _bedData = bedData;
+        CheckBoosts();
+
         if (_water != null)
-            _water.SetData(_bedData.WaterBoost);
+            _water.Bind(_bedData.WaterBoost);
         if (_fertilize != null)
-            _fertilize.SetData(_bedData.FertilizeBoost);
+            _fertilize.Bind(_bedData.FertilizeBoost);
         _pestsGenerator.Bind(_bedData.PestsGenerator);
     }
 }

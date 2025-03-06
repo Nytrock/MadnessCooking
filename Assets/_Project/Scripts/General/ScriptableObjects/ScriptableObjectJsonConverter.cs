@@ -1,7 +1,7 @@
 using Newtonsoft.Json;
 using System;
 
-public class ScriptableObjectConverter : JsonConverter<ExtendedScriptableObject> {
+public class ScriptableObjectJsonConverter : JsonConverter<ExtendedScriptableObject> {
     public override ExtendedScriptableObject ReadJson(JsonReader reader, Type objectType, ExtendedScriptableObject existingValue, bool hasExistingValue, Newtonsoft.Json.JsonSerializer serializer) {
         int id = Convert.ToInt32(reader.Value);
         return ScriptableObjectsDatabase.Instance.GetObject(id);

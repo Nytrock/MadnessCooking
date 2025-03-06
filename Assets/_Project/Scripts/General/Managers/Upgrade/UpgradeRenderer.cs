@@ -6,6 +6,7 @@ public class UpgradeRenderer : MonoBehaviour {
     [SerializeField] private VisualChanger _changer;
 
     private void Awake() {
+        ChangeState(_upgradeManager.IsItemAvailable(_upgrade));
         _upgradeManager.ItemAdded += CheckAddedUpgrade;
     }
 

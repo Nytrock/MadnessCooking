@@ -1,13 +1,24 @@
 using Newtonsoft.Json;
 using System;
 using System.Text;
+using UnityEngine;
 
-public class JsonConverter {
+public class JsonSerializer {
+    private readonly JsonConverter[] _converters = {
+        new UnityObjectJsonConverter<Color>(),
+        new UnityObjectJsonConverter<Vector2>(),
+        new UnityObjectJsonConverter<Vector3>(),
+        new UnityObjectJsonConverter<Quaternion>(),
+        new TimeSpanJsonConverter()
+    };
+
     public string Serialize<T>(T obj) {
         JsonSerializerSettings settings = new() {
             NullValueHandling = NullValueHandling.Ignore,
             ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
+            Converters = _converters
         };
+
         string json = JsonConvert.SerializeObject(obj, Formatting.Indented, settings);
         return json;
     }
@@ -17,10 +28,10 @@ public class JsonConverter {
     }
 
     public T Deserialize<T>(string json) {
-        return JsonConvert.DeserializeObject<T>(json);
+        return JsonConvert.DeserializeObject<T>(json, _converters);
     }
 
     public T DeserializeCoded<T>(string json) {
-        return JsonConvert.DeserializeObject<T>(Encoding.UTF8.GetString(Convert.FromBase64String(json)));
+        return Deserialize<T>(Encoding.UTF8.GetString(Convert.FromBase64String(json)));
     }
 }

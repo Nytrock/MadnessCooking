@@ -14,12 +14,15 @@ public class Pest : MonoBehaviour {
 
     public event Action PestRemoved;
 
-    public void Awake() {
-        _renderer = GetComponent<SpriteRenderer>();
+    public void ChangeState(bool value) {
+        CheckRenderer();
+        _renderer.enabled = value;
     }
 
-    public void ChangeState(bool value) {
-        _renderer.enabled = value;
+    private void CheckRenderer() {
+        if (_renderer != null) return;
+
+        _renderer = GetComponent<SpriteRenderer>();
     }
 
     public void Remove() {
@@ -29,6 +32,7 @@ public class Pest : MonoBehaviour {
     public void Randomize(RangeVector localPosition, RangeVector globalPosition, int prefabIndex) {
         int spriteIndex = -1;
         if (_isSpriteChanging) {
+            CheckRenderer();
             spriteIndex = Random.Range(0, _sprites.Length);
             _renderer.sprite = _sprites[spriteIndex];
         }
@@ -43,16 +47,17 @@ public class Pest : MonoBehaviour {
             transform.rotation = Quaternion.Euler(0, 0, Random.Range(0, 360f));
 
         Vector2 normalizedPosition = globalPosition.InverseLerp(transform.position);
-        Data = new(prefabIndex, spriteIndex, new(transform.rotation),
-            new(transform.position), new(normalizedPosition));
+        Data = new(prefabIndex, spriteIndex, transform.rotation,
+            transform.position, normalizedPosition);
     }
 
     public void Bind(PestData pestData) {
+        CheckRenderer();
         Data = pestData;
         transform.SetPositionAndRotation(Data.Position,
             Data.RotationDegree);
 
-        if (_isSpriteChanging)
+        if (_isSpriteChanging && Data.SpriteIndex != -1)
             _renderer.sprite = _sprites[Data.SpriteIndex];
     }
 

@@ -9,7 +9,7 @@ public class ClientData {
     [SerializeField, JsonProperty] private ClientSkinType _skinType;
     [SerializeField, JsonProperty] private ClientState _state;
     [SerializeField, JsonProperty] private ClientGender _gender;
-    [SerializeField, JsonProperty] private JsonVector _position;
+    [SerializeField, JsonProperty] private Vector2 _position;
     [SerializeField, JsonProperty] private float _waitTime;
     [SerializeField, JsonProperty] private float _nowTime;
     [SerializeField, JsonProperty] private bool _isServiced;
@@ -19,7 +19,7 @@ public class ClientData {
     public ClientSkinType SkinType => _skinType;
     public ClientState State => _state;
     public ClientGender Gender => _gender;
-    public JsonVector Position => _position;
+    public Vector2 Position => _position;
     public float WaitTime => _waitTime;
     public float NowTime => _nowTime;
     public bool IsServiced => _isServiced;
@@ -28,7 +28,7 @@ public class ClientData {
     public ClientData(Vector3 position, ClientType clientType, Order order) {
         _type = clientType;
         _state = ClientState.Spawn;
-        _position = new JsonVector(position);
+        _position = position;
         _order = order;
     }
 
@@ -52,7 +52,7 @@ public class ClientData {
     }
 
     public void UpdatePosition(Vector3 position) {
-        _position = new(position);
+        _position = position;
     }
 
     public void SetGender(ClientGender gender) {

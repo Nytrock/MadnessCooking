@@ -4,15 +4,15 @@ using UnityEngine;
 
 [Serializable, JsonObject(MemberSerialization.OptIn)]
 public class CameraManagerData {
-    [SerializeField, JsonProperty] private JsonVector _cameraPosition;
+    [SerializeField, JsonProperty] private Vector3 _cameraPosition;
 
-    public Vector3 CameraPosition => _cameraPosition.GetVector();
+    public Vector3 CameraPosition => _cameraPosition;
 
     public CameraManagerData(Vector3 defaultPosition) {
-        _cameraPosition = new(defaultPosition);
+        _cameraPosition = defaultPosition;
     }
 
     public void UpdateCameraPosition(Vector3 newPosition) {
-        _cameraPosition = new(newPosition);
+        _cameraPosition = newPosition;
     }
 }

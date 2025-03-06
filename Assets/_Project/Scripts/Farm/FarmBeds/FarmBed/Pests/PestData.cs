@@ -6,12 +6,12 @@ using UnityEngine;
 public class PestData {
     [SerializeField, JsonProperty] private int _prefabIndex;
     [SerializeField, JsonProperty] private int _spriteIndex;
-    [SerializeField, JsonProperty] private JsonQuaternion _rotationDegree;
-    [SerializeField, JsonProperty] private JsonVector _position;
-    [SerializeField, JsonProperty] private JsonVector _normalizedPosition;
+    [SerializeField, JsonProperty] private Quaternion _rotationDegree;
+    [SerializeField, JsonProperty] private Vector2 _position;
+    [SerializeField, JsonProperty] private Vector2 _normalizedPosition;
 
-    public PestData(int prefabIndex, int spriteIndex, JsonQuaternion rotation,
-        JsonVector position, JsonVector normalizedPosition) {
+    public PestData(int prefabIndex, int spriteIndex, Quaternion rotation,
+        Vector2 position, Vector2 normalizedPosition) {
         _prefabIndex = prefabIndex;
         _spriteIndex = spriteIndex;
         _rotationDegree = rotation;
@@ -21,7 +21,7 @@ public class PestData {
 
     public int PrefabIndex => _prefabIndex;
     public int SpriteIndex => _spriteIndex;
-    public Quaternion RotationDegree => _rotationDegree.GetQuaternion();
-    public Vector2 Position => _position.GetVector();
-    public Vector2 NormalizedPosition => _normalizedPosition.GetVector();
+    public Quaternion RotationDegree => _rotationDegree;
+    public Vector2 Position => _position;
+    public Vector2 NormalizedPosition => _normalizedPosition;
 }

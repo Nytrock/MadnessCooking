@@ -25,7 +25,7 @@ public abstract class BedHolderBooster : MonoBehaviour {
         }
     }
 
-    public virtual void SetData(BedHolderBoosterData data) {
+    public virtual void Bind(BedHolderBoosterData data) {
         _data = data;
         ChangeSpriteAlpha(Convert.ToInt16(_data.IsEternal));
     }

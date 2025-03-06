@@ -10,6 +10,8 @@ public class LocalizedText : MonoBehaviour {
     protected string _key;
     protected readonly Dictionary<string, string> _arguments = new();
 
+    public string Table => _table;
+
     protected void Start() {
         UpdateText();
         LocalizationManager.Instance.LocalizationChanged += UpdateText;
@@ -44,5 +46,9 @@ public class LocalizedText : MonoBehaviour {
 
     public void ClearArguments() {
         _arguments.Clear();
+    }
+
+    public void SetTable(string table) {
+        _table = table;
     }
 }

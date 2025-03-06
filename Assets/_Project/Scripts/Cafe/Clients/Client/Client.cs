@@ -90,7 +90,7 @@ public class Client : MonoBehaviour {
         Data = settings.Data;
         Data.SetGender(_gender);
 
-        transform.position = Data.Position.GetVector();
+        transform.position = Data.Position;
         _skin.StartNewCycle(Data);
         ClientUI.StartNewCycle();
 

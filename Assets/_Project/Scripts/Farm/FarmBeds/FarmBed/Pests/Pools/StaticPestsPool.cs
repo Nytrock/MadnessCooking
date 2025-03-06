@@ -8,7 +8,6 @@ public class StaticPestsPool : PestsPool {
 
     public void SetupFreePestsList() {
         foreach (var pest in _pests) {
-            pest.Awake();
             pest.ChangeState(false);
             _freePests.Add(pest);
         }

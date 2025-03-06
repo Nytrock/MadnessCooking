@@ -5,7 +5,7 @@ using UnityEngine;
 public class SaveFileManager<TData>
     where TData : ISaveable {
 
-    private readonly JsonConverter _serializer = new();
+    private readonly JsonSerializer _serializer = new();
     private readonly string _dataPath = Application.persistentDataPath;
     private readonly string _filePath = Application.persistentDataPath;
     private readonly string _fileName;
