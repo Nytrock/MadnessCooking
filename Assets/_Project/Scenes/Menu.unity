@@ -922,36 +922,12 @@ MonoBehaviour:
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
   _specialData:
-    _nowTopColor:
-      _r: 0
-      _g: 0
-      _b: 0
-      _a: 0
-    _nowBottomColor:
-      _r: 0
-      _g: 0
-      _b: 0
-      _a: 0
-    _previousTopColor:
-      _r: 0
-      _g: 0
-      _b: 0
-      _a: 0
-    _previousBottomColor:
-      _r: 0
-      _g: 0
-      _b: 0
-      _a: 0
-    _targetTopColor:
-      _r: 0
-      _g: 0
-      _b: 0
-      _a: 0
-    _targetBottomColor:
-      _r: 0
-      _g: 0
-      _b: 0
-      _a: 0
+    _nowTopColor: {r: 0, g: 0, b: 0, a: 0}
+    _nowBottomColor: {r: 0, g: 0, b: 0, a: 0}
+    _previousTopColor: {r: 0, g: 0, b: 0, a: 0}
+    _previousBottomColor: {r: 0, g: 0, b: 0, a: 0}
+    _targetTopColor: {r: 0, g: 0, b: 0, a: 0}
+    _targetBottomColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &176855584
 GameObject:
   m_ObjectHideFlags: 0
@@ -8388,7 +8364,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 250, y: -125.399994}
-  m_SizeDelta: {x: 370.64, y: 50}
+  m_SizeDelta: {x: 371.92, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &474318665
 MonoBehaviour:
@@ -10330,52 +10306,16 @@ MonoBehaviour:
     _nowTime: 0
     _isChanging: 0
     _skyData:
-      _nowTopColor:
-        _r: 0
-        _g: 0
-        _b: 0
-        _a: 0
-      _nowBottomColor:
-        _r: 0
-        _g: 0
-        _b: 0
-        _a: 0
-      _previousTopColor:
-        _r: 0
-        _g: 0
-        _b: 0
-        _a: 0
-      _previousBottomColor:
-        _r: 0
-        _g: 0
-        _b: 0
-        _a: 0
-      _targetTopColor:
-        _r: 0
-        _g: 0
-        _b: 0
-        _a: 0
-      _targetBottomColor:
-        _r: 0
-        _g: 0
-        _b: 0
-        _a: 0
+      _nowTopColor: {r: 0, g: 0, b: 0, a: 0}
+      _nowBottomColor: {r: 0, g: 0, b: 0, a: 0}
+      _previousTopColor: {r: 0, g: 0, b: 0, a: 0}
+      _previousBottomColor: {r: 0, g: 0, b: 0, a: 0}
+      _targetTopColor: {r: 0, g: 0, b: 0, a: 0}
+      _targetBottomColor: {r: 0, g: 0, b: 0, a: 0}
     _spritesData:
-      _previousLight:
-        _r: 0
-        _g: 0
-        _b: 0
-        _a: 0
-      _nowLight:
-        _r: 0
-        _g: 0
-        _b: 0
-        _a: 0
-      _targetLight:
-        _r: 0
-        _g: 0
-        _b: 0
-        _a: 0
+      _previousLight: {r: 0, g: 0, b: 0, a: 0}
+      _nowLight: {r: 0, g: 0, b: 0, a: 0}
+      _targetLight: {r: 0, g: 0, b: 0, a: 0}
     _timeStep: 0
 --- !u!1 &655661657
 GameObject:
@@ -10418,7 +10358,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 250, y: -474.59998}
-  m_SizeDelta: {x: 321.75, y: 50}
+  m_SizeDelta: {x: 323.59003, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &655661659
 MonoBehaviour:
@@ -18836,6 +18776,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1020670111}
   m_CullTransparentMesh: 1
+--- !u!1 &1023377492
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1023377493}
+  - component: {fileID: 1023377494}
+  m_Layer: 0
+  m_Name: SceneManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1023377493
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1023377492}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1023377494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1023377492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a088b29ddd8e24f41a3184efad50ac1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _loadingScreen: {fileID: 622385989}
 --- !u!1 &1027691549
 GameObject:
   m_ObjectHideFlags: 0
@@ -18891,22 +18876,6 @@ MonoBehaviour:
     _spriteColor: {r: 0.8862745, g: 0.80784315, b: 1, a: 1}
   - _daytime: 3
     _spriteColor: {r: 0.8156863, g: 0.80784315, b: 1, a: 1}
-  _specialData:
-    _previousLight:
-      _r: 0
-      _g: 0
-      _b: 0
-      _a: 0
-    _nowLight:
-      _r: 0
-      _g: 0
-      _b: 0
-      _a: 0
-    _targetLight:
-      _r: 0
-      _g: 0
-      _b: 0
-      _a: 0
 --- !u!1 &1030224507
 GameObject:
   m_ObjectHideFlags: 0
@@ -24528,6 +24497,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _panel: {fileID: 828039517}
   _saveManager: {fileID: 1569068872}
+  _sceneManager: {fileID: 1023377494}
   _confirmPanel: {fileID: 54358069}
   _settings: {fileID: 397963812}
   _tutorial: {fileID: 1515867899}
@@ -25754,7 +25724,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 250, y: -241.79999}
-  m_SizeDelta: {x: 485.87003, y: 50}
+  m_SizeDelta: {x: 489.34003, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1376868040
 CanvasRenderer:
@@ -26615,7 +26585,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 250, y: -358.19998}
-  m_SizeDelta: {x: 472.77002, y: 50}
+  m_SizeDelta: {x: 475.53, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1443793775
 MonoBehaviour:
@@ -34139,7 +34109,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 725856351, guid: d8509b07899e0c44bad26eb12185540e, type: 3}
+  m_Sprite: {fileID: 967459249, guid: fe4e74bdc1bc3a34e9ffb030d1ab6d92, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -36348,8 +36318,9 @@ GameObject:
   - component: {fileID: 2077318993}
   - component: {fileID: 2077318995}
   - component: {fileID: 2077318994}
+  - component: {fileID: 2077318996}
   m_Layer: 5
-  m_Name: Loading
+  m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36394,7 +36365,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Loading...
+  m_text: Scene.Loading
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1528e4081f4f5e342bab2676099abda8, type: 2}
   m_sharedMaterial: {fileID: 9146103655038203910, guid: 1528e4081f4f5e342bab2676099abda8, type: 2}
@@ -36473,6 +36444,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2077318992}
   m_CullTransparentMesh: 1
+--- !u!114 &2077318996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2077318992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64b8cfe32092a2d4686b80689560f005, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _table: UITable
 --- !u!1 &2078067410
 GameObject:
   m_ObjectHideFlags: 0
@@ -37186,6 +37170,7 @@ SceneRoots:
   - {fileID: 588813657}
   - {fileID: 661956818}
   - {fileID: 911848800}
+  - {fileID: 1023377493}
   - {fileID: 177466149}
   - {fileID: 631149661}
   - {fileID: 888605955}

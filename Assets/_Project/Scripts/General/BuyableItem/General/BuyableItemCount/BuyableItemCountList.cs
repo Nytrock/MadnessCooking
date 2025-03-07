@@ -11,7 +11,7 @@ public class BuyableItemCountList<TItem>
     [SerializeField, JsonProperty] private List<BuyableItemCount<TItem>> _itemCounts;
     private List<TItem> _availableItems;
 
-    public int Size => _itemCounts.Count;
+    public List<BuyableItemCount<TItem>> ItemCounts => _itemCounts;
 
     public BuyableItemCountList() {
         _itemCounts = new();

@@ -13,7 +13,7 @@ public class PauseManager : Singleton<PauseManager> {
     }
 
     private void Update() {
-        if (!SceneUtility.IsGame())
+        if (!SceneManager.IsGame())
             return;
 
         if (Input.GetKeyDown(KeyCode.Escape))

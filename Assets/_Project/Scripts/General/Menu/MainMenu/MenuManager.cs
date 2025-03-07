@@ -3,6 +3,7 @@ using UnityEngine;
 public class MenuManager : MonoBehaviour {
     [SerializeField] private GameObject _panel;
     [SerializeField] private GameSaveManager _saveManager;
+    [SerializeField] private SceneManager _sceneManager;
     [SerializeField] private ConfirmPanel _confirmPanel;
     [SerializeField] private SettingsManager _settings;
     [SerializeField] private TutorialManager _tutorial;
@@ -34,7 +35,7 @@ public class MenuManager : MonoBehaviour {
     }
 
     public void LoadGame() {
-        SceneUtility.LoadGame();
+        _sceneManager.LoadGame();
     }
 
     public void ChangeSettingsState() {
@@ -49,7 +50,7 @@ public class MenuManager : MonoBehaviour {
 
     public void ExitToMenu() {
         _saveManager.Save();
-        SceneUtility.LoadMenu();
+        _sceneManager.LoadMenu();
     }
 
     private void ChangeState() {

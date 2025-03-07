@@ -18,7 +18,7 @@ public class TutorialManager : MonoBehaviour, IBindable<GeneralData> {
     }
 
     private bool IsTutorial() {
-        return SceneUtility.IsGame() && _data.IsWork && _parts.Length > 0;
+        return SceneManager.IsGame() && _data.IsWork && _parts.Length > 0;
     }
 
     private void StartTutorial() {
