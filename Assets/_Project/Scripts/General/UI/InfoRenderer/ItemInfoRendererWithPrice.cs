@@ -13,6 +13,7 @@ public class ItemInfoRendererWithPrice : ItemInfoRendererWithDescription {
 
     public override void ResetInfo() {
         base.ResetInfo();
-        _priceText.SetText("");
+        _priceText.ClearArguments();
+        _priceText.SetText("General.Empty");
     }
 }

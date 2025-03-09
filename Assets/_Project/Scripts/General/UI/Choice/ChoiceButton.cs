@@ -1,9 +1,9 @@
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(ButtonWithAudio), typeof(Animator))]
-public abstract class ChoiceButton<TItem> : MonoBehaviour
-    where TItem : BuyableItem {
+public abstract class ChoiceButton<TItem> : MonoBehaviour where TItem : BuyableItem {
     [SerializeField] protected Image _icon;
 
     protected Button _button;
@@ -14,6 +14,19 @@ public abstract class ChoiceButton<TItem> : MonoBehaviour
 
     protected virtual void Awake() {
         _animator = GetComponent<Animator>();
+    }
+
+    public virtual void Setup(TItem item, UnityAction buttonEvent) {
+        CheckButton();
+        _button.onClick.AddListener(buttonEvent);
+        gameObject.SetActive(true);
+        Item = item;
+    }
+
+    private void CheckButton() {
+        if (_button != null) return;
+
+        _button = GetComponent<Button>();
     }
 
     public virtual void ChangeChoosedState() {

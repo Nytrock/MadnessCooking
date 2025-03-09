@@ -23,10 +23,10 @@ public class BedTypeHolder : MonoBehaviour {
         CheckBoosts();
 
         if (_water != null)
-            _water.BoostEnded += ChangeAnimationSpeed;
+            _water.BoostEnded += UpdateAnimationSpeed;
         if (_fertilize != null)
-            _fertilize.BoostEnded += ChangeAnimationSpeed;
-        _pestsGenerator.PestsChanged += ChangeAnimationSpeed;
+            _fertilize.BoostEnded += UpdateAnimationSpeed;
+        _pestsGenerator.PestsChanged += UpdateAnimationSpeed;
     }
 
     private void CheckBoosts() {
@@ -46,21 +46,24 @@ public class BedTypeHolder : MonoBehaviour {
 
     public void ChangeState(bool newMode) {
         gameObject.SetActive(newMode);
-        if (newMode)
-            return;
 
+        if (newMode)
+            ActivateBoostsAndPests();
+    }
+
+    private void ActivateBoostsAndPests() {
         if (_water != null)
-            _water.EndBoost();
+            _water.Activate();
         if (_fertilize != null)
-            _fertilize.EndBoost();
-        _pestsGenerator.ChangeMode(false);
+            _fertilize.Activate();
+        _pestsGenerator.Activate();
     }
 
     public void SetIngredient() {
         Ingredient ingredient = _bedData.PlantedIngredient;
         _name = ingredient.name;
 
-        _pestsGenerator.ChangeMode(true);
+        _pestsGenerator.ChangeState(true);
         StartCoroutine(SetAnimationSpeed(ingredient.TimeGrow));
         _animator.Play(_name, -1, _bedData.AnimationTime);
     }
@@ -86,7 +89,7 @@ public class BedTypeHolder : MonoBehaviour {
             return;
 
         _water.StartBoost();
-        ChangeAnimationSpeed();
+        UpdateAnimationSpeed();
     }
 
     public void UpdateEternalWater() {
@@ -94,6 +97,7 @@ public class BedTypeHolder : MonoBehaviour {
             return;
 
         _water.UpdateEternal();
+        UpdateAnimationSpeed();
     }
 
     public void Fertilize() {
@@ -101,7 +105,7 @@ public class BedTypeHolder : MonoBehaviour {
             return;
 
         _fertilize.StartBoost();
-        ChangeAnimationSpeed();
+        UpdateAnimationSpeed();
     }
 
     public void UpdateEternalFertilize() {
@@ -109,9 +113,10 @@ public class BedTypeHolder : MonoBehaviour {
             return;
 
         _fertilize.UpdateEternal();
+        UpdateAnimationSpeed();
     }
 
-    public void ChangeAnimationSpeed() {
+    public void UpdateAnimationSpeed() {
         _animator.SetFloat("growTime", _animationSpeed * _bedData.SummarizedBoost);
     }
 

@@ -1075,8 +1075,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _seats:
   - {fileID: 4027752276696192005}
-  _tableFoods:
-  - {fileID: 6724161912601488736}
   _border: {fileID: 3802189741268777417}
   _removeButton: {fileID: 103349438615258591}
 --- !u!114 &4608233568211056375
@@ -1092,13 +1090,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _waitSlider: {fileID: 1602978493788171441}
+  _tableFoods: []
   _waitTime:
     _min: 30
     _max: 50
-    _isGreaterZero: 1
-  _talkTime:
-    _min: 1.5
-    _max: 4
     _isGreaterZero: 1
   _clientInterval:
     _min: 1
@@ -1223,6 +1218,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6234299334378047606, guid: 4a26450d44109de418ec920aa1faceb7, type: 3}
+      propertyPath: _foodRenderer
+      value: 
+      objectReference: {fileID: 6724161912601488736}
     - target: {fileID: 7335289998871645541, guid: 4a26450d44109de418ec920aa1faceb7, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.69230795

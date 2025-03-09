@@ -1,13 +1,15 @@
+using System.Collections.Generic;
 using UnityEngine;
 
-public class BedChoiceUI : ChoiceBuyUI<BedType> {
+public class BedChoiceUI : ChoiceBuyUI<BedType, BedChoiceButton> {
     [SerializeField] private BedTypeManager _bedTypesManager;
     [SerializeField] private BedTypeIngredientsRenderer _ingredientsRenderer;
     [SerializeField] private TutorialManager _tutorialManager;
     private BedChoice _changingBed;
 
-    private void Awake() {
-        _bedTypesManager.ItemAdded += AddType;
+    protected override void Awake() {
+        base.Awake();
+        _bedTypesManager.ItemAdded += UnblockBedType;
     }
 
     public void ActivateBedChoice(BedChoice newBed) {
@@ -15,65 +17,51 @@ public class BedChoiceUI : ChoiceBuyUI<BedType> {
             _tutorialManager.NextTutorialPart();
 
         _changingBed = newBed;
-        GenerateChoiceButtons();
+        if (_choiceButtons.Count == 0)
+            GenerateChoiceButtons();
         Activate();
     }
 
-    protected override void GenerateChoiceButtons() {
-        int index = 0;
-        foreach (var bed in _bedTypesManager.GetAllItems()) {
-            var choiceButton = _choiceButtonPool.GetObject() as BedChoiceButton;
-            choiceButton.Setup(bed, index++, this);
-            choiceButton.SetBlockedState(!_bedTypesManager.IsItemAvailable(bed));
-            _choiceButtons.Add(choiceButton);
-        }
+    protected override BedChoiceButton GenerateChoiceButton(BedType item) {
+        BedChoiceButton button = base.GenerateChoiceButton(item);
+        button.SetBlockedState(!_bedTypesManager.IsItemAvailable(item));
+        return button;
     }
 
-    private void AddType(BedType newType) {
+    protected override IEnumerable<BedType> GetItems() {
+        return _bedTypesManager.GetAllItems();
+    }
+
+    private void UnblockBedType(BedType newType) {
         foreach (var button in _choiceButtons) {
             if (button.Item == newType) {
-                var choiceButton = button as BedChoiceButton;
-                choiceButton.SetBlockedState(false);
+                button.SetBlockedState(false);
                 break;
             }
         }
     }
 
-    public override void Choice(int index, bool isBuyable) {
-        base.Choice(index, isBuyable);
-
-        if (_chosedIndex == -1)
-            return;
-
+    public override void SelectButton(BedChoiceButton button) {
+        base.SelectButton(button);
         if (_tutorialManager.IsWork)
             _tutorialManager.NextTutorialPart();
 
-        BedType bedType = _choiceButtons[_chosedIndex].Item;
-        _ingredientsRenderer.ShowIngredients(bedType);
-        _description.UpdateDescription(bedType);
-
-        _submitButton.interactable &= _ingredientsRenderer.HaveIngredients(bedType);
+        _ingredientsRenderer.ShowIngredients(button.Item);
+        _submitButton.interactable &= _ingredientsRenderer.HaveIngredients(button.Item);
     }
 
-    public override void SetChoice() {
-        base.SetChoice();
+    public override void SubmitChoice() {
+        base.SubmitChoice();
         if (_tutorialManager.IsWork)
             _tutorialManager.NextTutorialPart();
 
-        _changingBed.SetType(_choiceButtons[_chosedIndex].Item);
+        _changingBed.SetType(_choosedButton.Item);
         _changingBed = null;
         Disable();
-    }
-
-    protected override void SetSelectedState(int index) {
-        _choiceButtons[index].ChangeChoosedState();
     }
 
     public override void Disable() {
         base.Disable();
         _changingBed = null;
-        foreach (var button in _choiceButtons)
-            _choiceButtonPool.PutObject(button);
-        _choiceButtons.Clear();
     }
 }

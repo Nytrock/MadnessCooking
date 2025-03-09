@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class SceneManager : MonoBehaviour {
     [SerializeField] private GameObject _loadingScreen;
+    [SerializeField] private AudioSource _music;
 
     private const int MENU_ID = 0;
     private const int GAME_ID = 1;
@@ -21,6 +22,7 @@ public class SceneManager : MonoBehaviour {
 
     private IEnumerator LoadScene(int sceneId) {
         _loadingScreen.SetActive(true);
+        _music.Stop();
         AsyncOperation asyncLoad = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(sceneId);
 
         while (!asyncLoad.isDone)

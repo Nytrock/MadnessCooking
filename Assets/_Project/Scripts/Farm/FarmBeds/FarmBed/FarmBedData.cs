@@ -61,8 +61,11 @@ public class FarmBedData {
     public void AddIngredient() {
         _count++;
         _nowTime = 0;
-        if (_count == _plantedIngredient.MaxCount)
+
+        if (_count == _plantedIngredient.MaxCount) {
             _isFull = true;
+            _animationTime = 1;
+        }
     }
 
     public void SetCount(int count) {

@@ -2,15 +2,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(BedTypeStyleUpdater))]
-public class IngredientChoiceUI : ChoiceSimpleUI<Ingredient> {
+public class IngredientChoiceUI : ChoiceUI<Ingredient, IngredientChoiceButton> {
     [SerializeField] private IngredientsManager _ingredientsManager;
     [SerializeField] private TutorialManager _tutorialManager;
 
-    private readonly List<Ingredient> _ingredients = new();
     private BedTypeStyleUpdater _renderer;
     private FarmBed _changingBed;
 
-    private void Awake() {
+    protected override void Awake() {
+        base.Awake();
         _renderer = GetComponent<BedTypeStyleUpdater>();
     }
 
@@ -26,27 +26,28 @@ public class IngredientChoiceUI : ChoiceSimpleUI<Ingredient> {
 
     protected override void GenerateChoiceButtons() {
         DestoyOldButtons();
-        _ingredients.Clear();
-
-        foreach (var ingredient in _ingredientsManager.GetAvailableIngredientsOfBedType(_changingBed.Data.BedType)) {
-            IngredientChoiceButton choiceButton = (IngredientChoiceButton)_choiceButtonPool.GetObject();
-            choiceButton.Setup(ingredient, _ingredients.Count, this);
-            choiceButton.SetBedType(_changingBed.Data.BedType);
-            _choiceButtons.Add(choiceButton);
-            _ingredients.Add(ingredient);
-        }
+        base.GenerateChoiceButtons();
     }
 
-    public override void SetChoice() {
-        _changingBed.SetIngredient(_ingredients[_chosedIndex]);
+    protected override IngredientChoiceButton GenerateChoiceButton(Ingredient item) {
+        IngredientChoiceButton button = base.GenerateChoiceButton(item);
+        button.SetBedType(_changingBed.Data.BedType);
+        return button;
+    }
+
+    protected override IEnumerable<Ingredient> GetItems() {
+        return _ingredientsManager.GetAvailableIngredientsOfBedType(_changingBed.Data.BedType);
+    }
+
+    public override void SubmitChoice() {
+        _changingBed.SetIngredient(_choosedButton.Item);
         Disable();
     }
 
-    protected override void SetSelectedState(int index) {
+    public override void SelectButton(IngredientChoiceButton button) {
+        base.SelectButton(button);
         if (_tutorialManager.IsWork)
             _tutorialManager.NextTutorialPart();
-
-        _choiceButtons[index].ChangeChoosedState();
     }
 
     public override void Disable() {

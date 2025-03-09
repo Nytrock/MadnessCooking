@@ -12,7 +12,7 @@ public class OrdersManager : MonoBehaviour {
     public event Action<Order> OrderAdded;
     public event Action<Order> OrderRemoved;
 
-    public void SetNewOrder(Client client) {
+    public void AddNewClient(Client client) {
         if (!_suitableStates.Contains(client.Data.State) || client.Data.IsServiced)
             return;
 

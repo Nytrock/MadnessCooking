@@ -9,7 +9,6 @@ public class ClientHolderData {
     [SerializeField, JsonProperty] private GroupClientState _groupState;
     [SerializeField, JsonProperty] private float _waitTime;
     [SerializeField, JsonProperty] private float _nowTime;
-    [SerializeField, JsonProperty] private int _talkIndex;
     [SerializeField, JsonProperty] private int _moneyCount;
     [SerializeField, JsonProperty] private int _seatsCount;
     [SerializeField, JsonProperty] private ClientData[] _clients;
@@ -18,13 +17,12 @@ public class ClientHolderData {
     public GroupClientState GroupState => _groupState;
     public float WaitTime => _waitTime;
     public float NowTime => _nowTime;
-    public int TalkIndex => _talkIndex;
     public int SeatsCount => _seatsCount;
     public IEnumerable<ClientData> Clients => _clients;
 
     public ClientHolderData(int seatsCount) {
         _seatsCount = seatsCount;
-        _clients = new ClientData[SeatsCount];
+        _clients = new ClientData[_seatsCount];
         _groupState = GroupClientState.None;
     }
 
@@ -38,7 +36,7 @@ public class ClientHolderData {
 
     private void ClearClients() {
         _haveClients = false;
-        _clients = new ClientData[SeatsCount];
+        _clients = new ClientData[_seatsCount];
     }
 
     public void StopWait() {
@@ -48,7 +46,6 @@ public class ClientHolderData {
     public void SetupOnSpawn() {
         if (_groupState == GroupClientState.Leave || _groupState == GroupClientState.None) {
             _groupState = GroupClientState.Enter;
-            _talkIndex = _clients.Length;
             _haveClients = true;
         }
     }
@@ -78,10 +75,6 @@ public class ClientHolderData {
         int payingMoney = Mathf.FloorToInt(_moneyCount * coeficient);
         MoneyManager.Instance.ChangeMoney(payingMoney);
         _moneyCount = 0;
-    }
-
-    public void DecreaseTalk() {
-        _talkIndex--;
     }
 
     public bool ContainsGrayMan() {

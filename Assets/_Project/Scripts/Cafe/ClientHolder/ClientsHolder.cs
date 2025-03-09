@@ -13,14 +13,16 @@ public class ClientsHolder : MonoBehaviour {
     [SerializeField, Min(0)] private float _clientServicedTimeBonus;
     [SerializeField, Min(0)] private float _notFullServicePenalty = 0.5f;
 
-    private ClientsSpawner _spawner;
     private ClientHolderData _data;
     private CafeSpot _spot;
     private readonly List<Client> _clients = new();
+
     private bool _isTutorial;
+    private int _index;
 
     public int ClientsCount => _spot.SeatsCount;
-    public int SpotIndex => _spot.Index;
+    public int Index => _index;
+    public ClientHolderData Data => _data;
 
     public event Action WaitStarted;
     public event Action<ClientsHolder> ClientsLeaved;
@@ -44,6 +46,8 @@ public class ClientsHolder : MonoBehaviour {
             EndVisit();
     }
 
+    public CafeSeat GetSeat(int index) => _spot.GetSeat(index);
+
     public void AddClient(Client newClient) {
         newClient.OrderActivated += ActivateAllOrders;
         _clients.Add(newClient);
@@ -57,10 +61,10 @@ public class ClientsHolder : MonoBehaviour {
         }
     }
 
-    public IEnumerator SpawnGroupOfClients() {
+    public IEnumerator SpawnGroupOfClients(ClientSpawnPoint spawnPoint) {
         _data.SetupOnSpawn();
 
-        float spawn = _spawner.SpawnPoint.x;
+        float spawn = spawnPoint.Position.x;
         _clients.Randomize();
 
         for (int i = 0; i < _clients.Count; i++) {
@@ -141,7 +145,6 @@ public class ClientsHolder : MonoBehaviour {
     }
 
     public void FoodRejected() {
-        _data.DecreaseTalk();
         CheckWaitEnded();
         CheckVisitEnded();
     }
@@ -175,15 +178,15 @@ public class ClientsHolder : MonoBehaviour {
         StartCoroutine(ClientsLeave(instantLeave));
     }
 
-    public void SetData(ClientHolderData spot) {
-        _data = spot;
+    public void SetData(ClientHolderData data) {
+        _data = data;
+    }
+
+    public void SetIndex(int index) {
+        _index = index;
     }
 
     public void SetTutorialState(bool isTutorial) {
         _isTutorial = isTutorial;
-    }
-
-    public void SetSpawner(ClientsSpawner spawner) {
-        _spawner = spawner;
     }
 }

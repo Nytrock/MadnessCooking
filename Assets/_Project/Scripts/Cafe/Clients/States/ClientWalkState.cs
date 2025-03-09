@@ -14,7 +14,7 @@ public class ClientWalkState : ClientBaseState {
         if (isLeaving)
             _nowTarget = _spawner.SpawnPoint;
         else
-            _nowTarget = _spawner.GetSpot(client.SpotIndex).GetTarget(client.SeatIndex);
+            _nowTarget = client.Seat.transform.position;
         _nowTarget = new Vector2(_nowTarget.x, client.transform.position.y);
         client.StartWalk(isLeaving.ToDirection());
     }

@@ -524,11 +524,6 @@ MonoBehaviour:
   - {fileID: 470985313465804395}
   - {fileID: 6328724325281539407}
   - {fileID: 9012174042339769673}
-  _tableFoods:
-  - {fileID: 5745508977542500343}
-  - {fileID: 8214308012462832186}
-  - {fileID: 8806993286562885072}
-  - {fileID: 8932391717632036338}
   _border: {fileID: 3195112924540026450}
   _removeButton: {fileID: 6027924768193669311}
 --- !u!114 &4807610232535231179
@@ -544,6 +539,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _waitSlider: {fileID: 1939017865290435205}
+  _tableFoods:
+  - {fileID: 5745508977542500343}
+  - {fileID: 8214308012462832186}
+  - {fileID: 8806993286562885072}
+  - {fileID: 8932391717632036338}
   _waitTime:
     _min: 70
     _max: 90
@@ -1127,6 +1127,10 @@ PrefabInstance:
       value: CenterSeat (1)
       objectReference: {fileID: 0}
     - target: {fileID: 6234299334378047606, guid: 4bedf438b7b67df4f8b63b410ec0e3c2, type: 3}
+      propertyPath: _foodRenderer
+      value: 
+      objectReference: {fileID: 8806993286562885072}
+    - target: {fileID: 6234299334378047606, guid: 4bedf438b7b67df4f8b63b410ec0e3c2, type: 3}
       propertyPath: _seatDirection
       value: 1
       objectReference: {fileID: 0}
@@ -1482,6 +1486,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LeftSeat
       objectReference: {fileID: 0}
+    - target: {fileID: 6234299334378047606, guid: 8b240cf2f28b8604c82574b53848636a, type: 3}
+      propertyPath: _foodRenderer
+      value: 
+      objectReference: {fileID: 8932391717632036338}
     - target: {fileID: 7335289998871645541, guid: 8b240cf2f28b8604c82574b53848636a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6.1538467
@@ -1649,6 +1657,10 @@ PrefabInstance:
       value: CenterSeat
       objectReference: {fileID: 0}
     - target: {fileID: 6234299334378047606, guid: 4bedf438b7b67df4f8b63b410ec0e3c2, type: 3}
+      propertyPath: _foodRenderer
+      value: 
+      objectReference: {fileID: 8214308012462832186}
+    - target: {fileID: 6234299334378047606, guid: 4bedf438b7b67df4f8b63b410ec0e3c2, type: 3}
       propertyPath: _seatDirection
       value: 2
       objectReference: {fileID: 0}
@@ -1725,6 +1737,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RightSeat
       objectReference: {fileID: 0}
+    - target: {fileID: 6234299334378047606, guid: 4a26450d44109de418ec920aa1faceb7, type: 3}
+      propertyPath: _foodRenderer
+      value: 
+      objectReference: {fileID: 5745508977542500343}
     - target: {fileID: 7335289998871645541, guid: 4a26450d44109de418ec920aa1faceb7, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5.8461537

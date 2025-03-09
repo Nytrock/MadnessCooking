@@ -1,32 +1,23 @@
 using UnityEngine;
 
-public abstract class ChoiceBuyUI<TItem> : ChoiceUI<TItem, ChoiceBuyButton<TItem>>
-    where TItem : BuyableItem {
+public abstract class ChoiceBuyUI<TItem, TButton> : ChoiceUI<TItem, TButton>
+    where TItem : BuyableItem where TButton : ChoiceBuyButton<TItem> {
 
     [SerializeField] protected ChoiceBuyDescriptionUI _description;
 
-    public virtual void Choice(int index, bool isBuyable) {
-        if (_chosedIndex == -1)
-            _description.ChangeState();
-        else
-            _choiceButtons[_chosedIndex].ChangeChoosedState();
+    public override void SelectButton(TButton button) {
+        base.SelectButton(button);
+        _description.ChangeState(_choosedButton != null);
+        _submitButton.interactable &= button.IsBuyable;
 
-        bool isSame = index == _chosedIndex;
-        if (isSame) {
-            _chosedIndex = -1;
-            _description.ChangeState();
+        if (_choosedButton == null)
             return;
-        }
-
-        _chosedIndex = index;
-        _choiceButtons[_chosedIndex].ChangeChoosedState();
-        _submitButton.interactable = !isSame && isBuyable;
+        _description.UpdateDescription(_choosedButton.Item);
     }
 
-    public override void SetChoice() {
-        int price = _choiceButtons[_chosedIndex].Item.Price;
-        if (price > 0)
-            MoneyManager.Instance.ChangeMoney(-price);
+    public override void SubmitChoice() {
+        int price = _choosedButton.Item.Price;
+        MoneyManager.Instance.ChangeMoney(-price);
     }
 
     protected override void Activate() {

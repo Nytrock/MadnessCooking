@@ -493,9 +493,6 @@ MonoBehaviour:
   _seats:
   - {fileID: 598623546544158984}
   - {fileID: 2085424906271807740}
-  _tableFoods:
-  - {fileID: 9104158340885288787}
-  - {fileID: 7169849244501226833}
   _border: {fileID: 8151701406759532964}
   _removeButton: {fileID: 2590385082426204656}
 --- !u!114 &-7621174372396858964
@@ -511,6 +508,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _waitSlider: {fileID: 1251707126577681444}
+  _tableFoods:
+  - {fileID: 9104158340885288787}
+  - {fileID: 7169849244501226833}
   _waitTime:
     _min: 30
     _max: 50
@@ -1288,6 +1288,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LeftSeat
       objectReference: {fileID: 0}
+    - target: {fileID: 6234299334378047606, guid: 8b240cf2f28b8604c82574b53848636a, type: 3}
+      propertyPath: _foodRenderer
+      value: 
+      objectReference: {fileID: 7169849244501226833}
     - target: {fileID: 7335289998871645541, guid: 8b240cf2f28b8604c82574b53848636a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.0769231
@@ -1361,6 +1365,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RightSeat
       objectReference: {fileID: 0}
+    - target: {fileID: 6234299334378047606, guid: 4a26450d44109de418ec920aa1faceb7, type: 3}
+      propertyPath: _foodRenderer
+      value: 
+      objectReference: {fileID: 9104158340885288787}
     - target: {fileID: 7335289998871645541, guid: 4a26450d44109de418ec920aa1faceb7, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.2307694

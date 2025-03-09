@@ -1,6 +1,6 @@
 public class WaterBedWater : StandardBedWater {
-    public override void Bind(BedHolderBoosterData data) {
-        base.Bind(data);
+    public override void Activate() {
+        base.Activate();
         _data.SetBoost(0);
     }
 }

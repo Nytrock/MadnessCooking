@@ -1,16 +1,14 @@
 using UnityEngine;
+using UnityEngine.Events;
 
-public class IngredientChoiceButton : ChoiceSimpleButton<Ingredient> {
+public class IngredientChoiceButton : ChoiceButton<Ingredient> {
     [SerializeField] private BedTypeImageStyleChanger _defaultStyleChanger;
     [SerializeField] private BedTypeImageStyleChanger _choosedStyleChanger;
     private BedType _bedType;
 
-    public override void Setup(Ingredient item, int index, ChoiceSimpleUI<Ingredient> ui) {
-        base.Setup(item, index, ui);
+    public override void Setup(Ingredient item, UnityAction buttonEvent) {
+        base.Setup(item, buttonEvent);
         _icon.sprite = Item.Icon;
-        _button.onClick.AddListener(
-            delegate { ui.Choice(index); }
-        );
     }
 
     public void SetBedType(BedType bedType) {

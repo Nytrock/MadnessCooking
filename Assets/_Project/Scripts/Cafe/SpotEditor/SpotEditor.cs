@@ -18,7 +18,6 @@ public class SpotEditor : MonoBehaviour {
         _opener.CafeChanged += CheckCafeOpener;
         _locationManager.LocationChanged += delegate { ChangeWorkMode(false); };
         _spotManager.SpotsPositionChanged += _preview.Move;
-        EditorDisabled += _spotManager.GenerateFreeSpotsList;
     }
 
     public void ChangeWorkMode() {

@@ -20,8 +20,4 @@ public class ClientHolderManagerData {
     public void AddClientHolder(ClientHolderData newData) {
         _clientHolders.Add(newData);
     }
-
-    public ClientHolderData GetClientHolder(int index) {
-        return _clientHolders[index];
-    }
 }

@@ -13,7 +13,7 @@ public class ClientMainAudio : MonoBehaviour {
     }
 
     private void SetupAudioSources() {
-        _orderAudio.volume = _orderAudioOriginalVolume / _client.Table.ClientsCount;
+        _orderAudio.volume = _orderAudioOriginalVolume / _client.Holder.ClientsCount;
 
         _client.OrderActivated += delegate { _orderAudio.Play(); };
         _client.ClientRejected += delegate { _rejectAudio.Play(); };

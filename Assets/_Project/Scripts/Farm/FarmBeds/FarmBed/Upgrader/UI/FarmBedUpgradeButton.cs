@@ -1,22 +1,13 @@
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(BedTypeStyleUpdater))]
 public class FarmBedUpgradeButton : ChoiceBuyButton<FarmBedUpgrade> {
     [SerializeField] private LocalizedText _nameText;
     private BedTypeStyleUpdater _renderer;
 
-    public override void Setup(FarmBedUpgrade item, int index, ChoiceBuyUI<FarmBedUpgrade> ui) {
-        _button = GetComponent<Button>();
-        gameObject.SetActive(true);
-
-        Item = item;
-        _price = item.PriceToAdd;
-        _icon.sprite = Item.Icon;
-        CheckBuyable(MoneyManager.Instance.MoneyCount);
-        _button.onClick.AddListener(
-            delegate { ui.Choice(index, _isBuyable); }
-        );
+    public override void Setup(FarmBedUpgrade item, UnityAction buttonEvent) {
+        base.Setup(item, buttonEvent);
         _nameText.SetText(item.Name);
     }
 

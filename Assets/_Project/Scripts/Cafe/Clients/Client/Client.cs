@@ -13,17 +13,15 @@ public class Client : MonoBehaviour {
     [SerializeField] private int _richClientMoneyMultiplier = 2;
 
     private ClientsSpawner _spawner;
-    private ClientsHolder _table;
-    private CafeSpot _spot;
+    private ClientsHolder _holder;
     private CafeSeat _seat;
 
     public ClientData Data { get; private set; }
     public ClientUI ClientUI { get; private set; }
-    public int SpotIndex { get; private set; }
-    public int SeatIndex { get; private set; }
 
     public ClientGender Gender => _gender;
-    public ClientsHolder Table => _table;
+    public ClientsHolder Holder => _holder;
+    public CafeSeat Seat => _seat;
 
     public event Action<Client> OrderActivated;
     public event Action<Client> ClientLeave;
@@ -84,9 +82,6 @@ public class Client : MonoBehaviour {
     }
 
     public void Setup(ClientSettings settings) {
-        SpotIndex = settings.SpotIndex;
-        SeatIndex = settings.SeatIndex;
-
         Data = settings.Data;
         Data.SetGender(_gender);
 
@@ -100,16 +95,14 @@ public class Client : MonoBehaviour {
             return;
         }
 
-        _spot = _spawner.GetSpot(SpotIndex);
-        _seat = _spot.GetSeat(SeatIndex);
+        _seat = settings.Seat;
         ChangeState();
 
         if (Data.State != ClientState.Spawn)
             TakeSeat();
 
-        if (!_spot.TryGetComponent(out _table))
-            throw new ArgumentNullException("Spot doesn't have the required class ClientGroupHolder");
-        _table.WaitStarted += WaitOrder;
+        _holder = settings.Holder;
+        _holder.WaitStarted += WaitOrder;
     }
 
     public void EndSetup() {
@@ -128,12 +121,12 @@ public class Client : MonoBehaviour {
 
     public void SitAndWait() {
         WaitOthers();
-        _table.CheckWait();
+        _holder.CheckWait();
     }
 
     public void EndEat() {
         WaitOthers();
-        _table.CheckVisitEnded();
+        _holder.CheckVisitEnded();
     }
 
     public void Leave() {
@@ -147,7 +140,7 @@ public class Client : MonoBehaviour {
     public void FoodRejected() {
         WaitOthers();
         Data.Service();
-        _table.FoodRejected();
+        _holder.FoodRejected();
         ClientRejected?.Invoke(this);
     }
 
@@ -163,7 +156,7 @@ public class Client : MonoBehaviour {
         int payingMoney = Data.Order.Food.MoneyGet;
         if (Data.Type == ClientType.Rich)
             payingMoney *= _richClientMoneyMultiplier;
-        _table.ClientEat(payingMoney);
+        _holder.ClientEat(payingMoney);
         ClientEat?.Invoke(this);
     }
 
@@ -178,12 +171,12 @@ public class Client : MonoBehaviour {
     }
 
     public void SetSpotTableFood() {
-        _spot.SetTableFoodSprite(Data.Order.Food, SeatIndex);
+        _seat.SetTableFoodSprite(Data.Order.Food);
     }
 
     public void StopEat() {
         ClientUI.ChangeEatSliderState(false);
-        _spot.ResetTableFoodSprite(SeatIndex);
+        _seat.ResetTableFoodSprite();
     }
 
     private void WaitOthers() {
@@ -198,14 +191,12 @@ public class Client : MonoBehaviour {
 
     public void ResetState() {
         _nowState = null;
+        _seat = null;
 
         OrderActivated = null;
         ClientLeave = null;
         ClientRejected = null;
         ClientEat = null;
-
-        _seat = null;
-        _spot = null;
     }
 
     public void SetupOnCreate(ClientsSpawner spawner, TutorialManager tutorialManager,

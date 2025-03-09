@@ -18,15 +18,9 @@ public class ChoiceBuyDescriptionUI : MonoBehaviour {
             _renderer.SetPrice(_freeDescription);
     }
 
-    public void ChangeState() {
-        gameObject.SetActive(!gameObject.activeSelf);
-        if (!gameObject.activeSelf)
-            _renderer.SetPrice("");
-    }
-
-    public void ChangeState(bool newvalue) {
-        gameObject.SetActive(newvalue);
-        if (!gameObject.activeSelf)
-            _renderer.SetPrice("");
+    public void ChangeState(bool newState) {
+        gameObject.SetActive(newState);
+        if (!newState)
+            _renderer.ResetInfo();
     }
 }

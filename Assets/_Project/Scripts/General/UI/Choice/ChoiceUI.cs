@@ -8,11 +8,16 @@ public abstract class ChoiceUI<TItem, TButton> : MonoBehaviour
     [SerializeField] protected GameObject _UI;
     [SerializeField] protected ChoicePool<TItem, TButton> _choiceButtonPool;
     [SerializeField] protected Button _submitButton;
+
     protected readonly List<TButton> _choiceButtons = new();
-    protected int _chosedIndex = -1;
+    protected TButton _choosedButton;
+
+    protected virtual void Awake() {
+        _submitButton.onClick.AddListener(SubmitChoice);
+    }
 
     protected virtual void Start() {
-        _UI.SetActive(false);
+        Disable();
     }
 
     protected virtual void Activate() {
@@ -21,10 +26,25 @@ public abstract class ChoiceUI<TItem, TButton> : MonoBehaviour
     }
 
     public virtual void Disable() {
-        if (_chosedIndex != -1)
-            SetSelectedState(_chosedIndex);
-        _chosedIndex = -1;
+        if (_choosedButton != null)
+            _choosedButton.ChangeChoosedState();
+        _choosedButton = null;
         _UI.SetActive(false);
+    }
+
+    public virtual void SelectButton(TButton button) {
+        if (_choosedButton != null)
+            _choosedButton.ChangeChoosedState();
+
+        if (_choosedButton == button) {
+            _submitButton.interactable = false;
+            _choosedButton = null;
+            return;
+        }
+
+        _choosedButton = button;
+        _submitButton.interactable = true;
+        _choosedButton.ChangeChoosedState();
     }
 
     protected void DestoyOldButtons() {
@@ -33,7 +53,18 @@ public abstract class ChoiceUI<TItem, TButton> : MonoBehaviour
         _choiceButtons.Clear();
     }
 
-    protected abstract void GenerateChoiceButtons();
-    protected abstract void SetSelectedState(int index);
-    public abstract void SetChoice();
+    protected virtual void GenerateChoiceButtons() {
+        foreach (var item in GetItems())
+            GenerateChoiceButton(item);
+    }
+
+    protected virtual TButton GenerateChoiceButton(TItem item) {
+        TButton choiceButton = _choiceButtonPool.GetObject();
+        choiceButton.Setup(item, delegate { SelectButton(choiceButton); });
+        _choiceButtons.Add(choiceButton);
+        return choiceButton;
+    }
+
+    protected abstract IEnumerable<TItem> GetItems();
+    public abstract void SubmitChoice();
 }

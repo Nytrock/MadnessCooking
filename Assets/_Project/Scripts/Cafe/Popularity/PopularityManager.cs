@@ -4,8 +4,8 @@ using UnityEngine;
 public class PopularityManager : MonoBehaviour, IBindable<CafeData> {
     [SerializeField] private PopularityLevel[] _levels;
     [SerializeField] private PopularityLevel _defaultLevel;
-    [SerializeField] private PopularityManagerData _data;
 
+    private PopularityManagerData _data;
     private PopularityLevel _nowLevel => _levels[_data.Level];
 
     public bool IsMaxLevel => _data.Level == _levels.Length - 1;
@@ -13,17 +13,21 @@ public class PopularityManager : MonoBehaviour, IBindable<CafeData> {
     public event Action<PopularityLevel> LevelChanged;
     public event Action<int> XpChanged;
 
-    private void Awake() {
-        CheckLevels();
-    }
 
+    [ContextMenu(nameof(CheckLevels))]
     private void CheckLevels() {
+        bool isError = false;
         foreach (var level in _levels) {
-            int sumChance = level.SingleChance + level.DoubleChance +
+            float sumChance = level.SingleChance + level.DoubleChance +
                 level.TripleChance + level.QuarterChance;
-            if (sumChance != 1000)
-                throw new ArgumentException($"Popularity level number {level.Number} has incorrect chances");
+            if (Mathf.RoundToInt(sumChance) != 100) {
+                isError = true;
+                Debug.LogError($"Popularity level number {level.Number} has total chance {sumChance}, must be 100");
+            }
         }
+
+        if (!isError)
+            Debug.Log("All popularity levels are OK");
     }
 
     public void LateStart() {

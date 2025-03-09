@@ -1,3 +1,3 @@
-public class FarmUpgradeChoicePool : ChoiceBuyPool<FarmBedUpgrade> {
+public class FarmUpgradeChoicePool : ChoicePool<FarmBedUpgrade, FarmBedUpgradeButton> {
 
 }

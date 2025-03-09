@@ -1,3 +1,3 @@
-public class BedChoicePool : ChoiceBuyPool<BedType> {
+public class BedChoicePool : ChoicePool<BedType, BedChoiceButton> {
 
 }

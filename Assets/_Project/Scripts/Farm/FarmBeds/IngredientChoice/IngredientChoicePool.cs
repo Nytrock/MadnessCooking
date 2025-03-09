@@ -1,3 +1,3 @@
-public class IngredientChoicePool : ChoiceSimplePool<Ingredient> {
+public class IngredientChoicePool : ChoicePool<Ingredient, IngredientChoiceButton> {
 
 }

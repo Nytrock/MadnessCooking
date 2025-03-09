@@ -3,12 +3,12 @@ using System;
 [Serializable]
 public struct ClientSettings {
     public ClientData Data { get; private set; }
-    public int SpotIndex { get; private set; }
-    public int SeatIndex { get; private set; }
+    public ClientsHolder Holder { get; private set; }
+    public CafeSeat Seat { get; private set; }
 
-    public ClientSettings(ClientData data, int spotIndex, int seatIndex) {
+    public ClientSettings(ClientData data, ClientsHolder holder, CafeSeat seat) {
         Data = data;
-        SpotIndex = spotIndex;
-        SeatIndex = seatIndex;
+        Holder = holder;
+        Seat = seat;
     }
 }

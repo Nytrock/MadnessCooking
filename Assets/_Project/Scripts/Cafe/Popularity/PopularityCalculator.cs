@@ -29,10 +29,18 @@ public class PopularityCalculator : MonoBehaviour {
             (1 + (_foodManager.FoodCountWithoutDefault * _oneFoodMultiplier));
     }
 
-    public void GetClientChances(out int singleChance, out int doubleChance, out int tripleChance, out int quarterChance) {
-        singleChance = _nowLevel.SingleChance;
-        doubleChance = _nowLevel.DoubleChance + singleChance;
-        tripleChance = _nowLevel.TripleChance + doubleChance;
-        quarterChance = _nowLevel.QuarterChance + tripleChance;
+    public ClientCount GetClientCount() {
+        float singleChance = _nowLevel.SingleChance;
+        float doubleChance = _nowLevel.DoubleChance + singleChance;
+        float tripleChance = _nowLevel.TripleChance + doubleChance;
+
+        float chance = Random.Range(1f, 101f);
+        if (chance <= singleChance)
+            return ClientCount.One;
+        else if (chance <= doubleChance)
+            return ClientCount.Two;
+        else if (chance <= tripleChance)
+            return ClientCount.Three;
+        return ClientCount.Four;
     }
 }
