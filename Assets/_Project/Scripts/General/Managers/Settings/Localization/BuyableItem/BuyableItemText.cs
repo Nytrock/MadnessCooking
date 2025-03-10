@@ -5,6 +5,7 @@ using UnityEngine;
 public class BuyableItemText : MonoBehaviour {
     private BuyableItemTextType _type;
     private BuyableItem _nowItem;
+    private bool _isHidden;
     private TextMeshProUGUI _text;
 
     private void Start() {
@@ -33,6 +34,11 @@ public class BuyableItemText : MonoBehaviour {
             return;
         }
 
+        if (_isHidden) {
+            _text.text = "???";
+            return;
+        }
+
         if (_type == BuyableItemTextType.Name)
             _text.text = _nowItem.Name;
         else
@@ -43,5 +49,9 @@ public class BuyableItemText : MonoBehaviour {
         if (_text != null) return;
 
         _text = GetComponent<TextMeshProUGUI>();
+    }
+
+    public void ChangeHiddenState(bool isHidden) {
+        _isHidden = isHidden;
     }
 }

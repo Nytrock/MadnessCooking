@@ -5,7 +5,7 @@ using UnityEngine;
 public class BarnChickens : MonoBehaviour, IBindable<FarmData> {
     [SerializeField] private FarmCar _car;
     [SerializeField] private UpgradeManager _upgradeManager;
-    [SerializeField] private IngredientsManager _ingredientsManager;
+    [SerializeField] private IngredientManager _ingredientsManager;
     [SerializeField] private Puncher _puncher;
     [SerializeField] private FarmShop _farmShop;
     [SerializeField] private VisualChanger _unlockVisual;

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BedTypeManager : SaveableItemManager<BedType, FarmData> {
     [SerializeField] private UpgradeManager _upgradeManager;
-    [SerializeField] private IngredientsManager _ingredientsManager;
+    [SerializeField] private IngredientManager _ingredientsManager;
 
     [Header("Upgrades")]
     [SerializeField] private BedTypeUpgrade[] _bedsUpgrades;

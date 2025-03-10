@@ -3,7 +3,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(BedTypeStyleUpdater))]
 public class IngredientChoiceUI : ChoiceUI<Ingredient, IngredientChoiceButton> {
-    [SerializeField] private IngredientsManager _ingredientsManager;
+    [SerializeField] private IngredientManager _ingredientsManager;
     [SerializeField] private TutorialManager _tutorialManager;
 
     private BedTypeStyleUpdater _renderer;

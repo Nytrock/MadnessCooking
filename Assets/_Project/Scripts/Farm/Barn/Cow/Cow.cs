@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public class Cow : NeedHoldAdd {
-    [SerializeField] private IngredientsManager _ingredientsManager;
+    [SerializeField] private IngredientManager _ingredientsManager;
     [SerializeField] private Puncher _puncher;
     [SerializeField, Min(0)] private float _wastePassiveAmount;
     [SerializeField, Min(0)] private float _wasteActiveAmount;

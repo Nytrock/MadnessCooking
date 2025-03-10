@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public class FoodShopRecipe : FoodRecipe<FoodShopRecipePart> {
-    [SerializeField] protected IngredientsManager _ingredientManager;
+    [SerializeField] protected IngredientManager _ingredientManager;
     private KitchenUpgradeData _upgradeData;
 
     protected override void SetupIngredients() {

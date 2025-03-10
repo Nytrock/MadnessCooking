@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-public class IngredientsManager : SaveableItemManager<Ingredient, FarmData> {
+public class IngredientManager : SaveableItemManager<Ingredient, FarmData> {
     public override bool IsItemAvailable(Ingredient ingredient) {
         if (ingredient.Type == IngredientType.Buyable)
             return true;

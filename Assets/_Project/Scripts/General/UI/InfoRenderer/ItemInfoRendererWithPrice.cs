@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 [Serializable]
-public class ItemInfoRendererWithPrice : ItemInfoRendererWithDescription {
+public class ItemInfoRendererWithPrice : BuyableItemRendererWithDescription {
     [SerializeField] private LocalizedText _priceText;
 
     public void SetPrice(string buyNote, int price = -1) {

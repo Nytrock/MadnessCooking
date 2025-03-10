@@ -7,12 +7,12 @@ public class BuyableItemRendererWithName : BuyableItemRenderer {
 
     public override void SetItemInfo(BuyableItem item) {
         base.SetItemInfo(item);
+        SetName(item, false);
+    }
 
-        if (_nameText == null)
-            return;
-
-        _nameText.SetType(BuyableItemTextType.Name);
-        _nameText.SetItem(item);
+    public override void SetHiddenItemInfo(BuyableItem item) {
+        base.SetHiddenItemInfo(item);
+        SetName(item, true);
     }
 
     public override void ResetInfo() {
@@ -22,5 +22,14 @@ public class BuyableItemRendererWithName : BuyableItemRenderer {
             return;
 
         _nameText.ResetItem();
+    }
+
+    private void SetName(BuyableItem item, bool isHidden) {
+        if (_nameText == null)
+            return;
+
+        _nameText.SetType(BuyableItemTextType.Name);
+        _nameText.ChangeHiddenState(isHidden);
+        _nameText.SetItem(item);
     }
 }

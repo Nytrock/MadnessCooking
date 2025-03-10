@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public class FoodShop : BaseChooseShop<Food, OfficeData>, IUpgradeable<KitchenUpgradeData> {
-    [SerializeField] private IngredientsManager _ingredientManager;
+    [SerializeField] private IngredientManager _ingredientManager;
     [SerializeField] private TechnicManager _technicManager;
     private KitchenUpgradeData _upgradeData;
 

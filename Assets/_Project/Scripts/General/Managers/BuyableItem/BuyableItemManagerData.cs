@@ -21,10 +21,6 @@ public class BuyableItemManagerData<TItem>
         _availableItems = _availableItems.OrderBy(item => item.Price).ToList();
     }
 
-    public TItem GetItem(int index) {
-        return _availableItems[index];
-    }
-
     public bool IsItemAvailable(TItem item) {
         return _availableItems.Contains(item);
     }
