@@ -6,6 +6,7 @@ using Random = UnityEngine.Random;
 public class ClientsSpawner : MonoBehaviour, IBindable<CafeData>, ITutorialPart {
     [SerializeField] private ClientSpawnPoint _spawnPoint;
     [SerializeField] private GameTimeManager _timeManager;
+    [SerializeField] private LocationNotificationManager _notificationManager;
     [SerializeField] private PopularityCalculator _popularityCalculate;
     [SerializeField] private CafeStateChanger _cafeOpener;
     [SerializeField] private ClientsHolderManager _clientsHolderManager;
@@ -132,7 +133,7 @@ public class ClientsSpawner : MonoBehaviour, IBindable<CafeData>, ITutorialPart 
         return ClientType.Standard;
     }
 
-    private ClientsHolder SpawnGroupOfClients(ClientsHolder holder) {
+    private void SpawnGroupOfClients(ClientsHolder holder) {
         holder.SetTutorialState(_tutorialManager.IsWork);
 
         for (int i = 0; i < holder.ClientsCount; i++) {
@@ -149,9 +150,9 @@ public class ClientsSpawner : MonoBehaviour, IBindable<CafeData>, ITutorialPart 
 
         if (_tutorialManager.IsWork)
             holder.WaitStarted += _tutorialManager.NextTutorialPart;
+        holder.WaitStarted += CreateNotification;
         holder.ClientsLeaved += ClientsLeave;
         StartCoroutine(holder.SpawnGroupOfClients(_spawnPoint));
-        return holder;
     }
 
     private void SetupClient(Client client, ClientData clientData, ClientsHolder holder, CafeSeat seat) {
@@ -183,6 +184,10 @@ public class ClientsSpawner : MonoBehaviour, IBindable<CafeData>, ITutorialPart 
     public void PutClient(Client client) {
         _data.TryRemoveLeavingClient(client.Data);
         _pool.PutObject(client);
+    }
+
+    private void CreateNotification() {
+        _notificationManager.CreateNotification(Location.Cafe);
     }
 
     public void StartTutorialPart() {
