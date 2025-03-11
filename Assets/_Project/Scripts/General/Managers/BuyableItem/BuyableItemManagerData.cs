@@ -13,10 +13,7 @@ public class BuyableItemManagerData<TItem>
     public IEnumerable<TItem> AvailableItems => _availableItems;
     public int ItemsCount => _availableItems.Count;
 
-    public void AddItem(TItem item) {
-        if (_availableItems.Contains(item))
-            return;
-
+    public virtual void AddItem(TItem item) {
         _availableItems.Add(item);
         _availableItems = _availableItems.OrderBy(item => item.Price).ToList();
     }

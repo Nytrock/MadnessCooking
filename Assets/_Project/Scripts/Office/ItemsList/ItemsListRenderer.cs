@@ -21,7 +21,6 @@ public class ItemsListRenderer : MonoBehaviour {
         where TItem : BuyableItem {
         ItemsListCategoryRenderer categoryRenderer = Instantiate(_categoryRendererPrefab, _categoriesContainer);
         categoryRenderer.Setup(itemManager, _description);
-
-        _categoriesContainer.sizeDelta = Vector2.one;
+        _categoriesContainer.ForceUpdateRect();
     }
 }

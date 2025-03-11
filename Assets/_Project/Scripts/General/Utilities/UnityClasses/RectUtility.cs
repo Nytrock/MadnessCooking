@@ -11,4 +11,8 @@ public static class RectUtility {
         Vector2 localMousePosition = rect.InverseTransformPoint(Input.mousePosition);
         return rect.rect.Contains(localMousePosition);
     }
+
+    public static void ForceUpdateRect(this RectTransform rect) {
+        rect.sizeDelta = Vector2.one;
+    }
 }
