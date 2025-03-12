@@ -7,13 +7,13 @@ public abstract class IngredientStorage : MonoBehaviour {
 
     [field: SerializeField] public IngredientStorageData Data { get; protected set; }
 
-    public event Action<BuyableItemCount<Ingredient>> IngredientAdded;
+    public event Action<IngredientCount> IngredientAdded;
     public event Action<Ingredient> IngredientRemoved;
 
-    public event Action<BuyableItemCount<Ingredient>> IngredientCountAdded;
-    public event Action<BuyableItemCount<Ingredient>> IngredientCountRemoved;
+    public event Action<IngredientCount> IngredientCountAdded;
+    public event Action<IngredientCount> IngredientCountRemoved;
 
-    public void PutIngredients(IEnumerable<BuyableItemCount<Ingredient>> puttingCountList) {
+    public void PutIngredients(IEnumerable<IngredientCount> puttingCountList) {
         foreach (var count in puttingCountList)
             PutIngredientWithRemain(count.Item, count.Count);
     }
@@ -23,7 +23,7 @@ public abstract class IngredientStorage : MonoBehaviour {
             return count;
 
         int remainCount = 0;
-        BuyableItemCount<Ingredient> puttingCount = new(ingredient, count);
+        IngredientCount puttingCount = new(ingredient, count);
 
         if (!Data.CanAddCount(count)) {
             remainCount = Data.NowSpace + count - Data.MaxSpace;
@@ -40,7 +40,7 @@ public abstract class IngredientStorage : MonoBehaviour {
         return remainCount;
     }
 
-    public virtual void RemoveIngredients(IEnumerable<BuyableItemCount<Ingredient>> ingredients) {
+    public virtual void RemoveIngredients(IEnumerable<IngredientCount> ingredients) {
         foreach (var count in ingredients)
             RemoveIngredient(count);
     }
@@ -49,11 +49,11 @@ public abstract class IngredientStorage : MonoBehaviour {
         if (count == 0)
             return;
 
-        BuyableItemCount<Ingredient> removingCount = new(ingredient, count);
+        IngredientCount removingCount = new(ingredient, count);
         RemoveIngredient(removingCount);
     }
 
-    public void RemoveIngredient(BuyableItemCount<Ingredient> removingCount) {
+    public void RemoveIngredient(IngredientCount removingCount) {
         IngredientCountRemoved?.Invoke(removingCount);
         Data.RemoveIngredient(removingCount);
 
@@ -61,11 +61,11 @@ public abstract class IngredientStorage : MonoBehaviour {
             IngredientRemoved?.Invoke(removingCount.Item);
     }
 
-    public bool HaveCount(BuyableItemCount<Ingredient> count) {
+    public bool HaveCount(IngredientCount count) {
         return Data.ContainsCount(count);
     }
 
-    protected void InvokeIngredientAdded(BuyableItemCount<Ingredient> count) {
+    protected void InvokeIngredientAdded(IngredientCount count) {
         IngredientAdded?.Invoke(count);
         IngredientCountAdded?.Invoke(count);
     }

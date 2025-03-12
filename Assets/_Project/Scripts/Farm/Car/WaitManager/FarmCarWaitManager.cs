@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -13,10 +14,12 @@ public class FarmCarWaitManager : MonoBehaviour, IBindable<FarmData> {
     [Header("Upgrades")]
     [SerializeField] private CoefficientUpgrade[] _speedUpgrades;
 
-    private CarWaitManagerData _data;
+    private FarmCarWaitManagerData _waitData;
     private const int SECONDS_IN_MINUTES = 60;
 
-    public float NowWaitTime => _data.NowWaitTime;
+    public float NowWaitTime => _waitData.NowWaitTime;
+    public CarState CarState => _waitData.CarState;
+    public IEnumerable<IngredientCount> IngredientsSended => _waitData.IngredientsSended;
 
     public event Action<CarState> StateChanged;
 
@@ -25,41 +28,41 @@ public class FarmCarWaitManager : MonoBehaviour, IBindable<FarmData> {
     }
 
     public void LateStart() {
-        if (_data.CarState != CarState.Calm)
+        if (_waitData.CarState != CarState.Calm)
             _car.InstantLeave();
-        StateChanged?.Invoke(_data.CarState);
+        StateChanged?.Invoke(_waitData.CarState);
     }
 
     private void Update() {
-        if (_data.CarState == CarState.Calm)
+        if (_waitData.CarState == CarState.Calm)
             return;
 
-        if (_data.NowWaitTime > 0) {
-            _data.UpdateTime();
+        if (_waitData.NowWaitTime > 0) {
+            _waitData.UpdateTime();
         } else {
-            if (_data.CarState == CarState.Returns)
+            if (_waitData.CarState == CarState.Returns)
                 Return();
             else
                 StartReturn();
-            StateChanged?.Invoke(_data.CarState);
+            StateChanged?.Invoke(_waitData.CarState);
         }
     }
 
     public void Send() {
-        _data.SetIngredientsSended(_car.Data.Ingredients);
-        _data.StartWait();
-        _car.Leave(_data.IngredientsSended);
-        StateChanged?.Invoke(_data.CarState);
+        _waitData.SetIngredientsSended(_car.Data.Ingredients);
+        _waitData.StartWait();
+        _car.Leave(_waitData.IngredientsSended);
+        StateChanged?.Invoke(_waitData.CarState);
     }
 
     private void StartReturn() {
-        _kitchenStorage.PutIngredients(_data.IngredientsSended);
-        _data.StartReturn();
+        _kitchenStorage.PutIngredients(_waitData.IngredientsSended);
+        _waitData.StartReturn();
         _notificationManager.CreateNotification(Location.Kitchen, _notificationsLifeTime);
     }
 
     private void Return() {
-        _data.StartCalm();
+        _waitData.StartCalm();
         _car.Return();
         _notificationManager.CreateNotification(Location.Farm, _notificationsLifeTime);
     }
@@ -67,12 +70,12 @@ public class FarmCarWaitManager : MonoBehaviour, IBindable<FarmData> {
     public void CheckSpeedChanged(BaseUpgrade upgrade) {
         if (_speedUpgrades.Contains(upgrade)) {
             var coefficientUpgrade = upgrade as CoefficientUpgrade;
-            _data.UpdateSpeed(coefficientUpgrade.Coefficient * SECONDS_IN_MINUTES);
+            _waitData.UpdateSpeed(coefficientUpgrade.Coefficient * SECONDS_IN_MINUTES);
         }
     }
 
     public void Bind(FarmData data) {
         data.CarWaitManager ??= new(_defaultWaitHours * SECONDS_IN_MINUTES);
-        _data = data.CarWaitManager;
+        _waitData = data.CarWaitManager;
     }
 }

@@ -11,7 +11,7 @@ public class Food : BuyableItem {
     [SerializeField, Min(0)] private float _timeToCook;
     [SerializeField, Min(0)] private float _timeToEat;
     [SerializeField, Min(0)] private int _moneyGet;
-    [SerializeField] private BuyableItemCountList<Ingredient> _ingredients;
+    [SerializeField] private IngredientCountList _ingredients;
     [SerializeField] private Color _color;
 
     protected override string _table => nameof(Food) + "Table";
@@ -25,7 +25,7 @@ public class Food : BuyableItem {
     public int MoneyGet => _moneyGet + SpicesPrice;
     public Color Color => _color;
 
-    public IEnumerable<BuyableItemCount<Ingredient>> Ingredients => _ingredients.GetItems();
+    public IEnumerable<IngredientCount> Ingredients => _ingredients.GetItems();
 
     public int SpicesPrice {
         get {

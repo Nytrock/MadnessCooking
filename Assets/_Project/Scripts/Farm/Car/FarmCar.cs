@@ -30,7 +30,7 @@ public class FarmCar : SaveableIngredientStorage<FarmData> {
             Data.UpdateMaxSpace(upgrade as CountUpgrade);
     }
 
-    public void Leave(IEnumerable<BuyableItemCount<Ingredient>> ingredientsToDelete) {
+    public void Leave(IEnumerable<IngredientCount> ingredientsToDelete) {
         RemoveIngredients(ingredientsToDelete);
         _animator.SetBool("isLeave", true);
         StateChanged?.Invoke(CarState.Sent);

@@ -40,7 +40,7 @@ public class FoodManagerData : BuyableItemManagerData<Food> {
     }
 
     private void UpdateFoodForOrderIndex() {
-        _foodForOrderIndex = (_foodForOrderIndex + 1) % ItemsCount;
+        _foodForOrderIndex = (_foodForOrderIndex + 1) % _nowFoodMenu.Count;
         if (_foodForOrderIndex == 0)
             _nowFoodMenu.Randomize();
     }

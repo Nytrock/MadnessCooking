@@ -1,19 +1,25 @@
 using TMPro;
 using UnityEngine;
 
-public class IngredientStorageButton : HoverItemNameActivator {
+public class IngredientCountButton : HoverItemNameActivator {
     [SerializeField] private TextMeshProUGUI _countText;
-    private BuyableItemCount<Ingredient> _countRenderer;
+    private IngredientCount _countRenderer;
 
-    public Ingredient Ingredient => _countRenderer.Item;
+    public IngredientCount IngredientCount => _countRenderer;
 
-    public void SetVisual(BuyableItemCount<Ingredient> count) {
+    public void SetVisual(IngredientCount count) {
         _icon.sprite = count.Item.Icon;
         _showingItem = count.Item;
         _countRenderer = count;
 
         UpdateCount(count.Count);
         _countRenderer.CountChanged += UpdateCount;
+    }
+
+    public void ResetVisual() {
+        _countRenderer.CountChanged -= UpdateCount;
+        _showingItem = null;
+        _countRenderer = null;
     }
 
     private void UpdateCount(int count) {

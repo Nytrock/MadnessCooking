@@ -5,6 +5,7 @@ public class HoverTextPanel : MonoBehaviour {
     [SerializeField] private RectTransform _panel;
     [SerializeField] private Vector2 _offset;
     [SerializeField] private LocalizedText _text;
+
     private bool _isHovered = false;
 
     private void Awake() {
@@ -26,10 +27,8 @@ public class HoverTextPanel : MonoBehaviour {
         _text.SetText(text);
         ChangeState(true);
 
-        float mousePosition = Input.mousePosition.x;
-        Direction panelDirection = Direction.Left;
-        if (mousePosition < Screen.width / 2)
-            panelDirection = Direction.Right;
+        bool isRight = Input.mousePosition.x < Screen.width / 2;
+        Direction panelDirection = isRight.ToDirection();
 
         LayoutRebuilder.ForceRebuildLayoutImmediate(_panel);
         _panel.localPosition = panelDirection.ToFloat() * (_offset + new Vector2(_panel.sizeDelta.x / 2, 0));

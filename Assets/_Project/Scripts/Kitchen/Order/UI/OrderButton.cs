@@ -50,7 +50,7 @@ public class OrderButton : MonoBehaviour {
         _recipe.SetHoverText(hoverText);
     }
 
-    private void UpdateRecipeIngredients(BuyableItemCount<Ingredient> count) {
+    private void UpdateRecipeIngredients(IngredientCount count) {
         if (CheckOrderStarted())
             return;
 

@@ -1,21 +1,20 @@
 using TMPro;
 using UnityEngine;
 
-public class FarmCarWaitUI : MonoBehaviour {
+public class FarmCarWaitRenderer : MonoBehaviour {
     [SerializeField] private FarmCarWaitManager _manager;
     [SerializeField] private LocalizedText _infoText;
     [SerializeField] private string _sentMessage;
     [SerializeField] private string _returnsMessage;
     [SerializeField] private TextMeshProUGUI _timeText;
-
-    private bool _isWait;
+    [SerializeField] private GameObject _showSendedItemsButton;
 
     private void Awake() {
         _manager.StateChanged += UpdateState;
     }
 
     private void UpdateState(CarState newState) {
-        _isWait = newState != CarState.Calm;
+        _showSendedItemsButton.SetActive(newState == CarState.Sent);
 
         if (newState == CarState.Sent)
             _infoText.SetText(_sentMessage);
@@ -24,8 +23,10 @@ public class FarmCarWaitUI : MonoBehaviour {
     }
 
     private void Update() {
-        if (_isWait)
-            UpdateText();
+        if (_manager.CarState == CarState.Calm)
+            return;
+
+        UpdateText();
     }
 
     private void UpdateText() {

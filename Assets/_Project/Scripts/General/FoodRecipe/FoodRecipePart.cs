@@ -13,7 +13,7 @@ public class FoodRecipePart : HoverItemNameActivator {
         _grayscaleIcon = _icon as GrayscaleImage;
     }
 
-    public virtual void Setup(BuyableItemCount<Ingredient> count, bool isAvailable) {
+    public virtual void Setup(IngredientCount count, bool isAvailable) {
         CheckGrayscaleIcon();
         gameObject.SetActive(true);
         _isAvailable = isAvailable;

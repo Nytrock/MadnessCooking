@@ -3,24 +3,23 @@ using System;
 using UnityEngine;
 
 [Serializable, JsonObject(MemberSerialization.OptIn)]
-public class BuyableItemCount<TItem>
-    where TItem : BuyableItem {
+public class IngredientCount {
 
-    [SerializeField, JsonProperty] private TItem _item;
+    [SerializeField, JsonProperty] private Ingredient _item;
     [SerializeField, Min(1), JsonProperty] private int _count;
 
-    public TItem Item => _item;
+    public Ingredient Item => _item;
     public int Count => _count;
 
     public event Action<int> CountChanged;
 
     [JsonConstructor]
-    public BuyableItemCount(TItem item, int count) {
+    public IngredientCount(Ingredient item, int count) {
         _item = item;
         _count = count;
     }
 
-    public BuyableItemCount(BuyableItemCount<TItem> buyableItemCount) {
+    public IngredientCount(IngredientCount buyableItemCount) {
         _item = buyableItemCount._item;
         _count = buyableItemCount._count;
     }

@@ -4,17 +4,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable, JsonObject(MemberSerialization.OptIn)]
-public class CarWaitManagerData {
-    [SerializeField, JsonProperty] private BuyableItemCountList<Ingredient> _ingredientsSended;
+public class FarmCarWaitManagerData {
+    [SerializeField, JsonProperty] private IngredientCountList _ingredientsSended;
     [SerializeField, JsonProperty] private CarState _carState;
     [SerializeField, JsonProperty] private float _nowWaitTime;
     [SerializeField, JsonProperty] private float _needWaitTime;
 
-    public IEnumerable<BuyableItemCount<Ingredient>> IngredientsSended => _ingredientsSended.GetItems();
+    public IEnumerable<IngredientCount> IngredientsSended => _ingredientsSended.GetItems();
     public CarState CarState => _carState;
     public float NowWaitTime => _nowWaitTime;
 
-    public CarWaitManagerData(float defaultWaitTime) {
+    public FarmCarWaitManagerData(float defaultWaitTime) {
         _needWaitTime = defaultWaitTime;
         _carState = CarState.Calm;
         _ingredientsSended = new();
@@ -36,7 +36,7 @@ public class CarWaitManagerData {
         _carState = CarState.Sent;
     }
 
-    public void SetIngredientsSended(IEnumerable<BuyableItemCount<Ingredient>> ingredients) {
+    public void SetIngredientsSended(IEnumerable<IngredientCount> ingredients) {
         _ingredientsSended.Clear();
 
         foreach (var ingredient in ingredients)

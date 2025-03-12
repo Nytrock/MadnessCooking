@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class FarmCarUI : IngredientStorageUI<FarmData> {
+public class FarmCarUI : IngredientStorageUI {
     [SerializeField] private FarmCarWaitManager _waitManager;
     [SerializeField] private Button _sendButton;
 

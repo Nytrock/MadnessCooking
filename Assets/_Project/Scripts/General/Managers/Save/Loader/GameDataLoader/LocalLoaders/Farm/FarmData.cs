@@ -14,6 +14,6 @@ public class FarmData : ISaveable {
     public NeedHoldAddData FlourMill { get; set; }
     public ChickensData Chickens { get; set; }
     public IngredientStorageData Car { get; set; }
-    public CarWaitManagerData CarWaitManager { get; set; }
+    public FarmCarWaitManagerData CarWaitManager { get; set; }
     public CameraManagerData CameraManager { get; set; }
 }

@@ -3,7 +3,7 @@ using UnityEngine;
 public abstract class SaveableIngredientStorage<TData> : IngredientStorage, IBindable<TData>
     where TData : ISaveable {
 
-    [SerializeField] protected BuyableItemCountList<Ingredient> _defaultIngredients;
+    [SerializeField] protected IngredientCountList _defaultIngredients;
 
     public void LateStart() {
         Data.SetMaxSpace(_defaultMaxSpace);

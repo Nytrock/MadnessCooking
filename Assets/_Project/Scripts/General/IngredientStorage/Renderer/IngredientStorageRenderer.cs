@@ -8,7 +8,7 @@ public abstract class IngredientStorageRenderer : MonoBehaviour {
     [SerializeField] protected IngredientRenderer[] _ingredientsRenderers;
 
     protected List<IngredientRenderer> _availableIngredientRenderers;
-    private readonly BuyableItemCountList<Ingredient> _ingredients = new();
+    private readonly IngredientCountList _ingredients = new();
 
     private void Awake() {
         _ingredientStorage.IngredientCountAdded += CheckAddedIngredient;
@@ -19,7 +19,7 @@ public abstract class IngredientStorageRenderer : MonoBehaviour {
             renderer.Setup();
     }
 
-    private void CheckRemovedIngredient(BuyableItemCount<Ingredient> removedCount) {
+    private void CheckRemovedIngredient(IngredientCount removedCount) {
         _ingredients.Remove(removedCount);
         int removedRenderersCount = removedCount.Count / _needCount;
 
@@ -37,7 +37,7 @@ public abstract class IngredientStorageRenderer : MonoBehaviour {
         }
     }
 
-    private void CheckAddedIngredient(BuyableItemCount<Ingredient> addedCount) {
+    private void CheckAddedIngredient(IngredientCount addedCount) {
         _ingredients.Add(new(addedCount));
         int nowCount = _ingredients.GetItemCount(addedCount.Item);
         int addedRenderersCount = nowCount / _needCount;

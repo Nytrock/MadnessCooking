@@ -3,19 +3,17 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class IngredientStorageUI<TData> : MonoBehaviour, IActivable
-    where TData : ISaveable {
-
-    [SerializeField] protected SaveableIngredientStorage<TData> _storage;
+public class IngredientStorageUI : MonoBehaviour, IActivable {
+    [SerializeField] protected IngredientStorage _storage;
     [SerializeField] protected GameObject _panel;
-    [SerializeField] protected IngredientStorageButtonPool _buttonPool;
+    [SerializeField] protected IngredientCountButtonPool _buttonPool;
     [SerializeField] private TextMeshProUGUI _sizeText;
-    protected List<IngredientStorageButton> _buttons = new();
+    protected List<IngredientCountButton> _buttons = new();
 
     public event Action<bool> StateChanged;
 
     protected virtual void Awake() {
-        _storage.IngredientAdded += AddIngredient;
+        _storage.IngredientAdded += AddIngredientCount;
         _storage.IngredientRemoved += RemoveIngredient;
     }
 
@@ -23,25 +21,27 @@ public class IngredientStorageUI<TData> : MonoBehaviour, IActivable
         _panel.SetActive(false);
     }
 
-    protected virtual void Update() {
-        UpdateSizeRenderer();
-    }
-
     public void ChangeState(bool newState) {
         _panel.SetActive(newState);
         StateChanged?.Invoke(newState);
     }
 
-    private void AddIngredient(BuyableItemCount<Ingredient> count) {
-        IngredientStorageButton button = _buttonPool.GetObject(count);
+    private void AddIngredientCount(IngredientCount count) {
+        IngredientCountButton button = _buttonPool.GetObject(count);
+        button.IngredientCount.CountChanged += delegate { UpdateSizeRenderer(); };
         _buttons.Add(button);
+    }
+
+    private void RemoveIngredientCount(IngredientCountButton button) {
+        button.IngredientCount.CountChanged -= delegate { UpdateSizeRenderer(); };
+        _buttons.Remove(button);
+        _buttonPool.PutObject(button);
     }
 
     private void RemoveIngredient(Ingredient ingredient) {
         foreach (var button in _buttons) {
-            if (button.Ingredient == ingredient) {
-                _buttons.Remove(button);
-                _buttonPool.PutObject(button);
+            if (button.IngredientCount.Item == ingredient) {
+                RemoveIngredientCount(button);
                 break;
             }
         }

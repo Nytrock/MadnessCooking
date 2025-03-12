@@ -3,17 +3,17 @@ using UnityEngine;
 public class OrderRecipePart : FoodRecipePart {
     [SerializeField] private TextAvailableRenderer _countTextRenderer;
     [SerializeField] private Sprite _moneySprite;
-    private BuyableItemCount<Ingredient> _ingredientCount;
+    private IngredientCount _ingredientCount;
 
-    public BuyableItemCount<Ingredient> IngredientCount => _ingredientCount;
+    public IngredientCount IngredientCount => _ingredientCount;
 
-    public override void Setup(BuyableItemCount<Ingredient> count, bool isAvailable) {
+    public override void Setup(IngredientCount count, bool isAvailable) {
         base.Setup(count, isAvailable);
         _countTextRenderer.UpdateAvailable(isAvailable);
         _ingredientCount = count;
     }
 
-    public void SetupAutoSpice(BuyableItemCount<Ingredient> ingredientCount) {
+    public void SetupAutoSpice(IngredientCount ingredientCount) {
         gameObject.SetActive(true);
         _ingredientCount = ingredientCount;
         _showingItem = ConstIngredients.Instance.Money;

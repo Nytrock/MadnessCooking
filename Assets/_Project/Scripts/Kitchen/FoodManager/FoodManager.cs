@@ -4,7 +4,7 @@ using UnityEngine;
 public class FoodManager : SaveableItemManager<Food, KitchenData> {
     [SerializeField] private CafeStateChanger _cafeOpener;
 
-    [SerializeField] private FoodManagerData _foodData;
+    private FoodManagerData _foodData;
 
     public int FoodCountWithoutDefault => Mathf.Max(0, AvailableItemsCount - _defaultItems.Count);
 
