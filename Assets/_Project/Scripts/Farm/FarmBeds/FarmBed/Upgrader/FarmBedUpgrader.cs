@@ -10,7 +10,7 @@ public class FarmBedUpgrader : MonoBehaviour {
     [SerializeField] private FarmBedUpgrade[] _pestsRemove;
     [SerializeField] private FarmBedUpgrade _autoCollect;
 
-    [SerializeField] private List<FarmBedUpgrade> _availableUpgrades = new();
+    private readonly List<FarmBedUpgrade> _availableUpgrades = new();
     private FarmBedData _bedData;
 
     public void AddUpgrade(FarmBedUpgrade upgrade) {

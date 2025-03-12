@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class DesertBedWater : StandardBedWater {
+public class DesertBedWater : BedHolderBooster {
     [SerializeField, Min(0)] private float _boostFine;
     private float _originalBoost;
 

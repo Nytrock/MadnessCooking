@@ -30,7 +30,7 @@ public class FarmBedUIManager : MonoBehaviour, IActivable {
         StateChanged?.Invoke(newState);
 
         if (!newState)
-            ResetFarmBed();
+            ResetNowUI();
     }
 
     private void CheckWater() {
@@ -55,10 +55,7 @@ public class FarmBedUIManager : MonoBehaviour, IActivable {
             _tutorialManager.NextTutorialPart();
 
         if (_nowUI != null) {
-            if (_farmBed != null) {
-                _farmBed.CountChanged -= _nowUI.UpdateCount;
-                UpdateSideButtons();
-            }
+            ResetNowUI();
             _activatorsManager.CloseNowActivable();
         }
 
@@ -72,10 +69,13 @@ public class FarmBedUIManager : MonoBehaviour, IActivable {
         UpdateSideButtons();
     }
 
-    private void ResetFarmBed() {
+    private void ResetNowUI() {
+        _nowUI = null;
+        if (_farmBed == null)
+            return;
+
         _farmBed.CountChanged -= _nowUI.UpdateCount;
         _farmBed = null;
-        _nowUI = null;
     }
 
     private BedTypeUI FindUI(BedType bedType) {
@@ -87,8 +87,8 @@ public class FarmBedUIManager : MonoBehaviour, IActivable {
         return null;
     }
 
-    public void ActivateIngredientChoice(FarmBed groundBed) {
-        _ingredientChoice.ActivateIngredientChoice(groundBed);
+    public void ActivateIngredientChoice(FarmBed farmBed) {
+        _ingredientChoice.ActivateIngredientChoice(farmBed);
     }
 
     public void CollectIngredients() {

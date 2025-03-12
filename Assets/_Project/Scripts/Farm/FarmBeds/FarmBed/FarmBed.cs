@@ -3,22 +3,22 @@ using UnityEngine;
 
 [RequireComponent(typeof(FarmBedUpgrader))]
 public class FarmBed : MonoBehaviour {
+    [SerializeField] private GameObject _autoCollector;
+
     [Header("Upgrades")]
     [SerializeField] private FarmBedGrowSlider _growStatusSlider;
 
-    [field: SerializeField] public FarmBedData Data { get; private set; }
+    public FarmBedData Data { get; private set; }
     private FarmUpgradeData _upgradeData;
     private FarmBedManagerData _managerData;
 
     private WheatManager _wheatManager;
-    private Ingredient _wheat;
+    private FarmBedUIManager _UI;
     private FarmCar _car;
     private Puncher _puncher;
 
     private BedTypeHolder _bedHolder;
     private FarmBedUpgrader _upgrader;
-    private FarmBedUIManager _UI;
-    private float _growTime;
 
     public PestsGenerator PestsGenerator => _bedHolder.PestsGenerator;
 
@@ -39,7 +39,7 @@ public class FarmBed : MonoBehaviour {
     }
 
     private void LateStart() {
-        UpdateUpgrades();
+        UpdateGlobalUpgrades();
     }
 
     private void Update() {
@@ -47,7 +47,7 @@ public class FarmBed : MonoBehaviour {
             return;
 
         Data.UpdateTime();
-        if (Data.NowTime > _growTime) {
+        if (Data.NowTime > Data.PlantedIngredient.TimeGrow) {
             Data.AddIngredient();
             if (Data.IsAutoCollect) {
                 CollectIngredients();
@@ -64,8 +64,9 @@ public class FarmBed : MonoBehaviour {
 
     public void ResetIngredient() {
         Data.ResetIngredient();
+        PestsGenerator.ChangeState(false);
         _bedHolder.StopAnimation();
-        UpdateUpgrades();
+        UpdateGlobalUpgrades();
     }
 
     public void SetBedType(BedTypeHolder bedType) {
@@ -95,25 +96,23 @@ public class FarmBed : MonoBehaviour {
         _car = settings.Car;
         _puncher = settings.Puncher;
         _wheatManager = settings.WheatManager;
-        _wheat = ConstIngredients.Instance.Wheat;
     }
 
     public void SetIngredient(Ingredient ingredient) {
         Data.SetIngredient(ingredient);
         _bedHolder.SetIngredient();
 
-        _growTime = ingredient.TimeGrow;
-        _growStatusSlider.SetMaxValue(_growTime);
+        _growStatusSlider.SetMaxValue(ingredient.TimeGrow);
         _growStatusSlider.SetValue(0);
 
-        UpdateUpgrades();
+        UpdateGlobalUpgrades();
     }
 
     public void CollectIngredients() {
         if (Data.Count == 0)
             return;
 
-        if (Data.PlantedIngredient == _wheat) {
+        if (Data.PlantedIngredient == ConstIngredients.Instance.Wheat) {
             _wheatManager.AddWheat(Data.Count);
             _managerData.AddToPlantCount(Data.Count);
             Data.SetCount(0);
@@ -137,19 +136,11 @@ public class FarmBed : MonoBehaviour {
 
     private void UnfullBed() {
         CountChanged?.Invoke();
-        if (Data.IsFull) {
-            Data.Unfull();
-            _bedHolder.UpdateAnimation();
-        }
-    }
+        if (!Data.IsFull)
+            return;
 
-    public void UpdateEternalWater() {
-        _bedHolder.UpdateEternalWater();
-        _UI.UpdateSideButtons();
-
-        BedHolderBoosterData waterData = Data.WaterBoost;
-        if (waterData.IsEternal && !waterData.IsBoosting)
-            BedWatered?.Invoke();
+        Data.Unfull();
+        _bedHolder.UpdateAnimation();
     }
 
     public void Water() {
@@ -157,21 +148,12 @@ public class FarmBed : MonoBehaviour {
         BedWatered?.Invoke();
     }
 
-    public void UpdateEternalFertilize() {
-        _bedHolder.UpdateEternalFertilize();
-        _UI.UpdateSideButtons();
-
-        BedHolderBoosterData fertilizeData = Data.FertilizeBoost;
-        if (fertilizeData.IsEternal && !fertilizeData.IsBoosting)
-            BedFertilized?.Invoke();
-    }
-
     public void Fertilize() {
         _bedHolder.Fertilize();
         BedFertilized?.Invoke();
     }
 
-    public void UpdateUpgrades() {
+    public void UpdateGlobalUpgrades() {
         _growStatusSlider.ChangeState(_upgradeData.IsGrowStatusShow && Data.PlantedIngredient != null);
     }
 
@@ -179,24 +161,31 @@ public class FarmBed : MonoBehaviour {
 
     private void DisableUpgrades() {
         _upgrader.DisableUpgrades();
-        UpdateEternalWater();
-        UpdateEternalFertilize();
+        _bedHolder.UpdateUpgrades();
+
+        _autoCollector.SetActive(false);
     }
 
     public void AddUpgrade(FarmBedUpgrade upgrade) {
         _upgrader.AddUpgrade(upgrade);
-        UpdateEternalWater();
-        UpdateEternalFertilize();
+        _bedHolder.UpdateUpgrades();
+
+        if (Data.IsAutoCollect)
+            ActivateAutoCollect();
 
         if (Data.PestsGenerator.IsPestsRemoved)
             RemovePests();
-        if (Data.IsAutoCollect)
-            CollectIngredients();
+
+        _UI.UpdateSideButtons();
+    }
+
+    private void ActivateAutoCollect() {
+        _autoCollector.SetActive(true);
+        CollectIngredients();
     }
 
     private void RemovePests() {
-        _UI.UpdateSideButtons();
-        PestsGenerator.CleanPests();
+        PestsGenerator.RemovePests();
     }
 
     public void Bind(FarmData data, FarmBedData bedData, BedTypeHolder holder) {

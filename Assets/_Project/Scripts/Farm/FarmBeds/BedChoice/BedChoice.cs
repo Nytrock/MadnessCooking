@@ -61,7 +61,7 @@ public class BedChoice : MonoBehaviour {
     }
 
     public void UpdateUpgrades() {
-        _farmBed.UpdateUpgrades();
+        _farmBed.UpdateGlobalUpgrades();
     }
 
     private BedTypeHolder FindBedTypeHolder(BedType bedType) {

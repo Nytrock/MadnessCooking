@@ -6,34 +6,26 @@ public class BedTypeHolder : MonoBehaviour {
     [SerializeField] private BedType _type;
     [SerializeField] private PestsGenerator _pestsGenerator;
     [SerializeField] private FarmBed _farmBed;
-    private FarmBedData _bedData;
+    [SerializeField] private BedHolderBooster _water;
+    [SerializeField] private BedHolderBooster _fertilize;
+    [SerializeField] private GameObject _intependentBooster;
 
+    private FarmBedData _bedData;
     private Animator _animator;
     private string _name;
     private float _animationSpeed;
-
-    private StandardBedWater _water;
-    private StandardBedFertilize _fertilize;
 
     public BedType Type => _type;
     public PestsGenerator PestsGenerator => _pestsGenerator;
 
     private void Awake() {
         _animator = GetComponent<Animator>();
-        CheckBoosts();
 
         if (_water != null)
             _water.BoostEnded += UpdateAnimationSpeed;
         if (_fertilize != null)
             _fertilize.BoostEnded += UpdateAnimationSpeed;
         _pestsGenerator.PestsChanged += UpdateAnimationSpeed;
-    }
-
-    private void CheckBoosts() {
-        if (_water == null)
-            TryGetComponent(out _water);
-        if (_fertilize == null)
-            TryGetComponent(out _fertilize);
     }
 
     private void Update() {
@@ -85,35 +77,40 @@ public class BedTypeHolder : MonoBehaviour {
     }
 
     public void Water() {
-        if (_water == null)
-            return;
-
-        _water.StartBoost();
-        UpdateAnimationSpeed();
-    }
-
-    public void UpdateEternalWater() {
-        if (_water == null)
-            return;
-
-        _water.UpdateEternal();
-        UpdateAnimationSpeed();
+        StartBoost(_water);
     }
 
     public void Fertilize() {
-        if (_fertilize == null)
+        StartBoost(_fertilize);
+    }
+
+    private void StartBoost(BedHolderBooster booster) {
+        if (booster == null)
             return;
 
-        _fertilize.StartBoost();
+        booster.StartBoost();
         UpdateAnimationSpeed();
     }
 
-    public void UpdateEternalFertilize() {
-        if (_fertilize == null)
+    public void UpdateUpgrades() {
+        UpdateEternalStatusOnBooster(_water);
+        UpdateEternalStatusOnBooster(_fertilize);
+        UpdateIntependentBooster();
+        UpdateAnimationSpeed();
+    }
+
+    private void UpdateIntependentBooster() {
+        if (_intependentBooster == null)
             return;
 
-        _fertilize.UpdateEternal();
-        UpdateAnimationSpeed();
+        _intependentBooster.SetActive(_bedData.IndependentBoost != 1);
+    }
+
+    public void UpdateEternalStatusOnBooster(BedHolderBooster booster) {
+        if (booster == null)
+            return;
+
+        booster.UpdateEternal();
     }
 
     public void UpdateAnimationSpeed() {
@@ -122,7 +119,6 @@ public class BedTypeHolder : MonoBehaviour {
 
     public void Bind(FarmBedData bedData) {
         _bedData = bedData;
-        CheckBoosts();
 
         if (_water != null)
             _water.Bind(_bedData.WaterBoost);

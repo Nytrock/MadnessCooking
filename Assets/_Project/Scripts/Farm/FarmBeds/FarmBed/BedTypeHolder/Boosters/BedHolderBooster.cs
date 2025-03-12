@@ -1,8 +1,9 @@
 using System;
 using UnityEngine;
 
-public abstract class BedHolderBooster : MonoBehaviour {
+public class BedHolderBooster : MonoBehaviour {
     [SerializeField] private SpriteRenderer _boostSprite;
+    [SerializeField] private GameObject _eternalSprite;
     [SerializeField] protected float _boostMultiplier;
     [SerializeField] protected float _boostLength;
     [SerializeField] protected float _spriteShowLength;
@@ -51,6 +52,7 @@ public abstract class BedHolderBooster : MonoBehaviour {
     }
 
     public void UpdateEternal() {
+        _eternalSprite.SetActive(_data.IsEternal);
         if (_data.IsEternal && !_data.IsBoosting)
             StartBoost();
         else if (_data.IsBoosting && !_data.IsEternal)

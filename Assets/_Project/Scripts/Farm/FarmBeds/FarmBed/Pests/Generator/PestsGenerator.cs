@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PestsGenerator : MonoBehaviour {
-    [SerializeField, Min(1)] private int _maxPests;
     [SerializeField] private PestsPool _pool;
+    [SerializeField] private GameObject _pestRemover;
+    [SerializeField, Min(1)] private int _maxPests;
     [SerializeField, Min(0)] private float _onePestSlowdown;
     [SerializeField] private RangeFloat _spawnTime;
     private PestsGeneratorData _data;
@@ -52,10 +53,19 @@ public class PestsGenerator : MonoBehaviour {
 
     public void ChangeState(bool newState) {
         _data.ChangeMode(newState);
-        if (!newState)
-            CleanPests();
-        else
+
+        if (newState) {
             _data.SetNewTime(_spawnTime.RandomValue);
+            return;
+        }
+
+        CleanPests();
+        _pestRemover.SetActive(false);
+    }
+
+    public void RemovePests() {
+        CleanPests();
+        _pestRemover.SetActive(true);
     }
 
     public void CleanPests() {
