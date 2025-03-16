@@ -1,7 +1,8 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class SceneManager : MonoBehaviour {
+public class ScenesManager : MonoBehaviour {
     [SerializeField] private GameObject _loadingScreen;
     [SerializeField] private AudioSource _music;
 
@@ -23,17 +24,17 @@ public class SceneManager : MonoBehaviour {
     private IEnumerator LoadScene(int sceneId) {
         _loadingScreen.SetActive(true);
         _music.Stop();
-        AsyncOperation asyncLoad = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(sceneId);
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneId);
 
         while (!asyncLoad.isDone)
             yield return null;
     }
 
     public static bool IsMenu() {
-        return UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex == MENU_ID;
+        return SceneManager.GetActiveScene().buildIndex == MENU_ID;
     }
 
     public static bool IsGame() {
-        return UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex == GAME_ID;
+        return SceneManager.GetActiveScene().buildIndex == GAME_ID;
     }
 }

@@ -10,7 +10,7 @@ public class BuyableItemManagerData<TItem>
 
     [SerializeField, JsonProperty] protected List<TItem> _availableItems = new();
 
-    public IEnumerable<TItem> AvailableItems => _availableItems;
+    public IEnumerable<TItem> AvailableItems => _availableItems.Distinct();
     public int ItemsCount => _availableItems.Count;
 
     public virtual void AddItem(TItem item) {

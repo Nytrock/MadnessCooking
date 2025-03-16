@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class FoodManager : SaveableItemManager<Food, KitchenData> {
@@ -7,6 +8,7 @@ public class FoodManager : SaveableItemManager<Food, KitchenData> {
     private FoodManagerData _foodData;
 
     public int FoodCountWithoutDefault => Mathf.Max(0, AvailableItemsCount - _defaultItems.Count);
+    public IEnumerable<MenuFood> FoodMenu => _foodData.FoodMenu;
 
     public event Action<MenuFood> MenuFoodAdded;
 
@@ -33,6 +35,7 @@ public class FoodManager : SaveableItemManager<Food, KitchenData> {
 
     private void AddMenuFood(Food item) {
         MenuFood menuFood = _foodData.CreateMenuFood(item);
+        menuFood.BanishedStateChanged += delegate { _foodData.CheckMenuSize(menuFood); };
         MenuFoodAdded?.Invoke(menuFood);
     }
 
@@ -47,7 +50,7 @@ public class FoodManager : SaveableItemManager<Food, KitchenData> {
             return;
 
         foreach (var food in _data.AvailableItems)
-            AddMenuFood(food);
+            _foodData.CreateMenuFood(food);
         _foodData.GenerateNowFoodMenu();
     }
 

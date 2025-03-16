@@ -11,6 +11,7 @@ public class FoodManagerData : BuyableItemManagerData<Food> {
     [SerializeField, JsonProperty] private List<int> _nowFoodMenu;
 
     public int FoodMenuLength => _foodMenu.Count;
+    public IEnumerable<MenuFood> FoodMenu => _foodMenu;
 
     public FoodManagerData() {
         _nowFoodMenu = new();
@@ -48,5 +49,15 @@ public class FoodManagerData : BuyableItemManagerData<Food> {
     public void UpdateNowFoodMenu() {
         _foodForOrderIndex = 0;
         GenerateNowFoodMenu();
+    }
+
+    public void CheckMenuSize(MenuFood lastChangedMenuFood) {
+        int foodMenuSize = _foodMenu
+            .Where(foodMenu => !foodMenu.IsBanished)
+            .Count();
+        if (foodMenuSize > 0)
+            return;
+
+        lastChangedMenuFood.ChangeBanishedState();
     }
 }
