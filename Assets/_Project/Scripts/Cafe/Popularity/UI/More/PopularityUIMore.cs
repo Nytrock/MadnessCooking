@@ -20,10 +20,10 @@ public class PopularityUIMore : MonoBehaviour {
 
     public void UpdateInfo(PopularityLevel level) {
         _descriptionText.SetText(level.Description);
-        _singleChanceText.text = (level.SingleChance / 10.0).ToString() + "%";
-        _doubleChanceText.text = (level.DoubleChance / 10.0).ToString() + "%";
-        _tripleChanceText.text = (level.TripleChance / 10.0).ToString() + "%";
-        _quarterChanceText.text = (level.QuarterChance / 10.0).ToString() + "%";
+        _singleChanceText.text = level.SingleChance.ToString() + "%";
+        _doubleChanceText.text = level.DoubleChance.ToString() + "%";
+        _tripleChanceText.text = level.TripleChance.ToString() + "%";
+        _quarterChanceText.text = level.QuarterChance.ToString() + "%";
     }
 
     public void ChangeCriticWaitText(bool newState) {

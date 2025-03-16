@@ -9,6 +9,8 @@ public class MenuFood {
     public Food Food => _food;
     public bool IsBanished => _isBanished;
 
+    public event Action BanishedStateChanged;
+
     public MenuFood(Food food) {
         _food = food;
         _isBanished = false;
@@ -16,5 +18,6 @@ public class MenuFood {
 
     public void ChangeBanishedState() {
         _isBanished = !_isBanished;
+        BanishedStateChanged?.Invoke();
     }
 }

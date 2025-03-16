@@ -9,7 +9,7 @@ public class BedTypeUIPestsButton : MonoBehaviour {
     private Button _button;
 
     public void UpdateState(PestsGeneratorData data) {
-        _button.interactable = data.IsPestsRemoved;
+        _button.interactable = !data.IsPestsRemoved;
 
         if (data.IsPestsInstant && !data.IsPestsRemoved)
             _button.image.sprite = _instantPestsIcon;

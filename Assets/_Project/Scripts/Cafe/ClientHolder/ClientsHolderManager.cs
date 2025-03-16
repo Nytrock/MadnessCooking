@@ -6,7 +6,7 @@ public class ClientsHolderManager : MonoBehaviour, IBindable<CafeData> {
     [SerializeField] private SpotEditor _spotEditor;
     [SerializeField] private CafeStateChanger _cafeOpener;
 
-    [SerializeField] private List<ClientsHolder> _holders = new();
+    private readonly List<ClientsHolder> _holders = new();
     private readonly List<List<int>> _freeHolders = new();
     private ClientHolderManagerData _data;
 
@@ -28,13 +28,15 @@ public class ClientsHolderManager : MonoBehaviour, IBindable<CafeData> {
         _holders.Add(clientsHolder);
         _cafeOpener.CafeChanged += clientsHolder.CafeStateChanged;
 
-        if (!isAddedByEditor)
+        if (!isAddedByEditor) {
+            int holderIndex = _holders.Count - 1;
+            clientsHolder.SetData(_data.GetClientHolder(holderIndex));
             return;
+        }
 
         ClientHolderData newData = new(spot.SeatsCount);
         _data.AddClientHolder(newData);
         clientsHolder.SetData(newData);
-
     }
 
     private void RemoveClientsHolder(CafeSpot spot) {
@@ -44,6 +46,8 @@ public class ClientsHolderManager : MonoBehaviour, IBindable<CafeData> {
         _cafeOpener.CafeChanged -= clientsHolder.CafeStateChanged;
         _data.RemoveClientHolderAt(clientsHolder.Index);
         _holders.Remove(clientsHolder);
+
+        UpdateIndexes();
     }
 
     public void GenerateFreeHoldersList() {
@@ -56,8 +60,8 @@ public class ClientsHolderManager : MonoBehaviour, IBindable<CafeData> {
             _freeHolders[_holders[i].ClientsCount - 1].Add(i);
     }
 
-    public ClientsHolder TakeRandomHolder(ClientCount clientType) {
-        int needSeat = clientType switch {
+    public ClientsHolder TakeRandomHolder(ClientCount clientCount) {
+        int needSeat = clientCount switch {
             ClientCount.One => 0,
             ClientCount.Two => 1,
             ClientCount.Three => 2,

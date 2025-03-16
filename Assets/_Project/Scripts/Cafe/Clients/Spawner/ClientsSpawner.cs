@@ -17,7 +17,7 @@ public class ClientsSpawner : MonoBehaviour, IBindable<CafeData>, ITutorialPart 
     [SerializeField] private RangeFloat _spawnTime;
     [SerializeField] private float _noClientsMultiplier;
 
-    private ClientsSpawnerData _data;
+    [SerializeField] private ClientsSpawnerData _data;
     private CriticSpawnerData _criticData;
     private ClientHolderManagerData _clientHolderData;
     private PopularityXpAdder _xpAdder;
@@ -74,9 +74,6 @@ public class ClientsSpawner : MonoBehaviour, IBindable<CafeData>, ITutorialPart 
     private void GenerateClientsFromData() {
         int holderIndex = 0;
         foreach (var clientsHolderData in _clientHolderData.ClientHolders) {
-            ClientsHolder clientsHolder = _clientsHolderManager.TakeHolder(holderIndex);
-            clientsHolder.SetData(clientsHolderData);
-
             if (!clientsHolderData.HaveClients) {
                 holderIndex++;
                 continue;
@@ -88,6 +85,7 @@ public class ClientsSpawner : MonoBehaviour, IBindable<CafeData>, ITutorialPart 
                 continue;
             }
 
+            ClientsHolder clientsHolder = _clientsHolderManager.TakeHolder(holderIndex);
             SpawnGroupOfClients(clientsHolder);
 
             if (clientsHolderData.GroupState == GroupClientState.Wait)

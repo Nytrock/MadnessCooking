@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PestsGenerator : MonoBehaviour {
     [SerializeField] private PestsPool _pool;
-    [SerializeField] private GameObject _pestRemover;
+    [SerializeField] private VisualChanger _pestRemover;
     [SerializeField, Min(1)] private int _maxPests;
     [SerializeField, Min(0)] private float _onePestSlowdown;
     [SerializeField] private RangeFloat _spawnTime;
@@ -60,12 +60,12 @@ public class PestsGenerator : MonoBehaviour {
         }
 
         CleanPests();
-        _pestRemover.SetActive(false);
+        _pestRemover.ChangeState(false);
     }
 
     public void RemovePests() {
         CleanPests();
-        _pestRemover.SetActive(true);
+        _pestRemover.ChangeState(true);
     }
 
     public void CleanPests() {

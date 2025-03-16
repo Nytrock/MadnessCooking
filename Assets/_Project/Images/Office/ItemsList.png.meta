@@ -1,7 +1,10 @@
 fileFormatVersion: 2
-guid: 8ffae2e5fe3e4b040a81a8e2d469eed3
+guid: 063bc7cacdc7cc442bb1832de4577ddc
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: 7834222349239600412
+    second: ItemsList_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -149,123 +152,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: RightSeat
+      name: ItemsListIcon
       rect:
         serializedVersion: 2
         x: 0
-        y: 31
-        width: 21
-        height: 28
-      alignment: 9
-      pivot: {x: 0.64285713, y: -0.071428575}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f73328f5024f2a344bd3c1425ac456ee
-      internalID: 989870722
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: RightArmset
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 14
-        width: 17
-        height: 16
-      alignment: 9
-      pivot: {x: 0.7941176, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 633a23313cef0ad469d32c2c5e20ef1b
-      internalID: -632635290
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: CenterSeat
-      rect:
-        serializedVersion: 2
-        x: 22
-        y: 32
-        width: 18
-        height: 27
-      alignment: 9
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 991d34b712ce0be4f9965742c1568a8a
-      internalID: 1370362515
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: LeftSeat
-      rect:
-        serializedVersion: 2
-        x: 44
-        y: 31
-        width: 17
-        height: 28
-      alignment: 9
-      pivot: {x: 0.29411766, y: -0.071428575}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ff1a6e6342140f049bb2683080775afb
-      internalID: -406976478
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: LeftArmset
-      rect:
-        serializedVersion: 2
-        x: 42
         y: 0
-        width: 19
-        height: 30
-      alignment: 9
-      pivot: {x: 0.36842105, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e722549b2b928a1468f7db386c0f3047
-      internalID: 455003548
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: LeftSeatShadow
-      rect:
-        serializedVersion: 2
-        x: 18
-        y: 22
-        width: 20
-        height: 8
+        width: 12
+        height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -274,52 +167,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 70ac46b43c9cfbb4da71335aa16fd0e9
-      internalID: 1112723979
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: CenterSeatShadow
-      rect:
-        serializedVersion: 2
-        x: 18
-        y: 13
-        width: 18
-        height: 7
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4762002019ead064fb2870d6d76d3d05
-      internalID: -524572917
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: RigthSeatShadow
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 6
-        width: 22
-        height: 6
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: baeb936158de1234c8272fc91cfb93bb
-      internalID: 424542615
+      spriteID: ef186206490cf4942adb216c67e0cc56
+      internalID: 2038314558
       vertices: []
       indices: 
       edges: []
@@ -338,18 +187,11 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Background: 711553620
-      CenterSeat: 1370362515
-      CenterSeatShadow: -524572917
-      Lamp: -1958543523
-      LeftArmset: 455003548
-      LeftSeat: -406976478
-      LeftSeatShadow: 1112723979
-      Pot: -465523258
-      RightArmset: -632635290
-      RightSeat: 989870722
-      RigthSeatShadow: 424542615
-      Window: -987738571
+      Background: 1901407923
+      ItemsListIcon: 2038314558
+      Lamp: 1955946697
+      Pot: 470648381
+      Window: -805373322
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

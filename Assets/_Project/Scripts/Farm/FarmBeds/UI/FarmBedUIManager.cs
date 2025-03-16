@@ -70,11 +70,13 @@ public class FarmBedUIManager : MonoBehaviour, IActivable {
     }
 
     private void ResetNowUI() {
-        _nowUI = null;
-        if (_farmBed == null)
+        if (_farmBed == null) {
+            _nowUI = null;
             return;
+        }
 
         _farmBed.CountChanged -= _nowUI.UpdateCount;
+        _nowUI = null;
         _farmBed = null;
     }
 

@@ -9,6 +9,12 @@ public class CafeMenuManager : MonoBehaviour {
 
     private void Awake() {
         _foodManager.MenuFoodAdded += AddMenuFood;
+        _binder.AfterLateStart += GenerateFoodMenu;
+    }
+
+    private void GenerateFoodMenu() {
+        foreach (var menuFood in _foodManager.FoodMenu)
+            AddMenuFood(menuFood);
     }
 
     private void AddMenuFood(MenuFood menuFood) {
