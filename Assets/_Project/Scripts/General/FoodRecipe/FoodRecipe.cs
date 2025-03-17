@@ -1,9 +1,8 @@
-using System.Linq;
 using UnityEngine;
 
 public abstract class FoodRecipe<TPart> : MonoBehaviour
     where TPart : FoodRecipePart {
-    [SerializeField] protected TPart[] _recipeParts = new TPart[8];
+    [SerializeField] protected TPart[] _recipeParts;
     [SerializeField] protected FoodRecipeTechnic _techicIcon;
     [SerializeField] protected KitchenStorage _kitchenStorage;
     [SerializeField] protected TechnicManager _technicManager;
@@ -11,8 +10,14 @@ public abstract class FoodRecipe<TPart> : MonoBehaviour
 
     public bool CanCook {
         get {
-            return _recipeParts.All(part => part.IsAvailable)
-                && _techicIcon.IsAvailable;
+            if (!_techicIcon.IsAvailable)
+                return false;
+
+            foreach (var part in _recipeParts)
+                if (!part.IsAvailable)
+                    return false;
+
+            return false;
         }
     }
 

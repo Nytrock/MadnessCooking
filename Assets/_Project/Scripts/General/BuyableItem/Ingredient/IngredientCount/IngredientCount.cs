@@ -8,7 +8,7 @@ public class IngredientCount {
     [SerializeField, JsonProperty] private Ingredient _item;
     [SerializeField, Min(1), JsonProperty] private int _count;
 
-    public Ingredient Item => _item;
+    public Ingredient Ingredient => _item;
     public int Count => _count;
 
     public event Action<int> CountChanged;

@@ -18,9 +18,9 @@ public class FoodRecipePart : HoverItemNameActivator {
         gameObject.SetActive(true);
         _isAvailable = isAvailable;
 
-        _grayscaleIcon.Setup(count.Item.Icon, !isAvailable);
+        _grayscaleIcon.Setup(count.Ingredient.Icon, !isAvailable);
         _countText.text = count.Count.ToString() + "x";
-        _showingItem = count.Item;
+        _showingItem = count.Ingredient;
     }
 
     public virtual void Setup(Technic technic, bool isAvailable) {

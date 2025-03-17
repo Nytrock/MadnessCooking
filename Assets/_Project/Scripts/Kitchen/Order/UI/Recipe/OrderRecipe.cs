@@ -14,7 +14,7 @@ public class OrderRecipe : FoodRecipe<OrderRecipePart> {
     protected override void SetupIngredients() {
         int index = 0;
         foreach (var count in _food.Ingredients) {
-            if (count.Item == ConstIngredients.Instance.Spice && _upgradeData.IsAutoSpice) {
+            if (count.Ingredient == ConstIngredients.Instance.Spice && _upgradeData.IsAutoSpice) {
                 _recipeParts[index].SetupAutoSpice(count);
             } else {
                 bool haveCount = _kitchenStorage.HaveCount(count);
@@ -47,7 +47,7 @@ public class OrderRecipe : FoodRecipe<OrderRecipePart> {
             if (part.IngredientCount is null)
                 continue;
 
-            if (part.IngredientCount.Item == ConstIngredients.Instance.Spice)
+            if (part.IngredientCount.Ingredient == ConstIngredients.Instance.Spice)
                 part.UpdateAutoSpiceStatus(count);
         }
     }

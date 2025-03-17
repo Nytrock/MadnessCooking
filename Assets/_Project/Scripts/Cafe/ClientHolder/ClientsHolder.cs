@@ -78,10 +78,13 @@ public class ClientsHolder : MonoBehaviour {
     }
 
     public void CheckWait() {
-        bool allClientsHere = _data.Clients.All(
-            client => client.State != ClientState.Spawn
-            && client.State != ClientState.Leave
-        );
+        bool allClientsHere = true;
+        foreach (var client in _clients) {
+            if (client.Data.State == ClientState.Spawn || client.Data.State == ClientState.Leave) {
+                allClientsHere = false;
+                break;
+            }
+        }
 
         if (allClientsHere)
             StartWait();
@@ -99,6 +102,10 @@ public class ClientsHolder : MonoBehaviour {
 
         _data.StartWait(_waitTime.RandomValue);
         _waitSlider.maxValue = _data.WaitTime;
+
+        foreach (var client in _clients)
+            client.WaitOrder();
+
         WaitStarted?.Invoke();
     }
 
@@ -190,5 +197,9 @@ public class ClientsHolder : MonoBehaviour {
         _isTutorial = isTutorial;
         if (_isTutorial)
             _waitSlider.value = 1;
+    }
+
+    public void SetClientData(int index, ClientType clientType, Food foodForOrder, Vector2 position) {
+        _data.SetClientData(index, _index + 1, clientType, foodForOrder, position);
     }
 }

@@ -8,8 +8,8 @@ public class IngredientCountButton : HoverItemNameActivator {
     public IngredientCount IngredientCount => _countRenderer;
 
     public void SetVisual(IngredientCount count) {
-        _icon.sprite = count.Item.Icon;
-        _showingItem = count.Item;
+        _icon.sprite = count.Ingredient.Icon;
+        _showingItem = count.Ingredient;
         _countRenderer = count;
 
         UpdateCount(count.Count);

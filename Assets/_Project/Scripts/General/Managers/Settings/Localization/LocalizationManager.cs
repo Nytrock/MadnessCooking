@@ -22,8 +22,7 @@ public class LocalizationManager : Singleton<LocalizationManager>, IBindable<Gam
 
     public string GetLocalization(string table, string key, Dictionary<string, string> arguments = null) {
         if (arguments != null) {
-            List<string> keys = new(arguments.Keys);
-            foreach (var argumentKey in keys)
+            foreach (var argumentKey in arguments.Keys)
                 arguments[argumentKey] = GetLocalization(table, arguments[argumentKey]);
         }
 

@@ -23,7 +23,7 @@ public class Order {
 
     public event Action OrderFinished;
 
-    public Order(Food food, int tableIndex) {
+    public void Setup(Food food, int tableIndex) {
         _food = food;
         _tableIndex = tableIndex;
     }

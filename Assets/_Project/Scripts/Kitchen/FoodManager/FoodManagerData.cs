@@ -33,10 +33,13 @@ public class FoodManagerData : BuyableItemManagerData<Food> {
     }
 
     public void GenerateNowFoodMenu() {
-        _nowFoodMenu = _foodMenu
-            .Where(foodMenu => !foodMenu.IsBanished)
-            .Select((foodMenu, index) => index)
-            .ToList();
+        _nowFoodMenu.Clear();
+        for (int i = 0; i < _foodMenu.Count; i++) {
+            if (_foodMenu[i].IsBanished)
+                continue;
+            _nowFoodMenu.Add(i);
+        }
+
         _nowFoodMenu.Randomize();
     }
 

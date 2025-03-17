@@ -96,13 +96,11 @@ public class Client : MonoBehaviour {
         }
 
         _seat = settings.Seat;
+        _holder = settings.Holder;
         ChangeState();
 
         if (Data.State != ClientState.Spawn)
             TakeSeat();
-
-        _holder = settings.Holder;
-        _holder.WaitStarted += WaitOrder;
     }
 
     public void EndSetup() {

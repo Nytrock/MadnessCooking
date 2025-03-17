@@ -15,7 +15,7 @@ public abstract class IngredientStorage : MonoBehaviour {
 
     public void PutIngredients(IEnumerable<IngredientCount> puttingCountList) {
         foreach (var count in puttingCountList)
-            PutIngredientWithRemain(count.Item, count.Count);
+            PutIngredientWithRemain(count.Ingredient, count.Count);
     }
 
     public virtual int PutIngredientWithRemain(Ingredient ingredient, int count) {
@@ -30,7 +30,7 @@ public abstract class IngredientStorage : MonoBehaviour {
             puttingCount = new(ingredient, Data.LeftSpace);
         }
 
-        bool containsIngredient = Data.ContainsIngredient(puttingCount.Item);
+        bool containsIngredient = Data.ContainsIngredient(puttingCount.Ingredient);
         Data.AddIngredientCount(puttingCount);
         if (!containsIngredient)
             InvokeIngredientAdded(puttingCount);
@@ -57,8 +57,8 @@ public abstract class IngredientStorage : MonoBehaviour {
         IngredientCountRemoved?.Invoke(removingCount);
         Data.RemoveIngredient(removingCount);
 
-        if (Data.GetIngredientCount(removingCount.Item) == 0)
-            IngredientRemoved?.Invoke(removingCount.Item);
+        if (Data.GetIngredientCount(removingCount.Ingredient) == 0)
+            IngredientRemoved?.Invoke(removingCount.Ingredient);
     }
 
     public bool HaveCount(IngredientCount count) {

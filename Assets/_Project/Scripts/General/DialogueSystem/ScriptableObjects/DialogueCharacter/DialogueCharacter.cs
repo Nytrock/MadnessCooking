@@ -6,9 +6,15 @@ public class DialogueCharacter : ExtendedScriptableObject {
     [SerializeField] private DialogueCharacterEmotionSprite[] _emotionSprites;
     [SerializeField] private PitchableAudioInfo _voiceInfo;
 
+    private string _characterName;
+
     public PitchableAudioInfo VoiceInfo => _voiceInfo;
-    public string Name => $"{nameof(DialogueCharacter)}.{name}";
+    public string Name => _characterName;
     public override Sprite Icon => _defaultSprite;
+
+    public override void Initialize() {
+        _characterName = $"{nameof(DialogueCharacter)}.{name}";
+    }
 
     public Sprite GetEmotionSprite(DialogueCharacterEmotion emotion) {
         foreach (var emotionSprite in _emotionSprites)

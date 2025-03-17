@@ -31,8 +31,8 @@ public class Food : BuyableItem {
         get {
             int price = 0;
             foreach (var ingredient in _ingredients) {
-                if (ingredient.Item == ConstIngredients.Instance.Spice) {
-                    price += ingredient.Count * ingredient.Item.Price;
+                if (ingredient.Ingredient == ConstIngredients.Instance.Spice) {
+                    price += ingredient.Count * ingredient.Ingredient.Price;
                 }
             }
             return price;

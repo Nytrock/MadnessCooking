@@ -31,7 +31,9 @@ public class FarmCarWaitRenderer : MonoBehaviour {
 
     private void UpdateText() {
         int nowTime = (int)_manager.NowWaitTime;
-        int seconds = nowTime % 60;
-        _timeText.text = $"{nowTime / 60}:{seconds:00}";
+
+        string munites = (nowTime / 60).ToString();
+        string seconds = (nowTime % 60).ToString("D4");
+        _timeText.text = $"{munites}:{seconds}";
     }
 }

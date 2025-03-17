@@ -30,7 +30,7 @@ public abstract class IngredientStorageRenderer : MonoBehaviour {
             if (removedRenderersCount == 0)
                 break;
 
-            while (_ingredientsRenderers[i].Ingredient == removedCount.Item) {
+            while (_ingredientsRenderers[i].Ingredient == removedCount.Ingredient) {
                 DisableIngredientRenderer(i);
                 removedRenderersCount--;
             }
@@ -39,15 +39,15 @@ public abstract class IngredientStorageRenderer : MonoBehaviour {
 
     private void CheckAddedIngredient(IngredientCount addedCount) {
         _ingredients.Add(new(addedCount));
-        int nowCount = _ingredients.GetItemCount(addedCount.Item);
+        int nowCount = _ingredients.GetItemCount(addedCount.Ingredient);
         int addedRenderersCount = nowCount / _needCount;
 
         if (addedRenderersCount == 0)
             return;
 
-        _ingredients.Remove(addedCount.Item, _needCount * addedRenderersCount);
+        _ingredients.Remove(addedCount.Ingredient, _needCount * addedRenderersCount);
         for (int i = 0; i < addedRenderersCount; i++)
-            EnableIngredientRenderer(addedCount.Item);
+            EnableIngredientRenderer(addedCount.Ingredient);
     }
 
     private void EnableIngredientRenderer(Ingredient ingredient) {

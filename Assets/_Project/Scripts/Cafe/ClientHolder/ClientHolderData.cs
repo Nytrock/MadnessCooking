@@ -26,8 +26,9 @@ public class ClientHolderData {
         _groupState = GroupClientState.None;
     }
 
-    public void SetClient(int index, ClientData clientData) {
-        _clients[index] = clientData;
+    public void SetClientData(int clientIndex, int tableIndex, ClientType clientType, Food foodForOrder, Vector2 position) {
+        ClientData clientData = _clients[clientIndex];
+        clientData.Setup(clientType, foodForOrder, tableIndex, position);
     }
 
     public ClientData GetClient(int index) {
@@ -36,7 +37,6 @@ public class ClientHolderData {
 
     private void ClearClients() {
         _haveClients = false;
-        _clients = new ClientData[_seatsCount];
     }
 
     public void StopWait() {

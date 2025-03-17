@@ -40,7 +40,7 @@ public class IngredientStorageUI : MonoBehaviour, IActivable {
 
     private void RemoveIngredient(Ingredient ingredient) {
         foreach (var button in _buttons) {
-            if (button.IngredientCount.Item == ingredient) {
+            if (button.IngredientCount.Ingredient == ingredient) {
                 RemoveIngredientCount(button);
                 break;
             }

@@ -25,11 +25,15 @@ public class ClientData {
     public bool IsServiced => _isServiced;
     public Order Order => _order;
 
-    public ClientData(Vector3 position, ClientType clientType, Order order) {
-        _type = clientType;
+    public ClientData() {
+        _order = new();
         _state = ClientState.Spawn;
+    }
+
+    public void Setup(ClientType clientType, Food foodForOrder, int tableIndex, Vector2 position) {
+        _type = clientType;
         _position = position;
-        _order = order;
+        _order.Setup(foodForOrder, tableIndex);
     }
 
     public void UpdateTime() {

@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 using UnityEngine;
 
 public class FpsManager : MonoBehaviour, IBindable<GameSettingsData>, ISettingable<bool> {
@@ -28,11 +27,21 @@ public class FpsManager : MonoBehaviour, IBindable<GameSettingsData>, ISettingab
             return;
 
         _frameDeltaTimeArray[_lastFrameIndex] = Time.deltaTime;
-        _lastFrameIndex = (_lastFrameIndex + 1) % REFERENCE_FPS;
+        _lastFrameIndex = (_lastFrameIndex + 1) % _frameRatePrecision;
     }
 
     public float GetFPS() {
-        return 1 / (_frameDeltaTimeArray.Sum() / _frameDeltaTimeArray.Where(fps => fps != 0).Count());
+        int framesCount = 0;
+        float framesSum = 0;
+
+        foreach (var frame in _frameDeltaTimeArray) {
+            if (frame == 0)
+                break;
+            framesCount++;
+            framesSum += frame;
+        }
+
+        return 1 / (framesSum / framesCount);
     }
 
     public void Bind(GameSettingsData data) {

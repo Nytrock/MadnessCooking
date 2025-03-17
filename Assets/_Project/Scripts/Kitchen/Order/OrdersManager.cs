@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 using UnityEngine;
 
 public class OrdersManager : MonoBehaviour {
@@ -7,13 +6,12 @@ public class OrdersManager : MonoBehaviour {
     [SerializeField] private TechnicManager _technicManager;
     [SerializeField] private GameSaveManager _saveManager;
     [SerializeField] private TutorialManager _tutorialManager;
-    private readonly ClientState[] _suitableStates = { ClientState.Spawn, ClientState.WaitOthers, ClientState.WaitOrder };
 
     public event Action<Order> OrderAdded;
     public event Action<Order> OrderRemoved;
 
     public void AddNewClient(Client client) {
-        if (!_suitableStates.Contains(client.Data.State) || client.Data.IsServiced)
+        if (client.Data.State == ClientState.Leave || client.Data.IsServiced)
             return;
 
         Order order = client.Data.Order;

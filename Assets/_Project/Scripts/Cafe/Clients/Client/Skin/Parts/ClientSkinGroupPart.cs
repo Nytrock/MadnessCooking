@@ -9,8 +9,7 @@ public class ClientSkinGroupPart : ClientSkinPart {
         base.Awake();
         foreach (var part in _relatedParts) {
             if (!part.CheckRelationToGroup(this)) {
-                throw new ArgumentException($"Skin part {part.name} not related to group {name}, " +
-                    $"but located in it");
+                throw new ArgumentException($"Skin part {part.name} not related to group {name}, but located in it");
             }
         }
     }

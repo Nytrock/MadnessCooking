@@ -13,12 +13,18 @@ public class PopularityLevel : ScriptableObject {
     [SerializeField, Range(0, 100)] private float _tripleChance;
     [SerializeField, Range(0, 100)] private float _quarterChance;
 
+    private string _description;
+
     public int Number => _number;
     public int NeedXp => _needXp;
     public float PopularityMultiplier => _popularityMultiplier;
-    public string Description => "Popularity" + name + ".Description";
+    public string Description => _description;
     public float SingleChance => _singleChance;
     public float DoubleChance => _doubleChance;
     public float TripleChance => _tripleChance;
     public float QuarterChance => _quarterChance;
+
+    public void Initialize() {
+        _description = "Popularity" + name + ".Description";
+    }
 }

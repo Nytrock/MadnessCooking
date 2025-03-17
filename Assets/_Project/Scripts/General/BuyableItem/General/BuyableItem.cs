@@ -9,13 +9,20 @@ public abstract class BuyableItem : ExtendedScriptableObject {
     [SerializeField, Min(0)] private int _price;
 
     protected abstract string _table { get; }
+    private string _rawName;
+    private string _rawDescription;
 
     public string Name => GetName();
-    public string RawName => name + ".Name";
+    public string RawName => _rawName;
     public string Description => GetDescription();
-    public string RawDescription => name + ".Description";
+    public string RawDescription => _rawDescription;
     public override Sprite Icon => _icon;
     public int Price => _price;
+
+    public override void Initialize() {
+        _rawName = name + ".Name";
+        _rawDescription = name + ".Description";
+    }
 
     protected virtual string GetName() {
         return LocalizationManager.Instance.GetLocalization(_table, RawName);

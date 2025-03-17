@@ -15,6 +15,7 @@ public class FpsUI : MonoBehaviour {
     }
 
     private void Update() {
-        _text.text = $"{_manager.GetFPS():F0} fps";
+        string fps = _manager.GetFPS().ToString("0");
+        _text.text = $"{fps} fps";
     }
 }

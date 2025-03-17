@@ -5,6 +5,12 @@ public class ScriptableObjectsDatabase : Singleton<ScriptableObjectsDatabase> {
     [SerializeField] private List<ExtendedScriptableObject> _scriptableObjects;
     [SerializeField] private string _objectsFolder;
 
+    protected override void Awake() {
+        base.Awake();
+        foreach (var scriptableObject in _scriptableObjects)
+            scriptableObject.Initialize();
+    }
+
     [ContextMenu("CheckObjectsLocalization")]
     private void CheckObjectsLocalization() {
         if (!Application.isPlaying)

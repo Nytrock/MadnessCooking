@@ -62,9 +62,8 @@ public class ClientsSpawner : MonoBehaviour, IBindable<CafeData>, ITutorialPart 
 
         ClientType clientType = GetRandomType(clientCount);
         for (int i = 0; i < holder.ClientsCount; i++) {
-            Order order = new(_foodManager.GetFoodForOrder(), holder.Index + 1);
-            ClientData newClient = new(_spawnPoint.Position, clientType, order);
-            holder.Data.SetClient(i, newClient);
+            Food foodForOrder = _foodManager.GetFoodForOrder();
+            holder.SetClientData(i, clientType, foodForOrder, _spawnPoint.Position);
         }
 
         SpawnGroupOfClients(holder);

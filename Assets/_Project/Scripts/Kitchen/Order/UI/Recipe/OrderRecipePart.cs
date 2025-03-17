@@ -21,7 +21,7 @@ public class OrderRecipePart : FoodRecipePart {
     }
 
     public void UpdateAutoSpiceStatus(int moneyCount) {
-        int price = _ingredientCount.Count * _ingredientCount.Item.Price;
+        int price = _ingredientCount.Count * _ingredientCount.Ingredient.Price;
         bool isMoneyEnough = moneyCount >= price;
         _isAvailable = isMoneyEnough;
 

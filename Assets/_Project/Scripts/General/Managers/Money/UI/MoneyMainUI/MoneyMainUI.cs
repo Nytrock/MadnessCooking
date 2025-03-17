@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public class MoneyMainUI : MoneyBaseUI {
-    [SerializeField] private MoneyCell[] _moneyCells = new MoneyCell[MONEY_CELLS_COUNT];
+    [SerializeField] private MoneyCell[] _moneyCells;
     public const int MONEY_CELLS_COUNT = 5;
 
     protected override void StartAnimation() {
