@@ -188,5 +188,7 @@ public class ClientsHolder : MonoBehaviour {
 
     public void SetTutorialState(bool isTutorial) {
         _isTutorial = isTutorial;
+        if (_isTutorial)
+            _waitSlider.value = 1;
     }
 }

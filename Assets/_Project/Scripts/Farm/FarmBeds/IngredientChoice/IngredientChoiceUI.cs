@@ -40,6 +40,8 @@ public class IngredientChoiceUI : ChoiceUI<Ingredient, IngredientChoiceButton> {
     }
 
     public override void SubmitChoice() {
+        if (_tutorialManager.IsWork)
+            _tutorialManager.NextTutorialPart();
         _changingBed.SetIngredient(_choosedButton.Item);
         Disable();
     }

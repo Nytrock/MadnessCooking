@@ -1,18 +1,40 @@
 using Discord;
 using System;
 using UnityEngine;
+using diagnostic = System.Diagnostics;
 
 public class DiscordPresenceManager : MonoBehaviour {
     [SerializeField] private LocationManager _locationManager;
     [SerializeField] private MoneyManager _moneyManager;
 
-    private DiscordSDK _discord;
+    private Discord.Discord _discord;
     private string _activityState;
     private string _activityDetails;
     private const long CLIENT_ID = 1350139391686873201;
 
     private void Awake() {
-        _discord = new DiscordSDK(CLIENT_ID, (UInt64)CreateFlags.Default);
+        CheckDiscordInstalled();
+    }
+
+    private void CheckDiscordInstalled() {
+        bool haveDiscord = false;
+        diagnostic.Process[] processes = diagnostic.Process.GetProcesses();
+
+        for (int i = 0; i < processes.Length; i++) {
+            if (processes[i].ToString() == "System.Diagnostics.Process (Discord)") {
+                haveDiscord = true;
+                break;
+            }
+        }
+
+        if (!haveDiscord)
+            return;
+
+        CreateRichPresence();
+    }
+
+    private void CreateRichPresence() {
+        _discord = new Discord.Discord(CLIENT_ID, (UInt64)CreateFlags.Default);
 
         if (ScenesManager.IsGame()) {
             _locationManager.LocationChanged += UpdateActivityState;
@@ -44,6 +66,17 @@ public class DiscordPresenceManager : MonoBehaviour {
     }
 
     private void Update() {
+        if (_discord == null)
+            return;
+
         _discord.RunCallbacks();
+    }
+
+    private void OnApplicationQuit() {
+        if (_discord == null)
+            return;
+
+        ActivityManager activityManager = _discord.GetActivityManager();
+        activityManager.ClearActivity((res) => { });
     }
 }
