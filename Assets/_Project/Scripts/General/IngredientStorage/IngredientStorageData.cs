@@ -14,6 +14,8 @@ public class IngredientStorageData {
     public int MaxSpace => _maxSpace;
     public int LeftSpace => _maxSpace - _nowSpace;
 
+    public event Action SpaceChanged;
+
     public IngredientStorageData(IngredientCountList defaultIngredients = null) {
         if (defaultIngredients == null)
             _ingredients = new();
@@ -28,15 +30,16 @@ public class IngredientStorageData {
 
     public void UpdateMaxSpace(CountUpgrade upgrade) {
         _maxSpace = upgrade.Count;
+        SpaceChanged?.Invoke();
     }
 
     public void AddIngredientCount(IngredientCount puttingCount) {
-        _ingredients.Add(puttingCount);
-
         if (CanAddCount(puttingCount.Count))
             _nowSpace += puttingCount.Count;
         else
             _nowSpace = _maxSpace;
+        _ingredients.Add(puttingCount);
+        SpaceChanged?.Invoke();
     }
 
     public bool ContainsCount(IngredientCount count) {
@@ -46,10 +49,11 @@ public class IngredientStorageData {
     public void RemoveIngredient(IngredientCount count) {
         _nowSpace = Mathf.Max(0, _nowSpace - count.Count);
         _ingredients.Remove(count);
+        SpaceChanged?.Invoke();
     }
 
     public int GetIngredientCount(Ingredient ingredient) {
-        return _ingredients.GetItemCount(ingredient);
+        return _ingredients.GetIngredientCount(ingredient);
     }
 
     public bool ContainsIngredient(Ingredient item) {
@@ -58,5 +62,6 @@ public class IngredientStorageData {
 
     public void SetMaxSpace(int defaultMaxSpace) {
         _maxSpace = defaultMaxSpace;
+        SpaceChanged?.Invoke();
     }
 }

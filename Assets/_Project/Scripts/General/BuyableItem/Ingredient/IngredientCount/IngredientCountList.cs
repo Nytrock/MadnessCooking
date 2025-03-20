@@ -16,6 +16,10 @@ public class IngredientCountList {
             _itemCounts.Add(new(item));
     }
 
+    public void Add(Ingredient ingredient, int count) {
+        Add(new(ingredient, count));
+    }
+
     public void Add(IngredientCount newIngredientCount) {
         foreach (var itemCount in _itemCounts) {
             if (itemCount.Ingredient == newIngredientCount.Ingredient) {
@@ -76,7 +80,7 @@ public class IngredientCountList {
             yield return count;
     }
 
-    public int GetItemCount(Ingredient ingredient) {
+    public int GetIngredientCount(Ingredient ingredient) {
         foreach (var count in _itemCounts)
             if (count.Ingredient == ingredient)
                 return count.Count;

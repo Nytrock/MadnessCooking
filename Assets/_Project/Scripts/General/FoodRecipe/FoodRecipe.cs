@@ -17,7 +17,7 @@ public abstract class FoodRecipe<TPart> : MonoBehaviour
                 if (!part.IsAvailable)
                     return false;
 
-            return false;
+            return true;
         }
     }
 

@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class FoodShopRecipe : FoodRecipe<FoodShopRecipePart> {
     [SerializeField] protected IngredientManager _ingredientManager;
-    private KitchenUpgradeData _upgradeData;
 
     protected override void SetupIngredients() {
         int index = 0;
@@ -14,16 +13,12 @@ public class FoodShopRecipe : FoodRecipe<FoodShopRecipePart> {
     }
 
     protected override void SetupTechnic() {
-        bool haveTechnic = _technicManager.HaveTechnic(_food.TypeTechnic);
+        bool haveTechnic = _technicManager.IsItemAvailable(_food.TypeTechnic);
         _techicIcon.SetTechnic(_food.TypeTechnic, haveTechnic);
     }
 
     public override void DisableParts() {
         base.DisableParts();
         _techicIcon.ChangeState(false);
-    }
-
-    public void SetUpgradeData(KitchenUpgradeData upgradeData) {
-        _upgradeData = upgradeData;
     }
 }

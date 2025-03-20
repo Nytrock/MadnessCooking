@@ -9,8 +9,7 @@ public class Order {
     [SerializeField, JsonProperty] private bool _isCooking;
     [SerializeField, JsonProperty] private Food _food;
     [SerializeField, JsonProperty] private int _tableIndex;
-
-    private float _cookProgress = 0;
+    [SerializeField] private float _cookProgress = 0;
 
     public bool IsActivated => _isActivated;
     public bool IsFinished => _isFinished;
@@ -23,12 +22,15 @@ public class Order {
 
     public event Action OrderFinished;
 
-    public void Setup(Food food, int tableIndex) {
+    public Order(Food food, int tableIndex) {
         _food = food;
         _tableIndex = tableIndex;
     }
 
     public void StartCook() {
+        if (_isCooking)
+            return;
+
         _isCooking = true;
         OrderStarted?.Invoke();
     }

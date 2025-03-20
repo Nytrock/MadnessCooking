@@ -24,7 +24,6 @@ public class FarmShop : BaseChooseShop<BaseUpgrade, FarmData> {
 
     protected override void UpdateItemsAfterBuying(BaseUpgrade upgrade) {
         int index = _data.IndexOfItem(upgrade);
-        Debug.Log(upgrade);
         if (upgrade as ConsumableUpgrade) {
             var consumableUpgrade = upgrade as ConsumableUpgrade;
             bool isMax = _specialData.AddConsumableAndCheckMax(consumableUpgrade);

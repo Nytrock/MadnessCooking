@@ -34,6 +34,6 @@ public class MoneyCell : MonoBehaviour {
     }
 
     public void UpdateMainSymbol() {
-        _nowText.text = _newTexts[0].text;
+        _nowText.text = _newSymbol;
     }
 }

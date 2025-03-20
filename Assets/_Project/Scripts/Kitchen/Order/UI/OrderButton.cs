@@ -11,6 +11,8 @@ public class OrderButton : MonoBehaviour {
     [SerializeField] private OrderUICookState _cookState;
     [SerializeField] private OrderUIBaseState _finishState;
 
+    private TechnicManager _technicManager;
+
     public Order Order { get; private set; }
 
     public void StartNewCycle() {
@@ -30,10 +32,12 @@ public class OrderButton : MonoBehaviour {
         _recipe.SetupRecipe(Order.Food, data);
         UpdateCookSlider();
 
-        if (order.IsCooking)
+        if (order.IsCooking) {
             Cook();
-        else if (order.IsFinished)
+            _technicManager.StartCooking(order);
+        } else if (order.IsFinished) {
             FinishCook();
+        }
     }
 
     public void SetManagers(TechnicManager technicManager, KitchenStorage kitchenStorage) {
@@ -42,6 +46,7 @@ public class OrderButton : MonoBehaviour {
         technicManager.TechnicChanged += UpdateRecipeTechnic;
         MoneyManager.Instance.MoneyChanged += UpdateAutoSpices;
 
+        _technicManager = technicManager;
         _recipe.SetManagers(kitchenStorage, technicManager);
     }
 

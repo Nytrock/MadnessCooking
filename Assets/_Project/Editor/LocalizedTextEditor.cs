@@ -6,6 +6,7 @@ using UnityEngine.Localization.Settings;
 
 [CustomEditor(typeof(LocalizedText))]
 public class LocalizedTextEditor : Editor {
+    private SerializedProperty _isLogging;
     private string[] _options;
 
     public void OnEnable() {
@@ -18,15 +19,24 @@ public class LocalizedTextEditor : Editor {
             return;
 
         _options = tables.Result.Select(table => table.TableCollectionName).ToArray();
+        _isLogging = serializedObject.FindProperty(nameof(_isLogging));
     }
 
     public override void OnInspectorGUI() {
-        if (_options is null)
+        serializedObject.Update();
+
+        if (_options is null) {
+            _isLogging.DrawPropertyField();
+            serializedObject.ApplyModifiedProperties();
             return;
+        }
 
         LocalizedText text = (LocalizedText)target;
         int nowOptionIndex = Mathf.Max(Array.IndexOf(_options, text.Table), 0);
         int selectedOptionIndex = EditorGUILayout.Popup("Table", nowOptionIndex, _options);
+
+        _isLogging.DrawPropertyField();
+        serializedObject.ApplyModifiedProperties();
 
         if (selectedOptionIndex == nowOptionIndex)
             return;

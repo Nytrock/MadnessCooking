@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class ClientWalkState : ClientBaseState {
     private Vector2 _nowTarget;
-    private const float _speed = 3.5f;
+    private const float _speed = 3.75f;
     private ClientsSpawner _spawner;
 
     public void SetupSpawner(ClientsSpawner spawner) {

@@ -7,7 +7,7 @@ public class FoodManager : SaveableItemManager<Food, KitchenData> {
 
     private FoodManagerData _foodData;
 
-    public int FoodCountWithoutDefault => Mathf.Max(0, AvailableItemsCount - _defaultItems.Count);
+    public int NowFoodMenuCountWithoutDefault => Mathf.Max(0, _foodData.NowFoodMenuLength - _defaultItems.Count);
     public IEnumerable<MenuFood> FoodMenu => _foodData.FoodMenu;
 
     public event Action<MenuFood> MenuFoodAdded;
@@ -19,6 +19,9 @@ public class FoodManager : SaveableItemManager<Food, KitchenData> {
     public override void LateStart() {
         base.LateStart();
         CheckIsDataOld();
+
+        foreach (var menuFood in _foodData.FoodMenu)
+            menuFood.BanishedStateChanged += delegate { _foodData.CheckMenuSize(menuFood); };
     }
 
     public Food GetFoodForOrder() {

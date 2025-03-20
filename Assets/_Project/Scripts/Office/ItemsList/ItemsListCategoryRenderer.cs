@@ -15,7 +15,7 @@ public class ItemsListCategoryRenderer : MonoBehaviour {
 
         _categoryName = _categoryPrefix + typeof(TItem).Name;
         _allItemsCount = itemManager.AllItemsCount;
-        _nowItemsCount = itemManager.AvailableItemsCount;
+        _nowItemsCount = 0;
         UpdateCategoryTitle();
 
         foreach (var item in itemManager.GetAllItems()) {

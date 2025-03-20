@@ -26,7 +26,7 @@ public class PopularityCalculator : MonoBehaviour {
         return _nowLevel.PopularityMultiplier *
             _timeMultiplier.NowDaytimeMultiplier *
             (1 + (_spaceManager.NoDefaultSpaceCount * _oneCafeSpaceMultiplier)) *
-            (1 + (_foodManager.FoodCountWithoutDefault * _oneFoodMultiplier));
+            (1 + (_foodManager.NowFoodMenuCountWithoutDefault * _oneFoodMultiplier));
     }
 
     public ClientCount GetClientCount() {

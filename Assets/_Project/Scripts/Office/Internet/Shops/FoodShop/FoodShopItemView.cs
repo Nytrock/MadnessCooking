@@ -9,10 +9,6 @@ public class FoodShopItemView : BaseChooseShopItemView<Food> {
         _recipeRenderer.SetHoverText(_hoverText);
     }
 
-    public void SetUpgradeDataToRecipe(KitchenUpgradeData upgradeData) {
-        _recipeRenderer.SetUpgradeData(upgradeData);
-    }
-
     protected override void SetInfo() {
         base.SetInfo();
         _recipeRenderer.SetupRecipe(_selectedItem);

@@ -42,6 +42,9 @@ public class OrdersManager : MonoBehaviour {
 
     private void RemoveOrder(Client client) {
         Order order = client.Data.Order;
+        if (!order.IsActivated)
+            return;
+
         if (_tutorialManager.IsWork)
             _tutorialManager.NextTutorialPart();
 

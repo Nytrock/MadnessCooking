@@ -198,8 +198,4 @@ public class ClientsHolder : MonoBehaviour {
         if (_isTutorial)
             _waitSlider.value = 1;
     }
-
-    public void SetClientData(int index, ClientType clientType, Food foodForOrder, Vector2 position) {
-        _data.SetClientData(index, _index + 1, clientType, foodForOrder, position);
-    }
 }

@@ -54,10 +54,8 @@ public class FarmBedUIManager : MonoBehaviour, IActivable {
         if (_tutorialManager.IsWork)
             _tutorialManager.NextTutorialPart();
 
-        if (_nowUI != null) {
-            ResetNowUI();
+        if (_nowUI != null)
             _activatorsManager.CloseNowActivable();
-        }
 
         _nowUI = FindUI(farmBed.Data.BedType);
         _nowUI.UpdateInfo(farmBed);

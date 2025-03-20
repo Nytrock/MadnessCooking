@@ -987,6 +987,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!222 &10984182
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2896,10 +2897,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stateTrueAudio:
     _audio: {fileID: 8300000, guid: 56d32cef3d1a34d4284931d4eb8f1e31, type: 3}
-    _volume: 0.8
+    _volume: 0.3
   _stateFalseAudio:
     _audio: {fileID: 8300000, guid: 63a8abca30afc6f4fb8aafdbe27bd749, type: 3}
-    _volume: 1
+    _volume: 0.3
   _activable:
     _underlyingValue: {fileID: 2098111177}
 --- !u!1 &62391270
@@ -3479,10 +3480,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stateTrueAudio:
     _audio: {fileID: 8300000, guid: 35ab678919d81734c975896bbed27333, type: 3}
-    _volume: 0.9
+    _volume: 0.2
   _stateFalseAudio:
     _audio: {fileID: 8300000, guid: c3812c1a8578b3a4b8c386037c9971fa, type: 3}
-    _volume: 0.9
+    _volume: 0.2
   _activator: {fileID: 1541666143}
 --- !u!1 &69085872
 GameObject:
@@ -4140,7 +4141,7 @@ MonoBehaviour:
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 149.4, y: 149.4}
-  m_Spacing: {x: -8.3, y: 0}
+  m_Spacing: {x: -8.3, y: -8.3}
   m_Constraint: 0
   m_ConstraintCount: 2
 --- !u!222 &76678010
@@ -4962,7 +4963,7 @@ MonoBehaviour:
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
-  m_ActiveFontFeatures: 00000000
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
@@ -4997,6 +4998,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!1 &85733931
 GameObject:
   m_ObjectHideFlags: 0
@@ -5475,6 +5477,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!114 &91737659
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7045,6 +7048,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!114 &108560348
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7351,6 +7355,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!1 &111288716
 GameObject:
   m_ObjectHideFlags: 0
@@ -7976,6 +7981,144 @@ MonoBehaviour:
     _style: {fileID: 1514346298, guid: 95bc4a35c21fa6a4380211c8e6a93d5a, type: 3}
   - _value: {fileID: 11400000, guid: 7e3fc35901153c8499d08566fb3e07cf, type: 2}
     _style: {fileID: 1365778269, guid: 95bc4a35c21fa6a4380211c8e6a93d5a, type: 3}
+--- !u!1 &121609974
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 121609975}
+  - component: {fileID: 121609976}
+  m_Layer: 0
+  m_Name: FoodMenuOpen
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &121609975
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 121609974}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1536461305}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &121609976
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 121609974}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 950278738884242801, guid: c2232c781fb4fe6458c8d53a2e082d03, type: 2}
+  m_audioClip: {fileID: 8300000, guid: a9d58055e32be26448ddb92fd34c5595, type: 3}
+  m_Resource: {fileID: 8300000, guid: a9d58055e32be26448ddb92fd34c5595, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 70
+  Pan2D: 0
+  rolloffMode: 2
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.0125
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.9835825
+      value: 0.726207
+      inSlope: -1.0683755
+      outSlope: -1.0683755
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.14947703
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -1.0126582
+      outSlope: -1.0126582
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &121620750
 GameObject:
   m_ObjectHideFlags: 0
@@ -10036,7 +10179,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 806685565534041565, guid: a4eafeffb2ec0104cb391da09e02b2c0, type: 3}
       propertyPath: m_Volume
-      value: 0.7
+      value: 0.45
       objectReference: {fileID: 0}
     - target: {fileID: 806685565534041565, guid: a4eafeffb2ec0104cb391da09e02b2c0, type: 3}
       propertyPath: m_Resource
@@ -10046,6 +10189,10 @@ PrefabInstance:
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: f57e44b0f1721fa46b3cda1cbad6bef3, type: 3}
+    - target: {fileID: 806685565534041565, guid: a4eafeffb2ec0104cb391da09e02b2c0, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 858868315869272246, guid: a4eafeffb2ec0104cb391da09e02b2c0, type: 3}
       propertyPath: _additions.Array.size
       value: 1
@@ -11132,6 +11279,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!1 &162323990
 GameObject:
   m_ObjectHideFlags: 0
@@ -11819,6 +11967,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!114 &181795341
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14515,6 +14664,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!1 &219618234
 GameObject:
   m_ObjectHideFlags: 0
@@ -14793,6 +14943,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!1 &224894458
 GameObject:
   m_ObjectHideFlags: 0
@@ -14943,6 +15094,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!1 &225372442
 GameObject:
   m_ObjectHideFlags: 0
@@ -14979,7 +15131,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -41.5, y: 49.80002}
+  m_AnchoredPosition: {x: -41.5, y: 49.80005}
   m_SizeDelta: {x: 66.4, y: 66.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &225372444
@@ -15398,7 +15550,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &234839168
 RectTransform:
   m_ObjectHideFlags: 0
@@ -21978,6 +22130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!1 &262283717
 GameObject:
   m_ObjectHideFlags: 0
@@ -22455,6 +22608,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!1 &265556543
 GameObject:
   m_ObjectHideFlags: 0
@@ -22573,10 +22727,10 @@ RectTransform:
   - {fileID: 2049702811}
   m_Father: {fileID: 1059864628}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.25}
-  m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: 33.199997, y: 0.040100098}
-  m_SizeDelta: {x: -99.600006, y: 4.4083}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 33.600006, y: 0}
+  m_SizeDelta: {x: -100.79999, y: -33.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &267196842
 GameObject:
@@ -23474,6 +23628,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!1 &275391383
 GameObject:
   m_ObjectHideFlags: 0
@@ -23558,6 +23713,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!114 &275509025
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24294,6 +24450,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!114 &292304858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24929,6 +25086,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!114 &300143563
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25189,6 +25347,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!1 &302278784
 GameObject:
   m_ObjectHideFlags: 0
@@ -25441,7 +25600,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: ecfd3b9581d3cac4a80b97ce1228e930, type: 3}
   m_Resource: {fileID: 8300000, guid: ecfd3b9581d3cac4a80b97ce1228e930, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.7
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -25984,6 +26143,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!114 &315132765
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26198,6 +26358,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!114 &317198961
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27300,6 +27461,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!1 &326983459
 GameObject:
   m_ObjectHideFlags: 0
@@ -29079,6 +29241,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!1 &345063730
 GameObject:
   m_ObjectHideFlags: 0
@@ -29130,6 +29293,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!114 &345063733
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29379,6 +29543,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!1 &350292046
 GameObject:
   m_ObjectHideFlags: 0
@@ -30885,11 +31050,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _defaultMaxSpace: -1
-  <Data>k__BackingField:
-    _ingredients:
-      _itemCounts: []
-    _maxSpace: 0
-    _nowSpace: 0
   _car: {fileID: 1090935202}
   _cow: {fileID: 1231044660}
   _flourMill: {fileID: 1257875750}
@@ -31658,7 +31818,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 153.54999, y: -149.4}
+  m_AnchoredPosition: {x: 153.54993, y: -149.40002}
   m_SizeDelta: {x: 307.1, y: 132.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &379616436
@@ -32043,6 +32203,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!114 &387653114
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33199,6 +33360,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!1 &397481014
 GameObject:
   m_ObjectHideFlags: 0
@@ -33248,11 +33410,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _defaultMaxSpace: -1
-  <Data>k__BackingField:
-    _ingredients:
-      _itemCounts: []
-    _maxSpace: 0
-    _nowSpace: 0
   _defaultIngredients:
     _itemCounts:
     - _item: {fileID: 11400000, guid: 897523a5d3e8cc843a91257d85a26f6b, type: 2}
@@ -33630,6 +33787,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4a564f336d265eb47b5daf68bf9921c8, type: 2}
   - {fileID: 11400000, guid: f8dd97dddc1dfc249a021bc4c31efdaf, type: 2}
   - {fileID: 11400000, guid: 686de94c06e4a214eb4c82a9ce6faf64, type: 2}
+  _data:
+    _availableItems: []
 --- !u!4 &403464059
 Transform:
   m_ObjectHideFlags: 0
@@ -34052,6 +34211,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!114 &407315387
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34608,6 +34768,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!114 &411606479
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35018,7 +35179,6 @@ GameObject:
   m_Component:
   - component: {fileID: 419275884}
   - component: {fileID: 419275885}
-  - component: {fileID: 419275886}
   m_Layer: 0
   m_Name: InternetUI
   m_TagString: Untagged
@@ -35063,22 +35223,6 @@ MonoBehaviour:
   _location: 6
   _locationManager: {fileID: 1560551276}
   _UI: {fileID: 1924294696}
---- !u!114 &419275886
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 419275882}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31f00c2292cb140419170a40e94d07bb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _hoverListener: {fileID: 1569875507}
-  _isScrollBlocked: 0
-  _isHoverReversed: 0
-  _isDebug: 0
 --- !u!1 &420455441
 GameObject:
   m_ObjectHideFlags: 0
@@ -35229,6 +35373,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!1 &422832662
 GameObject:
   m_ObjectHideFlags: 0
@@ -35476,7 +35621,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 33.75
+  m_fontSize: 43.7
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -35498,7 +35643,7 @@ MonoBehaviour:
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
-  m_ActiveFontFeatures: 00000000
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
@@ -35514,7 +35659,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 8.177366, z: 0, w: 8.858789}
+  m_margin: {x: 0, y: 16.6, z: 0, w: 16.6}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -35541,6 +35686,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!1 &429847891
 GameObject:
   m_ObjectHideFlags: 0
@@ -36177,6 +36323,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!1 &433150505
 GameObject:
   m_ObjectHideFlags: 0
@@ -37682,6 +37829,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!114 &454201352
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38011,6 +38159,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: EnviromentTable
+  _isLogging: 0
 --- !u!1 &460692033
 GameObject:
   m_ObjectHideFlags: 0
@@ -38972,7 +39121,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 170.15}
+  m_AnchoredPosition: {x: 0, y: 170.15002}
   m_SizeDelta: {x: 456.5, y: 307.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &476863066
@@ -39166,6 +39315,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: EnviromentTable
+  _isLogging: 0
 --- !u!114 &484500970
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39180,7 +39330,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -40383,7 +40533,6 @@ MonoBehaviour:
   - _underlyingValue: {fileID: 2098111177}
   - _underlyingValue: {fileID: 1297580539}
   - _underlyingValue: {fileID: 1180912243}
-  - _underlyingValue: {fileID: 1264516435}
 --- !u!1 &495332021
 GameObject:
   m_ObjectHideFlags: 0
@@ -40797,6 +40946,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!114 &501731046
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46856,6 +47006,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!114 &515402873
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47039,14 +47190,13 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1159935000}
+  m_Children: []
   m_Father: {fileID: 1629914686}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 183.20001, y: -33.6}
-  m_SizeDelta: {x: 67.2, y: 67.2}
+  m_AnchoredPosition: {x: 341.74997, y: -29.05}
+  m_SizeDelta: {x: 58.1, y: 58.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &516692922
 MonoBehaviour:
@@ -47068,7 +47218,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: -1401916229, guid: 85d6f516ef892374d8cbedfdbd4b4a83, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -47095,7 +47245,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 516692920}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 0836704ce75883b4dad94fee4e4a1d23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -47142,6 +47292,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  _audioSource: {fileID: 617222236}
 --- !u!1 &519764680
 GameObject:
   m_ObjectHideFlags: 0
@@ -47510,7 +47661,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 806685565534041565, guid: a4eafeffb2ec0104cb391da09e02b2c0, type: 3}
       propertyPath: m_Volume
-      value: 0.7
+      value: 0.32
       objectReference: {fileID: 0}
     - target: {fileID: 806685565534041565, guid: a4eafeffb2ec0104cb391da09e02b2c0, type: 3}
       propertyPath: m_Resource
@@ -47520,6 +47671,10 @@ PrefabInstance:
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: 29aa9f8cc16f40b459d6195c9e24c54c, type: 3}
+    - target: {fileID: 806685565534041565, guid: a4eafeffb2ec0104cb391da09e02b2c0, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 858868315869272246, guid: a4eafeffb2ec0104cb391da09e02b2c0, type: 3}
       propertyPath: _additions.Array.size
       value: 1
@@ -48336,6 +48491,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!114 &544705081
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49388,6 +49544,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!1 &562531414
 GameObject:
   m_ObjectHideFlags: 0
@@ -50606,6 +50763,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: TutorialTable
+  _isLogging: 0
   _pauseTime: 0
 --- !u!114 &581669954
 MonoBehaviour:
@@ -51227,6 +51385,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2e37d524597e5d2499cc7a496f717a91, type: 2}
   - {fileID: 11400000, guid: 3627450b9a024af45a0e4f14c3308c09, type: 2}
   - {fileID: 11400000, guid: 7e3fc35901153c8499d08566fb3e07cf, type: 2}
+  _data:
+    _availableItems: []
   _upgradeManager: {fileID: 1299343206}
   _ingredientsManager: {fileID: 917452951}
   _bedsUpgrades:
@@ -52142,6 +52302,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!114 &597052415
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -52572,6 +52733,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!1 &600296255
 GameObject:
   m_ObjectHideFlags: 0
@@ -52872,6 +53034,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!1 &605904565
 GameObject:
   m_ObjectHideFlags: 0
@@ -53153,7 +53316,7 @@ MonoBehaviour:
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
-  m_ActiveFontFeatures: 00000000
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
@@ -53188,6 +53351,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!1 &611401727
 GameObject:
   m_ObjectHideFlags: 0
@@ -53340,7 +53504,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -53865,10 +54029,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stateTrueAudio:
     _audio: {fileID: 8300000, guid: 1e8487d984224fd429d59a97b7ad6362, type: 3}
-    _volume: 0.8
+    _volume: 0.5
   _stateFalseAudio:
     _audio: {fileID: 8300000, guid: ca8aabeded88ae44485934c02859b316, type: 3}
-    _volume: 0.8
+    _volume: 0.5
   _repairUI: {fileID: 1960262528}
 --- !u!1 &617042852
 GameObject:
@@ -53986,6 +54150,144 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _disabledSprite: {fileID: -1025329251, guid: 4f653553d703c4a41b22a0914b888ac9, type: 3}
   _activeSprite: {fileID: -1025329251, guid: 647ebc0f03c25a24382de948d768eb77, type: 3}
+--- !u!1 &617222234
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 617222235}
+  - component: {fileID: 617222236}
+  m_Layer: 0
+  m_Name: FoodMenuClose
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &617222235
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 617222234}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1536461305}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &617222236
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 617222234}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 950278738884242801, guid: c2232c781fb4fe6458c8d53a2e082d03, type: 2}
+  m_audioClip: {fileID: 8300000, guid: 45b734a80f2d5514d92296881a36b8b3, type: 3}
+  m_Resource: {fileID: 8300000, guid: 45b734a80f2d5514d92296881a36b8b3, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 70
+  Pan2D: 0
+  rolloffMode: 2
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.0125
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.9835825
+      value: 0.726207
+      inSlope: -1.0683755
+      outSlope: -1.0683755
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.14947703
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -1.0126582
+      outSlope: -1.0126582
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &618310869
 GameObject:
   m_ObjectHideFlags: 0
@@ -54075,6 +54377,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!114 &619412521
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -54773,7 +55076,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 17005f34d99e48041b875fa543c7ce01, type: 3}
   m_Resource: {fileID: 8300000, guid: 17005f34d99e48041b875fa543c7ce01, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.8
+  m_Volume: 0.6
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -60998,6 +61301,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!1 &651091217
 GameObject:
   m_ObjectHideFlags: 0
@@ -61671,6 +61975,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!1 &656877967
 GameObject:
   m_ObjectHideFlags: 0
@@ -62638,6 +62943,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!1 &666346303
 GameObject:
   m_ObjectHideFlags: 0
@@ -62673,7 +62979,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -586.1541, y: -149.53847}
+  m_AnchoredPosition: {x: -586.1542, y: -149.53847}
   m_SizeDelta: {x: 448.2, y: 448.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &668397853
@@ -70197,8 +70503,8 @@ MonoBehaviour:
   _panel: {fileID: 454675965}
   _downloadBar: {fileID: 375859679}
   _waitTime:
-    _min: 7
-    _max: 20
+    _min: 5
+    _max: 10
     _isGreaterZero: 1
   _possibleProgress:
   - 0
@@ -70209,7 +70515,6 @@ MonoBehaviour:
   - 3
   - 6
   _speedUpgrades:
-  - {fileID: 11400000, guid: a95ed5fb47287f74bb27c597c67df11f, type: 2}
   - {fileID: 11400000, guid: 171083ec7a3923a4495da11e8e3e308b, type: 2}
   - {fileID: 11400000, guid: a5ccdd619285b584e8c79d36780d02a0, type: 2}
 --- !u!222 &707606094
@@ -71524,6 +71829,8 @@ MonoBehaviour:
   _spotManager: {fileID: 681891816}
   _spotEditor: {fileID: 1663832532}
   _cafeOpener: {fileID: 2131011339}
+  _data:
+    _clientHolders: []
 --- !u!1 &723849150
 GameObject:
   m_ObjectHideFlags: 0
@@ -72405,7 +72712,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 48864ece2bbbbb140bfbb697661329f8, type: 3}
   m_Resource: {fileID: 8300000, guid: 48864ece2bbbbb140bfbb697661329f8, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.25
+  m_Volume: 0.35
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -72805,6 +73112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!114 &747319446
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -73405,7 +73713,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -341.07812, y: -207.69229}
+  m_AnchoredPosition: {x: -341.07812, y: -207.69226}
   m_SizeDelta: {x: 356.90002, y: 215.79999}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &752640532
@@ -73831,6 +74139,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: EnviromentTable
+  _isLogging: 0
   _pauseTime: 2
 --- !u!1 &754222384
 GameObject:
@@ -75756,6 +76065,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!114 &777757956
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -85977,10 +86287,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stateTrueAudio:
     _audio: {fileID: 8300000, guid: 714807a8f29fccb409057c7290459846, type: 3}
-    _volume: 0.4
+    _volume: 0.3
   _stateFalseAudio:
     _audio: {fileID: 8300000, guid: 57eaf4154e463ed46a7d5eca2987b1c3, type: 3}
-    _volume: 0.4
+    _volume: 0.3
 --- !u!82 &862245695
 AudioSource:
   m_ObjectHideFlags: 0
@@ -86248,6 +86558,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!114 &863326231
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -87255,6 +87566,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!114 &881896153
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -87844,6 +88156,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!114 &886497215
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -88478,7 +88791,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 0544d5d126b31b54ab2d159868748be1, type: 3}
   m_Resource: {fileID: 8300000, guid: 0544d5d126b31b54ab2d159868748be1, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.4
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -88739,7 +89052,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 246.92499, y: -116.20001}
+  m_AnchoredPosition: {x: 246.92493, y: -116.20001}
   m_SizeDelta: {x: 493.85, y: 232.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &903045644
@@ -88793,7 +89106,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moreUI: {fileID: 1103815207}
-  _hoverListener: {fileID: 0}
 --- !u!114 &903045647
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -89232,6 +89544,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!114 &909685885
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -89717,8 +90030,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _defaultItems:
-  - {fileID: 11400000, guid: 552016a33cc72bb44b4eb6addf12b2f4, type: 2}
   - {fileID: 11400000, guid: 897523a5d3e8cc843a91257d85a26f6b, type: 2}
+  - {fileID: 11400000, guid: 552016a33cc72bb44b4eb6addf12b2f4, type: 2}
   _allItems:
   - {fileID: 11400000, guid: 3278518d00037514cbdf7435e0cc9325, type: 2}
   - {fileID: 11400000, guid: 24d7a663aa0937f4b8ed7ab357e76093, type: 2}
@@ -89737,6 +90050,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 521ee8b0837e79540b0c3208ad1528ad, type: 2}
   - {fileID: 11400000, guid: 72a975fb0e4957047b8160771602c871, type: 2}
   - {fileID: 11400000, guid: ea7fc1cecae589b43917f7d4735ec54a, type: 2}
+  _data:
+    _availableItems: []
 --- !u!4 &917452952
 Transform:
   m_ObjectHideFlags: 0
@@ -90219,6 +90534,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!1 &922864318
 GameObject:
   m_ObjectHideFlags: 0
@@ -90561,7 +90877,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -586.1541, y: -149.53847}
+  m_AnchoredPosition: {x: -586.1542, y: -149.53847}
   m_SizeDelta: {x: 448.2, y: 448.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &932680253
@@ -97465,7 +97781,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stateTrueAudio:
     _audio: {fileID: 8300000, guid: 0c54a8177d2083240b51f21d08e22d26, type: 3}
-    _volume: 0.35
+    _volume: 0.5
   _stateFalseAudio:
     _audio: {fileID: 8300000, guid: 204a8aa9082678b40b9c5f533c6a12ef, type: 3}
     _volume: 0.65
@@ -98074,6 +98390,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: TutorialTable
+  _isLogging: 0
 --- !u!1 &974057898
 GameObject:
   m_ObjectHideFlags: 0
@@ -98362,7 +98679,7 @@ MonoBehaviour:
   _message: Tutorial.48
   _buttonMessage: TutorialButton.0
   _positionMode: 2
-  _positionOffset: 33.2
+  _positionOffset: 16.6
   _isHoleBlocked: 1
   _isButtonVisible: 1
 --- !u!1 &978888510
@@ -98416,6 +98733,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!114 &978888513
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -98869,7 +99187,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 390.10004, y: -45.649994}
+  m_AnchoredPosition: {x: 390.09998, y: -45.650024}
   m_SizeDelta: {x: 182.59998, y: 91.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &983463329
@@ -99294,6 +99612,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!114 &994878994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -99643,6 +99962,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!1 &995745215
 GameObject:
   m_ObjectHideFlags: 0
@@ -106688,6 +107008,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!1 &1023401557
 GameObject:
   m_ObjectHideFlags: 0
@@ -106839,6 +107160,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!114 &1023401562
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -107078,7 +107400,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 153.55005, y: -45.649994}
+  m_AnchoredPosition: {x: 153.55005, y: -45.650024}
   m_SizeDelta: {x: 307.1, y: 91.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1025297752
@@ -108476,6 +108798,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!1 &1039953977
 GameObject:
   m_ObjectHideFlags: 0
@@ -115043,7 +115366,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -157.70001, y: -161.85}
+  m_AnchoredPosition: {x: -157.70007, y: -161.84}
   m_SizeDelta: {x: 315.4, y: 74.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1059864629
@@ -115433,10 +115756,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stateTrueAudio:
     _audio: {fileID: 8300000, guid: 0cc7b3299a50b7540b751a110cfa7d8d, type: 3}
-    _volume: 0.68
+    _volume: 0.4
   _stateFalseAudio:
     _audio: {fileID: 8300000, guid: cf0fd38c21c07e845a5b5b66b546ef8b, type: 3}
-    _volume: 0.68
+    _volume: 0.4
   _activable:
     _underlyingValue: {fileID: 1881828147}
 --- !u!1 &1068844922
@@ -115711,6 +116034,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!114 &1069238607
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116333,7 +116657,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 806685565534041565, guid: a4eafeffb2ec0104cb391da09e02b2c0, type: 3}
       propertyPath: m_Volume
-      value: 0.22
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 806685565534041565, guid: a4eafeffb2ec0104cb391da09e02b2c0, type: 3}
       propertyPath: m_Resource
@@ -118025,11 +118349,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _defaultMaxSpace: 75
-  <Data>k__BackingField:
-    _ingredients:
-      _itemCounts: []
-    _maxSpace: 0
-    _nowSpace: 0
   _defaultIngredients:
     _itemCounts: []
   _upgradeManager: {fileID: 1299343206}
@@ -118124,11 +118443,11 @@ MonoBehaviour:
   _pauseManager: {fileID: 1267245106}
   _daytimeStarts:
   - _daytime: 0
-    _startHour: 8
-    _startMinute: 0
-  - _daytime: 1
-    _startHour: 11
+    _startHour: 7
     _startMinute: 30
+  - _daytime: 1
+    _startHour: 10
+    _startMinute: 0
   - _daytime: 2
     _startHour: 18
     _startMinute: 30
@@ -118709,6 +119028,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8e667dd5827ddfd4a9ab0cb515eb2863, type: 2}
   - {fileID: 11400000, guid: 64cdc8e31301fc9488443cb9e57df709, type: 2}
   - {fileID: 11400000, guid: b219affaf916bbb438d96916f471b874, type: 2}
+  _data:
+    _availableItems: []
   _cafeOpener: {fileID: 2131011339}
 --- !u!4 &1103085984
 Transform:
@@ -118799,7 +119120,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 246.92499, y: -257.3}
+  m_AnchoredPosition: {x: 246.92493, y: -257.3}
   m_SizeDelta: {x: 493.85, y: 514.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1103815207
@@ -119109,7 +119430,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: a6c855bd7411ca44abcc526562e21467, type: 3}
   m_Resource: {fileID: 8300000, guid: a6c855bd7411ca44abcc526562e21467, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.7
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -121513,6 +121834,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!114 &1153640362
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -121648,7 +121970,6 @@ MonoBehaviour:
   _fatigueDefault: 0
   _needHoursToRecovery: 10
   _decorManager: {fileID: 403464058}
-  _decorBonus: 1
   _data:
     _fatigueNow: 0
     _fatigueMax: 0
@@ -121830,6 +122151,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!1 &1156787201
 GameObject:
   m_ObjectHideFlags: 0
@@ -122170,142 +122492,6 @@ MonoBehaviour:
     m_ColorSpace: -1
     m_NumColorKeys: 3
     m_NumAlphaKeys: 2
---- !u!1 &1159934999
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1159935000}
-  - component: {fileID: 1159935002}
-  - component: {fileID: 1159935001}
-  m_Layer: 0
-  m_Name: Text (TMP)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1159935000
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1159934999}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 516692921}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1159935001
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1159934999}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_text: Close
-  m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
-  m_fontMaterial: {fileID: 0}
-  m_fontMaterials: []
-  m_fontColor32:
-    serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
-  m_enableVertexGradient: 0
-  m_colorMode: 3
-  m_fontColorGradient:
-    topLeft: {r: 1, g: 1, b: 1, a: 1}
-    topRight: {r: 1, g: 1, b: 1, a: 1}
-    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
-    bottomRight: {r: 1, g: 1, b: 1, a: 1}
-  m_fontColorGradientPreset: {fileID: 0}
-  m_spriteAsset: {fileID: 0}
-  m_tintAllSprites: 0
-  m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: -1183493901
-  m_overrideHtmlColors: 0
-  m_faceColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
-  m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
-  m_fontStyle: 0
-  m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
-  m_textAlignment: 65535
-  m_characterSpacing: 0
-  m_wordSpacing: 0
-  m_lineSpacing: 0
-  m_lineSpacingMax: 0
-  m_paragraphSpacing: 0
-  m_charWidthMaxAdj: 0
-  m_TextWrappingMode: 1
-  m_wordWrappingRatios: 0.4
-  m_overflowMode: 0
-  m_linkedTextComponent: {fileID: 0}
-  parentLinkedComponent: {fileID: 0}
-  m_enableKerning: 0
-  m_ActiveFontFeatures: 6e72656b
-  m_enableExtraPadding: 0
-  checkPaddingRequired: 0
-  m_isRichText: 1
-  m_EmojiFallbackSupport: 1
-  m_parseCtrlCharacters: 1
-  m_isOrthographic: 1
-  m_isCullingEnabled: 0
-  m_horizontalMapping: 0
-  m_verticalMapping: 0
-  m_uvLineOffset: 0
-  m_geometrySortingOrder: 0
-  m_IsTextObjectScaleStatic: 0
-  m_VertexBufferAutoSizeReduction: 0
-  m_useMaxVisibleDescender: 1
-  m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
-  m_isUsingLegacyAnimationComponent: 0
-  m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
-  m_baseMaterial: {fileID: 0}
-  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!222 &1159935002
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1159934999}
-  m_CullTransparentMesh: 1
 --- !u!1 &1161855867
 GameObject:
   m_ObjectHideFlags: 0
@@ -128623,7 +128809,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 72a975fb0e4957047b8160771602c871, type: 2}
   - {fileID: 11400000, guid: 521ee8b0837e79540b0c3208ad1528ad, type: 2}
   - {fileID: 11400000, guid: 7755e9f6a50793a45afe949b36406069, type: 2}
-  _itemManager: {fileID: 0}
+  _itemManager: {fileID: 917452951}
   _bedTypesManager: {fileID: 585307979}
   _ingredientStorage: {fileID: 397481016}
 --- !u!1 &1181311992
@@ -128800,6 +128986,7 @@ GameObject:
   - component: {fileID: 1183236649}
   - component: {fileID: 1183236648}
   - component: {fileID: 1183236650}
+  - component: {fileID: 1183236651}
   m_Layer: 0
   m_Name: ItemsList
   m_TagString: Untagged
@@ -128920,6 +129107,22 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!114 &1183236651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1183236646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31f00c2292cb140419170a40e94d07bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hoverListener: {fileID: 1569875507}
+  _isScrollBlocked: 0
+  _isHoverReversed: 0
+  _isDebug: 0
 --- !u!1 &1183464756
 GameObject:
   m_ObjectHideFlags: 0
@@ -129513,6 +129716,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!1 &1187737946
 GameObject:
   m_ObjectHideFlags: 0
@@ -130145,10 +130349,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stateTrueAudio:
     _audio: {fileID: 8300000, guid: 0cc7b3299a50b7540b751a110cfa7d8d, type: 3}
-    _volume: 0.68
+    _volume: 0.4
   _stateFalseAudio:
     _audio: {fileID: 8300000, guid: cf0fd38c21c07e845a5b5b66b546ef8b, type: 3}
-    _volume: 0.68
+    _volume: 0.4
   _activable:
     _underlyingValue: {fileID: 568093279}
 --- !u!1 &1194021926
@@ -130814,6 +131018,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!222 &1200156335
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -131642,6 +131847,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!1001 &1217744070
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -138274,6 +138480,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!1 &1239913669
 GameObject:
   m_ObjectHideFlags: 0
@@ -139059,6 +139266,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: EnviromentTable
+  _isLogging: 0
 --- !u!1 &1249789428
 GameObject:
   m_ObjectHideFlags: 0
@@ -139325,8 +139533,8 @@ MonoBehaviour:
   _timeMultiplier: {fileID: 1095035883}
   _spaceManager: {fileID: 1436171022}
   _foodManager: {fileID: 1103085983}
-  _oneCafeSpaceMultiplier: 0.07
-  _oneFoodMultiplier: 0.04
+  _oneCafeSpaceMultiplier: 0.08
+  _oneFoodMultiplier: 0.05
 --- !u!1 &1254577191
 GameObject:
   m_ObjectHideFlags: 0
@@ -139909,6 +140117,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!1 &1260904709
 GameObject:
   m_ObjectHideFlags: 0
@@ -140587,6 +140796,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!114 &1263605499
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141727,6 +141937,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!1 &1273212734
 GameObject:
   m_ObjectHideFlags: 0
@@ -141915,6 +142126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!114 &1274174811
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143129,6 +143341,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!1 &1292577070
 GameObject:
   m_ObjectHideFlags: 0
@@ -143661,6 +143874,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b9a3806faa925c349973bf0ea4d3f160, type: 2}
   - {fileID: 11400000, guid: 2ab180e87c606ae48ba55132f53ee430, type: 2}
   - {fileID: 11400000, guid: 7a3095255cbd1074dba21111d12d19ae, type: 2}
+  _data:
+    _availableItems: []
   _holders:
   - {fileID: 1667349450}
   - {fileID: 532120962}
@@ -143736,6 +143951,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!114 &1297669858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143872,7 +144088,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 664, y: 235.30789}
+  m_SizeDelta: {x: 664, y: 262.8079}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1297945088
 MonoBehaviour:
@@ -144165,6 +144381,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7c63e4bc923165b4c9cce74d9f04ba83, type: 2}
   - {fileID: 11400000, guid: 171083ec7a3923a4495da11e8e3e308b, type: 2}
   - {fileID: 11400000, guid: a5ccdd619285b584e8c79d36780d02a0, type: 2}
+  _data:
+    _availableItems: []
   _localUpgradeManagers:
   - {fileID: 1119929040}
   - {fileID: 1005973284}
@@ -144671,10 +144889,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stateTrueAudio:
     _audio: {fileID: 8300000, guid: 93691e3951a18d14aae84b4817d8b89f, type: 3}
-    _volume: 0.55
+    _volume: 0.5
   _stateFalseAudio:
     _audio: {fileID: 8300000, guid: 62bf65aa953ee5141beeb572550b40c7, type: 3}
-    _volume: 0.55
+    _volume: 0.5
   _activator: {fileID: 2017835728}
 --- !u!1 &1310730263
 GameObject:
@@ -146001,6 +146219,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!114 &1333853772
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -146410,7 +146629,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 1d88234bc198e774b8b3797a5f30f794, type: 3}
   m_Resource: {fileID: 8300000, guid: 1d88234bc198e774b8b3797a5f30f794, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.9
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -146851,6 +147070,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!1 &1349613338
 GameObject:
   m_ObjectHideFlags: 0
@@ -148076,6 +148296,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!114 &1375961427
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148887,6 +149108,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!1 &1389124696
 GameObject:
   m_ObjectHideFlags: 0
@@ -149734,6 +149956,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!1 &1404715355
 GameObject:
   m_ObjectHideFlags: 0
@@ -150271,6 +150494,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!114 &1410410470
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150535,7 +150759,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 806685565534041565, guid: a4eafeffb2ec0104cb391da09e02b2c0, type: 3}
       propertyPath: m_Volume
-      value: 0.95
+      value: 0.35
       objectReference: {fileID: 0}
     - target: {fileID: 806685565534041565, guid: a4eafeffb2ec0104cb391da09e02b2c0, type: 3}
       propertyPath: m_Resource
@@ -150545,6 +150769,10 @@ PrefabInstance:
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: 27d00c229acaf524d8ba6a73570e3cdb, type: 3}
+    - target: {fileID: 806685565534041565, guid: a4eafeffb2ec0104cb391da09e02b2c0, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 858868315869272246, guid: a4eafeffb2ec0104cb391da09e02b2c0, type: 3}
       propertyPath: _additions.Array.size
       value: 1
@@ -157376,6 +157604,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!114 &1433094476
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -158371,10 +158600,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stateTrueAudio:
     _audio: {fileID: 8300000, guid: 4fee3e1b388f7874fb2644e9792e3d30, type: 3}
-    _volume: 0.8
+    _volume: 0.6
   _stateFalseAudio:
     _audio: {fileID: 8300000, guid: 5dd27f6b91a6c4649a4ce1b7b3e4d6d3, type: 3}
-    _volume: 0.8
+    _volume: 0.6
   _activable:
     _underlyingValue: {fileID: 1493344180}
 --- !u!1 &1445487952
@@ -158527,6 +158756,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!1 &1446611434
 GameObject:
   m_ObjectHideFlags: 0
@@ -163752,7 +163982,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -157.70001, y: -62.25}
+  m_AnchoredPosition: {x: -157.70007, y: -62.25}
   m_SizeDelta: {x: 315.4, y: 124.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1451246558
@@ -164253,6 +164483,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!1 &1456379069
 GameObject:
   m_ObjectHideFlags: 0
@@ -164861,6 +165092,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!1 &1463500058
 GameObject:
   m_ObjectHideFlags: 0
@@ -168482,7 +168714,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -168536,10 +168768,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stateTrueAudio:
     _audio: {fileID: 8300000, guid: e2f0d21ea80efdf4e98c9b3d5629ccfa, type: 3}
-    _volume: 0.75
+    _volume: 0.8
   _stateFalseAudio:
     _audio: {fileID: 8300000, guid: 38a17b3d0b2b175498bdc339da4f3f62, type: 3}
-    _volume: 0.75
+    _volume: 0.8
   _bed: {fileID: 442335472}
 --- !u!1 &1516808409
 GameObject:
@@ -169147,6 +169379,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!114 &1532211915
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169215,7 +169448,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 8763d81560025884bb3a2e1089751ca0, type: 3}
   m_Resource: {fileID: 8300000, guid: 8763d81560025884bb3a2e1089751ca0, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.65
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -169339,6 +169572,8 @@ Transform:
   m_Children:
   - {fileID: 1340445177}
   - {fileID: 963940581}
+  - {fileID: 121609975}
+  - {fileID: 617222235}
   m_Father: {fileID: 1832416031}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1537153864
@@ -169866,6 +170101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!1 &1541666139
 GameObject:
   m_ObjectHideFlags: 0
@@ -171077,8 +171313,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 108.4, y: -33.7}
-  m_SizeDelta: {x: 216.8, y: 67.4}
+  m_AnchoredPosition: {x: 185.4, y: -101.6}
+  m_SizeDelta: {x: 370.8, y: 221.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1559346184
 CanvasRenderer:
@@ -171115,17 +171351,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 42
-    m_Right: 42
-    m_Top: 42
-    m_Bottom: 42
+    m_Left: 127
+    m_Right: 127
+    m_Top: 127
+    m_Bottom: 127
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 132.8, y: 132.8}
   m_Spacing: {x: 16.6, y: 16.6}
   m_Constraint: 0
-  m_ConstraintCount: 2
+  m_ConstraintCount: 4
 --- !u!1 &1560551271
 GameObject:
   m_ObjectHideFlags: 0
@@ -171744,6 +171980,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!114 &1566733900
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172861,6 +173098,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!114 &1579759046
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173151,6 +173389,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!114 &1588447794
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174229,6 +174468,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!114 &1600417328
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174851,6 +175091,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!114 &1609229760
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -175817,6 +176058,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: TutorialTable
+  _isLogging: 0
 --- !u!114 &1625261776
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -175955,7 +176197,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 216.8, y: 67.4}
+  m_SizeDelta: {x: 370.8, y: 212.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1629914687
 MonoBehaviour:
@@ -175970,15 +176212,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.3207547, g: 0.3207547, b: 0.3207547, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 1962677573, guid: 85d6f516ef892374d8cbedfdbd4b4a83, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -175986,7 +176228,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 1.83
 --- !u!222 &1629914688
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -176007,8 +176249,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HorizontalFit: 2
-  m_VerticalFit: 2
+  m_HorizontalFit: 1
+  m_VerticalFit: 1
 --- !u!114 &1629914690
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -177583,11 +177825,13 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: ad07f406453fae445a4b91d496a34c5f, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4869028075311166806, guid: a4eafeffb2ec0104cb391da09e02b2c0, type: 3}
     m_RemovedGameObjects:
     - {fileID: 3397518800810593296, guid: a4eafeffb2ec0104cb391da09e02b2c0, type: 3}
     - {fileID: 6276765691045298400, guid: a4eafeffb2ec0104cb391da09e02b2c0, type: 3}
     - {fileID: 1785415411994811533, guid: a4eafeffb2ec0104cb391da09e02b2c0, type: 3}
+    - {fileID: 1188896765628707652, guid: a4eafeffb2ec0104cb391da09e02b2c0, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 1514369832554499183, guid: a4eafeffb2ec0104cb391da09e02b2c0, type: 3}
       insertIndex: -1
@@ -177918,6 +178162,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!114 &1653621410
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178063,7 +178308,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 872ab4d6db498bb498ac25893ec38b9a, type: 3}
   m_Resource: {fileID: 8300000, guid: 872ab4d6db498bb498ac25893ec38b9a, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.8
+  m_Volume: 0.75
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -178338,7 +178583,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 427.45, y: 0}
+  m_AnchoredPosition: {x: 427.45007, y: 0}
   m_SizeDelta: {x: 605.9, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1656205582
@@ -178764,6 +179009,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!1 &1657455527
 GameObject:
   m_ObjectHideFlags: 0
@@ -179140,6 +179386,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!114 &1660378984
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -179516,7 +179763,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 806685565534041565, guid: a4eafeffb2ec0104cb391da09e02b2c0, type: 3}
       propertyPath: m_Volume
-      value: 0.5
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 806685565534041565, guid: a4eafeffb2ec0104cb391da09e02b2c0, type: 3}
       propertyPath: m_Resource
@@ -179937,6 +180184,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!1 &1669975913
 GameObject:
   m_ObjectHideFlags: 0
@@ -180404,7 +180652,7 @@ MonoBehaviour:
   _message: Tutorial.47
   _buttonMessage: TutorialButton.0
   _positionMode: 0
-  _positionOffset: 33.2
+  _positionOffset: 16.6
   _isHoleBlocked: 1
   _isButtonVisible: 1
 --- !u!1 &1674498012
@@ -180657,7 +180905,7 @@ Canvas:
   m_RenderMode: 1
   m_Camera: {fileID: 206361366}
   m_PlaneDistance: 5
-  m_PixelPerfect: 1
+  m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
@@ -182484,7 +182732,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -183436,6 +183684,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!1 &1708215815
 GameObject:
   m_ObjectHideFlags: 0
@@ -184728,6 +184977,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!1 &1731182403
 GameObject:
   m_ObjectHideFlags: 0
@@ -185955,6 +186205,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!1 &1739330156
 GameObject:
   m_ObjectHideFlags: 0
@@ -192140,6 +192391,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!114 &1751679734
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198015,7 +198267,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 560.35, y: -83.19998}
+  m_AnchoredPosition: {x: 560.35, y: -83.19995}
   m_SizeDelta: {x: 99.6, y: 132.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1767145718
@@ -198027,7 +198279,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1767145716}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 0836704ce75883b4dad94fee4e4a1d23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -198074,6 +198326,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+  _audioSource: {fileID: 121609976}
 --- !u!114 &1767145719
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -199062,6 +199315,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: EnviromentTable
+  _isLogging: 0
 --- !u!1001 &1785123700
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -199892,6 +200146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!114 &1796658554
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -200403,6 +200658,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!1 &1801653608
 GameObject:
   m_ObjectHideFlags: 0
@@ -211234,6 +211490,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!1 &1818679588
 GameObject:
   m_ObjectHideFlags: 0
@@ -211573,6 +211830,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!114 &1820477003
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -212274,6 +212532,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: TutorialTable
+  _isLogging: 0
 --- !u!114 &1828887445
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214277,6 +214536,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: PopularityLevelTable
+  _isLogging: 0
 --- !u!114 &1852575586
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -215110,6 +215370,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!114 &1864235162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -215780,7 +216041,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 806685565534041565, guid: a4eafeffb2ec0104cb391da09e02b2c0, type: 3}
       propertyPath: m_Volume
-      value: 0.65
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 806685565534041565, guid: a4eafeffb2ec0104cb391da09e02b2c0, type: 3}
       propertyPath: m_Resource
@@ -215790,6 +216051,10 @@ PrefabInstance:
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: e99425128dbcc90499a57cb949ebe1e7, type: 3}
+    - target: {fileID: 806685565534041565, guid: a4eafeffb2ec0104cb391da09e02b2c0, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1514369832554499183, guid: a4eafeffb2ec0104cb391da09e02b2c0, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5.3846207
@@ -216945,10 +217210,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stateTrueAudio:
     _audio: {fileID: 8300000, guid: e2732d0918691304d9f0b23ae7207d35, type: 3}
-    _volume: 0.7
+    _volume: 0.6
   _stateFalseAudio:
     _audio: {fileID: 8300000, guid: c45fdcc6a62709149acefa50d92e6ba6, type: 3}
-    _volume: 0.7
+    _volume: 0.6
   _activable:
     _underlyingValue: {fileID: 810907697}
 --- !u!1 &1883755064
@@ -219456,7 +219721,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 269e416814473684eb29d5bf08c3e597, type: 3}
   m_Resource: {fileID: 8300000, guid: 269e416814473684eb29d5bf08c3e597, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.65
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -219707,6 +219972,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1924294700}
+  - component: {fileID: 1924294701}
   m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
@@ -219736,6 +220002,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1924294701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1924294696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31f00c2292cb140419170a40e94d07bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hoverListener: {fileID: 1569875507}
+  _isScrollBlocked: 0
+  _isHoverReversed: 0
+  _isDebug: 0
 --- !u!1 &1924935820
 GameObject:
   m_ObjectHideFlags: 0
@@ -219907,6 +220189,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!1 &1925053145
 GameObject:
   m_ObjectHideFlags: 0
@@ -221707,6 +221990,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!114 &1951607902
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -222150,6 +222434,10 @@ PrefabInstance:
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: 252420800ec0efb4496e930ec0af4ddf, type: 3}
+    - target: {fileID: 806685565534041565, guid: a4eafeffb2ec0104cb391da09e02b2c0, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 858868315869272246, guid: a4eafeffb2ec0104cb391da09e02b2c0, type: 3}
       propertyPath: _additions.Array.size
       value: 1
@@ -222583,6 +222871,7 @@ MonoBehaviour:
   _repairButton: {fileID: 445049855}
   _tutorialManager: {fileID: 841634105}
   _priceText: {fileID: 1588447795}
+  _activatorManager: {fileID: 800858057}
   _technicStrengthShow: {fileID: 11400000, guid: 5c5e9bb4f8ad81e4285b8b96d8ea731b, type: 2}
   _upgradeManager: {fileID: 1299343206}
   _strengthSlider: {fileID: 97124469}
@@ -227880,6 +228169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!114 &1961705736
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -229191,6 +229481,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!114 &1980322520
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -230702,7 +230993,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 1112669737, guid: 69cc2dbbf4e4daa47960f0376c98cf08, type: 3}
+  m_Sprite: {fileID: -698757038, guid: 69cc2dbbf4e4daa47960f0376c98cf08, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -230737,8 +231028,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 332, y: -207.55789}
-  m_SizeDelta: {x: 664, y: 55.5}
+  m_AnchoredPosition: {x: 332, y: -221.30789}
+  m_SizeDelta: {x: 664, y: 83}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1999680219
 GameObject:
@@ -230914,6 +231205,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!114 &2000209177
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -231507,6 +231799,10 @@ PrefabInstance:
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: 96b15d376acc483498d729c262466120, type: 3}
+    - target: {fileID: 806685565534041565, guid: a4eafeffb2ec0104cb391da09e02b2c0, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1514369832554499183, guid: a4eafeffb2ec0104cb391da09e02b2c0, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.5384674
@@ -232336,6 +232632,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!1 &2019807797
 GameObject:
   m_ObjectHideFlags: 0
@@ -236443,6 +236740,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!1 &2089755312
 GameObject:
   m_ObjectHideFlags: 0
@@ -236494,6 +236792,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!114 &2089755315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -238521,6 +238820,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!1 &2122801727
 GameObject:
   m_ObjectHideFlags: 0
@@ -238851,8 +239151,8 @@ MonoBehaviour:
   _tutorialManager: {fileID: 841634105}
   _pool: {fileID: 1508871257}
   _spawnTime:
-    _min: 12
-    _max: 22
+    _min: 15
+    _max: 25
     _isGreaterZero: 1
   _noClientsMultiplier: 0.5
   _data:
@@ -239803,10 +240103,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stateTrueAudio:
     _audio: {fileID: 8300000, guid: 8077ac07c0c50e84a95feef44b6725fe, type: 3}
-    _volume: 0.6
+    _volume: 0.2
   _stateFalseAudio:
     _audio: {fileID: 8300000, guid: 759d1c904bac2b34399dc719afb7c653, type: 3}
-    _volume: 0.6
+    _volume: 0.2
 --- !u!1 &2139191190
 GameObject:
   m_ObjectHideFlags: 0
@@ -241289,6 +241589,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!114 &7249450785174069313
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -241730,6 +242031,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!114 &8346870041821540953
 MonoBehaviour:
   m_ObjectHideFlags: 0

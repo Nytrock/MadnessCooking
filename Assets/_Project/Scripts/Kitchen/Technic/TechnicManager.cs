@@ -24,9 +24,10 @@ public class TechnicManager : SaveableItemManager<Technic, KitchenData>, IUpgrad
         TechnicChanged?.Invoke();
     }
 
-    public bool HaveTechnic(Technic technic) {
+    public bool IsTechnicAccessible(Technic technic) {
         if (!_data.IsItemAvailable(technic))
             return false;
+
         TechnicHolder holder = FindHolderByTechic(technic);
         if (holder == null)
             return false;

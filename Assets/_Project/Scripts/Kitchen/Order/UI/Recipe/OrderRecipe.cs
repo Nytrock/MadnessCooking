@@ -25,8 +25,8 @@ public class OrderRecipe : FoodRecipe<OrderRecipePart> {
     }
 
     protected override void SetupTechnic() {
-        bool haveTechnic = _technicManager.HaveTechnic(_food.TypeTechnic);
-        _techicIcon.SetTechnic(_food.TypeTechnic, haveTechnic);
+        bool isTechicAcsessible = _technicManager.IsTechnicAccessible(_food.TypeTechnic);
+        _techicIcon.SetTechnic(_food.TypeTechnic, isTechicAcsessible);
     }
 
     public void UpdateRecipeIngredients() {

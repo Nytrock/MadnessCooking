@@ -8,13 +8,18 @@ public class IngredientStorageUI : MonoBehaviour, IActivable {
     [SerializeField] protected GameObject _panel;
     [SerializeField] protected IngredientCountButtonPool _buttonPool;
     [SerializeField] private TextMeshProUGUI _sizeText;
-    protected List<IngredientCountButton> _buttons = new();
+    protected readonly List<IngredientCountButton> _buttons = new();
 
     public event Action<bool> StateChanged;
 
     protected virtual void Awake() {
         _storage.IngredientAdded += AddIngredientCount;
         _storage.IngredientRemoved += RemoveIngredient;
+        _storage.LoadingDataEnded += SubcribeToSpaceChanging;
+    }
+
+    private void SubcribeToSpaceChanging() {
+        _storage.Data.SpaceChanged += UpdateSizeRenderer;
     }
 
     protected virtual void Start() {
@@ -28,12 +33,10 @@ public class IngredientStorageUI : MonoBehaviour, IActivable {
 
     private void AddIngredientCount(IngredientCount count) {
         IngredientCountButton button = _buttonPool.GetObject(count);
-        button.IngredientCount.CountChanged += delegate { UpdateSizeRenderer(); };
         _buttons.Add(button);
     }
 
     private void RemoveIngredientCount(IngredientCountButton button) {
-        button.IngredientCount.CountChanged -= delegate { UpdateSizeRenderer(); };
         _buttons.Remove(button);
         _buttonPool.PutObject(button);
     }

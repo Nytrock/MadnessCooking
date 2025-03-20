@@ -66,7 +66,9 @@ public class TechnicHolderData {
             return;
 
         _nowWaitTime += InGameTime.Instance.NormalizedDeltaTime;
-        _nowOrder.UpdateProgress(_nowWaitTime / _needWaitTime);
+        if (_isCooking)
+            _nowOrder.UpdateProgress(_nowWaitTime / _needWaitTime);
+
         if (_nowWaitTime > _needWaitTime) {
             if (_isCooking)
                 StopCook();

@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(TextMeshProUGUI))]
 public class LocalizedText : MonoBehaviour {
     [SerializeField] private string _table;
+    [SerializeField] private bool _isLogging;
     protected TextMeshProUGUI _text;
 
     protected string _key;

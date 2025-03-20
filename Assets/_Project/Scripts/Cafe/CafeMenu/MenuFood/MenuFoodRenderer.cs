@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +9,8 @@ public class MenuFoodRenderer : MonoBehaviour {
 
     private MenuFood _menuFood;
     private Button _button;
+
+    public event Action<bool> BanishedStateChanged;
 
     private void Awake() {
         _button = GetComponent<Button>();
@@ -26,6 +29,10 @@ public class MenuFoodRenderer : MonoBehaviour {
     }
 
     private void UpdateBanishedState() {
+        if (_banishedCross.activeSelf == _menuFood.IsBanished)
+            return;
+
         _banishedCross.SetActive(_menuFood.IsBanished);
+        BanishedStateChanged?.Invoke(_menuFood.IsBanished);
     }
 }

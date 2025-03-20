@@ -9,6 +9,7 @@ public class TechnicRepairUI : MonoBehaviour, IActivable {
     [SerializeField] private Button _repairButton;
     [SerializeField] private TutorialManager _tutorialManager;
     [SerializeField] private TechnicRepairUIText _priceText;
+    [SerializeField] private UIActivatorsManager _activatorManager;
 
     [Header("Upgrades")]
     [SerializeField] private BaseUpgrade _technicStrengthShow;
@@ -38,8 +39,8 @@ public class TechnicRepairUI : MonoBehaviour, IActivable {
     }
 
     public void SetTechnic(TechnicHolder technicHolder) {
-        if (technicHolder == _nowTechnicHolder)
-            return;
+        if (technicHolder != _nowTechnicHolder)
+            _activatorManager.CloseNowActivable();
 
         _targetPoint.position = technicHolder.UITarget.position;
         _nowTechnicHolder = technicHolder;
@@ -57,9 +58,6 @@ public class TechnicRepairUI : MonoBehaviour, IActivable {
     }
 
     public void ChangeState(bool newState) {
-        if (newState == _panel.activeSelf && _panel.activeSelf == false)
-            return;
-
         _panel.SetActive(newState);
         StateChanged?.Invoke(newState);
 

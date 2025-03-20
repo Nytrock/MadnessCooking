@@ -1,9 +1,8 @@
 using UnityEngine;
 
-public class FoodShop : BaseChooseShop<Food, OfficeData>, IUpgradeable<KitchenUpgradeData> {
+public class FoodShop : BaseChooseShop<Food, OfficeData> {
     [SerializeField] private IngredientManager _ingredientManager;
     [SerializeField] private TechnicManager _technicManager;
-    private KitchenUpgradeData _upgradeData;
 
     public override void GenerateShop() {
         base.GenerateShop();
@@ -21,7 +20,7 @@ public class FoodShop : BaseChooseShop<Food, OfficeData>, IUpgradeable<KitchenUp
         if (food == null)
             return false;
 
-        if (!_technicManager.HaveTechnic(food.TypeTechnic))
+        if (!_technicManager.IsItemAvailable(food.TypeTechnic))
             return false;
 
         foreach (var ingredientCount in food.Ingredients)
@@ -35,11 +34,6 @@ public class FoodShop : BaseChooseShop<Food, OfficeData>, IUpgradeable<KitchenUp
         data.FoodShop ??= new(_defaultItemsToBuy);
         _data = data.FoodShop;
         base.Bind(data);
-    }
-
-    public void BindUpgrade(KitchenUpgradeData upgradeData) {
-        _upgradeData = upgradeData;
-        (_itemView as FoodShopItemView).SetUpgradeDataToRecipe(_upgradeData);
     }
 
     public void CheckAddedUpgrade(BaseUpgrade upgrade) { }

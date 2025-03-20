@@ -8,29 +8,58 @@ public abstract class IngredientStorageRenderer : MonoBehaviour {
     [SerializeField] protected IngredientRenderer[] _ingredientsRenderers;
 
     protected List<IngredientRenderer> _availableIngredientRenderers;
-    private readonly IngredientCountList _ingredients = new();
+    private readonly IngredientCountList _ingredientsRenderersCount = new();
 
     private void Awake() {
         _ingredientStorage.IngredientCountAdded += CheckAddedIngredient;
         _ingredientStorage.IngredientCountRemoved += CheckRemovedIngredient;
+        _ingredientStorage.LoadingDataEnded += SetupNeedCountUpdating;
 
         _availableIngredientRenderers = _ingredientsRenderers.ToList();
         foreach (var renderer in _availableIngredientRenderers)
             renderer.Setup();
     }
 
-    private void CheckRemovedIngredient(IngredientCount removedCount) {
-        _ingredients.Remove(removedCount);
-        int removedRenderersCount = removedCount.Count / _needCount;
+    private void SetupNeedCountUpdating() {
+        if (_ingredientStorage.Data.MaxSpace == -1)
+            return;
 
+        _ingredientStorage.Data.SpaceChanged += UpdateMaxSpace;
+        UpdateMaxSpace();
+    }
+
+    private void UpdateMaxSpace() {
+        int newNeedCount = _ingredientStorage.Data.MaxSpace / _ingredientsRenderers.Length;
+        if (newNeedCount == _needCount)
+            return;
+
+        _needCount = newNeedCount;
+        foreach (var renderer in _availableIngredientRenderers)
+            renderer.Disable();
+        _ingredientsRenderersCount.Clear();
+
+        foreach (var ingredientCount in _ingredientStorage.Data.Ingredients)
+            CheckAddedIngredient(ingredientCount);
+    }
+
+    private void CheckRemovedIngredient(IngredientCount removedCount) {
+        int ingredientCount = _ingredientStorage.Data.GetIngredientCount(removedCount.Ingredient);
+        int nowRenderersCount = _ingredientsRenderersCount.GetIngredientCount(removedCount.Ingredient);
+        int newRenderersCount = ingredientCount / _needCount;
+
+        int removedRenderersCount = nowRenderersCount - newRenderersCount;
         if (removedRenderersCount == 0)
             return;
 
+        _ingredientsRenderersCount.Remove(removedCount.Ingredient, removedRenderersCount);
         for (int i = 0; i < _ingredientsRenderers.Length; i++) {
             if (removedRenderersCount == 0)
                 break;
 
             while (_ingredientsRenderers[i].Ingredient == removedCount.Ingredient) {
+                if (removedRenderersCount == 0)
+                    break;
+
                 DisableIngredientRenderer(i);
                 removedRenderersCount--;
             }
@@ -38,14 +67,15 @@ public abstract class IngredientStorageRenderer : MonoBehaviour {
     }
 
     private void CheckAddedIngredient(IngredientCount addedCount) {
-        _ingredients.Add(new(addedCount));
-        int nowCount = _ingredients.GetItemCount(addedCount.Ingredient);
-        int addedRenderersCount = nowCount / _needCount;
+        int ingredientCount = _ingredientStorage.Data.GetIngredientCount(addedCount.Ingredient);
+        int nowRenderersCount = _ingredientsRenderersCount.GetIngredientCount(addedCount.Ingredient);
+        int newRenderersCount = ingredientCount / _needCount;
 
+        int addedRenderersCount = newRenderersCount - nowRenderersCount;
         if (addedRenderersCount == 0)
             return;
 
-        _ingredients.Remove(addedCount.Ingredient, _needCount * addedRenderersCount);
+        _ingredientsRenderersCount.Add(addedCount.Ingredient, addedRenderersCount);
         for (int i = 0; i < addedRenderersCount; i++)
             EnableIngredientRenderer(addedCount.Ingredient);
     }

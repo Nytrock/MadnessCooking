@@ -13,7 +13,6 @@ public class OrdersUI : MonoBehaviour, IUpgradeable<KitchenUpgradeData>, IActiva
 
     private List<OrderButton> _orderButtons;
     private KitchenUpgradeData _upgradeData;
-    private Ingredient _spice;
 
     public event Action<bool> StateChanged;
 
@@ -22,10 +21,6 @@ public class OrdersUI : MonoBehaviour, IUpgradeable<KitchenUpgradeData>, IActiva
         _ordersManager.OrderRemoved += RemoveOrderButton;
         _panel.SetActive(false);
         _orderButtons = new();
-    }
-
-    private void Start() {
-        _spice = ConstIngredients.Instance.Spice;
     }
 
     public void ChangeState(bool newState) {

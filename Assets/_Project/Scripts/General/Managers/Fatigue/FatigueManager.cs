@@ -10,7 +10,7 @@ public class FatigueManager : Singleton<FatigueManager>, IBindable<GeneralData>,
     [SerializeField, Min(1)] private float _needHoursToRecovery;
     [SerializeField] private DecorManager _decorManager;
 
-    [SerializeField] private float _decorBonus = 1;
+    private float _decorBonus = 1;
     private float _sleepBonus;
     private bool _isTired;
 

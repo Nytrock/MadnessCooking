@@ -44,7 +44,9 @@ public class FarmBedUpgraderUI : ChoiceBuyUI<FarmBedUpgrade, FarmBedUpgradeButto
         FarmBedUpgrade upgrade = _choosedButton.Item;
         MoneyManager.Instance.ChangeMoney(-upgrade.PriceToAdd);
         FatigueManager.Instance.AddFatigue(upgrade.FatigueCoef);
+
         _changingBed.AddUpgrade(upgrade);
+        _choiceButtonPool.PutObject(_choosedButton);
 
         foreach (var nextUpgrade in upgrade.NextItems)
             GenerateChoiceButton(nextUpgrade as FarmBedUpgrade);

@@ -7,6 +7,7 @@ public class ChoicePool<TItem, TButton> : Pool<TButton>
 
     public override TButton GetObject() {
         TButton button = base.GetObject();
+        button.transform.SetAsLastSibling();
         button.ChangeState(true);
         return button;
     }

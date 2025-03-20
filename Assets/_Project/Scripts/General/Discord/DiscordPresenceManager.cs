@@ -76,7 +76,6 @@ public class DiscordPresenceManager : MonoBehaviour {
         if (_discord == null)
             return;
 
-        ActivityManager activityManager = _discord.GetActivityManager();
-        activityManager.ClearActivity((res) => { });
+        _discord.Dispose();
     }
 }

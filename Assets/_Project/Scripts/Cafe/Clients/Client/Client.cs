@@ -16,7 +16,7 @@ public class Client : MonoBehaviour {
     private ClientsHolder _holder;
     private CafeSeat _seat;
 
-    public ClientData Data { get; private set; }
+    [field: SerializeField] public ClientData Data { get; private set; }
     public ClientUI ClientUI { get; private set; }
 
     public ClientGender Gender => _gender;
@@ -190,6 +190,7 @@ public class Client : MonoBehaviour {
     public void ResetState() {
         _nowState = null;
         _seat = null;
+        _holder = null;
 
         OrderActivated = null;
         ClientLeave = null;

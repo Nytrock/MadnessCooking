@@ -30,25 +30,14 @@ public class PopularityManager : MonoBehaviour, IBindable<CafeData> {
             Debug.Log("All popularity levels are OK");
     }
 
+    private void Awake() {
+        foreach (var level in _levels)
+            level.Initialize();
+    }
+
     public void LateStart() {
         LevelChanged?.Invoke(_nowLevel);
         XpChanged?.Invoke(_data.Xp);
-    }
-
-    [ContextMenu("AddXp")]
-    void TestAddXp() {
-        if (!Application.isPlaying)
-            return;
-
-        AddXp(100);
-    }
-
-    [ContextMenu("RemoveXp")]
-    private void TestRemoveXp() {
-        if (!Application.isPlaying)
-            return;
-
-        RemoveXp(100);
     }
 
     public void AddXp(float xp) {

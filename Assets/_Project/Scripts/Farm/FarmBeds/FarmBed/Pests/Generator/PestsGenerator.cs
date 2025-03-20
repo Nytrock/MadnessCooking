@@ -59,7 +59,6 @@ public class PestsGenerator : MonoBehaviour {
             return;
         }
 
-        CleanPests();
         _pestRemover.ChangeState(false);
     }
 

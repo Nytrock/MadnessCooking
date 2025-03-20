@@ -97,6 +97,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6856210257088720818}
   - component: {fileID: 3567313614728043962}
+  - component: {fileID: 6958599773789547834}
   m_Layer: 0
   m_Name: PestRemover
   m_TagString: Untagged
@@ -174,6 +175,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &6958599773789547834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 104683102999095311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b462f0947924dbf4b80b1db1ef9f5f61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isReversed: 0
 --- !u!1 &129988092482016357
 GameObject:
   m_ObjectHideFlags: 0
@@ -483,7 +497,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pool: {fileID: 1979318883052758845}
-  _pestRemover: {fileID: 104683102999095311}
+  _pestRemover: {fileID: 6958599773789547834}
   _maxPests: 8
   _onePestSlowdown: 0.0625
   _spawnTime:
@@ -812,7 +826,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 9c186a6afb079d146aad220f7395ad45, type: 3}
   m_Resource: {fileID: 8300000, guid: 9c186a6afb079d146aad220f7395ad45, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.5
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -29553,7 +29567,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pool: {fileID: 2600007182148234775}
-  _pestRemover: {fileID: 104683102999095311}
+  _pestRemover: {fileID: 6958599773789547834}
   _maxPests: 8
   _onePestSlowdown: 0.0625
   _spawnTime:

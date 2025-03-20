@@ -11,6 +11,7 @@ public class FoodManagerData : BuyableItemManagerData<Food> {
     [SerializeField, JsonProperty] private List<int> _nowFoodMenu;
 
     public int FoodMenuLength => _foodMenu.Count;
+    public int NowFoodMenuLength => _nowFoodMenu.Count;
     public IEnumerable<MenuFood> FoodMenu => _foodMenu;
 
     public FoodManagerData() {

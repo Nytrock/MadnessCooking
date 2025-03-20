@@ -8,7 +8,7 @@ public class ClientsHolderManager : MonoBehaviour, IBindable<CafeData> {
 
     private readonly List<ClientsHolder> _holders = new();
     private readonly List<List<int>> _freeHolders = new();
-    private ClientHolderManagerData _data;
+    [SerializeField] private ClientHolderManagerData _data;
 
     private void Awake() {
         _spotEditor.EditorDisabled += GenerateFreeHoldersList;
@@ -72,8 +72,7 @@ public class ClientsHolderManager : MonoBehaviour, IBindable<CafeData> {
         if (_freeHolders[needSeat].Count == 0)
             return null;
 
-        int randomSpotIndex = _freeHolders[needSeat].GetRandom();
-        _freeHolders[needSeat].Remove(randomSpotIndex);
+        int randomSpotIndex = _freeHolders[needSeat].PopRandom();
         return _holders[randomSpotIndex];
     }
 

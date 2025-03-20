@@ -11,6 +11,8 @@ public class FpsManager : MonoBehaviour, IBindable<GameSettingsData>, ISettingab
 
     private int _lastFrameIndex = 0;
     private float[] _frameDeltaTimeArray;
+    private float _framesSum = 0;
+    private int _framesCount = 0;
     private SettingsPointData<bool> _data;
 
     public bool DefaultValue => _defaultShow;
@@ -26,22 +28,16 @@ public class FpsManager : MonoBehaviour, IBindable<GameSettingsData>, ISettingab
         if (Time.timeScale == 0)
             return;
 
+        _framesSum -= _frameDeltaTimeArray[_lastFrameIndex];
         _frameDeltaTimeArray[_lastFrameIndex] = Time.deltaTime;
+        _framesSum += _frameDeltaTimeArray[_lastFrameIndex];
+
         _lastFrameIndex = (_lastFrameIndex + 1) % _frameRatePrecision;
+        _framesCount = Mathf.Min(_framesCount + 1, _frameRatePrecision);
     }
 
     public float GetFPS() {
-        int framesCount = 0;
-        float framesSum = 0;
-
-        foreach (var frame in _frameDeltaTimeArray) {
-            if (frame == 0)
-                break;
-            framesCount++;
-            framesSum += frame;
-        }
-
-        return 1 / (framesSum / framesCount);
+        return 1 / (_framesSum / _framesCount);
     }
 
     public void Bind(GameSettingsData data) {

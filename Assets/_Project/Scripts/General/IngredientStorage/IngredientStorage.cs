@@ -5,13 +5,13 @@ using UnityEngine;
 public abstract class IngredientStorage : MonoBehaviour {
     [SerializeField] protected int _defaultMaxSpace = 100;
 
-    [field: SerializeField] public IngredientStorageData Data { get; protected set; }
+    public IngredientStorageData Data { get; protected set; }
 
     public event Action<IngredientCount> IngredientAdded;
     public event Action<Ingredient> IngredientRemoved;
-
     public event Action<IngredientCount> IngredientCountAdded;
     public event Action<IngredientCount> IngredientCountRemoved;
+    public event Action LoadingDataEnded;
 
     public void PutIngredients(IEnumerable<IngredientCount> puttingCountList) {
         foreach (var count in puttingCountList)
@@ -54,11 +54,11 @@ public abstract class IngredientStorage : MonoBehaviour {
     }
 
     public void RemoveIngredient(IngredientCount removingCount) {
-        IngredientCountRemoved?.Invoke(removingCount);
         Data.RemoveIngredient(removingCount);
 
         if (Data.GetIngredientCount(removingCount.Ingredient) == 0)
             IngredientRemoved?.Invoke(removingCount.Ingredient);
+        IngredientCountRemoved?.Invoke(removingCount);
     }
 
     public bool HaveCount(IngredientCount count) {
@@ -68,5 +68,9 @@ public abstract class IngredientStorage : MonoBehaviour {
     protected void InvokeIngredientAdded(IngredientCount count) {
         IngredientAdded?.Invoke(count);
         IngredientCountAdded?.Invoke(count);
+    }
+
+    protected void InvokeLoadingDataEnded() {
+        LoadingDataEnded?.Invoke();
     }
 }
