@@ -13,6 +13,7 @@ public class ClientsSpawner : MonoBehaviour, IBindable<CafeData>, ITutorialPart 
     [SerializeField] private OrdersManager _ordersManager;
     [SerializeField] private FoodManager _foodManager;
     [SerializeField] private TutorialManager _tutorialManager;
+    [SerializeField] private GraymanManager _graymanManager;
     [SerializeField] private ClientsPoolsManager _pool;
     [SerializeField] private RangeFloat _spawnTime;
     [SerializeField] private float _noClientsMultiplier;
@@ -124,8 +125,8 @@ public class ClientsSpawner : MonoBehaviour, IBindable<CafeData>, ITutorialPart 
         }
 
         int number = Random.Range(1, 1001);
-        if (number == 1 && clientCount == ClientCount.One)
-            return ClientType.GrayMan;
+        if (number == 1 && clientCount == ClientCount.One && !_graymanManager.HeWasHere)
+            return ClientType.Grayman;
         else if (number <= 50)
             return ClientType.Rich;
         return ClientType.Standard;

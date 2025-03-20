@@ -2,13 +2,13 @@ using Newtonsoft.Json;
 using UnityEngine;
 
 [JsonConverter(typeof(ScriptableObjectJsonConverter))]
-public abstract class BuyableItem : ExtendedScriptableObject {
+public class BuyableItem : ExtendedScriptableObject {
     public const string AssetMenuName = nameof(BuyableItem) + "/";
 
     [SerializeField] private Sprite _icon;
     [SerializeField, Min(0)] private int _price;
 
-    protected abstract string _table { get; }
+    protected virtual string _table => "UITable";
     private string _rawName;
     private string _rawDescription;
 
@@ -32,11 +32,20 @@ public abstract class BuyableItem : ExtendedScriptableObject {
         return LocalizationManager.Instance.GetLocalization(_table, RawDescription);
     }
 
-    public static TItem CreateTemporaryItem<TItem>(string name)
+    public static TItem CreateTemporaryItem<TItem>(string name, Sprite icon = null)
         where TItem : BuyableItem {
 
         TItem item = CreateInstance<TItem>();
         item.name = name;
+        item.Initialize();
+
+        if (icon != null)
+            item.SetIcon(icon);
+
         return item;
+    }
+
+    private void SetIcon(Sprite icon) {
+        _icon = icon;
     }
 }

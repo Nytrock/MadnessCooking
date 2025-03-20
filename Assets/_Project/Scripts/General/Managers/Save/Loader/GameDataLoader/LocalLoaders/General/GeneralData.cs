@@ -11,4 +11,5 @@ public class GeneralData : ISaveable {
     public FatigueManagerData FatigueManager { get; set; }
     public LocationManagerData LocationManager { get; set; }
     public TutorialManagerData TutorialManager { get; set; }
+    public GraymanData Grayman { get; set; }
 }

@@ -1,15 +1,12 @@
 using UnityEngine;
 
 public class ItemsListItemDescription : MonoBehaviour {
+    [SerializeField] private GameObject _panel;
     [SerializeField] private BuyableItemRendererWithDescription _description;
     private ItemsListItemRenderer _nowRenderer;
 
-    private void Awake() {
-        ChangeState(false);
-    }
-
     public void ChangeState(bool newState) {
-        gameObject.SetActive(newState);
+        _panel.SetActive(newState);
 
         if (!newState && _nowRenderer != null) {
             _nowRenderer.ChangeSelectionState(false);

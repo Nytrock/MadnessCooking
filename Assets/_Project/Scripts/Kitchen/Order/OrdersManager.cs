@@ -4,8 +4,8 @@ using UnityEngine;
 public class OrdersManager : MonoBehaviour {
     [SerializeField] private KitchenStorage _kitchenStorage;
     [SerializeField] private TechnicManager _technicManager;
-    [SerializeField] private GameSaveManager _saveManager;
     [SerializeField] private TutorialManager _tutorialManager;
+    [SerializeField] private GraymanManager _graymanManager;
 
     public event Action<Order> OrderAdded;
     public event Action<Order> OrderRemoved;
@@ -28,9 +28,9 @@ public class OrdersManager : MonoBehaviour {
     }
 
     private void AddOrder(Client client) {
-        if (client.Data.Type == ClientType.GrayMan) {
-            _saveManager.Save();
-            Application.Quit();
+        if (client.Data.Type == ClientType.Grayman) {
+            _graymanManager.HeVisitedUs();
+            return;
         }
 
         client.OrderActivated -= AddOrder;

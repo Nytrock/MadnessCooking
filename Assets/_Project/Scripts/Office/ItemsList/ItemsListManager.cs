@@ -9,6 +9,7 @@ public class ItemsListManager : MonoBehaviour {
     [SerializeField] private UpgradeManager _upgradeManager;
     [SerializeField] private BedTypeManager _bedTypeManager;
     [SerializeField] private DecorManager _decorManager;
+    [SerializeField] private GraymanManager _graymanManager;
 
     private void Awake() {
         _binder.BeforeLateStart += SetupItemManagers;
@@ -21,6 +22,9 @@ public class ItemsListManager : MonoBehaviour {
         SetupItemManager(_upgradeManager);
         SetupItemManager(_bedTypeManager);
         SetupItemManager(_decorManager);
+
+        if (_graymanManager.HeWasHere)
+            _renderer.CreateGraymanCategory(_graymanManager);
     }
 
     private void SetupItemManager<TItem>(BuyableItemManager<TItem> itemManager)

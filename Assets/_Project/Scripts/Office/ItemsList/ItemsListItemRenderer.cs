@@ -3,7 +3,6 @@ using UnityEngine.UI;
 
 [RequireComponent(typeof(Button))]
 public class ItemsListItemRenderer : MonoBehaviour {
-    [SerializeField] private Color _lockedColor;
     [SerializeField] private GameObject _selection;
     [SerializeField] private Image[] _selectionImages;
 
@@ -47,9 +46,9 @@ public class ItemsListItemRenderer : MonoBehaviour {
 
     private void UpdateUnlockedState() {
         if (_isUnlocked)
-            _button.image.color = Color.white;
+            _button.image.material = null;
         else
-            _button.image.color = _lockedColor;
+            _button.image.material = MaterialManager.Instance.BlackMaterial;
     }
 
     private void SelectItem() {

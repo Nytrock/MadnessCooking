@@ -27,6 +27,16 @@ public class ItemsListCategoryRenderer : MonoBehaviour {
         itemManager.ItemAdded += AddNewItem;
     }
 
+    public void SetupGrayman(GraymanManager graymanManager, ItemsListItemDescription description) {
+        _categoryName = "???";
+        _allItemsCount = 1;
+        _nowItemsCount = 1;
+
+        ItemsListItemRenderer itemRenderer = Instantiate(_itemRendererPrefab, _itemsContainer);
+        itemRenderer.Setup(graymanManager.GraymanItem, description);
+        itemRenderer.CheckNewItem(graymanManager.GraymanItem);
+    }
+
     private void AddNewItem(BuyableItem item) {
         _nowItemsCount++;
     }

@@ -78,7 +78,7 @@ public class ClientHolderData {
     }
 
     public bool ContainsGrayMan() {
-        return _clients.Length == 1 && _clients[0].Type == ClientType.GrayMan;
+        return _clients.Length == 1 && _clients[0].Type == ClientType.Grayman;
     }
 
     public void AddWaitTime(float time) {

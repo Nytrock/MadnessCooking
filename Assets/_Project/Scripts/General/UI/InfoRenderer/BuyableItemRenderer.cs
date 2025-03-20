@@ -11,15 +11,16 @@ public class BuyableItemRenderer {
     }
 
     public virtual void SetHiddenItemInfo(BuyableItem item) {
-        SetIcon(item.Icon, Color.black);
+        SetIcon(item.Icon, Color.white, MaterialManager.Instance.BlackMaterial);
     }
 
     public virtual void ResetInfo() {
         SetIcon(null, new Color(1, 1, 1, 0));
     }
 
-    protected void SetIcon(Sprite sprite, Color color) {
+    protected void SetIcon(Sprite sprite, Color color, Material material = null) {
         _icon.sprite = sprite;
         _icon.color = color;
+        _icon.material = material;
     }
 }

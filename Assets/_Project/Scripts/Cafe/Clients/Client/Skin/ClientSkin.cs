@@ -54,7 +54,7 @@ public class ClientSkin : MonoBehaviour {
     }
 
     private ClientSkinType GetRandomSkinType(ClientType type) {
-        if (type == ClientType.GrayMan) {
+        if (type == ClientType.Grayman) {
             return ClientSkinType.GrayMan;
         } else {
             int skinChance = Random.Range(0, 100);

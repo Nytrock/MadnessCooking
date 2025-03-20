@@ -11,7 +11,7 @@ public class ClientsPoolsManager : MonoBehaviour, IUpgradeable<CafeUpgradeData> 
         if (clientData.Gender != ClientGender.None)
             return GetClientByGender(clientData.Gender);
 
-        if (clientData.Type == ClientType.GrayMan)
+        if (clientData.Type == ClientType.Grayman)
             return GetClientByGender(ClientGender.Male);
 
         ClientsPool randomPool = _pools.GetRandom();

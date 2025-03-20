@@ -23,4 +23,10 @@ public class ItemsListRenderer : MonoBehaviour {
         categoryRenderer.Setup(itemManager, _description);
         _categoriesContainer.ForceUpdateRect();
     }
+
+    public void CreateGraymanCategory(GraymanManager graymanManager) {
+        ItemsListCategoryRenderer categoryRenderer = Instantiate(_categoryRendererPrefab, _categoriesContainer);
+        categoryRenderer.SetupGrayman(graymanManager, _description);
+        _categoriesContainer.ForceUpdateRect();
+    }
 }
