@@ -25,7 +25,7 @@ public abstract class SettingsPoint<TValue> : BaseSettingsPoint {
     }
 
     public override void Submit() {
-        _data.SubmitChanginng();
+        _data.SubmitChanging();
     }
 
     protected override void UpdateState() {

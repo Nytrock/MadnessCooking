@@ -8,6 +8,7 @@ public class LocationNotificationManager : MonoBehaviour {
 
     public event Action<Location> LocationChanged;
     public event Action<Location, float> NotificationCreated;
+    public event Action<Location> NotificationDestroyed;
 
     private void Awake() {
         _locationManager = GetComponent<LocationManager>();
@@ -24,5 +25,9 @@ public class LocationNotificationManager : MonoBehaviour {
             return;
 
         NotificationCreated?.Invoke(location, lifeTime);
+    }
+
+    public void DestroyNotification(Location location) {
+        NotificationDestroyed?.Invoke(location);
     }
 }

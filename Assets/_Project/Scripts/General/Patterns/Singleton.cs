@@ -9,6 +9,11 @@ public class Singleton<TObject> : MonoBehaviour
 
     protected virtual void Awake() => InitializeSingleton();
 
+    [RuntimeInitializeOnLoadMethod]
+    private static void InitializeOnLoad() {
+        _instance = null;
+    }
+
     protected virtual void InitializeSingleton() {
         if (!Application.isPlaying) return;
 

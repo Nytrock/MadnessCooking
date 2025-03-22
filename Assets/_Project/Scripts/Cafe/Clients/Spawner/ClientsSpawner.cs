@@ -18,7 +18,7 @@ public class ClientsSpawner : MonoBehaviour, IBindable<CafeData>, ITutorialPart 
     [SerializeField] private RangeFloat _spawnTime;
     [SerializeField] private float _noClientsMultiplier;
 
-    [SerializeField] private ClientsSpawnerData _data;
+    private ClientsSpawnerData _data;
     private CriticSpawnerData _criticData;
     private ClientHolderManagerData _clientHolderData;
     private PopularityXpAdder _xpAdder;
@@ -178,6 +178,9 @@ public class ClientsSpawner : MonoBehaviour, IBindable<CafeData>, ITutorialPart 
 
         for (int i = 0; i < holder.ClientsCount; i++)
             _data.AddLeavingClient(holder.Data.GetClient(i));
+
+        if (_data.NowClientsCount == 0)
+            _notificationManager.DestroyNotification(Location.Cafe);
     }
 
     public void PutClient(Client client) {

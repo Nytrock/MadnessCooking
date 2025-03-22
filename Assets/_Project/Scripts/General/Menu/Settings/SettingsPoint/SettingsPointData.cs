@@ -23,7 +23,7 @@ public class SettingsPointData<TValue> {
         _lastValue = _nowValue;
     }
 
-    public void SubmitChanginng() {
+    public void SubmitChanging() {
         _nowValue = _lastValue;
     }
 }

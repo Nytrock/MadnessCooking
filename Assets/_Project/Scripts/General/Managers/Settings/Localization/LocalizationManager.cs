@@ -14,6 +14,16 @@ public class LocalizationManager : Singleton<LocalizationManager>, IBindable<Gam
 
     public event Action LocalizationChanged;
 
+    [RuntimeInitializeOnLoadMethod]
+    private static void InitializeOnLoad() {
+        LocalizationSettings.SelectedLocaleChanged -= UpdateLocalizationFromEditorStatic;
+    }
+
+    protected override void Awake() {
+        base.Awake();
+        LocalizationSettings.SelectedLocaleChanged += UpdateLocalizationFromEditorStatic;
+    }
+
     private void UpdateLocalization() {
         if (!Application.isPlaying) return;
 
@@ -43,5 +53,16 @@ public class LocalizationManager : Singleton<LocalizationManager>, IBindable<Gam
     public void UpdateValue() {
         LocalizationSettings.SelectedLocale = _locales[_data.LastValue];
         UpdateLocalization();
+    }
+
+    private static void UpdateLocalizationFromEditorStatic(Locale locale) {
+        Instance.UpdateLocalizationFromEditor(locale);
+    }
+
+    private void UpdateLocalizationFromEditor(Locale locale) {
+        int newValue = _locales.IndexOf(locale);
+        _data.ChangeValue(newValue);
+        _data.SubmitChanging();
+        UpdateValue();
     }
 }

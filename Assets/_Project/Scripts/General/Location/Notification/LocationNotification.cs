@@ -12,6 +12,7 @@ public class LocationNotification : MonoBehaviour {
     private void Awake() {
         _manager.LocationChanged += CheckNewLocation;
         _manager.NotificationCreated += CheckNewNotification;
+        _manager.NotificationDestroyed += CheckDestroyedNotification;
         UpdateShowingState(false);
     }
 
@@ -37,6 +38,13 @@ public class LocationNotification : MonoBehaviour {
         UpdateShowingState(true);
         _lifeTime = lifeTime;
         _nowTime = 0;
+    }
+
+    private void CheckDestroyedNotification(Location location) {
+        if (location != _location)
+            return;
+
+        UpdateShowingState(false);
     }
 
     private void UpdateShowingState(bool isShowing) {
