@@ -176,6 +176,9 @@ public class ClientsHolder : MonoBehaviour {
         WaitStarted = null;
         _waitSlider.value = 0;
 
+        foreach (var client in _clients)
+            client.WaitOthers();
+
         if (_data.GroupState == GroupClientState.Serviced)
             _data.PayToPlayer(1);
         else

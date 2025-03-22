@@ -177,7 +177,7 @@ public class Client : MonoBehaviour {
         _seat.ResetTableFoodSprite();
     }
 
-    private void WaitOthers() {
+    public void WaitOthers() {
         Data.ChangeState(ClientState.WaitOthers);
         ChangeState();
     }

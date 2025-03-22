@@ -10,7 +10,7 @@ public class UpgradeManager : SaveableItemManager<BaseUpgrade, GameData>, IBinda
     }
 
     public override void Bind(GameData data) {
-        data.UpgradeManager ??= new();
+        data.UpgradeManager ??= new(_defaultItems);
         _data = data.UpgradeManager;
 
         BindUpgradeData();

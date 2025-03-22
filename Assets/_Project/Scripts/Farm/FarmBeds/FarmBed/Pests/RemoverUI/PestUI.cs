@@ -15,7 +15,6 @@ public class PestUI : MonoBehaviour, IPointerExitHandler, IPointerEnterHandler {
 
     private void Awake() {
         _button = GetComponent<Button>();
-        ChangeSelectionState(false);
     }
 
     public void Setup(Pest pest, RangeVector position, PestsRemoverUI remover) {
@@ -41,6 +40,7 @@ public class PestUI : MonoBehaviour, IPointerExitHandler, IPointerEnterHandler {
 
     public void ChangeState(bool newState) {
         gameObject.SetActive(newState);
+        ChangeSelectionState(false);
     }
 
     public void SetupRemoveButton() {

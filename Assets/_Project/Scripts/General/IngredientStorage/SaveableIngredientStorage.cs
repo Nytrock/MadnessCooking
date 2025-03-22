@@ -6,8 +6,8 @@ public abstract class SaveableIngredientStorage<TData> : IngredientStorage, IBin
     [SerializeField] protected IngredientCountList _defaultIngredients;
 
     public void LateStart() {
-        InvokeLoadingDataEnded();
         Data.SetMaxSpace(_defaultMaxSpace);
+        InvokeLoadingDataEnded();
         foreach (var ingredientCount in Data.Ingredients)
             InvokeIngredientAdded(ingredientCount);
     }

@@ -4,9 +4,6 @@ public abstract class SaveableItemManager<TItem, TData> : BuyableItemManager<TIt
     public virtual void LateStart() {
         foreach (var item in _data.AvailableItems)
             InvokeItemAdded(item);
-
-        foreach (var item in _defaultItems)
-            AddItem(item);
     }
 
     public abstract void Bind(TData data);

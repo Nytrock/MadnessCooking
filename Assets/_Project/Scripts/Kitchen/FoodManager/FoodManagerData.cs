@@ -14,7 +14,7 @@ public class FoodManagerData : BuyableItemManagerData<Food> {
     public int NowFoodMenuLength => _nowFoodMenu.Count;
     public IEnumerable<MenuFood> FoodMenu => _foodMenu;
 
-    public FoodManagerData() {
+    public FoodManagerData(List<Food> defaultItems) : base(defaultItems) {
         _nowFoodMenu = new();
     }
 

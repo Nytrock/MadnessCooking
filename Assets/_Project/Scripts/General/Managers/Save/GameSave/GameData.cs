@@ -15,6 +15,5 @@ public class GameData : ISaveable {
         Kitchen = new();
         Farm = new();
         Office = new();
-        UpgradeManager = new();
     }
 }

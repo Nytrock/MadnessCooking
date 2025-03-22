@@ -1,7 +1,16 @@
 fileFormatVersion: 2
-guid: 2e66777ac91d0f0449f416410fed5d5a
+guid: b14affbeb26f04e458959b404298792b
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: 4385631429770320514
+    second: CarList_0
+  - first:
+      213: 827432703857885198
+    second: CarList_1
+  - first:
+      213: 6340051005311946277
+    second: CarList_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -45,7 +54,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 0
+  spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 6.5
@@ -149,13 +158,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Wall
+      name: CarListItem
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 78
-        height: 130
+        y: 7
+        width: 6
+        height: 7
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -164,206 +173,74 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c016a6f8b116e0b4bb2024ba4ef0b4dc
-      internalID: 1901407923
+      spriteID: e9b47acb8d8f6e54d8d2b2ecfe22a001
+      internalID: -1685598944
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Window
+      name: CarListPanel
       rect:
         serializedVersion: 2
-        x: 79
-        y: 63
-        width: 32
-        height: 45
-      alignment: 9
-      pivot: {x: 0.5, y: 0.4888889}
+        x: 7
+        y: 10
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 1, y: 1, z: 2, w: 2}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 31cc504b4bafea34a8db8837743f1db4
+      internalID: 917095630
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CarLisClose
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 0
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f823762236388634fba1ae15c3f0c6c3
-      internalID: -805373322
+      spriteID: 0a54cc181c4dfa640acc2f6bffd8b1dd
+      internalID: 811155862
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lamp
+      name: CarListHoverPanel
       rect:
         serializedVersion: 2
-        x: 79
-        y: 109
-        width: 26
-        height: 21
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 62b1dd5009cf71e4ab6b03f9a800b25d
-      internalID: 1955946697
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Pot
-      rect:
-        serializedVersion: 2
-        x: 106
-        y: 120
-        width: 5
-        height: 10
-      alignment: 6
+        x: 0
+        y: 3
+        width: 3
+        height: 3
+      alignment: 0
       pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 1, y: 1, z: 1, w: 1}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b6de419e2a74cd34a8dd522c0799e635
-      internalID: 470648381
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: WallExit
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 39
-        height: 130
-      alignment: 5
-      pivot: {x: 1, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3e4e3b630d705c543a95d5fab91637d7
-      internalID: -1525584205
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: WallEdge
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 1
-        height: 130
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: cb7bf72730c9f6946a2de52b1fe29b72
-      internalID: -301980848
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tree2
-      rect:
-        serializedVersion: 2
-        x: 79
-        y: 21
-        width: 13
-        height: 41
-      alignment: 9
-      pivot: {x: 0.4615385, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: efd5f1755d54025419dd94756685c652
-      internalID: 343474856
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Background_0
-      rect:
-        serializedVersion: 2
-        x: 98
-        y: 17
-        width: 13
-        height: 21
-      alignment: 9
-      pivot: {x: 0.46153846, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 49f4537a53c246147a465a1a0c70645e
-      internalID: 1223478226
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: BackgroundPicture1
-      rect:
-        serializedVersion: 2
-        x: 93
-        y: 39
-        width: 17
-        height: 23
-      alignment: 9
-      pivot: {x: 0.47058824, y: 0.47826087}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 044512cf0f3ecd349b4c670c7c24e48d
-      internalID: -631180302
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: BackgroundPicture2
-      rect:
-        serializedVersion: 2
-        x: 79
-        y: 0
-        width: 20
-        height: 17
-      alignment: 9
-      pivot: {x: 0.5, y: 0.47058824}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 36136c555975d0140955d1502ccba5f6
-      internalID: 1110764272
+      spriteID: 28242274b58e00848ade2fdf924e3a6b
+      internalID: 2102716936
       vertices: []
       indices: 
       edges: []
@@ -382,17 +259,13 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      BackgroundPicture1: -631180302
-      BackgroundPicture2: 1110764272
-      Background_0: 1223478226
+      Background: 1901407923
+      CarLisClose: 811155862
+      CarListHoverPanel: -556285053
+      CarListItem: -1685598944
+      CarListPanel: 917095630
       Lamp: 1955946697
-      OpenWindow: 51661407
       Pot: 470648381
-      Tree: -1430312787
-      Tree2: 343474856
-      Wall: 1901407923
-      WallEdge: -301980848
-      WallExit: -1525584205
       Window: -805373322
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0

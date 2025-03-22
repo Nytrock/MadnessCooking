@@ -66,7 +66,7 @@ public class TechnicManager : SaveableItemManager<Technic, KitchenData>, IUpgrad
     }
 
     public override void Bind(KitchenData data) {
-        data.TechnicManager ??= new();
+        data.TechnicManager ??= new(_defaultItems);
         _data = data.TechnicManager;
 
         BindHolders(data);

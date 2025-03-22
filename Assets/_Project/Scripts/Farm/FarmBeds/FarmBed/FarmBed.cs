@@ -199,6 +199,7 @@ public class FarmBed : MonoBehaviour {
                 SetIngredient(Data.PlantedIngredient);
         }
 
+        _autoCollector.SetActive(Data.IsAutoCollect);
         _upgrader.Bind(Data);
         LateStart();
     }

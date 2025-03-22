@@ -13,6 +13,13 @@ public class BuyableItemManagerData<TItem>
     public IEnumerable<TItem> AvailableItems => _availableItems.Distinct();
     public int ItemsCount => _availableItems.Count;
 
+    public BuyableItemManagerData(List<TItem> defaultItems) {
+        if (defaultItems == null)
+            return;
+
+        _availableItems = new(defaultItems);
+    }
+
     public virtual void AddItem(TItem item) {
         _availableItems.Add(item);
         _availableItems = _availableItems.OrderBy(item => item.Price).ToList();

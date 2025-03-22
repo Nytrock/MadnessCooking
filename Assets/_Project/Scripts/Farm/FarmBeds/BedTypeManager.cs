@@ -41,7 +41,7 @@ public class BedTypeManager : SaveableItemManager<BedType, FarmData> {
     }
 
     public override void Bind(FarmData data) {
-        data.BedTypeManager ??= new();
+        data.BedTypeManager ??= new(_defaultItems);
         _data = data.BedTypeManager;
     }
 }

@@ -9,6 +9,7 @@ public class GraymanManager : MonoBehaviour, IBindable<GeneralData> {
     private BuyableItem _graymanItem;
 
     public bool HeWasHere => _data.HeWasHere;
+    public string GraymanName => _graymanName;
     public BuyableItem GraymanItem => _graymanItem;
 
     private void Awake() {

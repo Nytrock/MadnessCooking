@@ -28,7 +28,7 @@ public class ItemsListCategoryRenderer : MonoBehaviour {
     }
 
     public void SetupGrayman(GraymanManager graymanManager, ItemsListItemDescription description) {
-        _categoryName = "???";
+        _categoryName = _categoryPrefix + graymanManager.GraymanName;
         _allItemsCount = 1;
         _nowItemsCount = 1;
 
