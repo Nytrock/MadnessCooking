@@ -13,6 +13,8 @@ public class TechnicHolderData {
     [SerializeField, JsonProperty] private float _needWaitTime;
     [SerializeField, JsonProperty] private Order _nowOrder;
 
+    private KitchenUpgradeData _upgradeData;
+
     public bool IsCooking => _isCooking;
     public bool IsRepairing => _isRepairing;
     public float NowStrength => _nowStrength;
@@ -33,15 +35,15 @@ public class TechnicHolderData {
         _nowWaitTime = 0f;
     }
 
-    public void StartRepair(KitchenUpgradeData upgradeData) {
+    public void StartRepair() {
         _isRepairing = true;
         MoneyManager.Instance.ChangeMoney(-GetRepairPrice());
-        _needWaitTime = _technic.TimeRepair * upgradeData.TechnicRepairSpeed * GetBrokenCoef();
+        _needWaitTime = _technic.TimeRepair * _upgradeData.TechnicRepairSpeed * GetBrokenCoef();
     }
 
     public int GetRepairPrice() {
         float brokenCoef = GetBrokenCoef();
-        int priceRepair = Mathf.CeilToInt(_technic.PriceRepair * brokenCoef);
+        int priceRepair = Mathf.CeilToInt(_technic.PriceRepair * brokenCoef / _upgradeData.TechnicRepairPrice);
         return priceRepair;
     }
 
@@ -52,12 +54,12 @@ public class TechnicHolderData {
         return brokenCoef;
     }
 
-    public void StartCook(KitchenUpgradeData upgradeData, Order order) {
+    public void StartCook(Order order) {
         _isCooking = true;
         _nowOrder = order;
-        _needWaitTime = _nowOrder.Food.TimeToCook / upgradeData.TechnicCookSpeed;
+        _needWaitTime = _nowOrder.Food.TimeToCook / _upgradeData.TechnicCookSpeed;
 
-        float strengthDecrease = Random.Range(1f, 2f) / upgradeData.TechnicStrengthMultiplier;
+        float strengthDecrease = Random.Range(1f, 2f) / _upgradeData.TechnicStrengthMultiplier;
         _nowStrength = Mathf.Max(_nowStrength - strengthDecrease, 0);
     }
 
@@ -100,5 +102,9 @@ public class TechnicHolderData {
         CookStoped?.Invoke();
         _nowOrder = null;
         _nowWaitTime = 0f;
+    }
+
+    public void SetUpgradeData(KitchenUpgradeData upgradeData) {
+        _upgradeData = upgradeData;
     }
 }

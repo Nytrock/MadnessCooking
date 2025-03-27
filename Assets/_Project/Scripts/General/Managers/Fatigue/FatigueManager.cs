@@ -65,7 +65,7 @@ public class FatigueManager : Singleton<FatigueManager>, IBindable<GeneralData>,
         _isTired = isTired;
         TiredChanged?.Invoke(_isTired);
         if (!_isTired)
-            _timeManager.ChangeTimeSpeed(_timeManager.DefaultTimeSpeed);
+            _bed.ChangeSleepState(false);
     }
 
     public void AddDecorBonus(Decor decor) {

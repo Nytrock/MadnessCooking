@@ -3454,7 +3454,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2.6153846, y: 2.6153846}
+  m_Size: {x: 2.4615386, y: 2.6153846}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
@@ -5207,7 +5207,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _skin: {fileID: 3703463240899266760}
   _gender: 2
-  _richClientMoneyMultiplier: 2
+  _richClientMoneyMultiplier: 1
+  <Data>k__BackingField:
+    _type: 0
+    _skinType: 0
+    _state: 0
+    _gender: 0
+    _position: {x: 0, y: 0}
+    _waitTime: 0
+    _nowTime: 0
+    _isServiced: 0
+    _order:
+      _isActivated: 0
+      _isFinished: 0
+      _isCooking: 0
+      _food: {fileID: 0}
+      _tableIndex: 0
+      _cookProgress: 0
 --- !u!114 &7984458469416964061
 MonoBehaviour:
   m_ObjectHideFlags: 0

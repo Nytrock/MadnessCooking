@@ -23,18 +23,14 @@ public class BedChoice : MonoBehaviour {
     }
 
     private void LateStart() {
-        if (!_bedData.IsActive) {
+        if (!_bedData.IsActive)
             _farmBed.enabled = false;
-            _bedData.SetActive(false);
-        }
-
         _addButton.SetActive(!_bedData.IsActive);
     }
 
     public void SetType(BedType bedType) {
         BedTypeHolder bed = FindBedTypeHolder(bedType);
 
-        _bedData.SetActive(true);
         _farmBed.SetBedType(bed);
         _farmBed.enabled = true;
         _addButton.SetActive(false);

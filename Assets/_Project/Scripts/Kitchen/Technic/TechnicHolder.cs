@@ -6,8 +6,6 @@ public class TechnicHolder : MonoBehaviour {
     [SerializeField] private Transform _UITarget;
     [SerializeField] private TutorialManager _tutorialManager;
 
-    private KitchenUpgradeData _upgradeData;
-
     [field: SerializeField] public TechnicHolderData Data { get; private set; }
 
     public Transform UITarget => _UITarget;
@@ -37,7 +35,7 @@ public class TechnicHolder : MonoBehaviour {
         if (_tutorialManager.IsWork)
             _tutorialManager.NextTutorialPart();
 
-        Data.StartCook(_upgradeData, order);
+        Data.StartCook(order);
         CookChanged?.Invoke();
     }
 
@@ -48,7 +46,7 @@ public class TechnicHolder : MonoBehaviour {
     }
 
     public void StartRepair() {
-        Data.StartRepair(_upgradeData);
+        Data.StartRepair();
         RepairChanged?.Invoke();
     }
 
@@ -57,10 +55,9 @@ public class TechnicHolder : MonoBehaviour {
     }
 
     public void Bind(KitchenData data, int index) {
-        _upgradeData = data.UpgradeData;
-
         data.TechnicHolders[index] ??= new(_technic);
         Data = data.TechnicHolders[index];
+        Data.SetUpgradeData(data.UpgradeData);
     }
 
     public bool Accessible() {

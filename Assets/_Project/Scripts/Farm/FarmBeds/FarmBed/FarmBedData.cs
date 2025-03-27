@@ -6,7 +6,6 @@ using UnityEngine;
 public class FarmBedData {
     [SerializeField, JsonProperty] private BedType _bedType;
     [SerializeField, JsonProperty] private Ingredient _plantedIngredient;
-    [SerializeField, JsonProperty] private bool _isActive;
 
     [SerializeField, JsonProperty] private float _nowTime;
     [SerializeField, JsonProperty] private int _count;
@@ -21,7 +20,7 @@ public class FarmBedData {
 
     public BedType BedType => _bedType;
     public Ingredient PlantedIngredient => _plantedIngredient;
-    public bool IsActive => _isActive;
+    public bool IsActive => _bedType != null;
     public float NowTime => _nowTime;
     public int Count => _count;
     public bool IsFull => _isFull;
@@ -48,10 +47,6 @@ public class FarmBedData {
         _waterBoost.DisableUpgrades();
         _fertilizeBoost.DisableUpgrades();
         _pestsGenerator.DisableUpgrades();
-    }
-
-    public void SetActive(bool isActive) {
-        _isActive = isActive;
     }
 
     public void UpdateTime() {
@@ -89,8 +84,8 @@ public class FarmBedData {
     }
 
     public void ResetBedType() {
-        _isActive = false;
         _bedType = null;
+        _pestsGenerator.CleanPests();
     }
 
     public void SetBedType(BedType bedType) {
