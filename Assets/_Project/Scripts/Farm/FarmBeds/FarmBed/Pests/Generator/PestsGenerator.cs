@@ -40,6 +40,7 @@ public class PestsGenerator : MonoBehaviour {
 
     public void Activate() {
         _data.SetMaxPestsCount(_maxPests);
+        _pestRemover.ChangeState(_data.IsPestsRemoved);
 
         if (_pool as StaticPestsPool)
             (_pool as StaticPestsPool).SetupFreePestsList();

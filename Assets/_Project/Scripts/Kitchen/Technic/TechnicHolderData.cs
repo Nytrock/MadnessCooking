@@ -38,7 +38,7 @@ public class TechnicHolderData {
     public void StartRepair() {
         _isRepairing = true;
         MoneyManager.Instance.ChangeMoney(-GetRepairPrice());
-        _needWaitTime = _technic.TimeRepair * _upgradeData.TechnicRepairSpeed * GetBrokenCoef();
+        _needWaitTime = _technic.TimeRepair * GetBrokenCoef() / _upgradeData.TechnicRepairSpeed;
     }
 
     public int GetRepairPrice() {

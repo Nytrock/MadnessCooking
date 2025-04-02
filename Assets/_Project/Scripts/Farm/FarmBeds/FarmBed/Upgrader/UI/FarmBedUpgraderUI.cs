@@ -49,25 +49,29 @@ public class FarmBedUpgraderUI : ChoiceBuyUI<FarmBedUpgrade, FarmBedUpgradeButto
         _choiceButtonPool.PutObject(_choosedButton);
 
         foreach (var nextUpgrade in upgrade.NextItems)
-            GenerateChoiceButton(nextUpgrade as FarmBedUpgrade);
+            if (_manager.HaveUpgrade(nextUpgrade as FarmBedUpgrade))
+                GenerateChoiceButton(nextUpgrade as FarmBedUpgrade);
         SelectButton(_choosedButton);
     }
 
     private bool CheckUpgradeAccessable(FarmBedUpgrade upgrade) {
         BedType bedType = _changingBed.Data.BedType;
-        bool isAccessable = true;
+        if (!upgrade.SuitableBedTypes.Contains(bedType))
+            return false;
 
-        isAccessable &= upgrade.SuitableBedTypes.Contains(bedType);
-        isAccessable &= !_changingBed.HaveUpgrade(upgrade);
+        if (_changingBed.HaveUpgrade(upgrade))
+            return false;
+
         foreach (var needUpgrade in upgrade.NeedItems) {
             var needFarmBedUpgrade = needUpgrade as FarmBedUpgrade;
             if (needFarmBedUpgrade == null)
                 continue;
 
-            isAccessable &= _changingBed.HaveUpgrade(needFarmBedUpgrade);
+            if (!_changingBed.HaveUpgrade(needFarmBedUpgrade))
+                return false;
         }
 
-        return isAccessable;
+        return true;
     }
 
     public override void Disable() {

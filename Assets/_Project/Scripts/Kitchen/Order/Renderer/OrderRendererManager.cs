@@ -31,7 +31,7 @@ public class OrderRendererManager : MonoBehaviour {
 
     private void RemoveOrder(Order order) {
         _countOfOrders--;
-        if (_countOfOrders > _renderers.Length)
+        if (_countOfOrders >= _renderers.Length)
             return;
 
         int rendererIndex = _takenRenderers.Pop(0);

@@ -49,6 +49,7 @@ public class BedTypeHolder : MonoBehaviour {
         if (_fertilize != null)
             _fertilize.Activate();
         _pestsGenerator.Activate();
+        UpdateIntependentBooster();
     }
 
     public void SetIngredient() {

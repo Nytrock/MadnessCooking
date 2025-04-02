@@ -19,8 +19,25 @@ public class ClientUI : MonoBehaviour, IActivable {
 
     public event Action<bool> StateChanged;
 
+    private void Awake() {
+        _mainButton.onClick.AddListener(OnMainButtonClicked);
+    }
+
+    private void OnMainButtonClicked() {
+        if (!_client.Data.Order.IsActivated) {
+            _client.ActivateOrder();
+            return;
+        }
+
+        if (_client.Data.Order.IsFinished) {
+            _client.Eat();
+            return;
+        }
+
+        ChangeButtonsBlockVisible();
+    }
+
     public void StartNewCycle() {
-        _mainButton.OverrideAllListeners(_client.ActivateOrder);
         _foodImage.sprite = _questionSprite;
         ChangeFoodChoiceState(false);
     }
@@ -56,14 +73,12 @@ public class ClientUI : MonoBehaviour, IActivable {
 
     public void SetFood(Food food) {
         _foodImage.sprite = food.Icon;
-        _mainButton.OverrideAllListeners(ChangeButtonsBlockVisible);
     }
 
     public void FinishOrder() {
         _animator.SetBool("isFinished", true);
         _buttonsBlock.SetActive(false);
         _orderSlider.SetValue(0);
-        _mainButton.OverrideAllListeners(_client.Eat);
     }
 
     public void ChangeEatSliderState(bool newValue) {

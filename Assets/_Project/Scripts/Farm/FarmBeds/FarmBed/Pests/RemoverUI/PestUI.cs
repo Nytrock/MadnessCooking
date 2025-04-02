@@ -35,7 +35,7 @@ public class PestUI : MonoBehaviour, IPointerExitHandler, IPointerEnterHandler {
 
     public void ResetPest() {
         ChangeState(false);
-        _button.onClick.RemoveListener(delegate { _pestsRemover.RemovePest(this); });
+        _button.onClick.RemoveAllListeners();
     }
 
     public void ChangeState(bool newState) {

@@ -59,7 +59,7 @@ public class OrderButton : MonoBehaviour {
         if (CheckOrderStarted())
             return;
 
-        _recipe.UpdateRecipeIngredients();
+        _recipe.UpdateRecipeIngredients(count);
         UpdateCookSlider();
     }
 

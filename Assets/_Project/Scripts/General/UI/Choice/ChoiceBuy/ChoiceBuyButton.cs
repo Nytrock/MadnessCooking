@@ -21,7 +21,7 @@ public abstract class ChoiceBuyButton<TItem> : ChoiceButton<TItem>
         CheckBuyable(MoneyManager.Instance.MoneyCount);
     }
 
-    public virtual void CheckBuyable(int newValue) {
-        _isBuyable = newValue >= _price;
+    public virtual void CheckBuyable(int newMoneyCount) {
+        _isBuyable = newMoneyCount >= _price;
     }
 }

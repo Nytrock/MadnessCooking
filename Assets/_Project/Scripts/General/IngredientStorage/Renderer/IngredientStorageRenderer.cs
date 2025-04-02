@@ -29,13 +29,20 @@ public abstract class IngredientStorageRenderer : MonoBehaviour {
     }
 
     private void UpdateMaxSpace() {
+        if (_ingredientStorage.Data.MaxSpace == -1)
+            return;
+
         int newNeedCount = _ingredientStorage.Data.MaxSpace / _ingredientsRenderers.Length;
         if (newNeedCount == _needCount)
             return;
 
         _needCount = newNeedCount;
-        foreach (var renderer in _availableIngredientRenderers)
+        _availableIngredientRenderers.Clear();
+
+        foreach (var renderer in _ingredientsRenderers) {
             renderer.Disable();
+            _availableIngredientRenderers.Add(renderer);
+        }
         _ingredientsRenderersCount.Clear();
 
         foreach (var ingredientCount in _ingredientStorage.Data.Ingredients)

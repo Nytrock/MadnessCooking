@@ -6723,7 +6723,7 @@ ParticleSystem:
   emitterVelocityMode: 1
   looping: 1
   prewarm: 1
-  playOnAwake: 0
+  playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -11905,7 +11905,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 12
+  m_SortingOrder: 14
   m_Sprite: {fileID: -687733949, guid: c6ed541ec6a744449bfdbcc47d17465b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -12241,6 +12241,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1069362101758709127
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1181125143723944380}
+  m_Layer: 0
+  m_Name: LeftDown
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1181125143723944380
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1069362101758709127}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -2.1538463, y: -2.1538463, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1709116911545493111}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1105429871375162121
 GameObject:
   m_ObjectHideFlags: 0
@@ -12532,7 +12563,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 15
+  m_SortingOrder: 16
   m_Sprite: {fileID: -462395922, guid: c6ed541ec6a744449bfdbcc47d17465b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -12603,6 +12634,7 @@ MonoBehaviour:
   - {fileID: 7436395665933293661}
   - {fileID: 8518173999023255391}
   - {fileID: 3163456459281167031}
+  _freePests: []
 --- !u!1 &1167579079246102248
 GameObject:
   m_ObjectHideFlags: 0
@@ -13593,7 +13625,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1181125143723944380}
+  - {fileID: 4175041550006901728}
   m_Father: {fileID: 7038259211522996182}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2067615603938320234
@@ -13610,11 +13644,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _container: {fileID: 1438477657768244391}
   _localPosition:
-    _leftDown: {fileID: 0}
-    _rightUp: {fileID: 0}
+    _leftDown: {fileID: 1181125143723944380}
+    _rightUp: {fileID: 4175041550006901728}
   _globalPosition:
-    _leftDown: {fileID: 0}
-    _rightUp: {fileID: 0}
+    _leftDown: {fileID: 2839065622788682798}
+    _rightUp: {fileID: 3768815715550933391}
   _prefabs:
   - {fileID: 8342348954772312041, guid: 48d6c67f468167b44926307c15345b8e, type: 3}
   - {fileID: -702117690435084310, guid: 68f951f31e04414498df1600a330783f, type: 3}
@@ -21840,7 +21874,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 11
+  m_SortingOrder: 13
   m_Sprite: {fileID: 415485274, guid: c6ed541ec6a744449bfdbcc47d17465b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -29087,6 +29121,7 @@ MonoBehaviour:
   - {fileID: 708617966325401272}
   - {fileID: 4663609365436297038}
   - {fileID: 5020521743978249526}
+  _freePests: []
 --- !u!1 &3780467594723745151
 GameObject:
   m_ObjectHideFlags: 0
@@ -29214,7 +29249,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4698305305209781880}
-  - component: {fileID: 408825794692698448}
+  - component: {fileID: 4094436638483829471}
   m_Layer: 0
   m_Name: Water
   m_TagString: Untagged
@@ -29238,7 +29273,7 @@ Transform:
   - {fileID: 7951757615175452935}
   m_Father: {fileID: 1685037940160960043}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &408825794692698448
+--- !u!114 &4094436638483829471
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -29247,7 +29282,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3926157903492269101}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67e0f51ac9586864db79bd04b62d11dc, type: 3}
+  m_Script: {fileID: 11500000, guid: 6017155a918ee0f48a9fd59a018f27d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _boostSprite: {fileID: 5257696794943396043}
@@ -30456,7 +30491,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 12
   m_Sprite: {fileID: 1600529896, guid: c6ed541ec6a744449bfdbcc47d17465b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -30543,7 +30578,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 14
+  m_SortingOrder: 16
   m_Sprite: {fileID: 442028169, guid: c6ed541ec6a744449bfdbcc47d17465b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -32288,6 +32323,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &5011128400987622520
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4175041550006901728}
+  m_Layer: 0
+  m_Name: RightUp
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4175041550006901728
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5011128400987622520}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2.1538463, y: 2.1538463, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1709116911545493111}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5032250801374395081
 GameObject:
   m_ObjectHideFlags: 0
@@ -33703,6 +33769,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _autoCollector: {fileID: 7096266056567547103}
   _growStatusSlider: {fileID: 5359901451888193382}
+  <Data>k__BackingField:
+    _bedType: {fileID: 0}
+    _plantedIngredient: {fileID: 0}
+    _nowTime: 0
+    _count: 0
+    _isFull: 0
+    _animationTime: 0
+    _waterBoost:
+      _boost: 1
+      _isBoosting: 0
+      _isEternal: 0
+      _nowTime: 0
+    _fertilizeBoost:
+      _boost: 1
+      _isBoosting: 0
+      _isEternal: 0
+      _nowTime: 0
+    _pestsGenerator:
+      _pests: []
+      _pestsSlowdown: 1
+      _nowTime: 0
+      _needTime: 0
+      _isActive: 0
+      _isPestsInstant: 0
+      _isPestsRemoved: 0
+    _independentBoost: 1
+    _isAutoCollect: 0
 --- !u!114 &4793016037927127210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35871,7 +35964,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 14
+  m_SortingOrder: 16
   m_Sprite: {fileID: 63544450, guid: c6ed541ec6a744449bfdbcc47d17465b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -36308,7 +36401,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 13
+  m_SortingOrder: 15
   m_Sprite: {fileID: -299577141, guid: c6ed541ec6a744449bfdbcc47d17465b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -36965,7 +37058,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pool: {fileID: 2067615603938320234}
-  _pestRemover: {fileID: 104683102999095311}
+  _pestRemover: {fileID: 6958599773789547834}
   _maxPests: 8
   _onePestSlowdown: 0.0625
   _spawnTime:
@@ -40227,7 +40320,7 @@ MonoBehaviour:
   _type: {fileID: 11400000, guid: 2e37d524597e5d2499cc7a496f717a91, type: 2}
   _pestsGenerator: {fileID: 4956057737783124877}
   _farmBed: {fileID: 5126006074908104}
-  _water: {fileID: 408825794692698448}
+  _water: {fileID: 4094436638483829471}
   _fertilize: {fileID: 296466730616425709}
   _intependentBooster: {fileID: 0}
 --- !u!1 &9198220099168491199

@@ -22,4 +22,8 @@ public class FarmBedUpgradeManager : MonoBehaviour {
             _availableUpgrades = _availableUpgrades.OrderBy(upgrade => upgrade.Price).ToList();
         }
     }
+
+    public bool HaveUpgrade(FarmBedUpgrade upgrade) {
+        return _availableUpgrades.Contains(upgrade);
+    }
 }

@@ -34,7 +34,7 @@ public class PopularityCalculator : MonoBehaviour {
         float doubleChance = _nowLevel.DoubleChance + singleChance;
         float tripleChance = _nowLevel.TripleChance + doubleChance;
 
-        float chance = Random.Range(1f, 101f);
+        float chance = Random.Range(1f, 100f);
         if (chance <= singleChance)
             return ClientCount.One;
         else if (chance <= doubleChance)

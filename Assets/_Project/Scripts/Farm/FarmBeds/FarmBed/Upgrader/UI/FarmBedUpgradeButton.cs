@@ -8,6 +8,9 @@ public class FarmBedUpgradeButton : ChoiceBuyButton<FarmBedUpgrade> {
 
     public override void Setup(FarmBedUpgrade item, UnityAction buttonEvent) {
         base.Setup(item, buttonEvent);
+        _price = item.PriceToAdd;
+        CheckBuyable(MoneyManager.Instance.MoneyCount);
+
         _nameText.SetText(item.Name);
     }
 

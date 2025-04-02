@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StaticPestsPool : PestsPool {
     [SerializeField] private Pest[] _pests;
-    private readonly List<Pest> _freePests = new();
+    [SerializeField] private List<Pest> _freePests = new();
 
     public void SetupFreePestsList() {
         foreach (var pest in _pests) {

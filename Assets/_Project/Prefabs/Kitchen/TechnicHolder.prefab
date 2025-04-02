@@ -177,7 +177,7 @@ AudioSource:
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
-  DopplerLevel: 1
+  DopplerLevel: 0
   MinDistance: 1
   MaxDistance: 70
   Pan2D: 0
@@ -517,6 +517,7 @@ MonoBehaviour:
       _isCooking: 0
       _food: {fileID: 0}
       _tableIndex: 0
+      _cookProgress: 0
 --- !u!114 &7799278233860721202
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -702,10 +703,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hoverListener: {fileID: 0}
-  _activableObject: {fileID: 0}
-  _locationManager: {fileID: 0}
+  _activableObject:
+    _underlyingValue: {fileID: 0}
+  _UIManager: {fileID: 0}
   _technicHolder: {fileID: 7106958589563700767}
-  _orderActivator: {fileID: 0}
 --- !u!1 &6228159044834728704
 GameObject:
   m_ObjectHideFlags: 0
@@ -794,6 +795,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98a6febe975baec4dbdb8bfbca44cfc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _maxValue: 1
   _gradient:
     serializedVersion: 2
     key0: {r: 0.92941177, g: 0.08235294, b: 0.08235294, a: 1}

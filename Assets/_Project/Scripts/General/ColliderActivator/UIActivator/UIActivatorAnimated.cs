@@ -7,10 +7,10 @@ public class UIActivatorAnimated : UIActivator {
 
     protected void Awake() {
         _animator = GetComponent<Animator>();
+        _activableObject.Value.StateChanged += ChangeAnimationState;
     }
 
-    protected override void Press() {
-        base.Press();
-        _animator.SetBool(_animationName, !_animator.GetBool(_animationName));
+    private void ChangeAnimationState(bool newState) {
+        _animator.SetBool(_animationName, newState);
     }
 }

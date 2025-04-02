@@ -827,7 +827,7 @@ AudioSource:
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
-  DopplerLevel: 1
+  DopplerLevel: 0
   MinDistance: 1
   MaxDistance: 70
   Pan2D: 0
@@ -3104,10 +3104,10 @@ RectTransform:
   - {fileID: 7479690520472781345}
   m_Father: {fileID: 6490442358468242938}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000000038184226, y: -0.000000005355105}
-  m_SizeDelta: {x: 3.1168, y: 0.4804}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: -0.3075, y: -0.3075}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &4188606915390441496
 GameObject:
@@ -3832,7 +3832,7 @@ AudioSource:
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
-  DopplerLevel: 1
+  DopplerLevel: 0
   MinDistance: 1
   MaxDistance: 70
   Pan2D: 0
@@ -4292,7 +4292,7 @@ AudioSource:
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
-  DopplerLevel: 1
+  DopplerLevel: 0
   MinDistance: 1
   MaxDistance: 100
   Pan2D: 0
@@ -4495,13 +4495,13 @@ MonoBehaviour:
     _isGreaterZero: 0
   _audios:
   - _audio: {fileID: 8300000, guid: 191ae073b450de247b85b36d24fcdb23, type: 3}
-    _volume: 0.25
+    _volume: 0.2
   - _audio: {fileID: 8300000, guid: 2da04328a1dedbc4d978f47fc2a5939f, type: 3}
-    _volume: 0.25
+    _volume: 0.2
   - _audio: {fileID: 8300000, guid: 76aabdb02747ee14bb6a606be65e82d6, type: 3}
-    _volume: 0.25
+    _volume: 0.2
   - _audio: {fileID: 8300000, guid: c72a117b58ffb3345a010d7b7321c00d, type: 3}
-    _volume: 0.25
+    _volume: 0.2
 --- !u!82 &2216101937005095480
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4522,7 +4522,7 @@ AudioSource:
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
-  DopplerLevel: 1
+  DopplerLevel: 0
   MinDistance: 0
   MaxDistance: 25
   Pan2D: 0
@@ -5711,7 +5711,7 @@ AudioSource:
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
-  DopplerLevel: 1
+  DopplerLevel: 0
   MinDistance: 1
   MaxDistance: 70
   Pan2D: 0
@@ -5883,7 +5883,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 0.578
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []

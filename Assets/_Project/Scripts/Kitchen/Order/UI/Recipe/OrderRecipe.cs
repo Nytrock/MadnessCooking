@@ -29,9 +29,12 @@ public class OrderRecipe : FoodRecipe<OrderRecipePart> {
         _techicIcon.SetTechnic(_food.TypeTechnic, isTechicAcsessible);
     }
 
-    public void UpdateRecipeIngredients() {
+    public void UpdateRecipeIngredients(IngredientCount changedCount) {
         foreach (var part in _recipeParts) {
             if (part.IngredientCount is null)
+                continue;
+
+            if (part.IngredientCount.Ingredient != changedCount.Ingredient)
                 continue;
 
             bool haveCount = _kitchenStorage.HaveCount(part.IngredientCount);

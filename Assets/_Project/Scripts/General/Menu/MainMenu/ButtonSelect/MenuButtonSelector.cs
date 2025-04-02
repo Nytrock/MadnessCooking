@@ -18,11 +18,7 @@ public abstract class MenuButtonSelector : MonoBehaviour {
     }
 
     private void Start() {
-        Invoke(nameof(LateStart), Time.deltaTime);
-    }
-
-    private void LateStart() {
-        SelectButton(0);
+        Invoke(nameof(SelectFirstButton), Time.deltaTime);
     }
 
     protected virtual void Update() {
@@ -39,6 +35,10 @@ public abstract class MenuButtonSelector : MonoBehaviour {
             return;
 
         _nowButton.Press();
+    }
+
+    public void SelectFirstButton() {
+        SelectButton(0);
     }
 
     private void SelectButton(int index) {

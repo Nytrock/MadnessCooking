@@ -35,8 +35,9 @@ public class FarmBedUpgrader : MonoBehaviour {
 
     public void DisableUpgrades() {
         foreach (var upgrade in _availableUpgrades)
-            MoneyManager.Instance.ChangeMoney((int)(upgrade.Price * 0.5f));
+            MoneyManager.Instance.ChangeMoney((int)(upgrade.PriceToAdd * 0.5f));
         _bedData.DisableUpgrades();
+        _availableUpgrades.Clear();
     }
 
     public void Bind(FarmBedData bedData) {

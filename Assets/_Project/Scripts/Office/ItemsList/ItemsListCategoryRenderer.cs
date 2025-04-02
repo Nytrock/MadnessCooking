@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ItemsListCategoryRenderer : MonoBehaviour {
@@ -6,6 +7,7 @@ public class ItemsListCategoryRenderer : MonoBehaviour {
     [SerializeField] private ItemsListItemRenderer _itemRendererPrefab;
     [SerializeField] private RectTransform _itemsContainer;
 
+    private readonly List<BuyableItem> _allItems = new();
     private string _categoryName;
     private int _allItemsCount;
     private int _nowItemsCount;
@@ -22,6 +24,7 @@ public class ItemsListCategoryRenderer : MonoBehaviour {
             ItemsListItemRenderer itemRenderer = Instantiate(_itemRendererPrefab, _itemsContainer);
             itemRenderer.Setup(item, description);
             itemManager.ItemAdded += itemRenderer.CheckNewItem;
+            _allItems.Add(item);
         }
 
         itemManager.ItemAdded += AddNewItem;
@@ -38,6 +41,8 @@ public class ItemsListCategoryRenderer : MonoBehaviour {
     }
 
     private void AddNewItem(BuyableItem item) {
+        if (!_allItems.Contains(item))
+            return;
         _nowItemsCount++;
     }
 
