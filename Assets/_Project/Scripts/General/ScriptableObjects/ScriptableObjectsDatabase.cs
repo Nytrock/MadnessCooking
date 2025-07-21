@@ -8,7 +8,8 @@ public class ScriptableObjectsDatabase : Singleton<ScriptableObjectsDatabase> {
     protected override void Awake() {
         base.Awake();
         foreach (var scriptableObject in _scriptableObjects)
-            scriptableObject.Initialize();
+            if (scriptableObject != null)
+                scriptableObject.Initialize();
     }
 
     [ContextMenu("CheckObjectsLocalization")]
