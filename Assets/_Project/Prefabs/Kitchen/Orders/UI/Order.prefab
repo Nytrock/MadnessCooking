@@ -419,12 +419,6 @@ MonoBehaviour:
   _startState: {fileID: 3869116745533427104}
   _cookState: {fileID: 7727834652994816916}
   _finishState: {fileID: 8491035449551638742}
-  <Order>k__BackingField:
-    _isActivated: 0
-    _isFinished: 0
-    _isCooking: 0
-    _food: {fileID: 0}
-    _tableIndex: 0
 --- !u!1 &3010070673466325070
 GameObject:
   m_ObjectHideFlags: 0
@@ -1039,6 +1033,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!1 &4743781694553705795
 GameObject:
   m_ObjectHideFlags: 0
@@ -1472,6 +1467,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _table: UITable
+  _isLogging: 0
 --- !u!1 &5536440784066294872
 GameObject:
   m_ObjectHideFlags: 0
