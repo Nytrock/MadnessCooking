@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class IngredientStorageUI : MonoBehaviour, IActivable {
+public class IngredientStorageUI : MonoBehaviour, IStateable {
     [SerializeField] protected IngredientStorage _storage;
     [SerializeField] protected GameObject _panel;
     [SerializeField] protected IngredientCountButtonPool _buttonPool;

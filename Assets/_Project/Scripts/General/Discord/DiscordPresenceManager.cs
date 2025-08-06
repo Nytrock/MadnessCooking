@@ -1,12 +1,15 @@
+#if UNITY_STANDALONE_WIN
 using Discord;
 using System;
-using UnityEngine;
 using diagnostic = System.Diagnostics;
+#endif
+using UnityEngine;
 
 public class DiscordPresenceManager : MonoBehaviour {
     [SerializeField] private LocationManager _locationManager;
     [SerializeField] private MoneyManager _moneyManager;
 
+#if UNITY_STANDALONE_WIN
     private Discord.Discord _discord;
     private string _activityState;
     private string _activityDetails;
@@ -78,4 +81,5 @@ public class DiscordPresenceManager : MonoBehaviour {
 
         _discord.Dispose();
     }
+#endif
 }

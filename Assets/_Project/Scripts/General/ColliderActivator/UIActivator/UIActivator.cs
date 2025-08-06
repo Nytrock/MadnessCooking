@@ -3,7 +3,7 @@ using UnityEngine;
 
 
 public class UIActivator : ColliderActivator {
-    [SerializeField] protected InterfaceReference<IActivable> _activableObject;
+    [SerializeField] protected InterfaceReference<IStateable> _activableObject;
     [SerializeField] private UIActivatorsManager _UIManager;
 
     protected override void Press() {

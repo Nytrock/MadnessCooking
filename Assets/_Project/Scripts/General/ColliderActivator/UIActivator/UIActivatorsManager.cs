@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class UIActivatorsManager : MonoBehaviour {
     [SerializeField] private LocationManager _locationManager;
-    private IActivable _nowActivable;
+    private IStateable _nowActivable;
 
     private void Awake() {
         _locationManager.LocationChanged += delegate { CloseNowActivable(); };
@@ -15,7 +15,7 @@ public class UIActivatorsManager : MonoBehaviour {
         }
     }
 
-    public void SetActivable(IActivable activable) {
+    public void SetActivable(IStateable activable) {
         if (activable == _nowActivable) {
             _nowActivable.ChangeState(false);
             _nowActivable = null;

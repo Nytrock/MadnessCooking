@@ -3,6 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class AutoSaveUI : MonoBehaviour {
     [SerializeField] private AutoSaveManager _manager;
+
     private Animator _animator;
 
     private void Awake() {

@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class BarnStorageUI : MonoBehaviour, IActivable {
+public class BarnStorageUI : MonoBehaviour, IStateable {
     [SerializeField] private GameObject _panel;
     [SerializeField] private BarnStorage _barnStorage;
     [SerializeField] private ItemInfoRendererWithCount _milkRenderer;

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class OrdersUI : MonoBehaviour, IUpgradeable<KitchenUpgradeData>, IActivable {
+public class OrdersUI : MonoBehaviour, IUpgradeable<KitchenUpgradeData>, IStateable {
     [SerializeField] private OrdersManager _ordersManager;
     [SerializeField] private OrderButtonsPool _pool;
     [SerializeField] private GameObject _panel;

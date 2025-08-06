@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PuncherUI : MonoBehaviour, IActivable {
+public class PuncherUI : MonoBehaviour, IStateable {
     [SerializeField] private Puncher _puncher;
     [SerializeField] private GameObject _panel;
     [SerializeField] private CountRenderer _count;

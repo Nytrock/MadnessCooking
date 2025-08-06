@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public abstract class CameraManager : MonoBehaviour {
     [SerializeField] protected Camera _mainCamera;
@@ -32,7 +33,7 @@ public abstract class CameraManager : MonoBehaviour {
     public float StartPosition => _startPosition;
     public float EndPosition => _endPosition;
     public Transform CameraTransform => _cameraTransform;
-    public bool IsMouseMoving => Mathf.Abs(_cameraVelocity) >= 0.01f && !_isKeyPressed;
+    public static Vector3 LocalMousePosition => Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
     protected virtual void Awake() {
         _locationManager.LocationChanged += ChangeWorkMode;
@@ -46,7 +47,7 @@ public abstract class CameraManager : MonoBehaviour {
             return;
 
         float keyAxis = 0, scrollAxis = 0, mouseAxis = 0;
-        if (!_hoverListener.IsHover) {
+        if (!EventSystem.current.IsPointerOverGameObject()) {
             keyAxis = Input.GetAxis(_keyAxis) / FpsManager.NORMALIZED_DELTA_TIME;
             mouseAxis = Input.GetAxis(_mouseAxis) / FpsManager.NORMALIZED_DELTA_TIME;
         }

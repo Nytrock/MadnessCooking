@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class HoverItemNameActivator : HoverTextActivator {
@@ -11,7 +10,7 @@ public class HoverItemNameActivator : HoverTextActivator {
         _showingItem = item;
     }
 
-    public override void OnPointerEnter(PointerEventData eventData) {
+    protected override void ShowText() {
         _hoverPanel.ShowText(_showingItem.Name);
     }
 }

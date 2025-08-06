@@ -25,7 +25,7 @@ public class HoldActivator : MonoBehaviour {
     }
 
     private void OnMouseUp() {
-        if (_hoverListener.IsHover || !_hold.IsUnlocked)
+        if (!_hold.IsUnlocked)
             return;
 
         _isMouseDown = false;

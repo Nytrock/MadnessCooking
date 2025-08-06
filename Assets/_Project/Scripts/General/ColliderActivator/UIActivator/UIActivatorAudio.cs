@@ -2,7 +2,7 @@ using AYellowpaper;
 using UnityEngine;
 
 public class UIActivatorAudio : SwitchableAudioSource {
-    [SerializeField] private InterfaceReference<IActivable> _activable;
+    [SerializeField] private InterfaceReference<IStateable> _activable;
 
     protected override void Awake() {
         base.Awake();

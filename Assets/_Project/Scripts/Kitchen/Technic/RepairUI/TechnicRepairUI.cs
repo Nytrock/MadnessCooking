@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TechnicRepairUI : MonoBehaviour, IActivable {
+public class TechnicRepairUI : MonoBehaviour, IStateable {
     [SerializeField] private Transform _targetPoint;
     [SerializeField] private GameObject _panel;
     [SerializeField] private Camera _camera;

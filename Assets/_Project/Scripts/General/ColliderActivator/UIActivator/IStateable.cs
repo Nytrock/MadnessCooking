@@ -1,6 +1,6 @@
 using System;
 
-public interface IActivable {
+public interface IStateable {
     void ChangeState(bool newState);
     event Action<bool> StateChanged;
 }

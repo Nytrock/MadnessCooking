@@ -5,7 +5,6 @@ using UnityEngine.EventSystems;
 public class UIHoverTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
     [SerializeField] private UIHoverListener _hoverListener;
     [SerializeField] private bool _isScrollBlocked;
-    [SerializeField] private bool _isHoverReversed;
     [SerializeField] private bool _isDebug;
 
     private RectTransform _rect;
@@ -32,20 +31,16 @@ public class UIHoverTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     }
 
     private void Enter() {
-        ChangeStates(!_isHoverReversed, _isScrollBlocked);
+        ChangeScrollState(_isScrollBlocked);
     }
 
     private void Leave() {
-        ChangeStates(_isHoverReversed, false);
+        ChangeScrollState(false);
     }
 
-    private void ChangeStates(bool isHover, bool isScrollBlocked) {
-        _hoverListener.ChangeHoverState(isHover);
+    private void ChangeScrollState(bool isScrollBlocked) {
         _hoverListener.ChangeScrollBlockState(isScrollBlocked);
-
-        if (_isDebug) {
-            Debug.Log($"{name} change hover to {isHover}");
+        if (_isDebug)
             Debug.Log($"{name} change scroll block to {isScrollBlocked}");
-        }
     }
 }

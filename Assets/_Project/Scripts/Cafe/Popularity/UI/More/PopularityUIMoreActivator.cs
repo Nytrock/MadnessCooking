@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+[RequireComponent(typeof(RectTransform))]
 public class PopularityUIMoreActivator : MonoBehaviour, IPointerEnterHandler {
     [SerializeField] private PopularityUIMore _moreUI;
 

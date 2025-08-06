@@ -9,12 +9,27 @@ public abstract class MenuButtonSelector : MonoBehaviour {
     protected RectTransform _targetRect;
 
     protected void Awake() {
+        if (Application.isMobilePlatform) {
+            MobileAwake();
+            return;
+        }
+
+        StandardAwake();
+    }
+
+    private void StandardAwake() {
         for (int i = 0; i < _buttons.Length; i++) {
             _buttons[i].Setup(i);
             _buttons[i].ButtonSelected += SelectButton;
         }
 
         _nowRect = GetComponent<RectTransform>();
+    }
+
+    private void MobileAwake() {
+        foreach (var button in _buttons)
+            button.ChangeSelectVisual(true);
+        gameObject.SetActive(false);
     }
 
     private void Start() {

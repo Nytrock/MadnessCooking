@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class SleepBedUI : MonoBehaviour, IActivable {
+public class SleepBedUI : MonoBehaviour, IStateable {
     [SerializeField] private SleepBed _sleepBed;
     [SerializeField] private GameObject _panel;
     [SerializeField] private GameObject _blockPanel;

@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ChickensUI : MonoBehaviour, IActivable {
+public class ChickensUI : MonoBehaviour, IStateable {
     [SerializeField] private BarnChickens _chickens;
     [SerializeField] private GameObject _panel;
     [SerializeField] private Button _feedButton;

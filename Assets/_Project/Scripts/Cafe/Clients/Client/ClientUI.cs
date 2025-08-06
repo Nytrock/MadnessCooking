@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ClientUI : MonoBehaviour, IActivable {
+public class ClientUI : MonoBehaviour, IStateable {
     [SerializeField] private Animator _animator;
     [SerializeField] private GameObject _chooseFoodPanel;
     [SerializeField] private GameObject _buttonsBlock;

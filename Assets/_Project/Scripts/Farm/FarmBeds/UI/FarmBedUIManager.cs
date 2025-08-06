@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class FarmBedUIManager : MonoBehaviour, IActivable {
+public class FarmBedUIManager : MonoBehaviour, IStateable {
     [SerializeField] private UIActivatorsManager _activatorsManager;
     [SerializeField] private BedTypeUI[] _bedsUI;
     [SerializeField] private FarmBedUpgraderUI _upgrade;
