@@ -7,7 +7,8 @@ public class FoodRecipeAdditionalPart : HoverItemNameActivator {
 
     public bool IsAvailable => _isAvailable;
 
-    protected virtual void Awake() {
+    protected override void Awake() {
+        base.Awake();
         InitializeIcon();
     }
 

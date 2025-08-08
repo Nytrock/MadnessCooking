@@ -9,6 +9,11 @@ public class ScreenSize {
     public int Height => _heigth;
     public int Width => _width;
 
+    public ScreenSize(int width, int heigth) {
+        _width = width;
+        _heigth = heigth;
+    }
+
     public override string ToString() {
         return _width.ToString() + " x " + _heigth.ToString();
     }

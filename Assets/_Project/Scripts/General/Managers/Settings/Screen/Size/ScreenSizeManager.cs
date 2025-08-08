@@ -1,35 +1,43 @@
 using UnityEngine;
 
 public class ScreenSizeManager : MonoBehaviour, IBindable<VideoSettingsData>, ISettingableWithOptions {
-    [SerializeField] private ScreenSize[] _sizes;
+    [SerializeField] private int[] _heights;
     [SerializeField] private ScreenModeManager _screenModeManager;
+
     private VideoSettingsData _data;
+    private ScreenSize _nowScreenSize;
+    private float _ratio;
+
+    public ScreenSize NowScreenSize => _nowScreenSize;
 
     public int DefaultValue {
         get {
-            for (int i = 0; i < _sizes.Length; i++)
-                if (_sizes[i].Height >= Screen.height)
+            for (int i = 0; i < _heights.Length; i++)
+                if (_heights[i] >= Screen.height)
                     return i;
             return 0;
         }
     }
 
-    public int OptionsCount => _sizes.Length;
+    public int OptionsCount => _heights.Length;
 
     public void LateStart() { }
+
+    private void Awake() {
+        _ratio = (float)Screen.width / Screen.height;
+    }
 
     public void Bind(VideoSettingsData data) {
         data.ScreenSize ??= new(DefaultValue);
         _data = data;
     }
 
-    public ScreenSize GetNowScreenSize() {
-        return _sizes[_data.ScreenSize.LastValue];
-    }
-
     public void UpdateValue() {
-        ScreenSize nowScreenSize = GetNowScreenSize();
-        Screen.SetResolution(nowScreenSize.Width, nowScreenSize.Height, true);
+        int height = _heights[_data.ScreenSize.LastValue];
+        int width = (int)(height * _ratio);
+
+        _nowScreenSize = new(width, height);
+        Screen.SetResolution(width, height, true);
         _screenModeManager.UpdateValue();
     }
 }

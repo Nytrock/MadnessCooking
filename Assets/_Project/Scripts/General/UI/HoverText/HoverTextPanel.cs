@@ -8,8 +8,6 @@ public class HoverTextPanel : MonoBehaviour {
 
     private bool _isHovered = false;
 
-    public bool IsHovered => _isHovered;
-
     private void Awake() {
         ChangeState(false);
     }

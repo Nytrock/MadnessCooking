@@ -6,7 +6,7 @@ public class ScreenSizeSettingsPoint : IntSettingsPoint {
 
     protected override void UpdateState() {
         base.UpdateState();
-        ScreenSize nowScreenSize = (_settingable.Value as ScreenSizeManager).GetNowScreenSize();
+        ScreenSize nowScreenSize = (_settingable.Value as ScreenSizeManager).NowScreenSize;
         _text.text = nowScreenSize.ToString();
     }
 }

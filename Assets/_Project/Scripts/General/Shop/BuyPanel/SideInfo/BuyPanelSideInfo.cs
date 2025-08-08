@@ -4,7 +4,8 @@ using UnityEngine;
 public class BuyPanelSideInfo : HoverTextActivator {
     private GrayscaleImage _grayscaleImage;
 
-    private void Awake() {
+    protected override void Awake() {
+        base.Awake();
         _grayscaleImage = GetComponent<GrayscaleImage>();
     }
 
