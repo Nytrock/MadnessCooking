@@ -40,7 +40,9 @@ public class UIHoverTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     private void ChangeScrollState(bool isScrollBlocked) {
         _hoverListener.ChangeScrollBlockState(isScrollBlocked);
-        if (_isDebug)
+
+        if (_isDebug) {
             Debug.Log($"{name} change scroll block to {isScrollBlocked}");
+        }
     }
 }
