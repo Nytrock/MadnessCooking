@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
@@ -7,7 +9,9 @@ using UnityEngine.Localization.Settings;
 public class LocalizationManager : Singleton<LocalizationManager>, IBindable<GameSettingsData>, ISettingableWithOptions {
     [SerializeField] private List<Locale> _locales;
     [SerializeField] private Locale _defaultLocale;
+
     private SettingsPointData<int> _data;
+    private bool _isLocalesLoaded;
 
     public int OptionsCount => _locales.Count;
     public int DefaultValue => _locales.IndexOf(_defaultLocale);
@@ -24,21 +28,32 @@ public class LocalizationManager : Singleton<LocalizationManager>, IBindable<Gam
         LocalizationSettings.SelectedLocaleChanged += UpdateLocalizationFromEditorStatic;
     }
 
+    protected IEnumerator Start() {
+        _isLocalesLoaded = false;
+        yield return new WaitForEndOfFrame();
+        yield return LocalizationSettings.InitializationOperation;
+        _isLocalesLoaded = true;
+        UpdateValue();
+    }
+
     private void UpdateLocalization() {
         if (!Application.isPlaying) return;
 
         LocalizationChanged?.Invoke();
     }
 
-    public string GetLocalization(string table, string key, Dictionary<string, string> arguments = null) {
+    public async Task<string> GetLocalization(string table, string key, Dictionary<string, string> arguments = null) {
+        if (!_isLocalesLoaded)
+            return key;
+
         if (arguments != null) {
-            List<string> keys = new(arguments.Keys);
-            foreach (var argumentKey in keys)
-                arguments[argumentKey] = GetLocalization(table, arguments[argumentKey]);
+            Dictionary<string, string> localizedArguments = new();
+            foreach (var argumentKey in arguments.Keys)
+                localizedArguments[argumentKey] = await GetLocalization(table, arguments[argumentKey]);
+            arguments = localizedArguments;
         }
 
-        string result = LocalizationSettings.StringDatabase.GetLocalizedString(table, key, arguments: arguments);
-        return result;
+        return await LocalizationSettings.StringDatabase.GetLocalizedStringAsync(table, key, arguments: arguments).Task;
     }
 
     public void Bind(GameSettingsData data) {
@@ -46,11 +61,10 @@ public class LocalizationManager : Singleton<LocalizationManager>, IBindable<Gam
         _data = data.LocalizationManager;
     }
 
-    public void LateStart() {
-        UpdateValue();
-    }
-
     public void UpdateValue() {
+        if (!_isLocalesLoaded)
+            return;
+
         LocalizationSettings.SelectedLocale = _locales[_data.LastValue];
         UpdateLocalization();
     }
@@ -65,4 +79,6 @@ public class LocalizationManager : Singleton<LocalizationManager>, IBindable<Gam
         _data.SubmitChanging();
         UpdateValue();
     }
+
+    public void LateStart() { }
 }

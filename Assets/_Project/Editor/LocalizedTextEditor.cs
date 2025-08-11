@@ -10,7 +10,7 @@ public class LocalizedTextEditor : Editor {
     private string[] _options;
 
     public void OnEnable() {
-        // this needs because for SOME REASON without selected locale i cannot get list of all tables
+        // this needs because for SOME REASON without selected locale I cannot get list of all tables
         LocalizationSettings.SelectedLocale = LocalizationSettings.ProjectLocale;
 
         var tables = LocalizationSettings.StringDatabase.GetAllTables();

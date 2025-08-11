@@ -2,12 +2,18 @@ using System;
 using UnityEngine;
 
 public class ScreenModeManager : MonoBehaviour, IBindable<VideoSettingsData>, ISettingableWithOptions {
-    [SerializeField] private ScreenMode[] _modes;
     [SerializeField] private ScreenMode _defaultMode;
     private VideoSettingsData _data;
 
-    public int DefaultValue => Mathf.Max(Array.IndexOf(_modes, _defaultMode), 0);
-    public int OptionsCount => _modes.Length;
+    public int DefaultValue {
+        get {
+            if (Application.platform == RuntimePlatform.WebGLPlayer)
+                return (int)ScreenMode.Windowed;
+            return (int)_defaultMode;
+        }
+    }
+
+    public int OptionsCount => Enum.GetNames(typeof(ScreenMode)).Length;
 
     public void LateStart() { }
 
@@ -17,7 +23,7 @@ public class ScreenModeManager : MonoBehaviour, IBindable<VideoSettingsData>, IS
     }
 
     public ScreenMode GetNowScreenMode() {
-        return _modes[_data.ScreenMode.LastValue];
+        return (ScreenMode)_data.ScreenMode.LastValue;
     }
 
     public void UpdateValue() {

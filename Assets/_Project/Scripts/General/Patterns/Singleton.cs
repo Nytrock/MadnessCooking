@@ -9,10 +9,12 @@ public class Singleton<TObject> : MonoBehaviour
 
     protected virtual void Awake() => InitializeSingleton();
 
+#if !UNITY_WEBGL
     [RuntimeInitializeOnLoadMethod]
     private static void InitializeOnLoad() {
         _instance = null;
     }
+#endif
 
     protected virtual void InitializeSingleton() {
         if (!Application.isPlaying) return;

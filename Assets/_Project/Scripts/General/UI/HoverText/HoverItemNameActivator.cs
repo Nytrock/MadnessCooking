@@ -10,7 +10,7 @@ public class HoverItemNameActivator : HoverTextActivator {
         _showingItem = item;
     }
 
-    protected override void ShowText() {
-        _hoverPanel.ShowText(_showingItem.Name);
+    protected override async void ShowText() {
+        _hoverPanel.ShowText(await _showingItem.GetName());
     }
 }

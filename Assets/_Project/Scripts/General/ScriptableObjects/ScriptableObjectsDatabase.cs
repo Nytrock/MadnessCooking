@@ -5,28 +5,10 @@ public class ScriptableObjectsDatabase : Singleton<ScriptableObjectsDatabase> {
     [SerializeField] private List<ExtendedScriptableObject> _scriptableObjects;
     [SerializeField] private string _objectsFolder;
 
-    protected override void Awake() {
-        base.Awake();
+    protected void Start() {
         foreach (var scriptableObject in _scriptableObjects)
-            if (scriptableObject != null)
-                scriptableObject.Initialize();
-    }
-
-    [ContextMenu("CheckObjectsLocalization")]
-    private void CheckObjectsLocalization() {
-        if (!Application.isPlaying)
-            return;
-
-        foreach (var scriptableObject in _scriptableObjects) {
-            if (scriptableObject as BuyableItem != null) {
-                BuyableItem item = scriptableObject as BuyableItem;
-                if (item.Name.Contains(".Name"))
-                    Debug.LogError($"No translation found for {item.Name}");
-                if (item.Description.Contains(".Description"))
-                    Debug.LogError($"No translation found for {item.Description}");
-                break;
-            }
-        }
+            if (scriptableObject != null && scriptableObject is BuyableItem item)
+                item.Initialize();
     }
 
 #if UNITY_EDITOR

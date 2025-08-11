@@ -5,7 +5,13 @@ public class BackgroundRunManager : MonoBehaviour, IBindable<GameSettingsData>, 
 
     private SettingsPointData<bool> _data;
 
-    public bool DefaultValue => _defaultValue;
+    public bool DefaultValue {
+        get {
+            if (Application.isMobilePlatform || Application.platform == RuntimePlatform.WebGLPlayer)
+                return false;
+            return _defaultValue;
+        }
+    }
 
     public void Bind(GameSettingsData data) {
         data.BackgroundRunManager ??= new(DefaultValue);

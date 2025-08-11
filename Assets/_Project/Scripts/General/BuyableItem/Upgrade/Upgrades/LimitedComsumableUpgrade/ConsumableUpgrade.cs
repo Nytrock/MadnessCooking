@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = AssetMenuName + nameof(ConsumableUpgrade))]
@@ -7,10 +8,10 @@ public class ConsumableUpgrade : BaseUpgrade {
 
     public int MaxCount => _maxCount;
 
-    protected override string GetDescription() {
+    public override async Task<string> GetDescription() {
         Dictionary<string, string> arguments = new() {
             ["maxCount"] = _maxCount.ToString()
         };
-        return LocalizationManager.Instance.GetLocalization(_table, name + ".Description", arguments);
+        return await LocalizationManager.Instance.GetLocalization(_table, name + ".Description", arguments);
     }
 }

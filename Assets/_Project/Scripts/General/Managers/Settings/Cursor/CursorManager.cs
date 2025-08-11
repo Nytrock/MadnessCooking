@@ -37,6 +37,9 @@ public class CursorManager : MonoBehaviour, IBindable<GameSettingsData>, ISettin
     }
 
     private void SetCursorTexture(CursorState state) {
+        if (Application.isMobilePlatform)
+            return;
+
         Texture2D texture = _nowCursor.GetCursor(state);
         Cursor.SetCursor(texture, _nowCursor.Offset, CursorMode.ForceSoftware);
     }

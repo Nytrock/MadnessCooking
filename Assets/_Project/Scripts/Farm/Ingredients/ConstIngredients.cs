@@ -20,8 +20,7 @@ public class ConstIngredients : Singleton<ConstIngredients> {
     public Ingredient Ectoplasm => _ectoplasm;
     public Ingredient Money => _money;
 
-    protected override void Awake() {
-        base.Awake();
+    protected void Start() {
         _money = BuyableItem.CreateTemporaryItem<Ingredient>(_moneyName);
     }
 }

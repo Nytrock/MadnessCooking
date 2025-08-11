@@ -14,8 +14,8 @@ public class LocalizedText : MonoBehaviour {
     public string Table => _table;
 
     protected void Start() {
-        UpdateText();
         LocalizationManager.Instance.LocalizationChanged += UpdateText;
+        UpdateText();
     }
 
     public virtual void SetText(string text) {
@@ -28,9 +28,10 @@ public class LocalizedText : MonoBehaviour {
         _text.color = color;
     }
 
-    public virtual void UpdateText() {
+    public virtual async void UpdateText() {
         CheckText();
-        _text.text = LocalizationManager.Instance.GetLocalization(_table, _key, _arguments);
+        string text = await LocalizationManager.Instance.GetLocalization(_table, _key, _arguments);
+        _text.text = text;
     }
 
     protected void CheckText() {

@@ -11,7 +11,7 @@ public class FarmBedUpgradeButton : ChoiceBuyButton<FarmBedUpgrade> {
         _price = item.PriceToAdd;
         CheckBuyable(MoneyManager.Instance.MoneyCount);
 
-        _nameText.SetText(item.Name);
+        _nameText.SetText(item.RawName);
     }
 
     public void UpdateStyle(BedType bedType) {

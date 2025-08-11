@@ -12,7 +12,7 @@ public class GraymanManager : MonoBehaviour, IBindable<GeneralData> {
     public string GraymanName => _graymanName;
     public BuyableItem GraymanItem => _graymanItem;
 
-    private void Awake() {
+    public void Start() {
         _graymanItem = BuyableItem.CreateTemporaryItem<BuyableItem>(_graymanName, _graymanIcon);
     }
 

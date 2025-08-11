@@ -27,7 +27,7 @@ public class BuyableItemText : MonoBehaviour {
         UpdateText();
     }
 
-    private void UpdateText() {
+    private async void UpdateText() {
         CheckText();
         if (_nowItem == null) {
             _text.text = "";
@@ -40,9 +40,9 @@ public class BuyableItemText : MonoBehaviour {
         }
 
         if (_type == BuyableItemTextType.Name)
-            _text.text = _nowItem.Name;
+            _text.text = await _nowItem.GetName();
         else
-            _text.text = _nowItem.Description;
+            _text.text = await _nowItem.GetDescription();
     }
 
     private void CheckText() {

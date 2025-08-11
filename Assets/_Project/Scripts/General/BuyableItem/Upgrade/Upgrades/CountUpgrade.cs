@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = AssetMenuName + nameof(CountUpgrade))]
@@ -7,10 +8,10 @@ public class CountUpgrade : BaseUpgrade {
 
     public int Count => _count;
 
-    protected override string GetDescription() {
+    public override async Task<string> GetDescription() {
         Dictionary<string, string> arguments = new() {
             ["count"] = _count.ToString()
         };
-        return LocalizationManager.Instance.GetLocalization(_table, name + ".Description", arguments);
+        return await LocalizationManager.Instance.GetLocalization(_table, name + ".Description", arguments);
     }
 }

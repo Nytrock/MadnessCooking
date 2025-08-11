@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class MenuButtonSelector : MonoBehaviour {
@@ -9,15 +10,29 @@ public abstract class MenuButtonSelector : MonoBehaviour {
     protected RectTransform _targetRect;
 
     protected void Awake() {
+        if (!Application.isMobilePlatform)
+            LocalizationManager.Instance.LocalizationChanged += SelectFirstButton;
+        CheckButtons();
+    }
+
+    private void CheckButtons() {
+        List<MenuButton> newButtons = new();
+        foreach (var button in _buttons)
+            if (button.gameObject.activeSelf)
+                newButtons.Add(button);
+        _buttons = newButtons.ToArray();
+    }
+
+    protected void Start() {
         if (Application.isMobilePlatform) {
-            MobileAwake();
+            MobileStart();
             return;
         }
 
-        StandardAwake();
+        StandardStart();
     }
 
-    private void StandardAwake() {
+    private void StandardStart() {
         for (int i = 0; i < _buttons.Length; i++) {
             _buttons[i].Setup(i);
             _buttons[i].ButtonSelected += SelectButton;
@@ -26,14 +41,10 @@ public abstract class MenuButtonSelector : MonoBehaviour {
         _nowRect = GetComponent<RectTransform>();
     }
 
-    private void MobileAwake() {
+    private void MobileStart() {
         foreach (var button in _buttons)
             button.ChangeSelectVisual(true);
         gameObject.SetActive(false);
-    }
-
-    private void Start() {
-        Invoke(nameof(SelectFirstButton), Time.deltaTime);
     }
 
     protected virtual void Update() {
@@ -54,6 +65,7 @@ public abstract class MenuButtonSelector : MonoBehaviour {
 
     public void SelectFirstButton() {
         SelectButton(0);
+        LocalizationManager.Instance.LocalizationChanged -= SelectFirstButton;
     }
 
     private void SelectButton(int index) {

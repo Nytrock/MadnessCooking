@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using System.Threading.Tasks;
 using UnityEngine;
 
 [JsonConverter(typeof(ScriptableObjectJsonConverter))]
@@ -12,24 +13,21 @@ public class BuyableItem : ExtendedScriptableObject {
     private string _rawName;
     private string _rawDescription;
 
-    public string Name => GetName();
     public string RawName => _rawName;
-    public string Description => GetDescription();
-    public string RawDescription => _rawDescription;
     public override Sprite Icon => _icon;
     public int Price => _price;
 
-    public override void Initialize() {
+    public void Initialize() {
         _rawName = name + ".Name";
         _rawDescription = name + ".Description";
     }
 
-    protected virtual string GetName() {
-        return LocalizationManager.Instance.GetLocalization(_table, RawName);
+    public virtual async Task<string> GetName() {
+        return await LocalizationManager.Instance.GetLocalization(_table, _rawName);
     }
 
-    protected virtual string GetDescription() {
-        return LocalizationManager.Instance.GetLocalization(_table, RawDescription);
+    public virtual async Task<string> GetDescription() {
+        return await LocalizationManager.Instance.GetLocalization(_table, _rawDescription);
     }
 
     public static TItem CreateTemporaryItem<TItem>(string name, Sprite icon = null)
@@ -40,12 +38,8 @@ public class BuyableItem : ExtendedScriptableObject {
         item.Initialize();
 
         if (icon != null)
-            item.SetIcon(icon);
+            item._icon = icon;
 
         return item;
-    }
-
-    private void SetIcon(Sprite icon) {
-        _icon = icon;
     }
 }

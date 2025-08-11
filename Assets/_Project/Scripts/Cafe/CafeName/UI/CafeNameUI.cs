@@ -21,9 +21,9 @@ public class CafeNameUI : MonoBehaviour, ITutorialPart {
         _editor.ChangeState(false);
     }
 
-    private void UpdateName(string name) {
+    private async void UpdateName(string name) {
         if (name == string.Empty && !_tutorialManager.IsWork) {
-            name = LocalizationManager.Instance.GetLocalization(_localizationTable, _defaultName);
+            name = await LocalizationManager.Instance.GetLocalization(_localizationTable, _defaultName);
             _editor.StartEditing(name, true);
         }
 

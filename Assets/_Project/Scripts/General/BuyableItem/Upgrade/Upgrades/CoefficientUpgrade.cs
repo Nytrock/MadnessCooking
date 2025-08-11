@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = AssetMenuName + nameof(CoefficientUpgrade))]
@@ -7,10 +8,10 @@ public class CoefficientUpgrade : BaseUpgrade {
 
     public float Coefficient => _coefficient;
 
-    protected override string GetDescription() {
+    public override async Task<string> GetDescription() {
         Dictionary<string, string> arguments = new() {
             ["coefficient"] = _coefficient.ToString()
         };
-        return LocalizationManager.Instance.GetLocalization(_table, name + ".Description", arguments);
+        return await LocalizationManager.Instance.GetLocalization(_table, name + ".Description", arguments);
     }
 }

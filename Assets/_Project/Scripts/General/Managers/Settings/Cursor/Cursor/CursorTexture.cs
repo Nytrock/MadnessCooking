@@ -9,8 +9,6 @@ public class CursorTexture : ExtendedScriptableObject {
     public override Sprite Icon => Sprite.Create(_defaultTexture, new Rect(0, 0, _defaultTexture.width, _defaultTexture.height), Vector2.zero);
     public Vector2 Offset => _offset;
 
-    public override void Initialize() { }
-
     public Texture2D GetCursor(CursorState state) {
         foreach (var texture in _extraTextures)
             if (texture.State == state)

@@ -33,11 +33,16 @@ public class ScreenSizeManager : MonoBehaviour, IBindable<VideoSettingsData>, IS
     }
 
     public void UpdateValue() {
-        int height = _heights[_data.ScreenSize.LastValue];
-        int width = (int)(height * _ratio);
+        int height, width;
+        if (Application.platform == RuntimePlatform.WebGLPlayer) {
+            height = Screen.height;
+            width = Screen.width;
+        } else {
+            height = _heights[_data.ScreenSize.LastValue];
+            width = (int)(height * _ratio);
+        }
 
         _nowScreenSize = new(width, height);
-        Screen.SetResolution(width, height, true);
-        _screenModeManager.UpdateValue();
+        Screen.SetResolution(width, height, Screen.fullScreenMode);
     }
 }
