@@ -6,6 +6,6 @@ public class AnimatedTextAudio : MonoBehaviour {
 
     private void Awake() {
         _audioSource = GetComponent<AudioSource>();
-        _text.TextUpdated += _audioSource.Play;
+        _text.TextAnimated += _audioSource.Play;
     }
 }

@@ -7,7 +7,7 @@ public class BackgroundRunManager : MonoBehaviour, IBindable<GameSettingsData>, 
 
     public bool DefaultValue {
         get {
-            if (Application.isMobilePlatform || Application.platform == RuntimePlatform.WebGLPlayer)
+            if (PlatformManager.IsNotDesktop)
                 return false;
             return _defaultValue;
         }

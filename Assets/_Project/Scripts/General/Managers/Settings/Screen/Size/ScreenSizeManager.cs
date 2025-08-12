@@ -34,7 +34,7 @@ public class ScreenSizeManager : MonoBehaviour, IBindable<VideoSettingsData>, IS
 
     public void UpdateValue() {
         int height, width;
-        if (Application.platform == RuntimePlatform.WebGLPlayer) {
+        if (PlatformManager.IsWeb) {
             height = Screen.height;
             width = Screen.width;
         } else {

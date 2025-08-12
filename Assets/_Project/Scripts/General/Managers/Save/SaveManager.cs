@@ -11,7 +11,10 @@ public abstract class SaveManager<TData> : MonoBehaviour
     protected abstract string _fileName { get; }
 
     private void Awake() {
-        _dataService = new SaveFileManager<TData>(_fileName);
+        if (PlatformManager.IsWeb)
+            _dataService = new WebSaveFileManager<TData>(_fileName);
+        else
+            _dataService = new SaveFileManager<TData>(_fileName);
     }
 
     private void Start() {

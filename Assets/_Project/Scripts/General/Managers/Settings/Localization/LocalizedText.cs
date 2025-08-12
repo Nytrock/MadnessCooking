@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -10,6 +11,8 @@ public class LocalizedText : MonoBehaviour {
 
     protected string _key;
     protected readonly Dictionary<string, string> _arguments = new();
+
+    public event Action TextChanged;
 
     public string Table => _table;
 
@@ -32,6 +35,7 @@ public class LocalizedText : MonoBehaviour {
         CheckText();
         string text = await LocalizationManager.Instance.GetLocalization(_table, _key, _arguments);
         _text.text = text;
+        TextChanged?.Invoke();
     }
 
     protected void CheckText() {

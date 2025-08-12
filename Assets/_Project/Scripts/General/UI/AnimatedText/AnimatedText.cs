@@ -11,7 +11,7 @@ public class AnimatedText : LocalizedText {
 
     public bool IsAnimated => _isAnimated;
 
-    public event Action TextUpdated;
+    public event Action TextAnimated;
 
     public override void UpdateText() {
         base.UpdateText();
@@ -46,7 +46,7 @@ public class AnimatedText : LocalizedText {
         _lastCharIndex++;
         _text.text = _targetText[.._lastCharIndex];
         _nowTime = 0;
-        TextUpdated?.Invoke();
+        TextAnimated?.Invoke();
     }
 
     public void StopAnimation() {
@@ -55,11 +55,11 @@ public class AnimatedText : LocalizedText {
 
         _isAnimated = false;
         _text.text = _targetText;
-        TextUpdated?.Invoke();
+        TextAnimated?.Invoke();
     }
 
     private void ForceStopAnimation() {
         _isAnimated = false;
-        TextUpdated?.Invoke();
+        TextAnimated?.Invoke();
     }
 }

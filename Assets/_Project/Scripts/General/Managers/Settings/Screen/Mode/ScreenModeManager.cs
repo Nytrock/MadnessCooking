@@ -7,7 +7,7 @@ public class ScreenModeManager : MonoBehaviour, IBindable<VideoSettingsData>, IS
 
     public int DefaultValue {
         get {
-            if (Application.platform == RuntimePlatform.WebGLPlayer)
+            if (PlatformManager.IsWeb)
                 return (int)ScreenMode.Windowed;
             return (int)_defaultMode;
         }

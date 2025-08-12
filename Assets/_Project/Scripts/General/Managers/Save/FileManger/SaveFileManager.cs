@@ -2,21 +2,21 @@ using System;
 using System.IO;
 using UnityEngine;
 
-public class SaveFileManager<TData>
-    where TData : ISaveable {
-
-    private readonly JsonSerializer _serializer = new();
+public class SaveFileManager<TData> where TData : ISaveable {
+    protected readonly JsonSerializer _serializer = new();
     private readonly string _dataPath = Application.persistentDataPath;
-    private readonly string _filePath = Application.persistentDataPath;
-    private readonly string _fileName;
-    private const string _fileExtension = "nyt";
+
+    protected readonly string _filePath;
+    protected readonly string _fileName;
+    protected const string _fileExtension = "nyt";
 
     public SaveFileManager(string fileName) {
         _fileName = fileName;
         if (_fileName.Contains("/"))
             FractionFileName();
 
-        _filePath = _dataPath + "/" + string.Concat(_fileName, ".", _fileExtension);
+        string filePath = string.Concat(_fileName, ".", _fileExtension);
+        _filePath = _dataPath + "/" + filePath;
     }
 
     private void FractionFileName() {
@@ -28,25 +28,27 @@ public class SaveFileManager<TData>
         }
     }
 
-    public void Save(TData data) {
-        File.WriteAllText(_filePath, _serializer.SerializeCoded(data));
+    public virtual void Save(TData data) {
+        string serializedData = _serializer.SerializeCoded(data);
+        File.WriteAllText(_filePath, serializedData);
     }
 
-    public TData Load() {
+    public virtual TData Load() {
         if (!IsFileExists())
             throw new NullReferenceException($"File {_fileName} not exist.");
 
-        return _serializer.DeserializeCoded<TData>(File.ReadAllText(_filePath));
+        string serializedData = File.ReadAllText(_filePath);
+        return _serializer.DeserializeCoded<TData>(serializedData);
     }
 
-    public void Delete() {
+    public virtual void Delete() {
         if (!IsFileExists())
             return;
 
         File.Delete(_filePath);
     }
 
-    public bool IsFileExists() {
+    public virtual bool IsFileExists() {
         return File.Exists(_filePath);
     }
 }

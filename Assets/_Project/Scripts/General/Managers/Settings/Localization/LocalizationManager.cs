@@ -14,6 +14,7 @@ public class LocalizationManager : Singleton<LocalizationManager>, IBindable<Gam
     private bool _isLocalesLoaded;
 
     public int OptionsCount => _locales.Count;
+    public bool IsLocalesLoaded => _isLocalesLoaded;
     public int DefaultValue => _locales.IndexOf(_defaultLocale);
 
     public event Action LocalizationChanged;
@@ -44,7 +45,7 @@ public class LocalizationManager : Singleton<LocalizationManager>, IBindable<Gam
 
     public async Task<string> GetLocalization(string table, string key, Dictionary<string, string> arguments = null) {
         if (!_isLocalesLoaded)
-            return key;
+            return string.Empty;
 
         if (arguments != null) {
             Dictionary<string, string> localizedArguments = new();

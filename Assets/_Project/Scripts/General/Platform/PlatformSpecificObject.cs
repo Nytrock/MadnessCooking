@@ -10,16 +10,13 @@ public class PlatformSpecificObject : MonoBehaviour {
     }
 
     private bool GetState() {
-        bool isMobile = Application.isMobilePlatform;
-        bool isWeb = Application.platform == RuntimePlatform.WebGLPlayer;
-
-        if (!_forMobile && isMobile)
+        if (!_forMobile && PlatformManager.IsMobile)
             return false;
 
-        if (!_forWeb && isWeb)
+        if (!_forWeb && PlatformManager.IsWeb)
             return false;
 
-        if (!_forDesktop && !isMobile && !isWeb)
+        if (!_forDesktop && !PlatformManager.IsMobile && !PlatformManager.IsWeb)
             return false;
 
         return true;

@@ -12,6 +12,7 @@ public class ClueRenderer : MonoBehaviour {
 
     private void Awake() {
         _buttonRect = _button.GetComponent<RectTransform>();
+        _messageText.TextChanged += UpdatePosition;
     }
 
     public void StartRenderClue(ClueTemplate clue) {
@@ -20,8 +21,6 @@ public class ClueRenderer : MonoBehaviour {
         _messageText.SetText(_template.Message);
         _button.gameObject.SetActive(_template.IsButtonVisible);
         _buttonText.SetText(_template.ButtonMessage);
-
-        UpdatePosition();
     }
 
     private void UpdatePosition() {
