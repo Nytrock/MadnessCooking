@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class CutoutMaskUI : Image {
     public override Material materialForRendering {
         get {
-            Material material = base.materialForRendering;
+            Material material = new(base.materialForRendering);
             material.SetFloat("_StencilComp", (int)CompareFunction.NotEqual);
             return material;
         }
