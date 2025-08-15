@@ -6,14 +6,15 @@ public class UIHoverListener : MonoBehaviour {
     [SerializeField] private UIHoverListener _globalListener;
     [SerializeField] private bool _isScrollBlocked;
 
+    private readonly List<RaycastResult> _hoverResults = new();
+
     public bool IsHover {
         get {
             PointerEventData eventData = new(EventSystem.current) {
                 position = Input.mousePosition
             };
-            List<RaycastResult> results = new();
-            EventSystem.current.RaycastAll(eventData, results);
-            return results.Count > 0;
+            EventSystem.current.RaycastAll(eventData, _hoverResults);
+            return _hoverResults.Count > 0;
         }
     }
 
