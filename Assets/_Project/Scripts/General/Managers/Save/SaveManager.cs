@@ -5,7 +5,7 @@ public abstract class SaveManager<TData> : MonoBehaviour
 
     [SerializeField] private DataBinder<TData> _binder;
 
-    private TData _data;
+    protected TData _data;
     protected SaveFileManager<TData> _dataService;
 
     protected abstract string _fileName { get; }
@@ -21,7 +21,7 @@ public abstract class SaveManager<TData> : MonoBehaviour
         Load();
     }
 
-    public void Save() {
+    public virtual void Save() {
         _dataService.Save(_data);
     }
 

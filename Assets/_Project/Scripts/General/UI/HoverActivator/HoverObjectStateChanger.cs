@@ -18,9 +18,13 @@ public abstract class HoverObjectStateChanger : MonoBehaviour, IPointerEnterHand
     }
 
     public void OnPointerExit(PointerEventData eventData) {
-        if (Application.isMobilePlatform || _rectTransform.ContainsLocalMouse())
+        if (Application.isMobilePlatform)
             return;
 
+        DisableHoverObject();
+    }
+
+    public void OnDisable() {
         DisableHoverObject();
     }
 

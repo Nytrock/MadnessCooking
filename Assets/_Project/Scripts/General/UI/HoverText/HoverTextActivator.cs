@@ -17,6 +17,8 @@ public class HoverTextActivator : HoverObjectStateChanger {
     }
 
     protected virtual void HideText() {
+        if (_hoverPanel == null) return;
+
         _hoverPanel.ChangeState(false);
     }
 

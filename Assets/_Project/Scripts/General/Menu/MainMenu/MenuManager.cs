@@ -44,12 +44,14 @@ public class MenuManager : MonoBehaviour {
     }
 
     public void ExitGame() {
-        _saveManager.Save();
+        if (!_tutorial.IsWork)
+            _saveManager.Save();
         Application.Quit();
     }
 
     public void ExitToMenu() {
-        _saveManager.Save();
+        if (!_tutorial.IsWork)
+            _saveManager.Save();
         _sceneManager.LoadMenu();
     }
 

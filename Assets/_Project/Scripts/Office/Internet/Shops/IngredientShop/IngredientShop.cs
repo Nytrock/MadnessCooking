@@ -24,13 +24,6 @@ public class IngredientShop : BaseInstantShop<Ingredient, OfficeData>, IUpgradea
         }
     }
 
-    protected override bool IsBuyable(Ingredient ingredient) {
-        if (ingredient.Type == IngredientType.Buyable)
-            return true;
-
-        return _bedTypesManager.HaveBedForIngredient(ingredient);
-    }
-
     protected override BuyPanelSideInfoData GenerateSideInfo(Ingredient ingredient) {
         if (ingredient.Type == IngredientType.Buyable)
             return null;
