@@ -1,10 +1,13 @@
 using UnityEngine;
+using MadnessCooking.General;
 
-public class SleepBedAudio : SwitchableAudioSource {
-    [SerializeField] private SleepBed _bed;
+namespace MadnessCooking.Office {
+    public class SleepBedAudio : SwitchableAudioSource {
+        [SerializeField] private SleepBed _bed;
 
-    protected override void Awake() {
-        base.Awake();
-        _bed.SleepChanged += SwitchStateAndPlay;
+        protected override void Awake() {
+            base.Awake();
+            _bed.SleepChanged += SwitchStateAndPlay;
+        }
     }
 }

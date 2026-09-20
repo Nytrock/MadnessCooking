@@ -1,5 +1,9 @@
-public enum OrderUIState {
-    Start,
-    Cook,
-    Finish
+using MadnessCooking.General;
+
+namespace MadnessCooking.Kitchen {
+    public enum OrderUIState {
+        Start,
+        Cook,
+        Finish
+    }
 }

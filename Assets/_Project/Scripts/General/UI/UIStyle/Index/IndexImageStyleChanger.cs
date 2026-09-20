@@ -1,3 +1,5 @@
-public class IndexImageStyleChanger : ImageStyleChanger<int> {
+namespace MadnessCooking.General {
+    public class IndexImageStyleChanger : ImageStyleChanger<int> {
 
+    }
 }

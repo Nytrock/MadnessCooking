@@ -2,75 +2,77 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class IngredientStorage : MonoBehaviour {
-    [SerializeField] protected int _defaultMaxSpace = 100;
+namespace MadnessCooking.General {
+    public abstract class IngredientStorage : MonoBehaviour {
+        [SerializeField] protected int _defaultMaxSpace = 100;
 
-    public IngredientStorageData Data { get; protected set; }
+        public IngredientStorageData Data { get; protected set; }
 
-    public event Action<IngredientCount> IngredientAdded;
-    public event Action<Ingredient> IngredientRemoved;
-    public event Action<IngredientCount> IngredientCountAdded;
-    public event Action<IngredientCount> IngredientCountRemoved;
-    public event Action LoadingDataEnded;
+        public event Action<IngredientCount> IngredientAdded;
+        public event Action<Ingredient> IngredientRemoved;
+        public event Action<IngredientCount> IngredientCountAdded;
+        public event Action<IngredientCount> IngredientCountRemoved;
+        public event Action LoadingDataEnded;
 
-    public void PutIngredients(IEnumerable<IngredientCount> puttingCountList) {
-        foreach (var count in puttingCountList)
-            PutIngredientWithRemain(count.Ingredient, count.Count);
-    }
-
-    public virtual int PutIngredientWithRemain(Ingredient ingredient, int count) {
-        if (count == 0)
-            return count;
-
-        int remainCount = 0;
-        IngredientCount puttingCount = new(ingredient, count);
-
-        if (!Data.CanAddCount(count)) {
-            remainCount = Data.NowSpace + count - Data.MaxSpace;
-            puttingCount = new(ingredient, Data.LeftSpace);
+        public void PutIngredients(IEnumerable<IngredientCount> puttingCountList) {
+            foreach (var count in puttingCountList)
+                PutIngredientWithRemain(count.Ingredient, count.Count);
         }
 
-        bool containsIngredient = Data.ContainsIngredient(puttingCount.Ingredient);
-        Data.AddIngredientCount(puttingCount);
-        if (!containsIngredient)
-            InvokeIngredientAdded(puttingCount);
-        else
-            IngredientCountAdded?.Invoke(puttingCount);
+        public virtual int PutIngredientWithRemain(Ingredient ingredient, int count) {
+            if (count == 0)
+                return count;
 
-        return remainCount;
-    }
+            int remainCount = 0;
+            IngredientCount puttingCount = new(ingredient, count);
 
-    public virtual void RemoveIngredients(IEnumerable<IngredientCount> ingredients) {
-        foreach (var count in ingredients)
-            RemoveIngredient(count);
-    }
+            if (!Data.CanAddCount(count)) {
+                remainCount = Data.NowSpace + count - Data.MaxSpace;
+                puttingCount = new(ingredient, Data.LeftSpace);
+            }
 
-    public void RemoveIngredient(Ingredient ingredient, int count) {
-        if (count == 0)
-            return;
+            bool containsIngredient = Data.ContainsIngredient(puttingCount.Ingredient);
+            Data.AddIngredientCount(puttingCount);
+            if (!containsIngredient)
+                InvokeIngredientAdded(puttingCount);
+            else
+                IngredientCountAdded?.Invoke(puttingCount);
 
-        IngredientCount removingCount = new(ingredient, count);
-        RemoveIngredient(removingCount);
-    }
+            return remainCount;
+        }
 
-    public void RemoveIngredient(IngredientCount removingCount) {
-        Data.RemoveIngredient(removingCount);
+        public virtual void RemoveIngredients(IEnumerable<IngredientCount> ingredients) {
+            foreach (var count in ingredients)
+                RemoveIngredient(count);
+        }
 
-        if (Data.GetIngredientCount(removingCount.Ingredient) == 0)
-            IngredientRemoved?.Invoke(removingCount.Ingredient);
-        IngredientCountRemoved?.Invoke(removingCount);
-    }
+        public void RemoveIngredient(Ingredient ingredient, int count) {
+            if (count == 0)
+                return;
 
-    public bool HaveCount(IngredientCount count) {
-        return Data.ContainsCount(count);
-    }
+            IngredientCount removingCount = new(ingredient, count);
+            RemoveIngredient(removingCount);
+        }
 
-    protected void InvokeIngredientAdded(IngredientCount count) {
-        IngredientAdded?.Invoke(count);
-        IngredientCountAdded?.Invoke(count);
-    }
+        public void RemoveIngredient(IngredientCount removingCount) {
+            Data.RemoveIngredient(removingCount);
 
-    protected void InvokeLoadingDataEnded() {
-        LoadingDataEnded?.Invoke();
+            if (Data.GetIngredientCount(removingCount.Ingredient) == 0)
+                IngredientRemoved?.Invoke(removingCount.Ingredient);
+            IngredientCountRemoved?.Invoke(removingCount);
+        }
+
+        public bool HaveCount(IngredientCount count) {
+            return Data.ContainsCount(count);
+        }
+
+        protected void InvokeIngredientAdded(IngredientCount count) {
+            IngredientAdded?.Invoke(count);
+            IngredientCountAdded?.Invoke(count);
+        }
+
+        protected void InvokeLoadingDataEnded() {
+            LoadingDataEnded?.Invoke();
+        }
     }
 }

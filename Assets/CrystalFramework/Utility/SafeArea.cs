@@ -1,6 +1,7 @@
 using UnityEngine;
 
-namespace Crystal {
+namespace Crystal
+{
     /// <summary>
     /// Safe area implementation for notched mobile devices. Usage:
     ///  (1) Add this component to the top level of any GUI panel. 
@@ -8,12 +9,14 @@ namespace Crystal {
     ///      This will allow the background image to stretch to the full extents of the screen behind the notch, which looks nicer.
     ///  (3) For other cases that use a mixture of full horizontal and vertical background stripes, use the Conform X & Y controls on separate elements as needed.
     /// </summary>
-    public class SafeArea : MonoBehaviour {
+    public class SafeArea : MonoBehaviour
+    {
         #region Simulations
         /// <summary>
         /// Simulation device that uses safe area due to a physical notch or software home bar. For use in Editor only.
         /// </summary>
-        public enum SimDevice {
+        public enum SimDevice
+        {
             /// <summary>
             /// Don't use a simulated safe area - GUI will be full screen as normal.
             /// </summary>
@@ -94,52 +97,60 @@ namespace Crystal {
         #endregion
 
         RectTransform Panel;
-        Rect LastSafeArea = new Rect(0, 0, 0, 0);
-        Vector2Int LastScreenSize = new Vector2Int(0, 0);
+        Rect LastSafeArea = new Rect (0, 0, 0, 0);
+        Vector2Int LastScreenSize = new Vector2Int (0, 0);
         ScreenOrientation LastOrientation = ScreenOrientation.AutoRotation;
         [SerializeField] bool ConformX = true;  // Conform to screen safe area on X-axis (default true, disable to ignore)
         [SerializeField] bool ConformY = true;  // Conform to screen safe area on Y-axis (default true, disable to ignore)
         [SerializeField] bool Logging = false;  // Conform to screen safe area on Y-axis (default true, disable to ignore)
 
-        private void Awake() {
-            Panel = GetComponent<RectTransform>();
+        void Awake ()
+        {
+            Panel = GetComponent<RectTransform> ();
 
-            if (Panel == null) {
-                Debug.LogError("Cannot apply safe area - no RectTransform found on " + name);
-                Destroy(gameObject);
+            if (Panel == null)
+            {
+                Debug.LogError ("Cannot apply safe area - no RectTransform found on " + name);
+                Destroy (gameObject);
             }
 
-            Refresh();
+            Refresh ();
         }
 
-        private void Update() {
-            Refresh();
+        void Update ()
+        {
+            Refresh ();
         }
 
-        private void Refresh() {
-            Rect safeArea = GetSafeArea();
+        void Refresh ()
+        {
+            Rect safeArea = GetSafeArea ();
 
             if (safeArea != LastSafeArea
                 || Screen.width != LastScreenSize.x
                 || Screen.height != LastScreenSize.y
-                || Screen.orientation != LastOrientation) {
+                || Screen.orientation != LastOrientation)
+            {
                 // Fix for having auto-rotate off and manually forcing a screen orientation.
                 // See https://forum.unity.com/threads/569236/#post-4473253 and https://forum.unity.com/threads/569236/page-2#post-5166467
                 LastScreenSize.x = Screen.width;
                 LastScreenSize.y = Screen.height;
                 LastOrientation = Screen.orientation;
 
-                ApplySafeArea(safeArea);
+                ApplySafeArea (safeArea);
             }
         }
 
-        private Rect GetSafeArea() {
+        Rect GetSafeArea ()
+        {
             Rect safeArea = Screen.safeArea;
 
-            if (Application.isEditor && Sim != SimDevice.None) {
-                Rect nsa = new Rect(0, 0, Screen.width, Screen.height);
+            if (Application.isEditor && Sim != SimDevice.None)
+            {
+                Rect nsa = new Rect (0, 0, Screen.width, Screen.height);
 
-                switch (Sim) {
+                switch (Sim)
+                {
                     case SimDevice.iPhoneX:
                         if (Screen.height > Screen.width)  // Portrait
                             nsa = NSA_iPhoneX[0];
@@ -168,49 +179,36 @@ namespace Crystal {
                         break;
                 }
 
-                safeArea = new Rect(Screen.width * nsa.x, Screen.height * nsa.y, Screen.width * nsa.width, Screen.height * nsa.height);
+                safeArea = new Rect (Screen.width * nsa.x, Screen.height * nsa.y, Screen.width * nsa.width, Screen.height * nsa.height);
             }
 
-            safeArea = NormalizeSafeArea(safeArea);
             return safeArea;
         }
 
-        private Rect NormalizeSafeArea(Rect safeArea) {
-            float leftOffset = safeArea.xMin;
-            float rightOffset = Screen.width - safeArea.xMax;
-            float topOffset = safeArea.yMin;
-            float bottomOffset = Screen.height - safeArea.yMax;
-
-            float maxXOffset = Mathf.Max(leftOffset, rightOffset);
-            float maxYOffset = Mathf.Max(topOffset, bottomOffset);
-
-            safeArea.xMin = maxXOffset;
-            safeArea.xMax = Screen.width - maxXOffset;
-            safeArea.yMin = maxYOffset;
-            safeArea.yMax = Screen.height - maxYOffset;
-            return safeArea;
-        }
-
-        private void ApplySafeArea(Rect safeArea) {
-            LastSafeArea = safeArea;
+        void ApplySafeArea (Rect r)
+        {
+            LastSafeArea = r;
 
             // Ignore x-axis?
-            if (!ConformX) {
-                safeArea.x = 0;
-                safeArea.width = Screen.width;
+            if (!ConformX)
+            {
+                r.x = 0;
+                r.width = Screen.width;
             }
 
             // Ignore y-axis?
-            if (!ConformY) {
-                safeArea.y = 0;
-                safeArea.height = Screen.height;
+            if (!ConformY)
+            {
+                r.y = 0;
+                r.height = Screen.height;
             }
 
             // Check for invalid screen startup state on some Samsung devices (see below)
-            if (Screen.width > 0 && Screen.height > 0) {
+            if (Screen.width > 0 && Screen.height > 0)
+            {
                 // Convert safe area rectangle from absolute pixels to normalised anchor coordinates
-                Vector2 anchorMin = safeArea.position;
-                Vector2 anchorMax = safeArea.position + safeArea.size;
+                Vector2 anchorMin = r.position;
+                Vector2 anchorMax = r.position + r.size;
                 anchorMin.x /= Screen.width;
                 anchorMin.y /= Screen.height;
                 anchorMax.x /= Screen.width;
@@ -218,15 +216,17 @@ namespace Crystal {
 
                 // Fix for some Samsung devices (e.g. Note 10+, A71, S20) where Refresh gets called twice and the first time returns NaN anchor coordinates
                 // See https://forum.unity.com/threads/569236/page-2#post-6199352
-                if (anchorMin.x >= 0 && anchorMin.y >= 0 && anchorMax.x >= 0 && anchorMax.y >= 0) {
+                if (anchorMin.x >= 0 && anchorMin.y >= 0 && anchorMax.x >= 0 && anchorMax.y >= 0)
+                {
                     Panel.anchorMin = anchorMin;
                     Panel.anchorMax = anchorMax;
                 }
             }
 
-            if (Logging) {
-                Debug.LogFormat("New safe area applied to {0}: x={1}, y={2}, w={3}, h={4} on full extents w={5}, h={6}",
-                name, safeArea.x, safeArea.y, safeArea.width, safeArea.height, Screen.width, Screen.height);
+            if (Logging)
+            {
+                Debug.LogFormat ("New safe area applied to {0}: x={1}, y={2}, w={3}, h={4} on full extents w={5}, h={6}",
+                name, r.x, r.y, r.width, r.height, Screen.width, Screen.height);
             }
         }
     }

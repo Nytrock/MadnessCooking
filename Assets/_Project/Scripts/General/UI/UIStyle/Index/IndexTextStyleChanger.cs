@@ -1,3 +1,5 @@
-public class IndexTextStyleChanger : TextStyleChanger<int> {
+namespace MadnessCooking.General {
+    public class IndexTextStyleChanger : TextStyleChanger<int> {
 
+    }
 }

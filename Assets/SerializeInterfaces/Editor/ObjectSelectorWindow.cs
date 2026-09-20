@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,11 +8,14 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using Object = UnityEngine.Object;
 
-namespace AYellowpaper.Editor {
-    internal class ObjectSelectorWindow : EditorWindow {
-        public class ItemInfo {
+namespace AYellowpaper.Editor
+{
+    internal class ObjectSelectorWindow : EditorWindow
+    {
+        public class ItemInfo
+        {
             public Texture Icon;
-            public int? InstanceID;
+            public EntityId? EntityID;
             public string Label;
         }
 
@@ -37,19 +40,22 @@ namespace AYellowpaper.Editor {
         private Tab _sceneTab;
         private Tab _assetsTab;
 
-        private static ItemInfo _nullItem = new ItemInfo() { InstanceID = null, Label = "None" };
+        private static ItemInfo _nullItem = new ItemInfo() { EntityID = null, Label = "None" };
 
         public bool initialized { get; private set; } = false;
 
-        public string SearchText {
+        public string SearchText
+        {
             get => _searchText;
-            set {
+            set
+            {
                 _searchText = value;
                 FilterItems();
             }
         }
 
-        public static void Show(SerializedProperty property, Action<Object> onSelectionChanged, Action<Object, bool> onSelectorClosed, ObjectSelectorFilter filter) {
+        public static void Show(SerializedProperty property, Action<Object> onSelectionChanged, Action<Object, bool> onSelectorClosed, ObjectSelectorFilter filter)
+        {
             if (Instance == null)
                 Instance = ScriptableObject.CreateInstance<ObjectSelectorWindow>();
             Instance._editingProperty = property;
@@ -61,18 +67,21 @@ namespace AYellowpaper.Editor {
             //Instance.Show();
         }
 
-        public void SetSearchFilter(string query) {
+        public void SetSearchFilter(string query)
+        {
             _searchbox.value = query;
         }
 
-        private void Init() {
+        private void Init()
+        {
             InitData();
             InitVisualElements();
             BindVisualElements();
             FinishInit();
         }
 
-        private void InitData() {
+        private void InitData()
+        {
             _undoGroup = Undo.GetCurrentGroup();
             _searchText = "";
             _allItems = new List<ItemInfo>();
@@ -87,7 +96,8 @@ namespace AYellowpaper.Editor {
             FilterItems();
         }
 
-        private void InitVisualElements() {
+        private void InitVisualElements()
+        {
             var styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>("Assets/SerializeInterfaces/Assets/USS/ObjectSelectorWindow.uss");
             rootVisualElement.styleSheets.Add(styleSheet);
 
@@ -120,7 +130,8 @@ namespace AYellowpaper.Editor {
             rootVisualElement.Add(details);
         }
 
-        private void BindVisualElements() {
+        private void BindVisualElements()
+        {
             Tab activeTab = _showSceneObjects ? _sceneTab : _assetsTab;
             activeTab.SetValueWithoutNotify(true);
 
@@ -133,31 +144,37 @@ namespace AYellowpaper.Editor {
                 _listView.selectedIndex = index;
         }
 
-        private void FinishInit() {
-            EditorApplication.delayCall += () => {
+        private void FinishInit()
+        {
+            EditorApplication.delayCall += () =>
+            {
                 _listView.Focus();
                 initialized = true;
             };
         }
 
-        private bool GetIndexOfEditingPropertyValue(out int index) {
+        private bool GetIndexOfEditingPropertyValue(out int index)
+        {
             index = -1;
             var targetObject = _editingProperty.objectReferenceValue;
-            if (targetObject) {
-                int instanceID = targetObject.GetInstanceID();
-                index = _filteredItems.FindIndex(x => x.InstanceID == instanceID);
+            if (targetObject)
+            {
+                EntityId instanceID = targetObject.GetEntityId();
+                index = _filteredItems.FindIndex(x => x.EntityID == instanceID);
             }
             return index >= 0;
         }
 
-        private bool GetIndexOfCurrentItem(out int index) {
+        private bool GetIndexOfCurrentItem(out int index)
+        {
             index = -1;
             if (_currentItem != null)
-                index = _filteredItems.FindIndex(0, x => x.InstanceID == _currentItem.InstanceID);
+                index = _filteredItems.FindIndex(0, x => x.EntityID == _currentItem.EntityID);
             return index >= 0;
         }
 
-        private void HandleGroupChanged(object sender, Toggle toggle) {
+        private void HandleGroupChanged(object sender, Toggle toggle)
+        {
             if (_showSceneObjects && toggle == this._sceneTab) return;
             _showSceneObjects = !_showSceneObjects;
             PopulateItems();
@@ -169,7 +186,8 @@ namespace AYellowpaper.Editor {
             _listView.Focus();
         }
 
-        private void OnDisable() {
+        private void OnDisable()
+        {
             _selectorClosedCallback?.Invoke(GetCurrentObject(), _userCanceled);
             if (_userCanceled)
                 Undo.RevertAllDownToGroup(_undoGroup);
@@ -178,7 +196,8 @@ namespace AYellowpaper.Editor {
             Instance = null;
         }
 
-        private void PopulateItems() {
+        private void PopulateItems()
+        {
             _allItems.Clear();
             _filteredItems.Clear();
             if (_showSceneObjects)
@@ -188,11 +207,13 @@ namespace AYellowpaper.Editor {
             _allItems.Sort((item, other) => item.Label.CompareTo(other.Label));
         }
 
-        private void SearchFilterChanged(ChangeEvent<string> evt) {
+        private void SearchFilterChanged(ChangeEvent<string> evt)
+        {
             SearchText = evt.newValue;
         }
 
-        private void FilterItems() {
+        private void FilterItems()
+        {
             _filteredItems.Clear();
             _filteredItems.Add(_nullItem);
             _filteredItems.AddRange(_allItems.Where(item => string.IsNullOrEmpty(SearchText) || item.Label.IndexOf(SearchText, StringComparison.InvariantCultureIgnoreCase) >= 0));
@@ -200,7 +221,8 @@ namespace AYellowpaper.Editor {
             _listView?.Rebuild();
         }
 
-        private void BindItem(VisualElement listItem, int index) {
+        private void BindItem(VisualElement listItem, int index)
+        {
             if (index < 0 || index >= _filteredItems.Count)
                 return;
 
@@ -211,7 +233,8 @@ namespace AYellowpaper.Editor {
             image.image = _filteredItems[index].Icon;
         }
 
-        private static VisualElement MakeItem() {
+        private static VisualElement MakeItem()
+        {
             var ve = new VisualElement();
             var image = new Image();
             var label = new Label();
@@ -225,22 +248,26 @@ namespace AYellowpaper.Editor {
             return ve;
         }
 
-        private void ItemSelectionChanged(IEnumerable<object> selectedItems) {
+        private void ItemSelectionChanged(IEnumerable<object> selectedItems)
+        {
             _currentItem = selectedItems.FirstOrDefault() as ItemInfo;
             UpdateDetails();
             _selectionChangedCallback?.Invoke(GetCurrentObject());
         }
 
-        private void ItemsChosen(IEnumerable<object> selectedItems) {
+        private void ItemsChosen(IEnumerable<object> selectedItems)
+        {
             _currentItem = selectedItems.FirstOrDefault() as ItemInfo;
             _userCanceled = false;
             Close();
         }
 
-        private void UpdateDetails() {
+        private void UpdateDetails()
+        {
             GetText(_currentItem, out var infoText, out var indexText, out var typeText);
 
-            void SetText(Label label, string text) {
+            void SetText(Label label, string text)
+            {
                 label.text = String.IsNullOrEmpty(text) ? "" : text;
             }
 
@@ -249,17 +276,19 @@ namespace AYellowpaper.Editor {
             SetText(_detailsTypeLabel, typeText);
         }
 
-        private static void GetText(ItemInfo itemInfo, out string text, out string indexText, out string typeText) {
+        private static void GetText(ItemInfo itemInfo, out string text, out string indexText, out string typeText)
+        {
             text = null;
             indexText = null;
             typeText = null;
 
             if (itemInfo == null) return;
-            if (itemInfo.InstanceID == null) {
+            if (itemInfo.EntityID == null) {
                 text = itemInfo.Label;
                 return;
             }
-            var obj = EditorUtility.InstanceIDToObject((int)itemInfo.InstanceID);
+
+            var obj = EditorUtility.EntityIdToObject((EntityId)itemInfo.EntityID);
             if (AssetDatabase.Contains(obj)) {
                 text = AssetDatabase.GetAssetPath(obj);
             } else {
@@ -271,61 +300,72 @@ namespace AYellowpaper.Editor {
             typeText = $"({obj.GetType().Name})";
         }
 
-        private static string GetTransformPath(Transform transform) {
+        private static string GetTransformPath(Transform transform)
+        {
             StringBuilder sb = new StringBuilder();
             sb.Append(transform.name);
-            while (transform.parent != null) {
+            while (transform.parent != null)
+            {
                 sb.Insert(0, transform.parent.name + "/");
                 transform = transform.parent;
             }
             return sb.ToString();
         }
 
-        private IEnumerable<ItemInfo> FetchAllAssets() {
-            var property = new HierarchyProperty(HierarchyType.Assets, false);
+        private IEnumerable<ItemInfo> FetchAllAssets()
+        {
+            var property = new HierarchyIterator(HierarchyType.Assets, false);
             property.SetSearchFilter(_filter.AssetSearchFilter, 0);
 
-            while (property.Next(null)) {
-                yield return new ItemInfo { Icon = property.icon, InstanceID = property.instanceID, Label = property.name };
+            while (property.Next(null))
+            {
+                yield return new ItemInfo { Icon = property.icon, EntityID = property.entityId, Label = property.name };
             }
             yield break;
         }
 
-        private IEnumerable<ItemInfo> FetchAllComponents() {
-            var property = new HierarchyProperty(HierarchyType.GameObjects, false);
+        private IEnumerable<ItemInfo> FetchAllComponents()
+        {
+            var property = new HierarchyIterator(HierarchyType.GameObjects, false);
 
-            while (property.Next(null)) {
+            while (property.Next(null))
+            {
                 var go = property.pptrValue as GameObject;
                 if (go == null) continue;
 
                 if (CheckFilter(go))
-                    yield return new ItemInfo { Icon = property.icon, InstanceID = property.instanceID, Label = property.name };
+                    yield return new ItemInfo { Icon = property.icon, EntityID = property.entityId, Label = property.name };
 
-                foreach (var comp in go.GetComponents(typeof(Component))) {
+                foreach (var comp in go.GetComponents(typeof(Component)))
+                {
                     if (CheckFilter(comp))
-                        yield return new ItemInfo { Icon = EditorGUIUtility.ObjectContent(comp, comp.GetType()).image, InstanceID = comp.GetInstanceID(), Label = property.name };
+                        yield return new ItemInfo { Icon = EditorGUIUtility.ObjectContent(comp, comp.GetType()).image, EntityID = comp.GetEntityId(), Label = property.name };
                 }
             }
         }
 
-        private bool CheckFilter(UnityEngine.Object obj) {
+        private bool CheckFilter(UnityEngine.Object obj)
+        {
             var matchFilterConstraint = _filter.SceneFilterCallback?.Invoke(obj);
-            return !matchFilterConstraint.HasValue || matchFilterConstraint.Value;
+            return (!matchFilterConstraint.HasValue || matchFilterConstraint.Value);
         }
 
-        private Object GetCurrentObject() {
-            if (_currentItem == null || _currentItem.InstanceID == null) return null;
-            return EditorUtility.InstanceIDToObject((int)_currentItem.InstanceID);
+        private Object GetCurrentObject()
+        {
+            if (_currentItem == null || _currentItem.EntityID == null) return null;
+            return EditorUtility.EntityIdToObject((EntityId)_currentItem.EntityID);
         }
     }
 
-    public class ObjectSelectorFilter {
+    public class ObjectSelectorFilter
+    {
         public string AssetSearchFilter;
         public Func<Object, bool> SceneFilterCallback;
 
         public ObjectSelectorFilter() : this("", x => true) { }
 
-        public ObjectSelectorFilter(string assetSearchFilter, Func<Object, bool> sceneFilterCallback) {
+        public ObjectSelectorFilter(string assetSearchFilter, Func<Object, bool> sceneFilterCallback)
+        {
             AssetSearchFilter = assetSearchFilter;
             SceneFilterCallback = sceneFilterCallback;
         }

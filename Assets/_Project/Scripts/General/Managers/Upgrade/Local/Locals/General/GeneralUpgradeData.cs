@@ -1,7 +1,9 @@
 using Newtonsoft.Json;
 using System;
 
-[Serializable, JsonObject(MemberSerialization.OptIn)]
-public class GeneralUpgradeData : ISaveable {
+namespace MadnessCooking.General {
+    [Serializable, JsonObject(MemberSerialization.OptIn)]
+    public class GeneralUpgradeData : ISaveable {
 
+    }
 }

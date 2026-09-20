@@ -2,80 +2,83 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using MadnessCooking.General;
 
-[Serializable, JsonObject(MemberSerialization.OptIn)]
-public class ChickensData {
-    [SerializeField, JsonProperty] private List<ChickenFoodData> _foodList;
-    [SerializeField, JsonProperty] private bool _isUnlocked;
-    [SerializeField, JsonProperty] private float _nowTime;
-    [SerializeField, JsonProperty] private float _speed;
+namespace MadnessCooking.Farm {
+    [Serializable, JsonObject(MemberSerialization.OptIn)]
+    public class ChickensData {
+        [SerializeField, JsonProperty] private List<ChickenFoodData> _foodList;
+        [SerializeField, JsonProperty] private bool _isUnlocked;
+        [SerializeField, JsonProperty] private float _nowTime;
+        [SerializeField, JsonProperty] private float _speed;
 
-    [SerializeField, JsonProperty] private int _eggCount;
-    [SerializeField, JsonProperty] private int _foodCount;
-    [SerializeField, JsonProperty] private bool _isFeed;
-    [SerializeField, JsonProperty] private bool _isInfiniteFood;
+        [SerializeField, JsonProperty] private int _eggCount;
+        [SerializeField, JsonProperty] private int _foodCount;
+        [SerializeField, JsonProperty] private bool _isFeed;
+        [SerializeField, JsonProperty] private bool _isInfiniteFood;
 
-    public IEnumerable<ChickenFoodData> FoodList => _foodList;
-    public int UsedFoodCount => _foodList.Count;
-    public bool IsUnlocked => _isUnlocked;
-    public float NowTime => _nowTime;
-    public float Speed => _speed;
-    public int EggCount => _eggCount;
-    public int FoodCount => _foodCount;
-    public bool IsFeed => _isFeed;
-    public bool IsInfiniteFood => _isInfiniteFood;
+        public IEnumerable<ChickenFoodData> FoodList => _foodList;
+        public int UsedFoodCount => _foodList.Count;
+        public bool IsUnlocked => _isUnlocked;
+        public float NowTime => _nowTime;
+        public float Speed => _speed;
+        public int EggCount => _eggCount;
+        public int FoodCount => _foodCount;
+        public bool IsFeed => _isFeed;
+        public bool IsInfiniteFood => _isInfiniteFood;
 
-    public ChickensData(int foodCount) {
-        _foodList = new();
-        _foodCount = foodCount;
-        _speed = 0;
-    }
+        public ChickensData(int foodCount) {
+            _foodList = new();
+            _foodCount = foodCount;
+            _speed = 0;
+        }
 
-    public void UpdateTime() {
-        _nowTime += InGameTime.Instance.NormalizedDeltaTime * _speed;
-    }
+        public void UpdateTime() {
+            _nowTime += InGameTime.Instance.NormalizedDeltaTime * _speed;
+        }
 
-    public void AddEgg() {
-        _nowTime = 0;
-        _eggCount++;
-    }
+        public void AddEgg() {
+            _nowTime = 0;
+            _eggCount++;
+        }
 
-    public void AddFood() {
-        _foodCount++;
-    }
+        public void AddFood() {
+            _foodCount++;
+        }
 
-    public void RemoveFood(ChickenFoodData expiredFood) {
-        _foodList.Remove(expiredFood);
-        _speed -= expiredFood.FoodCoef;
-        if (_foodList.Count == 0)
-            _isFeed = false;
-    }
+        public void RemoveFood(ChickenFoodData expiredFood) {
+            _foodList.Remove(expiredFood);
+            _speed -= expiredFood.FoodCoef;
+            if (_foodList.Count == 0)
+                _isFeed = false;
+        }
 
-    public void AddFood(ChickenFoodData newFood) {
-        _foodList.Add(newFood);
+        public void AddFood(ChickenFoodData newFood) {
+            _foodList.Add(newFood);
 
-        _speed += newFood.FoodCoef;
-        _isFeed = true;
+            _speed += newFood.FoodCoef;
+            _isFeed = true;
 
-        if (_isInfiniteFood)
-            return;
+            if (_isInfiniteFood)
+                return;
 
-        _foodCount--;
-    }
+            _foodCount--;
+        }
 
-    public void SetEggCount(int count) {
-        if (count < 0)
-            return;
+        public void SetEggCount(int count) {
+            if (count < 0)
+                return;
 
-        _eggCount = count;
-    }
+            _eggCount = count;
+        }
 
-    public void Unlock() {
-        _isUnlocked = true;
-    }
+        public void Unlock() {
+            _isUnlocked = true;
+        }
 
-    public void SetInfiniteFood() {
-        _foodCount = -1;
-        _isInfiniteFood = true;
+        public void SetInfiniteFood() {
+            _foodCount = -1;
+            _isInfiniteFood = true;
+        }
     }
 }

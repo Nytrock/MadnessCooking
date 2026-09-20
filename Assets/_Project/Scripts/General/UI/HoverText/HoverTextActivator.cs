@@ -1,28 +1,30 @@
-public class HoverTextActivator : HoverObjectStateChanger {
-    protected HoverTextPanel _hoverPanel;
-    protected string _textToShow;
+namespace MadnessCooking.General {
+    public class HoverTextActivator : HoverObjectStateChanger {
+        protected HoverTextPanel _hoverPanel;
+        protected string _textToShow;
 
-    protected override void ActivateHoverObject() {
-        base.ActivateHoverObject();
-        ShowText();
-    }
+        protected override void ActivateHoverObject() {
+            base.ActivateHoverObject();
+            ShowText();
+        }
 
-    protected override void DisableHoverObject() {
-        base.DisableHoverObject();
-        HideText();
-    }
+        protected override void DisableHoverObject() {
+            base.DisableHoverObject();
+            HideText();
+        }
 
-    protected virtual void ShowText() {
-        _hoverPanel.ShowText(_textToShow);
-    }
+        protected virtual void ShowText() {
+            _hoverPanel.ShowText(_textToShow);
+        }
 
-    protected virtual void HideText() {
-        if (_hoverPanel == null) return;
+        protected virtual void HideText() {
+            if (_hoverPanel == null) return;
 
-        _hoverPanel.ChangeState(false);
-    }
+            _hoverPanel.ChangeState(false);
+        }
 
-    public void SetHoverPanel(HoverTextPanel hoverText) {
-        _hoverPanel = hoverText;
+        public void SetHoverPanel(HoverTextPanel hoverText) {
+            _hoverPanel = hoverText;
+        }
     }
 }

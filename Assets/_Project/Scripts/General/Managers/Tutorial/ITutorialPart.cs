@@ -1,6 +1,8 @@
 using System;
 
-public interface ITutorialPart {
-    event Action PartEnded;
-    void StartTutorialPart();
+namespace MadnessCooking.General {
+    public interface ITutorialPart {
+        event Action PartEnded;
+        void StartTutorialPart();
+    }
 }

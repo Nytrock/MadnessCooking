@@ -1,7 +1,11 @@
-public enum ClientState {
-    Spawn,
-    Leave,
-    Eat,
-    WaitOthers,
-    WaitOrder
+using MadnessCooking.General;
+
+namespace MadnessCooking.Cafe {
+    public enum ClientState {
+        Spawn,
+        Leave,
+        Eat,
+        WaitOthers,
+        WaitOrder
+    }
 }

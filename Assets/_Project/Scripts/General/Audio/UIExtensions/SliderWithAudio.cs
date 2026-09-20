@@ -2,23 +2,25 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class SliderWithAudio : Slider {
-    [SerializeField] private AudioSource _audioSource;
+namespace MadnessCooking.General {
+    public class SliderWithAudio : Slider {
+        [SerializeField] private AudioSource _audioSource;
 
-    protected override void Awake() {
-        base.Awake();
+        protected override void Awake() {
+            base.Awake();
 
-        if (_audioSource == null)
-            TryGetComponent(out _audioSource);
-    }
+            if (_audioSource == null)
+                TryGetComponent(out _audioSource);
+        }
 
-    public override void OnPointerDown(PointerEventData eventData) {
-        _audioSource.Play();
-        base.OnPointerDown(eventData);
-    }
+        public override void OnPointerDown(PointerEventData eventData) {
+            _audioSource.Play();
+            base.OnPointerDown(eventData);
+        }
 
-    public override void OnPointerUp(PointerEventData eventData) {
-        _audioSource.Play();
-        base.OnPointerUp(eventData);
+        public override void OnPointerUp(PointerEventData eventData) {
+            _audioSource.Play();
+            base.OnPointerUp(eventData);
+        }
     }
 }

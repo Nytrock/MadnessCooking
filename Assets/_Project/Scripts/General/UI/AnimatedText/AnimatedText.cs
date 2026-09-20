@@ -1,65 +1,67 @@
 using System;
 using UnityEngine;
 
-public class AnimatedText : LocalizedText {
-    [SerializeField, Min(0)] private float _pauseTime;
+namespace MadnessCooking.General {
+    public class AnimatedText : LocalizedText {
+        [SerializeField, Min(0)] private float _pauseTime;
 
-    private string _targetText;
-    private int _lastCharIndex;
-    private bool _isAnimated;
-    private float _nowTime;
+        private string _targetText;
+        private int _lastCharIndex;
+        private bool _isAnimated;
+        private float _nowTime;
 
-    public bool IsAnimated => _isAnimated;
+        public bool IsAnimated => _isAnimated;
 
-    public event Action TextAnimated;
+        public event Action TextAnimated;
 
-    public override void UpdateText() {
-        base.UpdateText();
-        _targetText = _text.text;
-        _text.text = string.Empty;
-    }
-
-    public override void SetText(string text) {
-        base.SetText(text);
-        if (_isAnimated)
-            ForceStopAnimation();
-        StartAnimation();
-    }
-
-    private void StartAnimation() {
-        _isAnimated = true;
-        _lastCharIndex = 0;
-        _nowTime = 0;
-    }
-
-    private void Update() {
-        _nowTime += FpsManager.NORMALIZED_DELTA_TIME;
-
-        if (_nowTime < _pauseTime)
-            return;
-
-        if (_lastCharIndex >= _targetText.Length) {
-            StopAnimation();
-            return;
+        public override void UpdateText() {
+            base.UpdateText();
+            _targetText = _text.text;
+            _text.text = string.Empty;
         }
 
-        _lastCharIndex++;
-        _text.text = _targetText[.._lastCharIndex];
-        _nowTime = 0;
-        TextAnimated?.Invoke();
-    }
+        public override void SetText(string text) {
+            base.SetText(text);
+            if (_isAnimated)
+                ForceStopAnimation();
+            StartAnimation();
+        }
 
-    public void StopAnimation() {
-        if (string.IsNullOrEmpty(_targetText) || !_isAnimated)
-            return;
+        private void StartAnimation() {
+            _isAnimated = true;
+            _lastCharIndex = 0;
+            _nowTime = 0;
+        }
 
-        _isAnimated = false;
-        _text.text = _targetText;
-        TextAnimated?.Invoke();
-    }
+        private void Update() {
+            _nowTime += FpsManager.NORMALIZED_DELTA_TIME;
 
-    private void ForceStopAnimation() {
-        _isAnimated = false;
-        TextAnimated?.Invoke();
+            if (_nowTime < _pauseTime)
+                return;
+
+            if (_lastCharIndex >= _targetText.Length) {
+                StopAnimation();
+                return;
+            }
+
+            _lastCharIndex++;
+            _text.text = _targetText[.._lastCharIndex];
+            _nowTime = 0;
+            TextAnimated?.Invoke();
+        }
+
+        public void StopAnimation() {
+            if (string.IsNullOrEmpty(_targetText) || !_isAnimated)
+                return;
+
+            _isAnimated = false;
+            _text.text = _targetText;
+            TextAnimated?.Invoke();
+        }
+
+        private void ForceStopAnimation() {
+            _isAnimated = false;
+            TextAnimated?.Invoke();
+        }
     }
 }

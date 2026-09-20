@@ -2,54 +2,57 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using MadnessCooking.General;
 
-[Serializable, JsonObject(MemberSerialization.OptIn)]
-public class FarmCarWaitManagerData {
-    [SerializeField, JsonProperty] private IngredientCountList _ingredientsSended;
-    [SerializeField, JsonProperty] private CarState _carState;
-    [SerializeField, JsonProperty] private float _nowWaitTime;
-    [SerializeField, JsonProperty] private float _needWaitTime;
+namespace MadnessCooking.Farm {
+    [Serializable, JsonObject(MemberSerialization.OptIn)]
+    public class FarmCarWaitManagerData {
+        [SerializeField, JsonProperty] private IngredientCountList _ingredientsSended;
+        [SerializeField, JsonProperty] private CarState _carState;
+        [SerializeField, JsonProperty] private float _nowWaitTime;
+        [SerializeField, JsonProperty] private float _needWaitTime;
 
-    public IEnumerable<IngredientCount> IngredientsSended => _ingredientsSended.GetItems();
-    public CarState CarState => _carState;
-    public float NowWaitTime => _nowWaitTime;
+        public IEnumerable<IngredientCount> IngredientsSended => _ingredientsSended.GetItems();
+        public CarState CarState => _carState;
+        public float NowWaitTime => _nowWaitTime;
 
-    public FarmCarWaitManagerData(float defaultWaitTime) {
-        _needWaitTime = defaultWaitTime;
-        _carState = CarState.Calm;
-        _ingredientsSended = new();
-    }
-
-    public void UpdateSpeed(float needTime) {
-        _needWaitTime = needTime;
-        if (_carState != CarState.Calm) {
-            _nowWaitTime = Mathf.Min(_nowWaitTime, _needWaitTime / 2f);
+        public FarmCarWaitManagerData(float defaultWaitTime) {
+            _needWaitTime = defaultWaitTime;
+            _carState = CarState.Calm;
+            _ingredientsSended = new();
         }
-    }
 
-    public void UpdateTime() {
-        _nowWaitTime -= InGameTime.Instance.RawDeltaTime;
-    }
+        public void UpdateSpeed(float needTime) {
+            _needWaitTime = needTime;
+            if (_carState != CarState.Calm) {
+                _nowWaitTime = Mathf.Min(_nowWaitTime, _needWaitTime / 2f);
+            }
+        }
 
-    public void StartWait() {
-        _nowWaitTime = _needWaitTime / 2f;
-        _carState = CarState.Sent;
-    }
+        public void UpdateTime() {
+            _nowWaitTime -= InGameTime.Instance.RawDeltaTime;
+        }
 
-    public void SetIngredientsSended(IEnumerable<IngredientCount> ingredients) {
-        _ingredientsSended.Clear();
+        public void StartWait() {
+            _nowWaitTime = _needWaitTime / 2f;
+            _carState = CarState.Sent;
+        }
 
-        foreach (var ingredient in ingredients)
-            _ingredientsSended.Add(new(ingredient));
-    }
+        public void SetIngredientsSended(IEnumerable<IngredientCount> ingredients) {
+            _ingredientsSended.Clear();
 
-    public void StartReturn() {
-        _carState = CarState.Returns;
-        _ingredientsSended.Clear();
-        _nowWaitTime = _needWaitTime / 2f;
-    }
+            foreach (var ingredient in ingredients)
+                _ingredientsSended.Add(new(ingredient));
+        }
 
-    public void StartCalm() {
-        _carState = CarState.Calm;
+        public void StartReturn() {
+            _carState = CarState.Returns;
+            _ingredientsSended.Clear();
+            _nowWaitTime = _needWaitTime / 2f;
+        }
+
+        public void StartCalm() {
+            _carState = CarState.Calm;
+        }
     }
 }

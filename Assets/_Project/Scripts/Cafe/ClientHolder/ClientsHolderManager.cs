@@ -1,97 +1,100 @@
 using System.Collections.Generic;
 using UnityEngine;
+using MadnessCooking.General;
 
-public class ClientsHolderManager : MonoBehaviour, IBindable<CafeData> {
-    [SerializeField] private CafeSpotManager _spotManager;
-    [SerializeField] private SpotEditor _spotEditor;
-    [SerializeField] private CafeStateChanger _cafeOpener;
+namespace MadnessCooking.Cafe {
+    public class ClientsHolderManager : MonoBehaviour, IBindable<CafeData> {
+        [SerializeField] private CafeSpotManager _spotManager;
+        [SerializeField] private SpotEditor _spotEditor;
+        [SerializeField] private CafeStateChanger _cafeOpener;
 
-    private readonly List<ClientsHolder> _holders = new();
-    private readonly List<List<int>> _freeHolders = new();
-    [SerializeField] private ClientHolderManagerData _data;
+        private readonly List<ClientsHolder> _holders = new();
+        private readonly List<List<int>> _freeHolders = new();
+        [SerializeField] private ClientHolderManagerData _data;
 
-    private void Awake() {
-        _spotEditor.EditorDisabled += GenerateFreeHoldersList;
-        _spotManager.SpotAdded += AddClientsHolder;
-        _spotManager.SpotRemoved += RemoveClientsHolder;
-    }
-
-    public void LateStart() {
-        GenerateFreeHoldersList();
-    }
-
-    private void AddClientsHolder(CafeSpot spot, bool isAddedByEditor) {
-        if (!spot.TryGetComponent(out ClientsHolder clientsHolder))
-            return;
-
-        clientsHolder.SetIndex(_holders.Count);
-        _holders.Add(clientsHolder);
-        _cafeOpener.CafeChanged += clientsHolder.CafeStateChanged;
-
-        if (!isAddedByEditor) {
-            int holderIndex = _holders.Count - 1;
-            clientsHolder.SetData(_data.GetClientHolder(holderIndex));
-            return;
+        private void Awake() {
+            _spotEditor.EditorDisabled += GenerateFreeHoldersList;
+            _spotManager.SpotAdded += AddClientsHolder;
+            _spotManager.SpotRemoved += RemoveClientsHolder;
         }
 
-        ClientHolderData newData = new(spot.SeatsCount);
-        _data.AddClientHolder(newData);
-        clientsHolder.SetData(newData);
-    }
+        public void LateStart() {
+            GenerateFreeHoldersList();
+        }
 
-    private void RemoveClientsHolder(CafeSpot spot) {
-        if (!spot.TryGetComponent(out ClientsHolder clientsHolder))
-            return;
+        private void AddClientsHolder(CafeSpot spot, bool isAddedByEditor) {
+            if (!spot.TryGetComponent(out ClientsHolder clientsHolder))
+                return;
 
-        _cafeOpener.CafeChanged -= clientsHolder.CafeStateChanged;
-        _data.RemoveClientHolderAt(clientsHolder.Index);
-        _holders.Remove(clientsHolder);
+            clientsHolder.SetIndex(_holders.Count);
+            _holders.Add(clientsHolder);
+            _cafeOpener.CafeChanged += clientsHolder.CafeStateChanged;
 
-        UpdateIndexes();
-    }
+            if (!isAddedByEditor) {
+                int holderIndex = _holders.Count - 1;
+                clientsHolder.SetData(_data.GetClientHolder(holderIndex));
+                return;
+            }
 
-    public void GenerateFreeHoldersList() {
-        _freeHolders.Clear();
-        UpdateIndexes();
+            ClientHolderData newData = new(spot.SeatsCount);
+            _data.AddClientHolder(newData);
+            clientsHolder.SetData(newData);
+        }
 
-        for (int i = 0; i < _spotManager.PrefabsCount; i++)
-            _freeHolders.Add(new());
-        for (int i = 0; i < _holders.Count; i++)
-            _freeHolders[_holders[i].ClientsCount - 1].Add(i);
-    }
+        private void RemoveClientsHolder(CafeSpot spot) {
+            if (!spot.TryGetComponent(out ClientsHolder clientsHolder))
+                return;
 
-    public ClientsHolder TakeRandomHolder(ClientCount clientCount) {
-        int needSeat = clientCount switch {
-            ClientCount.One => 0,
-            ClientCount.Two => 1,
-            ClientCount.Three => 2,
-            ClientCount.Four => 3,
-            _ => 0,
-        };
+            _cafeOpener.CafeChanged -= clientsHolder.CafeStateChanged;
+            _data.RemoveClientHolderAt(clientsHolder.Index);
+            _holders.Remove(clientsHolder);
 
-        if (_freeHolders[needSeat].Count == 0)
-            return null;
+            UpdateIndexes();
+        }
 
-        int randomSpotIndex = _freeHolders[needSeat].PopRandom();
-        return _holders[randomSpotIndex];
-    }
+        public void GenerateFreeHoldersList() {
+            _freeHolders.Clear();
+            UpdateIndexes();
 
-    public ClientsHolder TakeHolder(int index) {
-        _freeHolders[_holders[index].ClientsCount - 1].Remove(index);
-        return _holders[index];
-    }
+            for (int i = 0; i < _spotManager.PrefabsCount; i++)
+                _freeHolders.Add(new());
+            for (int i = 0; i < _holders.Count; i++)
+                _freeHolders[_holders[i].ClientsCount - 1].Add(i);
+        }
 
-    public void ReturnHolder(int index) {
-        _freeHolders[_holders[index].ClientsCount - 1].Add(index);
-    }
+        public ClientsHolder TakeRandomHolder(ClientCount clientCount) {
+            int needSeat = clientCount switch {
+                ClientCount.One => 0,
+                ClientCount.Two => 1,
+                ClientCount.Three => 2,
+                ClientCount.Four => 3,
+                _ => 0,
+            };
 
-    public void UpdateIndexes() {
-        for (int i = 0; i < _holders.Count; i++)
-            _holders[i].SetIndex(i);
-    }
+            if (_freeHolders[needSeat].Count == 0)
+                return null;
 
-    public void Bind(CafeData data) {
-        data.ClientHolderManager ??= new();
-        _data = data.ClientHolderManager;
+            int randomSpotIndex = _freeHolders[needSeat].PopRandom();
+            return _holders[randomSpotIndex];
+        }
+
+        public ClientsHolder TakeHolder(int index) {
+            _freeHolders[_holders[index].ClientsCount - 1].Remove(index);
+            return _holders[index];
+        }
+
+        public void ReturnHolder(int index) {
+            _freeHolders[_holders[index].ClientsCount - 1].Add(index);
+        }
+
+        public void UpdateIndexes() {
+            for (int i = 0; i < _holders.Count; i++)
+                _holders[i].SetIndex(i);
+        }
+
+        public void Bind(CafeData data) {
+            data.ClientHolderManager ??= new();
+            _data = data.ClientHolderManager;
+        }
     }
 }

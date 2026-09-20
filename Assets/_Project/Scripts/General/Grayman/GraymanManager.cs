@@ -1,31 +1,33 @@
 using UnityEngine;
 
-public class GraymanManager : MonoBehaviour, IBindable<GeneralData> {
-    [SerializeField] private GameSaveManager _saveManager;
-    [SerializeField] private string _graymanName;
-    [SerializeField] private Sprite _graymanIcon;
+namespace MadnessCooking.General {
+    public class GraymanManager : MonoBehaviour, IBindable<GeneralData> {
+        [SerializeField] private GameSaveManager _saveManager;
+        [SerializeField] private string _graymanName;
+        [SerializeField] private Sprite _graymanIcon;
 
-    private GraymanData _data;
-    private BuyableItem _graymanItem;
+        private GraymanData _data;
+        private BuyableItem _graymanItem;
 
-    public bool HeWasHere => _data.HeWasHere;
-    public string GraymanName => _graymanName;
-    public BuyableItem GraymanItem => _graymanItem;
+        public bool HeWasHere => _data.HeWasHere;
+        public string GraymanName => _graymanName;
+        public BuyableItem GraymanItem => _graymanItem;
 
-    public void Start() {
-        _graymanItem = BuyableItem.CreateTemporaryItem<BuyableItem>(_graymanName, _graymanIcon);
-    }
+        public void Start() {
+            _graymanItem = BuyableItem.CreateTemporaryItem<BuyableItem>(_graymanName, _graymanIcon);
+        }
 
-    public void LateStart() { }
+        public void LateStart() { }
 
-    public void HeVisitedUs() {
-        _saveManager.Save();
-        _data.HeVisitedUs();
-        Application.Quit();
-    }
+        public void HeVisitedUs() {
+            _saveManager.Save();
+            _data.HeVisitedUs();
+            Application.Quit();
+        }
 
-    public void Bind(GeneralData data) {
-        data.Grayman ??= new();
-        _data = data.Grayman;
+        public void Bind(GeneralData data) {
+            data.Grayman ??= new();
+            _data = data.Grayman;
+        }
     }
 }

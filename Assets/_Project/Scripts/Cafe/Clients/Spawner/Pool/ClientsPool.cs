@@ -1,39 +1,42 @@
 using UnityEngine;
+using MadnessCooking.General;
 
-public class ClientsPool : Pool<Client> {
-    [SerializeField] private Client _clientPrefab;
-    [SerializeField] private ClientsSpawner _spawner;
-    [SerializeField] private TutorialManager _tutorialManager;
-    [SerializeField] private UIActivatorsManager _UIManager;
+namespace MadnessCooking.Cafe {
+    public class ClientsPool : Pool<Client> {
+        [SerializeField] private Client _clientPrefab;
+        [SerializeField] private ClientsSpawner _spawner;
+        [SerializeField] private TutorialManager _tutorialManager;
+        [SerializeField] private UIActivatorsManager _UIManager;
 
-    private ClientGender _clientsGender;
-    private CafeUpgradeData _upgradeData;
+        private ClientGender _clientsGender;
+        private CafeUpgradeData _upgradeData;
 
-    public ClientGender ClientsGender => _clientsGender;
+        public ClientGender ClientsGender => _clientsGender;
 
-    private void Awake() {
-        _clientsGender = _clientPrefab.Gender;
-    }
+        private void Awake() {
+            _clientsGender = _clientPrefab.Gender;
+        }
 
-    public override Client GetObject() {
-        Client client = base.GetObject();
-        client.gameObject.SetActive(true);
-        client.ChangeEnable(false);
-        return client;
-    }
+        public override Client GetObject() {
+            Client client = base.GetObject();
+            client.gameObject.SetActive(true);
+            client.ChangeEnable(false);
+            return client;
+        }
 
-    public override void PutObject(Client client) {
-        base.PutObject(client);
-        client.gameObject.SetActive(false);
-    }
+        public override void PutObject(Client client) {
+            base.PutObject(client);
+            client.gameObject.SetActive(false);
+        }
 
-    protected override Client CreateObject() {
-        Client client = Instantiate(_clientPrefab, _container);
-        client.SetupOnCreate(_spawner, _tutorialManager, _UIManager, _upgradeData);
-        return client;
-    }
+        protected override Client CreateObject() {
+            Client client = Instantiate(_clientPrefab, _container);
+            client.SetupOnCreate(_spawner, _tutorialManager, _UIManager, _upgradeData);
+            return client;
+        }
 
-    public void BindUpgrade(CafeUpgradeData upgradeData) {
-        _upgradeData = upgradeData;
+        public void BindUpgrade(CafeUpgradeData upgradeData) {
+            _upgradeData = upgradeData;
+        }
     }
 }

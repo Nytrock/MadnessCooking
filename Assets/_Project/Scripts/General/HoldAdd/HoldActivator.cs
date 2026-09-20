@@ -1,34 +1,36 @@
 using UnityEngine;
 
-[RequireComponent(typeof(BoxCollider2D))]
-public class HoldActivator : MonoBehaviour {
-    [SerializeField] private UIHoverListener _hoverListener;
-    [SerializeField] private UIActivatorsManager _UIManager;
-    [SerializeField] private HoldAdd _hold;
-    private bool _isMouseDown;
+namespace MadnessCooking.General {
+    [RequireComponent(typeof(BoxCollider2D))]
+    public class HoldActivator : MonoBehaviour {
+        [SerializeField] private UIHoverListener _hoverListener;
+        [SerializeField] private UIActivatorsManager _UIManager;
+        [SerializeField] private HoldAdd _hold;
+        private bool _isMouseDown;
 
-    private void OnMouseDown() {
-        if (_hoverListener.IsHover || !_hold.IsUnlocked)
-            return;
+        private void OnMouseDown() {
+            if (_hoverListener.IsHover || !_hold.IsUnlocked)
+                return;
 
-        _isMouseDown = true;
-        _hold.ChangeClickMode(true);
-        _UIManager.CloseNowActivable();
-    }
+            _isMouseDown = true;
+            _hold.ChangeClickMode(true);
+            _UIManager.CloseNowActivable();
+        }
 
-    private void OnMouseExit() {
-        if (!_isMouseDown || !_hold.IsUnlocked)
-            return;
+        private void OnMouseExit() {
+            if (!_isMouseDown || !_hold.IsUnlocked)
+                return;
 
-        _isMouseDown = false;
-        _hold.ChangeClickMode(false);
-    }
+            _isMouseDown = false;
+            _hold.ChangeClickMode(false);
+        }
 
-    private void OnMouseUp() {
-        if (!_hold.IsUnlocked)
-            return;
+        private void OnMouseUp() {
+            if (!_hold.IsUnlocked)
+                return;
 
-        _isMouseDown = false;
-        _hold.ChangeClickMode(false);
+            _isMouseDown = false;
+            _hold.ChangeClickMode(false);
+        }
     }
 }

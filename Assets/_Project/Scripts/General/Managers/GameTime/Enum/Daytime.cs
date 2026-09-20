@@ -1,6 +1,8 @@
-public enum Daytime {
-    Morning,
-    Day,
-    Evening,
-    Night
+namespace MadnessCooking.General {
+    public enum Daytime {
+        Morning,
+        Day,
+        Evening,
+        Night
+    }
 }

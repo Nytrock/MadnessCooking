@@ -2,16 +2,18 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = AssetMenuName + nameof(CoefficientUpgrade))]
-public class CoefficientUpgrade : BaseUpgrade {
-    [SerializeField, Min(0)] private float _coefficient;
+namespace MadnessCooking.General {
+    [CreateAssetMenu(menuName = AssetMenuName + nameof(CoefficientUpgrade))]
+    public class CoefficientUpgrade : BaseUpgrade {
+        [SerializeField, Min(0)] private float _coefficient;
 
-    public float Coefficient => _coefficient;
+        public float Coefficient => _coefficient;
 
-    public override async Task<string> GetDescription() {
-        Dictionary<string, string> arguments = new() {
-            ["coefficient"] = _coefficient.ToString()
-        };
-        return await LocalizationManager.Instance.GetLocalization(_table, name + ".Description", arguments);
+        public override async Task<string> GetDescription() {
+            Dictionary<string, string> arguments = new() {
+                ["coefficient"] = _coefficient.ToString()
+            };
+            return await LocalizationManager.Instance.GetLocalization(_table, name + ".Description", arguments);
+        }
     }
 }

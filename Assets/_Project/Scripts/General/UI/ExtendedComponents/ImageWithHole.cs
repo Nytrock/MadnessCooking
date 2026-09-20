@@ -1,12 +1,14 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ImageWithHole : Image {
-    [SerializeField] private RectTransform _hole;
+namespace MadnessCooking.General {
+    public class ImageWithHole : Image {
+        [SerializeField] private RectTransform _hole;
 
-    public override bool IsRaycastLocationValid(Vector2 screenPoint, Camera eventCamera) {
-        if (_hole.ContainsMouse())
-            return false;
-        return base.IsRaycastLocationValid(screenPoint, eventCamera);
+        public override bool IsRaycastLocationValid(Vector2 screenPoint, Camera eventCamera) {
+            if (_hole.ContainsMouse())
+                return false;
+            return base.IsRaycastLocationValid(screenPoint, eventCamera);
+        }
     }
 }

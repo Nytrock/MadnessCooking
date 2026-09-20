@@ -2,37 +2,39 @@ using Newtonsoft.Json;
 using System;
 using UnityEngine;
 
-[Serializable, JsonObject(MemberSerialization.OptIn)]
-public class LightManagerData {
-    [SerializeField, JsonProperty] private float _nowTime;
-    [SerializeField, JsonProperty] private bool _isChanging;
-    [SerializeField, JsonProperty] private SkyManagerData _skyData;
-    [SerializeField, JsonProperty] private SpritesManagerData _spritesData;
-    [SerializeField] private float _timeStep;
+namespace MadnessCooking.General {
+    [Serializable, JsonObject(MemberSerialization.OptIn)]
+    public class LightManagerData {
+        [SerializeField, JsonProperty] private float _nowTime;
+        [SerializeField, JsonProperty] private bool _isChanging;
+        [SerializeField, JsonProperty] private SkyManagerData _skyData;
+        [SerializeField, JsonProperty] private SpritesManagerData _spritesData;
+        [SerializeField] private float _timeStep;
 
-    public bool IsChanging => _isChanging;
-    public SkyManagerData SkyData => _skyData;
-    public SpritesManagerData SpritesData => _spritesData;
+        public bool IsChanging => _isChanging;
+        public SkyManagerData SkyData => _skyData;
+        public SpritesManagerData SpritesData => _spritesData;
 
-    public LightManagerData() {
-        _skyData = new();
-        _spritesData = new();
-    }
+        public LightManagerData() {
+            _skyData = new();
+            _spritesData = new();
+        }
 
-    public void StartChange() {
-        _isChanging = true;
-        _nowTime = 0;
-    }
+        public void StartChange() {
+            _isChanging = true;
+            _nowTime = 0;
+        }
 
-    public void SetTimeStep(float timeChanging) {
-        _timeStep = 1 / timeChanging;
-    }
+        public void SetTimeStep(float timeChanging) {
+            _timeStep = 1 / timeChanging;
+        }
 
-    public void Update() {
-        _nowTime += _timeStep * InGameTime.Instance.RawDeltaTime;
-        if (_nowTime >= 1)
-            _isChanging = false;
-        _skyData.UpdateMaterial(_nowTime);
-        _spritesData.UpdateMaterial(_nowTime);
+        public void Update() {
+            _nowTime += _timeStep * InGameTime.Instance.RawDeltaTime;
+            if (_nowTime >= 1)
+                _isChanging = false;
+            _skyData.UpdateMaterial(_nowTime);
+            _spritesData.UpdateMaterial(_nowTime);
+        }
     }
 }

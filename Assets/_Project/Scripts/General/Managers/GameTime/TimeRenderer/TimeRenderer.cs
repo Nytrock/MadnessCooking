@@ -1,11 +1,13 @@
 using UnityEngine;
 
-public abstract class TimeRenderer : MonoBehaviour {
-    [SerializeField] protected GameTimeManager _timeManager;
+namespace MadnessCooking.General {
+    public abstract class TimeRenderer : MonoBehaviour {
+        [SerializeField] protected GameTimeManager _timeManager;
 
-    private void Update() {
-        UpdateVisual();
+        private void Update() {
+            UpdateVisual();
+        }
+
+        protected abstract void UpdateVisual();
     }
-
-    protected abstract void UpdateVisual();
 }

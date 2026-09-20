@@ -1,9 +1,12 @@
 using UnityEngine;
+using MadnessCooking.General;
 
-public class OrderUIBaseState : MonoBehaviour {
-    [SerializeField] protected OrderUIState _state;
+namespace MadnessCooking.Kitchen {
+    public class OrderUIBaseState : MonoBehaviour {
+        [SerializeField] protected OrderUIState _state;
 
-    public virtual void UpdateState(OrderUIState newState) {
-        gameObject.SetActive(newState == _state);
+        public virtual void UpdateState(OrderUIState newState) {
+            gameObject.SetActive(newState == _state);
+        }
     }
 }

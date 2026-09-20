@@ -1,82 +1,85 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using MadnessCooking.General;
 
-[RequireComponent(typeof(BedTypeStyleUpdater))]
-public class FarmBedUpgraderUI : ChoiceBuyUI<FarmBedUpgrade, FarmBedUpgradeButton> {
-    [SerializeField] private FarmBedUpgradeManager _manager;
+namespace MadnessCooking.Farm {
+    [RequireComponent(typeof(BedTypeStyleUpdater))]
+    public class FarmBedUpgraderUI : ChoiceBuyUI<FarmBedUpgrade, FarmBedUpgradeButton> {
+        [SerializeField] private FarmBedUpgradeManager _manager;
 
-    private BedTypeStyleUpdater _styleUpdater;
-    private FarmBed _changingBed;
+        private BedTypeStyleUpdater _styleUpdater;
+        private FarmBed _changingBed;
 
-    protected override void Awake() {
-        base.Awake();
-        _styleUpdater = GetComponent<BedTypeStyleUpdater>();
-    }
-
-    public void ActivateUpgradePanel(FarmBed groundBed) {
-        Activate();
-        _changingBed = groundBed;
-        _styleUpdater.UpdateStyle(_changingBed.Data.BedType);
-        GenerateChoiceButtons();
-    }
-
-    protected override void GenerateChoiceButtons() {
-        DestoyOldButtons();
-        base.GenerateChoiceButtons();
-    }
-
-    protected override FarmBedUpgradeButton GenerateChoiceButton(FarmBedUpgrade item) {
-        bool isAccessable = CheckUpgradeAccessable(item);
-        if (!isAccessable)
-            return null;
-
-        FarmBedUpgradeButton button = base.GenerateChoiceButton(item);
-        button.UpdateStyle(_changingBed.Data.BedType);
-        return button;
-    }
-
-    protected override IEnumerable<FarmBedUpgrade> GetItems() {
-        return _manager.GetAvailableUpgrades();
-    }
-
-    public override void SubmitChoice() {
-        FarmBedUpgrade upgrade = _choosedButton.Item;
-        MoneyManager.Instance.ChangeMoney(-upgrade.PriceToAdd);
-        FatigueManager.Instance.AddFatigue(upgrade.FatigueCoef);
-
-        _changingBed.AddUpgrade(upgrade);
-        _choiceButtonPool.PutObject(_choosedButton);
-
-        foreach (var nextUpgrade in upgrade.NextItems)
-            if (_manager.HaveUpgrade(nextUpgrade as FarmBedUpgrade))
-                GenerateChoiceButton(nextUpgrade as FarmBedUpgrade);
-        SelectButton(_choosedButton);
-    }
-
-    private bool CheckUpgradeAccessable(FarmBedUpgrade upgrade) {
-        BedType bedType = _changingBed.Data.BedType;
-        if (!upgrade.SuitableBedTypes.Contains(bedType))
-            return false;
-
-        if (_changingBed.HaveUpgrade(upgrade))
-            return false;
-
-        foreach (var needUpgrade in upgrade.NeedItems) {
-            var needFarmBedUpgrade = needUpgrade as FarmBedUpgrade;
-            if (needFarmBedUpgrade == null)
-                continue;
-
-            if (!_changingBed.HaveUpgrade(needFarmBedUpgrade))
-                return false;
+        protected override void Awake() {
+            base.Awake();
+            _styleUpdater = GetComponent<BedTypeStyleUpdater>();
         }
 
-        return true;
-    }
+        public void ActivateUpgradePanel(FarmBed groundBed) {
+            Activate();
+            _changingBed = groundBed;
+            _styleUpdater.UpdateStyle(_changingBed.Data.BedType);
+            GenerateChoiceButtons();
+        }
 
-    public override void Disable() {
-        base.Disable();
-        _changingBed = null;
-        DestoyOldButtons();
+        protected override void GenerateChoiceButtons() {
+            DestoyOldButtons();
+            base.GenerateChoiceButtons();
+        }
+
+        protected override FarmBedUpgradeButton GenerateChoiceButton(FarmBedUpgrade item) {
+            bool isAccessable = CheckUpgradeAccessable(item);
+            if (!isAccessable)
+                return null;
+
+            FarmBedUpgradeButton button = base.GenerateChoiceButton(item);
+            button.UpdateStyle(_changingBed.Data.BedType);
+            return button;
+        }
+
+        protected override IEnumerable<FarmBedUpgrade> GetItems() {
+            return _manager.GetAvailableUpgrades();
+        }
+
+        public override void SubmitChoice() {
+            FarmBedUpgrade upgrade = _choosedButton.Item;
+            MoneyManager.Instance.ChangeMoney(-upgrade.PriceToAdd);
+            FatigueManager.Instance.AddFatigue(upgrade.FatigueCoef);
+
+            _changingBed.AddUpgrade(upgrade);
+            _choiceButtonPool.PutObject(_choosedButton);
+
+            foreach (var nextUpgrade in upgrade.NextItems)
+                if (_manager.HaveUpgrade(nextUpgrade as FarmBedUpgrade))
+                    GenerateChoiceButton(nextUpgrade as FarmBedUpgrade);
+            SelectButton(_choosedButton);
+        }
+
+        private bool CheckUpgradeAccessable(FarmBedUpgrade upgrade) {
+            BedType bedType = _changingBed.Data.BedType;
+            if (!upgrade.SuitableBedTypes.Contains(bedType))
+                return false;
+
+            if (_changingBed.HaveUpgrade(upgrade))
+                return false;
+
+            foreach (var needUpgrade in upgrade.NeedItems) {
+                var needFarmBedUpgrade = needUpgrade as FarmBedUpgrade;
+                if (needFarmBedUpgrade == null)
+                    continue;
+
+                if (!_changingBed.HaveUpgrade(needFarmBedUpgrade))
+                    return false;
+            }
+
+            return true;
+        }
+
+        public override void Disable() {
+            base.Disable();
+            _changingBed = null;
+            DestoyOldButtons();
+        }
     }
 }

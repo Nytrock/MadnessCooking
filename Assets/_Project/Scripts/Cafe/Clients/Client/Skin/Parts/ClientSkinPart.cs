@@ -1,67 +1,69 @@
-using UnityEngine;
+﻿using UnityEngine;
 using Random = UnityEngine.Random;
 
-[RequireComponent(typeof(SpriteRenderer))]
-public class ClientSkinPart : MonoBehaviour {
-    [SerializeField] protected Sprite _defaultSprite;
-    [SerializeField] private Sprite[] _randomSprites;
-    [SerializeField] protected SpecialClientSprite[] _specialSprites;
+namespace MadnessCooking.Cafe {
+    [RequireComponent(typeof(SpriteRenderer))]
+    public class ClientSkinPart : MonoBehaviour {
+        [SerializeField] protected Sprite _defaultSprite;
+        [SerializeField] private Sprite[] _randomSprites;
+        [SerializeField] protected SpecialClientSprite[] _specialSprites;
 
-    protected SpriteRenderer _renderer;
+        protected SpriteRenderer _renderer;
 
-    public int RandomSpritesCount => _randomSprites.Length;
+        public int RandomSpritesCount => _randomSprites.Length;
 
-    protected virtual void Awake() {
-        GetRenderer();
-    }
-
-    private void GetRenderer() {
-        if (_renderer)
-            return;
-
-        _renderer = GetComponent<SpriteRenderer>();
-    }
-
-    public void SetSprite(ClientSkinType skinType) {
-        if (skinType != ClientSkinType.Random) {
-            SetSpecialSprite(skinType);
-            return;
+        protected virtual void Awake() {
+            GetRenderer();
         }
 
-        int spriteIndex = Random.Range(0, RandomSpritesCount);
-        SetRandomSprite(spriteIndex);
-    }
+        private void GetRenderer() {
+            if (_renderer)
+                return;
 
-    public virtual void SetRandomSprite(int spriteIndex) {
-        GetRenderer();
-        if (RandomSpritesCount == 0) {
-            _renderer.sprite = _defaultSprite;
-            return;
+            _renderer = GetComponent<SpriteRenderer>();
         }
 
-        _renderer.sprite = _randomSprites[spriteIndex];
-    }
-
-    public virtual void SetSpecialSprite(ClientSkinType skinType) {
-        GetRenderer();
-        foreach (var specialSprite in _specialSprites) {
-            if (specialSprite.SkinType == skinType) {
-                _renderer.sprite = specialSprite.Sprite;
+        public void SetSprite(ClientSkinType skinType) {
+            if (skinType != ClientSkinType.Random) {
+                SetSpecialSprite(skinType);
                 return;
             }
+
+            int spriteIndex = Random.Range(0, RandomSpritesCount);
+            SetRandomSprite(spriteIndex);
         }
 
-        _renderer.sprite = _defaultSprite;
-    }
+        public virtual void SetRandomSprite(int spriteIndex) {
+            GetRenderer();
+            if (RandomSpritesCount == 0) {
+                _renderer.sprite = _defaultSprite;
+                return;
+            }
 
-    public virtual bool CheckRelationToGroup(ClientSkinGroupPart groupPart) {
-        if (groupPart.RandomSpritesCount != RandomSpritesCount && RandomSpritesCount != 0)
-            return false;
-        return true;
-    }
+            _renderer.sprite = _randomSprites[spriteIndex];
+        }
 
-    public virtual void SetDefalult() {
-        GetRenderer();
-        _renderer.sprite = _defaultSprite;
+        public virtual void SetSpecialSprite(ClientSkinType skinType) {
+            GetRenderer();
+            foreach (var specialSprite in _specialSprites) {
+                if (specialSprite.SkinType == skinType) {
+                    _renderer.sprite = specialSprite.Sprite;
+                    return;
+                }
+            }
+
+            _renderer.sprite = _defaultSprite;
+        }
+
+        public virtual bool CheckRelationToGroup(ClientSkinGroupPart groupPart) {
+            if (groupPart.RandomSpritesCount != RandomSpritesCount && RandomSpritesCount != 0)
+                return false;
+            return true;
+        }
+
+        public virtual void SetDefalult() {
+            GetRenderer();
+            _renderer.sprite = _defaultSprite;
+        }
     }
 }

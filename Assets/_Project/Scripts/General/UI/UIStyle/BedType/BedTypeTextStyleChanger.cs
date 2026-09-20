@@ -1,3 +1,5 @@
-public class BedTypeTextStyleChanger : TextStyleChanger<BedType> {
+namespace MadnessCooking.General {
+    public class BedTypeTextStyleChanger : TextStyleChanger<BedType> {
 
+    }
 }

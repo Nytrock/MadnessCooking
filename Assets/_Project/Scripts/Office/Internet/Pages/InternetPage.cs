@@ -1,16 +1,19 @@
 using UnityEngine;
+using MadnessCooking.General;
 
-public class InternetPage : MonoBehaviour {
-    [SerializeField] protected string _pageName;
-    [SerializeField] protected GameObject _panel;
+namespace MadnessCooking.Office {
+    public class InternetPage : MonoBehaviour {
+        [SerializeField] protected string _pageName;
+        [SerializeField] protected GameObject _panel;
 
-    public string PageName => _pageName;
+        public string PageName => _pageName;
 
-    private void Start() {
-        ChangeState(false);
-    }
+        private void Start() {
+            ChangeState(false);
+        }
 
-    public virtual void ChangeState(bool newValue) {
-        _panel.SetActive(newValue);
+        public virtual void ChangeState(bool newValue) {
+            _panel.SetActive(newValue);
+        }
     }
 }

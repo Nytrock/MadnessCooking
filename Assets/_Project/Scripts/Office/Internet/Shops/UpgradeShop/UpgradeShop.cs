@@ -1,17 +1,20 @@
 using UnityEngine;
+using MadnessCooking.General;
 
-public class UpgradeShop : BaseInstantShop<BaseUpgrade, OfficeData> {
-    [SerializeField] private UpgradeTypeData[] _upgradeTypes;
+namespace MadnessCooking.Office {
+    public class UpgradeShop : BaseInstantShop<BaseUpgrade, OfficeData> {
+        [SerializeField] private UpgradeTypeData[] _upgradeTypes;
 
-    public override void Bind(OfficeData data) {
-        data.UpgradesShop ??= new(_defaultItemsToBuy);
-        _data = data.UpgradesShop;
-    }
+        public override void Bind(OfficeData data) {
+            data.UpgradesShop ??= new(_defaultItemsToBuy);
+            _data = data.UpgradesShop;
+        }
 
-    protected override BuyPanelSideInfoData GenerateSideInfo(BaseUpgrade upgrade) {
-        foreach (var type in _upgradeTypes)
-            if (type.Type == upgrade.Type)
-                return new(type.Sprite, false, type.Name);
-        return null;
+        protected override BuyPanelSideInfoData GenerateSideInfo(BaseUpgrade upgrade) {
+            foreach (var type in _upgradeTypes)
+                if (type.Type == upgrade.Type)
+                    return new(type.Sprite, false, type.Name);
+            return null;
+        }
     }
 }

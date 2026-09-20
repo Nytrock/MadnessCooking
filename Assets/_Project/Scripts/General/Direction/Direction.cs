@@ -1,5 +1,7 @@
-public enum Direction {
-    None,
-    Left,
-    Right,
+namespace MadnessCooking.General {
+    public enum Direction {
+        None,
+        Left,
+        Right,
+    }
 }

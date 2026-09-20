@@ -1,10 +1,12 @@
 using UnityEngine;
 
-public class LocationActivatorAudio : SwitchableAudioSource {
-    [SerializeField] private LocationActivator _activator;
+namespace MadnessCooking.General {
+    public class LocationActivatorAudio : SwitchableAudioSource {
+        [SerializeField] private LocationActivator _activator;
 
-    protected override void Awake() {
-        base.Awake();
-        _activator.StateChanged += SwitchStateAndPlay;
+        protected override void Awake() {
+            base.Awake();
+            _activator.StateChanged += SwitchStateAndPlay;
+        }
     }
 }

@@ -1,10 +1,12 @@
 using UnityEngine;
 
-public class RotationChanger : VisualChanger {
-    [SerializeField] private Vector3 _disabledRotation;
-    [SerializeField] private Vector3 _activeRotation;
+namespace MadnessCooking.General {
+    public class RotationChanger : VisualChanger {
+        [SerializeField] private Vector3 _disabledRotation;
+        [SerializeField] private Vector3 _activeRotation;
 
-    protected override void UpdateVisual() {
-        transform.rotation = Quaternion.Euler(_isActive ? _activeRotation : _disabledRotation);
+        protected override void UpdateVisual() {
+            transform.rotation = Quaternion.Euler(_isActive ? _activeRotation : _disabledRotation);
+        }
     }
 }

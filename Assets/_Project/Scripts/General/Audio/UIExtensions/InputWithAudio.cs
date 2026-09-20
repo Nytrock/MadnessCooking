@@ -1,14 +1,16 @@
 using TMPro;
 using UnityEngine;
 
-public class InputWithAudio : TMP_InputField {
-    [SerializeField] private AudioSource _audioSource;
+namespace MadnessCooking.General {
+    public class InputWithAudio : TMP_InputField {
+        [SerializeField] private AudioSource _audioSource;
 
-    protected override void Awake() {
-        base.Awake();
+        protected override void Awake() {
+            base.Awake();
 
-        if (_audioSource == null)
-            TryGetComponent(out _audioSource);
-        onValueChanged.AddListener(delegate { _audioSource.Play(); });
+            if (_audioSource == null)
+                TryGetComponent(out _audioSource);
+            onValueChanged.AddListener(delegate { _audioSource.Play(); });
+        }
     }
 }

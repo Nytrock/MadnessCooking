@@ -1,64 +1,68 @@
 using System;
 using UnityEngine;
+using MadnessCooking.Cafe;
+using MadnessCooking.General;
 
-public class OrdersManager : MonoBehaviour {
-    [SerializeField] private KitchenStorage _kitchenStorage;
-    [SerializeField] private TechnicManager _technicManager;
-    [SerializeField] private TutorialManager _tutorialManager;
-    [SerializeField] private GraymanManager _graymanManager;
+namespace MadnessCooking.Kitchen {
+    public class OrdersManager : MonoBehaviour {
+        [SerializeField] private KitchenStorage _kitchenStorage;
+        [SerializeField] private TechnicManager _technicManager;
+        [SerializeField] private TutorialManager _tutorialManager;
+        [SerializeField] private GraymanManager _graymanManager;
 
-    public event Action<Order> OrderAdded;
-    public event Action<Order> OrderRemoved;
+        public event Action<Order> OrderAdded;
+        public event Action<Order> OrderRemoved;
 
-    public void AddNewClient(Client client) {
-        if (client.Data.State == ClientState.Leave || client.Data.IsServiced)
-            return;
+        public void AddNewClient(Client client) {
+            if (client.Data.State == ClientState.Leave || client.Data.IsServiced)
+                return;
 
-        Order order = client.Data.Order;
-        client.OrderActivated += AddOrder;
-        client.ClientRejected += RemoveOrder;
-        client.ClientEat += RemoveOrder;
-        order.OrderFinished += client.FinishOrder;
+            Order order = client.Data.Order;
+            client.OrderActivated += AddOrder;
+            client.ClientRejected += RemoveOrder;
+            client.ClientEat += RemoveOrder;
+            order.OrderFinished += client.FinishOrder;
 
-        if (order.IsActivated)
-            client.ActivateOrder();
+            if (order.IsActivated)
+                client.ActivateOrder();
 
-        if (order.IsFinished)
-            client.FinishOrder();
-    }
-
-    private void AddOrder(Client client) {
-        if (client.Data.Type == ClientType.Grayman) {
-            _graymanManager.HeVisitedUs();
-            return;
+            if (order.IsFinished)
+                client.FinishOrder();
         }
 
-        client.OrderActivated -= AddOrder;
+        private void AddOrder(Client client) {
+            if (client.Data.Type == ClientType.Grayman) {
+                _graymanManager.HeVisitedUs();
+                return;
+            }
 
-        if (_tutorialManager.IsWork)
-            _tutorialManager.NextTutorialPart();
-        OrderAdded?.Invoke(client.Data.Order);
-    }
+            client.OrderActivated -= AddOrder;
 
-    private void RemoveOrder(Client client) {
-        Order order = client.Data.Order;
-        if (!order.IsActivated)
-            return;
+            if (_tutorialManager.IsWork)
+                _tutorialManager.NextTutorialPart();
+            OrderAdded?.Invoke(client.Data.Order);
+        }
 
-        if (_tutorialManager.IsWork)
-            _tutorialManager.NextTutorialPart();
+        private void RemoveOrder(Client client) {
+            Order order = client.Data.Order;
+            if (!order.IsActivated)
+                return;
 
-        client.ClientRejected -= RemoveOrder;
-        client.ClientEat -= RemoveOrder;
-        order.OrderFinished -= client.FinishOrder;
+            if (_tutorialManager.IsWork)
+                _tutorialManager.NextTutorialPart();
 
-        if (order.IsCooking)
-            _technicManager.EmergencyStopCooking(order);
-        OrderRemoved?.Invoke(order);
-    }
+            client.ClientRejected -= RemoveOrder;
+            client.ClientEat -= RemoveOrder;
+            order.OrderFinished -= client.FinishOrder;
 
-    public void StartCook(Order order) {
-        _kitchenStorage.RemoveIngredients(order.Food.Ingredients);
-        _technicManager.StartCooking(order);
+            if (order.IsCooking)
+                _technicManager.EmergencyStopCooking(order);
+            OrderRemoved?.Invoke(order);
+        }
+
+        public void StartCook(Order order) {
+            _kitchenStorage.RemoveIngredients(order.Food.Ingredients);
+            _technicManager.StartCooking(order);
+        }
     }
 }

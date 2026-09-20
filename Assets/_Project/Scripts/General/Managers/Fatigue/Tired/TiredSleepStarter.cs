@@ -1,9 +1,12 @@
 using UnityEngine;
+using MadnessCooking.Office;
 
-public class TiredSleepStarter : MonoBehaviour {
-    [SerializeField] private SleepBed _bed;
+namespace MadnessCooking.General {
+    public class TiredSleepStarter : MonoBehaviour {
+        [SerializeField] private SleepBed _bed;
 
-    public void StartTiredSleep() {
-        _bed.ChangeSleepState(true);
+        public void StartTiredSleep() {
+            _bed.ChangeSleepState(true);
+        }
     }
 }

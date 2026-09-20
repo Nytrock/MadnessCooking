@@ -1,17 +1,19 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Animator))]
-public class AutoSaveUI : MonoBehaviour {
-    [SerializeField] private AutoSaveManager _manager;
+namespace MadnessCooking.General {
+    [RequireComponent(typeof(Animator))]
+    public class AutoSaveUI : MonoBehaviour {
+        [SerializeField] private AutoSaveManager _manager;
 
-    private Animator _animator;
+        private Animator _animator;
 
-    private void Awake() {
-        _animator = GetComponent<Animator>();
-        _manager.SaveStarted += StartSaveAnimation;
-    }
+        private void Awake() {
+            _animator = GetComponent<Animator>();
+            _manager.SaveStarted += StartSaveAnimation;
+        }
 
-    public void StartSaveAnimation() {
-        _animator.SetTrigger("isSaving");
+        public void StartSaveAnimation() {
+            _animator.SetTrigger("isSaving");
+        }
     }
 }

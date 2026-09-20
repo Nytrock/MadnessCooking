@@ -3,103 +3,106 @@ using System.Collections;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using MadnessCooking.General;
 
-[RequireComponent(typeof(InternetDownloadRenderer))]
-public class InternetDownload : MonoBehaviour, IUpgradeable<OfficeUpgradeData> {
-    [SerializeField] private GameObject _panel;
-    [SerializeField] private Slider _downloadBar;
+namespace MadnessCooking.Office {
+    [RequireComponent(typeof(InternetDownloadRenderer))]
+    public class InternetDownload : MonoBehaviour, IUpgradeable<OfficeUpgradeData> {
+        [SerializeField] private GameObject _panel;
+        [SerializeField] private Slider _downloadBar;
 
-    [Header("Wait borders")]
-    [SerializeField] private RangeFloat _waitTime;
-    [SerializeField, Min(0)] private float[] _possibleProgress;
+        [Header("Wait borders")]
+        [SerializeField] private RangeFloat _waitTime;
+        [SerializeField, Min(0)] private float[] _possibleProgress;
 
-    [Header("Upgrades")]
-    [SerializeField] private BaseUpgrade[] _speedUpgrades;
+        [Header("Upgrades")]
+        [SerializeField] private BaseUpgrade[] _speedUpgrades;
 
-    private float _nowProgress;
-    private float _needProgress;
+        private float _nowProgress;
+        private float _needProgress;
 
-    private InternetDownloadRenderer _renderer;
-    private InternetPage _openingPage;
-    private OfficeUpgradeData _upgradeData;
+        private InternetDownloadRenderer _renderer;
+        private InternetPage _openingPage;
+        private OfficeUpgradeData _upgradeData;
 
-    public event Action LoadingUpdated;
-    public event Action LoadingEnded;
+        public event Action LoadingUpdated;
+        public event Action LoadingEnded;
 
-    private void Awake() {
-        _renderer = GetComponent<InternetDownloadRenderer>();
-    }
-
-    private void Start() {
-        ChangeState(false);
-    }
-
-    private void Update() {
-        _downloadBar.value = _nowProgress;
-    }
-
-    private IEnumerator Download() {
-        float deltaTime = FpsManager.REFERENCE_DELTA_TIME;
-        WaitForSeconds waitTime = new(deltaTime);
-
-        while (_nowProgress < _needProgress) {
-            float progress = _possibleProgress.GetRandom();
-            _nowProgress += deltaTime * _upgradeData.InternetDownloadSpeed * progress;
-            if (progress > 0)
-                LoadingUpdated?.Invoke();
-            yield return waitTime;
+        private void Awake() {
+            _renderer = GetComponent<InternetDownloadRenderer>();
         }
 
-        EndDownload();
-    }
-
-    private void ChangeState(bool newValue) {
-        _panel.SetActive(newValue);
-    }
-
-    public void StartDownload(InternetPage openingPage) {
-        if (_upgradeData.IsInternetDownloadInstant) {
-            openingPage.ChangeState(true);
-            return;
+        private void Start() {
+            ChangeState(false);
         }
 
-        _openingPage = openingPage;
+        private void Update() {
+            _downloadBar.value = _nowProgress;
+        }
 
-        ChangeState(true);
-        _renderer.UpdateVisual(_openingPage);
+        private IEnumerator Download() {
+            float deltaTime = FpsManager.REFERENCE_DELTA_TIME;
+            WaitForSeconds waitTime = new(deltaTime);
 
-        _nowProgress = 0;
-        _needProgress = _waitTime.RandomValue;
-        _downloadBar.maxValue = _needProgress;
+            while (_nowProgress < _needProgress) {
+                float progress = _possibleProgress.GetRandom();
+                _nowProgress += deltaTime * _upgradeData.InternetDownloadSpeed * progress;
+                if (progress > 0)
+                    LoadingUpdated?.Invoke();
+                yield return waitTime;
+            }
 
-        StartCoroutine(nameof(Download));
-    }
+            EndDownload();
+        }
 
-    private void EndDownload() {
-        StopCoroutine(nameof(Download));
-        ChangeState(false);
-        _openingPage.ChangeState(true);
-        _openingPage = null;
+        private void ChangeState(bool newValue) {
+            _panel.SetActive(newValue);
+        }
 
-        LoadingEnded?.Invoke();
-    }
+        public void StartDownload(InternetPage openingPage) {
+            if (_upgradeData.IsInternetDownloadInstant) {
+                openingPage.ChangeState(true);
+                return;
+            }
 
-    public void StopDownload() {
-        StopCoroutine(nameof(Download));
-        _openingPage = null;
-    }
+            _openingPage = openingPage;
 
-    public void BindUpgrade(OfficeUpgradeData upgradeData) {
-        _upgradeData = upgradeData;
-    }
+            ChangeState(true);
+            _renderer.UpdateVisual(_openingPage);
 
-    public void CheckAddedUpgrade(BaseUpgrade upgrade) {
-        if (_speedUpgrades.Contains(upgrade)) {
-            var coefUpgrade = upgrade as CoefficientUpgrade;
-            if (coefUpgrade != null)
-                _upgradeData.ChangeInternetDownloadSpeed(coefUpgrade);
-            else
-                _upgradeData.ChangeInternetDownloadInstant();
+            _nowProgress = 0;
+            _needProgress = _waitTime.RandomValue;
+            _downloadBar.maxValue = _needProgress;
+
+            StartCoroutine(nameof(Download));
+        }
+
+        private void EndDownload() {
+            StopCoroutine(nameof(Download));
+            ChangeState(false);
+            _openingPage.ChangeState(true);
+            _openingPage = null;
+
+            LoadingEnded?.Invoke();
+        }
+
+        public void StopDownload() {
+            StopCoroutine(nameof(Download));
+            _openingPage = null;
+        }
+
+        public void BindUpgrade(OfficeUpgradeData upgradeData) {
+            _upgradeData = upgradeData;
+        }
+
+        public void CheckAddedUpgrade(BaseUpgrade upgrade) {
+            if (_speedUpgrades.Contains(upgrade)) {
+                var coefUpgrade = upgrade as CoefficientUpgrade;
+                if (coefUpgrade != null)
+                    _upgradeData.ChangeInternetDownloadSpeed(coefUpgrade);
+                else
+                    _upgradeData.ChangeInternetDownloadInstant();
+            }
         }
     }
 }

@@ -1,18 +1,21 @@
 using Newtonsoft.Json;
 using System;
 using UnityEngine;
+using MadnessCooking.General;
 
-[Serializable, JsonObject(MemberSerialization.OptIn)]
-public class SleepBedData {
-    [SerializeField, JsonProperty] private bool _isSleep;
+namespace MadnessCooking.Office {
+    [Serializable, JsonObject(MemberSerialization.OptIn)]
+    public class SleepBedData {
+        [SerializeField, JsonProperty] private bool _isSleep;
 
-    public bool IsSleep => _isSleep;
+        public bool IsSleep => _isSleep;
 
-    public void ChangeSleepState() {
-        _isSleep = !_isSleep;
-    }
+        public void ChangeSleepState() {
+            _isSleep = !_isSleep;
+        }
 
-    public void ChangeSleepState(bool newState) {
-        _isSleep = newState;
+        public void ChangeSleepState(bool newState) {
+            _isSleep = newState;
+        }
     }
 }

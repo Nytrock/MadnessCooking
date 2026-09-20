@@ -1,11 +1,13 @@
-public enum CluePositionMode {
-    UpperLeft,
-    UpperCenter,
-    UpperRight,
-    MiddleLeft,
-    MiddleCenter,
-    MiddleRight,
-    LowerLeft,
-    LowerCenter,
-    LowerRight,
+namespace MadnessCooking.General {
+    public enum CluePositionMode {
+        UpperLeft,
+        UpperCenter,
+        UpperRight,
+        MiddleLeft,
+        MiddleCenter,
+        MiddleRight,
+        LowerLeft,
+        LowerCenter,
+        LowerRight,
+    }
 }

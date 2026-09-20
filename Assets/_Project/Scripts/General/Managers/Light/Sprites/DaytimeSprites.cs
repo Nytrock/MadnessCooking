@@ -1,9 +1,11 @@
 using System;
 using UnityEngine;
 
-[Serializable]
-public class DaytimeSprites : DaytimeLight {
-    [SerializeField] private Color _spriteColor;
+namespace MadnessCooking.General {
+    [Serializable]
+    public class DaytimeSprites : DaytimeLight {
+        [SerializeField] private Color _spriteColor;
 
-    public Color SpriteColor => _spriteColor;
+        public Color SpriteColor => _spriteColor;
+    }
 }

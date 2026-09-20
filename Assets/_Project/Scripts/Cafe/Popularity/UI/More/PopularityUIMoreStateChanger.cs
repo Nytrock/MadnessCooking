@@ -1,15 +1,18 @@
 using UnityEngine;
+using MadnessCooking.General;
 
-public class PopularityUIMoreStateChanger : HoverObjectStateChanger {
-    [SerializeField] private PopularityUIMore _moreUI;
+namespace MadnessCooking.Cafe {
+    public class PopularityUIMoreStateChanger : HoverObjectStateChanger {
+        [SerializeField] private PopularityUIMore _moreUI;
 
-    protected override void ActivateHoverObject() {
-        base.ActivateHoverObject();
-        _moreUI.ChangeMode(true);
-    }
+        protected override void ActivateHoverObject() {
+            base.ActivateHoverObject();
+            _moreUI.ChangeMode(true);
+        }
 
-    protected override void DisableHoverObject() {
-        base.DisableHoverObject();
-        _moreUI.ChangeMode(false);
+        protected override void DisableHoverObject() {
+            base.DisableHoverObject();
+            _moreUI.ChangeMode(false);
+        }
     }
 }

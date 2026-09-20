@@ -1,30 +1,33 @@
 using UnityEngine;
+using MadnessCooking.General;
 
-[RequireComponent(typeof(AudioSource))]
-public class TableFoodAudio : MonoBehaviour {
-    [SerializeField] private TableFoodRenderer _renderer;
-    [SerializeField] private FoodAudioInfo[] _foodAudioInfo;
-    private AudioSource _audioSource;
+namespace MadnessCooking.Cafe {
+    [RequireComponent(typeof(AudioSource))]
+    public class TableFoodAudio : MonoBehaviour {
+        [SerializeField] private TableFoodRenderer _renderer;
+        [SerializeField] private FoodAudioInfo[] _foodAudioInfo;
+        private AudioSource _audioSource;
 
-    private void Awake() {
-        _audioSource = GetComponent<AudioSource>();
-        _renderer.StateChanged += ChangeAudio;
-    }
-
-    private void ChangeAudio(bool newState) {
-        if (newState)
-            UpdateAudioInfo();
-        _audioSource.ForceChangeState(newState);
-    }
-
-    private void UpdateAudioInfo() {
-        foreach (var foodAudio in _foodAudioInfo) {
-            if (foodAudio.FoodType == _renderer.NowFood.Type) {
-                _audioSource.SetAudioInfo(foodAudio);
-                return;
-            }
+        private void Awake() {
+            _audioSource = GetComponent<AudioSource>();
+            _renderer.StateChanged += ChangeAudio;
         }
 
-        _audioSource.SetAudioInfo(null);
+        private void ChangeAudio(bool newState) {
+            if (newState)
+                UpdateAudioInfo();
+            _audioSource.ForceChangeState(newState);
+        }
+
+        private void UpdateAudioInfo() {
+            foreach (var foodAudio in _foodAudioInfo) {
+                if (foodAudio.FoodType == _renderer.NowFood.Type) {
+                    _audioSource.SetAudioInfo(foodAudio);
+                    return;
+                }
+            }
+
+            _audioSource.SetAudioInfo(null);
+        }
     }
 }

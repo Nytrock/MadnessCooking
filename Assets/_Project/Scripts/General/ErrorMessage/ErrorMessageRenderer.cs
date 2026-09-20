@@ -1,20 +1,22 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Animator))]
-public class ErrorMessageRenderer : MonoBehaviour {
-    [SerializeField] private string _errorMessage;
-    [SerializeField] private LocalizedText _errorText;
-    private Animator _errorAnimator;
+namespace MadnessCooking.General {
+    [RequireComponent(typeof(Animator))]
+    public class ErrorMessageRenderer : MonoBehaviour {
+        [SerializeField] private string _errorMessage;
+        [SerializeField] private LocalizedText _errorText;
+        private Animator _errorAnimator;
 
-    private void Awake() {
-        _errorAnimator = GetComponent<Animator>();
-    }
+        private void Awake() {
+            _errorAnimator = GetComponent<Animator>();
+        }
 
-    private void Start() {
-        _errorText.SetText(_errorMessage);
-    }
+        private void Start() {
+            _errorText.SetText(_errorMessage);
+        }
 
-    public void ShowError() {
-        _errorAnimator.SetTrigger("Error");
+        public void ShowError() {
+            _errorAnimator.SetTrigger("Error");
+        }
     }
 }

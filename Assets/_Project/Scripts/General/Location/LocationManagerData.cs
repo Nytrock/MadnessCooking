@@ -2,17 +2,19 @@ using Newtonsoft.Json;
 using System;
 using UnityEngine;
 
-[Serializable, JsonObject(MemberSerialization.OptIn)]
-public class LocationManagerData {
-    [SerializeField, JsonProperty] private Location _location;
+namespace MadnessCooking.General {
+    [Serializable, JsonObject(MemberSerialization.OptIn)]
+    public class LocationManagerData {
+        [SerializeField, JsonProperty] private Location _location;
 
-    public Location Location => _location;
+        public Location Location => _location;
 
-    public LocationManagerData() {
-        _location = Location.Cafe;
-    }
+        public LocationManagerData() {
+            _location = Location.Cafe;
+        }
 
-    public void ChangeLocation(Location newLocation) {
-        _location = newLocation;
+        public void ChangeLocation(Location newLocation) {
+            _location = newLocation;
+        }
     }
 }

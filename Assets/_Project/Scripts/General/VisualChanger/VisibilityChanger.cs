@@ -1,9 +1,11 @@
 using UnityEngine;
 
-public class VisibilityChanger : VisualChanger {
-    [SerializeField] private bool _isReversed;
+namespace MadnessCooking.General {
+    public class VisibilityChanger : VisualChanger {
+        [SerializeField] private bool _isReversed;
 
-    protected override void UpdateVisual() {
-        gameObject.SetActive(_isActive != _isReversed);
+        protected override void UpdateVisual() {
+            gameObject.SetActive(_isActive != _isReversed);
+        }
     }
 }

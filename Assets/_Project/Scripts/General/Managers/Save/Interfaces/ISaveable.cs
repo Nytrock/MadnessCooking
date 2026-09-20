@@ -1,3 +1,5 @@
-public interface ISaveable {
+namespace MadnessCooking.General {
+    public interface ISaveable {
 
+    }
 }

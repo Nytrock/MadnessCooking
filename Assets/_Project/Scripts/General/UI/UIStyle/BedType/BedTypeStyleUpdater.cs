@@ -1,3 +1,5 @@
-public class BedTypeStyleUpdater : UIStyleUpdater<BedType> {
+namespace MadnessCooking.General {
+    public class BedTypeStyleUpdater : UIStyleUpdater<BedType> {
 
+    }
 }

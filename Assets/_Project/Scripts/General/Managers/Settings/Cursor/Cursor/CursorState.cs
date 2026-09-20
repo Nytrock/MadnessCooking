@@ -1,5 +1,7 @@
-public enum CursorState {
-    None,
-    Standard,
-    Press
+namespace MadnessCooking.General {
+    public enum CursorState {
+        None,
+        Standard,
+        Press
+    }
 }

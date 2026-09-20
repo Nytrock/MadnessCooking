@@ -1,23 +1,25 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(Slider))]
-public class FatigueSourceSlider : MonoBehaviour {
-    [SerializeField, Min(0)] private float _fatigueCoef;
-    private float _lastValue;
+namespace MadnessCooking.General {
+    [RequireComponent(typeof(Slider))]
+    public class FatigueSourceSlider : MonoBehaviour {
+        [SerializeField, Min(0)] private float _fatigueCoef;
+        private float _lastValue;
 
-    private void Start() {
-        Slider slider = GetComponent<Slider>();
-        slider.onValueChanged.AddListener(IncreaseFatigue);
-        _lastValue = slider.value;
-    }
+        private void Start() {
+            Slider slider = GetComponent<Slider>();
+            slider.onValueChanged.AddListener(IncreaseFatigue);
+            _lastValue = slider.value;
+        }
 
-    private void IncreaseFatigue(float value) {
-        float fatigue = Mathf.Abs(_lastValue - value) * _fatigueCoef;
-        _lastValue = value;
-        if (fatigue == 0)
-            return;
+        private void IncreaseFatigue(float value) {
+            float fatigue = Mathf.Abs(_lastValue - value) * _fatigueCoef;
+            _lastValue = value;
+            if (fatigue == 0)
+                return;
 
-        FatigueManager.Instance.AddFatigue(fatigue);
+            FatigueManager.Instance.AddFatigue(fatigue);
+        }
     }
 }

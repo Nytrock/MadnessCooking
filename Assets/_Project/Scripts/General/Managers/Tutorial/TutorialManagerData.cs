@@ -2,13 +2,15 @@ using Newtonsoft.Json;
 using System;
 using UnityEngine;
 
-[Serializable, JsonObject(MemberSerialization.OptIn)]
-public class TutorialManagerData {
-    [SerializeField, JsonProperty] private bool _isWork;
+namespace MadnessCooking.General {
+    [Serializable, JsonObject(MemberSerialization.OptIn)]
+    public class TutorialManagerData {
+        [SerializeField, JsonProperty] private bool _isWork;
 
-    public bool IsWork => _isWork;
+        public bool IsWork => _isWork;
 
-    public void ChangeWorkState(bool isWork) {
-        _isWork = isWork;
+        public void ChangeWorkState(bool isWork) {
+            _isWork = isWork;
+        }
     }
 }

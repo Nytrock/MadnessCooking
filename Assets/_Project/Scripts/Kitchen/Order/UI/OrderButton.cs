@@ -1,118 +1,121 @@
 using TMPro;
 using UnityEngine;
+using MadnessCooking.General;
 
-public class OrderButton : MonoBehaviour {
-    [SerializeField] private HoverItemNameActivator _foodInfo;
-    [SerializeField] private TextMeshProUGUI _tableIndexText;
-    [SerializeField] private OrderRecipe _recipe;
+namespace MadnessCooking.Kitchen {
+    public class OrderButton : MonoBehaviour {
+        [SerializeField] private HoverItemNameActivator _foodInfo;
+        [SerializeField] private TextMeshProUGUI _tableIndexText;
+        [SerializeField] private OrderRecipe _recipe;
 
-    [Header("States")]
-    [SerializeField] private OrderUIStartState _startState;
-    [SerializeField] private OrderUICookState _cookState;
-    [SerializeField] private OrderUIBaseState _finishState;
+        [Header("States")]
+        [SerializeField] private OrderUIStartState _startState;
+        [SerializeField] private OrderUICookState _cookState;
+        [SerializeField] private OrderUIBaseState _finishState;
 
-    private TechnicManager _technicManager;
+        private TechnicManager _technicManager;
 
-    public Order Order { get; private set; }
+        public Order Order { get; private set; }
 
-    public void StartNewCycle() {
-        ChangeState(OrderUIState.Start);
-        gameObject.SetActive(true);
-    }
-
-    public void SetOrder(Order order, KitchenUpgradeData data) {
-        StartNewCycle();
-        Order = order;
-        Order.OrderFinished += FinishCook;
-        _cookState.SetOrder(order);
-
-        _foodInfo.SetItem(Order.Food);
-        _tableIndexText.text = Order.TableIndex.ToString();
-
-        _recipe.SetupRecipe(Order.Food, data);
-        UpdateCookSlider();
-
-        if (order.IsCooking) {
-            Cook();
-            _technicManager.StartCooking(order);
-        } else if (order.IsFinished) {
-            FinishCook();
+        public void StartNewCycle() {
+            ChangeState(OrderUIState.Start);
+            gameObject.SetActive(true);
         }
-    }
 
-    public void SetManagers(TechnicManager technicManager, KitchenStorage kitchenStorage) {
-        kitchenStorage.IngredientCountAdded += UpdateRecipeIngredients;
-        kitchenStorage.IngredientCountRemoved += UpdateRecipeIngredients;
-        technicManager.TechnicChanged += UpdateRecipeTechnic;
-        MoneyManager.Instance.MoneyChanged += UpdateAutoSpices;
+        public void SetOrder(Order order, KitchenUpgradeData data) {
+            StartNewCycle();
+            Order = order;
+            Order.OrderFinished += FinishCook;
+            _cookState.SetOrder(order);
 
-        _technicManager = technicManager;
-        _recipe.SetManagers(kitchenStorage, technicManager);
-    }
+            _foodInfo.SetItem(Order.Food);
+            _tableIndexText.text = Order.TableIndex.ToString();
 
-    public void SetHoverText(HoverTextPanel hoverText) {
-        _foodInfo.SetHoverPanel(hoverText);
-        _recipe.SetHoverText(hoverText);
-    }
+            _recipe.SetupRecipe(Order.Food, data);
+            UpdateCookSlider();
 
-    private void UpdateRecipeIngredients(IngredientCount count) {
-        if (CheckOrderStarted())
-            return;
+            if (order.IsCooking) {
+                Cook();
+                _technicManager.StartCooking(order);
+            } else if (order.IsFinished) {
+                FinishCook();
+            }
+        }
 
-        _recipe.UpdateRecipeIngredients(count);
-        UpdateCookSlider();
-    }
+        public void SetManagers(TechnicManager technicManager, KitchenStorage kitchenStorage) {
+            kitchenStorage.IngredientCountAdded += UpdateRecipeIngredients;
+            kitchenStorage.IngredientCountRemoved += UpdateRecipeIngredients;
+            technicManager.TechnicChanged += UpdateRecipeTechnic;
+            MoneyManager.Instance.MoneyChanged += UpdateAutoSpices;
 
-    private void UpdateAutoSpices(int count) {
-        if (CheckOrderStarted())
-            return;
+            _technicManager = technicManager;
+            _recipe.SetManagers(kitchenStorage, technicManager);
+        }
 
-        _recipe.UpdateAutoSpices(count);
-        UpdateCookSlider();
-    }
+        public void SetHoverText(HoverTextPanel hoverText) {
+            _foodInfo.SetHoverPanel(hoverText);
+            _recipe.SetHoverText(hoverText);
+        }
 
-    public void UpdateRecipeTechnic() {
-        if (CheckOrderStarted())
-            return;
+        private void UpdateRecipeIngredients(IngredientCount count) {
+            if (CheckOrderStarted())
+                return;
 
-        _recipe.UpdateRecipeTechnic();
-        UpdateCookSlider();
-    }
+            _recipe.UpdateRecipeIngredients(count);
+            UpdateCookSlider();
+        }
 
-    public void Disable() {
-        _recipe.DisableParts();
-        Order = null;
-        gameObject.SetActive(false);
-    }
+        private void UpdateAutoSpices(int count) {
+            if (CheckOrderStarted())
+                return;
 
-    public void Cook() {
-        Order.StartCook();
-        ChangeState(OrderUIState.Cook);
-        _recipe.DisableParts();
-    }
+            _recipe.UpdateAutoSpices(count);
+            UpdateCookSlider();
+        }
 
-    public void FinishCook() {
-        ChangeState(OrderUIState.Finish);
-        _recipe.DisableParts();
-    }
+        public void UpdateRecipeTechnic() {
+            if (CheckOrderStarted())
+                return;
 
-    private void UpdateCookSlider() {
-        _startState.UpdateCookButton(_recipe.CanCook);
-    }
+            _recipe.UpdateRecipeTechnic();
+            UpdateCookSlider();
+        }
 
-    private void ChangeState(OrderUIState newState) {
-        _startState.UpdateState(newState);
-        _cookState.UpdateState(newState);
-        _finishState.UpdateState(newState);
-    }
+        public void Disable() {
+            _recipe.DisableParts();
+            Order = null;
+            gameObject.SetActive(false);
+        }
 
-    private bool CheckOrderStarted() {
-        if (Order == null)
-            return true;
+        public void Cook() {
+            Order.StartCook();
+            ChangeState(OrderUIState.Cook);
+            _recipe.DisableParts();
+        }
 
-        if (Order.IsCooking || Order.IsFinished)
-            return true;
+        public void FinishCook() {
+            ChangeState(OrderUIState.Finish);
+            _recipe.DisableParts();
+        }
 
-        return false;
+        private void UpdateCookSlider() {
+            _startState.UpdateCookButton(_recipe.CanCook);
+        }
+
+        private void ChangeState(OrderUIState newState) {
+            _startState.UpdateState(newState);
+            _cookState.UpdateState(newState);
+            _finishState.UpdateState(newState);
+        }
+
+        private bool CheckOrderStarted() {
+            if (Order == null)
+                return true;
+
+            if (Order.IsCooking || Order.IsFinished)
+                return true;
+
+            return false;
+        }
     }
 }

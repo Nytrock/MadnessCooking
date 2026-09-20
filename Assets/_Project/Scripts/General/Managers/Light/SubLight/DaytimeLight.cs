@@ -1,9 +1,11 @@
 using System;
 using UnityEngine;
 
-[Serializable]
-public abstract class DaytimeLight {
-    [SerializeField] private Daytime _daytime;
+namespace MadnessCooking.General {
+    [Serializable]
+    public abstract class DaytimeLight {
+        [SerializeField] private Daytime _daytime;
 
-    public Daytime Daytime => _daytime;
+        public Daytime Daytime => _daytime;
+    }
 }

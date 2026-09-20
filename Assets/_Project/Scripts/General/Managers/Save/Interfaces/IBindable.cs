@@ -1,6 +1,8 @@
-public interface IBindable<TData>
-    where TData : ISaveable {
+namespace MadnessCooking.General {
+    public interface IBindable<TData>
+        where TData : ISaveable {
 
-    void LateStart();
-    void Bind(TData data);
+        void LateStart();
+        void Bind(TData data);
+    }
 }

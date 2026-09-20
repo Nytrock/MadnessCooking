@@ -1,54 +1,57 @@
 using UnityEngine;
+using MadnessCooking.General;
 
-public class TechnicHolderRenderer : MonoBehaviour {
-    [SerializeField] private TechnicHolder _technicHolder;
-    [SerializeField] private GameObject _standardVisual;
-    [SerializeField] private VisualChanger[] _stateVisuals;
+namespace MadnessCooking.Kitchen {
+    public class TechnicHolderRenderer : MonoBehaviour {
+        [SerializeField] private TechnicHolder _technicHolder;
+        [SerializeField] private GameObject _standardVisual;
+        [SerializeField] private VisualChanger[] _stateVisuals;
 
-    [Header("Strength")]
-    [SerializeField] private VisualChanger[] _brokennessStages;
-    [SerializeField, Range(0, 1)] private float _brokennesOffset;
-    [SerializeField] private GameObject _brokenVisual;
+        [Header("Strength")]
+        [SerializeField] private VisualChanger[] _brokennessStages;
+        [SerializeField, Range(0, 1)] private float _brokennesOffset;
+        [SerializeField] private GameObject _brokenVisual;
 
-    private void Awake() {
-        _technicHolder.CookChanged += UpdateVisual;
-        _technicHolder.RepairChanged += UpdateVisual;
-        _technicHolder.StateChanged += ChangeState;
-    }
-
-    [ContextMenu("Hide brokennes")]
-    private void HideBrokennes() {
-        foreach (var stage in _brokennessStages)
-            stage.ChangeState(false);
-
-        _standardVisual.SetActive(true);
-        _brokenVisual.SetActive(false);
-    }
-
-    [ContextMenu("Show brokennes")]
-    private void ShowBrokennes() {
-        foreach (var stage in _brokennessStages)
-            stage.ChangeState(true);
-
-        _standardVisual.SetActive(true);
-        _brokenVisual.SetActive(false);
-    }
-
-    public virtual void ChangeState(bool newState) {
-        gameObject.SetActive(newState);
-        foreach (var visual in _stateVisuals)
-            visual.ChangeState(newState);
-    }
-
-    public void UpdateVisual() {
-        float brokennessDegree = 1 - (_technicHolder.Data.NowStrength / _technicHolder.Technic.Strength);
-        float needBrokennessDegree = (1 - _brokennesOffset) / (_brokennessStages.Length + 1);
-        for (int i = 1; i <= _brokennessStages.Length; i++) {
-            bool isShow = _brokennesOffset + needBrokennessDegree * i <= brokennessDegree;
-            _brokennessStages[i - 1].ChangeState(isShow);
+        private void Awake() {
+            _technicHolder.CookChanged += UpdateVisual;
+            _technicHolder.RepairChanged += UpdateVisual;
+            _technicHolder.StateChanged += ChangeState;
         }
 
-        _standardVisual.SetActive(brokennessDegree != 1);
-        _brokenVisual.SetActive(brokennessDegree == 1);
+        [ContextMenu("Hide brokennes")]
+        private void HideBrokennes() {
+            foreach (var stage in _brokennessStages)
+                stage.ChangeState(false);
+
+            _standardVisual.SetActive(true);
+            _brokenVisual.SetActive(false);
+        }
+
+        [ContextMenu("Show brokennes")]
+        private void ShowBrokennes() {
+            foreach (var stage in _brokennessStages)
+                stage.ChangeState(true);
+
+            _standardVisual.SetActive(true);
+            _brokenVisual.SetActive(false);
+        }
+
+        public virtual void ChangeState(bool newState) {
+            gameObject.SetActive(newState);
+            foreach (var visual in _stateVisuals)
+                visual.ChangeState(newState);
+        }
+
+        public void UpdateVisual() {
+            float brokennessDegree = 1 - (_technicHolder.Data.NowStrength / _technicHolder.Technic.Strength);
+            float needBrokennessDegree = (1 - _brokennesOffset) / (_brokennessStages.Length + 1);
+            for (int i = 1; i <= _brokennessStages.Length; i++) {
+                bool isShow = _brokennesOffset + needBrokennessDegree * i <= brokennessDegree;
+                _brokennessStages[i - 1].ChangeState(isShow);
+            }
+
+            _standardVisual.SetActive(brokennessDegree != 1);
+            _brokenVisual.SetActive(brokennessDegree == 1);
+        }
     }
 }

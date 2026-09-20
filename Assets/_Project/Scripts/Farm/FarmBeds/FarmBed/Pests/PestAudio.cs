@@ -1,12 +1,15 @@
 using UnityEngine;
+using MadnessCooking.General;
 
-[RequireComponent(typeof(Pest))]
-public class PestAudio : MonoBehaviour {
-    [SerializeField] private AudioSource _audio;
-    private Pest _pest;
+namespace MadnessCooking.Farm {
+    [RequireComponent(typeof(Pest))]
+    public class PestAudio : MonoBehaviour {
+        [SerializeField] private AudioSource _audio;
+        private Pest _pest;
 
-    private void Awake() {
-        _pest = GetComponent<Pest>();
-        _pest.PestRemoved += _audio.Play;
+        private void Awake() {
+            _pest = GetComponent<Pest>();
+            _pest.PestRemoved += _audio.Play;
+        }
     }
 }

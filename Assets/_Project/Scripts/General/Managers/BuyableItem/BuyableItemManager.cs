@@ -2,39 +2,41 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class BuyableItemManager<TItem> : MonoBehaviour
-    where TItem : BuyableItem {
+namespace MadnessCooking.General {
+    public abstract class BuyableItemManager<TItem> : MonoBehaviour
+        where TItem : BuyableItem {
 
-    [SerializeField] protected List<TItem> _defaultItems;
-    [SerializeField] protected List<TItem> _allItems;
+        [SerializeField] protected List<TItem> _defaultItems;
+        [SerializeField] protected List<TItem> _allItems;
 
-    protected BuyableItemManagerData<TItem> _data;
+        protected BuyableItemManagerData<TItem> _data;
 
-    public int AllItemsCount => _allItems.Count;
-    public int AvailableItemsCount => _data.ItemsCount;
+        public int AllItemsCount => _allItems.Count;
+        public int AvailableItemsCount => _data.ItemsCount;
 
-    public event Action<TItem> ItemAdded;
+        public event Action<TItem> ItemAdded;
 
-    public virtual void AddItem(TItem item) {
-        if (_data.IsItemAvailable(item))
-            return;
+        public virtual void AddItem(TItem item) {
+            if (_data.IsItemAvailable(item))
+                return;
 
-        _data.AddItem(item);
-        InvokeItemAdded(item);
-    }
+            _data.AddItem(item);
+            InvokeItemAdded(item);
+        }
 
-    protected void InvokeItemAdded(TItem item) {
-        ItemAdded?.Invoke(item);
-    }
+        protected void InvokeItemAdded(TItem item) {
+            ItemAdded?.Invoke(item);
+        }
 
-    public IEnumerable<TItem> GetAllItems() {
-        foreach (var item in _allItems)
-            yield return item;
-    }
+        public IEnumerable<TItem> GetAllItems() {
+            foreach (var item in _allItems)
+                yield return item;
+        }
 
-    public virtual bool IsItemAvailable(TItem item) {
-        if (_data == null)
-            return false;
-        return _data.IsItemAvailable(item);
+        public virtual bool IsItemAvailable(TItem item) {
+            if (_data == null)
+                return false;
+            return _data.IsItemAvailable(item);
+        }
     }
 }

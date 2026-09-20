@@ -1,19 +1,22 @@
 using UnityEngine;
+using MadnessCooking.General;
 
-public class DesertBedWater : BedHolderBooster {
-    [SerializeField, Min(0)] private float _boostFine;
-    private float _originalBoost;
+namespace MadnessCooking.Farm {
+    public class DesertBedWater : BedHolderBooster {
+        [SerializeField, Min(0)] private float _boostFine;
+        private float _originalBoost;
 
-    private void Start() {
-        _originalBoost = _boostMultiplier;
-    }
+        private void Start() {
+            _originalBoost = _boostMultiplier;
+        }
 
-    public override void StartBoost() {
-        if (_data.IsBoosting)
-            _boostMultiplier = Mathf.Max(0, _boostMultiplier - _boostFine);
-        else
-            _boostMultiplier = _originalBoost;
+        public override void StartBoost() {
+            if (_data.IsBoosting)
+                _boostMultiplier = Mathf.Max(0, _boostMultiplier - _boostFine);
+            else
+                _boostMultiplier = _originalBoost;
 
-        base.StartBoost();
+            base.StartBoost();
+        }
     }
 }

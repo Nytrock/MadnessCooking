@@ -1,50 +1,52 @@
 using UnityEngine;
 
-public abstract class SaveManager<TData> : MonoBehaviour
-    where TData : ISaveable, new() {
+namespace MadnessCooking.General {
+    public abstract class SaveManager<TData> : MonoBehaviour
+        where TData : ISaveable, new() {
 
-    [SerializeField] private DataBinder<TData> _binder;
+        [SerializeField] private DataBinder<TData> _binder;
 
-    protected TData _data;
-    protected SaveFileManager<TData> _dataService;
+        protected TData _data;
+        protected SaveFileManager<TData> _dataService;
 
-    protected abstract string _fileName { get; }
+        protected abstract string FileName { get; }
 
-    private void Awake() {
-        if (PlatformManager.IsWeb)
-            _dataService = new WebSaveFileManager<TData>(_fileName);
-        else
-            _dataService = new SaveFileManager<TData>(_fileName);
-    }
+        private void Awake() {
+            if (PlatformManager.IsWeb)
+                _dataService = new WebSaveFileManager<TData>(FileName);
+            else
+                _dataService = new SaveFileManager<TData>(FileName);
+        }
 
-    private void Start() {
-        Load();
-    }
+        private void Start() {
+            Load();
+        }
 
-    public virtual void Save() {
-        _dataService.Save(_data);
-    }
+        public virtual void Save() {
+            _dataService.Save(_data);
+        }
 
-    private void Load() {
-        if (_binder == null)
-            return;
+        private void Load() {
+            if (_binder == null)
+                return;
 
-        bool isFileEmpty = !IsDataExists();
-        if (isFileEmpty)
+            bool isFileEmpty = !IsDataExists();
+            if (isFileEmpty)
+                _data = new();
+            else
+                _data = _dataService.Load();
+
+            _binder.Bind(_data);
+        }
+
+        public void Delete() {
+            _dataService.Delete();
             _data = new();
-        else
-            _data = _dataService.Load();
+            _binder.Bind(_data);
+        }
 
-        _binder.Bind(_data);
-    }
-
-    public void Delete() {
-        _dataService.Delete();
-        _data = new();
-        _binder.Bind(_data);
-    }
-
-    public bool IsDataExists() {
-        return _dataService.IsFileExists();
+        public bool IsDataExists() {
+            return _dataService.IsFileExists();
+        }
     }
 }

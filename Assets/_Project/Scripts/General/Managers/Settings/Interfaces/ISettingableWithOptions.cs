@@ -1,3 +1,5 @@
-public interface ISettingableWithOptions : ISettingable<int> {
-    int OptionsCount { get; }
+namespace MadnessCooking.General {
+    public interface ISettingableWithOptions : ISettingable<int> {
+        int OptionsCount { get; }
+    }
 }

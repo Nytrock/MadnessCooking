@@ -1,40 +1,43 @@
 using UnityEngine;
+using MadnessCooking.General;
 
-public class ItemsListItemDescription : MonoBehaviour {
-    [SerializeField] private GameObject _panel;
-    [SerializeField] private BuyableItemRendererWithDescription _description;
-    private ItemsListItemRenderer _nowRenderer;
+namespace MadnessCooking.Office {
+    public class ItemsListItemDescription : MonoBehaviour {
+        [SerializeField] private GameObject _panel;
+        [SerializeField] private BuyableItemRendererWithDescription _description;
+        private ItemsListItemRenderer _nowRenderer;
 
-    public void ChangeState(bool newState) {
-        _panel.SetActive(newState);
+        public void ChangeState(bool newState) {
+            _panel.SetActive(newState);
 
-        if (!newState && _nowRenderer != null) {
-            _nowRenderer.ChangeSelectionState(false);
-            _nowRenderer = null;
-        }
-    }
-
-    public void SelectItem(ItemsListItemRenderer itemRenderer) {
-        if (itemRenderer == _nowRenderer) {
-            ChangeState(false);
-            return;
+            if (!newState && _nowRenderer != null) {
+                _nowRenderer.ChangeSelectionState(false);
+                _nowRenderer = null;
+            }
         }
 
-        if (_nowRenderer != null)
-            _nowRenderer.ChangeSelectionState(false);
-        _nowRenderer = itemRenderer;
-        _nowRenderer.ChangeSelectionState(true);
-        UpdateDescription();
-    }
+        public void SelectItem(ItemsListItemRenderer itemRenderer) {
+            if (itemRenderer == _nowRenderer) {
+                ChangeState(false);
+                return;
+            }
 
-    public void UpdateDescription() {
-        if (_nowRenderer == null)
-            return;
+            if (_nowRenderer != null)
+                _nowRenderer.ChangeSelectionState(false);
+            _nowRenderer = itemRenderer;
+            _nowRenderer.ChangeSelectionState(true);
+            UpdateDescription();
+        }
 
-        if (_nowRenderer.IsUnlocked)
-            _description.SetItemInfo(_nowRenderer.Item);
-        else
-            _description.SetHiddenItemInfo(_nowRenderer.Item);
-        ChangeState(true);
+        public void UpdateDescription() {
+            if (_nowRenderer == null)
+                return;
+
+            if (_nowRenderer.IsUnlocked)
+                _description.SetItemInfo(_nowRenderer.Item);
+            else
+                _description.SetHiddenItemInfo(_nowRenderer.Item);
+            ChangeState(true);
+        }
     }
 }

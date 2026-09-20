@@ -1,10 +1,13 @@
 using UnityEngine;
+using MadnessCooking.General;
 
-public class CafeSeatAudio : SwitchableAudioSource {
-    [SerializeField] private CafeSeat _seat;
+namespace MadnessCooking.Cafe {
+    public class CafeSeatAudio : SwitchableAudioSource {
+        [SerializeField] private CafeSeat _seat;
 
-    protected override void Awake() {
-        base.Awake();
-        _seat.StateChanged += SwitchStateAndPlay;
+        protected override void Awake() {
+            base.Awake();
+            _seat.StateChanged += SwitchStateAndPlay;
+        }
     }
 }

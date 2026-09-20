@@ -1,13 +1,17 @@
-public class ClientWaitState : ClientBaseState {
-    public override void EnterState(Client client) {
-        client.ClientUI.ChangeFoodChoiceState(client.Data.State == ClientState.WaitOrder);
-    }
+using MadnessCooking.General;
 
-    public override void ExitState(Client client) {
-        client.ClientUI.ChangeFoodChoiceState(false);
-    }
+namespace MadnessCooking.Cafe {
+    public class ClientWaitState : ClientBaseState {
+        public override void EnterState(Client client) {
+            client.ClientUI.ChangeFoodChoiceState(client.Data.State == ClientState.WaitOrder);
+        }
 
-    public override void UpdateState(Client client) {
+        public override void ExitState(Client client) {
+            client.ClientUI.ChangeFoodChoiceState(false);
+        }
 
+        public override void UpdateState(Client client) {
+
+        }
     }
 }

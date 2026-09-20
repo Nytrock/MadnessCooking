@@ -1,3 +1,7 @@
-public class CowUI : NeedHoldAddUI {
+using MadnessCooking.General;
 
+namespace MadnessCooking.Farm {
+    public class CowUI : NeedHoldAddUI {
+
+    }
 }

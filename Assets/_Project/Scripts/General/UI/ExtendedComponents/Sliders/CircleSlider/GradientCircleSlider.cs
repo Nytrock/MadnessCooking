@@ -1,10 +1,12 @@
 using UnityEngine;
 
-public class GradientCircleSlider : CircleSlider {
-    [SerializeField] private Gradient _gradient;
+namespace MadnessCooking.General {
+    public class GradientCircleSlider : CircleSlider {
+        [SerializeField] private Gradient _gradient;
 
-    protected override void UpdateValue() {
-        base.UpdateValue();
-        _slider.color = _gradient.Evaluate(_nowCoef);
+        protected override void UpdateValue() {
+            base.UpdateValue();
+            _slider.color = _gradient.Evaluate(_nowCoef);
+        }
     }
 }

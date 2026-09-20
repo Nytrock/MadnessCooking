@@ -1,5 +1,9 @@
-public abstract class ClientBaseState {
-    public abstract void EnterState(Client client);
-    public abstract void UpdateState(Client client);
-    public abstract void ExitState(Client client);
+using MadnessCooking.General;
+
+namespace MadnessCooking.Cafe {
+    public abstract class ClientBaseState {
+        public abstract void EnterState(Client client);
+        public abstract void UpdateState(Client client);
+        public abstract void ExitState(Client client);
+    }
 }

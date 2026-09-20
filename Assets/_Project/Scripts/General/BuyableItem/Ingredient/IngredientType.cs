@@ -1,10 +1,12 @@
-public enum IngredientType {
-    None,
-    Standard,
-    Desert,
-    Water,
-    Meat,
-    Ghost,
-    Buyable,
-    Other
+namespace MadnessCooking.General {
+    public enum IngredientType {
+        None,
+        Standard,
+        Desert,
+        Water,
+        Meat,
+        Ghost,
+        Buyable,
+        Other
+    }
 }

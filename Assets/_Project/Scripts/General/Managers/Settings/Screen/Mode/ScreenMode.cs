@@ -1,4 +1,6 @@
-public enum ScreenMode {
-    Fullscreen,
-    Windowed,
+namespace MadnessCooking.General {
+    public enum ScreenMode {
+        Fullscreen,
+        Windowed,
+    }
 }

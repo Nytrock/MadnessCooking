@@ -1,17 +1,20 @@
 using UnityEngine;
+using MadnessCooking.General;
 
-public class PestsGeneratorAudio : MonoBehaviour {
-    [SerializeField] private PestsGenerator _generator;
-    [SerializeField] private AudioSource _cleanAudio;
+namespace MadnessCooking.Farm {
+    public class PestsGeneratorAudio : MonoBehaviour {
+        [SerializeField] private PestsGenerator _generator;
+        [SerializeField] private AudioSource _cleanAudio;
 
-    private void Awake() {
-        _generator.PestsCleaned += Play;
-    }
+        private void Awake() {
+            _generator.PestsCleaned += Play;
+        }
 
-    private void Play() {
-        if (!gameObject.activeInHierarchy)
-            return;
+        private void Play() {
+            if (!gameObject.activeInHierarchy)
+                return;
 
-        _cleanAudio.Play();
+            _cleanAudio.Play();
+        }
     }
 }

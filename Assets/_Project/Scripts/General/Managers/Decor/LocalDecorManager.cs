@@ -1,32 +1,34 @@
 using System;
 using UnityEngine;
 
-public class LocalDecorManager : MonoBehaviour {
-    [SerializeField] private DecorManager _decorManager;
-    [SerializeField] private Location _location;
-    [SerializeField] protected DecorHolder[] _decorHolders;
+namespace MadnessCooking.General {
+    public class LocalDecorManager : MonoBehaviour {
+        [SerializeField] private DecorManager _decorManager;
+        [SerializeField] private Location _location;
+        [SerializeField] protected DecorHolder[] _decorHolders;
 
-    private void Awake() {
-        foreach (var holder in _decorHolders) {
-            if (holder.Decor == null)
-                throw new ArgumentNullException($"Holder {holder.name} have not decor.");
-            if (!holder.CheckLocation(_location))
-                throw new ArgumentException($"Location of decor {holder.Decor.name} does not match");
+        private void Awake() {
+            foreach (var holder in _decorHolders) {
+                if (holder.Decor == null)
+                    throw new ArgumentNullException($"Holder {holder.name} have not decor.");
+                if (!holder.CheckLocation(_location))
+                    throw new ArgumentException($"Location of decor {holder.Decor.name} does not match");
+            }
+
+
+            foreach (var holder in _decorHolders)
+                holder.ChangeState(false);
+
+            _decorManager.ItemAdded += AddDecor;
         }
 
+        public void AddDecor(Decor decor) {
+            if (decor.Location != _location)
+                return;
 
-        foreach (var holder in _decorHolders)
-            holder.ChangeState(false);
-
-        _decorManager.ItemAdded += AddDecor;
-    }
-
-    public void AddDecor(Decor decor) {
-        if (decor.Location != _location)
-            return;
-
-        foreach (var holder in _decorHolders)
-            if (holder.Decor == decor)
-                holder.ChangeState(true);
+            foreach (var holder in _decorHolders)
+                if (holder.Decor == decor)
+                    holder.ChangeState(true);
+        }
     }
 }

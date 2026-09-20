@@ -1,23 +1,26 @@
 using System;
 using UnityEngine;
+using MadnessCooking.General;
 
-[Serializable]
-public class MenuFood {
-    [SerializeField] private Food _food;
-    [SerializeField] private bool _isBanished;
+namespace MadnessCooking.Cafe {
+    [Serializable]
+    public class MenuFood {
+        [SerializeField] private Food _food;
+        [SerializeField] private bool _isBanished;
 
-    public Food Food => _food;
-    public bool IsBanished => _isBanished;
+        public Food Food => _food;
+        public bool IsBanished => _isBanished;
 
-    public event Action BanishedStateChanged;
+        public event Action BanishedStateChanged;
 
-    public MenuFood(Food food) {
-        _food = food;
-        _isBanished = false;
-    }
+        public MenuFood(Food food) {
+            _food = food;
+            _isBanished = false;
+        }
 
-    public void ChangeBanishedState() {
-        _isBanished = !_isBanished;
-        BanishedStateChanged?.Invoke();
+        public void ChangeBanishedState() {
+            _isBanished = !_isBanished;
+            BanishedStateChanged?.Invoke();
+        }
     }
 }

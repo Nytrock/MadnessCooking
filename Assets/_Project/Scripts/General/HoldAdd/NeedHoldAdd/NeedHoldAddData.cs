@@ -2,35 +2,37 @@ using Newtonsoft.Json;
 using System;
 using UnityEngine;
 
-[Serializable, JsonObject(MemberSerialization.OptIn)]
-public class NeedHoldAddData : HoldAddData {
-    [SerializeField, JsonProperty] private int _materialCount;
+namespace MadnessCooking.General {
+    [Serializable, JsonObject(MemberSerialization.OptIn)]
+    public class NeedHoldAddData : HoldAddData {
+        [SerializeField, JsonProperty] private int _materialCount;
 
-    public int MaterialCount => _materialCount;
+        public int MaterialCount => _materialCount;
 
-    public NeedHoldAddData(int readyCount, int materialCount) : base(readyCount) {
-        _materialCount = materialCount;
-    }
+        public NeedHoldAddData(int readyCount, int materialCount) : base(readyCount) {
+            _materialCount = materialCount;
+        }
 
-    public void AddMaterial() {
-        _materialCount++;
-    }
+        public void AddMaterial() {
+            _materialCount++;
+        }
 
-    public void SubstractMaterial() {
-        if (_materialCount == 0)
-            return;
+        public void SubstractMaterial() {
+            if (_materialCount == 0)
+                return;
 
-        _materialCount--;
-    }
+            _materialCount--;
+        }
 
-    public void AddMaterial(int materialCount) {
-        _materialCount += materialCount;
-    }
+        public void AddMaterial(int materialCount) {
+            _materialCount += materialCount;
+        }
 
-    public void SetMaterial(int remainCount) {
-        if (remainCount < 0)
-            return;
+        public void SetMaterial(int remainCount) {
+            if (remainCount < 0)
+                return;
 
-        _materialCount = remainCount;
+            _materialCount = remainCount;
+        }
     }
 }
