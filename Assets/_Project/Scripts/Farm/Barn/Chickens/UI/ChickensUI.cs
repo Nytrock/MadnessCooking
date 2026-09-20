@@ -1,18 +1,15 @@
-using System;
+﻿using MadnessCooking.General;
 using UnityEngine;
 using UnityEngine.UI;
-using MadnessCooking.General;
 
 namespace MadnessCooking.Farm {
-    public class ChickensUI : MonoBehaviour, IStateable {
+    public class ChickensUI : ActivableUI {
         [SerializeField] private BarnChickens _chickens;
         [SerializeField] private GameObject _panel;
         [SerializeField] private Button _feedButton;
         [SerializeField] private ChickensUIText _buttonText;
         [SerializeField] private Slider _eggSlider;
         [SerializeField] private ItemInfoRendererWithCount _eggRenderer;
-
-        public event Action<bool> StateChanged;
 
         private void Awake() {
             _chickens.FoodCountChanged += UpdateFoodCount;
@@ -50,9 +47,9 @@ namespace MadnessCooking.Farm {
             _eggRenderer.SetCount(_chickens.Data.EggCount);
         }
 
-        public void ChangeState(bool newState) {
+        public override void ChangeState(bool newState) {
             _panel.SetActive(newState);
-            StateChanged?.Invoke(newState);
+            base.ChangeState(newState);
         }
 
         public void EggsToCar() => _chickens.EggsToCar();

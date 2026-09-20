@@ -1,9 +1,8 @@
-using System;
+﻿using MadnessCooking.General;
 using UnityEngine;
-using MadnessCooking.General;
 
 namespace MadnessCooking.Office {
-    public class SleepBedUI : MonoBehaviour, IStateable {
+    public class SleepBedUI : ActivableUI {
         [SerializeField] private SleepBed _sleepBed;
         [SerializeField] private GameObject _panel;
         [SerializeField] private GameObject _blockPanel;
@@ -11,15 +10,13 @@ namespace MadnessCooking.Office {
         [SerializeField] private string _sleepingNote;
         [SerializeField] private string _notSleepingNote;
 
-        public event Action<bool> StateChanged;
-
         private void Awake() {
             _sleepBed.SleepChanged += UpdateSleepState;
         }
 
-        public void ChangeState(bool newState) {
+        public override void ChangeState(bool newState) {
             _panel.SetActive(newState);
-            StateChanged?.Invoke(newState);
+            base.ChangeState(newState);
         }
 
         public void UpdateSleepState(bool isSleep) {

@@ -1,11 +1,10 @@
-using System;
+﻿using MadnessCooking.General;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using MadnessCooking.General;
 
 namespace MadnessCooking.Kitchen {
-    public class OrdersUI : MonoBehaviour, IUpgradeable<KitchenUpgradeData>, IStateable {
+    public class OrdersUI : ActivableUI, IUpgradeable<KitchenUpgradeData> {
         [SerializeField] private OrdersManager _ordersManager;
         [SerializeField] private OrderButtonsPool _pool;
         [SerializeField] private GameObject _panel;
@@ -16,8 +15,6 @@ namespace MadnessCooking.Kitchen {
         private List<OrderButton> _orderButtons;
         private KitchenUpgradeData _upgradeData;
 
-        public event Action<bool> StateChanged;
-
         private void Awake() {
             _ordersManager.OrderAdded += AddOrder;
             _ordersManager.OrderRemoved += RemoveOrderButton;
@@ -25,9 +22,9 @@ namespace MadnessCooking.Kitchen {
             _orderButtons = new();
         }
 
-        public void ChangeState(bool newState) {
+        public override void ChangeState(bool newState) {
             _panel.SetActive(newState);
-            StateChanged?.Invoke(newState);
+            base.ChangeState(newState);
         }
 
         private void AddOrder(Order order) {

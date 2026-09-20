@@ -1,10 +1,9 @@
-using System;
+﻿using MadnessCooking.General;
 using UnityEngine;
 using UnityEngine.UI;
-using MadnessCooking.General;
 
 namespace MadnessCooking.Farm {
-    public class PuncherUI : MonoBehaviour, IStateable {
+    public class PuncherUI : ActivableUI {
         [SerializeField] private Puncher _puncher;
         [SerializeField] private GameObject _panel;
         [SerializeField] private CountRenderer _count;
@@ -16,20 +15,18 @@ namespace MadnessCooking.Farm {
 
         private bool _isProgressShow = false;
 
-        public event Action<bool> StateChanged;
-
         private void Awake() {
             _puncher.FertilizerChanged += UpdateCount;
             _upgradeManager.ItemAdded += CheckAddedUpgrade;
             UpdateProgressShow();
         }
 
-        public void ChangeState(bool newState) {
+        public override void ChangeState(bool newState) {
             _panel.SetActive(newState);
 
             if (newState)
                 UpdateProgress();
-            StateChanged?.Invoke(newState);
+            base.ChangeState(newState);
         }
 
         private void UpdateProgress() {

@@ -1,7 +1,6 @@
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using UnityEngine;
-using MadnessCooking.General;
 
 namespace MadnessCooking.Cafe {
     [Serializable, JsonObject(MemberSerialization.OptIn)]

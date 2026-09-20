@@ -1,11 +1,11 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace MadnessCooking.General {
     public class UIActivatorWithVisualChanger : UIActivator {
         [SerializeField] private VisualChanger _changer;
 
         private void Awake() {
-            _activableObject.Value.StateChanged += _changer.ChangeState;
+            _activableObject.StateChanged += _changer.ChangeState;
         }
     }
 }

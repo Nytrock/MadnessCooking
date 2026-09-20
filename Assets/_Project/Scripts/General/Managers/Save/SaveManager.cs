@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace MadnessCooking.General {
     public abstract class SaveManager<TData> : MonoBehaviour

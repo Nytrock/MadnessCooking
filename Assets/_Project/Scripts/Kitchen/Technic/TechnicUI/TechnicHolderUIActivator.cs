@@ -1,5 +1,5 @@
+﻿using MadnessCooking.General;
 using UnityEngine;
-using MadnessCooking.General;
 
 namespace MadnessCooking.Kitchen {
     public class TechnicHolderUIActivator : UIActivator {
@@ -7,7 +7,7 @@ namespace MadnessCooking.Kitchen {
         private TechnicRepairUI _repairUI;
 
         protected void Awake() {
-            _repairUI = _activableObject.Value as TechnicRepairUI;
+            _repairUI = _activableObject as TechnicRepairUI;
         }
 
         protected override void Press() {

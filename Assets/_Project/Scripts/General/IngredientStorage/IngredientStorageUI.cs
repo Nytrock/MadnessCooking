@@ -1,17 +1,14 @@
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
 namespace MadnessCooking.General {
-    public class IngredientStorageUI : MonoBehaviour, IStateable {
+    public class IngredientStorageUI : ActivableUI {
         [SerializeField] protected IngredientStorage _storage;
         [SerializeField] protected GameObject _panel;
         [SerializeField] protected IngredientCountButtonPool _buttonPool;
         [SerializeField] private TextMeshProUGUI _sizeText;
         protected readonly List<IngredientCountButton> _buttons = new();
-
-        public event Action<bool> StateChanged;
 
         protected virtual void Awake() {
             _storage.IngredientAdded += AddIngredientCount;
@@ -27,9 +24,9 @@ namespace MadnessCooking.General {
             _panel.SetActive(false);
         }
 
-        public void ChangeState(bool newState) {
+        public override void ChangeState(bool newState) {
             _panel.SetActive(newState);
-            StateChanged?.Invoke(newState);
+            base.ChangeState(newState);
         }
 
         private void AddIngredientCount(IngredientCount count) {

@@ -1,10 +1,9 @@
-using System;
+﻿using MadnessCooking.General;
 using UnityEngine;
 using UnityEngine.UI;
-using MadnessCooking.General;
 
 namespace MadnessCooking.Kitchen {
-    public class TechnicRepairUI : MonoBehaviour, IStateable {
+    public class TechnicRepairUI : ActivableUI {
         [SerializeField] private Transform _targetPoint;
         [SerializeField] private GameObject _panel;
         [SerializeField] private Camera _camera;
@@ -20,8 +19,6 @@ namespace MadnessCooking.Kitchen {
 
         private TechnicHolder _nowTechnicHolder;
         private bool _isStrengthShow;
-
-        public event Action<bool> StateChanged;
 
         private void Awake() {
             _upgradeManager.ItemAdded += CheckAddedUpgrade;
@@ -59,9 +56,9 @@ namespace MadnessCooking.Kitchen {
             ChangeState(false);
         }
 
-        public void ChangeState(bool newState) {
+        public override void ChangeState(bool newState) {
             _panel.SetActive(newState);
-            StateChanged?.Invoke(newState);
+            base.ChangeState(newState);
 
             if (newState)
                 UpdateInfo();

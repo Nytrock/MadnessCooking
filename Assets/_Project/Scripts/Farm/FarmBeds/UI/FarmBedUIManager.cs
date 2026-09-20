@@ -1,9 +1,8 @@
-using System;
+﻿using MadnessCooking.General;
 using UnityEngine;
-using MadnessCooking.General;
 
 namespace MadnessCooking.Farm {
-    public class FarmBedUIManager : MonoBehaviour, IStateable {
+    public class FarmBedUIManager : ActivableUI {
         [SerializeField] private UIActivatorsManager _activatorsManager;
         [SerializeField] private BedTypeUI[] _bedsUI;
         [SerializeField] private FarmBedUpgraderUI _upgrade;
@@ -17,19 +16,17 @@ namespace MadnessCooking.Farm {
         private FarmBed _farmBed;
         private BedTypeUI _nowUI;
 
-        public event Action<bool> StateChanged;
-
         private void Awake() {
             _farmWell.WaterChanged += CheckWater;
             _puncher.FertilizerChanged += CheckFertilize;
         }
 
-        public void ChangeState(bool newState) {
+        public override void ChangeState(bool newState) {
             if (_nowUI == null)
                 return;
 
             _nowUI.ChangeState(newState);
-            StateChanged?.Invoke(newState);
+            base.ChangeState(newState);
 
             if (!newState)
                 ResetNowUI();

@@ -1,4 +1,4 @@
-namespace MadnessCooking.General {
+﻿namespace MadnessCooking.General {
     public interface IBindable<TData>
         where TData : ISaveable {
 

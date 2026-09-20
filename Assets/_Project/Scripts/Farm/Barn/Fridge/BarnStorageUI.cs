@@ -1,15 +1,12 @@
-using System;
+﻿using MadnessCooking.General;
 using UnityEngine;
-using MadnessCooking.General;
 
 namespace MadnessCooking.Farm {
-    public class BarnStorageUI : MonoBehaviour, IStateable {
+    public class BarnStorageUI : ActivableUI {
         [SerializeField] private GameObject _panel;
         [SerializeField] private BarnStorage _barnStorage;
         [SerializeField] private ItemInfoRendererWithCount _milkRenderer;
         [SerializeField] private ItemInfoRendererWithCount _flourRenderer;
-
-        public event Action<bool> StateChanged;
 
         private void Awake() {
             _barnStorage.MilkCountUpdated += UpdateMilkCount;
@@ -30,9 +27,9 @@ namespace MadnessCooking.Farm {
             _flourRenderer.SetItemInfo(ConstIngredients.Instance.Flour);
         }
 
-        public void ChangeState(bool newState) {
+        public override void ChangeState(bool newState) {
             _panel.SetActive(newState);
-            StateChanged?.Invoke(newState);
+            base.ChangeState(newState);
         }
     }
 }

@@ -1,10 +1,12 @@
+﻿using MadnessCooking.General;
 using System;
 using UnityEngine;
-using MadnessCooking.General;
 
 namespace MadnessCooking.Kitchen {
     [RequireComponent(typeof(Collider2D), typeof(Animator))]
     public class KitchenCat : DecorHolder, IBindable<KitchenData> {
+        private static readonly int IsPetHash = Animator.StringToHash("isPet");
+
         [SerializeField, Min(0)] private float _needTime;
         [SerializeField, Min(0)] private float _cheerfullCoef;
         [SerializeField] private KitchenCatEyes _eyes;
@@ -26,7 +28,7 @@ namespace MadnessCooking.Kitchen {
         }
 
         private void Pet() {
-            _animator.SetTrigger("isPet");
+            _animator.SetTrigger(IsPetHash);
             _eyes.ChangeState(false);
             FatigueManager.Instance.RemoveFatigue(_cheerfullCoef);
             _data.Pet();

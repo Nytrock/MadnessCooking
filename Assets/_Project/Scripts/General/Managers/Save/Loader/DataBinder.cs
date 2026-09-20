@@ -1,10 +1,9 @@
-using AYellowpaper;
+﻿using AYellowpaper;
 using System;
 using UnityEngine;
 
 namespace MadnessCooking.General {
-    public abstract class DataBinder<TData> : MonoBehaviour
-        where TData : ISaveable {
+    public abstract class DataBinder<TData> : MonoBehaviour where TData : ISaveable {
 
         [SerializeField] private InterfaceReference<IBindable<TData>>[] _bindables;
 

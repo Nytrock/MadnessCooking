@@ -1,5 +1,5 @@
+﻿using MadnessCooking.General;
 using UnityEngine;
-using MadnessCooking.General;
 
 namespace MadnessCooking.Cafe {
     public class CafeCameraManager : HorizontalCameraManager, IBindable<CafeData> {

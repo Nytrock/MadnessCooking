@@ -1,11 +1,9 @@
-using System;
+﻿using MadnessCooking.General;
 using UnityEngine;
 using UnityEngine.UI;
-using MadnessCooking.General;
-using MadnessCooking.Kitchen;
 
 namespace MadnessCooking.Cafe {
-    public class ClientUI : MonoBehaviour, IStateable {
+    public class ClientUI : ActivableUI {
         [SerializeField] private Animator _animator;
         [SerializeField] private GameObject _chooseFoodPanel;
         [SerializeField] private GameObject _buttonsBlock;
@@ -19,8 +17,6 @@ namespace MadnessCooking.Cafe {
         private CafeUpgradeData _upgradeData;
         private TutorialManager _tutorialManager;
         private UIActivatorsManager _UIManager;
-
-        public event Action<bool> StateChanged;
 
         private void Awake() {
             _mainButton.onClick.AddListener(OnMainButtonClicked);
@@ -62,12 +58,12 @@ namespace MadnessCooking.Cafe {
             _chooseFoodPanel.SetActive(newValue);
         }
 
-        public void ChangeState(bool newState) {
+        public override void ChangeState(bool newState) {
             if (_tutorialManager.IsWork)
                 _tutorialManager.NextTutorialPart();
 
             _buttonsBlock.SetActive(newState);
-            StateChanged?.Invoke(newState);
+            base.ChangeState(newState);
         }
 
         private void ChangeButtonsBlockVisible() {

@@ -1,9 +1,9 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace MadnessCooking.General {
     public class UIActivatorsManager : MonoBehaviour {
         [SerializeField] private LocationManager _locationManager;
-        private IStateable _nowActivable;
+        private ActivableUI _nowActivable;
 
         private void Awake() {
             _locationManager.LocationChanged += delegate { CloseNowActivable(); };
@@ -16,7 +16,7 @@ namespace MadnessCooking.General {
             }
         }
 
-        public void SetActivable(IStateable activable) {
+        public void SetActivable(ActivableUI activable) {
             if (activable == _nowActivable) {
                 _nowActivable.ChangeState(false);
                 _nowActivable = null;
