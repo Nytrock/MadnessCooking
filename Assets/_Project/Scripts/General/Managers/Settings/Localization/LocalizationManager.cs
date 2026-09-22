@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -7,7 +7,7 @@ using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
 
 namespace MadnessCooking.General {
-    public class LocalizationManager : Singleton<LocalizationManager>, IBindable<GameSettingsData>, ISettingableWithOptions {
+    public class LocalizationManager : Singleton<LocalizationManager>, ISettingableWithOptions {
         [SerializeField] private List<Locale> _locales;
         [SerializeField] private Locale _defaultLocale;
 
@@ -58,9 +58,9 @@ namespace MadnessCooking.General {
             return await LocalizationSettings.StringDatabase.GetLocalizedStringAsync(table, key, arguments: arguments).Task;
         }
 
-        public void Bind(GameSettingsData data) {
-            data.LocalizationManager ??= new(DefaultValue);
-            _data = data.LocalizationManager;
+        public void SetSettings(SettingsData data) {
+            data.GameSettings.LocalizationManager ??= new(DefaultValue);
+            _data = data.GameSettings.LocalizationManager;
         }
 
         public void UpdateValue() {
@@ -81,7 +81,5 @@ namespace MadnessCooking.General {
             _data.SubmitChanging();
             UpdateValue();
         }
-
-        public void LateStart() { }
     }
 }

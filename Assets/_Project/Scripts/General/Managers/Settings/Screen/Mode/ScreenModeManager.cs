@@ -1,8 +1,8 @@
-using System;
+﻿using System;
 using UnityEngine;
 
 namespace MadnessCooking.General {
-    public class ScreenModeManager : MonoBehaviour, IBindable<VideoSettingsData>, ISettingableWithOptions {
+    public class ScreenModeManager : MonoBehaviour, ISettingableWithOptions {
         [SerializeField] private ScreenMode _defaultMode;
         private VideoSettingsData _data;
 
@@ -16,11 +16,9 @@ namespace MadnessCooking.General {
 
         public int OptionsCount => Enum.GetNames(typeof(ScreenMode)).Length;
 
-        public void LateStart() { }
-
-        public void Bind(VideoSettingsData data) {
-            data.ScreenMode ??= new(DefaultValue);
-            _data = data;
+        public void SetSettings(SettingsData data) {
+            data.VideoSettings.ScreenMode ??= new(DefaultValue);
+            _data = data.VideoSettings;
         }
 
         public ScreenMode GetNowScreenMode() {

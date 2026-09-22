@@ -1,6 +1,5 @@
+﻿using MadnessCooking.Kitchen;
 using UnityEngine;
-using MadnessCooking.General;
-using MadnessCooking.Kitchen;
 
 namespace MadnessCooking.Cafe {
     [RequireComponent(typeof(PopularityManager))]

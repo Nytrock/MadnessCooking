@@ -1,9 +1,9 @@
+﻿using MadnessCooking.General;
 using System.Collections.Generic;
 using UnityEngine;
-using MadnessCooking.General;
 
 namespace MadnessCooking.Cafe {
-    public class ClientsHolderManager : MonoBehaviour, IBindable<CafeData> {
+    public class ClientsHolderManager : MonoBehaviour, ISaveable {
         [SerializeField] private CafeSpotManager _spotManager;
         [SerializeField] private SpotEditor _spotEditor;
         [SerializeField] private CafeStateChanger _cafeOpener;
@@ -92,9 +92,9 @@ namespace MadnessCooking.Cafe {
                 _holders[i].SetIndex(i);
         }
 
-        public void Bind(CafeData data) {
-            data.ClientHolderManager ??= new();
-            _data = data.ClientHolderManager;
+        public void LoadSave(GameData data) {
+            data.Cafe.ClientHolderManager ??= new();
+            _data = data.Cafe.ClientHolderManager;
         }
     }
 }

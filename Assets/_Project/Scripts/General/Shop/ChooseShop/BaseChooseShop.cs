@@ -1,11 +1,9 @@
-using System;
+﻿using System;
 using UnityEngine;
 using UnityEngine.Events;
 
 namespace MadnessCooking.General {
-    public abstract class BaseChooseShop<TItem, TData> : SaveableBaseShop<TItem, TData>
-        where TItem : BuyableItem where TData : ISaveable {
-
+    public abstract class BaseChooseShop<TItem> : BuyableItemShop<TItem> where TItem : BuyableItem {
         [SerializeField] protected BaseChooseShopItemView<TItem> _itemView;
         protected TItem _itemToBuy;
         protected BaseChooseBuyPanel _choosedPanel;

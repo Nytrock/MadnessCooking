@@ -1,7 +1,7 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace MadnessCooking.General {
-    public class RealTimeManager : MonoBehaviour, IBindable<GeneralData> {
+    public class RealTimeManager : MonoBehaviour, ISaveable {
         [SerializeField] private PauseManager _pauseManager;
         [SerializeField] private RealTimeManagerData _data;
 
@@ -14,9 +14,9 @@ namespace MadnessCooking.General {
 
         public void LateStart() { }
 
-        public void Bind(GeneralData data) {
-            data.RealTimeManager ??= new();
-            _data = data.RealTimeManager;
+        public void LoadSave(GameData data) {
+            data.General.RealTimeManager ??= new();
+            _data = data.General.RealTimeManager;
         }
     }
 }

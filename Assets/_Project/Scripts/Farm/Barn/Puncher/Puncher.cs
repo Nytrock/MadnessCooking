@@ -1,9 +1,9 @@
+﻿using MadnessCooking.General;
 using System;
 using UnityEngine;
-using MadnessCooking.General;
 
 namespace MadnessCooking.Farm {
-    public class Puncher : MonoBehaviour, IBindable<FarmData> {
+    public class Puncher : MonoBehaviour, ISaveable {
         [SerializeField, Min(0)] private float _needWaste;
 
         [Header("Upgrades")]
@@ -41,9 +41,9 @@ namespace MadnessCooking.Farm {
                 Data.ChangeSpeed(_puncherSpeedUp);
         }
 
-        public void Bind(FarmData data) {
-            data.Puncher ??= new();
-            Data = data.Puncher;
+        public void LoadSave(GameData data) {
+            data.Farm.Puncher ??= new();
+            Data = data.Farm.Puncher;
         }
     }
 }

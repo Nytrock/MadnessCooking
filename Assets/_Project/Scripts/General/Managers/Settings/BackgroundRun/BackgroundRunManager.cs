@@ -1,7 +1,7 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace MadnessCooking.General {
-    public class BackgroundRunManager : MonoBehaviour, IBindable<GameSettingsData>, ISettingable<bool> {
+    public class BackgroundRunManager : MonoBehaviour, ISettingable<bool> {
         [SerializeField] private bool _defaultValue;
 
         private SettingsPointData<bool> _data;
@@ -14,12 +14,9 @@ namespace MadnessCooking.General {
             }
         }
 
-        public void Bind(GameSettingsData data) {
-            data.BackgroundRunManager ??= new(DefaultValue);
-            _data = data.BackgroundRunManager;
-        }
-
-        public void LateStart() {
+        public void SetSettings(SettingsData data) {
+            data.GameSettings.BackgroundRunManager ??= new(DefaultValue);
+            _data = data.GameSettings.BackgroundRunManager;
             UpdateValue();
         }
 

@@ -1,8 +1,8 @@
-using System;
+﻿using System;
 using UnityEngine;
 
 namespace MadnessCooking.General {
-    public class GameTimeManager : MonoBehaviour, IBindable<GeneralData> {
+    public class GameTimeManager : MonoBehaviour, ISaveable {
         [SerializeField, Min(0)] private float _defaultTimeSpeed;
         [SerializeField] private PauseManager _pauseManager;
         [SerializeField] private DaytimeStart[] _daytimeStarts;
@@ -72,13 +72,13 @@ namespace MadnessCooking.General {
             throw new NullReferenceException($"No info about {daytime}");
         }
 
-        public void Bind(GeneralData data) {
-            if (data.GameTimeManager == null) {
+        public void LoadSave(GameData data) {
+            if (data.General.GameTimeManager == null) {
                 DaytimeStart defaultDaytimeStart = GetDaytimeStartInfo(_defaultDaytime);
-                data.GameTimeManager = new(defaultDaytimeStart);
+                data.General.GameTimeManager = new(defaultDaytimeStart);
             }
 
-            _data = data.GameTimeManager;
+            _data = data.General.GameTimeManager;
         }
     }
 }

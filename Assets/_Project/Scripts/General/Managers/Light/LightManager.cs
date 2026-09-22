@@ -1,7 +1,7 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace MadnessCooking.General {
-    public class LightManager : MonoBehaviour, IBindable<GeneralData> {
+    public class LightManager : MonoBehaviour, ISaveable {
         [SerializeField] private GameTimeManager _timeManager;
         [SerializeField] private SkyManager _skyManager;
         [SerializeField] private SpritesManager _spritesManager;
@@ -36,9 +36,9 @@ namespace MadnessCooking.General {
 
         public void LateStart() { }
 
-        public void Bind(GeneralData data) {
-            data.LightManager ??= new();
-            _data = data.LightManager;
+        public void LoadSave(GameData data) {
+            data.General.LightManager ??= new();
+            _data = data.General.LightManager;
 
             _data.SetTimeStep(_secondsToChangeColor);
             _skyManager.Bind(_data.SkyData);

@@ -1,13 +1,13 @@
-using AYellowpaper;
-using UnityEngine;
-
-namespace MadnessCooking.General {
+﻿namespace MadnessCooking.General {
     public abstract class SettingsPoint<TValue> : BaseSettingsPoint {
-        [SerializeField] protected InterfaceReference<ISettingable<TValue>> _settingable;
-
+        protected ISettingable<TValue> _settingable;
         protected SettingsPointData<TValue> _data;
 
         public override bool IsValueChanged => _data.IsValueChanged;
+
+        public void SetSettingable(ISettingable<TValue> settingable) {
+            _settingable = settingable;
+        }
 
         public virtual void ChangeValue(TValue newValue) {
             _data.ChangeValue(newValue);
@@ -16,7 +16,7 @@ namespace MadnessCooking.General {
         }
 
         public override void SetDefaultValue() {
-            ChangeValue(_settingable.Value.DefaultValue);
+            ChangeValue(_settingable.DefaultValue);
             UpdateState();
         }
 
@@ -29,11 +29,11 @@ namespace MadnessCooking.General {
             _data.SubmitChanging();
         }
 
-        protected override void UpdateState() {
-            _settingable.Value.UpdateValue();
+        public override void UpdateState() {
+            _settingable.UpdateValue();
         }
 
-        public void Bind(SettingsPointData<TValue> data) {
+        public void SetData(SettingsPointData<TValue> data) {
             _data = data;
         }
     }

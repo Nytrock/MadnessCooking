@@ -1,9 +1,10 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace MadnessCooking.General {
     public abstract class IngredientStorage : MonoBehaviour {
+        [SerializeField] protected IngredientCountList _defaultIngredients;
         [SerializeField] protected int _defaultMaxSpace = 100;
 
         public IngredientStorageData Data { get; protected set; }
@@ -13,6 +14,8 @@ namespace MadnessCooking.General {
         public event Action<IngredientCount> IngredientCountAdded;
         public event Action<IngredientCount> IngredientCountRemoved;
         public event Action LoadingDataEnded;
+
+
 
         public void PutIngredients(IEnumerable<IngredientCount> puttingCountList) {
             foreach (var count in puttingCountList)

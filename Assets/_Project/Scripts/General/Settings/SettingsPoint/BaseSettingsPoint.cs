@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using UnityEngine;
 
 namespace MadnessCooking.General {
@@ -11,11 +11,7 @@ namespace MadnessCooking.General {
             ValueChanged?.Invoke();
         }
 
-        public void LateStart() {
-            UpdateState();
-        }
-
-        protected abstract void UpdateState();
+        public abstract void UpdateState();
         public abstract void SetDefaultValue();
         public abstract void Cancel();
         public abstract void Submit();

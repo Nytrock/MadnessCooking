@@ -1,11 +1,11 @@
-using UnityEngine;
-using MadnessCooking.Farm;
+﻿using MadnessCooking.Farm;
 using MadnessCooking.General;
 using MadnessCooking.Kitchen;
+using UnityEngine;
 
 namespace MadnessCooking.Office {
     public class ItemsListManager : MonoBehaviour {
-        [SerializeField] private GameDataBinder _binder;
+        [SerializeField] private GameSaveManager _saveManager;
         [SerializeField] private ItemsListRenderer _renderer;
         [SerializeField] private IngredientManager _ingredientManager;
         [SerializeField] private TechnicManager _technicManager;
@@ -16,7 +16,7 @@ namespace MadnessCooking.Office {
         [SerializeField] private GraymanManager _graymanManager;
 
         private void Awake() {
-            _binder.BeforeLateStart += SetupItemManagers;
+            _saveManager.BeforeLateStart += SetupItemManagers;
         }
 
         private void SetupItemManagers() {

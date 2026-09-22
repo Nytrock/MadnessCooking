@@ -1,8 +1,8 @@
-using System;
+﻿using System;
 using UnityEngine;
 
 namespace MadnessCooking.General {
-    public class MoneyManager : Singleton<MoneyManager>, IBindable<GeneralData> {
+    public class MoneyManager : Singleton<MoneyManager>, ISaveable {
         [SerializeField, Min(0)] private int _moneyDefault;
         private MoneyManagerData _data;
 
@@ -37,9 +37,9 @@ namespace MadnessCooking.General {
             MoneyChanged?.Invoke(0);
         }
 
-        public void Bind(GeneralData data) {
-            data.MoneyManager ??= new(_moneyDefault);
-            _data = data.MoneyManager;
+        public void LoadSave(GameData data) {
+            data.General.MoneyManager ??= new(_moneyDefault);
+            _data = data.General.MoneyManager;
         }
     }
 }

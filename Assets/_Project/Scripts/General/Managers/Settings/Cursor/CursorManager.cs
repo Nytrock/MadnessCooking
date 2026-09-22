@@ -1,8 +1,8 @@
-using System;
+﻿using System;
 using UnityEngine;
 
 namespace MadnessCooking.General {
-    public class CursorManager : MonoBehaviour, IBindable<GameSettingsData>, ISettingableWithOptions {
+    public class CursorManager : MonoBehaviour, ISettingableWithOptions {
         [SerializeField] private CursorTexture[] _cursors;
         [SerializeField] private CursorTexture _defaultCursor;
 
@@ -12,12 +12,9 @@ namespace MadnessCooking.General {
         public int OptionsCount => _cursors.Length;
         public int DefaultValue => Mathf.Max(Array.IndexOf(_cursors, _defaultCursor), 0);
 
-        public void Bind(GameSettingsData data) {
-            data.CursorManager ??= new(DefaultValue);
-            _data = data.CursorManager;
-        }
-
-        public void LateStart() {
+        public void SetSettings(SettingsData data) {
+            data.GameSettings.CursorManager ??= new(DefaultValue);
+            _data = data.GameSettings.CursorManager;
             UpdateValue();
         }
 

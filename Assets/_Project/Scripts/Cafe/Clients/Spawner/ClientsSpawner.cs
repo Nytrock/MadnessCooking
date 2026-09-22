@@ -1,12 +1,12 @@
-﻿using System;
+﻿using MadnessCooking.General;
+using MadnessCooking.Kitchen;
+using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
-using MadnessCooking.General;
-using MadnessCooking.Kitchen;
 
 namespace MadnessCooking.Cafe {
     [RequireComponent(typeof(PopularityXpAdder))]
-    public class ClientsSpawner : MonoBehaviour, IBindable<CafeData>, ITutorialPart {
+    public class ClientsSpawner : MonoBehaviour, ISaveable, ITutorialPart {
         [SerializeField] private ClientSpawnPoint _spawnPoint;
         [SerializeField] private GameTimeManager _timeManager;
         [SerializeField] private LocationNotificationManager _notificationManager;
@@ -200,12 +200,12 @@ namespace MadnessCooking.Cafe {
             PartEnded?.Invoke();
         }
 
-        public void Bind(CafeData data) {
-            data.ClientsSpawner ??= new();
-            _data = data.ClientsSpawner;
+        public void LoadSave(GameData data) {
+            data.Cafe.ClientsSpawner ??= new();
+            _data = data.Cafe.ClientsSpawner;
 
-            _clientHolderData = data.ClientHolderManager;
-            _criticData = data.CriticSpawner;
+            _clientHolderData = data.Cafe.ClientHolderManager;
+            _criticData = data.Cafe.CriticSpawner;
         }
     }
 }

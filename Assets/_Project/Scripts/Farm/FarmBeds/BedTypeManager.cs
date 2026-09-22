@@ -1,10 +1,10 @@
+﻿using MadnessCooking.General;
 using System;
 using System.Linq;
 using UnityEngine;
-using MadnessCooking.General;
 
 namespace MadnessCooking.Farm {
-    public class BedTypeManager : SaveableItemManager<BedType, FarmData> {
+    public class BedTypeManager : BuyableItemManager<BedType> {
         [SerializeField] private UpgradeManager _upgradeManager;
         [SerializeField] private IngredientManager _ingredientsManager;
 
@@ -42,9 +42,9 @@ namespace MadnessCooking.Farm {
             }
         }
 
-        public override void Bind(FarmData data) {
-            data.BedTypeManager ??= new(_defaultItems);
-            _data = data.BedTypeManager;
+        public override void LoadSave(GameData data) {
+            data.Farm.BedTypeManager ??= new(_defaultItems);
+            _data = data.Farm.BedTypeManager;
         }
     }
 }

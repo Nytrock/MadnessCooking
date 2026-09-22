@@ -1,5 +1,5 @@
+﻿using MadnessCooking.General;
 using UnityEngine;
-using MadnessCooking.General;
 
 namespace MadnessCooking.Farm {
     [RequireComponent(typeof(Animator))]
@@ -26,9 +26,9 @@ namespace MadnessCooking.Farm {
             base.ChangeClickMode(newValue);
         }
 
-        public override void Bind(FarmData data) {
-            data.FlourMill ??= new(_readyDefaultCount, _materialDefaultCount);
-            Data = data.FlourMill;
+        public override void LoadSave(GameData data) {
+            data.Farm.FlourMill ??= new(_readyDefaultCount, _materialDefaultCount);
+            Data = data.Farm.FlourMill;
         }
 
         protected override void UpdateUpgrades() {

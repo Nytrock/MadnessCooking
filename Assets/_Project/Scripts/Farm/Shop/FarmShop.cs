@@ -1,9 +1,9 @@
-﻿using System;
+﻿using MadnessCooking.General;
+using System;
 using UnityEngine;
-using MadnessCooking.General;
 
 namespace MadnessCooking.Farm {
-    public class FarmShop : BaseChooseShop<BaseUpgrade, FarmData> {
+    public class FarmShop : BaseChooseShop<BaseUpgrade> {
         [SerializeField] private ConsumableUpgrade[] _defaultConsumableUpgrades;
         [SerializeField] private LocationActivator _shopActivator;
 
@@ -44,11 +44,11 @@ namespace MadnessCooking.Farm {
             _shopActivator.ChangeLocation();
         }
 
-        public override void Bind(FarmData data) {
-            data.FarmShop ??= new(_defaultItemsToBuy, _defaultConsumableUpgrades);
-            _data = data.FarmShop;
+        public override void LoadSave(GameData data) {
+            data.Farm.FarmShop ??= new(_defaultItemsToBuy, _defaultConsumableUpgrades);
+            _data = data.Farm.FarmShop;
 
-            base.Bind(data);
+            base.LoadSave(data);
         }
     }
 }

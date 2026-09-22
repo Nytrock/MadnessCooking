@@ -1,13 +1,13 @@
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 
 namespace MadnessCooking.General {
     public class ScreenSizeSettingsPoint : IntSettingsPoint {
         [SerializeField] private TextMeshProUGUI _text;
 
-        protected override void UpdateState() {
+        public override void UpdateState() {
             base.UpdateState();
-            ScreenSize nowScreenSize = (_settingable.Value as ScreenSizeManager).NowScreenSize;
+            ScreenSize nowScreenSize = (_settingable as ScreenSizeManager).NowScreenSize;
             _text.text = nowScreenSize.ToString();
         }
     }

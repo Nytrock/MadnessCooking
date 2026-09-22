@@ -1,11 +1,11 @@
-using MadnessCooking.General;
+﻿using MadnessCooking.General;
 
 namespace MadnessCooking.Office {
-    public class SleepBedUpgradeRenderer : UpgradeRenderer, IUpgradeable<OfficeUpgradeData> {
+    public class SleepBedUpgradeRenderer : UpgradeRenderer, IUpgradeable {
         private OfficeUpgradeData _upgradeData;
 
-        public void BindUpgrade(OfficeUpgradeData upgradeData) {
-            _upgradeData = upgradeData;
+        public void SetUpgradeData(GameData gameData) {
+            _upgradeData = gameData.Office.UpgradeData;
         }
 
         protected override void ChangeState(bool newState) {

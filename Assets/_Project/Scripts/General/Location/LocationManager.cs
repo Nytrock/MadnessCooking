@@ -1,9 +1,9 @@
-using System;
+﻿using System;
 using System.Linq;
 using UnityEngine;
 
 namespace MadnessCooking.General {
-    public class LocationManager : MonoBehaviour, IBindable<GeneralData> {
+    public class LocationManager : MonoBehaviour, ISaveable {
         [SerializeField] private Camera _mainCamera;
         [SerializeField] private LocationPoint[] _locations;
         [SerializeField] private Location[] _saveableLocations;
@@ -41,9 +41,9 @@ namespace MadnessCooking.General {
             LocationChanged?.Invoke(location);
         }
 
-        public void Bind(GeneralData data) {
-            data.LocationManager ??= new();
-            _data = data.LocationManager;
+        public void LoadSave(GameData data) {
+            data.General.LocationManager ??= new();
+            _data = data.General.LocationManager;
         }
     }
 }

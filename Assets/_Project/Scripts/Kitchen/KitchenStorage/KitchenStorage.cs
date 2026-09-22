@@ -1,11 +1,18 @@
-using MadnessCooking.Farm;
+﻿using MadnessCooking.Farm;
 using MadnessCooking.General;
 
 namespace MadnessCooking.Kitchen {
-    public class KitchenStorage : SaveableIngredientStorage<KitchenData> {
-        public override void Bind(KitchenData data) {
-            data.KitchenStorage ??= new(_defaultIngredients);
-            Data = data.KitchenStorage;
+    public class KitchenStorage : IngredientStorage, ISaveable {
+        public void LoadSave(GameData data) {
+            data.Kitchen.KitchenStorage ??= new(_defaultIngredients);
+            Data = data.Kitchen.KitchenStorage;
+        }
+
+        public void LateStart() {
+            Data.SetMaxSpace(_defaultMaxSpace);
+            InvokeLoadingDataEnded();
+            foreach (var ingredientCount in Data.Ingredients)
+                InvokeIngredientAdded(ingredientCount);
         }
 
         public void RemoveAllSpices() {

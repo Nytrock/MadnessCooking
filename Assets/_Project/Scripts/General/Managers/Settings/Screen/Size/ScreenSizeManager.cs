@@ -1,7 +1,7 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace MadnessCooking.General {
-    public class ScreenSizeManager : MonoBehaviour, IBindable<VideoSettingsData>, ISettingableWithOptions {
+    public class ScreenSizeManager : MonoBehaviour, ISettingableWithOptions {
         [SerializeField] private int[] _heights;
         [SerializeField] private ScreenModeManager _screenModeManager;
 
@@ -22,15 +22,13 @@ namespace MadnessCooking.General {
 
         public int OptionsCount => _heights.Length;
 
-        public void LateStart() { }
-
         private void Awake() {
             _ratio = (float)Screen.width / Screen.height;
         }
 
-        public void Bind(VideoSettingsData data) {
-            data.ScreenSize ??= new(DefaultValue);
-            _data = data;
+        public void SetSettings(SettingsData data) {
+            data.VideoSettings.ScreenSize ??= new(DefaultValue);
+            _data = data.VideoSettings;
         }
 
         public void UpdateValue() {

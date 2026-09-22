@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace MadnessCooking.General {
     public class MenuBackgroundManager : MonoBehaviour {
@@ -6,9 +6,9 @@ namespace MadnessCooking.General {
         [SerializeField] private LightManager _lightManager;
 
         private void Start() {
-            GeneralData stubData = new();
-            _lightManager.Bind(stubData);
-            _timeManager.Bind(stubData);
+            GameData stubData = new();
+            _lightManager.LoadSave(stubData);
+            _timeManager.LoadSave(stubData);
 
             _lightManager.LateStart();
             _timeManager.LateStart();

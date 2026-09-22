@@ -1,10 +1,10 @@
+﻿using MadnessCooking.General;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using MadnessCooking.General;
 
 namespace MadnessCooking.Cafe {
-    public class CafeSpotManager : MonoBehaviour, IBindable<CafeData> {
+    public class CafeSpotManager : MonoBehaviour, ISaveable {
         [SerializeField] private CafeSpaceManager _spaceManager;
         [SerializeField] private AudioSource _removeButtonAudio;
         [SerializeField] private CafeSpot[] _spotPrefabs;
@@ -100,9 +100,9 @@ namespace MadnessCooking.Cafe {
             SpotsPositionChanged?.Invoke(_cellSize * spot.SeatsCount);
         }
 
-        public void Bind(CafeData data) {
-            data.ClientHolderManager ??= new();
-            _data = data.ClientHolderManager;
+        public void LoadSave(GameData data) {
+            data.Cafe.ClientHolderManager ??= new();
+            _data = data.Cafe.ClientHolderManager;
         }
     }
 }

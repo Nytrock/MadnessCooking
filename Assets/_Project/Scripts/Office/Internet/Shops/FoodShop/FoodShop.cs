@@ -1,10 +1,10 @@
-using UnityEngine;
-using MadnessCooking.Farm;
+﻿using MadnessCooking.Farm;
 using MadnessCooking.General;
 using MadnessCooking.Kitchen;
+using UnityEngine;
 
 namespace MadnessCooking.Office {
-    public class FoodShop : BaseChooseShop<Food, OfficeData> {
+    public class FoodShop : BaseChooseShop<Food> {
         [SerializeField] private IngredientManager _ingredientManager;
         [SerializeField] private TechnicManager _technicManager;
 
@@ -34,12 +34,10 @@ namespace MadnessCooking.Office {
             return true;
         }
 
-        public override void Bind(OfficeData data) {
-            data.FoodShop ??= new(_defaultItemsToBuy);
-            _data = data.FoodShop;
-            base.Bind(data);
+        public override void LoadSave(GameData data) {
+            data.Office.FoodShop ??= new(_defaultItemsToBuy);
+            _data = data.Office.FoodShop;
+            base.LoadSave(data);
         }
-
-        public void CheckAddedUpgrade(BaseUpgrade upgrade) { }
     }
 }

@@ -1,14 +1,14 @@
-using System;
+﻿using System;
 
 namespace MadnessCooking.General {
     public class IntSettingsPoint : SettingsPoint<int> {
         private int _optionsCount;
 
-        protected virtual void Awake() {
-            if (_settingable.Value as ISettingableWithOptions is null)
+        protected void Awake() {
+            if (_settingable as ISettingableWithOptions is null)
                 throw new ArgumentNullException($"{_settingable} isn't ISettingableWithOptions");
 
-            _optionsCount = (_settingable.Value as ISettingableWithOptions).OptionsCount;
+            _optionsCount = (_settingable as ISettingableWithOptions).OptionsCount;
         }
 
         public void NextOption() {

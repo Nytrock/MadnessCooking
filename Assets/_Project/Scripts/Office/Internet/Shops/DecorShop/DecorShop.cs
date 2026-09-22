@@ -1,9 +1,9 @@
+﻿using MadnessCooking.General;
 using System;
 using UnityEngine;
-using MadnessCooking.General;
 
 namespace MadnessCooking.Office {
-    public class DecorShop : BaseInstantShop<Decor, OfficeData> {
+    public class DecorShop : BaseInstantShop<Decor> {
         [SerializeField] private LocationData[] _decorLocations;
 
         protected override void SortItems() {
@@ -18,10 +18,10 @@ namespace MadnessCooking.Office {
             return null;
         }
 
-        public override void Bind(OfficeData data) {
-            data.DecorShop ??= new(_defaultItemsToBuy);
-            _data = data.DecorShop;
-            base.Bind(data);
+        public override void LoadSave(GameData data) {
+            data.Office.DecorShop ??= new(_defaultItemsToBuy);
+            _data = data.Office.DecorShop;
+            base.LoadSave(data);
         }
     }
 }

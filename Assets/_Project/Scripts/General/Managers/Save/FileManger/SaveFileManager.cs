@@ -1,9 +1,9 @@
-using System;
+﻿using System;
 using System.IO;
 using UnityEngine;
 
 namespace MadnessCooking.General {
-    public class SaveFileManager<TData> where TData : ISaveable {
+    public class SaveFileManager<TData> {
         protected readonly JsonSerializer _serializer = new();
         private readonly string _dataPath = Application.persistentDataPath;
 

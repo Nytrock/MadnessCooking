@@ -1,9 +1,9 @@
+﻿using MadnessCooking.General;
 using System;
 using UnityEngine;
-using MadnessCooking.General;
 
 namespace MadnessCooking.Cafe {
-    public class CafeStateChanger : MonoBehaviour, IBindable<CafeData> {
+    public class CafeStateChanger : MonoBehaviour, ISaveable {
         [SerializeField] private bool _defaultState;
 
         private CafeStateChangerData _data;
@@ -16,9 +16,9 @@ namespace MadnessCooking.Cafe {
             CafeChanged?.Invoke(_data.IsOpened);
         }
 
-        public void Bind(CafeData data) {
-            data.CafeOpener ??= new(_defaultState);
-            _data = data.CafeOpener;
+        public void LoadSave(GameData data) {
+            data.Cafe.CafeOpener ??= new(_defaultState);
+            _data = data.Cafe.CafeOpener;
         }
 
         public void ChangeCafeState() {

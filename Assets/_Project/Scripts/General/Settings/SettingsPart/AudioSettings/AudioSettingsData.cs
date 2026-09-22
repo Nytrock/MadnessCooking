@@ -1,8 +1,8 @@
-using System;
+﻿using System;
 
 namespace MadnessCooking.General {
     [Serializable]
-    public class AudioSettingsData : ISaveable {
+    public class AudioSettingsData {
         public AudioVolumeSettingsData VolumeSettings { get; set; }
     }
 }

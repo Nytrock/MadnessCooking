@@ -1,10 +1,10 @@
-﻿using System;
+﻿using MadnessCooking.General;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
-using MadnessCooking.General;
 
 namespace MadnessCooking.Farm {
-    public class BarnChickens : MonoBehaviour, IBindable<FarmData> {
+    public class BarnChickens : MonoBehaviour, ISaveable {
         [SerializeField] private FarmCar _car;
         [SerializeField] private UpgradeManager _upgradeManager;
         [SerializeField] private IngredientManager _ingredientsManager;
@@ -127,9 +127,9 @@ namespace MadnessCooking.Farm {
             FoodCountChanged?.Invoke();
         }
 
-        public void Bind(FarmData data) {
-            data.Chickens ??= new(_defaultFoodCount);
-            Data = data.Chickens;
+        public void LoadSave(GameData data) {
+            data.Farm.Chickens ??= new(_defaultFoodCount);
+            Data = data.Farm.Chickens;
         }
 
         private void InvokeFeedRelatedActions() {

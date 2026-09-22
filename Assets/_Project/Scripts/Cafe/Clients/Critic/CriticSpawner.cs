@@ -1,10 +1,10 @@
+﻿using MadnessCooking.General;
+using MadnessCooking.Office;
 using UnityEngine;
 using Random = UnityEngine.Random;
-using MadnessCooking.General;
-using MadnessCooking.Office;
 
 namespace MadnessCooking.Cafe {
-    public class CriticSpawner : MonoBehaviour, IBindable<CafeData> {
+    public class CriticSpawner : MonoBehaviour, ISaveable {
         [SerializeField] private GameTimeManager _timeManager;
         [SerializeField] private SleepBed _bed;
         [SerializeField] private PopularityManager _popularityManager;
@@ -56,9 +56,9 @@ namespace MadnessCooking.Cafe {
 
         public void LateStart() { }
 
-        public void Bind(CafeData data) {
-            data.CriticSpawner ??= new();
-            _data = data.CriticSpawner;
+        public void LoadSave(GameData data) {
+            data.Cafe.CriticSpawner ??= new();
+            _data = data.Cafe.CriticSpawner;
         }
     }
 }

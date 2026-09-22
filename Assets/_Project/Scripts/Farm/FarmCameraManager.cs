@@ -1,12 +1,12 @@
+﻿using MadnessCooking.General;
 using UnityEngine;
-using MadnessCooking.General;
 
 namespace MadnessCooking.Farm {
-    public class FarmCameraManager : VerticalCameraManager, IBindable<FarmData> {
-        public void Bind(FarmData data) {
+    public class FarmCameraManager : VerticalCameraManager, ISaveable {
+        public void LoadSave(GameData data) {
             Vector3 location = _locationManager.GetLocationData(_location).Point;
-            data.CameraManager ??= new(location);
-            _data = data.CameraManager;
+            data.Farm.CameraManager ??= new(location);
+            _data = data.Farm.CameraManager;
         }
 
         public void LateStart() {

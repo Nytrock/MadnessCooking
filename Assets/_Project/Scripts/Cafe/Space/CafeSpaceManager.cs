@@ -1,17 +1,17 @@
+﻿using MadnessCooking.General;
 using UnityEngine;
-using MadnessCooking.General;
 
 namespace MadnessCooking.Cafe {
-    public class CafeSpaceManager : SaveableSpaceManager<CafeData> {
+    public class CafeSpaceManager : SpaceManager {
         protected override void AddSpace(int index) {
             SpacePrefab space = Instantiate(_spacePrefab, _spaceContainer);
             space.transform.position += new Vector3(_spacePrefab.Size * index, 0, 0);
             InvokeSpaceAdded();
         }
 
-        protected override void BindData() {
-            _data.SpaceManager ??= new(_defaultSpaceCount);
-            _spaceData = _data.SpaceManager;
+        public override void LoadSave(GameData data) {
+            data.Cafe.SpaceManager ??= new(_defaultSpaceCount);
+            _spaceData = data.Cafe.SpaceManager;
         }
     }
 }

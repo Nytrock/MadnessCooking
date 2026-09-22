@@ -1,8 +1,8 @@
-using System;
+﻿using System;
 
 namespace MadnessCooking.General {
     [Serializable]
-    public class GameData : ISaveable {
+    public class GameData {
         public GeneralData General { get; set; }
         public CafeData Cafe { get; set; }
         public KitchenData Kitchen { get; set; }

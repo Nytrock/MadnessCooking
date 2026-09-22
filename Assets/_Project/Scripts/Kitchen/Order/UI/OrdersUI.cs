@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 
 namespace MadnessCooking.Kitchen {
-    public class OrdersUI : ActivableUI, IUpgradeable<KitchenUpgradeData> {
+    public class OrdersUI : ActivableUI, IUpgradeable {
         [SerializeField] private OrdersManager _ordersManager;
         [SerializeField] private OrderButtonsPool _pool;
         [SerializeField] private GameObject _panel;
@@ -65,8 +65,8 @@ namespace MadnessCooking.Kitchen {
                 button.UpdateRecipeTechnic();
         }
 
-        public void BindUpgrade(KitchenUpgradeData upgradeData) {
-            _upgradeData = upgradeData;
+        public void SetUpgradeData(GameData gameData) {
+            _upgradeData = gameData.Kitchen.UpgradeData;
         }
 
         public void CheckAddedUpgrade(BaseUpgrade upgrade) {

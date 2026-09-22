@@ -1,9 +1,8 @@
-using AYellowpaper;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace MadnessCooking.General {
-    public class TutorialManager : MonoBehaviour, IBindable<GeneralData> {
-        [SerializeField] private InterfaceReference<ITutorialPart>[] _parts;
+    public class TutorialManager : MonoBehaviour, ISaveable {
+        [SerializeField, Interface(typeof(ITutorialPart))] private MonoBehaviour[] _tutorialParts;
         [SerializeField] private GameSaveManager _saveManager;
 
         private int _currentTutorialPartIndex;
@@ -19,7 +18,7 @@ namespace MadnessCooking.General {
         }
 
         private bool IsTutorial() {
-            return ScenesManager.IsGame() && _data.IsWork && _parts.Length > 0;
+            return ScenesManager.IsGame() && _data.IsWork && _tutorialParts.Length > 0;
         }
 
         private void StartTutorial() {
@@ -32,7 +31,7 @@ namespace MadnessCooking.General {
                 return;
 
             _currentTutorialPartIndex++;
-            if (_currentTutorialPartIndex >= _parts.Length) {
+            if (_currentTutorialPartIndex >= _tutorialParts.Length) {
                 EndTutorial();
                 return;
             }
@@ -46,17 +45,19 @@ namespace MadnessCooking.General {
         }
 
         private void UpdateNowTutorialPart() {
-            if (_currentTutorialPartIndex - 1 >= 0)
-                _parts[_currentTutorialPartIndex - 1].Value.PartEnded -= NextTutorialPart;
+            if (_currentTutorialPartIndex - 1 >= 0) {
+                ITutorialPart previousPart = _tutorialParts[_currentTutorialPartIndex - 1] as ITutorialPart;
+                previousPart.PartEnded -= NextTutorialPart;
+            }
 
-            ITutorialPart currentPart = _parts[_currentTutorialPartIndex].Value;
+            ITutorialPart currentPart = _tutorialParts[_currentTutorialPartIndex] as ITutorialPart;
             currentPart.PartEnded += NextTutorialPart;
             currentPart.StartTutorialPart();
         }
 
-        public void Bind(GeneralData data) {
-            data.TutorialManager ??= new();
-            _data = data.TutorialManager;
+        public void LoadSave(GameData data) {
+            data.General.TutorialManager ??= new();
+            _data = data.General.TutorialManager;
         }
 
         public void ChangeWorkState(bool isWork) {

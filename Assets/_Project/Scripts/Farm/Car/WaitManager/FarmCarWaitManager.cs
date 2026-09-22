@@ -1,12 +1,12 @@
+﻿using MadnessCooking.General;
+using MadnessCooking.Kitchen;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using MadnessCooking.General;
-using MadnessCooking.Kitchen;
 
 namespace MadnessCooking.Farm {
-    public class FarmCarWaitManager : MonoBehaviour, IBindable<FarmData> {
+    public class FarmCarWaitManager : MonoBehaviour, ISaveable {
         [SerializeField] private FarmCar _car;
         [SerializeField] private UpgradeManager _upgradeManager;
         [SerializeField] private KitchenStorage _kitchenStorage;
@@ -77,9 +77,9 @@ namespace MadnessCooking.Farm {
             }
         }
 
-        public void Bind(FarmData data) {
-            data.CarWaitManager ??= new(_defaultWaitHours * SECONDS_IN_MINUTES);
-            _waitData = data.CarWaitManager;
+        public void LoadSave(GameData data) {
+            data.Farm.CarWaitManager ??= new(_defaultWaitHours * SECONDS_IN_MINUTES);
+            _waitData = data.Farm.CarWaitManager;
         }
     }
 }

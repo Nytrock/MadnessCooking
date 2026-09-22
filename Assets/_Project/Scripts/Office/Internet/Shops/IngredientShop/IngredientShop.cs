@@ -1,10 +1,10 @@
-using UnityEngine;
-using MadnessCooking.Farm;
+﻿using MadnessCooking.Farm;
 using MadnessCooking.General;
 using MadnessCooking.Kitchen;
+using UnityEngine;
 
 namespace MadnessCooking.Office {
-    public class IngredientShop : BaseInstantShop<Ingredient, OfficeData>, IUpgradeable<KitchenUpgradeData> {
+    public class IngredientShop : BaseInstantShop<Ingredient>, IUpgradeable {
         [SerializeField] private BedTypeManager _bedTypesManager;
         [SerializeField] private KitchenStorage _ingredientStorage;
         private KitchenUpgradeData _upgradeData;
@@ -37,14 +37,14 @@ namespace MadnessCooking.Office {
             return new BuyPanelSideInfoData(bedType.Icon, !isBedAvailable, bedType.RawName);
         }
 
-        public override void Bind(OfficeData data) {
-            data.IngredientShop ??= new(_defaultItemsToBuy);
-            _data = data.IngredientShop;
-            base.Bind(data);
+        public override void LoadSave(GameData data) {
+            data.Office.IngredientShop ??= new(_defaultItemsToBuy);
+            _data = data.Office.IngredientShop;
+            base.LoadSave(data);
         }
 
-        public void BindUpgrade(KitchenUpgradeData upgradeData) {
-            _upgradeData = upgradeData;
+        public void SetUpgradeData(GameData gameData) {
+            _upgradeData = gameData.Kitchen.UpgradeData;
         }
 
         public void CheckAddedUpgrade(BaseUpgrade upgrade) {

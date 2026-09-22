@@ -1,9 +1,7 @@
-using UnityEngine.Events;
+﻿using UnityEngine.Events;
 
 namespace MadnessCooking.General {
-    public abstract class BaseInstantShop<TItem, TData> : SaveableBaseShop<TItem, TData>
-        where TItem : BuyableItem where TData : ISaveable {
-
+    public abstract class BaseInstantShop<TItem> : BuyableItemShop<TItem> where TItem : BuyableItem {
         protected override UnityAction GetPanelAction(BuyableItem item) {
             return () => BuyItem(item as TItem);
         }

@@ -144,9 +144,9 @@ namespace MadnessCooking.Farm {
             _nowUI.UpdateSideButtons(_farmBed);
         }
 
-        public void Bind(FarmData data) {
+        public void LoadSave(FarmData data) {
             foreach (var bedType in _bedsUI)
-                bedType.Bind(data);
+                bedType.LoadSave(data);
         }
     }
 }

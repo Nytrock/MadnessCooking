@@ -1,4 +1,4 @@
-using MadnessCooking.General;
+﻿using MadnessCooking.General;
 using System;
 using UnityEngine;
 
@@ -8,7 +8,6 @@ namespace MadnessCooking.Farm {
         [SerializeField] private Cow _cow;
         [SerializeField] private FlourMill _flourMill;
         private int _milkCount = 0;
-
 
         private Ingredient Milk => ConstIngredients.Instance.Milk;
         private Ingredient Flour => ConstIngredients.Instance.Flour;

@@ -1,9 +1,9 @@
+﻿using MadnessCooking.General;
 using System;
 using UnityEngine;
-using MadnessCooking.General;
 
 namespace MadnessCooking.Farm {
-    public class WheatManager : MonoBehaviour, IBindable<FarmData> {
+    public class WheatManager : MonoBehaviour, ISaveable {
         [SerializeField] private Cow _cow;
         [SerializeField] private FlourMill _flourMill;
 
@@ -87,9 +87,9 @@ namespace MadnessCooking.Farm {
 
         public void LateStart() { }
 
-        public void Bind(FarmData data) {
-            data.WheatManager ??= new();
-            _data = data.WheatManager;
+        public void LoadSave(GameData data) {
+            data.Farm.WheatManager ??= new();
+            _data = data.Farm.WheatManager;
         }
     }
 }

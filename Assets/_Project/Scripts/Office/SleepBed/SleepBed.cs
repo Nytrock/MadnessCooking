@@ -1,9 +1,9 @@
+﻿using MadnessCooking.General;
 using System;
 using UnityEngine;
-using MadnessCooking.General;
 
 namespace MadnessCooking.Office {
-    public class SleepBed : MonoBehaviour, IBindable<OfficeData> {
+    public class SleepBed : MonoBehaviour, ISaveable {
         [SerializeField] private GameTimeManager _timeManager;
         [SerializeField, Min(0)] private float _sleepTimeSpeed;
         private SleepBedData _data;
@@ -12,9 +12,9 @@ namespace MadnessCooking.Office {
 
         public event Action<bool> SleepChanged;
 
-        public void Bind(OfficeData data) {
-            data.SleepBed ??= new();
-            _data = data.SleepBed;
+        public void LoadSave(GameData data) {
+            data.Office.SleepBed ??= new();
+            _data = data.Office.SleepBed;
         }
 
         public void LateStart() {

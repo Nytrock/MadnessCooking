@@ -1,14 +1,14 @@
+﻿using MadnessCooking.General;
 using System;
 using UnityEngine;
-using MadnessCooking.General;
 
 namespace MadnessCooking.Cafe {
-    public class PopularityManager : MonoBehaviour, IBindable<CafeData> {
+    public class PopularityManager : MonoBehaviour, ISaveable {
         [SerializeField] private PopularityLevel[] _levels;
         [SerializeField] private PopularityLevel _defaultLevel;
 
         private PopularityManagerData _data;
-        private PopularityLevel _nowLevel => _levels[_data.Level];
+        private PopularityLevel NowLevel => _levels[_data.Level];
 
         public bool IsMaxLevel => _data.Level == _levels.Length - 1;
 
@@ -38,21 +38,21 @@ namespace MadnessCooking.Cafe {
         }
 
         public void LateStart() {
-            LevelChanged?.Invoke(_nowLevel);
+            LevelChanged?.Invoke(NowLevel);
             XpChanged?.Invoke(_data.Xp);
         }
 
         public void AddXp(float xp) {
             _data.AddXp((int)xp);
 
-            if (_data.Xp >= _nowLevel.NeedXp && !IsMaxLevel) {
-                while (_data.Xp >= _nowLevel.NeedXp && !IsMaxLevel) {
+            if (_data.Xp >= NowLevel.NeedXp && !IsMaxLevel) {
+                while (_data.Xp >= NowLevel.NeedXp && !IsMaxLevel) {
                     if ((_data.Level + 1) % 5 == 0) {
-                        _data.RemoveXp(_data.Xp - _nowLevel.NeedXp);
+                        _data.RemoveXp(_data.Xp - NowLevel.NeedXp);
                         break;
                     }
 
-                    _data.RemoveXp(_nowLevel.NeedXp);
+                    _data.RemoveXp(NowLevel.NeedXp);
                     NextLevel();
                 }
             }
@@ -76,23 +76,23 @@ namespace MadnessCooking.Cafe {
 
         public void NextLevel() {
             _data.NextLevel();
-            LevelChanged?.Invoke(_nowLevel);
+            LevelChanged?.Invoke(NowLevel);
         }
 
         public void PreviousLevel() {
             _data.PreviousLevel();
-            LevelChanged?.Invoke(_nowLevel);
-            if (_data.Xp >= _nowLevel.NeedXp)
-                _data.RemoveXp(_data.Xp - _nowLevel.NeedXp + 1);
+            LevelChanged?.Invoke(NowLevel);
+            if (_data.Xp >= NowLevel.NeedXp)
+                _data.RemoveXp(_data.Xp - NowLevel.NeedXp + 1);
         }
 
-        public void Bind(CafeData data) {
-            data.PopularityManager ??= new(_defaultLevel);
-            _data = data.PopularityManager;
+        public void LoadSave(GameData data) {
+            data.Cafe.PopularityManager ??= new(_defaultLevel);
+            _data = data.Cafe.PopularityManager;
         }
 
         public bool CheckLevelWaitCritic() {
-            return !IsMaxLevel && (_data.Level + 1) % 5 == 0 && _data.Xp == _nowLevel.NeedXp;
+            return !IsMaxLevel && (_data.Level + 1) % 5 == 0 && _data.Xp == NowLevel.NeedXp;
         }
 
         public void CriticSuccess() {
@@ -101,7 +101,7 @@ namespace MadnessCooking.Cafe {
         }
 
         public void CriticFailure() {
-            RemoveXp(_nowLevel.NeedXp / 2);
+            RemoveXp(NowLevel.NeedXp / 2);
         }
     }
 }

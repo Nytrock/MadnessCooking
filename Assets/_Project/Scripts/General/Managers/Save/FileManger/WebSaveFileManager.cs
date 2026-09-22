@@ -1,8 +1,8 @@
-using System;
+﻿using System;
 using UnityEngine;
 
 namespace MadnessCooking.General {
-    public class WebSaveFileManager<TData> : SaveFileManager<TData> where TData : ISaveable {
+    public class WebSaveFileManager<TData> : SaveFileManager<TData> {
         private readonly string _prefsFilePath;
 
         public WebSaveFileManager(string fileName) : base(fileName) {

@@ -1,12 +1,13 @@
+﻿using MadnessCooking.General;
 using System.Collections.Generic;
 using UnityEngine;
-using MadnessCooking.General;
 
 namespace MadnessCooking.Farm {
-    public class FarmBedManager : SaveableSpaceManager<FarmData>, IUpgradeable<FarmUpgradeData> {
+    public class FarmBedManager : SpaceManager, IUpgradeable {
         [SerializeField] private FarmBedSettings _bedsSettings;
         private readonly List<FarmBedGroup> _beds = new();
         private FarmUpgradeData _upgradeData;
+        private FarmData _data;
 
         [Header("Upgrades")]
         [SerializeField] private BaseUpgrade _growStatusShowUpgrade;
@@ -21,14 +22,15 @@ namespace MadnessCooking.Farm {
             InvokeSpaceAdded();
         }
 
-        protected override void BindData() {
+        public override void LoadSave(GameData data) {
+            _data = data.Farm;
             _data.FarmBedGroups ??= new(_defaultSpaceCount, _spaceAddUpgrades[^1].Count * 3);
             _spaceData = _data.FarmBedGroups;
-            _bedsSettings.UIManager.Bind(_data);
+            _bedsSettings.UIManager.LoadSave(_data);
         }
 
-        public void BindUpgrade(FarmUpgradeData upgradeData) {
-            _upgradeData = upgradeData;
+        public void SetUpgradeData(GameData gameData) {
+            _upgradeData = gameData.Farm.UpgradeData;
         }
 
         public void CheckAddedUpgrade(BaseUpgrade upgrade) {

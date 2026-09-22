@@ -1,7 +1,7 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace MadnessCooking.General {
-    public class GraymanManager : MonoBehaviour, IBindable<GeneralData> {
+    public class GraymanManager : MonoBehaviour, ISaveable {
         [SerializeField] private GameSaveManager _saveManager;
         [SerializeField] private string _graymanName;
         [SerializeField] private Sprite _graymanIcon;
@@ -25,9 +25,9 @@ namespace MadnessCooking.General {
             Application.Quit();
         }
 
-        public void Bind(GeneralData data) {
-            data.Grayman ??= new();
-            _data = data.Grayman;
+        public void LoadSave(GameData data) {
+            data.General.Grayman ??= new();
+            _data = data.General.Grayman;
         }
     }
 }

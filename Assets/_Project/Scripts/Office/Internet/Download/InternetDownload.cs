@@ -1,13 +1,13 @@
+﻿using MadnessCooking.General;
 using System;
 using System.Collections;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
-using MadnessCooking.General;
 
 namespace MadnessCooking.Office {
     [RequireComponent(typeof(InternetDownloadRenderer))]
-    public class InternetDownload : MonoBehaviour, IUpgradeable<OfficeUpgradeData> {
+    public class InternetDownload : MonoBehaviour, IUpgradeable {
         [SerializeField] private GameObject _panel;
         [SerializeField] private Slider _downloadBar;
 
@@ -91,8 +91,8 @@ namespace MadnessCooking.Office {
             _openingPage = null;
         }
 
-        public void BindUpgrade(OfficeUpgradeData upgradeData) {
-            _upgradeData = upgradeData;
+        public void SetUpgradeData(GameData gameData) {
+            _upgradeData = gameData.Office.UpgradeData;
         }
 
         public void CheckAddedUpgrade(BaseUpgrade upgrade) {

@@ -1,8 +1,8 @@
-using System;
+﻿using System;
 using UnityEngine;
 
 namespace MadnessCooking.General {
-    public class SettingsManager : MonoBehaviour, IBindable<SettingsData> {
+    public class SettingsManager : MonoBehaviour, ISettingable {
         [SerializeField] private GameObject _panel;
         [SerializeField] private SettingsPanelsManager _panelsManager;
 
@@ -29,16 +29,14 @@ namespace MadnessCooking.General {
                 _panelsManager.SetDefaultPanel();
         }
 
-        public void LateStart() {
-            _gameSettings.LateStart();
-            _audioSettings.LateStart();
-            _videoSettings.LateStart();
-        }
+        public void SetSettings(SettingsData data) {
+            _gameSettings.SetSettings(data.GameSettings);
+            _audioSettings.SetSettings(data.AudioSettings);
+            _videoSettings.SetSettings(data.VideoSettings);
 
-        public void Bind(SettingsData data) {
-            _gameSettings.Bind(data.GameSettings);
-            _audioSettings.Bind(data.AudioSettings);
-            _videoSettings.Bind(data.VideoSettings);
+            _gameSettings.UpdateAllPoints();
+            _audioSettings.UpdateAllPoints();
+            _videoSettings.UpdateAllPoints();
         }
     }
 }

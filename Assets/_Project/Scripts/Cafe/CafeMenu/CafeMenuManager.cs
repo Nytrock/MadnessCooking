@@ -1,6 +1,6 @@
-using UnityEngine;
-using MadnessCooking.General;
+﻿using MadnessCooking.General;
 using MadnessCooking.Kitchen;
+using UnityEngine;
 
 namespace MadnessCooking.Cafe {
     public class CafeMenuManager : MonoBehaviour {
@@ -8,11 +8,11 @@ namespace MadnessCooking.Cafe {
         [SerializeField] private CafeMenuRenderer _renderer;
         [SerializeField] private ErrorMessageRenderer _errorMessage;
         [SerializeField] private FoodManager _foodManager;
-        [SerializeField] private GameDataBinder _binder;
+        [SerializeField] private GameSaveManager _saveManager;
 
         private void Awake() {
             _foodManager.MenuFoodAdded += AddMenuFood;
-            _binder.AfterLateStart += GenerateFoodMenu;
+            _saveManager.AfterLateStart += GenerateFoodMenu;
         }
 
         private void GenerateFoodMenu() {

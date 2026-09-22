@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using MadnessCooking.General;
 
@@ -61,7 +61,7 @@ namespace MadnessCooking.Farm {
             CheckFertilize();
         }
 
-        public void Bind(FarmData data) {
+        public void LoadSave(FarmData data) {
             _data = data;
         }
     }

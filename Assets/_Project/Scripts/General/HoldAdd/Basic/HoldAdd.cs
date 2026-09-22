@@ -1,8 +1,8 @@
-using System;
+﻿using System;
 using UnityEngine;
 
 namespace MadnessCooking.General {
-    public abstract class HoldAdd : MonoBehaviour, IBindable<FarmData> {
+    public abstract class HoldAdd : MonoBehaviour, ISaveable {
         [SerializeField] private UpgradeManager _upgradeManager;
 
         [Header("Upgrades")]
@@ -15,7 +15,7 @@ namespace MadnessCooking.General {
         [SerializeField, Min(0)] protected int _readyDefaultCount;
         [SerializeField] protected VisualChanger _unlockVisual;
 
-        [field: SerializeField] public HoldAddData Data { get; protected set; }
+        public HoldAddData Data { get; protected set; }
 
         public bool IsUnlocked => Data.IsUnlocked;
 
@@ -100,7 +100,7 @@ namespace MadnessCooking.General {
             UpdateUpgrades();
         }
 
-        public abstract void Bind(FarmData data);
+        public abstract void LoadSave(GameData data);
 
         protected void InvokeClickChanged(bool isWork) {
             ClickChanged?.Invoke(isWork);

@@ -1,8 +1,8 @@
-using System;
+﻿using System;
 using UnityEngine;
 
 namespace MadnessCooking.General {
-    public class FpsManager : MonoBehaviour, IBindable<GameSettingsData>, ISettingable<bool> {
+    public class FpsManager : MonoBehaviour, ISettingable<bool> {
         public const int REFERENCE_FPS = 60;
         public static float NORMALIZED_DELTA_TIME => REFERENCE_FPS * Time.deltaTime;
         public static float REFERENCE_DELTA_TIME => 1f / REFERENCE_FPS;
@@ -41,9 +41,9 @@ namespace MadnessCooking.General {
             return 1 / (_framesSum / _framesCount);
         }
 
-        public void Bind(GameSettingsData data) {
-            data.FpsManager ??= new(DefaultValue);
-            _data = data.FpsManager;
+        public void SetSettings(SettingsData data) {
+            data.GameSettings.FpsManager ??= new(DefaultValue);
+            _data = data.GameSettings.FpsManager;
         }
 
         public void LateStart() {

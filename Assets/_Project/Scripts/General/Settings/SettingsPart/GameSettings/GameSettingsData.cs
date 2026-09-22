@@ -1,8 +1,8 @@
-using System;
+﻿using System;
 
 namespace MadnessCooking.General {
     [Serializable]
-    public class GameSettingsData : ISaveable {
+    public class GameSettingsData {
         public SettingsPointData<int> LocalizationManager { get; set; }
         public SettingsPointData<int> CursorManager { get; set; }
         public SettingsPointData<bool> FpsManager { get; set; }

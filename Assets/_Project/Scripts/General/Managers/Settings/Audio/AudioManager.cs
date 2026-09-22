@@ -1,21 +1,18 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Audio;
 
 namespace MadnessCooking.General {
-    public class AudioManager : MonoBehaviour, IBindable<AudioSettingsData>, ISettingable<float> {
+    public class AudioManager : MonoBehaviour, ISettingable<float> {
         [SerializeField] private AudioMixer _mixer;
         [SerializeField, Range(0, 1)] private float _defaultVolumeCoef;
         private AudioVolumeSettingsData _data;
 
         public float DefaultValue => _defaultVolumeCoef;
 
-        public void LateStart() {
+        public void SetSettings(SettingsData data) {
+            data.AudioSettings.VolumeSettings ??= new(DefaultValue);
+            _data = data.AudioSettings.VolumeSettings;
             UpdateValue();
-        }
-
-        public void Bind(AudioSettingsData data) {
-            data.VolumeSettings ??= new(DefaultValue);
-            _data = data.VolumeSettings;
         }
 
         public void UpdateValue() {

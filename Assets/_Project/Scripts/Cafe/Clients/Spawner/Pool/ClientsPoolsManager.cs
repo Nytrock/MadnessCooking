@@ -1,9 +1,9 @@
+﻿using MadnessCooking.General;
 using System;
 using UnityEngine;
-using MadnessCooking.General;
 
 namespace MadnessCooking.Cafe {
-    public class ClientsPoolsManager : MonoBehaviour, IUpgradeable<CafeUpgradeData> {
+    public class ClientsPoolsManager : MonoBehaviour, IUpgradeable {
         [SerializeField] private ClientsPool[] _pools;
         [SerializeField] private BaseUpgrade _eatTimeShowUpgrade;
 
@@ -46,10 +46,10 @@ namespace MadnessCooking.Cafe {
                 _upgradeData.ChangeEatTimeShow(true);
         }
 
-        public void BindUpgrade(CafeUpgradeData upgradeData) {
-            _upgradeData = upgradeData;
+        public void SetUpgradeData(GameData gameData) {
+            _upgradeData = gameData.Cafe.UpgradeData;
             foreach (var pool in _pools)
-                pool.BindUpgrade(upgradeData);
+                pool.BindUpgrade(_upgradeData);
         }
     }
 }

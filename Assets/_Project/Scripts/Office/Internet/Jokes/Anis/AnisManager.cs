@@ -1,8 +1,8 @@
+﻿using MadnessCooking.General;
 using UnityEngine;
-using MadnessCooking.General;
 
 namespace MadnessCooking.Office {
-    public class AnisManager : MonoBehaviour, IBindable<OfficeData> {
+    public class AnisManager : MonoBehaviour, ISaveable {
         [SerializeField] private SpriteChanger[] _sprites;
         private JokesData _data;
 
@@ -12,9 +12,9 @@ namespace MadnessCooking.Office {
             UpdateAnisState();
         }
 
-        public void Bind(OfficeData data) {
-            data.InternetJokesData ??= new();
-            _data = data.InternetJokesData;
+        public void LoadSave(GameData data) {
+            data.Office.InternetJokesData ??= new();
+            _data = data.Office.InternetJokesData;
         }
 
         public void ChangeAnisState(bool isAnis) {

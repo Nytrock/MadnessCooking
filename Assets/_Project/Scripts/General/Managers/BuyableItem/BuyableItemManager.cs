@@ -1,11 +1,9 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace MadnessCooking.General {
-    public abstract class BuyableItemManager<TItem> : MonoBehaviour
-        where TItem : BuyableItem {
-
+    public abstract class BuyableItemManager<TItem> : MonoBehaviour, ISaveable where TItem : BuyableItem {
         [SerializeField] protected List<TItem> _defaultItems;
         [SerializeField] protected List<TItem> _allItems;
 
@@ -15,6 +13,11 @@ namespace MadnessCooking.General {
         public int AvailableItemsCount => _data.ItemsCount;
 
         public event Action<TItem> ItemAdded;
+
+        public virtual void LateStart() {
+            foreach (var item in _data.AvailableItems)
+                InvokeItemAdded(item);
+        }
 
         public virtual void AddItem(TItem item) {
             if (_data.IsItemAvailable(item))
@@ -38,5 +41,7 @@ namespace MadnessCooking.General {
                 return false;
             return _data.IsItemAvailable(item);
         }
+
+        public abstract void LoadSave(GameData data);
     }
 }

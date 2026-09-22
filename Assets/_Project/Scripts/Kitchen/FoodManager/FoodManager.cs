@@ -1,11 +1,11 @@
+﻿using MadnessCooking.Cafe;
+using MadnessCooking.General;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using MadnessCooking.Cafe;
-using MadnessCooking.General;
 
 namespace MadnessCooking.Kitchen {
-    public class FoodManager : SaveableItemManager<Food, KitchenData> {
+    public class FoodManager : BuyableItemManager<Food> {
         [SerializeField] private CafeStateChanger _cafeOpener;
 
         private FoodManagerData _foodData;
@@ -45,12 +45,6 @@ namespace MadnessCooking.Kitchen {
             MenuFoodAdded?.Invoke(menuFood);
         }
 
-        public override void Bind(KitchenData data) {
-            data.FoodManager ??= new(_defaultItems);
-            _data = data.FoodManager;
-            _foodData = data.FoodManager;
-        }
-
         private void CheckIsDataOld() {
             if (!(_foodData.FoodMenuLength == 0 && _data.ItemsCount != 0))
                 return;
@@ -65,6 +59,12 @@ namespace MadnessCooking.Kitchen {
                 return;
 
             _foodData.UpdateNowFoodMenu();
+        }
+
+        public override void LoadSave(GameData data) {
+            data.Kitchen.FoodManager ??= new(_defaultItems);
+            _data = data.Kitchen.FoodManager;
+            _foodData = data.Kitchen.FoodManager;
         }
     }
 }

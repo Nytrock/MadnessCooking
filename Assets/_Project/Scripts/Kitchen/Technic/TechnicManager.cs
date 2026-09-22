@@ -1,10 +1,10 @@
+﻿using MadnessCooking.General;
 using System;
 using System.Linq;
 using UnityEngine;
-using MadnessCooking.General;
 
 namespace MadnessCooking.Kitchen {
-    public class TechnicManager : SaveableItemManager<Technic, KitchenData>, IUpgradeable<KitchenUpgradeData> {
+    public class TechnicManager : BuyableItemManager<Technic>, IUpgradeable {
         [SerializeField] private TechnicHolder[] _holders;
 
         [Header("Upgrades")]
@@ -67,11 +67,11 @@ namespace MadnessCooking.Kitchen {
                 holder.LateStart();
         }
 
-        public override void Bind(KitchenData data) {
-            data.TechnicManager ??= new(_defaultItems);
-            _data = data.TechnicManager;
+        public override void LoadSave(GameData data) {
+            data.Kitchen.TechnicManager ??= new(_defaultItems);
+            _data = data.Kitchen.TechnicManager;
 
-            BindHolders(data);
+            BindHolders(data.Kitchen);
             ActivateHolders();
         }
 
@@ -82,8 +82,8 @@ namespace MadnessCooking.Kitchen {
                 _holders[i].Bind(data, i);
         }
 
-        public void BindUpgrade(KitchenUpgradeData upgradeData) {
-            _upgradeData = upgradeData;
+        public void SetUpgradeData(GameData gameData) {
+            _upgradeData = gameData.Kitchen.UpgradeData;
         }
 
         public void CheckAddedUpgrade(BaseUpgrade upgrade) {

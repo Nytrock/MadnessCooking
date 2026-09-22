@@ -1,11 +1,7 @@
 ﻿using UnityEngine;
 
 namespace MadnessCooking.General {
-    public abstract class SaveManager<TData> : MonoBehaviour
-        where TData : ISaveable, new() {
-
-        [SerializeField] private DataBinder<TData> _binder;
-
+    public abstract class SaveManager<TData> : MonoBehaviour where TData : new() {
         protected TData _data;
         protected SaveFileManager<TData> _dataService;
 
@@ -26,27 +22,25 @@ namespace MadnessCooking.General {
             _dataService.Save(_data);
         }
 
-        private void Load() {
-            if (_binder == null)
-                return;
-
+        protected virtual void Load() {
             bool isFileEmpty = !IsDataExists();
             if (isFileEmpty)
                 _data = new();
             else
                 _data = _dataService.Load();
-
-            _binder.Bind(_data);
+            UpdateData();
         }
 
-        public void Delete() {
+        public virtual void Delete() {
             _dataService.Delete();
             _data = new();
-            _binder.Bind(_data);
+            UpdateData();
         }
 
         public bool IsDataExists() {
             return _dataService.IsFileExists();
         }
+
+        protected abstract void UpdateData();
     }
 }

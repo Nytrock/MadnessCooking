@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using UnityEngine;
 
 namespace MadnessCooking.General {
@@ -8,16 +8,16 @@ namespace MadnessCooking.General {
 
         public event Action SettingsChanged;
 
-        private void Awake() {
+        protected virtual void Awake() {
             ChangeState(false);
             foreach (var point in _settingPoints)
                 point.ValueChanged += InvokeSettingsChanged;
         }
 
-        public void LateStart() {
+        public void UpdateAllPoints() {
             GenerateSettingPointsArray();
             foreach (var point in _settingPoints)
-                point.LateStart();
+                point.UpdateState();
         }
 
         private void InvokeSettingsChanged() {

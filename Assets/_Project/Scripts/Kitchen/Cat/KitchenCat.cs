@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace MadnessCooking.Kitchen {
     [RequireComponent(typeof(Collider2D), typeof(Animator))]
-    public class KitchenCat : DecorHolder, IBindable<KitchenData> {
+    public class KitchenCat : DecorHolder, ISaveable {
         private static readonly int IsPetHash = Animator.StringToHash("isPet");
 
         [SerializeField, Min(0)] private float _needTime;
@@ -42,9 +42,9 @@ namespace MadnessCooking.Kitchen {
             _data.Update();
         }
 
-        public void Bind(KitchenData data) {
-            data.Cat ??= new(_needTime);
-            _data = data.Cat;
+        public void LoadSave(GameData data) {
+            data.Kitchen.Cat ??= new(_needTime);
+            _data = data.Kitchen.Cat;
         }
 
         public void LateStart() {

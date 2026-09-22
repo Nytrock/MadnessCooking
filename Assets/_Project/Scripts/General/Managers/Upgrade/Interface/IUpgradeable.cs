@@ -1,8 +1,6 @@
-namespace MadnessCooking.General {
-    public interface IUpgradeable<TData>
-        where TData : ISaveable {
-
-        void BindUpgrade(TData upgradeData);
+﻿namespace MadnessCooking.General {
+    public interface IUpgradeable {
+        void SetUpgradeData(GameData gameData);
         void CheckAddedUpgrade(BaseUpgrade upgrade);
     }
 }

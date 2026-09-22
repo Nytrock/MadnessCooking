@@ -1,6 +1,6 @@
+﻿using MadnessCooking.General;
 using System;
 using UnityEngine;
-using MadnessCooking.General;
 
 namespace MadnessCooking.Farm {
     [RequireComponent(typeof(Animator))]
@@ -91,9 +91,9 @@ namespace MadnessCooking.Farm {
                 ChangeAnimationState(true);
         }
 
-        public override void Bind(FarmData data) {
-            data.FarmWell ??= new(_readyDefaultCount);
-            Data = data.FarmWell;
+        public override void LoadSave(GameData data) {
+            data.Farm.FarmWell ??= new(_readyDefaultCount);
+            Data = data.Farm.FarmWell;
         }
     }
 }

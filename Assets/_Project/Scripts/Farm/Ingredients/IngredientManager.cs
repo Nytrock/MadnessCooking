@@ -1,8 +1,8 @@
+﻿using MadnessCooking.General;
 using System.Collections.Generic;
-using MadnessCooking.General;
 
 namespace MadnessCooking.Farm {
-    public class IngredientManager : SaveableItemManager<Ingredient, FarmData> {
+    public class IngredientManager : BuyableItemManager<Ingredient> {
         public override bool IsItemAvailable(Ingredient ingredient) {
             if (ingredient.Type == IngredientType.Buyable)
                 return true;
@@ -29,9 +29,9 @@ namespace MadnessCooking.Farm {
                     yield return ingredient;
         }
 
-        public override void Bind(FarmData data) {
-            data.IngredientManager ??= new(_defaultItems);
-            _data = data.IngredientManager;
+        public override void LoadSave(GameData data) {
+            data.Farm.IngredientManager ??= new(_defaultItems);
+            _data = data.Farm.IngredientManager;
         }
     }
 }

@@ -1,9 +1,9 @@
+﻿using MadnessCooking.General;
 using System;
 using UnityEngine;
-using MadnessCooking.General;
 
 namespace MadnessCooking.Cafe {
-    public class CafeNameManager : MonoBehaviour, IBindable<CafeData> {
+    public class CafeNameManager : MonoBehaviour, ISaveable {
         [SerializeField] private GameSaveManager _saveManager;
 
         private CafeNameManagerData _data;
@@ -21,15 +21,14 @@ namespace MadnessCooking.Cafe {
             NameChanged?.Invoke(CafeName);
         }
 
-        public void Bind(CafeData data) {
-            data.CafeNameManager ??= new();
-            _data = data.CafeNameManager;
+        public void LoadSave(GameData data) {
+            data.Cafe.CafeNameManager ??= new();
+            _data = data.Cafe.CafeNameManager;
         }
 
         public void ChangeName(string name) {
             _data.ChangeCafeName(name);
             NameChanged?.Invoke(name);
-            // _saveManager.Save();
         }
     }
 }

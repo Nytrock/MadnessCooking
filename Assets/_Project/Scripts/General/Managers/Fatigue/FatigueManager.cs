@@ -1,9 +1,9 @@
+﻿using MadnessCooking.Office;
 using System;
 using UnityEngine;
-using MadnessCooking.Office;
 
 namespace MadnessCooking.General {
-    public class FatigueManager : Singleton<FatigueManager>, IBindable<GeneralData>, IUpgradeable<OfficeUpgradeData> {
+    public class FatigueManager : Singleton<FatigueManager>, ISaveable, IUpgradeable {
         [SerializeField] private GameTimeManager _timeManager;
         [SerializeField] private SleepBed _bed;
 
@@ -74,14 +74,14 @@ namespace MadnessCooking.General {
             _decorBonus += decor.FatigueCoef;
         }
 
-        public void Bind(GeneralData data) {
-            data.FatigueManager ??= new(_fatigueMax, _fatigueDefault);
-            _data = data.FatigueManager;
+        public void LoadSave(GameData data) {
+            data.General.FatigueManager ??= new(_fatigueMax, _fatigueDefault);
+            _data = data.General.FatigueManager;
             _data.SetFatigueMax(_fatigueMax);
         }
 
-        public void BindUpgrade(OfficeUpgradeData upgradeData) {
-            _upgradeData = upgradeData;
+        public void SetUpgradeData(GameData gameData) {
+            _upgradeData = gameData.Office.UpgradeData;
         }
 
         public void CheckAddedUpgrade(BaseUpgrade upgrade) { }
