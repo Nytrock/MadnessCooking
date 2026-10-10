@@ -15,9 +15,9 @@ A mix of café, kitchen, and farming simulators.
 
 # What I would change
 
--Add a DI framework to replace the current use of multiple dependency injection methods, which complicates development.
--Expand the use of Addressables beyond localization to other game assets to simplify game balancing.
--Add automated tests and Assembly Definitions.
+- Add a DI framework to replace the current use of multiple dependency injection methods, which complicates development.
+- Expand the use of Addressables beyond localization to other game assets to simplify game balancing.
+- Add automated tests and Assembly Definitions.
 
 # Screenshots
 
