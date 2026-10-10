@@ -1,30 +1,28 @@
-<p align="center"><img src="./Assets/_Project/Images/General/Icon.png" alt="Logo" width="256"></p>
-
 # Description
-Tired of boring games with hundreds of convoluted mechanics and equally dull casual games? Then this game is exactly what you need!​
 
-Madness Cooking is a game that blends cafe, kitchen, and farm simulators with absurd humor and charming pixel art. Get ready for PERFECTLY BALANCED gameplay, dozens of dishes and upgrades, and just as many puns!​
+A mix of café, kitchen, and farming simulators.
+- Developed throughout 2024 in my spare time
+- Created entirely solo, including game balancing and art
+- Conceived as a project to practice and refine my development skills
+- The game is available [here](https://nytrock.itch.io/madness-cooking) for download on all major platforms
 
-## Serve madness
-Serve a wide variety of customers, climb the career ladder, and create your perfect cafe with the most profit possible. And don't forget to sleep, or you'll pass out and risk going bankrupt!
+# Key responsibilities
+- Developed flexible save and tutorial systems that can be easily integrated into other systems throughout the project
+- Created a universal settings system that can be reused in other projects
+- Developed a shop system that allows game designers to modify item purchase conditions without touching the code
+- Applied a data-driven approach using ScriptableObjects
+- Implemented an event-driven UI and a modular game architecture
 
-## Cook madness
-Effortlessly cook Michelin-level dishes, as all it takes is pressing a couple of buttons. Keep an eye on your equipment's condition and at least occasionally repair it to avoid going bankrupt!
+# What I would change
 
-## Grow madness
-You have an entire farm, where you can grow crops, water them and protect from pests, care for animals, 3D print meat, and sometimes catch ghosts. Buy absurd upgrades, expand your farm, and don’t forget to send everything to the kitchen on time to avoid going bankrupt!
+-Add a DI framework to replace the current use of multiple dependency injection methods, which complicates development.
+-Expand the use of Addressables beyond localization to other game assets to simplify game balancing.
+-Add automated tests and Assembly Definitions.
 
-## Buy madness
-Buy new ingredients, dishes, equipment, and upgrades from the local equivalent of a soulless corporate browser! And if you're bored, try typing random stuff into the search bar — you might just find something interesting. Just don’t get too carried away, or you might risk going bankrupt!
+# Screenshots
 
-# Run source code on local machine
-If for some reason you want to dig into the source code or even improve it, then this instruction is for you.
-
-- Install [Unity Hub](https://unity3d.com/en/get-unity/download)
-- Clone repository
-
-```shell
-git clone https://github.com/Nytrock/MadnessCooking.git
-```
-- Open Unity Hub, click on the `Add project` button, select the folder where the repository was cloned
-- Click on the created project and start studying the code
+![Cafe](./Screenshots/1.png)
+![Kitchen](./Screenshots/2.png)
+![Farm](./Screenshots/3.png)
+![Shop](./Screenshots/4.png)
+![Internet](./Screenshots/5.png)
