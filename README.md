@@ -13,6 +13,15 @@ A mix of café, kitchen, and farming simulators.
 - Applied a data-driven approach using ScriptableObjects
 - Implemented an event-driven UI and a modular game architecture
 
+## Technical highlights
+- Generic save system with platform-specific storage implementations (_Project/Scripts/General/Managers/Save)
+- Data-driven content using ScriptableObjects (_Project/Scripts/General/BuyableItem)
+- Event-driven UI (for example, _Project/Scripts/General/IngredientStorage/IngredientStorageUI)
+- Object pooling for cafe clients (_Project/Scripts/Cafe/Clients/Spawner)
+- Custom Unity Editor tools (Assets/_Project/Editor)
+- Unity Localization (_Project/Scripts/General/Managers/Settings/Localization)
+- WebGL, Android, Windows, Linux and macOS support (_Project\Scripts\General\Platform)
+
 # What I would change
 
 - Add a DI framework to replace the current use of multiple dependency injection methods, which complicates development.
