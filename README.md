@@ -21,6 +21,7 @@ A mix of café, kitchen, and farming simulators.
 - Custom Unity Editor tools (Assets/_Project/Editor)
 - Unity Localization (_Project/Scripts/General/Managers/Settings/Localization)
 - WebGL, Android, Windows, Linux and macOS support (_Project\Scripts\General\Platform)
+SOLID principles was applied where they brought practical value, while the project also contains some architectural debt caused by its growth and my earlier experience level
 
 # What I would change
 
